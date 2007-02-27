@@ -190,46 +190,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>3B47D94D0B93B62D00F200B8</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>Wireless360Controller.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B47D94E0B93B62D00F200B8</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>Wireless360Controller.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D94F0B93B62D00F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B47D9440B93B51F00F200B8</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>81 312 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>3B18E2560B9272120093FA6E</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>Wireless360Controller.cpp</string>
@@ -244,10 +204,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>3B47D9500B93B62D00F200B8</string>
+						<string>3B47D9B40B93BD0B00F200B8</string>
 						<key>history</key>
 						<array>
-							<string>3B2593670B93AE560025011E</string>
+							<string>3B47D9860B93BBB600F200B8</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -448,9 +408,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B47D94B0B93B62D00F200B8</string>
+				<string>3B47D9B20B93BD0B00F200B8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B47D94C0B93B62D00F200B8</string>
+				<string>3B47D9B30B93BD0B00F200B8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -584,10 +544,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/colin/Projects2/OSX/360 Controller/Wireless360Controller/Wireless360Controller.xcodeproj</string>
-		<string>3B18E2560B9272120093FA6E</string>
-		<string>3B47D94D0B93B62D00F200B8</string>
 		<string>3B18E2510B92720F0093FA6E</string>
+		<string>3B18E2560B9272120093FA6E</string>
+		<string>/Users/colin/Projects2/OSX/360 Controller/Wireless360Controller/Wireless360Controller.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>96 437 690 397 0 0 1280 1002 </string>
@@ -606,14 +565,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Wireless360Controller.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -669,7 +626,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3B18E2510B92720F0093FA6E</string>
-				<string>3B47D9510B93B62D00F200B8</string>
+				<string>3B47D9B50B93BD0B00F200B8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -680,7 +637,7 @@
 			<key>WindowToolGUID</key>
 			<string>3B18E2510B92720F0093FA6E</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

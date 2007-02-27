@@ -36,24 +36,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 194228212;
-			PBXWorkspaceStateSaveDate = 194228212;
-		};
-		perUserProjectItems = {
-			3B25935F0B93AE550025011E /* PBXTextBookmark */ = 3B25935F0B93AE550025011E /* PBXTextBookmark */;
-			3B2593600B93AE550025011E /* PBXTextBookmark */ = 3B2593600B93AE550025011E /* PBXTextBookmark */;
-			3B2593610B93AE550025011E /* PBXTextBookmark */ = 3B2593610B93AE550025011E /* PBXTextBookmark */;
-			3B2593620B93AE550025011E /* PBXTextBookmark */ = 3B2593620B93AE550025011E /* PBXTextBookmark */;
-			3B2593630B93AE550025011E /* PBXTextBookmark */ = 3B2593630B93AE550025011E /* PBXTextBookmark */;
-			3B2593640B93AE550025011E /* PBXTextBookmark */ = 3B2593640B93AE550025011E /* PBXTextBookmark */;
-			3B2593650B93AE550025011E /* PBXTextBookmark */ = 3B2593650B93AE550025011E /* PBXTextBookmark */;
-			3B47D9100B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9100B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9110B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9110B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9120B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9120B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9130B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9130B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9140B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9140B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9150B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9150B93B0C200F200B8 /* PBXTextBookmark */;
-			3B47D9160B93B0C200F200B8 /* PBXTextBookmark */ = 3B47D9160B93B0C200F200B8 /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 194231576;
+			PBXWorkspaceStateSaveDate = 194231576;
 		};
 		sourceControlManager = 3B21EBDA0B8CEAED00B5CACA /* Source Control */;
 		userBuildSettings = {
@@ -63,7 +47,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {662, 798}}";
 			sepNavSelRange = "{110, 0}";
-			sepNavVisRect = "{{0, 461}, {649, 329}}";
+			sepNavVisRect = "{{0, 448}, {649, 329}}";
 			sepNavWindowFrame = "{{89, 102}, {688, 458}}";
 		};
 	};
@@ -71,7 +55,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1020, 6426}}";
 			sepNavSelRange = "{13899, 0}";
-			sepNavVisRect = "{{0, 3947}, {1020, 471}}";
+			sepNavVisRect = "{{0, 3953}, {1020, 471}}";
 			sepNavWindowFrame = "{{15, 397}, {1059, 600}}";
 		};
 	};
@@ -113,146 +97,6 @@
 			sepNavVisRect = "{{0, 57}, {1020, 471}}";
 			sepNavWindowFrame = "{{636, 153}, {1059, 600}}";
 		};
-	};
-	3B25935F0B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */;
-		name = "WirelessGamingReceiver.h: 5";
-		rLen = 0;
-		rLoc = 110;
-		rType = 0;
-		vrLen = 498;
-		vrLoc = 0;
-	};
-	3B2593600B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* WirelessGamingReceiver.cpp */;
-		name = "WirelessGamingReceiver.cpp: 417";
-		rLen = 0;
-		rLoc = 12990;
-		rType = 0;
-		vrLen = 803;
-		vrLoc = 0;
-	};
-	3B2593610B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
-		name = "WirelessHIDDevice.h: 23";
-		rLen = 0;
-		rLoc = 741;
-		rType = 0;
-		vrLen = 906;
-		vrLoc = 0;
-	};
-	3B2593620B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE6671B0B910A02009679FC /* WirelessHIDDevice.cpp */;
-		name = "WirelessHIDDevice.cpp: 144";
-		rLen = 0;
-		rLoc = 3629;
-		rType = 0;
-		vrLen = 946;
-		vrLoc = 3022;
-	};
-	3B2593630B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED660B8E688A00B5CACA /* WirelessDevice.h */;
-		name = "WirelessDevice.h: NextPacket";
-		rLen = 0;
-		rLoc = 440;
-		rType = 0;
-		vrLen = 846;
-		vrLoc = 0;
-	};
-	3B2593640B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
-		name = "Info.plist: 24";
-		rLen = 0;
-		rLoc = 793;
-		rType = 0;
-		vrLen = 1104;
-		vrLoc = 419;
-	};
-	3B2593650B93AE550025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE6677A0B91DC55009679FC /* devices.h */;
-		name = Wireless360Device;
-		rLen = 17;
-		rLoc = 78;
-		rType = 0;
-		vrLen = 168;
-		vrLoc = 0;
-	};
-	3B47D9100B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* WirelessGamingReceiver.cpp */;
-		name = "WirelessGamingReceiver.cpp: 439";
-		rLen = 0;
-		rLoc = 13899;
-		rType = 0;
-		vrLen = 1178;
-		vrLoc = 8649;
-	};
-	3B47D9110B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */;
-		name = "WirelessGamingReceiver.h: 5";
-		rLen = 0;
-		rLoc = 110;
-		rType = 0;
-		vrLen = 897;
-		vrLoc = 726;
-	};
-	3B47D9120B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
-		name = "WirelessHIDDevice.h: 23";
-		rLen = 0;
-		rLoc = 741;
-		rType = 0;
-		vrLen = 906;
-		vrLoc = 0;
-	};
-	3B47D9130B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE6671B0B910A02009679FC /* WirelessHIDDevice.cpp */;
-		name = "WirelessHIDDevice.cpp: 144";
-		rLen = 0;
-		rLoc = 3629;
-		rType = 0;
-		vrLen = 946;
-		vrLoc = 3022;
-	};
-	3B47D9140B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED660B8E688A00B5CACA /* WirelessDevice.h */;
-		name = "WirelessDevice.h: NextPacket";
-		rLen = 0;
-		rLoc = 440;
-		rType = 0;
-		vrLen = 846;
-		vrLoc = 0;
-	};
-	3B47D9150B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
-		name = "Info.plist: 24";
-		rLen = 0;
-		rLoc = 793;
-		rType = 0;
-		vrLen = 1104;
-		vrLoc = 419;
-	};
-	3B47D9160B93B0C200F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE6677A0B91DC55009679FC /* devices.h */;
-		name = Wireless360Device;
-		rLen = 17;
-		rLoc = 78;
-		rType = 0;
-		vrLen = 168;
-		vrLoc = 0;
 	};
 	3BD4A7080B8FF49E0096227D /* XCBreakpointsBucket */ = {
 		isa = XCBreakpointsBucket;

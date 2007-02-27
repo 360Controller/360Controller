@@ -185,288 +185,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3B21ED730B8E693700B5CACA</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WirelessGamingReceiver.cpp</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B21ED740B8E693700B5CACA</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WirelessGamingReceiver.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9100B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593600B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 453 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3B21EBD70B8CEAED00B5CACA</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WirelessGamingReceiver.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B21EBD80B8CEAED00B5CACA</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WirelessGamingReceiver.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9110B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B25935F0B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {688, 361}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>89 158 688 402 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3BE667290B910BCD009679FC</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WirelessHIDDevice.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3BE6672A0B910BCD009679FC</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WirelessHIDDevice.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9120B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593610B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>155 150 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3BE667250B910BCD009679FC</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WirelessHIDDevice.cpp</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3BE667260B910BCD009679FC</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WirelessHIDDevice.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9130B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593620B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>32 458 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3B21ED760B8E693700B5CACA</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>WirelessDevice.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B21ED770B8E693700B5CACA</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>WirelessDevice.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9140B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593630B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>175 169 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3B18E2B50B9277EC0093FA6E</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>Info.plist</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B18E2B60B9277EC0093FA6E</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>Info.plist</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9150B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593640B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>45 114 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3BE6677F0B91DC99009679FC</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>devices.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3BE667800B91DC99009679FC</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>devices.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D9160B93B0C200F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B2593650B93AE550025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1059, 503}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>61 411 1059 544 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -647,9 +366,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B47D90E0B93B0C200F200B8</string>
+				<string>3B47D9BF0B93BD2A00F200B8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B47D90F0B93B0C200F200B8</string>
+				<string>3B47D9C00B93BD2A00F200B8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -784,13 +503,6 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>3B21ED2D0B8E33A000B5CACA</string>
-		<string>3BE6677F0B91DC99009679FC</string>
-		<string>3B18E2B50B9277EC0093FA6E</string>
-		<string>3B21ED760B8E693700B5CACA</string>
-		<string>3BE667250B910BCD009679FC</string>
-		<string>3BE667290B910BCD009679FC</string>
-		<string>3B21EBD70B8CEAED00B5CACA</string>
-		<string>3B21ED730B8E693700B5CACA</string>
 		<string>/Users/colin/Projects2/OSX/360 Controller/WirelessGamingReceiver/WirelessGamingReceiver.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -871,7 +583,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3B21ED2D0B8E33A000B5CACA</string>
-				<string>3B47D9170B93B0C200F200B8</string>
+				<string>3B47D9C10B93BD2A00F200B8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

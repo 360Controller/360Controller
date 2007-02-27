@@ -185,88 +185,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3BCAF9310AC373D4008F5CE4</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>DeviceItem.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3BCAF9320AC373D4008F5CE4</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>DeviceItem.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D97D0B93B67000F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B25936A0B93AE570025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {900, 717}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>381 144 900 758 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>3B18E35E0B939D2A0093FA6E</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>Pref360ControlPref.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>3B18E35F0B939D2A0093FA6E</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>Pref360ControlPref.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>3B47D97E0B93B67000F200B8</string>
-						<key>history</key>
-						<array>
-							<string>3B25936B0B93AE570025011E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {900, 717}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>138 152 900 758 0 0 1280 1002 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -454,9 +373,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B47D9780B93B64A00F200B8</string>
+				<string>3B47D9D40B93BD4D00F200B8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B47D9790B93B64A00F200B8</string>
+				<string>3B47D9D50B93BD4D00F200B8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -590,9 +509,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3B18E35E0B939D2A0093FA6E</string>
+		<string>3BBEAB15096B38D200F2E37B</string>
 		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
-		<string>3BCAF9310AC373D4008F5CE4</string>
 	</array>
 	<key>WindowString</key>
 	<string>511 605 690 397 0 0 1280 1002 </string>
@@ -674,7 +592,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3BBEAB15096B38D200F2E37B</string>
-				<string>3B2593420B93AA0B0025011E</string>
+				<string>3B47D9D60B93BD4D00F200B8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

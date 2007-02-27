@@ -35,14 +35,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 194229824;
-			PBXWorkspaceStateSaveDate = 194229824;
-		};
-		perUserProjectItems = {
-			3B25936A0B93AE570025011E /* PBXTextBookmark */ = 3B25936A0B93AE570025011E /* PBXTextBookmark */;
-			3B25936B0B93AE570025011E /* PBXTextBookmark */ = 3B25936B0B93AE570025011E /* PBXTextBookmark */;
-			3B47D97D0B93B67000F200B8 /* PBXTextBookmark */ = 3B47D97D0B93B67000F200B8 /* PBXTextBookmark */;
-			3B47D97E0B93B67000F200B8 /* PBXTextBookmark */ = 3B47D97E0B93B67000F200B8 /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 194231609;
+			PBXWorkspaceStateSaveDate = 194231609;
 		};
 		sourceControlManager = 3BBEAAF5096B030C00F2E37B /* Source Control */;
 		userBuildSettings = {
@@ -64,26 +58,6 @@
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
 	};
-	3B25936A0B93AE570025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BC41F31096C85CB00664A42 /* DeviceItem.m */;
-		name = "DeviceItem.m: 35";
-		rLen = 0;
-		rLoc = 1219;
-		rType = 0;
-		vrLen = 1804;
-		vrLoc = 199;
-	};
-	3B25936B0B93AE570025011E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */;
-		name = "Pref360ControlPref.h: onIteratorWireless";
-		rLen = 0;
-		rLoc = 2619;
-		rType = 0;
-		vrLen = 1619;
-		vrLoc = 1005;
-	};
 	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:411 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -96,26 +70,6 @@
 		lineNumber = 411;
 		modificationTime = 182909504.480911;
 		state = 0;
-	};
-	3B47D97D0B93B67000F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BC41F31096C85CB00664A42 /* DeviceItem.m */;
-		name = "DeviceItem.m: 35";
-		rLen = 0;
-		rLoc = 1219;
-		rType = 0;
-		vrLen = 1803;
-		vrLoc = 199;
-	};
-	3B47D97E0B93B67000F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */;
-		name = "Pref360ControlPref.h: onIteratorWireless";
-		rLen = 0;
-		rLoc = 2619;
-		rType = 0;
-		vrLen = 1618;
-		vrLoc = 1005;
 	};
 	3BBB33C0097B2E9900E8A35A /* XCBreakpointsBucket */ = {
 		isa = XCBreakpointsBucket;

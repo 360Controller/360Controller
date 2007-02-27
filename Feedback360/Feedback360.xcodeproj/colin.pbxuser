@@ -33,22 +33,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 194229813;
-			PBXWorkspaceStateSaveDate = 194229813;
-		};
-		perUserProjectItems = {
-			3B47D9350B93B50800F200B8 /* PBXTextBookmark */ = 3B47D9350B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D9370B93B50800F200B8 /* PBXTextBookmark */ = 3B47D9370B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D9380B93B50800F200B8 /* PBXTextBookmark */ = 3B47D9380B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D9390B93B50800F200B8 /* PBXTextBookmark */ = 3B47D9390B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D93B0B93B50800F200B8 /* PBXTextBookmark */ = 3B47D93B0B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D93C0B93B50800F200B8 /* PBXTextBookmark */ = 3B47D93C0B93B50800F200B8 /* PBXTextBookmark */;
-			3B47D95D0B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D95D0B93B63A00F200B8 /* PBXTextBookmark */;
-			3B47D95E0B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D95E0B93B63A00F200B8 /* PBXTextBookmark */;
-			3B47D95F0B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D95F0B93B63A00F200B8 /* PBXTextBookmark */;
-			3B47D9600B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D9600B93B63A00F200B8 /* PBXTextBookmark */;
-			3B47D9620B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D9620B93B63A00F200B8 /* PBXTextBookmark */;
-			3B47D9630B93B63A00F200B8 /* PBXTextBookmark */ = 3B47D9630B93B63A00F200B8 /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 194231396;
+			PBXWorkspaceStateSaveDate = 194231396;
 		};
 		sourceControlManager = 3B2EF5360965A149007BFB7B /* Source Control */;
 		userBuildSettings = {
@@ -90,145 +76,6 @@
 			sepNavWindowFrame = "{{7, 68}, {900, 814}}";
 		};
 	};
-	3B47D9350B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB77B6FE84183AC02AAC07 /* main.c */;
-		name = "main.c: 76";
-		rLen = 0;
-		rLoc = 2434;
-		rType = 0;
-		vrLen = 1290;
-		vrLoc = 1672;
-	};
-	3B47D9370B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA03E2096A29B5008A46C9 /* devlink.c */;
-		name = Device_Initialise;
-		rLen = 17;
-		rLoc = 1001;
-		rType = 0;
-		vrLen = 1698;
-		vrLoc = 454;
-	};
-	3B47D9380B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA037C09697D80008A46C9 /* emulator.c */;
-		name = "emulator.c: 30";
-		rLen = 0;
-		rLoc = 1235;
-		rType = 0;
-		vrLen = 1924;
-		vrLoc = 0;
-	};
-	3B47D9390B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B47D93A0B93B50800F200B8 /* IOHIDLib.h */;
-		name = "(null): 4";
-		rLen = 0;
-		rLoc = 101;
-		rType = 0;
-		vrLen = 2161;
-		vrLoc = 9198;
-	};
-	3B47D93A0B93B50800F200B8 /* IOHIDLib.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = IOHIDLib.h;
-		path = /Developer/SDKs/MacOSX10.2.8.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/hid/IOHIDLib.h;
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 7518}}";
-			sepNavSelRange = "{101, 0}";
-			sepNavVisRect = "{{0, 3038}, {861, 685}}";
-			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
-		};
-	};
-	3B47D93B0B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B2EF5440965B3C7007BFB7B /* main.h */;
-		name = "main.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1781;
-		vrLoc = 0;
-	};
-	3B47D93C0B93B50800F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA037B09697D80008A46C9 /* emulator.h */;
-		name = "emulator.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1403;
-		vrLoc = 0;
-	};
-	3B47D95D0B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB77B6FE84183AC02AAC07 /* main.c */;
-		name = "main.c: 76";
-		rLen = 0;
-		rLoc = 2434;
-		rType = 0;
-		vrLen = 1279;
-		vrLoc = 1683;
-	};
-	3B47D95E0B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA03E2096A29B5008A46C9 /* devlink.c */;
-		name = Device_Initialise;
-		rLen = 17;
-		rLoc = 1001;
-		rType = 0;
-		vrLen = 1738;
-		vrLoc = 414;
-	};
-	3B47D95F0B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA037C09697D80008A46C9 /* emulator.c */;
-		name = "emulator.c: 30";
-		rLen = 0;
-		rLoc = 1235;
-		rType = 0;
-		vrLen = 1924;
-		vrLoc = 0;
-	};
-	3B47D9600B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B47D9610B93B63A00F200B8 /* IOHIDLib.h */;
-		name = "(null): 4";
-		rLen = 0;
-		rLoc = 101;
-		rType = 0;
-		vrLen = 2161;
-		vrLoc = 9198;
-	};
-	3B47D9610B93B63A00F200B8 /* IOHIDLib.h */ = {
-		isa = PBXFileReference;
-		name = IOHIDLib.h;
-		path = /Developer/SDKs/MacOSX10.2.8.sdk/System/Library/Frameworks/IOKit.framework/Versions/A/Headers/hid/IOHIDLib.h;
-		sourceTree = "<absolute>";
-	};
-	3B47D9620B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B2EF5440965B3C7007BFB7B /* main.h */;
-		name = "main.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1781;
-		vrLoc = 0;
-	};
-	3B47D9630B93B63A00F200B8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BBA037B09697D80008A46C9 /* emulator.h */;
-		name = "emulator.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1403;
-		vrLoc = 0;
-	};
 	3BBA037B09697D80008A46C9 /* emulator.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {861, 1582}}";
@@ -257,7 +104,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {861, 854}}";
 			sepNavSelRange = "{1001, 17}";
-			sepNavVisRect = "{{0, 162}, {861, 685}}";
+			sepNavVisRect = "{{0, 154}, {861, 685}}";
 			sepNavWindowFrame = "{{253, 110}, {900, 814}}";
 		};
 	};
