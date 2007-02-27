@@ -70,7 +70,8 @@
     
     IONotificationPortRef notifyPort;
     CFRunLoopSourceRef notifySource;
-    io_iterator_t onIterator,offIterator;
+    io_iterator_t onIteratorWired, offIteratorWired;
+    io_iterator_t onIteratorWireless, offIteratorWireless;
 }
 
 - (void)mainViewDidLoad;

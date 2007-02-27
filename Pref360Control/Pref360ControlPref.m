@@ -494,7 +494,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOReturn ioReturn;
     io_iterator_t iterator;
     io_object_t hidDevice;
-    io_name_t className;
     int count;
     DeviceItem *item;
     
@@ -510,15 +509,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     count=0;
     while(hidDevice=IOIteratorNext(iterator)) {
-        ioReturn=IOObjectGetClass(hidDevice,className);
-        if((ioReturn!=kIOReturnSuccess)||(strcmp(className,"Xbox360ControllerClass")!=0)) {
+        BOOL deviceWired = IOObjectConformsTo(hidDevice, "Xbox360ControllerClass");
+        BOOL deviceWireless = IOObjectConformsTo(hidDevice, "WirelessHIDDevice");
+        if ((!deviceWired) && (!deviceWireless))
+        {
             IOObjectRelease(hidDevice);
             continue;
         }
         item=[DeviceItem allocateDeviceItemForDevice:hidDevice];
         if(item==NULL) continue;
         // Add to item
-        [deviceList addItemWithTitle:[NSString stringWithFormat:@"Controller %i",++count]];
+        [deviceList addItemWithTitle:[NSString stringWithFormat:@"Controller %i (%@)",++count, deviceWireless ? @"Wireless" : @"Wired"]];
         [deviceArray addObject:item];
     }
     IOObjectRelease(iterator);
@@ -542,18 +543,28 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
-    IOServiceAddMatchingNotification(notifyPort,kIOFirstMatchNotification,IOServiceMatching(kIOUSBDeviceClassName),callbackHandleDevice,self,&onIterator);
-    callbackHandleDevice(self,onIterator);
-    IOServiceAddMatchingNotification(notifyPort,kIOTerminatedNotification,IOServiceMatching(kIOUSBDeviceClassName),callbackHandleDevice,self,&offIterator);
-    while((object=IOIteratorNext(offIterator))!=0) IOObjectRelease(object);
+        // Wired
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, self, &onIteratorWired);
+    callbackHandleDevice(self, onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, self, &offIteratorWired);
+    while((object = IOIteratorNext(offIteratorWired)) != 0)
+        IOObjectRelease(object);
+        // Wireless
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, self, &onIteratorWireless);
+    callbackHandleDevice(self, onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, self, &offIteratorWireless);
+    while((object = IOIteratorNext(offIteratorWireless)) != 0)
+        IOObjectRelease(object);
 }
 
 // Shut down
 - (void)dealloc
 {
     // Remove notification source
-    IOObjectRelease(onIterator);
-    IOObjectRelease(offIterator);
+    IOObjectRelease(onIteratorWired);
+    IOObjectRelease(onIteratorWireless);
+    IOObjectRelease(offIteratorWired);
+    IOObjectRelease(offIteratorWireless);
     CFRunLoopRemoveSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
     CFRunLoopSourceInvalidate(notifySource);
     IONotificationPortDestroy(notifyPort);

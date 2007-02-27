@@ -1,0 +1,161 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Debug */;
+		activeTarget = 32D94FC30562CBF700B6AF17 /* Wireless360Controller */;
+		addToTargets = (
+			32D94FC30562CBF700B6AF17 /* Wireless360Controller */,
+		);
+		codeSenseManager = 3B18E24C0B92718C0093FA6E /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					243,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 194228424;
+			PBXWorkspaceStateSaveDate = 194228424;
+		};
+		perUserProjectItems = {
+			3B18E3AB0B93A6780093FA6E = 3B18E3AB0B93A6780093FA6E /* PBXTextBookmark */;
+			3B18E3AC0B93A6780093FA6E = 3B18E3AC0B93A6780093FA6E /* PBXTextBookmark */;
+			3B2593670B93AE560025011E = 3B2593670B93AE560025011E /* PBXTextBookmark */;
+			3B2593680B93AE560025011E = 3B2593680B93AE560025011E /* PBXTextBookmark */;
+			3B47D9440B93B51F00F200B8 /* PBXBookmark */ = 3B47D9440B93B51F00F200B8 /* PBXBookmark */;
+			3B47D94F0B93B62D00F200B8 /* PBXTextBookmark */ = 3B47D94F0B93B62D00F200B8 /* PBXTextBookmark */;
+			3B47D9500B93B62D00F200B8 /* PBXTextBookmark */ = 3B47D9500B93B62D00F200B8 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 3B18E24B0B92718C0093FA6E /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	089C167EFE841241C02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {458, 440}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {458, 440}}";
+			sepNavWindowFrame = "{{107, 344}, {497, 569}}";
+		};
+	};
+	1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1020, 574}}";
+			sepNavSelRange = "{1285, 0}";
+			sepNavVisRect = "{{0, 103}, {1020, 471}}";
+			sepNavWindowFrame = "{{129, 347}, {1059, 600}}";
+		};
+	};
+	1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {896, 3248}}";
+			sepNavSelRange = "{6196, 0}";
+			sepNavVisRect = "{{0, 2445}, {458, 440}}";
+			sepNavWindowFrame = "{{113, 90}, {497, 569}}";
+		};
+	};
+	32D94FC30562CBF700B6AF17 /* Wireless360Controller */ = {
+		activeExec = 0;
+	};
+	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {767, 770}}";
+			sepNavSelRange = "{1134, 0}";
+			sepNavVisRect = "{{0, 0}, {767, 645}}";
+			sepNavWindowFrame = "{{351, 182}, {806, 774}}";
+		};
+	};
+	3B18E24B0B92718C0093FA6E /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+		scmType = "";
+	};
+	3B18E24C0B92718C0093FA6E /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	3B18E3AB0B93A6780093FA6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */;
+		name = "Wireless360Controller.cpp: 4";
+		rLen = 0;
+		rLoc = 185;
+		rType = 0;
+		vrLen = 1493;
+		vrLoc = 0;
+	};
+	3B18E3AC0B93A6780093FA6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
+		name = "Wireless360Controller.h: 5";
+		rLen = 0;
+		rLoc = 130;
+		rType = 0;
+		vrLen = 870;
+		vrLoc = 0;
+	};
+	3B2593670B93AE560025011E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */;
+		name = "Wireless360Controller.cpp: 1";
+		rLen = 0;
+		rLoc = 24;
+		rType = 0;
+		vrLen = 854;
+		vrLoc = 0;
+	};
+	3B2593680B93AE560025011E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
+		name = "Wireless360Controller.h: newReportDescriptor";
+		rLen = 0;
+		rLoc = 498;
+		rType = 0;
+		vrLen = 969;
+		vrLoc = 0;
+	};
+	3B47D9440B93B51F00F200B8 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
+	};
+	3B47D94F0B93B62D00F200B8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
+		name = "Wireless360Controller.h: fiddleReport";
+		rLen = 0;
+		rLoc = 1285;
+		rType = 0;
+		vrLen = 1195;
+		vrLoc = 188;
+	};
+	3B47D9500B93B62D00F200B8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */;
+		name = "Wireless360Controller.cpp: 189";
+		rLen = 0;
+		rLoc = 6196;
+		rType = 0;
+		vrLen = 855;
+		vrLoc = 5779;
+	};
+}

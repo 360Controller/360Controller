@@ -71,7 +71,9 @@ static ULONG Feedback360Release(void *that)
 
 static IOReturn Feedback360Probe(void *that,CFDictionaryRef propertyTable,io_service_t service,SInt32 *order)
 {
-    if((service==0)||(!IOObjectConformsTo(service,"Xbox360ControllerClass"))) return kIOReturnBadArgument;
+    if ((service==0)
+     || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
+     && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
     return S_OK;
 }
 
@@ -116,11 +118,22 @@ static HRESULT Feedback360InitializeTerminate(void *that,NumVersion APIversion,i
     if(begin) {
 //        fprintf(stderr,"Feedback: Initialising...\n");
         // Initialize
-        if(APIversion.majorRev!=kFFPlugInAPIMajorRev) return FFERR_INVALIDPARAM;
+        if(APIversion.majorRev!=kFFPlugInAPIMajorRev)
+        {
+//            fprintf(stderr,"Feedback: Invalid version\n");
+            return FFERR_INVALIDPARAM;
+        }
         // From probe
-            if((hidDevice==0)||(!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))) return FFERR_INVALIDPARAM;
+            if( (hidDevice==0)
+             || ((!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))
+             &&  (!IOObjectConformsTo(hidDevice,"Wireless360Controller"))) )
+        {
+//            fprintf(stderr,"Feedback: Invalid device\n");
+            return FFERR_INVALIDPARAM;
+        }
         Emulate_Initialise(&this->emulator,10,Feedback360_Callback,this);
         if(!Device_Initialise(&this->device,hidDevice)) {
+//            fprintf(stderr,"Feedback: Failed to initialise\n");
             Emulate_Finalise(&this->emulator);
             return FFERR_NOINTERFACE;
         }

@@ -224,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\ncp -R $SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle PlugIns/Feedback360.plugin\n# Renaming extension from bundle to a plugin? Could be naughty.";
+			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho $SRCROOT\ncp -R $SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle PlugIns/Feedback360.plugin\n# Renaming extension from bundle to a plugin? Could be naughty.";
 		};
 /* End PBXShellScriptBuildPhase section */
 
