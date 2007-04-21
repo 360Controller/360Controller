@@ -185,7 +185,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>3B4030190BDA964700D98BAE</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>Pref360ControlPref.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>3B40301A0BDA964700D98BAE</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>Pref360ControlPref.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>3B40301B0BDA964700D98BAE</string>
+						<key>history</key>
+						<array>
+							<string>3B4030150BDA961800D98BAE</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {900, 717}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>221 179 900 758 0 0 1280 1002 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -291,7 +332,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>511 605 690 397 0 0 1280 1002 </string>
+						<string>564 128 690 397 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -328,7 +369,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {482, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>511 605 690 397 0 0 1280 1002 </string>
+								<string>564 128 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -350,7 +391,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {482, 351}}</string>
 								<key>RubberWindowFrame</key>
-								<string>511 605 690 397 0 0 1280 1002 </string>
+								<string>564 128 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -374,9 +415,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3BCC40610BDA753B00B1619B</string>
+				<string>3B4030170BDA964700D98BAE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3BCC40620BDA753B00B1619B</string>
+				<string>3B4030180BDA964700D98BAE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -510,12 +551,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
 		<string>3BBEAB15096B38D200F2E37B</string>
+		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
+		<string>3B4030190BDA964700D98BAE</string>
 	</array>
 	<key>WindowString</key>
-	<string>511 605 690 397 0 0 1280 1002 </string>
+	<string>564 128 690 397 0 0 1280 1002 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -531,14 +572,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Pref360ControlPref.m</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -596,7 +635,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3BBEAB15096B38D200F2E37B</string>
-				<string>3BCC40630BDA753B00B1619B</string>
+				<string>3B40301C0BDA964700D98BAE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -607,7 +646,7 @@
 			<key>WindowToolGUID</key>
 			<string>3BBEAB15096B38D200F2E37B</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

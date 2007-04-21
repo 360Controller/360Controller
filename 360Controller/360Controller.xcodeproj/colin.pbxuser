@@ -89,12 +89,6 @@
 			PBXPerProjectTemplateStateSaveDate = 198862999;
 			PBXWorkspaceStateSaveDate = 198862999;
 		};
-		perUserProjectItems = {
-			3B7B8F800BB8707500081C48 = 3B7B8F800BB8707500081C48 /* PBXBookmark */;
-			3B7B8F860BB8709400081C48 = 3B7B8F860BB8709400081C48 /* PBXBookmark */;
-			3B7B8FB70BB8A3A400081C48 = 3B7B8FB70BB8A3A400081C48 /* PBXTextBookmark */;
-			3B7B8FBA0BB8A3A400081C48 = 3B7B8FBA0BB8A3A400081C48 /* PBXTextBookmark */;
-		};
 		sourceControlManager = 3BCE45B109633D9A00B69EDF /* Source Control */;
 		userBuildSettings = {
 		};
@@ -133,34 +127,6 @@
 			sepNavVisRect = "{{0, 2353}, {861, 685}}";
 			sepNavWindowFrame = "{{376, 7}, {900, 814}}";
 		};
-	};
-	3B7B8F800BB8707500081C48 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */;
-	};
-	3B7B8F860BB8709400081C48 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* _60Controller.h */;
-	};
-	3B7B8FB70BB8A3A400081C48 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */;
-		name = "_60Controller.cpp: 516";
-		rLen = 347;
-		rLoc = 16271;
-		rType = 0;
-		vrLen = 1452;
-		vrLoc = 15585;
-	};
-	3B7B8FBA0BB8A3A400081C48 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* _60Controller.h */;
-		name = "_60Controller.h: newLocationIDNumber";
-		rLen = 0;
-		rLoc = 3445;
-		rType = 0;
-		vrLen = 2018;
-		vrLoc = 1271;
 	};
 	3BB5E09B09641F8200F83598 /* xbox360hid.h */ = {
 		uiCtxt = {

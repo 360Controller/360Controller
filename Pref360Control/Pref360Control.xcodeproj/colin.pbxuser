@@ -57,12 +57,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198864362;
-			PBXWorkspaceStateSaveDate = 198864362;
+			PBXPerProjectTemplateStateSaveDate = 198874637;
+			PBXWorkspaceStateSaveDate = 198874637;
 		};
 		perUserProjectItems = {
-			3BCC40750BDA7CC900B1619B /* PBXTextBookmark */ = 3BCC40750BDA7CC900B1619B /* PBXTextBookmark */;
-			3BCC40760BDA7CC900B1619B /* PBXTextBookmark */ = 3BCC40760BDA7CC900B1619B /* PBXTextBookmark */;
+			3B4030150BDA961800D98BAE /* PBXBookmark */ = 3B4030150BDA961800D98BAE /* PBXBookmark */;
+			3B40301B0BDA964700D98BAE /* PBXTextBookmark */ = 3B40301B0BDA964700D98BAE /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3BBEAAF5096B030C00F2E37B /* Source Control */;
 		userBuildSettings = {
@@ -83,6 +83,20 @@
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
+	};
+	3B4030150BDA961800D98BAE /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
+	};
+	3B40301B0BDA964700D98BAE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
+		name = "Pref360ControlPref.m: 621";
+		rLen = 0;
+		rLoc = 20932;
+		rType = 0;
+		vrLen = 2115;
+		vrLoc = 18924;
 	};
 	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */ = {
 		isa = PBXFileBreakpoint;
@@ -212,24 +226,6 @@
 			sepNavWindowFrame = "{{381, 88}, {900, 814}}";
 		};
 	};
-	3BCC40750BDA7CC900B1619B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "error: instance variable 'forceFeedback' is declared protected";
-		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
-		rLen = 1;
-		rLoc = 609;
-		rType = 1;
-	};
-	3BCC40760BDA7CC900B1619B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
-		name = "Pref360ControlPref.m: 619";
-		rLen = 0;
-		rLoc = 20914;
-		rType = 0;
-		vrLen = 475;
-		vrLoc = 20576;
-	};
 	8D202CE80486D31800D8A456 /* Pref360Control */ = {
 		activeExec = 0;
 	};
@@ -252,8 +248,8 @@
 	F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1022, 9534}}";
-			sepNavSelRange = "{20914, 0}";
-			sepNavVisRect = "{{0, 8538}, {459, 186}}";
+			sepNavSelRange = "{20932, 0}";
+			sepNavVisRect = "{{0, 8032}, {861, 685}}";
 			sepNavWindowFrame = "{{221, 123}, {900, 814}}";
 		};
 	};

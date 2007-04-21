@@ -603,7 +603,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IONotificationPortDestroy(notifyPort);
     // Release device and info
     [self stopDevice];
-    [self deleteDeviceList];
     for (i = 0; i < [deviceArray count]; i++)
     {
         item = [deviceArray objectAtIndex:i];
@@ -618,6 +617,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         escape.lpvOutBuffer = NULL;
         FFDeviceEscape([item ffDevice], &escape);
     }
+    [self deleteDeviceList];
     [deviceArray release];
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);

@@ -39,18 +39,6 @@
 			PBXPerProjectTemplateStateSaveDate = 198861858;
 			PBXWorkspaceStateSaveDate = 198861858;
 		};
-		perUserProjectItems = {
-			3B3C64F70BDA5B7600EA9F99 = 3B3C64F70BDA5B7600EA9F99 /* PBXTextBookmark */;
-			3B3C64FC0BDA5E8100EA9F99 = 3B3C64FC0BDA5E8100EA9F99 /* PBXTextBookmark */;
-			3B3C64FD0BDA5E8100EA9F99 = 3B3C64FD0BDA5E8100EA9F99 /* PBXTextBookmark */;
-			3B3C64FE0BDA5E8100EA9F99 = 3B3C64FE0BDA5E8100EA9F99 /* PBXTextBookmark */;
-			3B3C64FF0BDA5E8100EA9F99 = 3B3C64FF0BDA5E8100EA9F99 /* PBXTextBookmark */;
-			3B3C65000BDA5E8100EA9F99 = 3B3C65000BDA5E8100EA9F99 /* PBXTextBookmark */;
-			3BEA26D30BCD6A8400267C3A = 3BEA26D30BCD6A8400267C3A /* PBXTextBookmark */;
-			3BEA26D50BCD6A8400267C3A = 3BEA26D50BCD6A8400267C3A /* PBXTextBookmark */;
-			3BEA26D60BCD6A8400267C3A = 3BEA26D60BCD6A8400267C3A /* PBXTextBookmark */;
-			3BEA26D70BCD6A8400267C3A = 3BEA26D70BCD6A8400267C3A /* PBXTextBookmark */;
-		};
 		sourceControlManager = 3B21EBDA0B8CEAED00B5CACA /* Source Control */;
 		userBuildSettings = {
 		};
@@ -110,70 +98,6 @@
 			sepNavWindowFrame = "{{107, 264}, {1059, 600}}";
 		};
 	};
-	3B3C64F60BDA5B7600EA9F99 /* WirelessHIDDevice.cpp */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = WirelessHIDDevice.cpp;
-		path = "/Users/colin/Projects2/OSX/360 Controller/WirelessGamingReceiver/WirelessHIDDevice.cpp";
-		sourceTree = "<absolute>";
-	};
-	3B3C64F70BDA5B7600EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B3C64F60BDA5B7600EA9F99 /* WirelessHIDDevice.cpp */;
-		rLen = 5;
-		rLoc = 5235;
-		rType = 0;
-	};
-	3B3C64FC0BDA5E8100EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE6671B0B910A02009679FC /* WirelessHIDDevice.cpp */;
-		name = "WirelessHIDDevice.cpp: 150";
-		rLen = 0;
-		rLoc = 5328;
-		rType = 0;
-		vrLen = 857;
-		vrLoc = 3348;
-	};
-	3B3C64FD0BDA5E8100EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED6B0B8E690F00B5CACA /* WirelessDevice.cpp */;
-		name = "WirelessDevice.cpp: 70";
-		rLen = 0;
-		rLoc = 2910;
-		rType = 0;
-		vrLen = 764;
-		vrLoc = 1260;
-	};
-	3B3C64FE0BDA5E8100EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED660B8E688A00B5CACA /* WirelessDevice.h */;
-		name = "WirelessDevice.h: 23";
-		rLen = 0;
-		rLoc = 1560;
-		rType = 0;
-		vrLen = 874;
-		vrLoc = 0;
-	};
-	3B3C64FF0BDA5E8100EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
-		name = "WirelessHIDDevice.h: 18";
-		rLen = 0;
-		rLoc = 1438;
-		rType = 0;
-		vrLen = 950;
-		vrLoc = 0;
-	};
-	3B3C65000BDA5E8100EA9F99 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */;
-		name = "WirelessGamingReceiver.h: 32";
-		rLen = 0;
-		rLoc = 1728;
-		rType = 0;
-		vrLen = 702;
-		vrLoc = 365;
-	};
 	3BD4A7080B8FF49E0096227D /* XCBreakpointsBucket */ = {
 		isa = XCBreakpointsBucket;
 		name = "Project Breakpoints";
@@ -229,45 +153,5 @@
 			sepNavVisRect = "{{0, 0}, {1020, 471}}";
 			sepNavWindowFrame = "{{61, 355}, {1059, 600}}";
 		};
-	};
-	3BEA26D30BCD6A8400267C3A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED6B0B8E690F00B5CACA /* WirelessDevice.cpp */;
-		name = "WirelessDevice.cpp: 70";
-		rLen = 0;
-		rLoc = 2910;
-		rType = 0;
-		vrLen = 737;
-		vrLoc = 1287;
-	};
-	3BEA26D50BCD6A8400267C3A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3B21ED660B8E688A00B5CACA /* WirelessDevice.h */;
-		name = "WirelessDevice.h: 23";
-		rLen = 0;
-		rLoc = 1560;
-		rType = 0;
-		vrLen = 874;
-		vrLoc = 0;
-	};
-	3BEA26D60BCD6A8400267C3A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
-		name = "WirelessHIDDevice.h: 18";
-		rLen = 0;
-		rLoc = 1438;
-		rType = 0;
-		vrLen = 950;
-		vrLoc = 0;
-	};
-	3BEA26D70BCD6A8400267C3A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */;
-		name = "WirelessGamingReceiver.h: 32";
-		rLen = 0;
-		rLoc = 1728;
-		rType = 0;
-		vrLen = 702;
-		vrLoc = 365;
 	};
 }

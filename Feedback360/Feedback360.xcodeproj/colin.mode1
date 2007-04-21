@@ -292,7 +292,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>172 539 690 397 0 0 1280 1002 </string>
+						<string>308 400 690 397 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -329,7 +329,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {482, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>172 539 690 397 0 0 1280 1002 </string>
+								<string>308 400 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -349,7 +349,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {482, 351}}</string>
 								<key>RubberWindowFrame</key>
-								<string>172 539 690 397 0 0 1280 1002 </string>
+								<string>308 400 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -373,9 +373,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B47DA420B93C92E00F200B8</string>
+				<string>3BCC40840BDA915400B1619B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B47DA430B93C92E00F200B8</string>
+				<string>3BCC40850BDA915400B1619B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -513,7 +513,7 @@
 		<string>/Users/colin/Projects2/OSX/360 Controller/Feedback360/Feedback360.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>172 539 690 397 0 0 1280 1002 </string>
+	<string>308 400 690 397 0 0 1280 1002 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -592,7 +592,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3B2EF5820965C4A5007BFB7B</string>
-				<string>3B47DA700B93C96D00F200B8</string>
+				<string>3BCC40880BDA916800B1619B</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

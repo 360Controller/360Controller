@@ -34,12 +34,6 @@
 			PBXPerProjectTemplateStateSaveDate = 198863039;
 			PBXWorkspaceStateSaveDate = 198863039;
 		};
-		perUserProjectItems = {
-			3BCC3FF60BDA643C00B1619B = 3BCC3FF60BDA643C00B1619B /* PBXBookmark */;
-			3BCC3FF80BDA669F00B1619B = 3BCC3FF80BDA669F00B1619B /* PBXBookmark */;
-			3BCC40110BDA689100B1619B = 3BCC40110BDA689100B1619B /* PBXTextBookmark */;
-			3BCC40140BDA689100B1619B = 3BCC40140BDA689100B1619B /* PBXTextBookmark */;
-		};
 		sourceControlManager = 3B18E24B0B92718C0093FA6E /* Source Control */;
 		userBuildSettings = {
 		};
@@ -90,33 +84,5 @@
 	3B18E24C0B92718C0093FA6E /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	3BCC3FF60BDA643C00B1619B /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */;
-	};
-	3BCC3FF80BDA669F00B1619B /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
-	};
-	3BCC40110BDA689100B1619B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */;
-		name = "Wireless360Controller.cpp: newTransportString";
-		rLen = 0;
-		rLoc = 7787;
-		rType = 0;
-		vrLen = 683;
-		vrLoc = 6377;
-	};
-	3BCC40140BDA689100B1619B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1A224C3EFF42367911CA2CB7 /* Wireless360Controller.h */;
-		name = "Wireless360Controller.h: newTransportString";
-		rLen = 0;
-		rLoc = 1818;
-		rType = 0;
-		vrLen = 1144;
-		vrLoc = 186;
 	};
 }
