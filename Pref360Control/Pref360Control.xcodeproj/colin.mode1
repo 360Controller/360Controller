@@ -219,8 +219,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -264,6 +262,7 @@
 								<string>1058C7ACFEA557BF11CA2CBB</string>
 								<string>1058C7AEFEA557BF11CA2CBB</string>
 								<string>19C28FB8FE9D52D311CA2CBB</string>
+								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
@@ -337,6 +336,8 @@
 							<string>0pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -373,9 +374,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B47D9D40B93BD4D00F200B8</string>
+				<string>3BCC40610BDA753B00B1619B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B47D9D50B93BD4D00F200B8</string>
+				<string>3BCC40620BDA753B00B1619B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -509,8 +510,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3BBEAB15096B38D200F2E37B</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
+		<string>3BBEAB15096B38D200F2E37B</string>
 	</array>
 	<key>WindowString</key>
 	<string>511 605 690 397 0 0 1280 1002 </string>
@@ -529,12 +531,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>Pref360ControlPref.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -592,7 +596,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3BBEAB15096B38D200F2E37B</string>
-				<string>3B47D9D60B93BD4D00F200B8</string>
+				<string>3BCC40630BDA753B00B1619B</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -603,7 +607,7 @@
 			<key>WindowToolGUID</key>
 			<string>3BBEAB15096B38D200F2E37B</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -737,7 +741,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Pref360ControlPref.h</string>
+										<string></string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -795,8 +799,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>3BCC2D1E0AE2A03400663661</string>
-				<string>3BCC2D1F0AE2A03400663661</string>
+				<string>3BCC405B0BDA6E0B00B1619B</string>
+				<string>3BCC405C0BDA6E0B00B1619B</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>

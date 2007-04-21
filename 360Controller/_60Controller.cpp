@@ -1,6 +1,6 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006 Colin Munro
+    Copyright (C) 2006-2007 Colin Munro
     
     _60Controller.cpp - main source of the driver
     
@@ -498,6 +498,31 @@ OSString* Xbox360ControllerClass::newTransportString() const
 OSNumber* Xbox360ControllerClass::newVendorIDNumber() const
 {
     return OSNumber::withNumber(device->GetVendorID(),16);
+}
+
+OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
+{
+    OSNumber *number;
+    UInt32    location;
+    
+    if (device)
+    {
+        if (number = OSDynamicCast(OSNumber, device->getProperty("locationID")))
+        {
+            location = number->unsigned32BitValue();
+        }
+        else
+        {
+            // Make up an address
+            if (number = OSDynamicCast(OSNumber, device->getProperty("USB Address")))
+                location |= number->unsigned8BitValue() << 24;
+                
+            if (number = OSDynamicCast(OSNumber, device->getProperty("idProduct")))
+                location |= number->unsigned8BitValue() << 16;
+        }
+    }
+    
+    return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
 }
 
 // Called by the userspace IORegistryEntrySetCFProperties function

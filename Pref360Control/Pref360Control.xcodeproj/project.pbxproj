@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B47D9ED0B93C2BF00F200B8 /* battNone.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EC0B93C2BF00F200B8 /* battNone.tif */; };
+		3B47D9F20B93C31400F200B8 /* batt1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EE0B93C31400F200B8 /* batt1.tif */; };
+		3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EF0B93C31400F200B8 /* batt0.tif */; };
+		3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F00B93C31400F200B8 /* batt3.tif */; };
+		3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F10B93C31400F200B8 /* batt2.tif */; };
 		3BBEAB01096B2C4C00F2E37B /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BBEAAFF096B2C4C00F2E37B /* MyAnalogStick.h */; };
 		3BBEAB02096B2C4C00F2E37B /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBEAB00096B2C4C00F2E37B /* MyAnalogStick.m */; };
 		3BBEAB05096B2C5200F2E37B /* MyCentreButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBEAB03096B2C5200F2E37B /* MyCentreButtons.m */; };
@@ -63,6 +68,11 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
+		3B47D9EC0B93C2BF00F200B8 /* battNone.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = battNone.tif; sourceTree = "<group>"; };
+		3B47D9EE0B93C31400F200B8 /* batt1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt1.tif; sourceTree = "<group>"; };
+		3B47D9EF0B93C31400F200B8 /* batt0.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt0.tif; sourceTree = "<group>"; };
+		3B47D9F00B93C31400F200B8 /* batt3.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt3.tif; sourceTree = "<group>"; };
+		3B47D9F10B93C31400F200B8 /* batt2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt2.tif; sourceTree = "<group>"; };
 		3BBEAAFF096B2C4C00F2E37B /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyAnalogStick.h; sourceTree = "<group>"; };
 		3BBEAB00096B2C4C00F2E37B /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyAnalogStick.m; sourceTree = "<group>"; };
 		3BBEAB03096B2C5200F2E37B /* MyCentreButtons.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyCentreButtons.m; sourceTree = "<group>"; };
@@ -129,6 +139,11 @@
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */,
 				F506C042013D9D8C01CA16C8 /* Pref360ControlPref.nib */,
+				3B47D9EC0B93C2BF00F200B8 /* battNone.tif */,
+				3B47D9EF0B93C31400F200B8 /* batt0.tif */,
+				3B47D9EE0B93C31400F200B8 /* batt1.tif */,
+				3B47D9F10B93C31400F200B8 /* batt2.tif */,
+				3B47D9F00B93C31400F200B8 /* batt3.tif */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -289,6 +304,11 @@
 				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
 				8D202CEE0486D31800D8A456 /* Pref360ControlPref.tiff in Resources */,
 				8D202CEF0486D31800D8A456 /* Pref360ControlPref.nib in Resources */,
+				3B47D9ED0B93C2BF00F200B8 /* battNone.tif in Resources */,
+				3B47D9F20B93C31400F200B8 /* batt1.tif in Resources */,
+				3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */,
+				3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */,
+				3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

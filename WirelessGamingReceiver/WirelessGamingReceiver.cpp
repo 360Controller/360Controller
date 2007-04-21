@@ -1,9 +1,32 @@
+/*
+    MICE Xbox 360 Controller driver for Mac OS X
+    Copyright (C) 2006-2007 Colin Munro
+    
+    WirelessGamingReceiver.cpp - main source of the wireless receiver driver
+    
+    This file is part of Xbox360Controller.
+
+    Xbox360Controller is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Xbox360Controller is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 #include "WirelessGamingReceiver.h"
 #include "WirelessDevice.h"
 #include "devices.h"
 
 OSDefineMetaClassAndStructors(WirelessGamingReceiver, IOService)
 
+// Holds data for asynchronous reads
 typedef struct
 {
     int index;
@@ -11,6 +34,7 @@ typedef struct
 }
 WGRREAD;
 
+// Get maximum packet size for a pipe
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed;
@@ -20,6 +44,7 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
     else return ed->wMaxPacketSize;
 }
 
+// Start device
 bool WirelessGamingReceiver::start(IOService *provider)
 {
     const IOUSBConfigurationDescriptor *cd;
@@ -183,12 +208,14 @@ fail:
     return false;
 }
 
+// Stop the device
 void WirelessGamingReceiver::stop(IOService *provider)
 {
     ReleaseAll();
     IOService::stop(provider);
 }
 
+// Queue a read on a controller
 bool WirelessGamingReceiver::QueueRead(int index)
 {
     IOUSBCompletion complete;
@@ -221,6 +248,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
     return false;
 }
 
+// Handle a completed read on a controller
 void WirelessGamingReceiver::ReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
     WGRREAD *data = (WGRREAD*)parameter;
@@ -251,6 +279,7 @@ void WirelessGamingReceiver::ReadComplete(void *parameter, IOReturn status, UInt
         QueueRead(newIndex);
 }
 
+// Queue an asynchronous write on a controller
 bool WirelessGamingReceiver::QueueWrite(int index, const void *bytes, UInt32 length)
 {
     IOBufferMemoryDescriptor *outBuffer;
@@ -279,6 +308,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void *bytes, UInt32 len
     }
 }
 
+// Handle a completed write on a controller
 void WirelessGamingReceiver::WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
 {
     IOMemoryDescriptor *memory=(IOMemoryDescriptor*)parameter;
@@ -288,6 +318,7 @@ void WirelessGamingReceiver::WriteComplete(void *parameter,IOReturn status,UInt3
     memory->release();
 }
 
+// Release any allocated objects
 void WirelessGamingReceiver::ReleaseAll(void)
 {
     int i;
@@ -348,18 +379,21 @@ void WirelessGamingReceiver::ReleaseAll(void)
     }
 }
 
+// Static wrapper for read notifications
 void WirelessGamingReceiver::_ReadComplete(void *target, void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
     if (target != NULL)
         ((WirelessGamingReceiver*)target)->ReadComplete(parameter, status, bufferSizeRemaining);
 }
 
+// Static wrapper for write notifications
 void WirelessGamingReceiver::_WriteComplete(void *target, void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
     if (target != NULL)
         ((WirelessGamingReceiver*)target)->WriteComplete(parameter, status, bufferSizeRemaining);
 }
 
+// Processes a message for a controller
 void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data, int length)
 {
 /*
@@ -411,6 +445,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
         connections[index].service->NewData();
 }
 
+// Create a new node for the attached controller
 void WirelessGamingReceiver::InstantiateService(int index)
 {
     connections[index].service = new WirelessDevice;
@@ -441,11 +476,13 @@ void WirelessGamingReceiver::InstantiateService(int index)
     }
 }
 
+// Check a controller's queue
 bool WirelessGamingReceiver::IsDataQueued(int index)
 {
     return connections[index].inputArray->getCount() > 0;
 }
 
+// Read a controller's queue
 IOMemoryDescriptor* WirelessGamingReceiver::ReadBuffer(int index)
 {
     IOMemoryDescriptor *data;
@@ -455,4 +492,30 @@ IOMemoryDescriptor* WirelessGamingReceiver::ReadBuffer(int index)
         data->retain();
     connections[index].inputArray->removeObject(0);
     return data;
+}
+
+// Get our location ID
+OSNumber* WirelessGamingReceiver::newLocationIDNumber() const
+{
+    OSNumber *number;
+    UInt32    location = 0;
+    
+    if (device)
+    {
+        if (number = OSDynamicCast(OSNumber, device->getProperty("locationID")))
+        {
+            location = number->unsigned32BitValue();
+        }
+        else 
+        {
+            // Make up an address
+            if (number = OSDynamicCast(OSNumber, device->getProperty("USB Address")))
+                location |= number->unsigned8BitValue() << 24;
+                
+            if (number = OSDynamicCast(OSNumber, device->getProperty("idProduct")))
+                location |= number->unsigned8BitValue() << 16;
+        }
+    }
+    
+    return OSNumber::withNumber(location, 32);
 }

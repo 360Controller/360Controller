@@ -15,6 +15,7 @@
                 "_initialKeyView" = id; 
                 "_lastKeyView" = id; 
                 "_window" = NSWindow; 
+                batteryLevel = NSImageView; 
                 centreButtons = MyCentreButtons; 
                 deviceList = NSPopUpButton; 
                 digiStick = MyDigitalStick; 

@@ -8,7 +8,7 @@
 			8D202CE80486D31800D8A456 /* Pref360Control */,
 		);
 		breakpoints = (
-			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:411 */,
+			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */,
 		);
 		breakpointsGroup = 3BBB33C0097B2E9900E8A35A /* XCBreakpointsBucket */;
 		codeSenseManager = 3BBEAAF6096B030C00F2E37B /* Code sense */;
@@ -35,8 +35,34 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 194231609;
-			PBXWorkspaceStateSaveDate = 194231609;
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					200,
+					63,
+					20,
+					48.1626,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 198864362;
+			PBXWorkspaceStateSaveDate = 198864362;
+		};
+		perUserProjectItems = {
+			3BCC40750BDA7CC900B1619B /* PBXTextBookmark */ = 3BCC40750BDA7CC900B1619B /* PBXTextBookmark */;
+			3BCC40760BDA7CC900B1619B /* PBXTextBookmark */ = 3BCC40760BDA7CC900B1619B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3BBEAAF5096B030C00F2E37B /* Source Control */;
 		userBuildSettings = {
@@ -58,7 +84,7 @@
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
 	};
-	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:411 */ = {
+	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -67,7 +93,7 @@
 		fileReference = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
 		functionName = "-startDevice";
 		hitCount = 1;
-		lineNumber = 411;
+		lineNumber = 416;
 		modificationTime = 182909504.480911;
 		state = 0;
 	};
@@ -75,7 +101,7 @@
 		isa = XCBreakpointsBucket;
 		name = "Project Breakpoints";
 		objects = (
-			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:411 */,
+			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */,
 		);
 	};
 	3BBEAAF5096B030C00F2E37B /* Source Control */ = {
@@ -173,7 +199,7 @@
 	3BC41F30096C85CB00664A42 /* DeviceItem.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{1196, 0}";
+			sepNavSelRange = "{1399, 8}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{292, 58}, {900, 814}}";
 		};
@@ -185,6 +211,24 @@
 			sepNavVisRect = "{{0, 98}, {861, 685}}";
 			sepNavWindowFrame = "{{381, 88}, {900, 814}}";
 		};
+	};
+	3BCC40750BDA7CC900B1619B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: instance variable 'forceFeedback' is declared protected";
+		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
+		rLen = 1;
+		rLoc = 609;
+		rType = 1;
+	};
+	3BCC40760BDA7CC900B1619B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
+		name = "Pref360ControlPref.m: 619";
+		rLen = 0;
+		rLoc = 20914;
+		rType = 0;
+		vrLen = 475;
+		vrLoc = 20576;
 	};
 	8D202CE80486D31800D8A456 /* Pref360Control */ = {
 		activeExec = 0;
@@ -199,17 +243,17 @@
 	};
 	F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 1176}}";
-			sepNavSelRange = "{2619, 0}";
-			sepNavVisRect = "{{0, 365}, {861, 685}}";
+			sepNavIntBoundsRect = "{{0, 0}, {861, 1190}}";
+			sepNavSelRange = "{2150, 0}";
+			sepNavVisRect = "{{0, 414}, {861, 685}}";
 			sepNavWindowFrame = "{{138, 96}, {900, 814}}";
 		};
 	};
 	F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1022, 8876}}";
-			sepNavSelRange = "{20883, 0}";
-			sepNavVisRect = "{{0, 8191}, {861, 685}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1022, 9534}}";
+			sepNavSelRange = "{20914, 0}";
+			sepNavVisRect = "{{0, 8538}, {459, 186}}";
 			sepNavWindowFrame = "{{221, 123}, {900, 814}}";
 		};
 	};

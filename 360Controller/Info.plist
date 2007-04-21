@@ -180,6 +180,26 @@
 			<key>idVendor</key>
 			<integer>5227</integer>
 		</dict>
+		<key>GuitarHero</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.mice.driver.Xbox360Controller</string>
+            <key>IOCFPlugInTypes</key>
+            <dict>
+                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+            </dict>
+			<key>IOClass</key>
+			<string>Xbox360ControllerClass</string>
+			<key>IOKitDebug</key>
+			<integer>65535</integer>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>18248</integer>
+			<key>idVendor</key>
+			<integer>5168</integer>
+		</dict>
 	</dict>
 	<key>OSBundleLibraries</key>
 	<dict>

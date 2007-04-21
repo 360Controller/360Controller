@@ -1,6 +1,6 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006 Colin Munro
+    Copyright (C) 2006-2007 Colin Munro
     
     xbox360hid.h - HID descriptor for the driver
         

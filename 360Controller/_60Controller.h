@@ -1,8 +1,8 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006 Colin Munro
+    Copyright (C) 2006-2007 Colin Munro
     
-    _60Controller.h - definition of the driver main class
+    _60Controller.h - declaration of the driver main class
     
     This file is part of Xbox360Controller.
 
@@ -86,6 +86,8 @@ public:
     virtual OSString* newSerialNumberString() const;
     virtual OSString* newTransportString() const;
     virtual OSNumber* newVendorIDNumber() const;
+
+    virtual OSNumber* newLocationIDNumber() const;
 protected:
     virtual bool handleStart(IOService *provider);
     virtual void handleStop(IOService *provider);

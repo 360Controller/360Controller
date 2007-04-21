@@ -1,3 +1,25 @@
+/*
+    MICE Xbox 360 Controller driver for Mac OS X
+    Copyright (C) 2006-2007 Colin Munro
+    
+    Wireless360Controller.cpp - main source of the standard wireless controller driver
+    
+    This file is part of Xbox360Controller.
+
+    Xbox360Controller is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Xbox360Controller is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 #include <IOKit/IOLib.h>
 #include "Wireless360Controller.h"
 #include "../WirelessGamingReceiver/WirelessDevice.h"
@@ -143,7 +165,7 @@ IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDRepor
 {
     char data[2];
     
-    IOLog("setReport(%p, %i, %i)\n", report, reportType, options);
+//    IOLog("setReport(%p, %d, %d)\n", report, reportType, options);
     if (report->readBytes(0, data, 2) < 2)
         return kIOReturnUnsupported;
         
@@ -212,11 +234,6 @@ OSNumber* Wireless360Controller::newProductIDNumber() const
 OSString* Wireless360Controller::newProductString() const
 {
     return OSString::withCString("Wireless 360 Controller");
-}
-
-OSString* Wireless360Controller::newSerialNumberString() const
-{
-    return OSString::withCString("0000");
 }
 
 OSString* Wireless360Controller::newTransportString() const

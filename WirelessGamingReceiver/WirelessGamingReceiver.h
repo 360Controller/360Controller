@@ -1,9 +1,32 @@
+/*
+    MICE Xbox 360 Controller driver for Mac OS X
+    Copyright (C) 2006-2007 Colin Munro
+    
+    WirelessGamingReceiver.h - declaration of the wireless receiver driver
+    
+    This file is part of Xbox360Controller.
+
+    Xbox360Controller is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    Xbox360Controller is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 #ifndef __WIRELESSGAMINGRECEIVER_H__
 #define __WIRELESSGAMINGRECEIVER_H__
 
 #include <IOKit/usb/IOUSBDevice.h>
 #include <IOKit/usb/IOUSBInterface.h>
 
+// This value is defined by the hardware and fixed
 #define WIRELESS_CONNECTIONS        4
 
 class WirelessDevice;
@@ -13,9 +36,11 @@ typedef struct
     // Controller
     IOUSBInterface *controller;
     IOUSBPipe *controllerIn, *controllerOut;
+    
     // Mystery
     IOUSBInterface *other;
     IOUSBPipe *otherIn, *otherOut;
+    
     // Runtime data
     OSArray *inputArray;
     WirelessDevice *service;
@@ -28,11 +53,16 @@ class WirelessGamingReceiver : public IOService
 public:
     bool start(IOService *provider);
     void stop(IOService *provider);
+
+    // For WirelessDevice to use
+    OSNumber* WirelessGamingReceiver::newLocationIDNumber() const;
+    
 private:
     friend class WirelessDevice;
     bool IsDataQueued(int index);
     IOMemoryDescriptor* ReadBuffer(int index);
     bool QueueWrite(int index, const void *bytes, UInt32 length);
+    
 private:
     IOUSBDevice *device;
     WIRELESS_CONNECTION connections[WIRELESS_CONNECTIONS];
