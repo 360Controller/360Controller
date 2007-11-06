@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>Hierarchy</key>
@@ -127,7 +127,296 @@
 											<array>
 												<dict>
 													<key>Children</key>
-													<array/>
+													<array>
+														<dict>
+															<key>Children</key>
+															<array>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../360Controller/build/Deployment/360Controller.kext/Contents/Info.plist</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../360Controller/build/Deployment/360Controller.kext/Contents/MacOS/360Controller</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>420</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../360Controller/build/Deployment/360Controller.kext/Contents/MacOS</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array>
+																				<dict>
+																					<key>Children</key>
+																					<array>
+																						<dict>
+																							<key>Children</key>
+																							<array/>
+																							<key>GID</key>
+																							<integer>0</integer>
+																							<key>Path</key>
+																							<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/Info.plist</string>
+																							<key>Path Type</key>
+																							<integer>2</integer>
+																							<key>Privileges</key>
+																							<integer>420</integer>
+																							<key>Type</key>
+																							<integer>3</integer>
+																							<key>UID</key>
+																							<integer>0</integer>
+																						</dict>
+																						<dict>
+																							<key>Children</key>
+																							<array>
+																								<dict>
+																									<key>Children</key>
+																									<array/>
+																									<key>GID</key>
+																									<integer>0</integer>
+																									<key>Path</key>
+																									<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/MacOS/Feedback360</string>
+																									<key>Path Type</key>
+																									<integer>2</integer>
+																									<key>Privileges</key>
+																									<integer>493</integer>
+																									<key>Type</key>
+																									<integer>3</integer>
+																									<key>UID</key>
+																									<integer>0</integer>
+																								</dict>
+																							</array>
+																							<key>Expanded</key>
+																							<true/>
+																							<key>GID</key>
+																							<integer>0</integer>
+																							<key>Path</key>
+																							<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/MacOS</string>
+																							<key>Path Type</key>
+																							<integer>2</integer>
+																							<key>Privileges</key>
+																							<integer>493</integer>
+																							<key>Type</key>
+																							<integer>3</integer>
+																							<key>UID</key>
+																							<integer>0</integer>
+																						</dict>
+																						<dict>
+																							<key>Children</key>
+																							<array>
+																								<dict>
+																									<key>Children</key>
+																									<array>
+																										<dict>
+																											<key>Children</key>
+																											<array/>
+																											<key>GID</key>
+																											<integer>0</integer>
+																											<key>Path</key>
+																											<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/Resources/English.lproj/InfoPlist.strings</string>
+																											<key>Path Type</key>
+																											<integer>2</integer>
+																											<key>Privileges</key>
+																											<integer>420</integer>
+																											<key>Type</key>
+																											<integer>3</integer>
+																											<key>UID</key>
+																											<integer>0</integer>
+																										</dict>
+																									</array>
+																									<key>Expanded</key>
+																									<true/>
+																									<key>GID</key>
+																									<integer>0</integer>
+																									<key>Path</key>
+																									<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/Resources/English.lproj</string>
+																									<key>Path Type</key>
+																									<integer>2</integer>
+																									<key>Privileges</key>
+																									<integer>493</integer>
+																									<key>Type</key>
+																									<integer>3</integer>
+																									<key>UID</key>
+																									<integer>0</integer>
+																								</dict>
+																							</array>
+																							<key>Expanded</key>
+																							<true/>
+																							<key>GID</key>
+																							<integer>0</integer>
+																							<key>Path</key>
+																							<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/Resources</string>
+																							<key>Path Type</key>
+																							<integer>2</integer>
+																							<key>Privileges</key>
+																							<integer>493</integer>
+																							<key>Type</key>
+																							<integer>3</integer>
+																							<key>UID</key>
+																							<integer>0</integer>
+																						</dict>
+																					</array>
+																					<key>Expanded</key>
+																					<true/>
+																					<key>GID</key>
+																					<integer>0</integer>
+																					<key>Path</key>
+																					<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents</string>
+																					<key>Path Type</key>
+																					<integer>2</integer>
+																					<key>Privileges</key>
+																					<integer>493</integer>
+																					<key>Type</key>
+																					<integer>3</integer>
+																					<key>UID</key>
+																					<integer>0</integer>
+																				</dict>
+																			</array>
+																			<key>Expanded</key>
+																			<true/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>493</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../360Controller/build/Deployment/360Controller.kext/Contents/PlugIns</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array>
+																				<dict>
+																					<key>Children</key>
+																					<array/>
+																					<key>GID</key>
+																					<integer>0</integer>
+																					<key>Path</key>
+																					<string>../360Controller/build/Deployment/360Controller.kext/Contents/Resources/English.lproj/InfoPlist.strings</string>
+																					<key>Path Type</key>
+																					<integer>2</integer>
+																					<key>Privileges</key>
+																					<integer>438</integer>
+																					<key>Type</key>
+																					<integer>3</integer>
+																					<key>UID</key>
+																					<integer>0</integer>
+																				</dict>
+																			</array>
+																			<key>Expanded</key>
+																			<true/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../360Controller/build/Deployment/360Controller.kext/Contents/Resources/English.lproj</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>493</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../360Controller/build/Deployment/360Controller.kext/Contents/Resources</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+															</array>
+															<key>Expanded</key>
+															<true/>
+															<key>GID</key>
+															<integer>0</integer>
+															<key>Path</key>
+															<string>../360Controller/build/Deployment/360Controller.kext/Contents</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>493</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+													</array>
+													<key>Expanded</key>
+													<true/>
 													<key>GID</key>
 													<integer>0</integer>
 													<key>Path</key>
@@ -143,7 +432,134 @@
 												</dict>
 												<dict>
 													<key>Children</key>
-													<array/>
+													<array>
+														<dict>
+															<key>Children</key>
+															<array>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/Info.plist</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/MacOS/Wireless360Controller</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>420</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/MacOS</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array>
+																				<dict>
+																					<key>Children</key>
+																					<array/>
+																					<key>GID</key>
+																					<integer>0</integer>
+																					<key>Path</key>
+																					<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/Resources/English.lproj/InfoPlist.strings</string>
+																					<key>Path Type</key>
+																					<integer>2</integer>
+																					<key>Privileges</key>
+																					<integer>438</integer>
+																					<key>Type</key>
+																					<integer>3</integer>
+																					<key>UID</key>
+																					<integer>0</integer>
+																				</dict>
+																			</array>
+																			<key>Expanded</key>
+																			<true/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/Resources/English.lproj</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>493</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/Resources</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+															</array>
+															<key>Expanded</key>
+															<true/>
+															<key>GID</key>
+															<integer>0</integer>
+															<key>Path</key>
+															<string>../Wireless360Controller/build/Release/Wireless360Controller.kext/Contents</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>493</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+													</array>
+													<key>Expanded</key>
+													<true/>
 													<key>GID</key>
 													<integer>0</integer>
 													<key>Path</key>
@@ -159,7 +575,134 @@
 												</dict>
 												<dict>
 													<key>Children</key>
-													<array/>
+													<array>
+														<dict>
+															<key>Children</key>
+															<array>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/Info.plist</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/MacOS/WirelessGamingReceiver</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>420</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/MacOS</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array>
+																				<dict>
+																					<key>Children</key>
+																					<array/>
+																					<key>GID</key>
+																					<integer>0</integer>
+																					<key>Path</key>
+																					<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/Resources/English.lproj/InfoPlist.strings</string>
+																					<key>Path Type</key>
+																					<integer>2</integer>
+																					<key>Privileges</key>
+																					<integer>420</integer>
+																					<key>Type</key>
+																					<integer>3</integer>
+																					<key>UID</key>
+																					<integer>0</integer>
+																				</dict>
+																			</array>
+																			<key>Expanded</key>
+																			<true/>
+																			<key>GID</key>
+																			<integer>0</integer>
+																			<key>Path</key>
+																			<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/Resources/English.lproj</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>493</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>0</integer>
+																	<key>Path</key>
+																	<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/Resources</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+															</array>
+															<key>Expanded</key>
+															<true/>
+															<key>GID</key>
+															<integer>0</integer>
+															<key>Path</key>
+															<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>493</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+													</array>
+													<key>Expanded</key>
+													<true/>
 													<key>GID</key>
 													<integer>0</integer>
 													<key>Path</key>
