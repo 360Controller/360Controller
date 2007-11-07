@@ -22,7 +22,7 @@ enum {
 };
 
 NSString *alertStrings[] = {
-    @"You have attached a Microsoft plug'n'charge cable for your XBox 360 Wireless Controller. While this cable will allow you to charge your wireless controller, you will require the Microsoft Wireless Gaming Receiver for Windows to use your wireless controller in Mac OS X!",
+    @"You have attached a Microsoft Play & Charge cable for your XBox 360 Wireless Controller. While this cable will allow you to charge your wireless controller, you will require the Microsoft Wireless Gaming Receiver for Windows to use your wireless controller in Mac OS X!",
 };
 
 void releaseAlert(void)
