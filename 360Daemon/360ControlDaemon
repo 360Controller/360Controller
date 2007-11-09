@@ -1,0 +1,25 @@
+#!/bin/sh
+. /etc/rc.common
+ 
+# The start subroutine
+StartService() {
+    /Library/StartupItems/360ControlDaemon/360Daemon &
+}
+ 
+# The stop subroutine
+StopService() {
+    killall -TERM 360Daemon
+    sleep 10
+    killall -9 360Daemon
+}
+ 
+# The restart subroutine
+RestartService() {
+    killall -TERM 360Daemon
+    sleep 10
+    killall -9 360Daemon
+    sleep 10
+    /Library/StartupItems/360ControlDaemon/360Daemon &
+}
+ 
+RunService "$1"

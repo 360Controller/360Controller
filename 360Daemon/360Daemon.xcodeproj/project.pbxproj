@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B7905000CE3F6A400ACB699 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7904FF0CE3F6A400ACB699 /* ForceFeedback.framework */; };
 		3B7A8E2C0CE14E38005BB45B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7A8E2B0CE14E38005BB45B /* IOKit.framework */; };
+		3B8698090CE2903100283CEC /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8698080CE2903100283CEC /* ControlPrefs.m */; };
 		8DD76F9A0486AA7600D96B5E /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* 360Daemon.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* 360Daemon.1 */; };
@@ -30,7 +32,13 @@
 		08FB7796FE84155DC02AAC07 /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 360Daemon.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32A70AAB03705E1F00C91783 /* 360Daemon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 360Daemon_Prefix.pch; sourceTree = "<group>"; };
+		3B7904BE0CE3E94500ACB699 /* StartupParameters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = StartupParameters.plist; sourceTree = "<group>"; };
+		3B7904C30CE3EC7700ACB699 /* 360ControlDaemon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 360ControlDaemon; sourceTree = "<group>"; };
+		3B7904D50CE3F13700ACB699 /* Alert.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Alert.tif; sourceTree = "<group>"; };
+		3B7904FF0CE3F6A400ACB699 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		3B7A8E2B0CE14E38005BB45B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		3B8698070CE2903100283CEC /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPrefs.h; sourceTree = "<group>"; };
+		3B8698080CE2903100283CEC /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPrefs.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* 360Daemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 360Daemon; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* 360Daemon.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = 360Daemon.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,6 +50,7 @@
 			files = (
 				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
 				3B7A8E2C0CE14E38005BB45B /* IOKit.framework in Frameworks */,
+				3B7905000CE3F6A400ACB699 /* ForceFeedback.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,8 +71,13 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3B7904D50CE3F13700ACB699 /* Alert.tif */,
+				3B8698070CE2903100283CEC /* ControlPrefs.h */,
+				3B8698080CE2903100283CEC /* ControlPrefs.m */,
 				32A70AAB03705E1F00C91783 /* 360Daemon_Prefix.pch */,
 				08FB7796FE84155DC02AAC07 /* 360Daemon.m */,
+				3B7904BE0CE3E94500ACB699 /* StartupParameters.plist */,
+				3B7904C30CE3EC7700ACB699 /* 360ControlDaemon */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -71,6 +85,7 @@
 		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3B7904FF0CE3F6A400ACB699 /* ForceFeedback.framework */,
 				3B7A8E2B0CE14E38005BB45B /* IOKit.framework */,
 				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
 			);
@@ -137,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F9A0486AA7600D96B5E /* 360Daemon.m in Sources */,
+				3B8698090CE2903100283CEC /* ControlPrefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

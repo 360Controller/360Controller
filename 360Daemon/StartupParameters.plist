@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>Description</key>
+	<string>360 Controller Driver Daemon</string>
+	<key>Messages</key>
+	<dict>
+		<key>start</key>
+		<string>Starting 360 Controller Daemon</string>
+		<key>stop</key>
+		<string>Stopping 360 Controller Daemon</string>
+	</dict>
+	<key>OrderPreference</key>
+	<string>None</string>
+	<key>Provides</key>
+	<array>
+		<string>360ControllerDaemon</string>
+	</array>
+</dict>
+</plist>

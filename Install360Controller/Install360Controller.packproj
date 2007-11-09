@@ -102,6 +102,121 @@
 									<key>UID</key>
 									<integer>0</integer>
 								</dict>
+								<dict>
+									<key>Children</key>
+									<array>
+										<dict>
+											<key>Children</key>
+											<array>
+												<dict>
+													<key>Children</key>
+													<array/>
+													<key>GID</key>
+													<integer>0</integer>
+													<key>Path</key>
+													<string>../360Daemon/360ControlDaemon</string>
+													<key>Path Type</key>
+													<integer>2</integer>
+													<key>Privileges</key>
+													<integer>493</integer>
+													<key>Type</key>
+													<integer>3</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+												<dict>
+													<key>Children</key>
+													<array/>
+													<key>GID</key>
+													<integer>0</integer>
+													<key>Path</key>
+													<string>../360Daemon/build/Debug/360Daemon</string>
+													<key>Path Type</key>
+													<integer>2</integer>
+													<key>Privileges</key>
+													<integer>493</integer>
+													<key>Type</key>
+													<integer>3</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+												<dict>
+													<key>Children</key>
+													<array>
+														<dict>
+															<key>Children</key>
+															<array/>
+															<key>GID</key>
+															<integer>0</integer>
+															<key>Path</key>
+															<string>../360Daemon/Alert.tif</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>420</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+													</array>
+													<key>GID</key>
+													<integer>0</integer>
+													<key>Path</key>
+													<string>Resources</string>
+													<key>Path Type</key>
+													<integer>1</integer>
+													<key>Privileges</key>
+													<integer>493</integer>
+													<key>Type</key>
+													<integer>2</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+												<dict>
+													<key>Children</key>
+													<array/>
+													<key>GID</key>
+													<integer>0</integer>
+													<key>Path</key>
+													<string>../360Daemon/StartupParameters.plist</string>
+													<key>Path Type</key>
+													<integer>2</integer>
+													<key>Privileges</key>
+													<integer>493</integer>
+													<key>Type</key>
+													<integer>3</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+											</array>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>Path</key>
+											<string>360ControlDaemon</string>
+											<key>Path Type</key>
+											<integer>1</integer>
+											<key>Privileges</key>
+											<integer>493</integer>
+											<key>Type</key>
+											<integer>2</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+									</array>
+									<key>GID</key>
+									<integer>0</integer>
+									<key>Path</key>
+									<string>StartupItems</string>
+									<key>Path Type</key>
+									<integer>1</integer>
+									<key>Privileges</key>
+									<integer>509</integer>
+									<key>Type</key>
+									<integer>2</integer>
+									<key>UID</key>
+									<integer>0</integer>
+								</dict>
 							</array>
 							<key>GID</key>
 							<integer>80</integer>
