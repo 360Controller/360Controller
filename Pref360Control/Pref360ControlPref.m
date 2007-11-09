@@ -24,6 +24,7 @@
 #include <IOKit/usb/IOUSBLib.h>
 #import "Pref360ControlPref.h"
 #import "DeviceItem.h"
+#import "ControlPrefs.h"
 
 #define NO_ITEMS            @"No devices found"
 
@@ -285,7 +286,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if(registryEntry==0) return;
     [self testMotorsLarge:0 small:0];
     [self setMotorOverride:FALSE];
-    [self updateLED:0x00];
+//    [self updateLED:0x00];
     if(hidQueue!=NULL) {
         CFRunLoopSourceRef eventSource;
         
@@ -431,7 +432,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     // Read existing properties
     {
-        CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
+//        CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
+        CFDictionaryRef dict = (CFDictionaryRef)[GetController(GetSerialNumber(registryEntry)) retain];
         if(dict!=0) {
             CFBooleanRef boolValue;
             CFNumberRef intValue;
@@ -478,7 +480,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Enable GUI components
     [self inputEnable:YES];
     // Set LED and manual motor control
-    [self updateLED:0x0a];
+//    [self updateLED:0x0a];
     [self setMotorOverride:TRUE];
     [self testMotorsLarge:0 small:0];
     largeMotor=0;
@@ -661,7 +663,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Create dictionary
     dict=CFDictionaryCreate(NULL,(const void**)keys,(const void**)values,sizeof(keys)/sizeof(keys[0]),&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);
     // Set property
-    IORegistryEntrySetCFProperties(registryEntry,dict);
+    IORegistryEntrySetCFProperties(registryEntry, dict);
+    SetController(GetSerialNumber(registryEntry), (NSDictionary*)dict);
     // Update UI
     [leftStick setLinked:([leftLinked state]==NSOnState)];
     [leftStick setDeadzone:[leftStickDeadzone doubleValue]];

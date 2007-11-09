@@ -12,6 +12,8 @@
 		3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EF0B93C31400F200B8 /* batt0.tif */; };
 		3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F00B93C31400F200B8 /* batt3.tif */; };
 		3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F10B93C31400F200B8 /* batt2.tif */; };
+		3B86987F0CE2A22100283CEC /* ControlPrefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B86987D0CE2A22100283CEC /* ControlPrefs.h */; };
+		3B8698800CE2A22100283CEC /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B86987E0CE2A22100283CEC /* ControlPrefs.m */; };
 		3BBEAB01096B2C4C00F2E37B /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BBEAAFF096B2C4C00F2E37B /* MyAnalogStick.h */; };
 		3BBEAB02096B2C4C00F2E37B /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBEAB00096B2C4C00F2E37B /* MyAnalogStick.m */; };
 		3BBEAB05096B2C5200F2E37B /* MyCentreButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBEAB03096B2C5200F2E37B /* MyCentreButtons.m */; };
@@ -36,32 +38,6 @@
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		06F27B30FFEEEFEF11CA0E56 /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OPTIMIZATION_CFLAGS = "-O0";
-				ZERO_LINK = YES;
-			};
-			name = Development;
-		};
-		06F27B31FFEEEFEF11CA0E56 /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				ZERO_LINK = NO;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -73,6 +49,8 @@
 		3B47D9EF0B93C31400F200B8 /* batt0.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt0.tif; sourceTree = "<group>"; };
 		3B47D9F00B93C31400F200B8 /* batt3.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt3.tif; sourceTree = "<group>"; };
 		3B47D9F10B93C31400F200B8 /* batt2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt2.tif; sourceTree = "<group>"; };
+		3B86987D0CE2A22100283CEC /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPrefs.h; path = ../360Daemon/ControlPrefs.h; sourceTree = SOURCE_ROOT; };
+		3B86987E0CE2A22100283CEC /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlPrefs.m; path = ../360Daemon/ControlPrefs.m; sourceTree = SOURCE_ROOT; };
 		3BBEAAFF096B2C4C00F2E37B /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyAnalogStick.h; sourceTree = "<group>"; };
 		3BBEAB00096B2C4C00F2E37B /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyAnalogStick.m; sourceTree = "<group>"; };
 		3BBEAB03096B2C5200F2E37B /* MyCentreButtons.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyCentreButtons.m; sourceTree = "<group>"; };
@@ -151,6 +129,8 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3B86987D0CE2A22100283CEC /* ControlPrefs.h */,
+				3B86987E0CE2A22100283CEC /* ControlPrefs.m */,
 				F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */,
 				F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */,
 				3BBEAAFF096B2C4C00F2E37B /* MyAnalogStick.h */,
@@ -220,6 +200,7 @@
 				3BBEAB0D096B2C5B00F2E37B /* MyMainButtons.h in Headers */,
 				3BBEAB11096B2C6000F2E37B /* MyShoulderButton.h in Headers */,
 				3BC41F32096C85CB00664A42 /* DeviceItem.h in Headers */,
+				3B86987F0CE2A22100283CEC /* ControlPrefs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,35 +219,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Pref360Control_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				LIBRARY_SEARCH_PATHS = "";
-				LIBRARY_STYLE = Bundle;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-bundle",
-					"-twolevel_namespace",
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = Pref360Control;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = prefPane;
-			};
 			dependencies = (
 			);
 			name = Pref360Control;
@@ -281,15 +233,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 3BBDC6A9097946B50023AAD8 /* Build configuration list for PBXProject "Pref360Control" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				06F27B30FFEEEFEF11CA0E56 /* Development */,
-				06F27B31FFEEEFEF11CA0E56 /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* Pref360Control */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D202CE80486D31800D8A456 /* Pref360Control */,
 			);
@@ -336,6 +284,7 @@
 				3BBEAB0E096B2C5B00F2E37B /* MyMainButtons.m in Sources */,
 				3BBEAB12096B2C6000F2E37B /* MyShoulderButton.m in Sources */,
 				3BC41F33096C85CB00664A42 /* DeviceItem.m in Sources */,
+				3B8698800CE2A22100283CEC /* ControlPrefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,7 +436,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Deployment;
