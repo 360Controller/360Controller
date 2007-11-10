@@ -228,7 +228,7 @@ OSNumber* Wireless360Controller::newPrimaryUsagePageNumber() const
 
 OSNumber* Wireless360Controller::newProductIDNumber() const
 {
-    return OSNumber::withNumber((unsigned long long)0, 16);
+    return OSNumber::withNumber((unsigned long long)0x28e, 16);
 }
 
 OSString* Wireless360Controller::newProductString() const
@@ -243,6 +243,6 @@ OSString* Wireless360Controller::newTransportString() const
 
 OSNumber* Wireless360Controller::newVendorIDNumber() const
 {
-    return OSNumber::withNumber((unsigned long long)0, 16);
+    return OSNumber::withNumber((unsigned long long)0x45e, 16);
 }
 
