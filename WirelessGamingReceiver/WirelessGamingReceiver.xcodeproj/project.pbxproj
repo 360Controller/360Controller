@@ -17,21 +17,6 @@
 		3BE6677B0B91DC55009679FC /* devices.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BE6677A0B91DC55009679FC /* devices.h */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		06AA1265FFB2107B11CA28AA /* Debug */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		06AA1266FFB2107B11CA28AA /* Release */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Release;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; };
@@ -128,8 +113,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-			};
 			dependencies = (
 			);
 			name = WirelessGamingReceiver;
@@ -144,15 +127,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91DD08733DB10010E9CD /* Build configuration list for PBXProject "WirelessGamingReceiver" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				06AA1265FFB2107B11CA28AA /* Debug */,
-				06AA1266FFB2107B11CA28AA /* Release */,
-			);
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* WirelessGamingReceiver */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				32D94FC30562CBF700B6AF17 /* WirelessGamingReceiver */,
 			);
@@ -266,7 +245,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.2.8.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				SYMROOT = build;
 			};

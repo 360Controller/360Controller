@@ -16,29 +16,6 @@
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		014CEA3F0018CDD111CA2923 /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				ZERO_LINK = YES;
-			};
-			name = Development;
-		};
-		014CEA400018CDD111CA2923 /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				ZERO_LINK = NO;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -140,13 +117,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = Feedback360;
-				WRAPPER_EXTENSION = bundle;
-			};
 			dependencies = (
 			);
 			name = Feedback360;
@@ -161,15 +131,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 3BBDC69709793BF60023AAD8 /* Build configuration list for PBXProject "Feedback360" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				014CEA3F0018CDD111CA2923 /* Development */,
-				014CEA400018CDD111CA2923 /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* Feedback360 */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D57630D048677EA00EA77CD /* Feedback360 */,
 			);
@@ -269,7 +235,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Deployment;
