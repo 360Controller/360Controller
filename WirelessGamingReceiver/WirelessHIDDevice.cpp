@@ -118,6 +118,8 @@ void WirelessHIDDevice::receivedData(void)
     }
 }
 
+const char *HexData = "0123456789ABCDEF";
+
 // Process new data
 void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
 {
@@ -133,8 +135,16 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
         case 0x0f:  // Initial info
             if (buf[16] == 0x13)
                 receivedUpdate(0x13, buf + 17);
-            memcpy(serialString, buf + 0x0A, 4);
-            serialString[4] = '\0';
+            serialString[0] = HexData[(buf[0x0A] & 0xF0) >> 4];
+            serialString[1] = HexData[buf[0x0A] & 0x0F];
+            serialString[2] = HexData[(buf[0x0B] & 0xF0) >> 4];
+            serialString[3] = HexData[buf[0x0B] & 0x0F];
+            serialString[4] = HexData[(buf[0x0C] & 0xF0) >> 4];
+            serialString[5] = HexData[buf[0x0C] & 0x0F];
+            serialString[6] = HexData[(buf[0x0D] & 0xF0) >> 4];
+            serialString[7] = HexData[buf[0x0D] & 0x0F];
+            serialString[8] = '\0';
+            IOLog("Got serial number: %s", serialString);
             break;
             
         case 0x01:  // HID info update

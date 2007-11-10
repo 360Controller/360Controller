@@ -49,7 +49,7 @@ private:
     static void _receivedData(void *target, WirelessDevice *sender, void *parameter);
     
     unsigned char battery;
-    char serialString[5];
+    char serialString[10];
 };
 
 #endif // __WIRELESSHIDDEVICE_H__

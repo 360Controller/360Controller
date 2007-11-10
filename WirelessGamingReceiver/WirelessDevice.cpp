@@ -75,6 +75,8 @@ void WirelessDevice::RegisterWatcher(void *target, WirelessDeviceWatcher functio
     this->target = target;
     this->parameter = parameter;
     this->function = function;
+    if ((function != NULL) && IsDataAvailable())
+        NewData();
 }
 
 // For internal use, sets this instances index on the wireless gaming receiver

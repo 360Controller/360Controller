@@ -44,6 +44,7 @@ typedef struct
     // Runtime data
     OSArray *inputArray;
     WirelessDevice *service;
+    bool controllerStarted;
 }
 WIRELESS_CONNECTION;
 
@@ -53,6 +54,8 @@ class WirelessGamingReceiver : public IOService
 public:
     bool start(IOService *provider);
     void stop(IOService *provider);
+
+    IOReturn message(UInt32 type,IOService *provider,void *argument);
 
     // For WirelessDevice to use
     OSNumber* WirelessGamingReceiver::newLocationIDNumber() const;

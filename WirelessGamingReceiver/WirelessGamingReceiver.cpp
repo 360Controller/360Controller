@@ -105,6 +105,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
         connections[i].otherOut = NULL;
         connections[i].inputArray = NULL;
         connections[i].service = NULL;
+        connections[i].controllerStarted = false;
     }
     
     pipeRequest.interval = 0;
@@ -213,6 +214,22 @@ void WirelessGamingReceiver::stop(IOService *provider)
 {
     ReleaseAll();
     IOService::stop(provider);
+}
+
+// Handle message from provider
+IOReturn WirelessGamingReceiver::message(UInt32 type,IOService *provider,void *argument)
+{
+//    IOLog("Message\n");
+/*
+    switch(type) {
+        case kIOMessageServiceIsTerminated:
+        case kIOMessageServiceIsRequestingClose:
+            if(device->isOpen(this)) ReleaseAll();
+            return kIOReturnSuccess;
+        default:
+        */
+            return IOService::message(type,provider,argument);
+//    }
 }
 
 // Queue a read on a controller
@@ -371,6 +388,7 @@ void WirelessGamingReceiver::ReleaseAll(void)
             connections[i].inputArray->release();
             connections[i].inputArray = NULL;
         }
+        connections[i].controllerStarted = false;
     }
     if (device != NULL)
     {
@@ -418,10 +436,12 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
             if (connections[index].service != NULL)
             {
                 connections[index].service->SetIndex(-1);
-                connections[index].service->terminate(kIOServiceRequired);
-                connections[index].service->detachAll(gIOServicePlane);
+                if (connections[index].controllerStarted)
+                    connections[index].service->terminate(kIOServiceRequired | kIOServiceSynchronous);
+                connections[index].service->detach(this);
                 connections[index].service->release();
                 connections[index].service = NULL;
+                connections[index].controllerStarted = false;
             }
         }
         else
@@ -429,7 +449,29 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
             // Device connected
 //            IOLog("process: Attempting to add new device\n");
             if (connections[index].service == NULL)
+            {
+                bool ready;
+                int i, j;
+                IOMemoryDescriptor *data;
+                char c;
+                
+                ready = false;
+                j = connections[index].inputArray->getCount();
+                for (i = 0; !ready && (i < j); i++)
+                {
+                    data = OSDynamicCast(IOMemoryDescriptor, connections[index].inputArray->getObject(i));
+                    data->readBytes(1, &c, 1);
+                    if (c == 0x0f)
+                        ready = true;
+                }
                 InstantiateService(index);
+                if (ready)
+                {
+//                    IOLog("Registering wireless device");
+                    connections[index].controllerStarted = true;
+                    connections[index].service->registerService();
+                }
+            }
         }
         return;
     }
@@ -438,11 +480,25 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
     IOMemoryDescriptor *copy = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
     copy->writeBytes(0, data, length);
     connections[index].inputArray->setObject(copy);
-    copy->release();
     if (connections[index].service == NULL)
         InstantiateService(index);
     if (connections[index].service != NULL)
+    {
         connections[index].service->NewData();
+        if (!connections[index].controllerStarted)
+        {
+            char c;
+            
+            copy->readBytes(1, &c, 1);
+            if (c == 0x0f)
+            {
+//                IOLog("Registering wireless device");
+                connections[index].controllerStarted = true;
+                connections[index].service->registerService();
+            }
+        }
+    }
+    copy->release();
 }
 
 // Create a new node for the attached controller
@@ -462,7 +518,7 @@ void WirelessGamingReceiver::InstantiateService(int index)
         {
             connections[index].service->attach(this);
             connections[index].service->SetIndex(index);
-            connections[index].service->registerService();
+//            connections[index].service->registerService();
 //            IOLog("process: Device attached\n");
             if (IsDataQueued(index))
                 connections[index].service->NewData();
