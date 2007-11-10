@@ -15,8 +15,10 @@ CFRunLoopSourceRef notifySource;
 io_iterator_t onIteratorWired;
 io_iterator_t onIteratorWireless;
 io_iterator_t onIteratorOther;
+io_iterator_t offIteratorWired;
+io_iterator_t offIteratorWireless;
 BOOL foundWirelessReceiver;
-int controllerCounter = 0;
+NSString *leds[4];
 
 CFUserNotificationRef activeAlert = nil;
 CFRunLoopSourceRef activeAlertSource;
@@ -102,9 +104,25 @@ static void callbackConnected(void *param,io_iterator_t iterator)
             {
                 FFEFFESCAPE escape;
                 unsigned char c;
+                NSString *serial;
+                int i;
     
-                c = 0x06 + controllerCounter;
-                controllerCounter = (controllerCounter + 1) % 4;
+                serial = GetSerialNumber(object);
+                c = 0x0a;
+                if (serial != nil)
+                {
+                    for (i = 0; i < 4; i++)
+                    {
+                        if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame))
+                        {
+                            c = 0x06 + i;
+                            if (leds[i] == nil)
+                                leds[i] = [serial retain];
+//                            NSLog(@"Added controller with LED %i", i);
+                            break;
+                        }
+                    }
+                }
                 escape.dwSize = sizeof(escape);
                 escape.dwCommand = 0x02;
                 escape.cbInBuffer = sizeof(c);
@@ -149,12 +167,43 @@ static void callbackConnected(void *param,io_iterator_t iterator)
     [pool release];
 }
 
+// Supported device - disconnecting
+static void callbackDisconnected(void *param, io_iterator_t iterator)
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    io_service_t object = 0;
+    NSString *serial;
+    int i;
+    
+    while ((object = IOIteratorNext(iterator)) != 0)
+    {
+        serial = GetSerialNumber(object);
+        if (serial != nil)
+        {
+            for (i = 0; i < 4; i++)
+            {
+                if (leds[i] == nil)
+                    continue;
+                if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
+                {
+                    [leds[i] release];
+                    leds[i] = nil;
+//                    NSLog(@"Removed controller with LED %i", i);
+                }
+            }
+        }
+        IOObjectRelease(object);
+    }
+    [pool release];
+}
+
 // Entry point
 int main (int argc, const char * argv[])
 {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
     foundWirelessReceiver = FALSE;
+    memset(leds, 0, sizeof(leds));
     // Get master port, for accessing I/O Kit
     IOMasterPort(MACH_PORT_NULL,&masterPort);
     // Set up notification of USB device addition/removal
@@ -168,15 +217,21 @@ int main (int argc, const char * argv[])
         // Wired 360 devices
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
     callbackConnected(NULL, onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
+    callbackDisconnected(NULL, offIteratorWired);
         // Wireless 360 devices
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
     callbackConnected(NULL, onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
+    callbackDisconnected(NULL, offIteratorWireless);
     // Run loop
     CFRunLoopRun();
     // Stop listening
     IOObjectRelease(onIteratorOther);
     IOObjectRelease(onIteratorWired);
+    IOObjectRelease(offIteratorWired);
     IOObjectRelease(onIteratorWireless);
+    IOObjectRelease(offIteratorWireless);
     CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     CFRunLoopSourceInvalidate(notifySource);
     IONotificationPortDestroy(notifyPort);
