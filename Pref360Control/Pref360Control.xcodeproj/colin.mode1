@@ -204,10 +204,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>3B40301B0BDA964700D98BAE</string>
+						<string>3BE67E3B0C9F380500A68607</string>
 						<key>history</key>
 						<array>
-							<string>3B4030150BDA961800D98BAE</string>
+							<string>3B1C2F8C0C9E057F00D37DB5</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -224,6 +224,86 @@
 				<false/>
 				<key>RubberWindowFrame</key>
 				<string>221 179 900 758 0 0 1280 1002 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>3B216D690C0E0319000BE7F3</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>Pref360ControlPref.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>3B216D6A0C0E0319000BE7F3</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>Pref360ControlPref.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>3BE67E3C0C9F380500A68607</string>
+						<key>history</key>
+						<array>
+							<string>3B1C2F8E0C9E057F00D37DB5</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {900, 717}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>138 152 900 758 0 0 1280 1002 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>3B216D660C0E0319000BE7F3</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>DeviceItem.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>3B216D670C0E0319000BE7F3</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>DeviceItem.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>3BE67E3D0C9F380500A68607</string>
+						<key>history</key>
+						<array>
+							<string>3B1C2F8F0C9E057F00D37DB5</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {900, 717}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>68 226 900 758 0 0 1280 1002 </string>
 			</dict>
 		</dict>
 	</array>
@@ -260,6 +340,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -309,6 +391,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>14</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -377,8 +461,6 @@
 							<string>0pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -415,9 +497,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3B4030170BDA964700D98BAE</string>
+				<string>3BE67E390C9F380500A68607</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3B4030180BDA964700D98BAE</string>
+				<string>3BE67E3A0C9F380500A68607</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -551,9 +633,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3BBEAB15096B38D200F2E37B</string>
-		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
+		<string>3B216D660C0E0319000BE7F3</string>
+		<string>3B216D690C0E0319000BE7F3</string>
 		<string>3B4030190BDA964700D98BAE</string>
+		<string>/Users/colin/Projects2/OSX/360 Controller/Pref360Control/Pref360Control.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>564 128 690 397 0 0 1280 1002 </string>

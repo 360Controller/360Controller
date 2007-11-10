@@ -1,8 +1,8 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecture = ppc;
 		activeBuildConfigurationName = Release;
-		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Debug */;
 		activeTarget = 32D94FC30562CBF700B6AF17 /* Wireless360Controller */;
 		addToTargets = (
 			32D94FC30562CBF700B6AF17 /* Wireless360Controller */,
@@ -31,8 +31,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198863039;
-			PBXWorkspaceStateSaveDate = 198863039;
+			PBXPerProjectTemplateStateSaveDate = 216359858;
+			PBXWorkspaceStateSaveDate = 216359858;
 		};
 		sourceControlManager = 3B18E24B0B92718C0093FA6E /* Source Control */;
 		userBuildSettings = {
@@ -56,10 +56,11 @@
 	};
 	1A224C3FFF42367911CA2CB7 /* Wireless360Controller.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {896, 3486}}";
-			sepNavSelRange = "{188, 0}";
-			sepNavVisRect = "{{0, 0}, {458, 440}}";
-			sepNavWindowFrame = "{{113, 90}, {497, 569}}";
+			sepNavIntBoundsRect = "{{0, 0}, {722, 3472}}";
+			sepNavSelRange = "{5823, 5}";
+			sepNavVisRange = "{5275, 1039}";
+			sepNavVisRect = "{{0, 1656}, {584, 455}}";
+			sepNavWindowFrame = "{{113, 75}, {623, 584}}";
 		};
 	};
 	32D94FC30562CBF700B6AF17 /* Wireless360Controller */ = {
@@ -67,8 +68,9 @@
 	};
 	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {767, 770}}";
-			sepNavSelRange = "{1134, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {747, 742}}";
+			sepNavSelRange = "{722, 0}";
+			sepNavVisRange = "{0, 1636}";
 			sepNavVisRect = "{{0, 0}, {767, 645}}";
 			sepNavWindowFrame = "{{351, 182}, {806, 774}}";
 		};

@@ -2,16 +2,18 @@
 {
 	08FB7793FE84155DC02AAC07 /* Project object */ = {
 		activeArchitecture = ppc;
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = Release;
 		activeExecutable = 3BD6F0E90C67E41F00574E6A /* 360Daemon */;
 		activeTarget = 8DD76F960486AA7600D96B5E /* 360Daemon */;
 		addToTargets = (
 			8DD76F960486AA7600D96B5E /* 360Daemon */,
 		);
 		breakpoints = (
-			3B7A8E510CE154B9005BB45B /* 360Daemon.m:94 */,
-			3B7A8E6B0CE157EC005BB45B /* 360Daemon.m:69 */,
-			3B7A8E740CE1595C005BB45B /* 360Daemon.m:82 */,
+			3B7A8E510CE154B9005BB45B /* 360Daemon.m:140 */,
+			3B7A8E6B0CE157EC005BB45B /* 360Daemon.m:82 */,
+			3B7A8E740CE1595C005BB45B /* 360Daemon.m:95 */,
+			3B8698420CE29A3100283CEC /* ControlPrefs.m:28 */,
+			3B8698440CE29A3300283CEC /* ControlPrefs.m:16 */,
 		);
 		codeSenseManager = 3BD6F0F00C67E43E00574E6A /* Code sense */;
 		executables = (
@@ -40,15 +42,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216085581;
-			PBXWorkspaceStateSaveDate = 216085581;
-		};
-		perUserProjectItems = {
-			3B7A8E590CE15573005BB45B /* PBXTextBookmark */ = 3B7A8E590CE15573005BB45B /* PBXTextBookmark */;
-			3B7A8E5A0CE15573005BB45B /* PBXTextBookmark */ = 3B7A8E5A0CE15573005BB45B /* PBXTextBookmark */;
-			3B7A8E6D0CE15840005BB45B /* PBXTextBookmark */ = 3B7A8E6D0CE15840005BB45B /* PBXTextBookmark */;
-			3B7A8E6E0CE15840005BB45B /* PBXTextBookmark */ = 3B7A8E6E0CE15840005BB45B /* PBXTextBookmark */;
-			3B7A8E720CE15907005BB45B /* PBXTextBookmark */ = 3B7A8E720CE15907005BB45B /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 216359795;
+			PBXWorkspaceStateSaveDate = 216359795;
 		};
 		sourceControlManager = 3BD6F0EF0C67E43E00574E6A /* Source Control */;
 		userBuildSettings = {
@@ -56,14 +51,38 @@
 	};
 	08FB7796FE84155DC02AAC07 /* 360Daemon.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1670, 1988}}";
-			sepNavSelRange = "{3008, 0}";
-			sepNavVisRange = "{2016, 1625}";
+			sepNavIntBoundsRect = "{{0, 0}, {1670, 3556}}";
+			sepNavSelRange = "{6891, 0}";
+			sepNavVisRange = "{6043, 1017}";
 			sepNavVisRect = "{{0, 1099}, {584, 455}}";
-			sepNavWindowFrame = "{{14, 413}, {623, 584}}";
+			sepNavWindowFrame = "{{10, 344}, {827, 653}}";
 		};
 	};
-	3B7A8E510CE154B9005BB45B /* 360Daemon.m:94 */ = {
+	32A70AAB03705E1F00C91783 /* 360Daemon_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {564, 433}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 160}";
+			sepNavWindowFrame = "{{38, 392}, {623, 584}}";
+		};
+	};
+	3B7904BE0CE3E94500ACB699 /* StartupParameters.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {564, 456}}";
+			sepNavSelRange = "{541, 0}";
+			sepNavVisRange = "{0, 541}";
+			sepNavWindowFrame = "{{15, 413}, {623, 584}}";
+		};
+	};
+	3B7904C30CE3EC7700ACB699 /* 360ControlDaemon */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {564, 456}}";
+			sepNavSelRange = "{402, 0}";
+			sepNavVisRange = "{0, 434}";
+			sepNavWindowFrame = "{{435, 140}, {623, 584}}";
+		};
+	};
+	3B7A8E510CE154B9005BB45B /* 360Daemon.m:140 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -75,29 +94,12 @@
 		functionName = "callbackConnected()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 94;
+		lineNumber = 140;
 		location = 360Daemon;
-		modificationTime = 216095252.3851;
+		modificationTime = 216357854.964732;
 		state = 2;
 	};
-	3B7A8E590CE15573005BB45B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
-		rLen = 0;
-		rLoc = 72;
-		rType = 1;
-	};
-	3B7A8E5A0CE15573005BB45B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
-		name = "360Daemon.m: 71";
-		rLen = 0;
-		rLoc = 2464;
-		rType = 0;
-		vrLen = 1191;
-		vrLoc = 1607;
-	};
-	3B7A8E6B0CE157EC005BB45B /* 360Daemon.m:69 */ = {
+	3B7A8E6B0CE157EC005BB45B /* 360Daemon.m:82 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -109,39 +111,12 @@
 		functionName = "ShowAlert()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 69;
+		lineNumber = 82;
 		location = 360Daemon;
-		modificationTime = 216095252.385363;
+		modificationTime = 216357854.964961;
 		state = 2;
 	};
-	3B7A8E6D0CE15840005BB45B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
-		rLen = 0;
-		rLoc = 68;
-		rType = 1;
-	};
-	3B7A8E6E0CE15840005BB45B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
-		name = "360Daemon.m: 68";
-		rLen = 0;
-		rLoc = 2086;
-		rType = 0;
-		vrLen = 1228;
-		vrLoc = 1325;
-	};
-	3B7A8E720CE15907005BB45B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
-		name = "360Daemon.m: 87";
-		rLen = 0;
-		rLoc = 3039;
-		rType = 0;
-		vrLen = 1625;
-		vrLoc = 2016;
-	};
-	3B7A8E740CE1595C005BB45B /* 360Daemon.m:82 */ = {
+	3B7A8E740CE1595C005BB45B /* 360Daemon.m:95 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -151,12 +126,62 @@
 		delayBeforeContinue = 0;
 		fileReference = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */;
 		functionName = "callbackConnected()";
-		hitCount = 1;
+		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 82;
+		lineNumber = 95;
 		location = 360Daemon;
-		modificationTime = 216095265.934186;
+		modificationTime = 216357854.96508;
 		state = 2;
+	};
+	3B8698070CE2903100283CEC /* ControlPrefs.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {564, 456}}";
+			sepNavSelRange = "{599, 15}";
+			sepNavVisRange = "{0, 703}";
+			sepNavWindowFrame = "{{573, 106}, {623, 584}}";
+		};
+	};
+	3B8698080CE2903100283CEC /* ControlPrefs.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {872, 938}}";
+			sepNavSelRange = "{1606, 0}";
+			sepNavVisRange = "{0, 969}";
+			sepNavWindowFrame = "{{38, 392}, {623, 584}}";
+		};
+	};
+	3B8698420CE29A3100283CEC /* ControlPrefs.m:28 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 3B8698080CE2903100283CEC /* ControlPrefs.m */;
+		functionName = "AlertDisabled()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 28;
+		location = 360Daemon;
+		modificationTime = 216357854.965237;
+		state = 0;
+	};
+	3B8698440CE29A3300283CEC /* ControlPrefs.m:16 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 3B8698080CE2903100283CEC /* ControlPrefs.m */;
+		functionName = "SetAlertDisabled()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 16;
+		location = 360Daemon;
+		modificationTime = 216357854.965258;
+		state = 0;
 	};
 	3BD6F0E90C67E41F00574E6A /* 360Daemon */ = {
 		isa = PBXExecutable;

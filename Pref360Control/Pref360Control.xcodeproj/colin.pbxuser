@@ -1,16 +1,15 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
-		activeBuildStyle = 06F27B30FFEEEFEF11CA0E56 /* Development */;
 		activeTarget = 8D202CE80486D31800D8A456 /* Pref360Control */;
 		addToTargets = (
 			8D202CE80486D31800D8A456 /* Pref360Control */,
 		);
 		breakpoints = (
-			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */,
+			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:417 */,
 		);
-		breakpointsGroup = 3BBB33C0097B2E9900E8A35A /* XCBreakpointsBucket */;
 		codeSenseManager = 3BBEAAF6096B030C00F2E37B /* Code sense */;
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
@@ -57,12 +56,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198874637;
-			PBXWorkspaceStateSaveDate = 198874637;
-		};
-		perUserProjectItems = {
-			3B4030150BDA961800D98BAE /* PBXBookmark */ = 3B4030150BDA961800D98BAE /* PBXBookmark */;
-			3B40301B0BDA964700D98BAE /* PBXTextBookmark */ = 3B40301B0BDA964700D98BAE /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 216360628;
+			PBXWorkspaceStateSaveDate = 216360628;
 		};
 		sourceControlManager = 3BBEAAF5096B030C00F2E37B /* Source Control */;
 		userBuildSettings = {
@@ -84,39 +79,30 @@
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
 	};
-	3B4030150BDA961800D98BAE /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
-	};
-	3B40301B0BDA964700D98BAE /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
-		name = "Pref360ControlPref.m: 621";
-		rLen = 0;
-		rLoc = 20932;
-		rType = 0;
-		vrLen = 2115;
-		vrLoc = 18924;
-	};
-	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */ = {
+	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:417 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
+		breakpointStyle = 0;
 		continueAfterActions = 0;
+		countType = 0;
 		delayBeforeContinue = 0;
 		fileReference = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
 		functionName = "-startDevice";
-		hitCount = 1;
-		lineNumber = 416;
-		modificationTime = 182909504.480911;
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 417;
+		location = Pref360Control;
+		modificationTime = 216269836.523849;
 		state = 0;
 	};
-	3BBB33C0097B2E9900E8A35A /* XCBreakpointsBucket */ = {
-		isa = XCBreakpointsBucket;
-		name = "Project Breakpoints";
-		objects = (
-			3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:416 */,
-		);
+	3B86987E0CE2A22100283CEC /* ControlPrefs.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {872, 938}}";
+			sepNavSelRange = "{1706, 2}";
+			sepNavVisRange = "{770, 1303}";
+			sepNavWindowFrame = "{{84, 281}, {827, 653}}";
+		};
 	};
 	3BBEAAF5096B030C00F2E37B /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -212,18 +198,20 @@
 	};
 	3BC41F30096C85CB00664A42 /* DeviceItem.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{1399, 8}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 686}}";
+			sepNavSelRange = "{1085, 40}";
+			sepNavVisRange = "{0, 1442}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
-			sepNavWindowFrame = "{{292, 58}, {900, 814}}";
+			sepNavWindowFrame = "{{292, 106}, {900, 814}}";
 		};
 	};
 	3BC41F31096C85CB00664A42 /* DeviceItem.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 1036}}";
-			sepNavSelRange = "{1219, 0}";
-			sepNavVisRect = "{{0, 98}, {861, 685}}";
-			sepNavWindowFrame = "{{381, 88}, {900, 814}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 1036}}";
+			sepNavSelRange = "{1952, 31}";
+			sepNavVisRange = "{930, 1266}";
+			sepNavVisRect = "{{0, 336}, {861, 685}}";
+			sepNavWindowFrame = "{{68, 170}, {900, 814}}";
 		};
 	};
 	8D202CE80486D31800D8A456 /* Pref360Control */ = {
@@ -231,25 +219,28 @@
 	};
 	8D202CF70486D31800D8A456 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{844, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 686}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 927}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{319, 93}, {900, 814}}";
 		};
 	};
 	F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 1190}}";
-			sepNavSelRange = "{2150, 0}";
-			sepNavVisRect = "{{0, 414}, {861, 685}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 1190}}";
+			sepNavSelRange = "{2423, 13}";
+			sepNavVisRange = "{1227, 1565}";
+			sepNavVisRect = "{{0, 238}, {861, 685}}";
 			sepNavWindowFrame = "{{138, 96}, {900, 814}}";
 		};
 	};
 	F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1022, 9534}}";
-			sepNavSelRange = "{20932, 0}";
-			sepNavVisRect = "{{0, 8032}, {861, 685}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 9296}}";
+			sepNavSelRange = "{15986, 9}";
+			sepNavVisRange = "{14625, 2202}";
+			sepNavVisRect = "{{0, 7211}, {861, 685}}";
 			sepNavWindowFrame = "{{221, 123}, {900, 814}}";
 		};
 	};

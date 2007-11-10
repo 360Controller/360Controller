@@ -1,8 +1,8 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
-		activeBuildStyle = 014CEA3F0018CDD111CA2923 /* Development */;
 		activeTarget = 8D57630D048677EA00EA77CD /* Feedback360 */;
 		addToTargets = (
 			8D57630D048677EA00EA77CD /* Feedback360 */,
@@ -33,8 +33,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198873428;
-			PBXWorkspaceStateSaveDate = 198873428;
+			PBXPerProjectTemplateStateSaveDate = 216359748;
+			PBXWorkspaceStateSaveDate = 216359748;
 		};
 		sourceControlManager = 3B2EF5360965A149007BFB7B /* Source Control */;
 		userBuildSettings = {
@@ -50,8 +50,9 @@
 	};
 	08FB77B6FE84183AC02AAC07 /* main.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1226, 6174}}";
-			sepNavSelRange = "{2434, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {902, 5978}}";
+			sepNavSelRange = "{8090, 79}";
+			sepNavVisRange = "{8002, 1846}";
 			sepNavVisRect = "{{0, 659}, {861, 685}}";
 			sepNavWindowFrame = "{{253, 96}, {900, 814}}";
 		};
@@ -102,8 +103,9 @@
 	};
 	3BBA03E2096A29B5008A46C9 /* devlink.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 854}}";
-			sepNavSelRange = "{1001, 17}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 868}}";
+			sepNavSelRange = "{284, 0}";
+			sepNavVisRange = "{0, 1832}";
 			sepNavVisRect = "{{0, 154}, {861, 685}}";
 			sepNavWindowFrame = "{{253, 110}, {900, 814}}";
 		};
@@ -113,8 +115,9 @@
 	};
 	8D576317048677EA00EA77CD /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{1047, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 686}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1047}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{325, 66}, {900, 814}}";
 		};

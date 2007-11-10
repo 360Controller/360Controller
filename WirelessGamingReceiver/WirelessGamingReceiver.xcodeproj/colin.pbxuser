@@ -1,8 +1,8 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecture = ppc;
 		activeBuildConfigurationName = Release;
-		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Debug */;
 		activeTarget = 32D94FC30562CBF700B6AF17 /* WirelessGamingReceiver */;
 		addToTargets = (
 			32D94FC30562CBF700B6AF17 /* WirelessGamingReceiver */,
@@ -11,7 +11,6 @@
 			3BE667220B910BB9009679FC /* WirelessHIDDevice.h:5 */,
 			3BE6673C0B911E3C009679FC /* WirelessHIDDevice.h:5 */,
 		);
-		breakpointsGroup = 3BD4A7080B8FF49E0096227D /* XCBreakpointsBucket */;
 		codeSenseManager = 3B21EBDB0B8CEAED00B5CACA /* Code sense */;
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
@@ -36,8 +35,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198861858;
-			PBXWorkspaceStateSaveDate = 198861858;
+			PBXPerProjectTemplateStateSaveDate = 216359882;
+			PBXWorkspaceStateSaveDate = 216359882;
 		};
 		sourceControlManager = 3B21EBDA0B8CEAED00B5CACA /* Source Control */;
 		userBuildSettings = {
@@ -45,17 +44,19 @@
 	};
 	1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {662, 1218}}";
-			sepNavSelRange = "{2745, 0}";
-			sepNavVisRect = "{{0, 400}, {649, 329}}";
+			sepNavIntBoundsRect = "{{0, 0}, {629, 1288}}";
+			sepNavSelRange = "{1435, 7}";
+			sepNavVisRange = "{1099, 488}";
+			sepNavVisRect = "{{0, 658}, {649, 329}}";
 			sepNavWindowFrame = "{{481, 112}, {688, 458}}";
 		};
 	};
 	1A224C3FFF42367911CA2CB7 /* WirelessGamingReceiver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {842, 7308}}";
-			sepNavSelRange = "{16651, 0}";
-			sepNavVisRect = "{{0, 6663}, {767, 645}}";
+			sepNavIntBoundsRect = "{{0, 0}, {747, 7924}}";
+			sepNavSelRange = "{6221, 5}";
+			sepNavVisRange = "{5219, 1665}";
+			sepNavVisRect = "{{0, 5898}, {767, 645}}";
 			sepNavWindowFrame = "{{38, 202}, {806, 774}}";
 		};
 	};
@@ -64,10 +65,11 @@
 	};
 	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 784}}";
-			sepNavSelRange = "{793, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 756}}";
+			sepNavSelRange = "{723, 0}";
+			sepNavVisRange = "{0, 1173}";
 			sepNavVisRect = "{{0, 168}, {1020, 471}}";
-			sepNavWindowFrame = "{{45, 58}, {1059, 600}}";
+			sepNavWindowFrame = "{{45, 118}, {1059, 600}}";
 		};
 	};
 	3B21EBDA0B8CEAED00B5CACA /* Source Control */ = {
@@ -84,66 +86,68 @@
 	};
 	3B21ED660B8E688A00B5CACA /* WirelessDevice.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 826}}";
-			sepNavSelRange = "{1470, 0}";
-			sepNavVisRect = "{{0, 355}, {1020, 471}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 826}}";
+			sepNavSelRange = "{1620, 0}";
+			sepNavVisRange = "{1013, 848}";
+			sepNavVisRect = "{{0, 341}, {1020, 471}}";
 			sepNavWindowFrame = "{{175, 113}, {1059, 600}}";
 		};
 	};
 	3B21ED6B0B8E690F00B5CACA /* WirelessDevice.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 1568}}";
-			sepNavSelRange = "{3286, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 1596}}";
+			sepNavSelRange = "{2806, 0}";
+			sepNavVisRange = "{2269, 938}";
 			sepNavVisRect = "{{0, 1097}, {1020, 471}}";
-			sepNavWindowFrame = "{{107, 264}, {1059, 600}}";
+			sepNavWindowFrame = "{{226, 80}, {1059, 600}}";
 		};
-	};
-	3BD4A7080B8FF49E0096227D /* XCBreakpointsBucket */ = {
-		isa = XCBreakpointsBucket;
-		name = "Project Breakpoints";
-		objects = (
-			3BE667220B910BB9009679FC /* WirelessHIDDevice.h:5 */,
-			3BE6673C0B911E3C009679FC /* WirelessHIDDevice.h:5 */,
-		);
 	};
 	3BE667170B9109C5009679FC /* WirelessHIDDevice.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 784}}";
-			sepNavSelRange = "{96, 0}";
-			sepNavVisRect = "{{0, 313}, {1020, 471}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 784}}";
+			sepNavSelRange = "{1774, 0}";
+			sepNavVisRange = "{941, 1025}";
+			sepNavVisRect = "{{0, 299}, {1020, 471}}";
 			sepNavWindowFrame = "{{155, 94}, {1059, 600}}";
 		};
 	};
 	3BE6671B0B910A02009679FC /* WirelessHIDDevice.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 2954}}";
-			sepNavSelRange = "{5927, 0}";
-			sepNavVisRect = "{{0, 2483}, {1020, 471}}";
-			sepNavWindowFrame = "{{34, 402}, {1059, 600}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 3164}}";
+			sepNavSelRange = "{3510, 0}";
+			sepNavVisRange = "{2855, 785}";
+			sepNavVisRect = "{{0, 1316}, {1020, 471}}";
+			sepNavWindowFrame = "{{217, 402}, {1059, 600}}";
 		};
 	};
 	3BE667220B910BB9009679FC /* WirelessHIDDevice.h:5 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
+		breakpointStyle = 0;
 		continueAfterActions = 0;
+		countType = 0;
 		delayBeforeContinue = 0;
 		fileReference = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
 		hitCount = 0;
+		ignoreCount = 0;
 		lineNumber = 5;
-		modificationTime = 194059839.645874;
+		modificationTime = 216357854.963561;
 		state = 2;
 	};
 	3BE6673C0B911E3C009679FC /* WirelessHIDDevice.h:5 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
+		breakpointStyle = 0;
 		continueAfterActions = 0;
+		countType = 0;
 		delayBeforeContinue = 0;
 		fileReference = 3BE667170B9109C5009679FC /* WirelessHIDDevice.h */;
 		hitCount = 0;
+		ignoreCount = 0;
 		lineNumber = 5;
-		modificationTime = 194059838.6863289;
+		modificationTime = 216357854.964239;
 		state = 2;
 	};
 	3BE6677A0B91DC55009679FC /* devices.h */ = {

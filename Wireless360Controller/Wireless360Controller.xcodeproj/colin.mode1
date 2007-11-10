@@ -185,7 +185,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>3BE527300BDC35AB00984E1F</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>Wireless360Controller.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>3BE527310BDC35AB00984E1F</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>Wireless360Controller.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>3BD5A2F90C56D76B005B4E24</string>
+						<key>history</key>
+						<array>
+							<string>3B4FCA000C49C3B6007CF491</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {623, 487}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>113 131 623 528 0 0 1280 1002 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -261,6 +302,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>3</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -284,7 +327,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>574 562 690 397 0 0 1280 1002 </string>
+						<string>105 479 690 397 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -321,7 +364,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {482, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>574 562 690 397 0 0 1280 1002 </string>
+								<string>105 479 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -343,7 +386,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {482, 351}}</string>
 								<key>RubberWindowFrame</key>
-								<string>574 562 690 397 0 0 1280 1002 </string>
+								<string>105 479 690 397 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -367,9 +410,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3BCC408A0BDA917D00B1619B</string>
+				<string>3BD5A2F70C56D76B005B4E24</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3BCC408B0BDA917D00B1619B</string>
+				<string>3BD5A2F80C56D76B005B4E24</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -503,12 +546,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3B18E2510B92720F0093FA6E</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>3BE527300BDC35AB00984E1F</string>
 		<string>/Users/colin/Projects2/OSX/360 Controller/Wireless360Controller/Wireless360Controller.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>574 562 690 397 0 0 1280 1002 </string>
+	<string>105 479 690 397 0 0 1280 1002 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -585,7 +627,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3B18E2510B92720F0093FA6E</string>
-				<string>3BCC408C0BDA917D00B1619B</string>
+				<string>3B4FC9DE0C49BD69007CF491</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

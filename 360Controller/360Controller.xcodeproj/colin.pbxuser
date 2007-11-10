@@ -1,15 +1,14 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
-		activeBuildStyle = 06AA1265FFB2107B11CA28AA /* Development */;
 		activeTarget = 32D94FC30562CBF700B6AF17 /* 360Controller */;
 		addToTargets = (
 			32D94FC30562CBF700B6AF17 /* 360Controller */,
 		);
 		breakpoints = (
 		);
-		breakpointsGroup = 3BBDC6B209794B560023AAD8 /* XCBreakpointsBucket */;
 		codeSenseManager = 3BCE45B209633D9A00B69EDF /* Code sense */;
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXErrorsWarningsDataSource = {
@@ -86,8 +85,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198862999;
-			PBXWorkspaceStateSaveDate = 198862999;
+			PBXPerProjectTemplateStateSaveDate = 216359776;
+			PBXWorkspaceStateSaveDate = 216359776;
 		};
 		sourceControlManager = 3BCE45B109633D9A00B69EDF /* Source Control */;
 		userBuildSettings = {
@@ -112,9 +111,9 @@
 	1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {896, 7560}}";
-			sepNavSelRange = "{17116, 0}";
-			sepNavVisRect = "{{0, 6875}, {861, 685}}";
-			sepNavWindowFrame = "{{518, 59}, {900, 814}}";
+			sepNavSelRange = "{8336, 22}";
+			sepNavVisRect = "{{0, 3575}, {861, 685}}";
+			sepNavWindowFrame = "{{-9, 188}, {900, 814}}";
 		};
 	};
 	32D94FC30562CBF700B6AF17 /* 360Controller */ = {
@@ -122,10 +121,11 @@
 	};
 	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 3038}}";
-			sepNavSelRange = "{6483, 0}";
-			sepNavVisRect = "{{0, 2353}, {861, 685}}";
-			sepNavWindowFrame = "{{376, 7}, {900, 814}}";
+			sepNavIntBoundsRect = "{{0, 0}, {841, 3038}}";
+			sepNavSelRange = "{663, 0}";
+			sepNavVisRange = "{0, 1584}";
+			sepNavVisRect = "{{0, 2311}, {861, 685}}";
+			sepNavWindowFrame = "{{376, 63}, {900, 814}}";
 		};
 	};
 	3BB5E09B09641F8200F83598 /* xbox360hid.h */ = {
@@ -135,12 +135,6 @@
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
-	};
-	3BBDC6B209794B560023AAD8 /* XCBreakpointsBucket */ = {
-		isa = XCBreakpointsBucket;
-		name = "Project Breakpoints";
-		objects = (
-		);
 	};
 	3BBEA711096AFD9F00F2E37B /* Info copy.plist */ = {
 		uiCtxt = {

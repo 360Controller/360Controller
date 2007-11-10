@@ -130,7 +130,7 @@
 													<key>GID</key>
 													<integer>0</integer>
 													<key>Path</key>
-													<string>../360Daemon/build/Debug/360Daemon</string>
+													<string>../360Daemon/build/Release/360Daemon</string>
 													<key>Path Type</key>
 													<integer>2</integer>
 													<key>Privileges</key>
