@@ -46,11 +46,8 @@ NSDictionary* GetController(NSString *serial)
 {
     CFPropertyListRef value;
     
-    NSLog(@"Syncro-data");
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    NSLog(@"Reading value");
     value = CFPreferencesCopyValue((CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    NSLog(@"Done, returning");
     return [((NSDictionary*)value) autorelease];
 }
 
