@@ -55,6 +55,8 @@ bool Device_Send(DeviceLink *link,void *data,int length)
     if(link->interface==NULL) return FALSE;
     else {
         IOReturn res=(*link->interface)->setReport(link->interface,kIOHIDReportTypeOutput,0,data,length,10000,NULL,NULL,NULL);
+		if (res != kIOReturnSuccess)
+			fprintf(stderr, "Device_Send failed: 0x%.8x\n", res);
         return res==kIOReturnSuccess;
     }
 }

@@ -3,13 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		32D94FC60562CBF700B6AF17 /* _60Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* _60Controller.h */; };
 		32D94FC80562CBF700B6AF17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		32D94FCA0562CBF700B6AF17 /* _60Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */; settings = {ATTRIBUTES = (); }; };
+		3B36DCC410B7816F00FFD769 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC210B7816F00FFD769 /* Controller.cpp */; };
+		3B36DCC510B7816F00FFD769 /* Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC310B7816F00FFD769 /* Controller.h */; };
+		3B36DCCB10B7817E00FFD769 /* ChatPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC610B7817E00FFD769 /* ChatPad.cpp */; };
+		3B36DCCC10B7817E00FFD769 /* ChatPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC710B7817E00FFD769 /* ChatPad.h */; };
+		3B36DCCD10B7817E00FFD769 /* chatpadhid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC810B7817E00FFD769 /* chatpadhid.h */; };
+		3B36DCCE10B7817E00FFD769 /* chatpadkeys.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */; };
+		3B36DCCF10B7817E00FFD769 /* chatpadkeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */; };
 		3BB5E09C09641F8200F83598 /* xbox360hid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BB5E09B09641F8200F83598 /* xbox360hid.h */; };
 		3BCE45CA09638EBC00B69EDF /* ControlStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BCE45C909638EBC00B69EDF /* ControlStruct.h */; };
 /* End PBXBuildFile section */
@@ -18,11 +25,17 @@
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A224C3EFF42367911CA2CB7 /* _60Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; };
 		1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
-		32D94FCF0562CBF700B6AF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		32D94FCF0562CBF700B6AF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32D94FD00562CBF700B6AF17 /* 360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B0F1276097B395B00127827 /* Feedback360.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Feedback360.bundle; path = ../Feedback360/build/Deployment/Feedback360.bundle; sourceTree = SOURCE_ROOT; };
+		3B36DCC210B7816F00FFD769 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		3B36DCC310B7816F00FFD769 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		3B36DCC610B7817E00FFD769 /* ChatPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; };
+		3B36DCC710B7817E00FFD769 /* ChatPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; };
+		3B36DCC810B7817E00FFD769 /* chatpadhid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; };
+		3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; };
+		3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; };
 		3BB5E09B09641F8200F83598 /* xbox360hid.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; };
-		3BBEA711096AFD9F00F2E37B /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Info copy.plist"; path = "/Users/colin/Projects/360Controller/Info copy.plist"; sourceTree = "<absolute>"; };
 		3BCE45C909638EBC00B69EDF /* ControlStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; };
 		8DA8362C06AD9B9200E5AC22 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = /System/Library/Frameworks/Kernel.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -75,7 +88,8 @@
 		3B2EF19A0965A03E007BFB7B /* Kernel Driver */ = {
 			isa = PBXGroup;
 			children = (
-				3BB5E09B09641F8200F83598 /* xbox360hid.h */,
+				3B36DCC010B7815000FFD769 /* Controller */,
+				3B36DCC110B7815700FFD769 /* ChatPad */,
 				3BCE45C909638EBC00B69EDF /* ControlStruct.h */,
 				1A224C3EFF42367911CA2CB7 /* _60Controller.h */,
 				1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */,
@@ -90,9 +104,30 @@
 				8DA8362C06AD9B9200E5AC22 /* Kernel.framework */,
 				32D94FCF0562CBF700B6AF17 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
-				3BBEA711096AFD9F00F2E37B /* Info copy.plist */,
 			);
 			name = "Kernel Driver";
+			sourceTree = "<group>";
+		};
+		3B36DCC010B7815000FFD769 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3B36DCC210B7816F00FFD769 /* Controller.cpp */,
+				3B36DCC310B7816F00FFD769 /* Controller.h */,
+				3BB5E09B09641F8200F83598 /* xbox360hid.h */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3B36DCC110B7815700FFD769 /* ChatPad */ = {
+			isa = PBXGroup;
+			children = (
+				3B36DCC610B7817E00FFD769 /* ChatPad.cpp */,
+				3B36DCC710B7817E00FFD769 /* ChatPad.h */,
+				3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */,
+				3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */,
+				3B36DCC810B7817E00FFD769 /* chatpadhid.h */,
+			);
+			name = ChatPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +140,10 @@
 				32D94FC60562CBF700B6AF17 /* _60Controller.h in Headers */,
 				3BCE45CA09638EBC00B69EDF /* ControlStruct.h in Headers */,
 				3BB5E09C09641F8200F83598 /* xbox360hid.h in Headers */,
+				3B36DCC510B7816F00FFD769 /* Controller.h in Headers */,
+				3B36DCCC10B7817E00FFD769 /* ChatPad.h in Headers */,
+				3B36DCCD10B7817E00FFD769 /* chatpadhid.h in Headers */,
+				3B36DCCF10B7817E00FFD769 /* chatpadkeys.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +177,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 3BBDC686097938A90023AAD8 /* Build configuration list for PBXProject "360Controller" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* 360Controller */;
 			projectDirPath = "";
@@ -192,6 +231,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D94FCA0562CBF700B6AF17 /* _60Controller.cpp in Sources */,
+				3B36DCC410B7816F00FFD769 /* Controller.cpp in Sources */,
+				3B36DCCB10B7817E00FFD769 /* ChatPad.cpp in Sources */,
+				3B36DCCE10B7817E00FFD769 /* chatpadkeys.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,21 +317,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = /Developer/SDKs/MacOSX10.2.8.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.2.8.sdk";
 			};
 			name = Development;
 		};
 		3BBDC688097938A90023AAD8 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
-				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Deployment;
 		};
@@ -297,7 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = /Developer/SDKs/MacOSX10.2.8.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.2.8.sdk";
 			};
 			name = Default;
 		};

@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	08FB7793FE84155DC02AAC07 /* Project object */ = {
-		activeArchitecture = ppc;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 3BD6F0E90C67E41F00574E6A /* 360Daemon */;
 		activeTarget = 8DD76F960486AA7600D96B5E /* 360Daemon */;
@@ -42,8 +41,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216359795;
-			PBXWorkspaceStateSaveDate = 216359795;
+			PBXPerProjectTemplateStateSaveDate = 280461357;
+			PBXWorkspaceStateSaveDate = 280461357;
 		};
 		sourceControlManager = 3BD6F0EF0C67E43E00574E6A /* Source Control */;
 		userBuildSettings = {
@@ -51,11 +50,11 @@
 	};
 	08FB7796FE84155DC02AAC07 /* 360Daemon.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1670, 3556}}";
-			sepNavSelRange = "{6891, 0}";
-			sepNavVisRange = "{6043, 1017}";
+			sepNavIntBoundsRect = "{{0, 0}, {1951, 3237}}";
+			sepNavSelRange = "{5747, 0}";
+			sepNavVisRange = "{7116, 2143}";
 			sepNavVisRect = "{{0, 1099}, {584, 455}}";
-			sepNavWindowFrame = "{{10, 344}, {827, 653}}";
+			sepNavWindowFrame = "{{10, 125}, {827, 653}}";
 		};
 	};
 	32A70AAB03705E1F00C91783 /* 360Daemon_Prefix.pch */ = {
@@ -97,6 +96,7 @@
 		lineNumber = 140;
 		location = 360Daemon;
 		modificationTime = 216357854.964732;
+		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	3B7A8E6B0CE157EC005BB45B /* 360Daemon.m:82 */ = {
@@ -114,6 +114,7 @@
 		lineNumber = 82;
 		location = 360Daemon;
 		modificationTime = 216357854.964961;
+		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	3B7A8E740CE1595C005BB45B /* 360Daemon.m:95 */ = {
@@ -131,6 +132,7 @@
 		lineNumber = 95;
 		location = 360Daemon;
 		modificationTime = 216357854.96508;
+		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	3B8698070CE2903100283CEC /* ControlPrefs.h */ = {
@@ -143,10 +145,10 @@
 	};
 	3B8698080CE2903100283CEC /* ControlPrefs.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {872, 938}}";
-			sepNavSelRange = "{1606, 0}";
-			sepNavVisRange = "{0, 969}";
-			sepNavWindowFrame = "{{38, 392}, {623, 584}}";
+			sepNavIntBoundsRect = "{{0, 0}, {852, 910}}";
+			sepNavSelRange = "{648, 0}";
+			sepNavVisRange = "{0, 0}";
+			sepNavWindowFrame = "{{38, 194}, {623, 584}}";
 		};
 	};
 	3B8698420CE29A3100283CEC /* ControlPrefs.m:28 */ = {
@@ -162,8 +164,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 28;
-		location = 360Daemon;
+		location = Pref360Control;
 		modificationTime = 216357854.965237;
+		originalNumberOfMultipleMatches = 1;
 		state = 0;
 	};
 	3B8698440CE29A3300283CEC /* ControlPrefs.m:16 */ = {
@@ -179,8 +182,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 16;
-		location = 360Daemon;
+		location = Pref360Control;
 		modificationTime = 216357854.965258;
+		originalNumberOfMultipleMatches = 1;
 		state = 0;
 	};
 	3BD6F0E90C67E41F00574E6A /* 360Daemon */ = {
@@ -194,6 +198,9 @@
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
 		dylibVariantSuffix = "";
@@ -206,6 +213,7 @@
 		name = 360Daemon;
 		savedGlobals = {
 		};
+		showTypeColumn = 0;
 		sourceDirectories = (
 		);
 		variableFormatDictionary = {
@@ -216,6 +224,9 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};

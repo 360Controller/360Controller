@@ -523,7 +523,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     CFMutableDictionaryRef hidDictionary;
     IOReturn ioReturn;
     io_iterator_t iterator;
-    io_object_t hidDevice;
+    io_object_t hidDevice, parent;
     int count;
     DeviceItem *item;
     
@@ -539,7 +539,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     count=0;
     while(hidDevice=IOIteratorNext(iterator)) {
-        BOOL deviceWired = IOObjectConformsTo(hidDevice, "Xbox360ControllerClass");
+		parent = 0;
+		IORegistryEntryGetParentEntry(hidDevice, kIOServicePlane, &parent);
+        BOOL deviceWired = IOObjectConformsTo(parent, "Xbox360ControllerClass") && IOObjectConformsTo(hidDevice, "ControllerClass");
         BOOL deviceWireless = IOObjectConformsTo(hidDevice, "WirelessHIDDevice");
         if ((!deviceWired) && (!deviceWireless))
         {

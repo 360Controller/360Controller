@@ -27,70 +27,99 @@
 #include <IOKit/usb/IOUSBDevice.h>
 #include <IOKit/usb/IOUSBInterface.h>
 
-class Xbox360ControllerClass : public IOHIDDevice
+//class Serial360Device;
+class ControllerClass;
+class ChatPadKeyboardClass;
+
+class Xbox360ControllerClass : public IOService
 {
     OSDeclareDefaultStructors(Xbox360ControllerClass)
 
 private:
     void ReleaseAll(void);
     bool QueueRead(void);
-    bool QueueWrite(const void *bytes,UInt32 length);
+	bool QueueSerialRead(void);
 
-    OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
-    
+	static void SerialReadCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     static void ReadCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     static void WriteCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     
+	void SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
+	
     void fiddleReport(IOBufferMemoryDescriptor *buffer);
     
     void readSettings(void);
 
+	static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
+	void ChatPadTimerAction(IOTimerEventSource *sender);
+	void SendToggle(void);
+	void SendSpecial(UInt16 value);
+	void SendInit(UInt16 value, UInt16 index);
+	
+	void PadConnect(void);
+	void PadDisconnect(void);
+	
+	void SerialConnect(void);
+	void SerialDisconnect(void);
+	void SerialMessage(IOBufferMemoryDescriptor *data, size_t length);
+
 protected:
+	typedef enum {
+		tsToggle,
+		tsReset1,
+		tsReset2,
+		tsMiniToggle,
+		tsSet1,
+		tsSet2,
+		tsSet3,
+	} TIMER_STATE;
+	
     IOUSBDevice *device;
+	
+	// Joypad
     IOUSBInterface *interface;
     IOUSBPipe *inPipe,*outPipe;
     IOBufferMemoryDescriptor *inBuffer;
+	
+	// Keyboard
+	IOUSBInterface *serialIn;
+	IOUSBPipe *serialInPipe;
+    IOBufferMemoryDescriptor *serialInBuffer;
+	IOTimerEventSource *serialTimer;
+	bool serialToggle, serialHeard, serialActive;
+	int serialResetCount;
+	TIMER_STATE serialTimerState;
+//	Serial360Device *serialHandler;
+	ChatPadKeyboardClass *serialHandler;
     
     // Settings
     bool invertLeftX,invertLeftY;
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
+	ControllerClass *padHandler;
 
 public:
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);
     virtual void free(void);
 
+	bool start(IOService *provider);
+	void stop(IOService *provider);
+	
     // IOKit methods. These methods are defines in <IOKit/IOService.h>
-    virtual IOService* probe(IOService *provider, SInt32 *score );
 
     virtual IOReturn setProperties(OSObject *properties);
 
     virtual IOReturn message(UInt32 type, IOService *provider, void *argument);
     
+	// Hooks
     virtual void ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     virtual void WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
-    
-    // IOHidDevice methods
-    virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;
-    
-    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
-    virtual IOReturn getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options);
 
-    virtual OSString* newManufacturerString() const;
-    virtual OSNumber* newPrimaryUsageNumber() const;
-    virtual OSNumber* newPrimaryUsagePageNumber() const;
-    virtual OSNumber* newProductIDNumber() const;
-    virtual OSString* newProductString() const;
-    virtual OSString* newSerialNumberString() const;
-    virtual OSString* newTransportString() const;
-    virtual OSNumber* newVendorIDNumber() const;
-
-    virtual OSNumber* newLocationIDNumber() const;
-protected:
-    virtual bool handleStart(IOService *provider);
-    virtual void handleStop(IOService *provider);
+    bool QueueWrite(const void *bytes,UInt32 length);
+	
+	IOHIDDevice* getController(int index);
 };
 
 #endif /* __XBOX360CONTROLLER_H__ */

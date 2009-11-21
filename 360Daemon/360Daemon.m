@@ -92,10 +92,28 @@ static void callbackConnected(void *param,io_iterator_t iterator)
     
     while ((object = IOIteratorNext(iterator)) != 0)
     {
+		/*
+		CFStringRef bob = IOObjectCopyClass(object);
+		NSLog(@"Found %p: %@", object, bob);
+		CFRelease(bob);
+		 */
         if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
         {
             FFDeviceObjectReference forceFeedback;
             
+			if (IOObjectConformsTo(object, "Xbox360ControllerClass"))
+			{
+				io_iterator_t iter;
+			
+				if (IORegistryEntryGetChildIterator(object, kIOServicePlane, &iter) != kIOReturnSuccess)
+					continue;
+				while ((object = IOIteratorNext(iter)) != 0)
+					if (IOObjectConformsTo(object, "ControllerClass"))
+						break;
+				IOObjectRelease(iter);
+				if (object == 0)
+					continue;
+			}
             // Supported device - load settings
             ConfigController(object, GetController(GetSerialNumber(object)));
             // Set LEDs
@@ -177,6 +195,11 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
     
     while ((object = IOIteratorNext(iterator)) != 0)
     {
+		/*
+		CFStringRef bob = IOObjectCopyClass(object);
+		NSLog(@"Lost %p: %@", object, bob);
+		CFRelease(bob);
+		 */
         serial = GetSerialNumber(object);
         if (serial != nil)
         {

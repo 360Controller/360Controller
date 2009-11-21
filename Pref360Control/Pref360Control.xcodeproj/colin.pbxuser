@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
 		activeTarget = 8D202CE80486D31800D8A456 /* Pref360Control */;
 		addToTargets = (
@@ -56,8 +55,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216360628;
-			PBXWorkspaceStateSaveDate = 216360628;
+			PBXPerProjectTemplateStateSaveDate = 280461366;
+			PBXWorkspaceStateSaveDate = 280461366;
+		};
+		perUserProjectItems = {
+			3B36DCF610B7831F00FFD769 /* PBXTextBookmark */ = 3B36DCF610B7831F00FFD769 /* PBXTextBookmark */;
+			3B36DCF710B7831F00FFD769 /* PlistBookmark */ = 3B36DCF710B7831F00FFD769 /* PlistBookmark */;
+			3B36DCF810B7831F00FFD769 /* PlistBookmark */ = 3B36DCF810B7831F00FFD769 /* PlistBookmark */;
+			3B90DB351059D9B600CC39D4 /* PBXTextBookmark */ = 3B90DB351059D9B600CC39D4 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3BBEAAF5096B030C00F2E37B /* Source Control */;
 		userBuildSettings = {
@@ -65,8 +70,9 @@
 	};
 	089C167EFE841241C02AAC07 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{188, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {481, 78}}";
+			sepNavSelRange = "{129, 0}";
+			sepNavVisRange = "{0, 193}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{156, 129}, {900, 814}}";
 		};
@@ -78,6 +84,38 @@
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
+	};
+	3B36DCF610B7831F00FFD769 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */;
+		name = "Pref360ControlPref.m: 91";
+		rLen = 0;
+		rLoc = 2855;
+		rType = 0;
+		vrLen = 430;
+		vrLoc = 2698;
+	};
+	3B36DCF710B7831F00FFD769 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D202CF70486D31800D8A456 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/colin/Projects/360 Controller/Pref360Control/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	3B36DCF810B7831F00FFD769 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D202CF70486D31800D8A456 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/colin/Projects/360 Controller/Pref360Control/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
 	};
 	3B4499F90AC8B9880013FDC6 /* Pref360ControlPref.m:417 */ = {
 		isa = PBXFileBreakpoint;
@@ -94,21 +132,35 @@
 		lineNumber = 417;
 		location = Pref360Control;
 		modificationTime = 216269836.523849;
+		originalNumberOfMultipleMatches = 1;
 		state = 0;
 	};
 	3B86987E0CE2A22100283CEC /* ControlPrefs.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {872, 938}}";
-			sepNavSelRange = "{1706, 2}";
-			sepNavVisRange = "{770, 1303}";
-			sepNavWindowFrame = "{{84, 281}, {827, 653}}";
+			sepNavIntBoundsRect = "{{0, 0}, {876, 938}}";
+			sepNavSelRange = "{1656, 0}";
+			sepNavVisRange = "{703, 1371}";
+			sepNavWindowFrame = "{{84, 125}, {827, 653}}";
 		};
+	};
+	3B90DB351059D9B600CC39D4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "InfoPlist.strings: 4";
+		rLen = 0;
+		rLoc = 129;
+		rType = 0;
+		vrLen = 193;
+		vrLoc = 0;
 	};
 	3BBEAAF5096B030C00F2E37B /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -229,19 +281,19 @@
 	F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1190}}";
-			sepNavSelRange = "{2423, 13}";
-			sepNavVisRange = "{1227, 1565}";
+			sepNavSelRange = "{2479, 38}";
+			sepNavVisRange = "{544, 1524}";
 			sepNavVisRect = "{{0, 238}, {861, 685}}";
-			sepNavWindowFrame = "{{138, 96}, {900, 814}}";
+			sepNavWindowFrame = "{{138, 61}, {900, 717}}";
 		};
 	};
 	F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {841, 9296}}";
-			sepNavSelRange = "{15986, 9}";
-			sepNavVisRange = "{14625, 2202}";
+			sepNavIntBoundsRect = "{{0, 0}, {537, 9165}}";
+			sepNavSelRange = "{2855, 0}";
+			sepNavVisRange = "{2698, 430}";
 			sepNavVisRect = "{{0, 7211}, {861, 685}}";
-			sepNavWindowFrame = "{{221, 123}, {900, 814}}";
+			sepNavWindowFrame = "{{221, 61}, {900, 717}}";
 		};
 	};
 	F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */ = {

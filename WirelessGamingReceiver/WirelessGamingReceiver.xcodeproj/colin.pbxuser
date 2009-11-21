@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeArchitecture = ppc;
 		activeBuildConfigurationName = Release;
 		activeTarget = 32D94FC30562CBF700B6AF17 /* WirelessGamingReceiver */;
 		addToTargets = (
@@ -18,7 +17,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					243,
+					282,
 					20,
 					48,
 					43,
@@ -35,29 +34,41 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216359882;
-			PBXWorkspaceStateSaveDate = 216359882;
+			PBXPerProjectTemplateStateSaveDate = 280461377;
+			PBXWorkspaceStateSaveDate = 280461377;
+		};
+		perUserProjectItems = {
+			3B06F80510606E4D00CACC16 /* PBXTextBookmark */ = 3B06F80510606E4D00CACC16 /* PBXTextBookmark */;
+			3B36DCDE10B781DC00FFD769 /* PlistBookmark */ = 3B36DCDE10B781DC00FFD769 /* PlistBookmark */;
 		};
 		sourceControlManager = 3B21EBDA0B8CEAED00B5CACA /* Source Control */;
 		userBuildSettings = {
 		};
 	};
+	089C167EFE841241C02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {830, 524}}";
+			sepNavSelRange = "{86, 0}";
+			sepNavVisRange = "{0, 97}";
+			sepNavWindowFrame = "{{15, 121}, {889, 652}}";
+		};
+	};
 	1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {629, 1288}}";
-			sepNavSelRange = "{1435, 7}";
-			sepNavVisRange = "{1099, 488}";
+			sepNavIntBoundsRect = "{{0, 0}, {421, 1300}}";
+			sepNavSelRange = "{1828, 0}";
+			sepNavVisRange = "{0, 0}";
 			sepNavVisRect = "{{0, 658}, {649, 329}}";
 			sepNavWindowFrame = "{{481, 112}, {688, 458}}";
 		};
 	};
 	1A224C3FFF42367911CA2CB7 /* WirelessGamingReceiver.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {747, 7924}}";
-			sepNavSelRange = "{6221, 5}";
-			sepNavVisRange = "{5219, 1665}";
+			sepNavIntBoundsRect = "{{0, 0}, {845, 7449}}";
+			sepNavSelRange = "{15821, 11}";
+			sepNavVisRange = "{14963, 1502}";
 			sepNavVisRect = "{{0, 5898}, {767, 645}}";
-			sepNavWindowFrame = "{{38, 202}, {806, 774}}";
+			sepNavWindowFrame = "{{38, 61}, {806, 717}}";
 		};
 	};
 	32D94FC30562CBF700B6AF17 /* WirelessGamingReceiver */ = {
@@ -65,18 +76,31 @@
 	};
 	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1000, 756}}";
-			sepNavSelRange = "{723, 0}";
-			sepNavVisRange = "{0, 1173}";
+			sepNavIntBoundsRect = "{{0, 0}, {460, 806}}";
+			sepNavSelRange = "{1716, 58}";
+			sepNavVisRange = "{1570, 224}";
 			sepNavVisRect = "{{0, 168}, {1020, 471}}";
 			sepNavWindowFrame = "{{45, 118}, {1059, 600}}";
 		};
+	};
+	3B06F80510606E4D00CACC16 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
+		name = "Info.plist: 53";
+		rLen = 58;
+		rLoc = 1716;
+		rType = 0;
+		vrLen = 224;
+		vrLoc = 1570;
 	};
 	3B21EBDA0B8CEAED00B5CACA /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -86,21 +110,32 @@
 	};
 	3B21ED660B8E688A00B5CACA /* WirelessDevice.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1000, 826}}";
-			sepNavSelRange = "{1620, 0}";
-			sepNavVisRange = "{1013, 848}";
+			sepNavIntBoundsRect = "{{0, 0}, {663, 767}}";
+			sepNavSelRange = "{1561, 0}";
+			sepNavVisRange = "{1202, 572}";
 			sepNavVisRect = "{{0, 341}, {1020, 471}}";
-			sepNavWindowFrame = "{{175, 113}, {1059, 600}}";
+			sepNavWindowFrame = "{{100, 80}, {1059, 600}}";
 		};
 	};
 	3B21ED6B0B8E690F00B5CACA /* WirelessDevice.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1000, 1596}}";
 			sepNavSelRange = "{2806, 0}";
-			sepNavVisRange = "{2269, 938}";
+			sepNavVisRange = "{0, 1238}";
 			sepNavVisRect = "{{0, 1097}, {1020, 471}}";
 			sepNavWindowFrame = "{{226, 80}, {1059, 600}}";
 		};
+	};
+	3B36DCDE10B781DC00FFD769 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/colin/Projects/360 Controller/WirelessGamingReceiver/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
 	};
 	3BE667170B9109C5009679FC /* WirelessHIDDevice.h */ = {
 		uiCtxt = {
@@ -113,11 +148,11 @@
 	};
 	3BE6671B0B910A02009679FC /* WirelessHIDDevice.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1000, 3164}}";
-			sepNavSelRange = "{3510, 0}";
-			sepNavVisRange = "{2855, 785}";
+			sepNavIntBoundsRect = "{{0, 0}, {1000, 3094}}";
+			sepNavSelRange = "{6463, 0}";
+			sepNavVisRange = "{0, 1352}";
 			sepNavVisRect = "{{0, 1316}, {1020, 471}}";
-			sepNavWindowFrame = "{{217, 402}, {1059, 600}}";
+			sepNavWindowFrame = "{{217, 178}, {1059, 600}}";
 		};
 	};
 	3BE667220B910BB9009679FC /* WirelessHIDDevice.h:5 */ = {
@@ -133,6 +168,7 @@
 		ignoreCount = 0;
 		lineNumber = 5;
 		modificationTime = 216357854.963561;
+		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	3BE6673C0B911E3C009679FC /* WirelessHIDDevice.h:5 */ = {
@@ -148,14 +184,16 @@
 		ignoreCount = 0;
 		lineNumber = 5;
 		modificationTime = 216357854.964239;
+		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	3BE6677A0B91DC55009679FC /* devices.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1020, 471}}";
-			sepNavSelRange = "{1030, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {720, 434}}";
+			sepNavSelRange = "{1011, 17}";
+			sepNavVisRange = "{673, 406}";
 			sepNavVisRect = "{{0, 0}, {1020, 471}}";
-			sepNavWindowFrame = "{{61, 355}, {1059, 600}}";
+			sepNavWindowFrame = "{{61, 178}, {1059, 600}}";
 		};
 	};
 }

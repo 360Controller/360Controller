@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
 		activeTarget = 8D57630D048677EA00EA77CD /* Feedback360 */;
 		addToTargets = (
@@ -16,7 +15,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					243,
+					287,
 					20,
 					48,
 					43,
@@ -33,8 +32,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216359748;
-			PBXWorkspaceStateSaveDate = 216359748;
+			PBXPerProjectTemplateStateSaveDate = 280461345;
+			PBXWorkspaceStateSaveDate = 280461345;
+		};
+		perUserProjectItems = {
+			3B36DCAA10B780FE00FFD769 /* PBXTextBookmark */ = 3B36DCAA10B780FE00FFD769 /* PBXTextBookmark */;
+			3B90DB321059D9AC00CC39D4 /* PlistBookmark */ = 3B90DB321059D9AC00CC39D4 /* PlistBookmark */;
+			3B90DB341059D9AC00CC39D4 /* PBXTextBookmark */ = 3B90DB341059D9AC00CC39D4 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3B2EF5360965A149007BFB7B /* Source Control */;
 		userBuildSettings = {
@@ -42,17 +46,18 @@
 	};
 	089C167EFE841241C02AAC07 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{127, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {465, 98}}";
+			sepNavSelRange = "{126, 0}";
+			sepNavVisRange = "{0, 129}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
-			sepNavWindowFrame = "{{38, 162}, {900, 814}}";
+			sepNavWindowFrame = "{{38, 61}, {900, 717}}";
 		};
 	};
 	08FB77B6FE84183AC02AAC07 /* main.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {902, 5978}}";
-			sepNavSelRange = "{8090, 79}";
-			sepNavVisRange = "{8002, 1846}";
+			sepNavIntBoundsRect = "{{0, 0}, {670, 5759}}";
+			sepNavSelRange = "{9315, 0}";
+			sepNavVisRange = "{0, 0}";
 			sepNavVisRect = "{{0, 659}, {861, 685}}";
 			sepNavWindowFrame = "{{253, 96}, {900, 814}}";
 		};
@@ -62,6 +67,9 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -71,11 +79,43 @@
 	};
 	3B2EF5440965B3C7007BFB7B /* main.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 784}}";
+			sepNavIntBoundsRect = "{{0, 0}, {551, 715}}";
 			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 610}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{7, 68}, {900, 814}}";
 		};
+	};
+	3B36DCAA10B780FE00FFD769 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "InfoPlist.strings: 4";
+		rLen = 0;
+		rLoc = 126;
+		rType = 0;
+		vrLen = 129;
+		vrLoc = 0;
+	};
+	3B90DB321059D9AC00CC39D4 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D576317048677EA00EA77CD /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/colin/Projects/360 Controller/Feedback360/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	3B90DB341059D9AC00CC39D4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "InfoPlist.strings: 4";
+		rLen = 0;
+		rLoc = 126;
+		rType = 0;
+		vrLen = 129;
+		vrLoc = 0;
 	};
 	3BBA037B09697D80008A46C9 /* emulator.h */ = {
 		uiCtxt = {
@@ -119,7 +159,7 @@
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 1047}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
-			sepNavWindowFrame = "{{325, 66}, {900, 814}}";
+			sepNavWindowFrame = "{{325, 61}, {900, 717}}";
 		};
 	};
 }

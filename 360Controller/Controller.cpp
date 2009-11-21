@@ -1,0 +1,190 @@
+/*
+ *  Controller.cpp
+ *  360Controller
+ *
+ *  Created by Colin on 20/11/2009.
+ *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#include <IOKit/usb/IOUSBDevice.h>
+#include <IOKit/usb/IOUSBInterface.h>
+#include "Controller.h"
+#include "ControlStruct.h"
+namespace HID_360 {
+#include "xbox360hid.h"
+}
+#include "_60Controller.h"
+
+OSDefineMetaClassAndStructors(ControllerClass, IOHIDDevice)
+
+static Xbox360ControllerClass* GetOwner(IOService *us)
+{
+	IOService *prov;
+	
+	prov = us->getProvider();
+	if (prov == NULL)
+		return NULL;
+	return OSDynamicCast(Xbox360ControllerClass, prov);
+}
+
+static IOUSBDevice* GetOwnerProvider(const IOService *us)
+{
+	IOService *prov, *provprov;
+	
+	prov = us->getProvider();
+	if (prov == NULL)
+		return NULL;
+	provprov = prov->getProvider();
+	if (provprov == NULL)
+		return NULL;
+	return OSDynamicCast(IOUSBDevice, provprov);
+}
+
+IOReturn ControllerClass::setProperties(OSObject *properties)
+{
+	Xbox360ControllerClass *owner = GetOwner(this);
+	if (owner == NULL)
+		return kIOReturnUnsupported;
+	return owner->setProperties(properties);
+}
+
+// Returns the HID descriptor for this device
+IOReturn ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) const
+{
+    IOBufferMemoryDescriptor *buffer;
+    
+    buffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,sizeof(HID_360::ReportDescriptor));
+    if(buffer==NULL) return kIOReturnNoResources;
+    buffer->writeBytes(0,HID_360::ReportDescriptor,sizeof(HID_360::ReportDescriptor));
+    *descriptor=buffer;
+    return kIOReturnSuccess;
+}
+
+// Handles a message from the userspace IOHIDDeviceInterface122::setReport function
+IOReturn ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+{
+    char data[2];
+    
+    report->readBytes(0,data,2);
+    switch(data[0]) {
+        case 0x00:  // Set force feedback
+            if((data[1]!=report->getLength())||(data[1]!=0x04)) return kIOReturnUnsupported;
+		{
+			XBOX360_OUT_RUMBLE rumble;
+			
+			Xbox360_Prepare(rumble,outRumble);
+			report->readBytes(2,data,2);
+			rumble.big=data[0];
+			rumble.little=data[1];
+			GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
+//			IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
+		}
+            return kIOReturnSuccess;
+        case 0x01:  // Set LEDs
+            if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
+		{
+			XBOX360_OUT_LED led;
+			
+			report->readBytes(2,data,1);
+			Xbox360_Prepare(led,outLed);
+			led.pattern=data[0];
+			GetOwner(this)->QueueWrite(&led,sizeof(led));
+//			IOLog("Set LED: %d\n", led.pattern);
+		}
+            return kIOReturnSuccess;
+        default:
+			IOLog("Unknown escape %d\n", data[0]);
+            return kIOReturnUnsupported;
+    }
+}
+
+// Get report
+IOReturn ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+{
+    // Doesn't do anything yet ;)
+    return kIOReturnUnsupported;
+}
+
+// Returns the string for the specified index from the USB device's string list, with an optional default
+OSString* ControllerClass::getDeviceString(UInt8 index,const char *def) const
+{
+    IOReturn err;
+    char buf[1024];
+    const char *string;
+    
+    err = GetOwnerProvider(this)->GetStringDescriptor(index,buf,sizeof(buf));
+    if(err==kIOReturnSuccess) string=buf;
+    else {
+        if(def==NULL) string="Unknown";
+        else string=def;
+    }
+    return OSString::withCString(string);
+}
+
+OSString* ControllerClass::newManufacturerString() const
+{
+    return getDeviceString(GetOwnerProvider(this)->GetManufacturerStringIndex());
+}
+
+OSNumber* ControllerClass::newPrimaryUsageNumber() const
+{
+    return OSNumber::withNumber(HID_360::ReportDescriptor[3], 8);
+}
+
+OSNumber* ControllerClass::newPrimaryUsagePageNumber() const
+{
+    return OSNumber::withNumber(HID_360::ReportDescriptor[1], 8);
+}
+
+OSNumber* ControllerClass::newProductIDNumber() const
+{
+    return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
+}
+
+OSString* ControllerClass::newProductString() const
+{
+    return getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+}
+
+OSString* ControllerClass::newSerialNumberString() const
+{
+    return getDeviceString(GetOwnerProvider(this)->GetSerialNumberStringIndex());
+}
+
+OSString* ControllerClass::newTransportString() const
+{
+    return OSString::withCString("USB");
+}
+
+OSNumber* ControllerClass::newVendorIDNumber() const
+{
+    return OSNumber::withNumber(GetOwnerProvider(this)->GetVendorID(),16);
+}
+
+OSNumber* ControllerClass::newLocationIDNumber() const
+{
+	IOUSBDevice *device;
+    OSNumber *number;
+    UInt32 location;
+    
+	device = GetOwnerProvider(this);
+    if (device)
+    {
+        if (number = OSDynamicCast(OSNumber, device->getProperty("locationID")))
+        {
+            location = number->unsigned32BitValue();
+        }
+        else
+        {
+            // Make up an address
+            if (number = OSDynamicCast(OSNumber, device->getProperty("USB Address")))
+                location |= number->unsigned8BitValue() << 24;
+			
+            if (number = OSDynamicCast(OSNumber, device->getProperty("idProduct")))
+                location |= number->unsigned8BitValue() << 16;
+        }
+    }
+    
+    return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
+}

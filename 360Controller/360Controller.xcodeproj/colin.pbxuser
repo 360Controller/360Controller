@@ -1,7 +1,6 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeArchitecture = ppc;
 		activeBuildConfigurationName = Deployment;
 		activeTarget = 32D94FC30562CBF700B6AF17 /* 360Controller */;
 		addToTargets = (
@@ -85,8 +84,17 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 216359776;
-			PBXWorkspaceStateSaveDate = 216359776;
+			PBXPerProjectTemplateStateSaveDate = 280461271;
+			PBXWorkspaceStateSaveDate = 280461271;
+		};
+		perUserProjectItems = {
+			3B06F7AB10605DE300CACC16 /* PBXTextBookmark */ = 3B06F7AB10605DE300CACC16 /* PBXTextBookmark */;
+			3B06F7CC1060663900CACC16 /* PBXTextBookmark */ = 3B06F7CC1060663900CACC16 /* PBXTextBookmark */;
+			3B06F83910615C8B00CACC16 /* PBXTextBookmark */ = 3B06F83910615C8B00CACC16 /* PBXTextBookmark */;
+			3B36DCD210B781B500FFD769 /* PlistBookmark */ = 3B36DCD210B781B500FFD769 /* PlistBookmark */;
+			3B36DCD310B781B500FFD769 /* PBXTextBookmark */ = 3B36DCD310B781B500FFD769 /* PBXTextBookmark */;
+			3B36DCD410B781B500FFD769 /* PBXBookmark */ = 3B36DCD410B781B500FFD769 /* PBXBookmark */;
+			3B36DCD510B781B500FFD769 /* PBXTextBookmark */ = 3B36DCD510B781B500FFD769 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3BCE45B109633D9A00B69EDF /* Source Control */;
 		userBuildSettings = {
@@ -94,16 +102,18 @@
 	};
 	089C167EFE841241C02AAC07 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 685}}";
-			sepNavSelRange = "{129, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {444, 226}}";
+			sepNavSelRange = "{125, 0}";
+			sepNavVisRange = "{0, 129}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{130, 78}, {900, 814}}";
 		};
 	};
 	1A224C3EFF42367911CA2CB7 /* _60Controller.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 1358}}";
-			sepNavSelRange = "{125, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {775, 1196}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{2980, 619}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{389, 134}, {900, 814}}";
 		};
@@ -121,12 +131,91 @@
 	};
 	32D94FCF0562CBF700B6AF17 /* Info.plist */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {841, 3038}}";
-			sepNavSelRange = "{663, 0}";
-			sepNavVisRange = "{0, 1584}";
+			sepNavIntBoundsRect = "{{0, 0}, {726, 2912}}";
+			sepNavSelRange = "{6083, 64}";
+			sepNavVisRange = "{6026, 386}";
 			sepNavVisRect = "{{0, 2311}, {861, 685}}";
 			sepNavWindowFrame = "{{376, 63}, {900, 814}}";
 		};
+	};
+	3B06F7AB10605DE300CACC16 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "InfoPlist.strings: 4";
+		rLen = 0;
+		rLoc = 125;
+		rType = 0;
+		vrLen = 129;
+		vrLoc = 0;
+	};
+	3B06F7CC1060663900CACC16 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3BCE45C909638EBC00B69EDF /* ControlStruct.h */;
+		name = "ControlStruct.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 832;
+		vrLoc = 92;
+	};
+	3B06F83910615C8B00CACC16 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1A224C3EFF42367911CA2CB7 /* _60Controller.h */;
+		name = "_60Controller.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 619;
+		vrLoc = 2980;
+	};
+	3B36DCC710B7817E00FFD769 /* ChatPad.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {775, 585}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 278}";
+		};
+	};
+	3B36DCC810B7817E00FFD769 /* chatpadhid.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {488, 481}}";
+			sepNavSelRange = "{305, 0}";
+			sepNavVisRange = "{0, 784}";
+		};
+	};
+	3B36DCD210B781B500FFD769 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/colin/Projects/360 Controller/360Controller/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	3B36DCD310B781B500FFD769 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3B36DCC710B7817E00FFD769 /* ChatPad.h */;
+		name = "ChatPad.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 278;
+		vrLoc = 0;
+	};
+	3B36DCD410B781B500FFD769 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 3B36DCC810B7817E00FFD769 /* chatpadhid.h */;
+	};
+	3B36DCD510B781B500FFD769 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3B36DCC810B7817E00FFD769 /* chatpadhid.h */;
+		name = "chatpadhid.h: 8";
+		rLen = 0;
+		rLoc = 305;
+		rType = 0;
+		vrLen = 784;
+		vrLoc = 0;
 	};
 	3BB5E09B09641F8200F83598 /* xbox360hid.h */ = {
 		uiCtxt = {
@@ -136,19 +225,14 @@
 			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
 		};
 	};
-	3BBEA711096AFD9F00F2E37B /* Info copy.plist */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 798}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 113}, {861, 685}}";
-			sepNavWindowFrame = "{{15, 183}, {900, 814}}";
-		};
-	};
 	3BCE45B109633D9A00B69EDF /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -158,8 +242,9 @@
 	};
 	3BCE45C909638EBC00B69EDF /* ControlStruct.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {861, 1624}}";
-			sepNavSelRange = "{949, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {726, 1508}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{92, 832}";
 			sepNavVisRect = "{{0, 0}, {861, 685}}";
 			sepNavWindowFrame = "{{38, 162}, {900, 814}}";
 		};

@@ -58,7 +58,7 @@ public:
     IOReturn message(UInt32 type,IOService *provider,void *argument);
 
     // For WirelessDevice to use
-    OSNumber* WirelessGamingReceiver::newLocationIDNumber() const;
+    OSNumber* newLocationIDNumber() const;
     
 private:
     friend class WirelessDevice;

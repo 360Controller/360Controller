@@ -74,7 +74,246 @@
 									<array>
 										<dict>
 											<key>Children</key>
-											<array/>
+											<array>
+												<dict>
+													<key>Children</key>
+													<array>
+														<dict>
+															<key>Children</key>
+															<array/>
+															<key>GID</key>
+															<integer>80</integer>
+															<key>Path</key>
+															<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Info.plist</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>420</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+														<dict>
+															<key>Children</key>
+															<array>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/MacOS/Pref360Control</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+															</array>
+															<key>Expanded</key>
+															<true/>
+															<key>GID</key>
+															<integer>80</integer>
+															<key>Path</key>
+															<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/MacOS</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>493</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+														<dict>
+															<key>Children</key>
+															<array>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/batt0.tif</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/batt1.tif</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/batt2.tif</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/batt3.tif</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/battNone.tif</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array>
+																		<dict>
+																			<key>Children</key>
+																			<array/>
+																			<key>GID</key>
+																			<integer>80</integer>
+																			<key>Path</key>
+																			<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/English.lproj/InfoPlist.strings</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>420</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																		<dict>
+																			<key>Children</key>
+																			<array/>
+																			<key>GID</key>
+																			<integer>80</integer>
+																			<key>Path</key>
+																			<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/English.lproj/Pref360ControlPref.nib</string>
+																			<key>Path Type</key>
+																			<integer>2</integer>
+																			<key>Privileges</key>
+																			<integer>420</integer>
+																			<key>Type</key>
+																			<integer>3</integer>
+																			<key>UID</key>
+																			<integer>0</integer>
+																		</dict>
+																	</array>
+																	<key>Expanded</key>
+																	<true/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/English.lproj</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>493</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+																<dict>
+																	<key>Children</key>
+																	<array/>
+																	<key>GID</key>
+																	<integer>80</integer>
+																	<key>Path</key>
+																	<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/Pref360ControlPref.tiff</string>
+																	<key>Path Type</key>
+																	<integer>2</integer>
+																	<key>Privileges</key>
+																	<integer>420</integer>
+																	<key>Type</key>
+																	<integer>3</integer>
+																	<key>UID</key>
+																	<integer>0</integer>
+																</dict>
+															</array>
+															<key>Expanded</key>
+															<true/>
+															<key>GID</key>
+															<integer>80</integer>
+															<key>Path</key>
+															<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources</string>
+															<key>Path Type</key>
+															<integer>2</integer>
+															<key>Privileges</key>
+															<integer>493</integer>
+															<key>Type</key>
+															<integer>3</integer>
+															<key>UID</key>
+															<integer>0</integer>
+														</dict>
+													</array>
+													<key>Expanded</key>
+													<true/>
+													<key>GID</key>
+													<integer>80</integer>
+													<key>Path</key>
+													<string>../Pref360Control/build/Deployment/Pref360Control.prefPane/Contents</string>
+													<key>Path Type</key>
+													<integer>2</integer>
+													<key>Privileges</key>
+													<integer>493</integer>
+													<key>Type</key>
+													<integer>3</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+											</array>
+											<key>Expanded</key>
+											<true/>
 											<key>GID</key>
 											<integer>80</integer>
 											<key>Path</key>
@@ -475,7 +714,7 @@
 																					<key>Path Type</key>
 																					<integer>2</integer>
 																					<key>Privileges</key>
-																					<integer>438</integer>
+																					<integer>420</integer>
 																					<key>Type</key>
 																					<integer>3</integer>
 																					<key>UID</key>
@@ -618,7 +857,7 @@
 																					<key>Path Type</key>
 																					<integer>2</integer>
 																					<key>Privileges</key>
-																					<integer>438</integer>
+																					<integer>420</integer>
 																					<key>Type</key>
 																					<integer>3</integer>
 																					<key>UID</key>
@@ -896,6 +1135,54 @@
 				<key>Split Forks</key>
 				<true/>
 			</dict>
+			<key>Plugins</key>
+			<dict>
+				<key>PluginsList</key>
+				<array>
+					<dict>
+						<key>Path</key>
+						<string>Introduction</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>ReadMe</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>License</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>Target</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>PackageSelection</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>Install</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>Path</key>
+						<string>FinishUp</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+				</array>
+			</dict>
 			<key>Scripts</key>
 			<dict>
 				<key>Additional Resources</key>
@@ -968,13 +1255,13 @@
 						<key>IFPkgDescriptionTitle</key>
 						<string>XBox 360 Controller Installer</string>
 						<key>IFPkgDescriptionVersion</key>
-						<string>0.06</string>
+						<string>0.08</string>
 					</dict>
 				</dict>
 				<key>Display Information</key>
 				<dict>
 					<key>CFBundleGetInfoString</key>
-					<string>Install360Controller 0.06 Copyrights © 2006-2007 Colin Munro</string>
+					<string>Install360Controller 0.08 Copyrights © 2006-2009 Colin Munro</string>
 					<key>CFBundleIconFile</key>
 					<string></string>
 					<key>CFBundleIconFile Path Type</key>
@@ -984,7 +1271,7 @@
 					<key>CFBundleName</key>
 					<string>XBox 360 Controller Driver Installer</string>
 					<key>CFBundleShortVersionString</key>
-					<string>0.06</string>
+					<string>0.08</string>
 				</dict>
 				<key>Options</key>
 				<dict>
@@ -993,8 +1280,6 @@
 					<key>IFPkgFlagAuthorizationAction</key>
 					<integer>2</integer>
 					<key>IFPkgFlagFollowLinks</key>
-					<false/>
-					<key>IFPkgFlagInstallFat</key>
 					<false/>
 					<key>IFPkgFlagIsRequired</key>
 					<false/>
@@ -1014,7 +1299,7 @@
 					<key>IFMajorVersion</key>
 					<integer>0</integer>
 					<key>IFMinorVersion</key>
-					<integer>6</integer>
+					<integer>8</integer>
 				</dict>
 			</dict>
 		</dict>

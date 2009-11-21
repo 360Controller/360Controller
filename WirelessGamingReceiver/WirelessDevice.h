@@ -43,7 +43,7 @@ public:
     
     void RegisterWatcher(void *target, WirelessDeviceWatcher function, void *parameter);
 
-    OSNumber* WirelessDevice::newLocationIDNumber() const;
+    OSNumber* newLocationIDNumber() const;
 private:
     friend class WirelessGamingReceiver;
     void SetIndex(int i);

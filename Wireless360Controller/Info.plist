@@ -45,10 +45,14 @@
     <dict>
         <key>com.mice.driver.WirelessGamingReceiver</key>
         <string>1.0.0d1</string>
-        <key>com.apple.kernel.libkern</key>
-        <string>6.9.9</string>
-        <key>com.apple.kernel.mach</key>
-        <string>6.9.9</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0.0</string>
+		<key>com.apple.iokit.IOHIDFamily</key>
+		<string>1.2</string>
 	</dict>
 </dict>
 </plist>

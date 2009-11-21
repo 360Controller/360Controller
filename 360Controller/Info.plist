@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
@@ -17,18 +17,18 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d4</string>
+	<string>1.0.0d9</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>Controller</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -44,11 +44,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -64,11 +64,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -84,11 +84,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -104,11 +104,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -124,11 +124,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -144,11 +144,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -164,11 +164,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -184,11 +184,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
-            <key>IOCFPlugInTypes</key>
-            <dict>
-                <key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
-                <string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
-            </dict>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>Xbox360ControllerClass</string>
 			<key>IOKitDebug</key>
@@ -200,6 +200,23 @@
 			<key>idVendor</key>
 			<integer>5168</integer>
 		</dict>
+		<key>ChatPadKeyboardEvents</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.iokit.IOHIDFamily</string>
+			<key>IOClass</key>
+			<string>IOHIDEventDriver</string>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>VendorID</key>
+			<integer>100</integer>
+			<!--
+			<key>ProductID</key>
+			<integer>100</integer>
+			<key>Transport</key>
+			<string>Serial</string>
+			-->
+		</dict>
 	</dict>
 	<key>OSBundleLibraries</key>
 	<dict>
@@ -207,10 +224,12 @@
 		<string>1.2</string>
 		<key>com.apple.iokit.IOUSBFamily</key>
 		<string>1.8</string>
-		<key>com.apple.kernel.libkern</key>
-		<string>6.9.9</string>
-		<key>com.apple.kernel.mach</key>
-		<string>6.9.9</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0.0</string>
 	</dict>
 </dict>
 </plist>

@@ -522,10 +522,11 @@ void WirelessGamingReceiver::InstantiateService(int index)
 //            IOLog("process: Device attached\n");
             if (IsDataQueued(index))
                 connections[index].service->NewData();
+			connections[index].service->start(this);
         }
         else
         {
-            connections[index].service->free();
+            connections[index].service->release();
             connections[index].service = NULL;
 //            IOLog("process: Device attach failure\n");
         }
