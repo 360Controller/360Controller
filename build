@@ -1,0 +1,53 @@
+#!/bin/bash
+cd Feedback360
+xcodebuild -configuration Deployment
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../DriverTool
+xcodebuild -configuration Release
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../360Controller
+xcodebuild -configuration Deployment
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../360Daemon
+xcodebuild -configuration Release
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../WirelessGamingReceiver
+xcodebuild -configuration Release
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../Wireless360Controller
+xcodebuild -configuration Release
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../Pref360Control
+xcodebuild -configuration Deployment 
+if [ $? -ne 0 ]
+  then
+    echo "******** BUILD FAILED ********"
+    exit 1
+fi
+cd ../Install360Controller
+freeze Install360Controller.packproj
+echo "*** DONE ***"
