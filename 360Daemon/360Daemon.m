@@ -257,9 +257,9 @@ int main (int argc, const char * argv[])
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
     callbackConnected(NULL, onIteratorOther);
         // Wired 360 devices
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360Peripheral"), callbackConnected, NULL, &onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
     callbackConnected(NULL, onIteratorWired);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360Peripheral"), callbackDisconnected, NULL, &offIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
     callbackDisconnected(NULL, offIteratorWired);
         // Wireless 360 devices
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);

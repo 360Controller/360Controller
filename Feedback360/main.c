@@ -72,8 +72,7 @@ static ULONG Feedback360Release(void *that)
 static IOReturn Feedback360Probe(void *that,CFDictionaryRef propertyTable,io_service_t service,SInt32 *order)
 {
     if ((service==0)
-//     || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
-     || ((!IOObjectConformsTo(service,"ControllerClass"))
+     || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
      && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
     return S_OK;
 }
