@@ -39,6 +39,21 @@
             <key>idVendor</key>
             <integer>1118</integer>
         </dict>
+        <key>WirelessGamingReceiverForWindowsAlternate</key>
+        <dict>
+            <key>CFBundleIdentifier</key>
+            <string>com.mice.driver.WirelessGamingReceiver</string>
+            <key>IOClass</key>
+            <string>WirelessGamingReceiver</string>
+            <key>IOKitDebug</key>
+            <integer>65535</integer>
+            <key>IOProviderClass</key>
+            <string>IOUSBDevice</string>
+            <key>idProduct</key>
+            <integer>657</integer>
+            <key>idVendor</key>
+            <integer>1118</integer>
+        </dict>
     </dict>
 	<key>OSBundleLibraries</key>
     <dict>
