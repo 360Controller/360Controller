@@ -241,7 +241,7 @@ bool Xbox360ControllerClass::init(OSDictionary *propTable)
     invertRightX=invertRightY=FALSE;
     deadzoneLeft=deadzoneRight=0;
     relativeLeft=relativeRight=FALSE;
-    readSettings();
+//    readSettings();
     // Done
     return res;
 }
@@ -453,7 +453,7 @@ bool Xbox360ControllerClass::QueueRead(void)
     err=inPipe->Read(inBuffer,0,0,inBuffer->getLength(),&complete);
     if(err==kIOReturnSuccess) return true;
     else {
-        IOLog("read - failed to start (0x%.8x\n",err);
+        IOLog("read - failed to start (0x%.8x)\n",err);
         return false;
     }
 }
@@ -473,7 +473,7 @@ bool Xbox360ControllerClass::QueueSerialRead(void)
 	}
     else
 	{
-        IOLog("read - failed to start for chatpad (0x%.8x\n",err);
+        IOLog("read - failed to start for chatpad (0x%.8x)\n",err);
         return false;
     }
 }
@@ -779,6 +779,7 @@ void Xbox360ControllerClass::PadDisconnect(void)
 	if (padHandler != NULL)
 	{
 		padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        padHandler->stop(this);
 		padHandler->detach(this);
 		padHandler->release();
 		padHandler = NULL;
@@ -790,7 +791,6 @@ void Xbox360ControllerClass::PadDisconnect(void)
 void Xbox360ControllerClass::SerialConnect(void)
 {
 	SerialDisconnect();
-//    serialHandler = new Serial360Device;
 	serialHandler = new ChatPadKeyboardClass;
     if (serialHandler != NULL)
     {

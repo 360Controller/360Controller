@@ -27,7 +27,6 @@
 #include <IOKit/usb/IOUSBDevice.h>
 #include <IOKit/usb/IOUSBInterface.h>
 
-//class Serial360Device;
 class ControllerClass;
 class ChatPadKeyboardClass;
 
@@ -89,15 +88,14 @@ protected:
 	bool serialToggle, serialHeard, serialActive;
 	int serialResetCount;
 	TIMER_STATE serialTimerState;
-//	Serial360Device *serialHandler;
 	ChatPadKeyboardClass *serialHandler;
-    
+	ControllerClass *padHandler;
+
     // Settings
     bool invertLeftX,invertLeftY;
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
-	ControllerClass *padHandler;
 
 public:
     // this is from the IORegistryEntry - no provider yet

@@ -179,6 +179,12 @@
 			buildConfigurationList = 3BBDC686097938A90023AAD8 /* Build configuration list for PBXProject "360Controller" */;
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* 360Controller */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,6 +283,11 @@
 		3BBDC684097938A90023AAD8 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d1;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -325,6 +336,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_VERSION = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				SDKROOT = macosx10.5;
 				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
