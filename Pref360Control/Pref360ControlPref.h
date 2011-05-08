@@ -35,6 +35,8 @@
 #include "MyMainButtons.h"
 #include "MyShoulderButton.h"
 
+@class DeviceLister;
+
 @interface Pref360ControlPref : NSPreferencePane 
 {
     // Window components
@@ -57,6 +59,7 @@
     IBOutlet NSButton *rightStickInvertY;
     IBOutlet NSProgressIndicator *rightTrigger;
     IBOutlet NSImageView *batteryLevel;
+    IBOutlet DeviceLister *deviceLister;
     // Internal info
     mach_port_t masterPort;
     NSMutableArray *deviceArray;
@@ -80,5 +83,9 @@
 - (void)eventQueueFired:(void*)sender withResult:(IOReturn)result;
 
 - (void)handleDeviceChange;
+
+- (IBAction)showDeviceList:(id)sender;
+
+- (mach_port_t)masterPort;
 
 @end

@@ -132,7 +132,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 3BBDC69709793BF60023AAD8 /* Build configuration list for PBXProject "Feedback360" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Feedback360 */;
 			projectDirPath = "";
 			projectRoot = "";

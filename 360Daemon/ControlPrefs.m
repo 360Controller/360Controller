@@ -55,12 +55,34 @@ NSString* GetSerialNumber(io_service_t device)
 {
     CFTypeRef value;
     
-    value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("SerialNumber"), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("USB Serial Number"), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    if (value == NULL)
+        value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("SerialNumber"), kCFAllocatorDefault, kIORegistryIterateRecursively);
     return [((NSString*)value) autorelease];
 }
 
 void ConfigController(io_service_t device, NSDictionary *config)
 {
-    // Ownership?
-    IORegistryEntrySetCFProperties(device, [config retain]);
+    IORegistryEntrySetCFProperties(device, config);
+}
+
+void SetKnownDevices(NSDictionary *devices)
+{
+    // Setting the dictionary should work?
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
+    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, data, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+}
+
+NSDictionary* GetKnownDevices(void)
+{
+    CFPropertyListRef value;
+    NSData *data;
+    
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    data = [(NSData*)value autorelease];
+    if (data == nil)
+        return nil;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }

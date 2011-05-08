@@ -17,7 +17,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d9</string>
+	<string>1.0.0d10</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>Controller</key>
@@ -210,12 +210,6 @@
 			<string>IOHIDInterface</string>
 			<key>VendorID</key>
 			<integer>100</integer>
-			<!--
-			<key>ProductID</key>
-			<integer>100</integer>
-			<key>Transport</key>
-			<string>Serial</string>
-			-->
 		</dict>
 	</dict>
 	<key>OSBundleLibraries</key>

@@ -25,6 +25,7 @@
 #import "Pref360ControlPref.h"
 #import "DeviceItem.h"
 #import "ControlPrefs.h"
+#import "DeviceLister.h"
 
 #define NO_ITEMS            @"No devices found"
 
@@ -629,6 +630,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [super dealloc];
 }
 
+- (mach_port_t)masterPort
+{
+    return masterPort;
+}
+
 // Handle selection from drop down menu
 - (void)selectDevice:(id)sender
 {
@@ -680,6 +686,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Ideally, this function would make a note of the controller's Location ID, then
     // reselect it when the list is updated, if it's still in the list.
     [self updateDeviceList];
+}
+
+- (IBAction)showDeviceList:(id)sender
+{
+    [deviceLister showWithOwner:self];
 }
 
 @end

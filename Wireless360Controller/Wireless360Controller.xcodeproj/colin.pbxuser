@@ -13,7 +13,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					369,
+					243,
 					20,
 					48,
 					43,
@@ -30,13 +30,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 280461383;
-			PBXWorkspaceStateSaveDate = 280461383;
+			PBXPerProjectTemplateStateSaveDate = 326569052;
+			PBXWorkspaceStateSaveDate = 326569052;
 		};
 		perUserProjectItems = {
-			3B06F84110615CA500CACC16 /* PBXTextBookmark */ = 3B06F84110615CA500CACC16 /* PBXTextBookmark */;
-			3B06F84310615CA500CACC16 /* PBXTextBookmark */ = 3B06F84310615CA500CACC16 /* PBXTextBookmark */;
-			3B36DCB410B7813600FFD769 /* PlistBookmark */ = 3B36DCB410B7813600FFD769 /* PlistBookmark */;
+			3B8B920A13770C6B0047D446 /* PlistBookmark */ = 3B8B920A13770C6B0047D446 /* PlistBookmark */;
+			3B8B920B13770C6B0047D446 /* PlistBookmark */ = 3B8B920B13770C6B0047D446 /* PlistBookmark */;
 		};
 		sourceControlManager = 3B18E24B0B92718C0093FA6E /* Source Control */;
 		userBuildSettings = {
@@ -80,26 +79,6 @@
 			sepNavWindowFrame = "{{351, 61}, {806, 717}}";
 		};
 	};
-	3B06F84110615CA500CACC16 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 089C167EFE841241C02AAC07 /* English */;
-		name = "InfoPlist.strings: 3";
-		rLen = 0;
-		rLoc = 86;
-		rType = 0;
-		vrLen = 97;
-		vrLoc = 0;
-	};
-	3B06F84310615CA500CACC16 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
-		name = "Info.plist: 56";
-		rLen = 0;
-		rLoc = 1875;
-		rType = 0;
-		vrLen = 281;
-		vrLoc = 1603;
-	};
 	3B18E24B0B92718C0093FA6E /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
@@ -115,14 +94,26 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
-	3B36DCB410B7813600FFD769 /* PlistBookmark */ = {
+	3B8B920A13770C6B0047D446 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
 		fallbackIsa = PBXBookmark;
 		isK = 0;
 		kPath = (
 		);
-		name = "/Users/colin/Projects/360 Controller/Wireless360Controller/Info.plist";
+		name = "/Users/colin/OSX/360 Controller/Wireless360Controller/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	3B8B920B13770C6B0047D446 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 32D94FCF0562CBF700B6AF17 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleVersion,
+		);
+		name = "/Users/colin/OSX/360 Controller/Wireless360Controller/Info.plist";
 		rLen = 0;
 		rLoc = 9223372036854775807;
 	};
