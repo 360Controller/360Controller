@@ -25,7 +25,6 @@
 #include <IOKit/IOTimerEventSource.h>
 #include "_60Controller.h"
 #include "ControlStruct.h"
-#include "SerialDriver.h"
 #include "ChatPad.h"
 #include "Controller.h"
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+zip -r ../360ControllerSource.zip *
 cd Feedback360
 xcodebuild -configuration Deployment
 if [ $? -ne 0 ]
@@ -50,4 +51,7 @@ if [ $? -ne 0 ]
 fi
 cd ../Install360Controller
 freeze Install360Controller.packproj
+mv build 360ControllerInstall
+hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
+mv 360ControllerInstall build
 echo "*** DONE ***"
