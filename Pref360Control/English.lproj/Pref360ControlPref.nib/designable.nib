@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10A432</string>
-		<string key="IBDocument.InterfaceBuilderVersion">732</string>
-		<string key="IBDocument.AppKitVersion">1038</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">823</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">732</string>
+			<string key="NS.object.0">823</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<integer value="6"/>
@@ -16,7 +16,10 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1008938679">
 			<object class="NSCustomObject" id="33196832">
 				<string key="NSClassName">NSPreferencePane</string>
@@ -419,13 +422,13 @@
 										<object class="NSTextField" id="24399355">
 											<reference key="NSNextResponder" ref="772377613"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrame">{{13, 177}, {129, 13}}</string>
+											<string key="NSFrame">{{13, 173}, {129, 17}}</string>
 											<reference key="NSSuperview" ref="772377613"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="26653717">
 												<int key="NSCellFlags">67239424</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">Version 0.08</string>
+												<string key="NSContents">Version 0.10</string>
 												<object class="NSFont" key="NSSupport" id="276746597">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">10</double>
@@ -445,7 +448,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="1039916014">
 												<int key="NSCellFlags">67239424</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">(C) 2006-09 Colin Munro</string>
+												<string key="NSContents">(C) 2006-11 Colin Munro</string>
 												<reference key="NSSupport" ref="276746597"/>
 												<reference key="NSControlView" ref="850481656"/>
 												<reference key="NSBackgroundColor" ref="972077515"/>
@@ -1236,9 +1239,9 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 				<boolean value="YES" key="116.ImportedFromIB2"/>
 				<string key="117.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="117.ImportedFromIB2"/>
-				<string key="12.IBEditorWindowLastContentRect">{{0, 441}, {595, 304}}</string>
+				<string key="12.IBEditorWindowLastContentRect">{{326, 482}, {595, 304}}</string>
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="12.IBWindowTemplateEditedContentRect">{{0, 441}, {595, 304}}</string>
+				<string key="12.IBWindowTemplateEditedContentRect">{{326, 482}, {595, 304}}</string>
 				<boolean value="YES" key="12.ImportedFromIB2"/>
 				<boolean value="YES" key="12.windowTemplate.hasMinSize"/>
 				<string key="12.windowTemplate.minSize">{595, 10}</string>
@@ -1392,6 +1395,16 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 						<string key="changeSetting:">id</string>
 						<string key="selectDevice:">id</string>
 					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeSetting:">
+							<string key="name">changeSetting:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectDevice:">
+							<string key="name">selectDevice:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="batteryLevel">NSImageView</string>
 						<string key="centreButtons">MyCentreButtons</string>
@@ -1416,6 +1429,100 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 						<string key="rightTriggerDeadzone">NSSlider</string>
 						<string key="rumbleEnable">NSButton</string>
 						<string key="rumbleTest">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="batteryLevel">
+							<string key="name">batteryLevel</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="centreButtons">
+							<string key="name">centreButtons</string>
+							<string key="candidateClassName">MyCentreButtons</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="deviceList">
+							<string key="name">deviceList</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="digiStick">
+							<string key="name">digiStick</string>
+							<string key="candidateClassName">MyDigitalStick</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftLinked">
+							<string key="name">leftLinked</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftShoulder">
+							<string key="name">leftShoulder</string>
+							<string key="candidateClassName">MyShoulderButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftStick">
+							<string key="name">leftStick</string>
+							<string key="candidateClassName">MyAnalogStick</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftStickDeadzone">
+							<string key="name">leftStickDeadzone</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftStickInvertX">
+							<string key="name">leftStickInvertX</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftStickInvertY">
+							<string key="name">leftStickInvertY</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftTrigger">
+							<string key="name">leftTrigger</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftTriggerDeadzone">
+							<string key="name">leftTriggerDeadzone</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightButtons">
+							<string key="name">rightButtons</string>
+							<string key="candidateClassName">MyMainButtons</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightLinked">
+							<string key="name">rightLinked</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightShoulder">
+							<string key="name">rightShoulder</string>
+							<string key="candidateClassName">MyShoulderButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightStick">
+							<string key="name">rightStick</string>
+							<string key="candidateClassName">MyAnalogStick</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightStickDeadzone">
+							<string key="name">rightStickDeadzone</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightStickInvertX">
+							<string key="name">rightStickInvertX</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightStickInvertY">
+							<string key="name">rightStickInvertY</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightTrigger">
+							<string key="name">rightTrigger</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightTriggerDeadzone">
+							<string key="name">rightTriggerDeadzone</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rumbleEnable">
+							<string key="name">rumbleEnable</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rumbleTest">
+							<string key="name">rumbleTest</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
@@ -1832,6 +1939,24 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 						<string key="_lastKeyView">NSView</string>
 						<string key="_window">NSWindow</string>
 					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_firstKeyView">
+							<string key="name">_firstKeyView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_initialKeyView">
+							<string key="name">_initialKeyView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_lastKeyView">
+							<string key="name">_lastKeyView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_window">
+							<string key="name">_window</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">PreferencePanes.framework/Headers/NSPreferencePane.h</string>
@@ -1940,6 +2065,7 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1050" key="NS.object.0"/>
@@ -1951,5 +2077,10 @@ eW91IGVuam95IHRoaXMgZHJpdmVyIQ</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">../Pref360Control.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSMenuCheckmark">{9, 8}</string>
+			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="battNone">{32, 24}</string>
+		</dictionary>
 	</data>
 </archive>
