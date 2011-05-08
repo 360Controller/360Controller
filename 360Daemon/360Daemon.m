@@ -84,6 +84,35 @@ void ShowAlert(int index)
     CFRunLoopAddSource(CFRunLoopGetCurrent(), activeAlertSource, kCFRunLoopCommonModes);
 }
 
+static void ConfigureDevice(io_service_t object)
+{
+    IOCFPlugInInterface **iodev;
+    IOUSBDeviceInterface **dev;
+    IOReturn err;
+    SInt32 score;
+    
+    if ((!IOCreatePlugInInterfaceForService(object, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &iodev, &score))&&iodev)
+    {
+        err = (*iodev)->QueryInterface(iodev, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID)&dev);
+        (*iodev)->Release(iodev);
+        if ((!err) && dev)
+        {
+            if ((*dev)->USBDeviceOpen(dev) == 0)
+            {
+                IOUSBConfigurationDescriptorPtr confDesc;
+                
+                if ((*dev)->GetConfigurationDescriptorPtr(dev, 0, &confDesc) == 0)
+                {
+                    (*dev)->SetConfiguration(dev, confDesc->bConfigurationValue);
+                    // Open interface? Hopefully not necessary
+                }
+                (*dev)->USBDeviceClose(dev);
+            }
+            (*dev)->Release(dev);
+        }
+    }
+}
+
 // Supported device - connecting - set settings?
 static void callbackConnected(void *param,io_iterator_t iterator)
 {
@@ -100,42 +129,54 @@ static void callbackConnected(void *param,io_iterator_t iterator)
         if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
         {
             FFDeviceObjectReference forceFeedback;
+            NSString *serialNumber;
             
 			if (IOObjectConformsTo(object, "Xbox360ControllerClass"))
 			{
 				io_iterator_t iter;
+                kern_return_t res;
+                io_service_t found;
 			
-				if (IORegistryEntryGetChildIterator(object, kIOServicePlane, &iter) != kIOReturnSuccess)
+				res = IORegistryEntryGetChildIterator(object, kIOServicePlane, &iter);
+                IOObjectRelease(object);
+                if (res != kIOReturnSuccess)
 					continue;
+                found = 0;
 				while ((object = IOIteratorNext(iter)) != 0)
-					if (IOObjectConformsTo(object, "ControllerClass"))
-						break;
+                {
+                    if ((found == 0) && IOObjectConformsTo(object, "ControllerClass"))
+                        found = object;
+                    else
+                        IOObjectRelease(object);
+                }
 				IOObjectRelease(iter);
-				if (object == 0)
+				if (found == 0)
 					continue;
+                object = found;
 			}
+            serialNumber = GetSerialNumber(object);
             // Supported device - load settings
-            ConfigController(object, GetController(GetSerialNumber(object)));
+            ConfigController(object, GetController(serialNumber));
             // Set LEDs
-            FFCreateDevice(object, &forceFeedback);
+            forceFeedback = 0;
+            if (FFCreateDevice(object, &forceFeedback) != FF_OK)
+                forceFeedback = 0;
             if (forceFeedback != 0)
             {
                 FFEFFESCAPE escape;
                 unsigned char c;
-                NSString *serial;
                 int i;
     
-                serial = GetSerialNumber(object);
                 c = 0x0a;
-                if (serial != nil)
+                if (serialNumber != nil)
                 {
                     for (i = 0; i < 4; i++)
                     {
-                        if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame))
+                        if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
                         {
                             c = 0x06 + i;
                             if (leds[i] == nil)
-                                leds[i] = [serial retain];
+                                leds[i] = [serialNumber retain];
 //                            NSLog(@"Added controller with LED %i", i);
                             break;
                         }
@@ -162,16 +203,17 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                 if (idVendor == 0x045e)
                 {
                     // Microsoft
-                    if (idProduct == 0x028f)
+                    switch (idProduct)
                     {
-                        // Unsupported - plug'n'charge cable
-                        if (!foundWirelessReceiver)
-                            ShowAlert(kaPlugNCharge);
-                    }
-                    if (idProduct == 0x0719)
-                    {
-                        // Wireless Gaming Receiver for Windows
-                        foundWirelessReceiver = TRUE;
+                        case 0x028f:    // Plug'n'charge cable
+                            if (!foundWirelessReceiver)
+                                ShowAlert(kaPlugNCharge);
+                            ConfigureDevice(object);
+                            break;
+                        case 0x0719:    // Microsoft Wireless Gaming Receiver
+                        case 0x0291:    // Third party Wireless Gaming Receiver
+                            foundWirelessReceiver = TRUE;
+                            break;
                     }
                 }
             }
