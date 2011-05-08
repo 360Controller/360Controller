@@ -54,7 +54,8 @@ freeze Install360Controller.packproj
 mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
 mv 360ControllerInstall build
-echo "*** DONE ***"
+cd ..
+echo ** File contents **
 lipo -info 360Controller/build/Deployment/360Controller.kext/Contents/MacOS/360Controller
 lipo -info 360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/MacOS/Feedback360
 lipo -info 360Daemon/build/Release/360Daemon
@@ -62,3 +63,4 @@ lipo -info Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/MacO
 lipo -info Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/DriverTool
 lipo -info WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/MacOS/WirelessGamingReceiver
 lipo -info Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/MacOS/Wireless360Controller
+echo "*** DONE ***"
