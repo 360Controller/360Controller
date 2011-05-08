@@ -125,8 +125,7 @@ static HRESULT Feedback360InitializeTerminate(void *that,NumVersion APIversion,i
         }
         // From probe
             if( (hidDevice==0)
-//             || ((!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))
-             || ((!IOObjectConformsTo(hidDevice,"ControllerClass"))
+             || ((!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))
              &&  (!IOObjectConformsTo(hidDevice,"Wireless360Controller"))) )
         {
 //            fprintf(stderr,"Feedback: Invalid device\n");
