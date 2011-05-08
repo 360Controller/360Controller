@@ -1269,7 +1269,7 @@
 						<key>IFPkgDescriptionDescription</key>
 						<string>Installs the driver for the XBox 360 Controller for MacOS X.</string>
 						<key>IFPkgDescriptionTitle</key>
-						<string>XBox 360 Controller Installer</string>
+						<string>XBox 360 Controller</string>
 						<key>IFPkgDescriptionVersion</key>
 						<string>0.10</string>
 					</dict>
