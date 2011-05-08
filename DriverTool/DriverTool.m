@@ -74,7 +74,7 @@ static void ScrubDevices(NSMutableDictionary *devices)
     for (NSString *key in keys)
     {
         NSDictionary *device = [devices objectForKey:key];
-        if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360ControllerClass"] == NSOrderedSame)
+        if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360Peripheral"] == NSOrderedSame)
             [deviceKeys addObject:key];
     }
     
@@ -103,7 +103,7 @@ static void AddDevice(NSMutableDictionary *personalities, NSString *name, int ve
     [controller setObject:[NSDictionary dictionaryWithObject:@"360Controller.kext/Contents/PlugIns/Feedback360.plugin"
                                                       forKey:@"F4545CE5-BF5B-11D6-A4BB-0003933E3E3E"]
                    forKey:@"IOCFPlugInTypes"];
-    [controller setObject:@"Xbox360ControllerClass"
+    [controller setObject:@"Xbox360Peripheral"
                    forKey:@"IOClass"];
     [controller setObject:@"IOUSBDevice"
                    forKey:@"IOProviderClass"];
@@ -150,7 +150,7 @@ int main (int argc, const char * argv[]) {
         for (NSString *key in keys)
         {
             NSDictionary *device = [types objectForKey:key];
-            if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360ControllerClass"] != NSOrderedSame)
+            if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
                 continue;
             fprintf(stdout, "%s,%i,%i\n",
                     [key UTF8String],

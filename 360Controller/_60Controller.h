@@ -27,12 +27,12 @@
 #include <IOKit/usb/IOUSBDevice.h>
 #include <IOKit/usb/IOUSBInterface.h>
 
-class ControllerClass;
+class Xbox360ControllerClass;
 class ChatPadKeyboardClass;
 
-class Xbox360ControllerClass : public IOService
+class Xbox360Peripheral : public IOService
 {
-    OSDeclareDefaultStructors(Xbox360ControllerClass)
+    OSDeclareDefaultStructors(Xbox360Peripheral)
 
 private:
     void ReleaseAll(void);
@@ -89,7 +89,7 @@ protected:
 	int serialResetCount;
 	TIMER_STATE serialTimerState;
 	ChatPadKeyboardClass *serialHandler;
-	ControllerClass *padHandler;
+	Xbox360ControllerClass *padHandler;
 
     // Settings
     bool invertLeftX,invertLeftY;

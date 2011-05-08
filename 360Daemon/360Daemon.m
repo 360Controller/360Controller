@@ -131,29 +131,6 @@ static void callbackConnected(void *param,io_iterator_t iterator)
             FFDeviceObjectReference forceFeedback;
             NSString *serialNumber;
             
-			if (IOObjectConformsTo(object, "Xbox360ControllerClass"))
-			{
-				io_iterator_t iter;
-                kern_return_t res;
-                io_service_t found;
-			
-				res = IORegistryEntryGetChildIterator(object, kIOServicePlane, &iter);
-                IOObjectRelease(object);
-                if (res != kIOReturnSuccess)
-					continue;
-                found = 0;
-				while ((object = IOIteratorNext(iter)) != 0)
-                {
-                    if ((found == 0) && IOObjectConformsTo(object, "ControllerClass"))
-                        found = object;
-                    else
-                        IOObjectRelease(object);
-                }
-				IOObjectRelease(iter);
-				if (found == 0)
-					continue;
-                object = found;
-			}
             serialNumber = GetSerialNumber(object);
             // Supported device - load settings
             ConfigController(object, GetController(serialNumber));
@@ -280,9 +257,9 @@ int main (int argc, const char * argv[])
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
     callbackConnected(NULL, onIteratorOther);
         // Wired 360 devices
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360Peripheral"), callbackConnected, NULL, &onIteratorWired);
     callbackConnected(NULL, onIteratorWired);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360Peripheral"), callbackDisconnected, NULL, &offIteratorWired);
     callbackDisconnected(NULL, offIteratorWired);
         // Wireless 360 devices
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);

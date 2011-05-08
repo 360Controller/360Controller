@@ -9,9 +9,9 @@
 
 #include <IOKit/hid/IOHIDDevice.h>
 
-class ControllerClass : public IOHIDDevice
+class Xbox360ControllerClass : public IOHIDDevice
 {
-	OSDeclareDefaultStructors(ControllerClass)
+	OSDeclareDefaultStructors(Xbox360ControllerClass)
 
 private:
     OSString* getDeviceString(UInt8 index,const char *def=NULL) const;

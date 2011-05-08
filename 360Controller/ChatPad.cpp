@@ -106,9 +106,9 @@ static IOHIDDevice* GetParent(const IOService *current)
  */
 static IOHIDDevice* GetParent(const IOService *current)
 {
-	Xbox360ControllerClass *owner;
+	Xbox360Peripheral *owner;
 	
-	owner = OSDynamicCast(Xbox360ControllerClass, current->getProvider());
+	owner = OSDynamicCast(Xbox360Peripheral, current->getProvider());
 	if (owner == NULL)
 		return NULL;
 	return owner->getController(0);

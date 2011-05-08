@@ -30,7 +30,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -50,7 +50,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -70,7 +70,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -90,7 +90,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -110,7 +110,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -130,7 +130,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -150,7 +150,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -170,7 +170,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
@@ -190,7 +190,7 @@
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
 			</dict>
 			<key>IOClass</key>
-			<string>Xbox360ControllerClass</string>
+			<string>Xbox360Peripheral</string>
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>

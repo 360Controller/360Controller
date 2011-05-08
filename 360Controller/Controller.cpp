@@ -16,16 +16,16 @@ namespace HID_360 {
 }
 #include "_60Controller.h"
 
-OSDefineMetaClassAndStructors(ControllerClass, IOHIDDevice)
+OSDefineMetaClassAndStructors(Xbox360ControllerClass, IOHIDDevice)
 
-static Xbox360ControllerClass* GetOwner(IOService *us)
+static Xbox360Peripheral* GetOwner(IOService *us)
 {
 	IOService *prov;
 	
 	prov = us->getProvider();
 	if (prov == NULL)
 		return NULL;
-	return OSDynamicCast(Xbox360ControllerClass, prov);
+	return OSDynamicCast(Xbox360Peripheral, prov);
 }
 
 static IOUSBDevice* GetOwnerProvider(const IOService *us)
@@ -41,16 +41,16 @@ static IOUSBDevice* GetOwnerProvider(const IOService *us)
 	return OSDynamicCast(IOUSBDevice, provprov);
 }
 
-IOReturn ControllerClass::setProperties(OSObject *properties)
+IOReturn Xbox360ControllerClass::setProperties(OSObject *properties)
 {
-	Xbox360ControllerClass *owner = GetOwner(this);
+	Xbox360Peripheral *owner = GetOwner(this);
 	if (owner == NULL)
 		return kIOReturnUnsupported;
 	return owner->setProperties(properties);
 }
 
 // Returns the HID descriptor for this device
-IOReturn ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) const
+IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) const
 {
     IOBufferMemoryDescriptor *buffer;
     
@@ -62,7 +62,7 @@ IOReturn ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) c
 }
 
 // Handles a message from the userspace IOHIDDeviceInterface122::setReport function
-IOReturn ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     char data[2];
     
@@ -100,14 +100,14 @@ IOReturn ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType r
 }
 
 // Get report
-IOReturn ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+IOReturn Xbox360ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     // Doesn't do anything yet ;)
     return kIOReturnUnsupported;
 }
 
 // Returns the string for the specified index from the USB device's string list, with an optional default
-OSString* ControllerClass::getDeviceString(UInt8 index,const char *def) const
+OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) const
 {
     IOReturn err;
     char buf[1024];
@@ -122,47 +122,47 @@ OSString* ControllerClass::getDeviceString(UInt8 index,const char *def) const
     return OSString::withCString(string);
 }
 
-OSString* ControllerClass::newManufacturerString() const
+OSString* Xbox360ControllerClass::newManufacturerString() const
 {
     return getDeviceString(GetOwnerProvider(this)->GetManufacturerStringIndex());
 }
 
-OSNumber* ControllerClass::newPrimaryUsageNumber() const
+OSNumber* Xbox360ControllerClass::newPrimaryUsageNumber() const
 {
     return OSNumber::withNumber(HID_360::ReportDescriptor[3], 8);
 }
 
-OSNumber* ControllerClass::newPrimaryUsagePageNumber() const
+OSNumber* Xbox360ControllerClass::newPrimaryUsagePageNumber() const
 {
     return OSNumber::withNumber(HID_360::ReportDescriptor[1], 8);
 }
 
-OSNumber* ControllerClass::newProductIDNumber() const
+OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 {
     return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
 }
 
-OSString* ControllerClass::newProductString() const
+OSString* Xbox360ControllerClass::newProductString() const
 {
     return getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
 }
 
-OSString* ControllerClass::newSerialNumberString() const
+OSString* Xbox360ControllerClass::newSerialNumberString() const
 {
     return getDeviceString(GetOwnerProvider(this)->GetSerialNumberStringIndex());
 }
 
-OSString* ControllerClass::newTransportString() const
+OSString* Xbox360ControllerClass::newTransportString() const
 {
     return OSString::withCString("USB");
 }
 
-OSNumber* ControllerClass::newVendorIDNumber() const
+OSNumber* Xbox360ControllerClass::newVendorIDNumber() const
 {
     return OSNumber::withNumber(GetOwnerProvider(this)->GetVendorID(),16);
 }
 
-OSNumber* ControllerClass::newLocationIDNumber() const
+OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 {
 	IOUSBDevice *device;
     OSNumber *number;
