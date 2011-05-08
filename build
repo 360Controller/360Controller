@@ -55,7 +55,7 @@ mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
 mv 360ControllerInstall build
 cd ..
-echo ** File contents **
+echo "** File contents **"
 lipo -info 360Controller/build/Deployment/360Controller.kext/Contents/MacOS/360Controller
 lipo -info 360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin/Contents/MacOS/Feedback360
 lipo -info 360Daemon/build/Release/360Daemon
