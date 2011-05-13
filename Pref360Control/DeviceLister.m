@@ -198,6 +198,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     // Build array of parameters
     parameters = [NSMutableArray arrayWithCapacity:10];
+    [parameters addObject:@"edit"];
     
     for (NSNumber *key in enabled)
     {

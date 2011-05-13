@@ -125,12 +125,12 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
 {
     int i, count;
     
-    count = (argc - 1) / 3;
+    count = (argc - 2) / 3;
     for (i = 0; i < count; i++)
     {
-        NSString *name = [NSString stringWithCString:argv[(i * 3) + 1] encoding:NSUTF8StringEncoding];
-        int vendor = atoi(argv[(i * 3) + 2]);
-        int product = atoi(argv[(i * 3) + 3]);
+        NSString *name = [NSString stringWithCString:argv[(i * 3) + 2] encoding:NSUTF8StringEncoding];
+        int vendor = atoi(argv[(i * 3) + 3]);
+        int product = atoi(argv[(i * 3) + 4]);
         AddDevice(personalities, name, vendor, product);
     }
 }
@@ -158,7 +158,7 @@ int main (int argc, const char * argv[]) {
                     [[device objectForKey:@"idProduct"] intValue]);
         }
     }
-    else if (((argc - 1) % 3) == 0)
+    else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0))
     {
         NSMutableDictionary *saving;
         NSMutableDictionary *devices;
@@ -168,6 +168,8 @@ int main (int argc, const char * argv[]) {
         ScrubDevices(devices);
         AddDevices(devices, argc, argv);
         WriteDriverConfig(DRIVER_NAME, saving);
+
+        system("/sbin/kextunload /System/Library/Extensions/360Controller.kext; /sbin/kextload /System/Library/Extensions/360Controller.kext");
     }
     else
         NSLog(@"Invalid number of parameters (%i)", argc);

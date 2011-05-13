@@ -240,7 +240,6 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     invertRightX=invertRightY=FALSE;
     deadzoneLeft=deadzoneRight=0;
     relativeLeft=relativeRight=FALSE;
-//    readSettings();
     // Done
     return res;
 }
@@ -503,7 +502,6 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
 
 void Xbox360Peripheral::stop(IOService *provider)
 {
-//    IOLog("Stopping\n");
     ReleaseAll();
     super::stop(provider);
 }
@@ -563,7 +561,6 @@ void Xbox360Peripheral::ReleaseAll(void)
 // Handle message sent to the driver
 IOReturn Xbox360Peripheral::message(UInt32 type,IOService *provider,void *argument)
 {
-//    IOLog("Message\n");
     switch(type) {
         case kIOMessageServiceIsTerminated:
         case kIOMessageServiceIsRequestingClose:
@@ -763,7 +760,6 @@ void Xbox360Peripheral::PadConnect(void)
 		{
 			padHandler->attach(this);
 			padHandler->start(this);
-			// No registerService() - IOHIDDevice does that in start()
 		}
 		else
 		{
@@ -778,8 +774,6 @@ void Xbox360Peripheral::PadDisconnect(void)
 	if (padHandler != NULL)
 	{
 		padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
-        padHandler->stop(this);
-		padHandler->detach(this);
 		padHandler->release();
 		padHandler = NULL;
 	}
@@ -804,7 +798,6 @@ void Xbox360Peripheral::SerialConnect(void)
         {
             serialHandler->attach(this);
 			serialHandler->start(this);
-//			serialHandler->registerService();
         }
         else
         {
@@ -818,8 +811,8 @@ void Xbox360Peripheral::SerialDisconnect(void)
 {
 	if (serialHandler != NULL)
 	{
+        // Hope it's okay to terminate twice...
 		serialHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
-		serialHandler->detach(this);
 		serialHandler->release();
 		serialHandler = NULL;
 	}
@@ -831,7 +824,6 @@ void Xbox360Peripheral::SerialMessage(IOBufferMemoryDescriptor *data, size_t len
 	{
 		char *buffer = (char*)data->getBytesNoCopy();
 		if ((length == 5) && (buffer[0] == 0x00))
-//			serialHandler->SendPacket(data);
 			serialHandler->handleReport(data, kIOHIDReportTypeInput);
 	}
 }
