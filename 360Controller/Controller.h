@@ -17,6 +17,8 @@ private:
     OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
 
 public:
+    virtual bool start(IOService *provider);
+
     virtual IOReturn setProperties(OSObject *properties);
 
     virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;

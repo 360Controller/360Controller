@@ -35,6 +35,22 @@
 OSDefineMetaClassAndStructors(Xbox360Peripheral, IOService)
 #define super IOService
 
+class LockRequired
+{
+private:
+    IOLock *_lock;
+public:
+    LockRequired(IOLock *lock)
+    {
+        _lock = lock;
+        IOLockLock(_lock);
+    }
+    ~LockRequired()
+    {
+        IOLockUnlock(_lock);
+    }
+};
+
 // Find the maximum packet size of this pipe
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
@@ -224,6 +240,7 @@ void Xbox360Peripheral::readSettings(void)
 bool Xbox360Peripheral::init(OSDictionary *propTable)
 {
     bool res=super::init(propTable);
+    mainLock = IOLockAlloc();
     device=NULL;
     interface=NULL;
     inPipe=NULL;
@@ -247,7 +264,7 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
 // Free the extension
 void Xbox360Peripheral::free(void)
 {
-    // Don't actually do anything yet
+    IOLockFree(mainLock);
     super::free();
 }
 
@@ -259,6 +276,7 @@ bool Xbox360Peripheral::start(IOService *provider)
 	IOUSBDevRequest controlReq;
 	char controlBuf[2];
     XBOX360_OUT_LED led;
+    IOWorkLoop *workloop = NULL;
     
     if (!super::start(provider))
 		return false;
@@ -364,7 +382,8 @@ bool Xbox360Peripheral::start(IOService *provider)
 		IOLog("start - failed to create timer for chatpad\n");
 		goto fail;
 	}
-	if (getWorkLoop()->addEventSource(serialTimer) != kIOReturnSuccess)
+    workloop = getWorkLoop();
+	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
 	{
 		IOLog("start - failed to connect timer for chatpad\n");
 		goto fail;
@@ -430,7 +449,6 @@ bool Xbox360Peripheral::start(IOService *provider)
     led.pattern=ledOff;
     QueueWrite(&led,sizeof(led));
     // Done
-    readSettings();
 	PadConnect();
 	registerService();
     return true;
@@ -445,6 +463,8 @@ bool Xbox360Peripheral::QueueRead(void)
     IOUSBCompletion complete;
     IOReturn err;
 
+    if ((inPipe == NULL) || (inBuffer == NULL))
+        return false;
     complete.target=this;
     complete.action=ReadCompleteInternal;
     complete.parameter=inBuffer;
@@ -461,6 +481,8 @@ bool Xbox360Peripheral::QueueSerialRead(void)
     IOUSBCompletion complete;
     IOReturn err;
 	
+    if ((serialInPipe == NULL) || (serialInBuffer == NULL))
+        return false;
     complete.target = this;
     complete.action = SerialReadCompleteInternal;
     complete.parameter = serialInBuffer;
@@ -509,6 +531,8 @@ void Xbox360Peripheral::stop(IOService *provider)
 // Releases all the objects used
 void Xbox360Peripheral::ReleaseAll(void)
 {
+    LockRequired locker(mainLock);
+    
 	SerialDisconnect();
 	PadDisconnect();
 	if (serialTimer != NULL)
@@ -641,15 +665,18 @@ void Xbox360Peripheral::WriteCompleteInternal(void *target,void *parameter,IORet
 // This handles a completed asynchronous read
 void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
 {
+    LockRequired locker(mainLock);
     IOReturn err;
     bool reread=!isInactive();
     
     switch(status) {
         case kIOReturnOverrun:
             IOLog("read - kIOReturnOverrun, clearing stall\n");
-            inPipe->ClearStall();
+            if (inPipe != NULL)
+                inPipe->ClearStall();
             // Fall through
         case kIOReturnSuccess:
+            if (inBuffer != NULL)
             {
                 const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
                 if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
@@ -674,17 +701,20 @@ void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 buff
 
 void Xbox360Peripheral::SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
+    LockRequired locker(mainLock);
     bool reread = !isInactive();
 
 	switch (status)
 	{
         case kIOReturnOverrun:
             IOLog("read (serial) - kIOReturnOverrun, clearing stall\n");
-            serialInPipe->ClearStall();
+            if (serialInPipe != NULL)
+                serialInPipe->ClearStall();
             // Fall through
         case kIOReturnSuccess:
 			serialHeard = true;
-			SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
+            if (serialInBuffer != NULL)
+                SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
             break;
 			
         case kIOReturnNotResponding:

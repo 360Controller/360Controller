@@ -16,6 +16,8 @@ class ChatPadKeyboardClass : public IOHIDDevice
 private:
 
 public:
+    virtual bool start(IOService *provider);
+
     // IOHidDevice methods
     virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;
     

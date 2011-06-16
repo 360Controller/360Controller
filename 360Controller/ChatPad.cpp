@@ -114,6 +114,13 @@ static IOHIDDevice* GetParent(const IOService *current)
 	return owner->getController(0);
 }
 
+bool ChatPadKeyboardClass::start(IOService *provider)
+{
+    if (!IOHIDDevice::start(provider))
+        return false;
+    return OSDynamicCast(Xbox360Peripheral, provider) != NULL;
+}
+
 OSString* ChatPadKeyboardClass::newManufacturerString() const
 {
 	IOHIDDevice *device = GetParent(this);

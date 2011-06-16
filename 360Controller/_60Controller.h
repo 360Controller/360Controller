@@ -74,6 +74,7 @@ protected:
 	} TIMER_STATE;
 	
     IOUSBDevice *device;
+    IOLock *mainLock;
 	
 	// Joypad
     IOUSBInterface *interface;
