@@ -43,9 +43,9 @@ static IOUSBDevice* GetOwnerProvider(const IOService *us)
 
 bool Xbox360ControllerClass::start(IOService *provider)
 {
-    if (!IOHIDDevice::start(provider))
+    if (OSDynamicCast(Xbox360Peripheral, provider) == NULL)
         return false;
-    return OSDynamicCast(Xbox360Peripheral, provider) != NULL;
+    return IOHIDDevice::start(provider);
 }
 
 IOReturn Xbox360ControllerClass::setProperties(OSObject *properties)
