@@ -1,6 +1,7 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006-2007 Colin Munro
+    Copyright (C) 2006-2011 Colin Munro
+    Bug fixes contributed by Cody "codeman38" Boisclair
     
     _60Controller.cpp - main source of the driver
     
@@ -665,69 +666,75 @@ void Xbox360Peripheral::WriteCompleteInternal(void *target,void *parameter,IORet
 // This handles a completed asynchronous read
 void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
 {
-    LockRequired locker(mainLock);
-    IOReturn err;
-    bool reread=!isInactive();
-    
-    switch(status) {
-        case kIOReturnOverrun:
-            IOLog("read - kIOReturnOverrun, clearing stall\n");
-            if (inPipe != NULL)
-                inPipe->ClearStall();
-            // Fall through
-        case kIOReturnSuccess:
-            if (inBuffer != NULL)
-            {
-                const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
-                if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
-                    fiddleReport(inBuffer);
-                    err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
-                    if(err!=kIOReturnSuccess) {
-                        IOLog("read - failed to handle report: 0x%.8x\n",err);
-                    }
-                }
-            }
-            break;
-        case kIOReturnNotResponding:
-            IOLog("read - kIOReturnNotResponding\n");
-            reread=false;
-            break;
-        default:
-            reread=false;
-            break;
+	if (padHandler != NULL) // avoid deadlock with release
+	{
+		LockRequired locker(mainLock);
+		IOReturn err;
+		bool reread=!isInactive();
+		
+		switch(status) {
+			case kIOReturnOverrun:
+				IOLog("read - kIOReturnOverrun, clearing stall\n");
+				if (inPipe != NULL)
+					inPipe->ClearStall();
+				// Fall through
+			case kIOReturnSuccess:
+				if (inBuffer != NULL)
+				{
+					const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
+					if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
+						fiddleReport(inBuffer);
+						err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
+						if(err!=kIOReturnSuccess) {
+							IOLog("read - failed to handle report: 0x%.8x\n",err);
+						}
+					}
+				}
+				break;
+			case kIOReturnNotResponding:
+				IOLog("read - kIOReturnNotResponding\n");
+				reread=false;
+				break;
+			default:
+				reread=false;
+				break;
+		}
+		if(reread) QueueRead();
     }
-    if(reread) QueueRead();    
 }
 
 void Xbox360Peripheral::SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
-    LockRequired locker(mainLock);
-    bool reread = !isInactive();
-
-	switch (status)
+	if (padHandler != NULL) // avoid deadlock with release
 	{
-        case kIOReturnOverrun:
-            IOLog("read (serial) - kIOReturnOverrun, clearing stall\n");
-            if (serialInPipe != NULL)
-                serialInPipe->ClearStall();
-            // Fall through
-        case kIOReturnSuccess:
-			serialHeard = true;
-            if (serialInBuffer != NULL)
-                SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
-            break;
-			
-        case kIOReturnNotResponding:
-            IOLog("read (serial) - kIOReturnNotResponding\n");
-            reread = false;
-            break;
-			
-        default:
-            reread = false;
-            break;
+		LockRequired locker(mainLock);
+		bool reread = !isInactive();
+	
+		switch (status)
+		{
+			case kIOReturnOverrun:
+				IOLog("read (serial) - kIOReturnOverrun, clearing stall\n");
+				if (serialInPipe != NULL)
+					serialInPipe->ClearStall();
+				// Fall through
+			case kIOReturnSuccess:
+				serialHeard = true;
+				if (serialInBuffer != NULL)
+					SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
+				break;
+				
+			case kIOReturnNotResponding:
+				IOLog("read (serial) - kIOReturnNotResponding\n");
+				reread = false;
+				break;
+				
+			default:
+				reread = false;
+				break;
+		}
+		if (reread)
+			QueueSerialRead();
 	}
-    if (reread)
-		QueueSerialRead();    
 }
 
 // Handle a completed asynchronous write
