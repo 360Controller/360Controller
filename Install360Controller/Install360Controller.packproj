@@ -1271,13 +1271,13 @@
 						<key>IFPkgDescriptionTitle</key>
 						<string>XBox 360 Controller</string>
 						<key>IFPkgDescriptionVersion</key>
-						<string>0.10</string>
+						<string>0.11</string>
 					</dict>
 				</dict>
 				<key>Display Information</key>
 				<dict>
 					<key>CFBundleGetInfoString</key>
-					<string>Install360Controller 0.10 Copyrights © 2006-2011 Colin Munro</string>
+					<string>Install360Controller 0.11 Copyrights © 2006-2011 Colin Munro</string>
 					<key>CFBundleIconFile</key>
 					<string></string>
 					<key>CFBundleIconFile Path Type</key>
@@ -1287,7 +1287,7 @@
 					<key>CFBundleName</key>
 					<string>XBox 360 Controller Driver Installer</string>
 					<key>CFBundleShortVersionString</key>
-					<string>0.10</string>
+					<string>0.11</string>
 				</dict>
 				<key>Options</key>
 				<dict>
@@ -1315,7 +1315,7 @@
 					<key>IFMajorVersion</key>
 					<integer>0</integer>
 					<key>IFMinorVersion</key>
-					<integer>10</integer>
+					<integer>11</integer>
 				</dict>
 			</dict>
 		</dict>
