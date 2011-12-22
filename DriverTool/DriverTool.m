@@ -169,7 +169,7 @@ int main (int argc, const char * argv[]) {
         AddDevices(devices, argc, argv);
         WriteDriverConfig(DRIVER_NAME, saving);
 
-        system("/sbin/kextunload /System/Library/Extensions/360Controller.kext; /sbin/kextload /System/Library/Extensions/360Controller.kext");
+        system("/usr/bin/touch /System/Library/Extensions");
     }
     else
         NSLog(@"Invalid number of parameters (%i)", argc);
