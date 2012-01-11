@@ -489,7 +489,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="1039916014">
 												<int key="NSCellFlags">67239424</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">(C) 2006-11 Colin Munro</string>
+												<string key="NSContents">(C) 2006-12 Colin Munro</string>
 												<reference key="NSSupport" ref="276746597"/>
 												<reference key="NSControlView" ref="850481656"/>
 												<reference key="NSBackgroundColor" ref="972077515"/>
@@ -535,7 +535,6 @@
 											<int key="NSvFlags">256</int>
 											<string key="NSFrame">{{13, 11}, {150, 97}}</string>
 											<reference key="NSSuperview" ref="772377613"/>
-											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="837329624">
 												<int key="NSCellFlags">67239424</int>

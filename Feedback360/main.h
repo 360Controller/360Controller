@@ -1,6 +1,6 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006 Colin Munro
+    Copyright (C) 2006-2012 Colin Munro
     
     main.h - defines the structure used for the plugin COM object
     

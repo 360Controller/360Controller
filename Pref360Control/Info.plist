@@ -26,5 +26,9 @@
 	<string>Pref360ControlPref.tiff</string>
 	<key>NSPrincipalClass</key>
 	<string>Pref360ControlPref</string>
+	<key>CFBundleName</key>
+	<string>XBox 360 Controllers</string>
+	<key>NSPrefPaneIconLabel</key>
+	<string>Xbox 360\nControllers</string>
 </dict>
 </plist>

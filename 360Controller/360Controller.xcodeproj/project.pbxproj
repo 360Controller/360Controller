@@ -263,7 +263,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
+				CURRENT_PROJECT_VERSION = 1.0.0d11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -274,10 +274,10 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
-				MODULE_VERSION = 1.0.0d1;
+				MODULE_VERSION = 1.0.0d11;
 				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
-				SDKROOT = macosx10.6;
+				SDKROOT = "";
 				WRAPPER_EXTENSION = kext;
 				ZERO_LINK = YES;
 			};
@@ -292,7 +292,7 @@
 					x86_64,
 				);
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
+				CURRENT_PROJECT_VERSION = 1.0.0d11;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -302,7 +302,7 @@
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				LD_GENERATE_MAP_FILE = NO;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
-				MODULE_VERSION = 1.0.0d1;
+				MODULE_VERSION = 1.0.0d11;
 				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
 				WRAPPER_EXTENSION = kext;
@@ -313,7 +313,7 @@
 		3BBDC685097938A90023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1.0.0d1;
+				CURRENT_PROJECT_VERSION = 1.0.0d11;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -321,7 +321,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
-				MODULE_VERSION = 1.0.0d1;
+				MODULE_VERSION = 1.0.0d11;
 				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
 				WRAPPER_EXTENSION = kext;
@@ -331,8 +331,8 @@
 		3BBDC687097938A90023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.2.8.sdk";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = "";
 			};
 			name = Development;
 		};
@@ -340,18 +340,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = macosx10.5;
-				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				GCC_VERSION = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = "";
+				"SDKROOT[arch=x86_64]" = "";
 			};
 			name = Deployment;
 		};
 		3BBDC689097938A90023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.2.8.sdk";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = "";
 			};
 			name = Default;
 		};

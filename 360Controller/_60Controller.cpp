@@ -1,6 +1,6 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006-2011 Colin Munro
+    Copyright (C) 2006-2012 Colin Munro
     Bug fixes contributed by Cody "codeman38" Boisclair
     
     _60Controller.cpp - main source of the driver

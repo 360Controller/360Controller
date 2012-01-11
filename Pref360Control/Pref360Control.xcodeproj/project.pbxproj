@@ -365,7 +365,7 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Pref360Control;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = "";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -451,8 +451,8 @@
 		3BBDC6AA097946B50023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
+				MACOSX_DEPLOYMENT_TARGET = "";
+				SDKROOT = "";
 			};
 			name = Development;
 		};
@@ -462,7 +462,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = "";
 			};
 			name = Deployment;
 		};
@@ -470,7 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
+				SDKROOT = "";
 			};
 			name = Default;
 		};

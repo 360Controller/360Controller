@@ -1,14 +1,6 @@
 /*
- *  devlink.h
- *  Feedback360
- *
- *  Created by Colin Munro on 3/1/06.
- *  Copyright 2006 Colin Munro. All rights reserved.
- *
- */
-/*
     MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006 Colin Munro
+    Copyright (C) 2006-2012 Colin Munro
     
     devlink.h - Interface to the device link
     
