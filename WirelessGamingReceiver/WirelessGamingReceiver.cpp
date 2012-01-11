@@ -24,6 +24,8 @@
 #include "WirelessDevice.h"
 #include "devices.h"
 
+//#define PROTOCOL_DEBUG
+
 OSDefineMetaClassAndStructors(WirelessGamingReceiver, IOService)
 
 // Holds data for asynchronous reads
@@ -414,7 +416,7 @@ void WirelessGamingReceiver::_WriteComplete(void *target, void *parameter, IORet
 // Processes a message for a controller
 void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data, int length)
 {
-/*
+#ifdef PROTOCOL_DEBUG
     char s[1024];
     int i;
     
@@ -425,14 +427,16 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
     }
     s[i * 2] = '\0';
     IOLog("Got data (%d, %d bytes): %s\n", index, length, s);
-*/
+#endif
     // Handle device connections
     if ((length == 2) && (data[0] == 0x08))
     {
         if (data[1] == 0x00)
         {
             // Device disconnected
-//            IOLog("process: Device detached\n");
+#ifdef PROTOCOL_DEBUG
+            IOLog("process: Device detached\n");
+#endif
             if (connections[index].service != NULL)
             {
                 connections[index].service->SetIndex(-1);
@@ -447,7 +451,9 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
         else
         {
             // Device connected
-//            IOLog("process: Attempting to add new device\n");
+#ifdef PROTOCOL_DEBUG
+            IOLog("process: Attempting to add new device\n");
+#endif
             if (connections[index].service == NULL)
             {
                 bool ready;
@@ -467,7 +473,9 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
                 InstantiateService(index);
                 if (ready)
                 {
-//                    IOLog("Registering wireless device");
+#ifdef PROTOCOL_DEBUG
+                    IOLog("Registering wireless device");
+#endif
                     connections[index].controllerStarted = true;
                     connections[index].service->registerService();
                 }
@@ -492,7 +500,9 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
             copy->readBytes(1, &c, 1);
             if (c == 0x0f)
             {
-//                IOLog("Registering wireless device");
+#ifdef PROTOCOL_DEBUG
+                IOLog("Registering wireless device");
+#endif
                 connections[index].controllerStarted = true;
                 connections[index].service->registerService();
             }
