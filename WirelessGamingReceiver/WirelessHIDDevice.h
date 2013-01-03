@@ -48,6 +48,10 @@ protected:
     virtual void receivedHIDupdate(unsigned char *data, int length);
 private:
     static void _receivedData(void *target, WirelessDevice *sender, void *parameter);
+    static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
+    
+	IOTimerEventSource *serialTimer;
+    int serialTimerCount;
     
     unsigned char battery;
     char serialString[10];

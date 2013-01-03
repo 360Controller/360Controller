@@ -21,15 +21,31 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <IOKit/IOLib.h>
+#include <IOKit/IOTimerEventSource.h>
 #include "WirelessHIDDevice.h"
 #include "WirelessDevice.h"
 #include "devices.h"
+
+#define POWEROFF_TIMEOUT        (2 * 60)
 
 OSDefineMetaClassAndAbstractStructors(WirelessHIDDevice, IOHIDDevice)
 #define super IOHIDDevice
 
 // Some sort of message to send
 const char weirdStart[] = {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
+{
+	WirelessHIDDevice *device;
+    
+	device = OSDynamicCast(WirelessHIDDevice, owner);
+    // Automatic shutoff
+    device->serialTimerCount++;
+    if (device->serialTimerCount > POWEROFF_TIMEOUT)
+        device->PowerOff();
+    // Reset
+    sender->setTimeoutMS(1000);
+}
 
 // Sets the LED with the same format as the wired controller
 void WirelessHIDDevice::SetLEDs(int mode)
@@ -91,19 +107,40 @@ IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor *report, IOHIDReportTyp
 bool WirelessHIDDevice::handleStart(IOService *provider)
 {
     WirelessDevice *device;
+    IOWorkLoop *workloop;
     
     if (!super::handleStart(provider))
-        return false;
+        goto fail;
 
     device = OSDynamicCast(WirelessDevice, provider);
     if (device == NULL)
-        return false;
-        
+        goto fail;
+    
+    serialTimerCount = 0;
+    
+	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
+	if (serialTimer == NULL)
+	{
+		IOLog("start - failed to create timer for chatpad\n");
+		goto fail;
+	}
+    workloop = getWorkLoop();
+	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
+	{
+		IOLog("start - failed to connect timer for chatpad\n");
+		goto fail;
+	}
+    
     device->RegisterWatcher(this, _receivedData, NULL);
     
     device->SendPacket(weirdStart, sizeof(weirdStart));
-    
+
+    serialTimer->setTimeoutMS(1000);
+
     return true;
+    
+fail:
+    return false;
 }
 
 // Shut down the driver
@@ -204,6 +241,7 @@ void WirelessHIDDevice::receivedHIDupdate(unsigned char *data, int length)
     IOReturn err;
     IOMemoryDescriptor *report;
     
+    serialTimerCount = 0;
     report = IOMemoryDescriptor::withAddress(data, length, kIODirectionNone);
     err = handleReport(report, kIOHIDReportTypeInput);
     report->release();
