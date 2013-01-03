@@ -89,6 +89,22 @@ void Xbox360Peripheral::SendInit(UInt16 value, UInt16 index)
 	device->DeviceRequest(&controlReq, 100, 100, NULL);	// Will fail - but device should still act on it
 }
 
+bool Xbox360Peripheral::SendSwitch(bool sendOut)
+{
+	IOUSBDevRequest controlReq;
+
+	controlReq.bmRequestType = USBmakebmRequestType(sendOut ? kUSBOut : kUSBIn, kUSBVendor, kUSBDevice);
+	controlReq.bRequest = 0xa1;
+	controlReq.wValue = 0x0000;
+	controlReq.wIndex = 0xe416;
+	controlReq.wLength = sizeof(chatpadInit);
+	controlReq.pData = chatpadInit;
+	if (device->DeviceRequest(&controlReq, 100, 100, NULL) == kIOReturnSuccess)
+        return true;
+    IOLog("start - failed to %s chatpad setting\n", sendOut ? "write" : "read");
+    return false;
+}
+
 void Xbox360Peripheral::SendToggle(void)
 {
 	SendSpecial(serialToggle ? 0x1F : 0x1E);
@@ -274,8 +290,6 @@ bool Xbox360Peripheral::start(IOService *provider)
     const IOUSBConfigurationDescriptor *cd;
     IOUSBFindInterfaceRequest intf;
     IOUSBFindEndpointRequest pipe;
-	IOUSBDevRequest controlReq;
-	char controlBuf[2];
     XBOX360_OUT_LED led;
     IOWorkLoop *workloop = NULL;
     
@@ -309,6 +323,23 @@ bool Xbox360Peripheral::start(IOService *provider)
     if(device->SetConfiguration(this,cd->bConfigurationValue,true)!=kIOReturnSuccess) {
         IOLog("start - unable to set configuration\n");
         goto fail;
+    }
+    // Get release
+    {
+        UInt16 release = device->GetDeviceRelease();
+        switch (release) {
+            default:
+                IOLog("Unknown device release %.4x", release);
+                // fall through
+            case 0x0110:
+                chatpadInit[0] = 0x01;
+                chatpadInit[1] = 0x02;
+                break;
+            case 0x0114:
+                chatpadInit[0] = 0x09;
+                chatpadInit[1] = 0x00;
+                break;
+        }
     }
     // Find correct interface
     intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
@@ -395,44 +426,8 @@ bool Xbox360Peripheral::start(IOService *provider)
 	SendInit(0x2344, 0x7f03);
 	SendInit(0x5839, 0x6832);
 		// Set 'switch'
-	controlReq.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
-	controlReq.bRequest = 0xa1;
-	controlReq.wValue = 0x0000;
-	controlReq.wIndex = 0xe416;
-	controlReq.wLength = sizeof(controlBuf);
-	controlReq.pData = controlBuf;
-	if (device->DeviceRequest(&controlReq, 100, 100, NULL) != kIOReturnSuccess)
-	{
-		IOLog("start - failed to read chatpad setting\n");
-		goto fail;
-	}
-//	IOLog("start - read: %.2x %.2x\n", controlBuf[0], controlBuf[1]);
-	controlBuf[0] = 0x01;
-	controlBuf[1] = 0x02;
-	controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBDevice);
-	controlReq.bRequest = 0xa1;
-	controlReq.wValue = 0x0000;
-	controlReq.wIndex = 0xe416;
-	controlReq.wLength = sizeof(controlBuf);
-	controlReq.pData = controlBuf;
-	if (device->DeviceRequest(&controlReq, 100, 100, NULL) != kIOReturnSuccess)
-	{
-		IOLog("start - failed to write chatpad setting\n");
-		goto fail;
-	}
-//	IOLog("start - write: %.2x %.2x\n", controlBuf[0], controlBuf[1]);
-	controlReq.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
-	controlReq.bRequest = 0xa1;
-	controlReq.wValue = 0x0000;
-	controlReq.wIndex = 0xe416;
-	controlReq.wLength = sizeof(controlBuf);
-	controlReq.pData = controlBuf;
-	if (device->DeviceRequest(&controlReq, 100, 100, NULL) != kIOReturnSuccess)
-	{
-		IOLog("start - failed to read chatpad setting\n");
-		goto fail;
-	}
-//	IOLog("start - read: %.2x %.2x\n", controlBuf[0], controlBuf[1]);
+    if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false)))
+        goto fail;
 		// Begin toggle
 	serialHeard = false;
 	serialActive = false;

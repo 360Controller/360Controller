@@ -286,7 +286,7 @@ static BOOL IsXBox360Controller(io_service_t device)
             continue;
         NSUInteger vendor = [[values objectAtIndex:1] intValue];
         NSUInteger product = [[values objectAtIndex:2] intValue];
-        NSNumber *key = [NSNumber numberWithUnsignedInt:(vendor << 16) | product];
+        NSNumber *key = [NSNumber numberWithUnsignedInt:(int)((vendor << 16) | product)];
         [enabled addObject:key];
         if ([entries objectForKey:key] == nil)
             [entries setObject:SanitiseName([values objectAtIndex:0]) forKey:key];

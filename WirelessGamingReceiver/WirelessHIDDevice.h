@@ -32,6 +32,7 @@ class WirelessHIDDevice : public IOHIDDevice
     OSDeclareDefaultStructors(WirelessHIDDevice);
 public:
     void SetLEDs(int mode);
+    void PowerOff(void);
     unsigned char GetBatteryLevel(void);
     
     IOReturn setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options);

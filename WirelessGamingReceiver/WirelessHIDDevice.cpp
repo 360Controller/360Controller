@@ -51,6 +51,19 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
     return battery;
 }
 
+void WirelessHIDDevice::PowerOff(void)
+{
+    char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    WirelessDevice *device;
+    
+    device = OSDynamicCast(WirelessDevice, getProvider());
+    if (device != NULL)
+    {
+        device->SendPacket(buf, sizeof(buf));
+//        device->SendPacket(weirdStart, sizeof(weirdStart));
+    }
+}
+
 // Called from userspace to do something, like set the LEDs
 IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
 {
@@ -58,18 +71,20 @@ IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor *report, IOHIDReportTyp
 
     if (report->readBytes(0, data, 2) < 2)
         return kIOReturnUnsupported;
-        
-    // LED
-    if (data[0] == 0x01)
-    {
-        if ((data[1] != report->getLength()) || (data[1] != 0x03))
-            return kIOReturnUnsupported;
-        report->readBytes(2, data, 1);
-        SetLEDs(data[0]);
-        return kIOReturnSuccess;
+    
+    switch (data[0]) {
+        case 0x01:  // LED
+            if ((data[1] != report->getLength()) || (data[1] != 0x03))
+                return kIOReturnUnsupported;
+            report->readBytes(2, data, 1);
+            SetLEDs(data[0]);
+            return kIOReturnSuccess;
+        case 0x02:  // Power
+            PowerOff();
+            return kIOReturnSuccess;
+        default:
+            return super::setReport(report, reportType, options);
     }
-
-    return super::setReport(report, reportType, options);
 }
 
 // Start up the driver

@@ -54,7 +54,7 @@ IOMemoryDescriptor* WirelessDevice::NextPacket(void)
         return NULL;
     WirelessGamingReceiver *receiver = OSDynamicCast(WirelessGamingReceiver, getProvider());
     if (receiver == NULL)
-        return false;
+        return NULL;
     return receiver->ReadBuffer(index);
 }
 
@@ -66,7 +66,7 @@ void WirelessDevice::SendPacket(const void *data, size_t length)
     WirelessGamingReceiver *receiver = OSDynamicCast(WirelessGamingReceiver, getProvider());
     if (receiver == NULL)
         return;
-    receiver->QueueWrite(index, data, length);
+    receiver->QueueWrite(index, data, (UInt32)length);
 }
 
 // Registers a callback function

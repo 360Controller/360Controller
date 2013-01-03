@@ -54,6 +54,7 @@ private:
 	void SendToggle(void);
 	void SendSpecial(UInt16 value);
 	void SendInit(UInt16 value, UInt16 index);
+    bool SendSwitch(bool sendOut);
 	
 	void PadConnect(void);
 	void PadDisconnect(void);
@@ -91,6 +92,7 @@ protected:
 	TIMER_STATE serialTimerState;
 	ChatPadKeyboardClass *serialHandler;
 	Xbox360ControllerClass *padHandler;
+    UInt8 chatpadInit[2];
 
     // Settings
     bool invertLeftX,invertLeftY;

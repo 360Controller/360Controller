@@ -73,7 +73,7 @@ static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags 
     [pool release];
 }
 
-void ShowAlert(int index)
+static void ShowAlert(int index)
 {
     SInt32 error;
     NSArray *checkBoxes = [NSArray arrayWithObjects:CHECK_SHOWAGAIN, nil];

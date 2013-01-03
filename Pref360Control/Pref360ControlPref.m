@@ -319,9 +319,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOReturn ret;
     
     [self resetDisplay];
-    i=[deviceList indexOfSelectedItem];
+    i=(int)[deviceList indexOfSelectedItem];
     if(([deviceArray count]==0)||(i==-1)) {
-        NSLog(@"No devices found? :( device count==%i, i==%i",[deviceArray count],i);
+        NSLog(@"No devices found? :( device count==%i, i==%i",(int)[deviceArray count],i);
         return;
     }
     {
@@ -539,7 +539,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     count=0;
-    while(hidDevice=IOIteratorNext(iterator)) {
+    while((hidDevice=IOIteratorNext(iterator))) {
 		parent = 0;
 		IORegistryEntryGetParentEntry(hidDevice, kIOServicePlane, &parent);
         BOOL deviceWired = IOObjectConformsTo(parent, "Xbox360Peripheral") && IOObjectConformsTo(hidDevice, "Xbox360ControllerClass");
