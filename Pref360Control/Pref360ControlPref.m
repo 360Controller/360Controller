@@ -552,7 +552,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         item=[DeviceItem allocateDeviceItemForDevice:hidDevice];
         if(item==NULL) continue;
         // Add to item
-        [deviceList addItemWithTitle:[NSString stringWithFormat:@"Controller %i (%@)",++count, deviceWireless ? @"Wireless" : @"Wired"]];
+        NSString *name;
+        name = [item name];
+        if (name == nil)
+            name = @"Generic Controller";
+        [deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [deviceArray addObject:item];
     }
     IOObjectRelease(iterator);

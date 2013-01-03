@@ -31,10 +31,12 @@
     IOHIDDeviceInterface122 **interface;
     FFDeviceObjectReference forceFeedback;
     io_service_t deviceHandle;
+    NSString *deviceName;
 }
 
 + allocateDeviceItemForDevice:(io_service_t)device;
 
+- (NSString*)name;
 - (IOHIDDeviceInterface122**)hidDevice;
 - (FFDeviceObjectReference)ffDevice;
 - (io_service_t)rawDevice;
