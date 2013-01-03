@@ -246,6 +246,12 @@ static HRESULT Feedback360Escape(void *that,FFEffectDownloadID downloadID,FFEFFE
                 Device_Send(&this->device,buf,sizeof(buf));
             }
             break;
+        case 0x03:  // Power off
+        {
+            unsigned char buf[] = {0x02, 0x02};
+            Device_Send(&this->device, buf, sizeof(buf));
+        }
+            break;
         default:
             fprintf(stderr, "Xbox360Controller FF plugin: Unknown escape (%i)\n", (int)escape->dwCommand);
             return FFERR_UNSUPPORTED;

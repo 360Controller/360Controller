@@ -364,7 +364,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                                      defaultButton:nil
                                    alternateButton:nil
                                        otherButton:nil
-                         informativeTextWithFormat:message];
+                         informativeTextWithFormat:@"%@", message];
     [alert runModal];
 }
 

@@ -127,12 +127,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         case 4:
             [leftTrigger setDoubleValue:value];
             largeMotor=value;
-            [self testMotorsLarge:largeMotor small:smallMotor];
+//            [self testMotorsLarge:largeMotor small:smallMotor];
             break;
         case 5:
             [rightTrigger setDoubleValue:value];
             smallMotor=value;
-            [self testMotorsLarge:largeMotor small:smallMotor];
+//            [self testMotorsLarge:largeMotor small:smallMotor];
             break;
         default:
             break;
@@ -276,6 +276,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [rightStickInvertY setState:NSOffState];
     // Disable inputs
     [self inputEnable:NO];
+    [powerOff setHidden:YES];
     // Hide battery icon
     bundle = [NSBundle bundleForClass:[self class]];
     [batteryLevel setImage:[[[NSImage alloc] initByReferencingFile:[bundle pathForResource:@"battNone" ofType:@"tif"]] autorelease]];
@@ -285,8 +286,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)stopDevice
 {
     if(registryEntry==0) return;
-    [self testMotorsLarge:0 small:0];
-    [self setMotorOverride:FALSE];
+//    [self testMotorsLarge:0 small:0];
+//    [self setMotorOverride:FALSE];
 //    [self updateLED:0x00];
     if(hidQueue!=NULL) {
         CFRunLoopSourceRef eventSource;
@@ -482,8 +483,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:YES];
     // Set LED and manual motor control
 //    [self updateLED:0x0a];
-    [self setMotorOverride:TRUE];
-    [self testMotorsLarge:0 small:0];
+//    [self setMotorOverride:TRUE];
+//    [self testMotorsLarge:0 small:0];
     largeMotor=0;
     smallMotor=0;
     // Battery level?
@@ -504,6 +505,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                     path = [bundle pathForResource:[NSString stringWithFormat:@"batt%i", level / 64] ofType:@"tif"];
                 CFRelease(prop);
             }
+            [powerOff setHidden:NO];
         }
         if (path == nil)
             path = [bundle pathForResource:@"battNone" ofType:@"tif"];
@@ -695,6 +697,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)showDeviceList:(id)sender
 {
     [deviceLister showWithOwner:self];
+}
+
+- (IBAction)powerOff:(id)sender
+{
+    FFEFFESCAPE escape;
+    
+    if(ffDevice==0) return;
+    escape.dwSize=sizeof(escape);
+    escape.dwCommand=0x03;
+    escape.cbInBuffer=0;
+    escape.lpvInBuffer=NULL;
+    escape.cbOutBuffer=0;
+    escape.lpvOutBuffer=NULL;
+    FFDeviceEscape(ffDevice,&escape);
 }
 
 @end

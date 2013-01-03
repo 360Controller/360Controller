@@ -60,6 +60,7 @@
     IBOutlet NSProgressIndicator *rightTrigger;
     IBOutlet NSImageView *batteryLevel;
     IBOutlet DeviceLister *deviceLister;
+    IBOutlet NSButton *powerOff;
     // Internal info
     mach_port_t masterPort;
     NSMutableArray *deviceArray;
@@ -85,6 +86,7 @@
 - (void)handleDeviceChange;
 
 - (IBAction)showDeviceList:(id)sender;
+- (IBAction)powerOff:(id)sender;
 
 - (mach_port_t)masterPort;
 
