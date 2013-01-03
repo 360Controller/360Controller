@@ -382,11 +382,10 @@ bool Xbox360Peripheral::start(IOService *provider)
 	intf.bInterfaceProtocol = 2;
 	intf.bAlternateSetting = kIOUSBFindInterfaceDontCare;
 	serialIn = device->FindNextInterface(NULL, &intf);
-	if (serialIn == NULL)
-	{
+	if (serialIn == NULL) {
 		IOLog("start - unable to find chatpad interface\n");
-		goto fail;
-	}
+        goto nochat;
+    }
 	serialIn->open(this);
 	// Find chatpad pipe
 	pipe.direction = kUSBIn;
@@ -436,9 +435,10 @@ bool Xbox360Peripheral::start(IOService *provider)
 	serialTimerState = tsToggle;
 	serialTimer->setTimeoutMS(1000);
     // Begin reading
+    if (!QueueSerialRead())
+        goto fail;
+nochat:
     if (!QueueRead())
-		goto fail;
-	if (!QueueSerialRead())
 		goto fail;
     // Disable LED
     Xbox360_Prepare(led,outLed);
