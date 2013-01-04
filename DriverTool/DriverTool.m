@@ -87,22 +87,15 @@ static void WriteDriverConfig(NSString *driver, id config)
 static void ScrubDevices(NSMutableDictionary *devices)
 {
     NSMutableArray *deviceKeys;
-    NSArray *keys;
     
     deviceKeys = [NSMutableArray arrayWithCapacity:10];
-    
-    // Find all the devices in the list
-    keys = [devices allKeys];
-    for (NSString *key in keys)
+    for (NSString *key in [devices allKeys])
     {
         NSDictionary *device = [devices objectForKey:key];
         if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360Peripheral"] == NSOrderedSame)
             [deviceKeys addObject:key];
     }
-    
-    // Scrub all found devices
-    for (NSString *key in deviceKeys)
-        [devices removeObjectForKey:key];
+    [devices removeObjectsForKeys:deviceKeys];
 }
 
 static id MakeMutableCopy(id object)
