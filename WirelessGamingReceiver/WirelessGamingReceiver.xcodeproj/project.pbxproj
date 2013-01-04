@@ -78,8 +78,8 @@
 				3BE667170B9109C5009679FC /* WirelessHIDDevice.h */,
 				3B21ED6B0B8E690F00B5CACA /* WirelessDevice.cpp */,
 				3B21ED660B8E688A00B5CACA /* WirelessDevice.h */,
-				1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */,
 				1A224C3FFF42367911CA2CB7 /* WirelessGamingReceiver.cpp */,
+				1A224C3EFF42367911CA2CB7 /* WirelessGamingReceiver.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -195,7 +195,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.0d11;
+				CURRENT_PROJECT_VERSION = 1.0.0d12;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -213,7 +213,7 @@
 		1DEB91DB08733DB10010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1.0.0d11;
+				CURRENT_PROJECT_VERSION = 1.0.0d12;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;

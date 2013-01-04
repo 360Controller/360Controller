@@ -1,6 +1,6 @@
 /*
  MICE Xbox 360 Controller driver for Mac OS X
- Copyright (C) 2006-2012 Colin Munro
+ Copyright (C) 2006-2013 Colin Munro
  
  ChatPad.h - Driver class for the ChatPad accessory
  

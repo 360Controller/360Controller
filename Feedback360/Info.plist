@@ -35,6 +35,6 @@
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2011 MICE Software. All rights reserved.</string>
+	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
 </dict>
 </plist>

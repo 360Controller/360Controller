@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d11</string>
+	<string>1.0.0d12</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>WirelessGamingReceiverForWindows</key>
