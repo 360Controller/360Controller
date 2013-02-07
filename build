@@ -71,5 +71,5 @@ sudo spctl -a -v Pref360Control/build/Deployment/Pref360Control.prefPane
 sudo spctl -a -v Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/DriverTool
 sudo spctl -a -v WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext
 sudo spctl -a -v Wireless360Controller/build/Release/Wireless360Controller.kext
-sudo spctl -a -v --type install build/Install360Controller.pkg
+sudo spctl -a -v --type install Install360Controller/build/Install360Controller.pkg
 echo "*** DONE ***"
