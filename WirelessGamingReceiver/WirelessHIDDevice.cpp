@@ -151,7 +151,16 @@ void WirelessHIDDevice::handleStop(IOService *provider)
     device = OSDynamicCast(WirelessDevice, provider);
     if (device != NULL)
         device->RegisterWatcher(NULL, NULL, NULL);
-        
+
+    if (serialTimer != NULL) {
+        serialTimer->cancelTimeout();
+        IOWorkLoop *workloop = getWorkLoop();
+        if (workloop != NULL)
+            workloop->removeEventSource(serialTimer);
+        serialTimer->release();
+        serialTimer = NULL;
+    }
+    
     super::handleStop(provider);
 }
 
