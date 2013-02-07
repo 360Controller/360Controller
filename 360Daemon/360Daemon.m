@@ -31,6 +31,9 @@
 
 #define CHECK_SHOWAGAIN     @"Do not show this message again"
 
+#define INSTALL_PATH        @"/Library/Application Support/MICE/360Daemon"
+#define RESOURCE_PATH       INSTALL_PATH @"/Resources"
+
 mach_port_t masterPort;
 IONotificationPortRef notifyPort;
 CFRunLoopSourceRef notifySource;
@@ -87,7 +90,7 @@ static void ShowAlert(int index)
         @"XBox 360 Controller Driver",
         alertStrings[index],
         checkBoxes,
-        [NSURL fileURLWithPath:@"/Library/StartupItems/360ControlDaemon/Resources/Alert.tif"],
+        [NSURL fileURLWithPath:RESOURCE_PATH @"/Alert.tif"],
         nil];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:dictValues forKeys:dictKeys];
     

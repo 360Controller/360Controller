@@ -50,7 +50,7 @@ if [ $? -ne 0 ]
     exit 1
 fi
 cd ../Install360Controller
-freeze Install360Controller.packproj
+packagesbuild -v Install360Controller.pkgproj
 mv 360ControllerInstall/360ControllerInstall.pkg .
 productsign --sign "Developer ID Installer: Colin Munro" Install360Controller.pkg Install360Controller/Install360Controller.pkg
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
