@@ -331,7 +331,9 @@
 		3BBDC687097938A90023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
 			};
 			name = Development;
@@ -340,8 +342,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
 				GCC_VERSION = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
 				"SDKROOT[arch=x86_64]" = "";
 			};
@@ -350,7 +354,9 @@
 		3BBDC689097938A90023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
 			};
 			name = Default;

@@ -51,6 +51,8 @@ if [ $? -ne 0 ]
 fi
 cd ../Install360Controller
 freeze Install360Controller.packproj
+mv build/360ControllerInstall.pkg .
+productsign --sign 4052c865dcb083da7f325d61d7c7965bb0028a5e Install360Controller.pkg build/Install360Controller.pkg
 mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
 mv 360ControllerInstall build
