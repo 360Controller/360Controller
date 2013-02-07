@@ -65,4 +65,13 @@ lipo -info Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/MacO
 lipo -info Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/DriverTool
 lipo -info WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext/Contents/MacOS/WirelessGamingReceiver
 lipo -info Wireless360Controller/build/Release/Wireless360Controller.kext/Contents/MacOS/Wireless360Controller
+echo "** File signatures **"
+codesign -dvvv 360Controller/build/Deployment/360Controller.kext
+codesign -dvvv 360Controller/build/Deployment/360Controller.kext/Contents/PlugIns/Feedback360.plugin
+codesign -dvvv 360Daemon/build/Release/360Daemon
+codesign -dvvv Pref360Control/build/Deployment/Pref360Control.prefPane
+codesign -dvvv Pref360Control/build/Deployment/Pref360Control.prefPane/Contents/Resources/DriverTool
+codesign -dvvv WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext
+codesign -dvvv Wireless360Controller/build/Release/Wireless360Controller.kext
+pkgutil --check-signature build/360ControllerInstall.pkg
 echo "*** DONE ***"
