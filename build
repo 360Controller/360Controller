@@ -51,8 +51,7 @@ if [ $? -ne 0 ]
 fi
 cd ../Install360Controller
 packagesbuild -v Install360Controller.pkgproj
-mv 360ControllerInstall/360ControllerInstall.pkg .
-productsign --sign "Developer ID Installer: Colin Munro" Install360Controller.pkg Install360Controller/Install360Controller.pkg
+mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../../360ControllerInstall.dmg
 mv 360ControllerInstall build
 cd ..
