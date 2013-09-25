@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32D94FC60562CBF700B6AF17 /* _60Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A224C3EFF42367911CA2CB7 /* _60Controller.h */; };
+		32D94FC80562CBF700B6AF17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		32D94FCA0562CBF700B6AF17 /* _60Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */; settings = {ATTRIBUTES = (); }; };
+		3B36DCC410B7816F00FFD769 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC210B7816F00FFD769 /* Controller.cpp */; };
+		3B36DCC510B7816F00FFD769 /* Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC310B7816F00FFD769 /* Controller.h */; };
+		3B36DCCB10B7817E00FFD769 /* ChatPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC610B7817E00FFD769 /* ChatPad.cpp */; };
+		3B36DCCC10B7817E00FFD769 /* ChatPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC710B7817E00FFD769 /* ChatPad.h */; };
+		3B36DCCD10B7817E00FFD769 /* chatpadhid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCC810B7817E00FFD769 /* chatpadhid.h */; };
+		3B36DCCE10B7817E00FFD769 /* chatpadkeys.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */; };
+		3B36DCCF10B7817E00FFD769 /* chatpadkeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */; };
+		3BB5E09C09641F8200F83598 /* xbox360hid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BB5E09B09641F8200F83598 /* xbox360hid.h */; };
+		3BCE45CA09638EBC00B69EDF /* ControlStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BCE45C909638EBC00B69EDF /* ControlStruct.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1A224C3EFF42367911CA2CB7 /* _60Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; };
+		1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
+		32D94FCF0562CBF700B6AF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32D94FD00562CBF700B6AF17 /* 360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B0F1276097B395B00127827 /* Feedback360.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Feedback360.bundle; path = ../Feedback360/build/Deployment/Feedback360.bundle; sourceTree = SOURCE_ROOT; };
+		3B36DCC210B7816F00FFD769 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		3B36DCC310B7816F00FFD769 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		3B36DCC610B7817E00FFD769 /* ChatPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; };
+		3B36DCC710B7817E00FFD769 /* ChatPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; };
+		3B36DCC810B7817E00FFD769 /* chatpadhid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; };
+		3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; };
+		3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; };
+		3BB5E09B09641F8200F83598 /* xbox360hid.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; };
+		3BCE45C909638EBC00B69EDF /* ControlStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; };
+		8DA8362C06AD9B9200E5AC22 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = /System/Library/Frameworks/Kernel.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32D94FCB0562CBF700B6AF17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* 360Controller */ = {
+			isa = PBXGroup;
+			children = (
+				247142CAFF3F8F9811CA285C /* Source */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				19C28FB6FE9D52B211CA2CBB /* Products */,
+			);
+			name = 360Controller;
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B2EF52A0965A0AE007BFB7B /* Kernel Driver */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		19C28FB6FE9D52B211CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32D94FD00562CBF700B6AF17 /* 360Controller.kext */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		247142CAFF3F8F9811CA285C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3B2EF19A0965A03E007BFB7B /* Kernel Driver */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		3B2EF19A0965A03E007BFB7B /* Kernel Driver */ = {
+			isa = PBXGroup;
+			children = (
+				3B36DCC010B7815000FFD769 /* Controller */,
+				3B36DCC110B7815700FFD769 /* ChatPad */,
+				3BCE45C909638EBC00B69EDF /* ControlStruct.h */,
+				1A224C3EFF42367911CA2CB7 /* _60Controller.h */,
+				1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */,
+			);
+			name = "Kernel Driver";
+			sourceTree = "<group>";
+		};
+		3B2EF52A0965A0AE007BFB7B /* Kernel Driver */ = {
+			isa = PBXGroup;
+			children = (
+				3B0F1276097B395B00127827 /* Feedback360.bundle */,
+				8DA8362C06AD9B9200E5AC22 /* Kernel.framework */,
+				32D94FCF0562CBF700B6AF17 /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = "Kernel Driver";
+			sourceTree = "<group>";
+		};
+		3B36DCC010B7815000FFD769 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3B36DCC210B7816F00FFD769 /* Controller.cpp */,
+				3B36DCC310B7816F00FFD769 /* Controller.h */,
+				3BB5E09B09641F8200F83598 /* xbox360hid.h */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3B36DCC110B7815700FFD769 /* ChatPad */ = {
+			isa = PBXGroup;
+			children = (
+				3B36DCC610B7817E00FFD769 /* ChatPad.cpp */,
+				3B36DCC710B7817E00FFD769 /* ChatPad.h */,
+				3B36DCC910B7817E00FFD769 /* chatpadkeys.cpp */,
+				3B36DCCA10B7817E00FFD769 /* chatpadkeys.h */,
+				3B36DCC810B7817E00FFD769 /* chatpadhid.h */,
+			);
+			name = ChatPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		32D94FC50562CBF700B6AF17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FC60562CBF700B6AF17 /* _60Controller.h in Headers */,
+				3BCE45CA09638EBC00B69EDF /* ControlStruct.h in Headers */,
+				3BB5E09C09641F8200F83598 /* xbox360hid.h in Headers */,
+				3B36DCC510B7816F00FFD769 /* Controller.h in Headers */,
+				3B36DCCC10B7817E00FFD769 /* ChatPad.h in Headers */,
+				3B36DCCD10B7817E00FFD769 /* chatpadhid.h in Headers */,
+				3B36DCCF10B7817E00FFD769 /* chatpadkeys.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		32D94FC30562CBF700B6AF17 /* 360Controller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BBDC682097938A90023AAD8 /* Build configuration list for PBXNativeTarget "360Controller" */;
+			buildPhases = (
+				32D94FC50562CBF700B6AF17 /* Headers */,
+				32D94FC70562CBF700B6AF17 /* Resources */,
+				32D94FC90562CBF700B6AF17 /* Sources */,
+				32D94FCB0562CBF700B6AF17 /* Frameworks */,
+				32D94FCC0562CBF700B6AF17 /* Rez */,
+				3B0F12A1097B3A3A00127827 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 360Controller;
+			productInstallPath = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+			productName = 360Controller;
+			productReference = 32D94FD00562CBF700B6AF17 /* 360Controller.kext */;
+			productType = "com.apple.product-type.kernel-extension.iokit";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3BBDC686097938A90023AAD8 /* Build configuration list for PBXProject "360Controller" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* 360Controller */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				32D94FC30562CBF700B6AF17 /* 360Controller */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32D94FC70562CBF700B6AF17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FC80562CBF700B6AF17 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		32D94FCC0562CBF700B6AF17 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B0F12A1097B3A3A00127827 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle\"\ncp -R \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle\" PlugIns/Feedback360.plugin\n# Renaming extension from bundle to a plugin? Could be naughty.";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32D94FC90562CBF700B6AF17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D94FCA0562CBF700B6AF17 /* _60Controller.cpp in Sources */,
+				3B36DCC410B7816F00FFD769 /* Controller.cpp in Sources */,
+				3B36DCCB10B7817E00FFD769 /* ChatPad.cpp in Sources */,
+				3B36DCCE10B7817E00FFD769 /* chatpadkeys.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3BBDC683097938A90023AAD8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.0d12;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				MODULE_NAME = com.mice.driver.Xbox360Controller;
+				MODULE_VERSION = 1.0.0d11;
+				PREBINDING = NO;
+				PRODUCT_NAME = 360Controller;
+				SDKROOT = "";
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		3BBDC684097938A90023AAD8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0d12;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				LD_GENERATE_MAP_FILE = NO;
+				MODULE_NAME = com.mice.driver.Xbox360Controller;
+				MODULE_VERSION = 1.0.0d11;
+				PREBINDING = NO;
+				PRODUCT_NAME = 360Controller;
+				WRAPPER_EXTENSION = kext;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		3BBDC685097938A90023AAD8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1.0.0d12;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				MODULE_NAME = com.mice.driver.Xbox360Controller;
+				MODULE_VERSION = 1.0.0d11;
+				PREBINDING = NO;
+				PRODUCT_NAME = 360Controller;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Default;
+		};
+		3BBDC687097938A90023AAD8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "";
+			};
+			name = Development;
+		};
+		3BBDC688097938A90023AAD8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				GCC_VERSION = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "";
+				"SDKROOT[arch=x86_64]" = "";
+			};
+			name = Deployment;
+		};
+		3BBDC689097938A90023AAD8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "";
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BBDC682097938A90023AAD8 /* Build configuration list for PBXNativeTarget "360Controller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BBDC683097938A90023AAD8 /* Development */,
+				3BBDC684097938A90023AAD8 /* Deployment */,
+				3BBDC685097938A90023AAD8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		3BBDC686097938A90023AAD8 /* Build configuration list for PBXProject "360Controller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BBDC687097938A90023AAD8 /* Development */,
+				3BBDC688097938A90023AAD8 /* Deployment */,
+				3BBDC689097938A90023AAD8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

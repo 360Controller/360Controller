@@ -1,0 +1,4 @@
+﻿/* Localized versions of Info.plist keys */
+
+CFBundleName = "360Controller";
+NSHumanReadableCopyright = "© Colin Munro, 2005-11";

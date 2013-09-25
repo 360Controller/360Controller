@@ -1,0 +1,4 @@
+﻿/* Localized versions of Info.plist keys */
+
+CFBundleName = "Feedback360";
+NSHumanReadableCopyright = "© Colin Munro, 2005-2011";

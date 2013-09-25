@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>com.mice.Xbox360ControllerForceFeedback</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFPlugInDynamicRegistration</key>
+	<string>NO</string>
+	<key>CFPlugInFactories</key>
+	<dict>
+		<key>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</key>
+		<string>Control360Factory</string>
+	</dict>
+	<key>CFPlugInTypes</key>
+	<dict>
+		<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+		<array>
+			<string>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</string>
+		</array>
+	</dict>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
+</dict>
+</plist>

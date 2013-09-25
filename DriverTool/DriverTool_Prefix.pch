@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'DriverTool' target in the 'DriverTool' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
