@@ -199,7 +199,7 @@ static HRESULT Feedback360DownloadEffect(void *that,CFUUIDRef effectType,FFEffec
     Xbox360ForceFeedback *this=FFThis(that);
 
     if(!Feedback360SupportedEffect(effectType)) return FFERR_UNSUPPORTED;
-    if(!(effect->dwFlags&FFEFF_SPHERICAL)) return FFERR_UNSUPPORTED;
+    //if(!(effect->dwFlags&FFEFF_SPHERICAL)) return FFERR_UNSUPPORTED;
     if(effect->dwTriggerButton!=FFEB_NOTRIGGER) return FFERR_UNSUPPORTED;
     if(!Feedback360ConvertEffect(effect,&params)) return FFERR_UNSUPPORTED;
     if(Emulate_IsPaused(&this->emulator)) return FFERR_DEVICEPAUSED;

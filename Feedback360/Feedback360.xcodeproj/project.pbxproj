@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		3B2EF5440965B3C7007BFB7B /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
@@ -130,6 +130,8 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 3BBDC69709793BF60023AAD8 /* Build configuration list for PBXProject "Feedback360" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
@@ -228,7 +230,7 @@
 		3BBDC69809793BF60023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
@@ -239,7 +241,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
@@ -249,7 +251,7 @@
 		3BBDC69A09793BF60023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
