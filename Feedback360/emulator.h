@@ -73,7 +73,7 @@ typedef struct {
     ForceEffect *effects;
     int effectCount;
     // Runtime
-    CFRunLoopTimerRef timer;
+    dispatch_source_t timer;
     unsigned char oldLarge,oldSmall;
     int activeEffect;
 } ForceEmulator;

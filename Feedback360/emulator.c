@@ -33,7 +33,7 @@
 #define LoopGranularity             500         // Microseconds
 #define LoopTimerDelay              (LoopGranularity*0.000001f) // In seconds
 
-static void Emulate_Timer(CFRunLoopTimerRef timer,void *context);
+static void Emulate_Timer(void *context);
 
 // Initialise the emulation of a force feedback device
 void Emulate_Initialise(ForceEmulator *emulator,int effectCount,void (*SetForce)(void*,unsigned char,unsigned char),void *context)
@@ -61,15 +61,19 @@ void Emulate_Initialise(ForceEmulator *emulator,int effectCount,void (*SetForce)
     callbackData.retain=NULL;
     callbackData.release=NULL;
     callbackData.copyDescription=NULL;
-    emulator->timer=CFRunLoopTimerCreate(NULL,LoopTimerDelay,LoopTimerDelay,0,0,Emulate_Timer,&callbackData);
-    CFRunLoopAddTimer(CFRunLoopGetCurrent(),emulator->timer,kCFRunLoopCommonModes);
+    emulator->timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_current_queue());
+    dispatch_source_set_timer(emulator->timer, dispatch_walltime(NULL, 0), LoopGranularity*1000, 10);
+    dispatch_set_context(emulator->timer, emulator);
+    dispatch_source_set_event_handler_f(emulator->timer, Emulate_Timer);
+    dispatch_resume(emulator->timer);
 }
 
 // Close down the force feedback stuff
 void Emulate_Finalise(ForceEmulator *emulator)
 {
-    CFRunLoopTimerInvalidate(emulator->timer);
-    CFRelease(emulator->timer);
+    dispatch_suspend(emulator->timer);
+    dispatch_source_cancel(emulator->timer);
+    dispatch_release(emulator->timer);
     free(emulator->effects);
     emulator->SetForce(emulator->context,0,0);
 }
@@ -287,7 +291,7 @@ static void Emulate_Force(ForceEmulator *emulator,int force,int maxGain)
 }
 
 // Handles the timer, to simulate an effect using the rumble motors
-static void Emulate_Timer(CFRunLoopTimerRef timer,void *context)
+static void Emulate_Timer(void *context)
 {
     ForceEmulator *emulator;
     int i;
