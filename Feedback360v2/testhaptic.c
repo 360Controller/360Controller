@@ -128,7 +128,6 @@ main(int argc, char **argv)
     supported = SDL_HapticQuery(haptic);
 
     SDL_Log("\nUploading effects\n");
-#if 0
     /* Left motor */
     if(supported & SDL_HAPTIC_LEFTRIGHT) {
         SDL_Log("   effect %d: Left Motor\n", nefx);
@@ -166,10 +165,11 @@ main(int argc, char **argv)
         SDL_Log("   effect %d: Sine Wave\n", nefx);
         efx[nefx].type = SDL_HAPTIC_SINE;
         efx[nefx].periodic.period = 1000;
-        efx[nefx].periodic.magnitude = 0x4000;
+        efx[nefx].periodic.magnitude = 32767;
         efx[nefx].periodic.length = 5000;
-        efx[nefx].periodic.attack_length = 1000;
-        efx[nefx].periodic.fade_length = 1000;
+        //efx[nefx].periodic.attack_length = 1000;
+        //efx[nefx].periodic.fade_length = 1000;
+        efx[nefx].periodic.phase = 0;
         id[nefx] = SDL_HapticNewEffect(haptic, &efx[nefx]);
         if (id[nefx] < 0) {
             SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "UPLOADING EFFECT ERROR: %s\n", SDL_GetError());
@@ -178,7 +178,7 @@ main(int argc, char **argv)
         nefx++;
     }
     /* Now we'll try a SAWTOOTHUP */
-
+#if 0
     if (supported & SDL_HAPTIC_SAWTOOTHUP) {
         SDL_Log("   effect %d: Sawtooth Up\n", nefx);
         efx[nefx].type = SDL_HAPTIC_SAWTOOTHUP;
@@ -194,7 +194,6 @@ main(int argc, char **argv)
         }
         nefx++;
     }
-#endif
     /* Now the classical constant effect. */
     if (supported & SDL_HAPTIC_CONSTANT) {
         SDL_Log("   effect %d: Constant Force\n", nefx);
@@ -264,7 +263,7 @@ main(int argc, char **argv)
         }
         nefx++;
     }
-
+#endif
     SDL_Log
         ("\nNow playing effects for 5 seconds each with 1 second delay between\n");
     for (i = 0; i < nefx; i++) {

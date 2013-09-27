@@ -400,7 +400,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->lpvTypeSpecificParams
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiPeriodic;
-                    fprintf(stderr, "Mag: %ud; Dur: %ud\n", Effect->DiPeriodic.dwMagnitude, DiEffect->dwDuration);
+                    fprintf(stderr, "Mag: %d\n", Effect->DiPeriodic.dwMagnitude);
                 }
                 else if(CFEqual(EffectType, kFFEffectType_RampForce_ID)) {
                     memcpy(

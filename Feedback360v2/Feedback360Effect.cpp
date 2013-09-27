@@ -85,7 +85,7 @@ void Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
             //fprintf(stderr, "Duration %f; NormalRate: %d; AttackLevel: %d; FadeLevel: %d\n", Duration, NormalRate, AttackLevel, FadeLevel);
 
             // フォースの正負を調整する
-            fprintf(stderr, "NL: %d\n", NormalLevel);
+            fprintf(stderr, "NL: %u\n", NormalLevel);
             WorkLeftLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
             WorkRightLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
 
