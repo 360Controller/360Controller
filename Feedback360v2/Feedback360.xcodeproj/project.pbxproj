@@ -10,8 +10,8 @@
 		3B2EF54C0965C358007BFB7B /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2EF54B0965C358007BFB7B /* ForceFeedback.framework */; };
 		3BBA03D0096A22F5008A46C9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBA03CF096A22F5008A46C9 /* IOKit.framework */; };
 		3BBA03E3096A29B5008A46C9 /* devlink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BBA03E2096A29B5008A46C9 /* devlink.cpp */; };
-		633F25A317F5E9DC00044F63 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 633F25A217F5E9DC00044F63 /* main.c */; };
-		633F25A517F5E9DC00044F63 /* testrumble.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 633F25A417F5E9DC00044F63 /* testrumble.1 */; };
+		633F25AD17F5E9EE00044F63 /* testrumble.c in Sources */ = {isa = PBXBuildFile; fileRef = 633F259B17F5E9A900044F63 /* testrumble.c */; };
+		633F25AE17F5E9F400044F63 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63519B3F17F336B2005B1010 /* SDL2.framework */; };
 		63519B4017F336B2005B1010 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63519B3F17F336B2005B1010 /* SDL2.framework */; };
 		63519B4117F336C2005B1010 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 63519B2D17F33676005B1010 /* testhaptic.c */; };
 		63A4C8B717F3A937006BD66F /* Feedback360Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63A4C8B517F3A937006BD66F /* Feedback360Effect.cpp */; };
@@ -21,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		633F25AA17F5E9E800044F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
+			remoteInfo = Feedback360;
+		};
 		63519B3C17F33695005B1010 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
@@ -37,7 +44,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				633F25A517F5E9DC00044F63 /* testrumble.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -63,8 +69,6 @@
 		3BBA03E2096A29B5008A46C9 /* devlink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = devlink.cpp; sourceTree = "<group>"; };
 		633F259B17F5E9A900044F63 /* testrumble.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = testrumble.c; sourceTree = "<group>"; };
 		633F25A017F5E9DC00044F63 /* testrumble */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testrumble; sourceTree = BUILT_PRODUCTS_DIR; };
-		633F25A217F5E9DC00044F63 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		633F25A417F5E9DC00044F63 /* testrumble.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = testrumble.1; sourceTree = "<group>"; };
 		63519B2D17F33676005B1010 /* testhaptic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = testhaptic.c; sourceTree = SOURCE_ROOT; };
 		63519B3217F33691005B1010 /* testhaptic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testhaptic; sourceTree = BUILT_PRODUCTS_DIR; };
 		63519B3F17F336B2005B1010 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633F25AE17F5E9F400044F63 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +116,6 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				63519B3317F33691005B1010 /* tests */,
-				633F25A117F5E9DC00044F63 /* testrumble */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 			);
 			name = Feedback360;
@@ -167,15 +171,6 @@
 			name = "New Group";
 			sourceTree = "<group>";
 		};
-		633F25A117F5E9DC00044F63 /* testrumble */ = {
-			isa = PBXGroup;
-			children = (
-				633F25A217F5E9DC00044F63 /* main.c */,
-				633F25A417F5E9DC00044F63 /* testrumble.1 */,
-			);
-			path = testrumble;
-			sourceTree = "<group>";
-		};
 		63519B3317F33691005B1010 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +195,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				633F25AB17F5E9E800044F63 /* PBXTargetDependency */,
 			);
 			name = testrumble;
 			productName = testrumble;
@@ -286,7 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				633F25A317F5E9DC00044F63 /* main.c in Sources */,
+				633F25AD17F5E9EE00044F63 /* testrumble.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +307,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		633F25AB17F5E9E800044F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D57630D048677EA00EA77CD /* Feedback360 */;
+			targetProxy = 633F25AA17F5E9E800044F63 /* PBXContainerItemProxy */;
+		};
 		63519B3D17F33695005B1010 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D57630D048677EA00EA77CD /* Feedback360 */;
@@ -440,6 +441,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -480,6 +485,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -512,6 +521,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -76,7 +76,8 @@ private:
     bool Stopped;
     bool Paused;
     bool Manual;
-    int PausedTime;
+    CFAbsoluteTime LastTime;
+    CFAbsoluteTime PausedTime;
     DeviceLink device;
     dispatch_source_t Timer;
     dispatch_queue_t Queue;

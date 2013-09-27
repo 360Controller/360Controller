@@ -29,11 +29,11 @@
 #include <string.h>             /* strstr */
 #include <ctype.h>              /* isdigit */
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 #ifndef SDL_HAPTIC_DISABLED
 
-#include "SDL_haptic.h"
+#include <SDL2/SDL_haptic.h>
 
 static SDL_Haptic *haptic;
 
@@ -119,7 +119,7 @@ main(int argc, char **argv)
         return 1;
     }
     SDL_Log("Playing 2 second rumble at 0.5 magnitude.\n");
-    if (SDL_HapticRumblePlay(haptic, 0.5, 5000) != 0) {
+    if (SDL_HapticRumblePlay(haptic, 1.0, 5000) != 0) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to play rumble: %s\n", SDL_GetError() );
         return 1;
     }

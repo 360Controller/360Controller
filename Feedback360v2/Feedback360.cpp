@@ -75,6 +75,7 @@ Feedback360::Feedback360(void) : fRefCount(1)
     Stopped = TRUE;
     Paused = FALSE;
     PausedTime = 0;
+    LastTime = 0;
     Gain = 10000;
     Actuator = TRUE;
     Manual = FALSE;
@@ -193,12 +194,9 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
         return FFERR_UNSUPPORTED;
     }
 
-    // 変数宣言
-
     UInt32 NewGain = *((UInt32*)value);
     __block HRESULT Result = FF_OK;
 
-    // ゲインを設定する
     dispatch_sync(Queue, ^{
         if( 1 <= NewGain && NewGain <= 10000 )
         {
@@ -215,26 +213,22 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
 HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartFlag Mode, UInt32 Count)
 {
     dispatch_sync(Queue, ^{
-    // ハンドルからエフェクトを検索する
-    for( UInt32 Index = 0; Index < EffectCount; Index ++ )
-    {
-        if( EffectList[Index]->Handle == EffectHandle )
+        for( UInt32 Index = 0; Index < EffectCount; Index ++ )
         {
-            fprintf(stderr, "Playing effect: %s\n", CFStringGetCStringPtr(CFUUIDCreateString(NULL, EffectList[Index]->Type), kCFStringEncodingMacRoman));
-            // エフェクトの再生を開始する
-            EffectList[Index]->Status  = FFEGES_PLAYING;
-            EffectList[Index]->PlayCount = Count;
-            EffectList[Index]->StartTime = CFAbsoluteTimeGetCurrent();
-            // 停止を解除する
-            Stopped = FALSE;
-        } else {
-            // DIES_SOLO が指定されている場合は他のエフェクトを停止する
-            if( Mode & FFES_SOLO )
+            if( EffectList[Index]->Handle == EffectHandle )
             {
-                EffectList[Index]->Status = NULL;
+                fprintf(stderr, "Playing effect: %s\n", CFStringGetCStringPtr(CFUUIDCreateString(NULL, EffectList[Index]->Type), kCFStringEncodingMacRoman));
+                EffectList[Index]->Status  = FFEGES_PLAYING;
+                EffectList[Index]->PlayCount = Count;
+                EffectList[Index]->StartTime = CFAbsoluteTimeGetCurrent();
+                Stopped = FALSE;
+            } else {
+                if( Mode & FFES_SOLO )
+                {
+                    EffectList[Index]->Status = NULL;
+                }
             }
         }
-    }
     });
     return FF_OK;
 }
@@ -242,30 +236,26 @@ HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartF
 HRESULT Feedback360::StopEffect(UInt32 EffectHandle)
 {
     dispatch_sync(Queue, ^{
-    // ハンドルからエフェクトを検索する
-    for( LONG Index = 0; Index < EffectCount; Index ++ )
-    {
-        if( EffectList[Index]->Handle == EffectHandle )
+        for( LONG Index = 0; Index < EffectCount; Index ++ )
         {
-            // エフェクトを停止する
-            EffectList[Index]->Status = NULL;
-            break;
+            if( EffectList[Index]->Handle == EffectHandle )
+            {
+                EffectList[Index]->Status = NULL;
+                break;
+            }
         }
-    }
     });
     return( FF_OK );
 }
 
 HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *EffectHandle, FFEFFECT *DiEffect, FFEffectParameterFlag Flags)
 {
-    // 変数宣言
     __block HRESULT Result = FF_OK;
     __block Feedback360Effect *Effect = NULL;
 
     fprintf(stderr, "Downloading effect: %s\n", CFStringGetCStringPtr(CFUUIDCreateString(NULL, EffectType), kCFStringEncodingMacRoman));
 
 
-    // DIEP_NODOWNLOAD の場合は無視する
     if( Flags & FFEP_NODOWNLOAD )
     {
         return( FF_OK );
@@ -275,12 +265,10 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
 
         if( *EffectHandle == 0 )
         {
-            // 新規エフェクトを作成する
+            fprintf(stderr, "BeginDl");
             Effect = new Feedback360Effect();
             Effect->Handle = ( EffectIndex ++ );
-            // エフェクト数を増やす
             EffectCount ++;
-            // エフェクト リストを拡張する
             Feedback360Effect **NewEffectList;
             NewEffectList = (Feedback360Effect **)realloc( EffectList, sizeof(Feedback360Effect*) * EffectCount );
             if( NewEffectList == NULL )
@@ -290,15 +278,14 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             } else {
                 EffectList = NewEffectList;
                 EffectList[EffectCount - 1] = Effect;
-                // エフェクトのハンドルを返す
                 *EffectHandle = Effect->Handle;
             }
         } else {
-            // ハンドルからエフェクトを検索する
             for( LONG Index = 0; Index < EffectCount; Index ++ )
             {
                 if( EffectList[Index]->Handle == *EffectHandle )
                 {
+                    fprintf(stderr, "InternalError!\n");
                     Effect = EffectList[Index];
                     break;
                 }
@@ -309,62 +296,51 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             Result = FFERR_INTERNAL;
         }
         else {
-            // 種類を設定する
             Effect->Type = EffectType;
 
-            // Flags を設定する
             Effect->DiEffect.dwFlags = DiEffect->dwFlags;
 
-            // DIEP_DURATION を設定する
             if( Flags & FFEP_DURATION )
             {
                 Effect->DiEffect.dwDuration = DiEffect->dwDuration;
             }
 
-            // DIEP_SAMPLEPERIOD を設定する
             if( Flags & FFEP_SAMPLEPERIOD )
             {
                 Effect->DiEffect.dwSamplePeriod = DiEffect->dwSamplePeriod;
             }
 
-            // DIEP_GAIN を設定する
             if( Flags & FFEP_GAIN )
             {
                 Effect->DiEffect.dwGain = DiEffect->dwGain;
                 fprintf(stderr, "GAIN: %d; ", DiEffect->dwGain);
             }
 
-            // DIEP_TRIGGERBUTTON を設定する
             if( Flags & FFEP_TRIGGERBUTTON )
             {
                 Effect->DiEffect.dwTriggerButton = DiEffect->dwTriggerButton;
             }
 
-            // DIEP_TRIGGERREPEATINTERVAL を設定する
             if( Flags & FFEP_TRIGGERREPEATINTERVAL )
             {
                 Effect->DiEffect.dwTriggerRepeatInterval = DiEffect->dwTriggerRepeatInterval;
             }
 
-            // DIEP_AXES を設定する
             if( Flags & FFEP_AXES )
             {
                 Effect->DiEffect.cAxes  = DiEffect->cAxes;
                 Effect->DiEffect.rgdwAxes = NULL;
             }
 
-            // DIEP_DIRECTION を設定する
             if( Flags & FFEP_DIRECTION )
             {
                 Effect->DiEffect.cAxes   = DiEffect->cAxes;
                 Effect->DiEffect.rglDirection = NULL;
             }
 
-            // DIEP_ENVELOPE を設定する
             if( ( Flags & FFEP_ENVELOPE ) && DiEffect->lpEnvelope != NULL )
             {
                 memcpy( &Effect->DiEnvelope, DiEffect->lpEnvelope, sizeof( FFENVELOPE ) );
-                // アタック時間とフェード時間がかぶる場合は値を補正する
                 if( Effect->DiEffect.dwDuration - Effect->DiEnvelope.dwFadeTime
                    < Effect->DiEnvelope.dwAttackTime )
                 {
@@ -373,10 +349,8 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 Effect->DiEffect.lpEnvelope = &Effect->DiEnvelope;
             }
 
-            // TypeSpecificParams を設定する
             Effect->DiEffect.cbTypeSpecificParams = DiEffect->cbTypeSpecificParams;
 
-            // DIEP_TYPESPECIFICPARAMS を設定する
             if( Flags & FFEP_TYPESPECIFICPARAMS )
             {
                 if(CFEqual(EffectType, kFFEffectType_CustomForce_ID)) {
@@ -385,6 +359,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->lpvTypeSpecificParams
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiCustomForce;
+                    fprintf(stderr, "CustomForce copied\n");
                 }
 
                 else if(CFEqual(EffectType, kFFEffectType_ConstantForce_ID)) {
@@ -411,13 +386,11 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 }
             }
 
-            // DIEP_STARTDELAY を設定する
             if( Flags & FFEP_STARTDELAY )
             {
                 Effect->DiEffect.dwStartDelay = DiEffect->dwStartDelay;
             }
 
-            // DIEP_START が指定されていればエフェクトを再生する
             if( Flags & FFEP_START )
             {
                 Effect->Status  = FFEGES_PLAYING;
@@ -425,7 +398,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 Effect->StartTime = CFAbsoluteTimeGetCurrent();
             }
 
-            // DIEP_NORESTART は無視する
             if( Flags & FFEP_NORESTART )
             {
                 ;
@@ -438,7 +410,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
 
 HRESULT Feedback360::GetForceFeedbackState(ForceFeedbackDeviceState *DeviceState)
 {
-    // デバイス状態のサイズをチェックする
     if( DeviceState->dwSize != sizeof( FFDEVICESTATE ) )
     {
         return( FFERR_INVALIDPARAM );
@@ -446,38 +417,29 @@ HRESULT Feedback360::GetForceFeedbackState(ForceFeedbackDeviceState *DeviceState
 
     dispatch_sync(Queue, ^{
 
-        // エフェクト ドライバの状態を返す
         DeviceState->dwState = NULL;
-        // エフェクト リストが空かどうか
         if( EffectCount == 0 )
         {
             DeviceState->dwState |= FFGFFS_EMPTY;
         }
-        // エフェクトが停止中かどうか
         if( Stopped == TRUE )
         {
             DeviceState->dwState |= FFGFFS_STOPPED;
         }
-        // エフェクトが一時停止中かどうか
         if( Paused == TRUE )
         {
             DeviceState->dwState |= FFGFFS_PAUSED;
         }
-        // アクチュエータが作動しているかどうか
         if( Actuator == TRUE )
         {
             DeviceState->dwState |= FFGFFS_ACTUATORSON;
         } else {
             DeviceState->dwState |= FFGFFS_ACTUATORSOFF;
         }
-        // 電源はオン固定
         DeviceState->dwState |= FFGFFS_POWERON;
-        // セーフティ スイッチはオフ固定
         DeviceState->dwState |= FFGFFS_SAFETYSWITCHOFF;
-        // ユーザー スイッチはオン固定
         DeviceState->dwState |= FFGFFS_USERFFSWITCHON;
 
-        // ロード可能数は無制限固定
         DeviceState->dwLoad  = 0;
     });
 
@@ -490,7 +452,6 @@ HRESULT Feedback360::GetForceFeedbackCapabilities(FFCAPABILITIES *capabilities)
     capabilities->ffSpecVer.minorAndBugRev=kFFPlugInAPIMinorAndBugRev;
     capabilities->ffSpecVer.stage=kFFPlugInAPIStage;
     capabilities->ffSpecVer.nonRelRev=kFFPlugInAPINonRelRev;
-    //capabilities->supportedEffects=FFCAP_ET_SQUARE|FFCAP_ET_SINE|FFCAP_ET_TRIANGLE|FFCAP_ET_SAWTOOTHUP|FFCAP_ET_SAWTOOTHDOWN;
     capabilities->supportedEffects=FFCAP_ET_CUSTOMFORCE|FFCAP_ET_CONSTANTFORCE|FFCAP_ET_RAMPFORCE|FFCAP_ET_SQUARE|FFCAP_ET_SINE|FFCAP_ET_TRIANGLE|FFCAP_ET_SAWTOOTHUP|FFCAP_ET_SAWTOOTHDOWN;
     capabilities->emulatedEffects=0;
     capabilities->subType=FFCAP_ST_VIBRATION;
@@ -516,69 +477,55 @@ HRESULT Feedback360::GetForceFeedbackCapabilities(FFCAPABILITIES *capabilities)
 
 HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
 {
-    // 変数宣言
     __block HRESULT Result = FF_OK;
 
-    // コマンドによって処理を振り分ける
     dispatch_sync(Queue, ^{
         switch( state ) {
 
             case FFSFFC_RESET:
-                // 全てのエフェクトを削除する
                 for( LONG Index = 0; Index < EffectCount; Index ++ )
                 {
                     delete EffectList[Index];
                 }
-                // エフェクト数を 0 にする
                 EffectCount = 0;
-                // エフェクト リストを削除する
                 free( EffectList );
                 EffectList = NULL;
-                // 再生を停止する
                 Stopped = TRUE;
-                // 一時停止を解除する
                 Paused = FALSE;
                 break;
 
             case FFSFFC_STOPALL:
-                // 全てのエフェクトの再生を停止する
                 for( LONG Index = 0; Index < EffectCount; Index ++ )
                 {
                     EffectList[Index]->Status = NULL;
                 }
-                // 再生を停止する
                 Stopped = TRUE;
-                // 一時停止を解除する
                 Paused = FALSE;
                 break;
 
             case FFSFFC_PAUSE:
-                // 再生を一時停止する
                 Paused  = TRUE;
                 PausedTime = CFAbsoluteTimeGetCurrent();
                 break;
 
             case FFSFFC_CONTINUE:
-                // 一時停止を解除する
                 for( LONG Index = 0; Index < EffectCount; Index ++ )
                 {
-                    // 一時停止した時間だけエフェクトの開始時間を遅らせる
                     EffectList[Index]->StartTime += ( CFAbsoluteTimeGetCurrent() - PausedTime );
                 }
                 Paused = FALSE;
                 break;
 
             case FFSFFC_SETACTUATORSON:
-                // アクチュエータを有効にする
                 Actuator = TRUE;
                 break;
 
             case FFSFFC_SETACTUATORSOFF:
-                // アクチュエータを無効にする
                 Actuator = FALSE;
                 break;
 
             default:
+                fprintf(stderr, "FFSFFC: %d\n", state);
                 Result = FFERR_INVALIDPARAM;
                 break;
         }
@@ -629,39 +576,33 @@ HRESULT Feedback360::DestroyEffect(FFEffectDownloadID EffectHandle)
     __block HRESULT Result = FF_OK;
     dispatch_sync(Queue, ^{
 
-    // ハンドルからエフェクトを検索する
-    for( LONG Index = 0; Index < EffectCount; Index ++ )
-    {
-        if( EffectList[Index]->Handle == EffectHandle )
+        for( LONG Index = 0; Index < EffectCount; Index ++ )
         {
-            // エフェクトを削除する
-            delete EffectList[Index];
-            // エフェクト数を減らす
-            EffectCount --;
-            if( EffectCount > 0 )
+            if( EffectList[Index]->Handle == EffectHandle )
             {
-                // エフェクト リストを縮小する
-                memcpy(
-                       &EffectList[Index]
-                       ,&EffectList[Index + 1]
-                       ,sizeof( Feedback360Effect * ) * ( EffectCount - Index ) );
-                Feedback360Effect **NewEffectList;
-                NewEffectList = (Feedback360Effect * *)realloc( EffectList, sizeof( Feedback360Effect * ) * EffectCount );
-                if( NewEffectList != NULL )
+                delete EffectList[Index];
+                EffectCount --;
+                if( EffectCount > 0 )
                 {
-                    EffectList = NewEffectList;
+                    memcpy(
+                           &EffectList[Index]
+                           ,&EffectList[Index + 1]
+                           ,sizeof( Feedback360Effect * ) * ( EffectCount - Index ) );
+                    Feedback360Effect **NewEffectList;
+                    NewEffectList = (Feedback360Effect * *)realloc( EffectList, sizeof( Feedback360Effect * ) * EffectCount );
+                    if( NewEffectList != NULL )
+                    {
+                        EffectList = NewEffectList;
+                    } else {
+                        Result = E_OUTOFMEMORY;
+                    }
                 } else {
-                    // エラーを返す
-                    Result = E_OUTOFMEMORY;
+                    free( EffectList );
+                    EffectList = NULL;
                 }
-            } else {
-                // エフェクト リストを削除する
-                free( EffectList );
-                EffectList = NULL;
+                break;
             }
-            break;
         }
-    }
     });
     return( Result );
 
@@ -682,28 +623,28 @@ HRESULT Feedback360::Escape(FFEffectDownloadID downloadID, FFEFFESCAPE *escape)
         case 0x01:  // Set motors
             if(escape->cbInBuffer!=2) return FFERR_INVALIDPARAM;
             dispatch_sync(Queue, ^{
-            if(Manual) {
-                unsigned char *data=(unsigned char *)escape->lpvInBuffer;
-                unsigned char buf[]={0x00,0x04,data[0],data[1]};
-                Device_Send(&this->device,buf,sizeof(buf));
-            }
+                if(Manual) {
+                    unsigned char *data=(unsigned char *)escape->lpvInBuffer;
+                    unsigned char buf[]={0x00,0x04,data[0],data[1]};
+                    Device_Send(&this->device,buf,sizeof(buf));
+                }
             });
             break;
         case 0x02:  // Set LED
             if(escape->cbInBuffer!=1) return FFERR_INVALIDPARAM;
         {
             dispatch_sync(Queue, ^{
-            unsigned char *data=(unsigned char *)escape->lpvInBuffer;
-            unsigned char buf[]={0x01,0x03,data[0]};
-            Device_Send(&this->device,buf,sizeof(buf));
+                unsigned char *data=(unsigned char *)escape->lpvInBuffer;
+                unsigned char buf[]={0x01,0x03,data[0]};
+                Device_Send(&this->device,buf,sizeof(buf));
             });
         }
             break;
         case 0x03:  // Power off
         {
             dispatch_sync(Queue, ^{
-            unsigned char buf[] = {0x02, 0x02};
-            Device_Send(&this->device, buf, sizeof(buf));
+                unsigned char buf[] = {0x02, 0x02};
+                Device_Send(&this->device, buf, sizeof(buf));
             });
         }
             break;
@@ -726,53 +667,46 @@ void Feedback360::EffectProc( void *params )
 {
     Feedback360 *cThis = (Feedback360 *)params;
 
-    //dispatch_sync(cThis->Queue, ^{
     LONG LeftLevel = 0;
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
-
-    //cThis = *Feedback360::getThis(params);
-    //fprintf(stderr, "EC2: %d\n", cThis->EffectCount);
+    int CalcResult;
 
     if( cThis->Actuator == TRUE )
     {
-        // エフェクトの強さを計算する
         for(  int Index = 0; Index < cThis->EffectCount; Index ++ )
         {
-            cThis->EffectList[Index]->Calc( &LeftLevel, &RightLevel );
+            if((CFAbsoluteTimeGetCurrent() - cThis->LastTime*1000*1000) >= cThis->EffectList[Index]->DiEffect.dwSamplePeriod) {
+                CalcResult = cThis->EffectList[Index]->Calc( &LeftLevel, &RightLevel );
+            }
         }
     }
 
     //fprintf(stderr, "Actuator: %d, L: %d, R: %d\n", cThis->Actuator, LeftLevel, RightLevel);
 
 
-    // コントローラーの振動を設定する
-    if( cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel )
+    if((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && CalcResult != -1)
     {
         fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
         cThis->SetForce((unsigned char)MIN(255, LeftLevel * Gain / 10000),(unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
     }
 
-    // エフェクトの強さを退避する
     cThis->PrvLeftLevel = LeftLevel;
     cThis->PrvRightLevel = RightLevel;
-    //});
 
 }
 
 HRESULT Feedback360::GetEffectStatus(FFEffectDownloadID EffectHandle, FFEffectStatusFlag *Status)
 {
-    // ハンドルからエフェクトを検索する
     dispatch_sync(Queue, ^{
-    for( LONG Index = 0; Index < EffectCount; Index ++ )
-    {
-        if( EffectList[Index]->Handle == EffectHandle )
+        for( LONG Index = 0; Index < EffectCount; Index ++ )
         {
-            // エフェクトの状態を返す
-            *Status = EffectList[Index]->Status;
-            break;
+            if( EffectList[Index]->Handle == EffectHandle )
+            {
+                *Status = EffectList[Index]->Status;
+                break;
+            }
         }
-    }
     });
     return( FF_OK );
 

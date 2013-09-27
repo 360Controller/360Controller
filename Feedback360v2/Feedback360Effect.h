@@ -39,7 +39,7 @@ public:
 
 	Feedback360Effect();
 
-    void Calc(int *LeftLevel, int *RightLevel);
+    int Calc(int *LeftLevel, int *RightLevel);
 
 	CFUUIDRef		Type;
     FFEffectDownloadID Handle;
@@ -54,8 +54,10 @@ public:
 
 	DWORD			Status;
 	DWORD			PlayCount;
-    DWORD           Index;
 	CFAbsoluteTime	StartTime;
+
+    CFAbsoluteTime  LastTime;
+    DWORD           Index;
 
 private:
 

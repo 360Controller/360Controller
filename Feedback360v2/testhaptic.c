@@ -128,6 +128,7 @@ main(int argc, char **argv)
     supported = SDL_HapticQuery(haptic);
 
     SDL_Log("\nUploading effects\n");
+#if 0
     /* Left motor */
     if(supported & SDL_HAPTIC_LEFTRIGHT) {
         SDL_Log("   effect %d: Left Motor\n", nefx);
@@ -178,7 +179,6 @@ main(int argc, char **argv)
         nefx++;
     }
     /* Now we'll try a SAWTOOTHUP */
-#if 0
     if (supported & SDL_HAPTIC_SAWTOOTHUP) {
         SDL_Log("   effect %d: Sawtooth Up\n", nefx);
         efx[nefx].type = SDL_HAPTIC_SAWTOOTHUP;
@@ -264,6 +264,25 @@ main(int argc, char **argv)
         nefx++;
     }
 #endif
+
+    /* Finally we'll try a custom effect. */
+    if (supported & SDL_HAPTIC_CUSTOM) {
+        Uint16 data[] = {0, 0, 0, 32767, 0, 32767/2, 0, 0, 32767, 0, 32767/2, 0, 0, 0};
+        SDL_Log("   effect %d: Custom\n", nefx);
+        efx[nefx].type = SDL_HAPTIC_CUSTOM;
+        efx[nefx].custom.length = 5000;
+        efx[nefx].custom.channels = 2;
+        efx[nefx].custom.samples = 14;
+        efx[nefx].custom.period = 700;
+        efx[nefx].custom.data = data;
+        id[nefx] = SDL_HapticNewEffect(haptic, &efx[nefx]);
+        if (id[nefx] < 0) {
+            SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "UPLOADING EFFECT ERROR: %s\n", SDL_GetError());
+            abort_execution();
+        }
+        nefx++;
+    }
+
     SDL_Log
         ("\nNow playing effects for 5 seconds each with 1 second delay between\n");
     for (i = 0; i < nefx; i++) {

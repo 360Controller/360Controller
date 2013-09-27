@@ -8,25 +8,25 @@ Feedback360Effect::Feedback360Effect()
     Type  = NULL;
     memset(&DiEffect, 0, sizeof(FFEFFECT));
     memset(&DiEnvelope, 0, sizeof(FFENVELOPE));
+    memset(&DiCustomForce, 0, sizeof(FFCUSTOMFORCE));
     memset(&DiConstantForce, 0, sizeof(FFCONSTANTFORCE));
     memset(&DiPeriodic, 0, sizeof(FFPERIODIC));
     memset(&DiRampforce, 0, sizeof(FFRAMPFORCE));
-
     Status  = 0;
     PlayCount = 0;
     StartTime = 0;
     Index = 0;
+    LastTime = 0;
 }
 
 //----------------------------------------------------------------------------------------------
 // Calc
 //----------------------------------------------------------------------------------------------
-void Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
+int Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
 {
-    // エフェクトの再生時間、開始時刻、終了時刻、現在時刻を算出する
     CFTimeInterval Duration = NULL;
     if(DiEffect.dwDuration != FF_INFINITE) {
-       Duration = MAX( 1, DiEffect.dwDuration / 1000 ) / 1000;
+        Duration = MAX( 1, DiEffect.dwDuration / 1000 ) / 1000;
     } else {
         Duration = DBL_MAX;
     }
@@ -38,41 +38,39 @@ void Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
     }
     CFAbsoluteTime CurrentTime = CFAbsoluteTimeGetCurrent();
 
-    // エフェクトは再生中？
     if( Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime )
     {
-        // フォースを計算する
+        // Used for force calculation
         LONG NormalLevel;
         LONG WorkLeftLevel;
         LONG WorkRightLevel;
-        /*
+
+        // Used for envelope calculation
+        LONG NormalRate;
+        LONG AttackLevel;
+        LONG FadeLevel;
+
+        CalcEnvelope(
+                     (ULONG)(Duration*1000)
+                     ,(ULONG)(fmod(CurrentTime - BeginTime, Duration)*1000)
+                     ,&NormalRate
+                     ,&AttackLevel
+                     ,&FadeLevel );
+
+        // CustomForce allows setting each channel separately
         if(CFEqual(Type, kFFEffectType_CustomForce_ID)) {
-            LONG Period	= MAX( 1, ( DiCustomForce.dwSamplePeriod / 1000 ) );
-            if(Index >= DiCustomForce.cSamples) {
-                Index = 0;
-                WorkLeftLevel = 0;
-                WorkRightLevel = 0;
+            if((CFAbsoluteTimeGetCurrent() - LastTime)*1000*1000 < DiCustomForce.dwSamplePeriod) {
+                return -1;
             }
             else {
-                WorkLeftLevel = DiCustomForce.rglForceData[2*Index];
-                WorkRightLevel = DiCustomForce.rglForceData[(2*Index)+1];
-                Index++;
+                WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+                WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+                Index = (Index + 1) % DiCustomForce.cSamples;
+                LastTime = CFAbsoluteTimeGetCurrent();
             }
         }
+        // Regular commands treat controller as a single output (both channels are together as one)
         else {
-         */
-            // エンベロープを計算する
-            LONG NormalRate;
-            LONG AttackLevel;
-            LONG FadeLevel;
-
-            CalcEnvelope(
-                         (ULONG)(Duration*1000)
-                         ,(ULONG)(fmod(CurrentTime - BeginTime, Duration)*1000)
-                         ,&NormalRate
-                         ,&AttackLevel
-                         ,&FadeLevel );
-
             CalcForce(
                       (ULONG)(Duration*1000)
                       ,(ULONG)(fmod(CurrentTime - BeginTime, Duration)*1000)
@@ -80,27 +78,20 @@ void Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
                       ,AttackLevel
                       ,FadeLevel
                       ,&NormalLevel );
-
             //fprintf(stderr, "DeltaT %f\n", CurrentTime - BeginTime);
             //fprintf(stderr, "Duration %f; NormalRate: %d; AttackLevel: %d; FadeLevel: %d\n", Duration, NormalRate, AttackLevel, FadeLevel);
 
-            // フォースの正負を調整する
-            fprintf(stderr, "NL: %u\n", NormalLevel);
+            fprintf(stderr, "NL: %d\n", NormalLevel);
             WorkLeftLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
             WorkRightLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
+        }
+        WorkLeftLevel = MIN( SCALE_MAX, WorkLeftLevel * SCALE_MAX / 10000 );
+        WorkRightLevel = MIN( SCALE_MAX, WorkRightLevel * SCALE_MAX / 10000 );
 
-            // フォースの上限を調整する
-            WorkLeftLevel = MIN( SCALE_MAX, WorkLeftLevel * SCALE_MAX / 10000 );
-            WorkRightLevel = MIN( SCALE_MAX, WorkRightLevel * SCALE_MAX / 10000 );
-        //}
-        // フォースを加算する
         *LeftLevel = *LeftLevel + WorkLeftLevel;
         *RightLevel = *RightLevel + WorkRightLevel;
-      }/*
-      else {
-      *LeftLevel = 0;
-      *RightLevel = 0;
-      }*/
+    }
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -108,25 +99,25 @@ void Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
 //----------------------------------------------------------------------------------------------
 void Feedback360Effect::CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel)
 {
-	//	エンベロープを計算する
 	if( ( DiEffect.dwFlags & FFEP_ENVELOPE ) && DiEffect.lpEnvelope != NULL )
 	{
-		//	アタックの割合を算出する
+        // Calculate attack factor
 		LONG	AttackRate	= 0;
 		ULONG	AttackTime	= MAX( 1, DiEnvelope.dwAttackTime / 1000 );
 		if( CurrentPos < AttackTime )
 		{
 			AttackRate	= ( AttackTime - CurrentPos ) * 100 / AttackTime;
 		}
-		//	フェードの割合を算出する
-		LONG	FadeRate	= 0;
+
+        // Calculate fade factor
+        LONG	FadeRate	= 0;
 		ULONG	FadeTime	= MAX( 1, DiEnvelope.dwFadeTime / 1000 );
 		ULONG	FadePos		= Duration - FadeTime;
 		if( FadePos < CurrentPos )
 		{
 			FadeRate	= ( CurrentPos - FadePos ) * 100 / FadeTime;
 		}
-		//	算出した値を返す
+
 		*NormalRate		= 100 - AttackRate - FadeRate;
 		*AttackLevel	= DiEnvelope.dwAttackLevel * AttackRate;
 		*FadeLevel		= DiEnvelope.dwFadeLevel * FadeRate;
@@ -139,64 +130,57 @@ void Feedback360Effect::CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *Nor
 
 void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel)
 {
-	//	変数宣言
+
     LONG Magnitude = 0;
     LONG Period;
     LONG R;
     LONG Rate;
 
-	//	エフェクトの種類によって処理を振り分ける
-    //	条件
-    //	カスタム フォース
-    //	コンスタント フォース
     if(CFEqual(Type, kFFEffectType_ConstantForce_ID)) {
         Magnitude	= DiConstantForce.lMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
     }
-    //	周期的エフェクト
+
     else if(CFEqual(Type, kFFEffectType_Square_ID)) {
-        //	１周期の時間（ミリ秒）と経過時間から 0 〜 359 度のどこかを求める
+
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= ( CurrentPos%Period) * 360 / Period;
-        //	フェーズを計算する
         R	= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        //	正方形を考慮したマグニチュードを求める
+
         if( 180 <= R )
         {
             Magnitude	= Magnitude * -1;
         }
-        //	オフセットを計算する
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
 
     else if(CFEqual(Type, kFFEffectType_Sine_ID)) {
-        //	１周期の時間（ミリ秒）と経過時間から 0 〜 359 度のどこかを求める
+
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
-        //	フェーズを計算する
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        //	正弦波を考慮したマグニチュードを求める
-        Magnitude	= ( int)( Magnitude * sin( R * 3.1415 / 180.0 ) );
-        //	オフセットを計算する
+
+        Magnitude	= ( int)( Magnitude * sin( R * M_PI / 180.0 ) );
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
 
     else if(CFEqual(Type, kFFEffectType_Triangle_ID)) {
-        //	１周期の時間（ミリ秒）と経過時間から 0 〜 359 度のどこかを求める
+
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
-        //	フェーズを計算する
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        //	三角波を考慮したマグニチュードを求める
+
         if( 0 <= R && R < 90 )
         {
             Magnitude	= -Magnitude * ( 90 - R ) / 90;
@@ -213,19 +197,17 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
         {
             Magnitude	= -Magnitude * ( R - 270 ) / 90;
         }
-        //	オフセットを計算する
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
     else if(CFEqual(Type, kFFEffectType_SawtoothUp_ID)) {
-        //	１周期の時間（ミリ秒）と経過時間から 0 〜 359 度のどこかを求める
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
-        //	フェーズを計算する
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        //	アップ鋸歯を考慮したマグニチュードを求める
+
         if( 0 <= R && R < 180 )
         {
             Magnitude	= -Magnitude * ( 180 - R ) / 180;
@@ -234,19 +216,16 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
         {
             Magnitude	= Magnitude * ( R - 180 ) / 180;
         }
-        //	オフセットを計算する
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
     else if(CFEqual(Type, kFFEffectType_SawtoothDown_ID)) {
-        //	１周期の時間（ミリ秒）と経過時間から 0 〜 359 度のどこかを求める
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
-        //	フェーズを計算する
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        //	ダウン鋸歯を考慮したマグニチュードを求める
         if( 0 <= R && R < 180 )
         {
             Magnitude	= Magnitude * ( 180 - R ) / 180;
@@ -255,20 +234,19 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
         {
             Magnitude	= -Magnitude * ( R - 180 ) / 180;
         }
-        //	オフセットを計算する
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
 
-    // 傾斜フォース
     else if(CFEqual(Type, kFFEffectType_RampForce_ID)) {
-        //	始点、終点の割合を算出する
+
         Rate		= ( Duration - CurrentPos ) * 100
         / Duration;//MAX( 1, DiEffect.dwDuration / 1000 );
-        //	エンベロープを考慮したマグニチュードを求める
+
         Magnitude	= ( DiRampforce.lStart * Rate
                        + DiRampforce.lEnd * ( 100 - Rate ) ) / 100;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
     }
-    // ゲインを考慮したフォースを返す
+
     *NormalLevel = Magnitude * (LONG)DiEffect.dwGain / 10000;
 }
