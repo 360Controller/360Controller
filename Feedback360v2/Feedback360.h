@@ -1,25 +1,27 @@
 /*
- MICE Xbox 360 Controller driver for Mac OS X
- Copyright (C) 2006-2013 Colin Munro
+    MICE Xbox 360 Controller driver for Mac OS X
+    Force Feedback module
+    Copyright (C) 2013 David Ryskalczyk
+    based on xi, Copyright (C) 2011 ledyba
 
- main.h - defines the structure used for the plugin COM object
+    Feedback360.h - defines the structure used for the driver (COM object and emulator)
 
- This file is part of Xbox360Controller.
+    This file is part of Xbox360Controller.
 
- Xbox360Controller is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+    Xbox360Controller is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
- Xbox360Controller is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+    Xbox360Controller is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with Foobar; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
+    You should have received a copy of the GNU General Public License
+    along with Foobar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #ifndef Feedback360_Feedback360_h
 #define Feedback360_Feedback360_h
@@ -66,7 +68,6 @@ private:
     // IOCFPlugin interfacing variables and functions
 public:
 
-
     static IOCFPlugInInterface** Alloc(void);
 
     // static functions called by the ForceFeedback API
@@ -93,7 +94,7 @@ public:
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
 
 private:
-    // helper functions
+    // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
 
     // interfacing
@@ -108,12 +109,12 @@ private:
     // effects handling
     LONG                EffectCount;
     Feedback360Effect   **EffectList;
-    int                 EffectIndex;
+    UInt32                 EffectIndex;
 
     DWORD Gain;
     bool Actuator;
 
-    int                 PrvLeftLevel, PrvRightLevel;
+    LONG                 PrvLeftLevel, PrvRightLevel;
     bool                Stopped;
     bool                Paused;
     bool                Manual;
@@ -124,6 +125,7 @@ private:
 
     void        SetForce(LONG LeftLevel, LONG RightLevel);
 
+    // event loop func
     static void EffectProc( void *params );
 
     // actual (internal) member functions ultimately called by the FF API (through the static functions)

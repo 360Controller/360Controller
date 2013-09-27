@@ -267,7 +267,7 @@ main(int argc, char **argv)
 
     /* Finally we'll try a custom effect. */
     if (supported & SDL_HAPTIC_CUSTOM) {
-        Uint16 data[] = {0, 0, 0, 32767, 0, 32767/2, 0, 0, 32767, 0, 32767/2, 0, 0, 0};
+        Uint16 data[] = {0, 32767, 0, 32767/2, 0, 32767/4, 0, 0, 32767, 0, 32767/2, 0, 32767/4, 0};
         SDL_Log("   effect %d: Custom\n", nefx);
         efx[nefx].type = SDL_HAPTIC_CUSTOM;
         efx[nefx].custom.length = 5000;

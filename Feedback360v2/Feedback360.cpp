@@ -1,8 +1,10 @@
 /*
- MICE Xbox 360 Controller driver for Mac OS X
- Copyright (C) 2006-2013 Colin Munro
+    MICE Xbox 360 Controller driver for Mac OS X
+    Force Feedback module
+    Copyright (C) 2013 David Ryskalczyk
+    based on xi, Copyright (C) 2011 ledyba
 
- main.c - Main code for the FF plugin
+    Feedback360.cpp - Main code for the FF plugin
 
  This file is part of Xbox360Controller.
 
@@ -17,10 +19,10 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- a int with Foobar; if not, write to the Free Software
+ along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-//#include <CoreFoundation/CoreFoundation.h>
+
 #include "Feedback360.h"
 
 #define LoopGranularity             10000         // Microseconds
@@ -141,7 +143,6 @@ ULONG Feedback360::Release(void)
 IOCFPlugInInterface** Feedback360::Alloc()
 {
     Feedback360 *me = new Feedback360;
-    fprintf (stderr, "Feedback360::alloc called\n");
     if(!me) {
         return NULL;
     }
@@ -213,11 +214,10 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
 HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartFlag Mode, UInt32 Count)
 {
     dispatch_sync(Queue, ^{
-        for( UInt32 Index = 0; Index < EffectCount; Index ++ )
+        for( LONG Index = 0; Index < EffectCount; Index ++ )
         {
             if( EffectList[Index]->Handle == EffectHandle )
             {
-                fprintf(stderr, "Playing effect: %s\n", CFStringGetCStringPtr(CFUUIDCreateString(NULL, EffectList[Index]->Type), kCFStringEncodingMacRoman));
                 EffectList[Index]->Status  = FFEGES_PLAYING;
                 EffectList[Index]->PlayCount = Count;
                 EffectList[Index]->StartTime = CFAbsoluteTimeGetCurrent();
@@ -253,7 +253,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
     __block HRESULT Result = FF_OK;
     __block Feedback360Effect *Effect = NULL;
 
-    fprintf(stderr, "Downloading effect: %s\n", CFStringGetCStringPtr(CFUUIDCreateString(NULL, EffectType), kCFStringEncodingMacRoman));
 
 
     if( Flags & FFEP_NODOWNLOAD )
@@ -265,7 +264,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
 
         if( *EffectHandle == 0 )
         {
-            fprintf(stderr, "BeginDl");
             Effect = new Feedback360Effect();
             Effect->Handle = ( EffectIndex ++ );
             EffectCount ++;
@@ -285,7 +283,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             {
                 if( EffectList[Index]->Handle == *EffectHandle )
                 {
-                    fprintf(stderr, "InternalError!\n");
                     Effect = EffectList[Index];
                     break;
                 }
@@ -313,7 +310,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             if( Flags & FFEP_GAIN )
             {
                 Effect->DiEffect.dwGain = DiEffect->dwGain;
-                fprintf(stderr, "GAIN: %d; ", DiEffect->dwGain);
             }
 
             if( Flags & FFEP_TRIGGERBUTTON )
@@ -359,7 +355,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->lpvTypeSpecificParams
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiCustomForce;
-                    fprintf(stderr, "CustomForce copied\n");
                 }
 
                 else if(CFEqual(EffectType, kFFEffectType_ConstantForce_ID)) {
@@ -375,7 +370,6 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->lpvTypeSpecificParams
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiPeriodic;
-                    fprintf(stderr, "Mag: %d\n", Effect->DiPeriodic.dwMagnitude);
                 }
                 else if(CFEqual(EffectType, kFFEffectType_RampForce_ID)) {
                     memcpy(
@@ -525,7 +519,6 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
                 break;
 
             default:
-                fprintf(stderr, "FFSFFC: %d\n", state);
                 Result = FFERR_INVALIDPARAM;
                 break;
         }
@@ -658,7 +651,7 @@ HRESULT Feedback360::Escape(FFEffectDownloadID downloadID, FFEFFESCAPE *escape)
 
 void Feedback360::SetForce(LONG LeftLevel, LONG RightLevel)
 {
-    fprintf(stderr, "LS: %d; RS: %d\n", (unsigned char)MIN( 255, LeftLevel * Gain / 10000 ), (unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
+    //fprintf(stderr, "LS: %d; RS: %d\n", (unsigned char)MIN( 255, LeftLevel * Gain / 10000 ), (unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
     unsigned char buf[]={0x00,0x04,(unsigned char)MIN( 255, LeftLevel * Gain / 10000 ),(unsigned char)MIN( 255, RightLevel * Gain / 10000 )};
     if(!Manual) Device_Send(&device,buf,sizeof(buf));
 }
@@ -670,11 +663,11 @@ void Feedback360::EffectProc( void *params )
     LONG LeftLevel = 0;
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
-    int CalcResult;
+    LONG CalcResult;
 
     if( cThis->Actuator == TRUE )
     {
-        for(  int Index = 0; Index < cThis->EffectCount; Index ++ )
+        for(  UInt32 Index = 0; Index < cThis->EffectCount; Index ++ )
         {
             if((CFAbsoluteTimeGetCurrent() - cThis->LastTime*1000*1000) >= cThis->EffectList[Index]->DiEffect.dwSamplePeriod) {
                 CalcResult = cThis->EffectList[Index]->Calc( &LeftLevel, &RightLevel );
@@ -682,17 +675,14 @@ void Feedback360::EffectProc( void *params )
         }
     }
 
-    //fprintf(stderr, "Actuator: %d, L: %d, R: %d\n", cThis->Actuator, LeftLevel, RightLevel);
-
-
     if((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && CalcResult != -1)
     {
-        fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
+        //fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
         cThis->SetForce((unsigned char)MIN(255, LeftLevel * Gain / 10000),(unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
-    }
 
-    cThis->PrvLeftLevel = LeftLevel;
-    cThis->PrvRightLevel = RightLevel;
+        cThis->PrvLeftLevel = LeftLevel;
+        cThis->PrvRightLevel = RightLevel;
+    }
 
 }
 
