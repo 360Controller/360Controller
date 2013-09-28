@@ -2,7 +2,7 @@
     MICE Xbox 360 Controller driver for Mac OS X
     Force Feedback module
     Copyright (C) 2013 David Ryskalczyk
-    based on xi, Copyright (C) 2011 ledyba
+    based on xi, Copyright (C) 2011 Masahiko Morii
 
     Feedback360.h - defines the structure used for the driver (COM object and emulator)
 
@@ -19,7 +19,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar; if not, write to the Free Software
+    along with Xbox360Controller; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
