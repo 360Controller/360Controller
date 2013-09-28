@@ -90,7 +90,7 @@ int Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
             else {
                 WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
                 WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-                Index = (Index + 1) % DiCustomForce.cSamples;
+                Index = (Index + 1) % (DiCustomForce.cSamples/2);
                 LastTime = CFAbsoluteTimeGetCurrent();
             }
         }

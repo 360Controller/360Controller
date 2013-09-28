@@ -267,13 +267,13 @@ main(int argc, char **argv)
 
     /* Finally we'll try a custom effect. */
     if (supported & SDL_HAPTIC_CUSTOM) {
-        Uint16 data[] = {0, 32767, 0, 32767/2, 0, 32767/4, 0, 0, 32767, 0, 32767/2, 0, 32767/4, 0};
+        Uint16 data[] = {0, 32767, 0, 32767/2, 0, 32767/4, 32767, 0, 32767/2, 0, 32767/4, 0};
         SDL_Log("   effect %d: Custom\n", nefx);
         efx[nefx].type = SDL_HAPTIC_CUSTOM;
         efx[nefx].custom.length = 5000;
         efx[nefx].custom.channels = 2;
-        efx[nefx].custom.samples = 14;
-        efx[nefx].custom.period = 700;
+        efx[nefx].custom.samples = 12;
+        efx[nefx].custom.period = 100;
         efx[nefx].custom.data = data;
         id[nefx] = SDL_HapticNewEffect(haptic, &efx[nefx]);
         if (id[nefx] < 0) {
