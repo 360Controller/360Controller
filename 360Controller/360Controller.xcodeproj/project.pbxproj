@@ -230,7 +230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho \"$SRCROOT/../Feedback360v2/build/Deployment/Feedback360.plugin\"\ncp -R \"$SRCROOT/../Feedback360v2/build/Deployment/Feedback360.plugin\" PlugIns/Feedback360.plugin";
+			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.plugin\"\ncp -R \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.plugin\" PlugIns/Feedback360.plugin";
 		};
 /* End PBXShellScriptBuildPhase section */
 

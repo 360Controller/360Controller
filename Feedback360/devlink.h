@@ -20,6 +20,9 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#ifndef Feedback360_devlink_h
+#define Feedback360_devlink_h
+
 #include <Carbon/Carbon.h>
 #include <IOKit/hid/IOHIDLib.h>
 
@@ -31,3 +34,5 @@ bool Device_Initialise(DeviceLink *link,io_object_t device);
 void Device_Finalise(DeviceLink *link);
 
 bool Device_Send(DeviceLink *link,void *data,int length);
+
+#endif

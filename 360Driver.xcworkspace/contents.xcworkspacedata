@@ -20,6 +20,6 @@
       location = "group:WirelessGamingReceiver/WirelessGamingReceiver.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Feedback360v2/Feedback360.xcodeproj">
+      location = "group:Feedback360/Feedback360.xcodeproj">
    </FileRef>
 </Workspace>

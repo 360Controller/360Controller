@@ -94,6 +94,9 @@ build/
 !default.mode2v3
 !default.perspectivev3
 
+####
+# Xcode 5 - checkout data
+*.xccheckout
 
 ####
 # Xcode 4 - semi-personal settings
