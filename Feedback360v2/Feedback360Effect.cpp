@@ -47,7 +47,7 @@ Feedback360Effect::Feedback360Effect()
 //----------------------------------------------------------------------------------------------
 // Calc
 //----------------------------------------------------------------------------------------------
-int Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
+LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
 {
     CFTimeInterval Duration = NULL;
     if(DiEffect.dwDuration != FF_INFINITE) {
@@ -90,6 +90,7 @@ int Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
             else {
                 WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
                 WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+                //fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
                 Index = (Index + 1) % (DiCustomForce.cSamples/2);
                 LastTime = CFAbsoluteTimeGetCurrent();
             }
@@ -106,7 +107,6 @@ int Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
             //fprintf(stderr, "DeltaT %f\n", CurrentTime - BeginTime);
             //fprintf(stderr, "Duration %f; NormalRate: %d; AttackLevel: %d; FadeLevel: %d\n", Duration, NormalRate, AttackLevel, FadeLevel);
 
-            fprintf(stderr, "NL: %d\n", NormalLevel);
             WorkLeftLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
             WorkRightLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
         }

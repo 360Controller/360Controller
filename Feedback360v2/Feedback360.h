@@ -44,7 +44,7 @@ class Feedback360
 {
 private:
     // constructor/destructor
-    Feedback360();
+    Feedback360(void);
     virtual ~Feedback360(void);
 
     //disable copy constructor
@@ -109,7 +109,7 @@ private:
     // effects handling
     LONG                EffectCount;
     Feedback360Effect   **EffectList;
-    UInt32                 EffectIndex;
+    UInt32              EffectIndex;
 
     DWORD Gain;
     bool Actuator;

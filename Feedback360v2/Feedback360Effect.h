@@ -63,7 +63,7 @@ public:
 
 	Feedback360Effect();
 
-    int Calc(int *LeftLevel, int *RightLevel);
+    LONG Calc(LONG *LeftLevel, LONG *RightLevel);
 
 	CFUUIDRef		Type;
     FFEffectDownloadID Handle;

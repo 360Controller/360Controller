@@ -140,7 +140,7 @@ ULONG Feedback360::Release(void)
     return returnValue;
 }
 
-IOCFPlugInInterface** Feedback360::Alloc()
+IOCFPlugInInterface** Feedback360::Alloc(void)
 {
     Feedback360 *me = new Feedback360;
     if(!me) {
@@ -150,7 +150,7 @@ IOCFPlugInInterface** Feedback360::Alloc()
     return (IOCFPlugInInterface **)(&me->iIOCFPlugInInterface.pseudoVTable);
 }
 
-void Feedback360::sFactoryAddRef ( void )
+void Feedback360::sFactoryAddRef (void)
 {
     if ( sFactoryRefCount++ == 0 )
     {
@@ -160,7 +160,7 @@ void Feedback360::sFactoryAddRef ( void )
     }
 }
 
-void Feedback360::sFactoryRelease ( void )
+void Feedback360::sFactoryRelease (void)
 {
     if ( sFactoryRefCount-- == 1 )
     {
@@ -183,7 +183,7 @@ IOReturn Feedback360::Start(CFDictionaryRef propertyTable,io_service_t service)
     return FF_OK;
 }
 
-IOReturn Feedback360::Stop()
+IOReturn Feedback360::Stop(void)
 {
     return FF_OK;
 }
@@ -663,7 +663,7 @@ void Feedback360::EffectProc( void *params )
     LONG LeftLevel = 0;
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
-    LONG CalcResult;
+    LONG CalcResult =0;
 
     if( cThis->Actuator == TRUE )
     {
@@ -675,7 +675,7 @@ void Feedback360::EffectProc( void *params )
         }
     }
 
-    if((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && CalcResult != -1)
+    if((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && (CalcResult != -1))
     {
         //fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
         cThis->SetForce((unsigned char)MIN(255, LeftLevel * Gain / 10000),(unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
