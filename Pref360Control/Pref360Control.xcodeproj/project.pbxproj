@@ -246,6 +246,8 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 3BBDC6A9097946B50023AAD8 /* Build configuration list for PBXProject "Pref360Control" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
@@ -450,7 +452,7 @@
 		3BBDC6AA097946B50023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
@@ -461,7 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";
@@ -471,7 +473,7 @@
 		3BBDC6AC097946B50023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "";

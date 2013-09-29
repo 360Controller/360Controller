@@ -115,6 +115,8 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "DriverTool" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -180,7 +182,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -197,7 +199,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

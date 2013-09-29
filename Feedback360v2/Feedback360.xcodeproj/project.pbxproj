@@ -341,7 +341,7 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = plugin;
 			};
 			name = Development;
 		};
@@ -354,7 +354,7 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = plugin;
 			};
 			name = Deployment;
 		};
@@ -366,7 +366,7 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
-				WRAPPER_EXTENSION = bundle;
+				WRAPPER_EXTENSION = plugin;
 			};
 			name = Default;
 		};

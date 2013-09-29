@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A224C3EFF42367911CA2CB7 /* _60Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; };
 		1A224C3FFF42367911CA2CB7 /* _60Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
 		32D94FCF0562CBF700B6AF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,6 +176,8 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 3BBDC686097938A90023AAD8 /* Build configuration list for PBXProject "360Controller" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -228,7 +230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle\"\ncp -R \"$SRCROOT/../Feedback360/build/Deployment/Feedback360.bundle\" PlugIns/Feedback360.plugin\n# Renaming extension from bundle to a plugin? Could be naughty.";
+			shellScript = "cd \"$TARGET_BUILD_DIR/$TARGET_NAME.kext/Contents\"\nmkdir PlugIns > /dev/null 2>&1\nrm -R PlugIns/Feedback360.plugin > /dev/null 2>&1\necho \"$SRCROOT/../Feedback360v2/build/Deployment/Feedback360.plugin\"\ncp -R \"$SRCROOT/../Feedback360v2/build/Deployment/Feedback360.plugin\" PlugIns/Feedback360.plugin";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -261,13 +263,10 @@
 		3BBDC683097938A90023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0.0d12;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -275,38 +274,26 @@
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = 1.0.0d11;
-				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
-				SDKROOT = "";
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Development;
 		};
 		3BBDC684097938A90023AAD8 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d12;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
-				LD_GENERATE_MAP_FILE = NO;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = 1.0.0d11;
-				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -315,14 +302,12 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1.0.0d12;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = 1.0.0d11;
-				PREBINDING = NO;
 				PRODUCT_NAME = 360Controller;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -331,33 +316,24 @@
 		3BBDC687097938A90023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
 			};
 			name = Development;
 		};
 		3BBDC688097938A90023AAD8 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
-				GCC_VERSION = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
-				"SDKROOT[arch=x86_64]" = "";
 			};
 			name = Deployment;
 		};
 		3BBDC689097938A90023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Colin Munro";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
 			};
 			name = Default;
 		};

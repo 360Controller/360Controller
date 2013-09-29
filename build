@@ -1,6 +1,6 @@
 #!/bin/bash
 zip -r ../360ControllerSource.zip *
-cd Feedback360
+cd Feedback360v2
 xcodebuild -configuration Deployment
 if [ $? -ne 0 ]
   then
