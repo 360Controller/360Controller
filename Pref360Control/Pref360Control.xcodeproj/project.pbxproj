@@ -338,13 +338,10 @@
 		3BBDC6A6097946B50023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				"GCC_ENABLE_OBJC_GC[arch=x86_64]" = supported;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -357,14 +354,12 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				LIBRARY_STYLE = Bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Pref360Control;
 				SDKROOT = "";
 				SECTORDER_FLAGS = "";
@@ -374,7 +369,6 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = prefPane;
-				ZERO_LINK = YES;
 			};
 			name = Development;
 		};
@@ -384,7 +378,6 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				"GCC_ENABLE_OBJC_GC[arch=x86_64]" = supported;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -396,13 +389,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -411,7 +402,6 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = prefPane;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -419,7 +409,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
-				"GCC_ENABLE_OBJC_GC[arch=x86_64]" = supported;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -431,13 +420,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -452,10 +439,9 @@
 		3BBDC6AA097946B50023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
 			};
 			name = Development;
 		};
@@ -465,18 +451,15 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
 			};
 			name = Deployment;
 		};
 		3BBDC6AC097946B50023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = "";
 			};
 			name = Default;
 		};

@@ -316,6 +316,7 @@
 		3BBDC687097938A90023AAD8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 			};
@@ -324,6 +325,7 @@
 		3BBDC688097938A90023AAD8 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 			};
@@ -332,6 +334,7 @@
 		3BBDC689097938A90023AAD8 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 			};

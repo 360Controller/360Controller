@@ -330,7 +330,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
 				WRAPPER_EXTENSION = plugin;
@@ -343,7 +342,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
 				WRAPPER_EXTENSION = plugin;
@@ -355,7 +353,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = "-g";
 				PRODUCT_NAME = Feedback360;
 				WRAPPER_EXTENSION = plugin;
@@ -366,7 +363,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -382,7 +379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_WARN_PEDANTIC = YES;
@@ -395,7 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: David Ryskalczyk";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_WARN_PEDANTIC = YES;
