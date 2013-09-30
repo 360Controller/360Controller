@@ -187,7 +187,7 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 {
 	IOUSBDevice *device;
     OSNumber *number;
-    UInt32 location;
+    UInt32 location = 0;
     
 	device = GetOwnerProvider(this);
     if (device)

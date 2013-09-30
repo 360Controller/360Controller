@@ -471,7 +471,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
                         ready = true;
                 }
                 InstantiateService(index);
-                if (ready)
+                if (ready && connections[index].service != NULL)
                 {
 #ifdef PROTOCOL_DEBUG
                     IOLog("Registering wireless device");

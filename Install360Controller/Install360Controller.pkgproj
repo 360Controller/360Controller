@@ -881,9 +881,9 @@
 			<key>CERTIFICATE</key>
 			<dict>
 				<key>NAME</key>
-				<string>Developer ID Installer: Colin Munro</string>
+				<string>Developer ID Application: David Ryskalczyk</string>
 				<key>PATH</key>
-				<string>/Users/colin/Library/Keychains/login.keychain</string>
+				<string>/Users/david/Library/Keychains/login.keychain</string>
 			</dict>
 			<key>EXCLUDED_FILES</key>
 			<array>
