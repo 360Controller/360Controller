@@ -654,7 +654,7 @@
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
 				<key>VERSION</key>
-				<string>0.12</string>
+				<string>0.13</string>
 			</dict>
 			<key>UUID</key>
 			<string>95C3DB03-4C99-4A29-AEC7-C73B3D9F6A04</string>
@@ -881,7 +881,7 @@
 			<key>CERTIFICATE</key>
 			<dict>
 				<key>NAME</key>
-				<string>Developer ID Application: David Ryskalczyk</string>
+				<string>Developer ID Installer: David Ryskalczyk</string>
 				<key>PATH</key>
 				<string>/Users/david/Library/Keychains/login.keychain</string>
 			</dict>
