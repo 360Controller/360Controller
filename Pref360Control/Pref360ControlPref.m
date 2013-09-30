@@ -69,43 +69,68 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFDeviceEscape(ffDevice,&escape);
 }
 
-// Enables and disables the rumble motor "override"
-- (void)setMotorOverride:(BOOL)enable
+// This will initialize the ff effect.
+
+- (void)testMotorsInit
 {
-    FFEFFESCAPE escape;
-    char c;
-    
-    if(ffDevice==0) return;
-    // If true, the motors will no longer obey any Force Feedback Framework
-    // effects, and the motors may be controlled directly. False and the
-    // motors will perform effects but can not be directly controlled.
-    c=enable?0x01:0x00;
-    escape.dwSize=sizeof(escape);
-    escape.dwCommand=0x00;
-    escape.cbInBuffer=sizeof(c);
-    escape.lpvInBuffer=&c;
-    escape.cbOutBuffer=0;
-    escape.lpvOutBuffer=NULL;
-    FFDeviceEscape(ffDevice,&escape);
+    if(ffDevice == 0) return;
+
+    FFCAPABILITIES capabs;
+    FFDeviceGetForceFeedbackCapabilities(ffDevice, &capabs);
+
+    if(capabs.numFfAxes != 2) return;
+
+    effect = calloc(1, sizeof(FFEFFECT));
+    customforce = calloc(1, sizeof(FFCUSTOMFORCE));
+    LONG *c = calloc(2, sizeof(LONG));
+    DWORD *a = calloc(2, sizeof(DWORD));
+    LONG *d = calloc(2, sizeof(LONG));
+
+
+    c[0] = 0;
+    c[1] = 0;
+    a[0] = capabs.ffAxes[0];
+    a[1] = capabs.ffAxes[1];
+    d[0] = 0;
+    d[1] = 0;
+
+    customforce->cChannels = 2;
+    customforce->cSamples = 2;
+    customforce->rglForceData = c;
+    customforce->dwSamplePeriod = 100*1000;
+
+    effect->cAxes = capabs.numFfAxes;
+    effect->rglDirection = d;
+    effect->rgdwAxes = a;
+    effect->dwSamplePeriod = 0;
+    effect->dwGain = 10000;
+    effect->dwFlags = FFEFF_OBJECTOFFSETS | FFEFF_SPHERICAL;
+    effect->dwSize = sizeof(FFEFFECT);
+    effect->dwDuration = FF_INFINITE;
+    effect->dwSamplePeriod = 100*1000;
+    effect->cbTypeSpecificParams = sizeof(FFCUSTOMFORCE);
+    effect->lpvTypeSpecificParams = customforce;
+    effect->lpEnvelope = NULL;
+    FFDeviceCreateEffect(ffDevice, kFFEffectType_CustomForce_ID, effect, &effectRef);
 }
 
-// If the direct rumble control is enabled, this will set the motors
-// to the desired speed.
+- (void)testMotorsCleanUp
+{
+    if(effectRef == NULL) return;
+    FFDeviceReleaseEffect(ffDevice, effectRef);
+    free(customforce->rglForceData);
+    free(effect->rgdwAxes);
+    free(effect->rglDirection);
+    free(customforce);
+    free(effect);
+}
 - (void)testMotorsLarge:(unsigned char)large small:(unsigned char)small
 {
-    FFEFFESCAPE escape;
-    char c[2];
-    
-    if(ffDevice==0) return;
-    c[0]=large;
-    c[1]=small;
-    escape.dwSize=sizeof(escape);
-    escape.dwCommand=0x01;
-    escape.cbInBuffer=sizeof(c);
-    escape.lpvInBuffer=c;
-    escape.cbOutBuffer=0;
-    escape.lpvOutBuffer=NULL;
-    FFDeviceEscape(ffDevice,&escape);
+    if(effectRef == NULL) return;
+    customforce->rglForceData[0] = (large*10000)/255;
+    customforce->rglForceData[1] = (small*10000)/255;
+    FFEffectSetParameters(effectRef, effect, FFEP_TYPESPECIFICPARAMS);
+    FFEffectStart(effectRef, 1, 0);
 }
 
 // Update axis GUI component
@@ -127,12 +152,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         case 4:
             [leftTrigger setDoubleValue:value];
             largeMotor=value;
-//            [self testMotorsLarge:largeMotor small:smallMotor];
+            [self testMotorsLarge:largeMotor small:smallMotor];
             break;
         case 5:
             [rightTrigger setDoubleValue:value];
             smallMotor=value;
-//            [self testMotorsLarge:largeMotor small:smallMotor];
+            [self testMotorsLarge:largeMotor small:smallMotor];
             break;
         default:
             break;
@@ -286,9 +311,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)stopDevice
 {
     if(registryEntry==0) return;
-//    [self testMotorsLarge:0 small:0];
-//    [self setMotorOverride:FALSE];
-//    [self updateLED:0x00];
+    [self testMotorsLarge:0 small:0];
+    [self testMotorsCleanUp];
+    [self updateLED:0x00];
     if(hidQueue!=NULL) {
         CFRunLoopSourceRef eventSource;
         
@@ -481,10 +506,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     // Enable GUI components
     [self inputEnable:YES];
-    // Set LED and manual motor control
-//    [self updateLED:0x0a];
-//    [self setMotorOverride:TRUE];
-//    [self testMotorsLarge:0 small:0];
+    // Set device capabilities
+    // Set LED and FF motor control
+    [self updateLED:0x0a];
+    [self testMotorsInit];
+    [self testMotorsLarge:0 small:0];
     largeMotor=0;
     smallMotor=0;
     // Battery level?
@@ -567,7 +593,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 
 // Start up
-- (void)mainViewDidLoad
+- (void)didSelect
 {
     io_object_t object;
     
@@ -597,7 +623,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 
 // Shut down
-- (void)dealloc
+- (void)didUnselect
 {
     int i;
     DeviceItem *item;
@@ -609,7 +635,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOObjectRelease(onIteratorWireless);
     IOObjectRelease(offIteratorWired);
     IOObjectRelease(offIteratorWireless);
-    CFRunLoopRemoveSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
     CFRunLoopSourceInvalidate(notifySource);
     IONotificationPortDestroy(notifyPort);
     // Release device and info
@@ -633,7 +658,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);
     // Done
-    [super dealloc];
 }
 
 - (mach_port_t)masterPort
@@ -712,5 +736,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     escape.lpvOutBuffer=NULL;
     FFDeviceEscape(ffDevice,&escape);
 }
+
 
 @end
