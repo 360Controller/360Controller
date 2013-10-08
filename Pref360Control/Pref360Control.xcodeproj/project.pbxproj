@@ -345,18 +345,12 @@
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Development;
@@ -379,18 +373,12 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Deployment;
@@ -411,18 +399,12 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-bundle",
 					"-twolevel_namespace",
 				);
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Default;
@@ -432,7 +414,9 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				GCC_ENABLE_OBJC_GCC = supported;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-fobjc-gc";
 			};
 			name = Development;
 		};
@@ -441,7 +425,9 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				GCC_ENABLE_OBJC_GCC = supported;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-fobjc-gc";
 			};
 			name = Deployment;
 		};
@@ -450,7 +436,9 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				GCC_ENABLE_OBJC_GCC = supported;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-fobjc-gc";
 			};
 			name = Default;
 		};

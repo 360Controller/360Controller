@@ -646,7 +646,7 @@
 				<key>AUTHENTICATION</key>
 				<integer>1</integer>
 				<key>CONCLUSION_ACTION</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>IDENTIFIER</key>
 				<string>com.mice.pkg.Xbox360controller</string>
 				<key>NAME</key>

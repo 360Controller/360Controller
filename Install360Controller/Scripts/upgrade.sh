@@ -8,6 +8,7 @@ fi
 
 if [ -f /Library/LaunchDaemons/com.mice.360Daemon.plist ]; then
    launchctl stop com.mice.360Daemon
+   launchctl unload /Library/LaunchDaemons/com.mice.360Daemon.plist
    /bin/rm /Library/LaunchDaemons/com.mice.360Daemon.plist
 fi
 
