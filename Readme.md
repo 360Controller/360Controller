@@ -4,7 +4,6 @@ Copyright (C) 2006-2013 Colin Munro
 
 [http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller)
 
-\
 
 **About**
 
@@ -16,7 +15,6 @@ test everything is installed correctly. Both wired 360 controllers
 connected via USB, and wireless 360 controllers connected via the
 Wireless Gaming Receiver for Windows, are supported.
 
-\
 
 **Licence**
 
@@ -24,7 +22,6 @@ This driver is licensed under the GNU Public License. A copy of this
 license is included in the distribution file, please inspect it before
 using the binary or source.
 
-\
 
 **Installation**
 
@@ -34,7 +31,6 @@ usable if the controller is already connected or connected within a
 minute after the installer completes. If you are interested in
 installing as a developer please see below.
 
-\
 
 **Usage**
 
@@ -46,19 +42,10 @@ Frameworks for accessing HID devices and accessing Force Feedback
 capabilities, so should be a good test that the installation is
 functional.
 
-\
 
 **Known Problems/Todo**
 
--   The rumble motor test on the triggers of the Preference Pane
-    bypasses the Force Feedback Framework functionality, so isn't
-    actually testing it. It really should, for completeness (and it'd
-    help adding support for more complex effects) - this test is now
-    disabled in the normal release anyway
--   Force Feedback plugin may make effects run slower (e.g. longer time)
-    than they should
 -   Driver probably needs to be more resilient to errors and odd cases
--   Better Force Feedback "emulation"
 -   Extra settings? E.g. trigger deadzones, control remapping.
 -   Someone has requested old Xbox Controller support too.
 
@@ -71,7 +58,6 @@ functional.
 -   Anything below this probably doesn't affect end users, so you can
     stop reading now if you just want to use the driver.
 
-\
 
 **Building**
 
@@ -84,25 +70,21 @@ one for the Preference Pane (implemented in Objective C as a preference
 pane plugin). Ideally these 3 targets should be in the same project, but
 I've not worked on this yet.
 
-\
 
 To build, use the standard Xcode build for Deployment on each of the 3
 projects. Build Feedback360 before 360Controller, as the 360Controller
 project includes a script to copy the Feedback360 bundle to the correct
 place in the .kext to make it work.
 
-\
 
 To debug the driver, sudo cp -R 360Controller.kext /tmp/ to assign the
 correct properties - note that the Force Feedback plugin only seems to
 be found by OSX if the driver is in /System/Library/Extensions so I
 could only debug it in place.
 
-\
 
 To test the Preference Pane, just double-click the resulting file.
 
-\
 
 **Debugging**
 
@@ -113,14 +95,12 @@ the console of whatever application is attempting to use Force Feedback.
 In Pref360Control NSLog() works as it's an Objective C program, and will
 output to the console of the Preferences application.
 
-\
 
 **Installer**
 
-Included is an installer project for Iceberg. Download Iceberg at
-[http://s.sudre.free.fr/Software/Iceberg.html](http://s.sudre.free.fr/Software/Iceberg.html)
+Included is an installer project for Packages. Download Iceberg at
+[http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html)
 
-\
 
 **Other information**
 
@@ -129,3 +109,6 @@ simply as a reference and not basing it upon any existing source. As
 such, some things may be done strangely or incorrectly, so excuse any
 weirdness. I've also tried to include comments to explain generally
 what's going on :)
+
+The calculations for the updated Feedback360 plugin are based on the
+unmaintained xi driver for Windows.

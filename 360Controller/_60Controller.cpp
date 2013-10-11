@@ -578,14 +578,21 @@ void Xbox360Peripheral::ReleaseAll(void)
     }
 }
 
+// Handle termination
+bool Xbox360Peripheral::didTerminate(IOService *provider, IOOptionBits options, bool *defer)
+{
+    // release all objects used and close the device
+    ReleaseAll();
+    return super::didTerminate(provider, options, defer);
+}
+
+
 // Handle message sent to the driver
 IOReturn Xbox360Peripheral::message(UInt32 type,IOService *provider,void *argument)
 {
     switch(type) {
         case kIOMessageServiceIsTerminated:
         case kIOMessageServiceIsRequestingClose:
-            if(device->isOpen(this)) ReleaseAll();
-            return kIOReturnSuccess;
         default:
             return super::message(type,provider,argument);
     }

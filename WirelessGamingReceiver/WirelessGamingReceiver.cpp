@@ -218,6 +218,15 @@ void WirelessGamingReceiver::stop(IOService *provider)
     IOService::stop(provider);
 }
 
+// Handle termination
+bool WirelessGamingReceiver::didTerminate(IOService *provider, IOOptionBits options, bool *defer)
+{
+    // release all objects used and close the device
+    ReleaseAll();
+    return IOService::didTerminate(provider, options, defer);
+}
+
+
 // Handle message from provider
 IOReturn WirelessGamingReceiver::message(UInt32 type,IOService *provider,void *argument)
 {

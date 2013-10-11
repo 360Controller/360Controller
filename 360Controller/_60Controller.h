@@ -113,6 +113,8 @@ public:
     virtual IOReturn setProperties(OSObject *properties);
 
     virtual IOReturn message(UInt32 type, IOService *provider, void *argument);
+
+    virtual bool didTerminate(IOService *provider, IOOptionBits options, bool *defer);
     
 	// Hooks
     virtual void ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
