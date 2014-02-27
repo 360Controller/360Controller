@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,8 +26,8 @@
 		3BC41F32096C85CB00664A42 /* DeviceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BC41F30096C85CB00664A42 /* DeviceItem.h */; };
 		3BC41F33096C85CB00664A42 /* DeviceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC41F31096C85CB00664A42 /* DeviceItem.m */; };
 		3BC41F47096C8D0300664A42 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC41F46096C8D0300664A42 /* ForceFeedback.framework */; };
-		55A3FDD918BEF6CA00266EA3 /* DriverTool in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FDD618BEF6B200266EA3 /* DriverTool */; };
 		55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDDA18BEF99A00266EA3 /* Images.xcassets */; };
+		55A3FDDC18BEFCC400266EA3 /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDD618BEF6B200266EA3 /* DriverTool */; };
 		8D202CEA0486D31800D8A456 /* Pref360Control_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */; };
 		8D202CEB0486D31800D8A456 /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -260,9 +260,10 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 3BBDC6A9097946B50023AAD8 /* Build configuration list for PBXProject "Pref360Control" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -303,6 +304,7 @@
 			files = (
 				55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */,
 				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
+				55A3FDDC18BEFCC400266EA3 /* DriverTool in Resources */,
 				8D202CEE0486D31800D8A456 /* Pref360ControlPref.tiff in Resources */,
 				8D202CEF0486D31800D8A456 /* Pref360ControlPref.nib in Resources */,
 			);
@@ -315,7 +317,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55A3FDD918BEF6CA00266EA3 /* DriverTool in Sources */,
 				8D202CF10486D31800D8A456 /* Pref360ControlPref.m in Sources */,
 				3BBEAB02096B2C4C00F2E37B /* MyAnalogStick.m in Sources */,
 				3BBEAB05096B2C5200F2E37B /* MyCentreButtons.m in Sources */,
@@ -361,6 +362,7 @@
 		3BBDC6A6097946B50023AAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -390,6 +392,7 @@
 		3BBDC6A7097946B50023AAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_GCC = supported;
@@ -416,7 +419,7 @@
 		3BBDC6AA097946B50023AAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GCC = supported;
