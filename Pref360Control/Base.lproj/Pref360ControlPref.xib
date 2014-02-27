@@ -38,8 +38,6 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="240" y="597" width="600" height="307"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="600" height="10"/>
-            <value key="maxSize" type="size" width="600" height="309"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="307"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -330,7 +328,7 @@ Please consider donating if you enjoy this driver!</string>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
                         <rect key="frame" x="23" y="40" width="21" height="159"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="195"/>
+                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
                         <connections>
                             <action selector="changeSetting:" target="-2" id="196"/>
                         </connections>

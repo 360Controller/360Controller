@@ -69,7 +69,7 @@ IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface={
 };
 
 
-Feedback360::Feedback360(void) : fRefCount(1)
+Feedback360::Feedback360() : fRefCount(1)
 {
     EffectCount = 0;
     EffectIndex = 1;
@@ -92,9 +92,9 @@ Feedback360::Feedback360(void) : fRefCount(1)
     sFactoryAddRef();
 }
 
-Feedback360::~Feedback360(void)
+Feedback360::~Feedback360()
 {
-    sFactoryRelease();
+	sFactoryRelease();
 }
 
 HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
@@ -139,39 +139,37 @@ ULONG Feedback360::Release(void)
 
 IOCFPlugInInterface** Feedback360::Alloc(void)
 {
-    Feedback360 *me = new Feedback360;
+	Feedback360 *me = new Feedback360;
     if(!me) {
-        return NULL;
+		return NULL;
     }
-    // return reinterpret_cast<IOCFPlugInInterface **>(&me->iIOCFPlugInInterface.pseudoVTable);
+	// return reinterpret_cast<IOCFPlugInInterface **>(&me->iIOCFPlugInInterface.pseudoVTable);
     return (IOCFPlugInInterface **)(&me->iIOCFPlugInInterface.pseudoVTable);
 }
 
 void Feedback360::sFactoryAddRef (void)
 {
-    if ( sFactoryRefCount++ == 0 )
-    {
-        factoryID = kFeedback360Uuid;
-        CFRetain ( factoryID );
-        CFPlugInAddInstanceForFactory ( factoryID );
-    }
+	if (sFactoryRefCount++ == 0) {
+		factoryID = kFeedback360Uuid;
+		CFRetain(factoryID);
+		CFPlugInAddInstanceForFactory(factoryID);
+	}
 }
 
 void Feedback360::sFactoryRelease (void)
 {
-    if ( sFactoryRefCount-- == 1 )
-    {
-        CFPlugInRemoveInstanceForFactory ( factoryID );
-        CFRelease ( factoryID );
-    }
+	if (sFactoryRefCount-- == 1) {
+		CFPlugInRemoveInstanceForFactory(factoryID);
+		CFRelease(factoryID);
+	}
 }
 
 IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 *order)
 {
-    if ((service==0)
-        || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
-            && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
-    return FF_OK;
+	if ((service==0)
+		|| ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
+			&& (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
+	return FF_OK;
 }
 
 IOReturn Feedback360::Start(CFDictionaryRef propertyTable,io_service_t service)
@@ -241,23 +239,21 @@ HRESULT Feedback360::StopEffect(UInt32 EffectHandle)
             }
         }
     });
-    return( FF_OK );
+    return FF_OK;
 }
 
 HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *EffectHandle, FFEFFECT *DiEffect, FFEffectParameterFlag Flags)
 {
-    __block HRESULT Result = FF_OK;
-    __block Feedback360Effect *Effect = NULL;
-
-
-
+	__block HRESULT Result = FF_OK;
+	__block Feedback360Effect *Effect = NULL;
+	
     if( Flags & FFEP_NODOWNLOAD )
     {
-        return( FF_OK );
+		return FF_OK;
     }
-
+	
     dispatch_sync(Queue, ^{
-
+		
         if( *EffectHandle == 0 )
         {
             Effect = new Feedback360Effect();
@@ -268,7 +264,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             if( NewEffectList == NULL )
             {
                 Result = -1;
-
+				
             } else {
                 EffectList = NewEffectList;
                 EffectList[EffectCount - 1] = Effect;
@@ -284,52 +280,52 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 }
             }
         }
-
+		
         if(Effect == NULL || Result == -1) {
             Result = FFERR_INTERNAL;
         }
         else {
             Effect->Type = EffectType;
-
+			
             Effect->DiEffect.dwFlags = DiEffect->dwFlags;
-
+			
             if( Flags & FFEP_DURATION )
             {
                 Effect->DiEffect.dwDuration = DiEffect->dwDuration;
             }
-
+			
             if( Flags & FFEP_SAMPLEPERIOD )
             {
                 Effect->DiEffect.dwSamplePeriod = DiEffect->dwSamplePeriod;
             }
-
+			
             if( Flags & FFEP_GAIN )
             {
                 Effect->DiEffect.dwGain = DiEffect->dwGain;
             }
-
+			
             if( Flags & FFEP_TRIGGERBUTTON )
             {
                 Effect->DiEffect.dwTriggerButton = DiEffect->dwTriggerButton;
             }
-
+			
             if( Flags & FFEP_TRIGGERREPEATINTERVAL )
             {
                 Effect->DiEffect.dwTriggerRepeatInterval = DiEffect->dwTriggerRepeatInterval;
             }
-
+			
             if( Flags & FFEP_AXES )
             {
                 Effect->DiEffect.cAxes  = DiEffect->cAxes;
                 Effect->DiEffect.rgdwAxes = NULL;
             }
-
+			
             if( Flags & FFEP_DIRECTION )
             {
                 Effect->DiEffect.cAxes   = DiEffect->cAxes;
                 Effect->DiEffect.rglDirection = NULL;
             }
-
+			
             if( ( Flags & FFEP_ENVELOPE ) && DiEffect->lpEnvelope != NULL )
             {
                 memcpy( &Effect->DiEnvelope, DiEffect->lpEnvelope, sizeof( FFENVELOPE ) );
@@ -340,9 +336,9 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 }
                 Effect->DiEffect.lpEnvelope = &Effect->DiEnvelope;
             }
-
+			
             Effect->DiEffect.cbTypeSpecificParams = DiEffect->cbTypeSpecificParams;
-
+			
             if( Flags & FFEP_TYPESPECIFICPARAMS )
             {
                 if(CFEqual(EffectType, kFFEffectType_CustomForce_ID)) {
@@ -352,7 +348,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiCustomForce;
                 }
-
+				
                 else if(CFEqual(EffectType, kFFEffectType_ConstantForce_ID)) {
                     memcpy(
                            &Effect->DiConstantForce
@@ -375,19 +371,19 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiRampforce;
                 }
             }
-
+			
             if( Flags & FFEP_STARTDELAY )
             {
                 Effect->DiEffect.dwStartDelay = DiEffect->dwStartDelay;
             }
-
+			
             if( Flags & FFEP_START )
             {
                 Effect->Status  = FFEGES_PLAYING;
                 Effect->PlayCount = 1;
                 Effect->StartTime = CFAbsoluteTimeGetCurrent();
             }
-
+			
             if( Flags & FFEP_NORESTART )
             {
                 ;
@@ -395,7 +391,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             Result = FF_OK;
         }
     });
-    return( Result );
+    return Result;
 }
 
 HRESULT Feedback360::GetForceFeedbackState(ForceFeedbackDeviceState *DeviceState)
@@ -774,8 +770,7 @@ HRESULT Feedback360::sStopEffect( void * self, UInt32 downloadID ) {
 }
 
 // External factory function
-
-extern "C" void* Control360Factory(CFAllocatorRef allocator,CFUUIDRef typeID)
+void* Control360Factory(CFAllocatorRef allocator,CFUUIDRef typeID)
 {
     void* result = NULL;
     if(CFEqual(typeID, kIOForceFeedbackLibTypeID))
