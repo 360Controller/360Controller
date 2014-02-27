@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>237FBB5C-0B8C-4A12-8BA6-DD823709AB49</string>
+	<string>79434671-DDE3-4DCB-A638-62D8AC0E391D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>360Driver</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>E2ECD32B-FD9B-4325-B04B-CAF44C80BACC</key>
-		<string>ssh://github.com/d235j/360Controller.git</string>
+		<key>B376363D-F658-4722-A3A3-68859037664F</key>
+		<string>https://github.com/MaddTheSane/360Controller.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>360Driver.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E2ECD32B-FD9B-4325-B04B-CAF44C80BACC</key>
+		<key>B376363D-F658-4722-A3A3-68859037664F</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/d235j/360Controller.git</string>
+	<string>https://github.com/MaddTheSane/360Controller.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E2ECD32B-FD9B-4325-B04B-CAF44C80BACC</string>
+	<string>B376363D-F658-4722-A3A3-68859037664F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E2ECD32B-FD9B-4325-B04B-CAF44C80BACC</string>
+			<string>B376363D-F658-4722-A3A3-68859037664F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>360ControllerSource.0</string>
+			<string>360Controller</string>
 		</dict>
 	</array>
 </dict>

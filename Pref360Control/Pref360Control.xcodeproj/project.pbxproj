@@ -79,6 +79,7 @@
 		3BC41F30096C85CB00664A42 /* DeviceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceItem.h; sourceTree = "<group>"; };
 		3BC41F31096C85CB00664A42 /* DeviceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceItem.m; sourceTree = "<group>"; };
 		3BC41F46096C8D0300664A42 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
+		556395DB18BFF0EB00773B93 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pref360ControlPref.strings; sourceTree = "<group>"; };
 		55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DriverTool.xcodeproj; path = ../DriverTool/DriverTool.xcodeproj; sourceTree = "<group>"; };
 		55A3FDDA18BEF99A00266EA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55A3FDE118BFB2E700266EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55A3FDE118BFB2E700266EA3 /* Base */,
+				556395DB18BFF0EB00773B93 /* en */,
 			);
 			name = Pref360ControlPref.xib;
 			sourceTree = "<group>";

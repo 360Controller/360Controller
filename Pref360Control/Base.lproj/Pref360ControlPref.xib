@@ -36,16 +36,16 @@
         <window title="&lt;&lt; do not localize >>" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="12" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="240" y="597" width="595" height="307"/>
+            <rect key="contentRect" x="240" y="597" width="600" height="307"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="595" height="10"/>
-            <value key="maxSize" type="size" width="595" height="307"/>
+            <value key="minSize" type="size" width="600" height="10"/>
+            <value key="maxSize" type="size" width="600" height="309"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="595" height="307"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="307"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="98">
-                        <rect key="frame" x="109" y="263" width="468" height="26"/>
+                    <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="98">
+                        <rect key="frame" x="112" y="263" width="471" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="101" id="177">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -63,7 +63,7 @@
                         </connections>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="103">
-                        <rect key="frame" x="46" y="269" width="59" height="17"/>
+                        <rect key="frame" x="58" y="269" width="50" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Device:" id="178">
                             <font key="font" metaFont="system"/>
@@ -72,7 +72,7 @@
                         </textFieldCell>
                     </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="104" customClass="MyAnalogStick">
-                        <rect key="frame" x="43" y="117" width="77" height="77"/>
+                        <rect key="frame" x="49" y="120" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="u3f-Xl-D3j"/>
@@ -80,7 +80,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="105" customClass="MyDigitalStick">
-                        <rect key="frame" x="123" y="43" width="77" height="80"/>
+                        <rect key="frame" x="129" y="43" width="77" height="80"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="QLP-S4-rvf"/>
@@ -88,7 +88,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="106" customClass="MyAnalogStick">
-                        <rect key="frame" x="226" y="43" width="77" height="80"/>
+                        <rect key="frame" x="232" y="43" width="77" height="80"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="9b6-pI-rGz"/>
@@ -96,7 +96,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
-                        <rect key="frame" x="306" y="117" width="77" height="77"/>
+                        <rect key="frame" x="312" y="120" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="SUB-tj-1Og"/>
@@ -104,7 +104,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="108" customClass="MyCentreButtons">
-                        <rect key="frame" x="151" y="144" width="126" height="39"/>
+                        <rect key="frame" x="157" y="144" width="126" height="39"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="126" id="XGw-f2-1xS"/>
@@ -112,31 +112,31 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="109" customClass="MyShoulderButton">
-                        <rect key="frame" x="43" y="202" width="77" height="21"/>
+                        <rect key="frame" x="49" y="205" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="2vY-ao-kAF"/>
+                            <constraint firstAttribute="height" constant="18" id="2vY-ao-kAF"/>
                             <constraint firstAttribute="width" constant="77" id="W1d-5g-5Dt"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="110" customClass="MyShoulderButton">
-                        <rect key="frame" x="306" y="202" width="77" height="21"/>
+                        <rect key="frame" x="312" y="205" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="HM7-UJ-OKn"/>
-                            <constraint firstAttribute="height" constant="21" id="eFY-Zs-88D"/>
+                            <constraint firstAttribute="height" constant="18" id="eFY-Zs-88D"/>
                         </constraints>
                     </customView>
                     <progressIndicator verticalHuggingPriority="750" maxValue="255" bezeled="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="111">
-                        <rect key="frame" x="41" y="227" width="168" height="28"/>
+                        <rect key="frame" x="41" y="227" width="171" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </progressIndicator>
                     <progressIndicator verticalHuggingPriority="750" maxValue="255" bezeled="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="112">
-                        <rect key="frame" x="217" y="227" width="168" height="28"/>
+                        <rect key="frame" x="220" y="227" width="171" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </progressIndicator>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="114">
-                        <rect key="frame" x="41" y="93" width="71" height="18"/>
+                        <rect key="frame" x="47" y="96" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="179">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -147,7 +147,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="115">
-                        <rect key="frame" x="41" y="73" width="71" height="18"/>
+                        <rect key="frame" x="47" y="76" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="180">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -158,7 +158,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                        <rect key="frame" x="309" y="81" width="71" height="18"/>
+                        <rect key="frame" x="315" y="96" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="181">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -169,7 +169,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="117">
-                        <rect key="frame" x="309" y="61" width="71" height="18"/>
+                        <rect key="frame" x="315" y="76" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="182">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -180,7 +180,7 @@
                         </connections>
                     </button>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="120">
-                        <rect key="frame" x="224" y="16" width="161" height="21"/>
+                        <rect key="frame" x="230" y="16" width="161" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="157" id="zuY-YG-vN9"/>
@@ -193,7 +193,7 @@
                         </connections>
                     </slider>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="156">
-                        <rect key="frame" x="41" y="53" width="64" height="18"/>
+                        <rect key="frame" x="47" y="56" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="185">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -204,7 +204,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="157">
-                        <rect key="frame" x="309" y="41" width="64" height="18"/>
+                        <rect key="frame" x="315" y="56" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="186">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -215,7 +215,7 @@
                         </connections>
                     </button>
                     <box title="About" translatesAutoresizingMaskIntoConstraints="NO" id="158">
-                        <rect key="frame" x="395" y="16" width="182" height="238"/>
+                        <rect key="frame" x="401" y="16" width="182" height="238"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="178" height="221"/>
@@ -319,7 +319,7 @@ Please consider donating if you enjoy this driver!</string>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                        <rect key="frame" x="197" y="193" width="32" height="24"/>
+                        <rect key="frame" x="203" y="193" width="32" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="1S3-ss-4Tr"/>
@@ -328,19 +328,20 @@ Please consider donating if you enjoy this driver!</string>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="battNone" id="193"/>
                     </imageView>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
-                        <rect key="frame" x="17" y="40" width="21" height="156"/>
+                        <rect key="frame" x="23" y="40" width="21" height="159"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="151" id="FyU-0S-29w"/>
-                        </constraints>
-                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
+                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="195"/>
                         <connections>
                             <action selector="changeSetting:" target="-2" id="196"/>
                         </connections>
                     </slider>
                     <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="198">
-                        <rect key="frame" x="8" y="254" width="39" height="38"/>
+                        <rect key="frame" x="8" y="248" width="51" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="60P-3v-Wib"/>
+                            <constraint firstAttribute="width" constant="38" id="wH6-0r-jMY"/>
+                        </constraints>
                         <buttonCell key="cell" type="round" title="+" bezelStyle="circular" imagePosition="left" alignment="center" borderStyle="border" id="199">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="18" name="LucidaGrande"/>
@@ -350,7 +351,7 @@ Please consider donating if you enjoy this driver!</string>
                         </connections>
                     </button>
                     <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="227">
-                        <rect key="frame" x="81" y="9" width="99" height="32"/>
+                        <rect key="frame" x="87" y="9" width="99" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Power off" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="228">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -362,12 +363,11 @@ Please consider donating if you enjoy this driver!</string>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="116" firstAttribute="top" secondItem="107" secondAttribute="bottom" constant="8" symbolic="YES" id="0Uk-Rc-6IF"/>
                     <constraint firstItem="98" firstAttribute="centerY" secondItem="198" secondAttribute="centerY" id="1RV-sD-xjh"/>
                     <constraint firstItem="110" firstAttribute="top" secondItem="109" secondAttribute="top" id="1sg-mM-Wcg"/>
                     <constraint firstItem="227" firstAttribute="centerY" secondItem="120" secondAttribute="centerY" id="2S6-OE-jDC"/>
                     <constraint firstItem="174" firstAttribute="leading" secondItem="109" secondAttribute="trailing" constant="77" id="5hk-ay-MPb"/>
-                    <constraint firstItem="194" firstAttribute="top" secondItem="198" secondAttribute="bottom" constant="69" id="5nG-qb-LPs"/>
-                    <constraint firstItem="105" firstAttribute="leading" secondItem="114" secondAttribute="trailing" constant="13" id="6QD-qR-jyi"/>
                     <constraint firstAttribute="bottom" secondItem="227" secondAttribute="bottom" constant="16" id="6Wr-RF-Fi0"/>
                     <constraint firstItem="104" firstAttribute="top" secondItem="109" secondAttribute="bottom" constant="8" symbolic="YES" id="7UE-oa-B5w"/>
                     <constraint firstItem="116" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="8jz-J6-HZn"/>
@@ -378,19 +378,16 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="104" firstAttribute="top" secondItem="194" secondAttribute="top" id="C55-gK-9ah"/>
                     <constraint firstItem="108" firstAttribute="top" secondItem="174" secondAttribute="bottom" constant="10" id="Chs-Lp-BOl"/>
                     <constraint firstItem="104" firstAttribute="leading" secondItem="109" secondAttribute="leading" id="Dj7-3p-ymf"/>
-                    <constraint firstItem="115" firstAttribute="top" secondItem="114" secondAttribute="bottom" constant="6" symbolic="YES" id="DtI-CF-UTJ"/>
                     <constraint firstItem="106" firstAttribute="top" secondItem="105" secondAttribute="top" id="ENB-Ho-eYh"/>
                     <constraint firstItem="103" firstAttribute="leading" secondItem="198" secondAttribute="trailing" constant="8" symbolic="YES" id="Eyz-dt-Zb9"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="110" secondAttribute="bottom" constant="8" symbolic="YES" id="FlY-gP-35L"/>
                     <constraint firstItem="111" firstAttribute="top" secondItem="112" secondAttribute="top" id="FoB-DX-oBU"/>
                     <constraint firstItem="98" firstAttribute="trailing" secondItem="158" secondAttribute="trailing" id="Gqa-03-mz3"/>
                     <constraint firstItem="114" firstAttribute="leading" secondItem="104" secondAttribute="leading" id="Gtg-bv-iZN"/>
-                    <constraint firstItem="120" firstAttribute="top" secondItem="157" secondAttribute="bottom" constant="8" symbolic="YES" id="JLm-Xo-t9x"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="104" secondAttribute="top" id="Jb7-V5-bAt"/>
-                    <constraint firstItem="116" firstAttribute="centerX" secondItem="107" secondAttribute="centerX" id="K7v-5R-yF9"/>
                     <constraint firstItem="107" firstAttribute="trailing" secondItem="120" secondAttribute="trailing" id="LHI-jg-5AS"/>
                     <constraint firstItem="105" firstAttribute="bottom" secondItem="106" secondAttribute="bottom" id="O0R-MD-C1W"/>
-                    <constraint firstItem="107" firstAttribute="leading" secondItem="108" secondAttribute="trailing" constant="29" id="ONh-IK-86R"/>
+                    <constraint firstItem="107" firstAttribute="leading" secondItem="108" secondAttribute="trailing" constant="29" id="Ohr-Ml-kjG"/>
                     <constraint firstItem="111" firstAttribute="centerY" secondItem="112" secondAttribute="centerY" id="PfC-Yb-vDK"/>
                     <constraint firstItem="198" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="14" id="Ppf-SW-LUk"/>
                     <constraint firstItem="109" firstAttribute="trailing" secondItem="104" secondAttribute="trailing" id="RIM-w7-rgz"/>
@@ -403,25 +400,23 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="104" firstAttribute="leading" secondItem="194" secondAttribute="trailing" constant="7" id="YYU-hm-bje"/>
                     <constraint firstItem="174" firstAttribute="top" secondItem="112" secondAttribute="bottom" constant="11" id="ZMm-vB-5SY"/>
                     <constraint firstAttribute="trailing" secondItem="158" secondAttribute="trailing" constant="20" symbolic="YES" id="Zwd-u6-HSk"/>
-                    <constraint firstItem="156" firstAttribute="trailing" secondItem="103" secondAttribute="trailing" id="bQM-0Z-hxk"/>
                     <constraint firstItem="120" firstAttribute="top" secondItem="106" secondAttribute="bottom" constant="8" symbolic="YES" id="bTy-2c-n06"/>
                     <constraint firstItem="157" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="cbA-Ma-UfC"/>
-                    <constraint firstItem="108" firstAttribute="leading" secondItem="104" secondAttribute="trailing" constant="31" id="dKb-FM-T2U"/>
                     <constraint firstItem="106" firstAttribute="leading" secondItem="105" secondAttribute="trailing" constant="26" id="elS-7G-OMS"/>
                     <constraint firstAttribute="trailing" secondItem="98" secondAttribute="trailing" constant="20" symbolic="YES" id="ewf-xH-uT7"/>
-                    <constraint firstItem="156" firstAttribute="top" secondItem="115" secondAttribute="bottom" constant="6" symbolic="YES" id="fKC-AF-TlD"/>
+                    <constraint firstItem="156" firstAttribute="top" secondItem="115" secondAttribute="bottom" constant="6" symbolic="YES" id="gnu-eg-JBM"/>
                     <constraint firstItem="115" firstAttribute="leading" secondItem="156" secondAttribute="leading" id="hpK-3v-Xwt"/>
                     <constraint firstItem="106" firstAttribute="leading" secondItem="120" secondAttribute="leading" id="ivh-gO-265"/>
                     <constraint firstItem="111" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="41" id="ixk-L0-PbD"/>
                     <constraint firstItem="114" firstAttribute="top" secondItem="104" secondAttribute="bottom" constant="8" symbolic="YES" id="jxf-oT-auA"/>
                     <constraint firstItem="194" firstAttribute="bottom" secondItem="105" secondAttribute="bottom" id="kmc-bM-Io2"/>
                     <constraint firstItem="157" firstAttribute="top" secondItem="117" secondAttribute="bottom" constant="6" symbolic="YES" id="lkC-Yo-Ut4"/>
+                    <constraint firstItem="115" firstAttribute="top" secondItem="114" secondAttribute="bottom" constant="6" symbolic="YES" id="lpe-uf-HLv"/>
                     <constraint firstItem="111" firstAttribute="width" secondItem="112" secondAttribute="width" id="nGL-7z-lae"/>
                     <constraint firstItem="117" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="pi7-d4-yLK"/>
                     <constraint firstItem="105" firstAttribute="top" secondItem="108" secondAttribute="bottom" constant="21" id="qJa-ps-3cy"/>
                     <constraint firstItem="109" firstAttribute="top" secondItem="111" secondAttribute="bottom" constant="5" id="r3N-Kb-06h"/>
                     <constraint firstItem="112" firstAttribute="leading" secondItem="111" secondAttribute="trailing" constant="8" symbolic="YES" id="rdD-2g-Edk"/>
-                    <constraint firstItem="227" firstAttribute="top" secondItem="156" secondAttribute="bottom" constant="18" id="sJZ-iL-BbO"/>
                     <constraint firstItem="98" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="tUX-eV-8PA"/>
                     <constraint firstItem="158" firstAttribute="leading" secondItem="110" secondAttribute="trailing" constant="15" id="vQF-Tb-sEC"/>
                     <constraint firstItem="107" firstAttribute="leading" secondItem="110" secondAttribute="leading" id="wDo-rV-y2l"/>
