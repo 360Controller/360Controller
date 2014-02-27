@@ -325,7 +325,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [powerOff setHidden:YES];
     // Hide battery icon
     bundle = [NSBundle bundleForClass:[self class]];
-    [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:[bundle pathForResource:@"battNone" ofType:@"tif"]]];
+    [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:[bundle pathForImageResource:@"battNone"]]];
 }
 
 // Stop using the HID device
@@ -549,13 +549,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 unsigned char level;
                 
                 if (CFNumberGetValue(prop, kCFNumberCharType, &level))
-                    path = [bundle pathForResource:[NSString stringWithFormat:@"batt%i", level / 64] ofType:@"tif"];
+                    path = [bundle pathForImageResource:[NSString stringWithFormat:@"batt%i", level / 64]];
                 CFRelease(prop);
             }
             [powerOff setHidden:NO];
         }
         if (path == nil)
-            path = [bundle pathForResource:@"battNone" ofType:@"tif"];
+            path = [bundle pathForImageResource:@"battNone"];
         [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:path]];
     }
 }
