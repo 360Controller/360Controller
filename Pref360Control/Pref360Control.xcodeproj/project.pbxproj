@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3B04BE7313763D04005FA9F8 /* DeviceLister.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B04BE7113763D04005FA9F8 /* DeviceLister.h */; };
 		3B04BE7413763D04005FA9F8 /* DeviceLister.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04BE7213763D04005FA9F8 /* DeviceLister.m */; };
-		3B04BEA61376416D005FA9F8 /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 3B04BEA51376416D005FA9F8 /* DriverTool */; };
 		3B47D9ED0B93C2BF00F200B8 /* battNone.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EC0B93C2BF00F200B8 /* battNone.tif */; };
 		3B47D9F20B93C31400F200B8 /* batt1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EE0B93C31400F200B8 /* batt1.tif */; };
 		3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EF0B93C31400F200B8 /* batt0.tif */; };
@@ -32,6 +31,7 @@
 		3BC41F32096C85CB00664A42 /* DeviceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BC41F30096C85CB00664A42 /* DeviceItem.h */; };
 		3BC41F33096C85CB00664A42 /* DeviceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC41F31096C85CB00664A42 /* DeviceItem.m */; };
 		3BC41F47096C8D0300664A42 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC41F46096C8D0300664A42 /* ForceFeedback.framework */; };
+		55A3FDD918BEF6CA00266EA3 /* DriverTool in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FDD618BEF6B200266EA3 /* DriverTool */; };
 		8D202CEA0486D31800D8A456 /* Pref360Control_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */; };
 		8D202CEB0486D31800D8A456 /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -42,6 +42,23 @@
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		55A3FDD518BEF6B200266EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DD76FA10486AA7600D96B5E;
+			remoteInfo = DriverTool;
+		};
+		55A3FDD718BEF6C100266EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76F960486AA7600D96B5E;
+			remoteInfo = DriverTool;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -50,7 +67,6 @@
 		32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
 		3B04BE7113763D04005FA9F8 /* DeviceLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLister.h; sourceTree = "<group>"; };
 		3B04BE7213763D04005FA9F8 /* DeviceLister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLister.m; sourceTree = "<group>"; };
-		3B04BEA51376416D005FA9F8 /* DriverTool */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = DriverTool; path = ../DriverTool/build/Release/DriverTool; sourceTree = SOURCE_ROOT; };
 		3B47D9EC0B93C2BF00F200B8 /* battNone.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = battNone.tif; sourceTree = "<group>"; };
 		3B47D9EE0B93C31400F200B8 /* batt1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt1.tif; sourceTree = "<group>"; };
 		3B47D9EF0B93C31400F200B8 /* batt0.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt0.tif; sourceTree = "<group>"; };
@@ -73,6 +89,7 @@
 		3BC41F30096C85CB00664A42 /* DeviceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceItem.h; sourceTree = "<group>"; };
 		3BC41F31096C85CB00664A42 /* DeviceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceItem.m; sourceTree = "<group>"; };
 		3BC41F46096C8D0300664A42 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
+		55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DriverTool.xcodeproj; path = ../DriverTool/DriverTool.xcodeproj; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Pref360Control.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pref360Control.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
@@ -88,10 +105,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
-				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
-				3BBEAB2D096B6EDE00F2E37B /* IOKit.framework in Frameworks */,
 				3BC41F47096C8D0300664A42 /* ForceFeedback.framework in Frameworks */,
 				3B8B91321376FC120047D446 /* Security.framework in Frameworks */,
+				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
+				3BBEAB2D096B6EDE00F2E37B /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,25 +121,25 @@
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32DBCFA10370C40200C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				089C1671FE841209C02AAC07 /* Frameworks */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = Pref360Control;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+		089C1671FE841209C02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
-			name = "Frameworks and Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3B04BEA51376416D005FA9F8 /* DriverTool */,
+				55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */,
@@ -198,6 +215,14 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		55A3FDD218BEF6B200266EA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55A3FDD618BEF6B200266EA3 /* DriverTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -233,6 +258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55A3FDD818BEF6C100266EA3 /* PBXTargetDependency */,
 			);
 			name = Pref360Control;
 			productInstallPath = "$(HOME)/Library/PreferencePanes";
@@ -259,12 +285,28 @@
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Pref360Control */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 55A3FDD218BEF6B200266EA3 /* Products */;
+					ProjectRef = 55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D202CE80486D31800D8A456 /* Pref360Control */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		55A3FDD618BEF6B200266EA3 /* DriverTool */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = DriverTool;
+			remoteRef = 55A3FDD518BEF6B200266EA3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D202CEC0486D31800D8A456 /* Resources */ = {
@@ -279,7 +321,6 @@
 				3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */,
 				3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */,
 				3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */,
-				3B04BEA61376416D005FA9F8 /* DriverTool in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A3FDD918BEF6CA00266EA3 /* DriverTool in Sources */,
 				8D202CF10486D31800D8A456 /* Pref360ControlPref.m in Sources */,
 				3BBEAB02096B2C4C00F2E37B /* MyAnalogStick.m in Sources */,
 				3BBEAB05096B2C5200F2E37B /* MyCentreButtons.m in Sources */,
@@ -303,6 +345,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55A3FDD818BEF6C100266EA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DriverTool;
+			targetProxy = 55A3FDD718BEF6C100266EA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
@@ -324,7 +374,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3BBDC6A6097946B50023AAD8 /* Development */ = {
+		3BBDC6A6097946B50023AAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -351,9 +401,9 @@
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
-			name = Development;
+			name = Debug;
 		};
-		3BBDC6A7097946B50023AAD8 /* Deployment */ = {
+		3BBDC6A7097946B50023AAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -377,68 +427,31 @@
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		3BBDC6A8097946B50023AAD8 /* Default */ = {
+		3BBDC6AA097946B50023AAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_OBJC_GCC = supported;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Pref360Control_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"-bundle",
-					"-twolevel_namespace",
-				);
-				PRODUCT_NAME = Pref360Control;
-				SECTORDER_FLAGS = "";
-				WRAPPER_EXTENSION = prefPane;
-			};
-			name = Default;
-		};
-		3BBDC6AA097946B50023AAD8 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GCC = supported;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-fobjc-gc";
+				SDKROOT = macosx;
 			};
-			name = Development;
+			name = Debug;
 		};
-		3BBDC6AB097946B50023AAD8 /* Deployment */ = {
+		3BBDC6AB097946B50023AAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GCC = supported;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-fobjc-gc";
+				SDKROOT = macosx;
 			};
-			name = Deployment;
-		};
-		3BBDC6AC097946B50023AAD8 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_GCC = supported;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_CFLAGS = "-fobjc-gc";
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -446,22 +459,20 @@
 		3BBDC6A5097946B50023AAD8 /* Build configuration list for PBXNativeTarget "Pref360Control" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3BBDC6A6097946B50023AAD8 /* Development */,
-				3BBDC6A7097946B50023AAD8 /* Deployment */,
-				3BBDC6A8097946B50023AAD8 /* Default */,
+				3BBDC6A6097946B50023AAD8 /* Debug */,
+				3BBDC6A7097946B50023AAD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 		3BBDC6A9097946B50023AAD8 /* Build configuration list for PBXProject "Pref360Control" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3BBDC6AA097946B50023AAD8 /* Development */,
-				3BBDC6AB097946B50023AAD8 /* Deployment */,
-				3BBDC6AC097946B50023AAD8 /* Default */,
+				3BBDC6AA097946B50023AAD8 /* Debug */,
+				3BBDC6AB097946B50023AAD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

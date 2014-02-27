@@ -108,6 +108,8 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB91DD08733DB10010E9CD /* Build configuration list for PBXProject "Wireless360Controller" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -179,11 +181,9 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = 1.0.0d11;
 				PRODUCT_NAME = Wireless360Controller;
-				SDKROOT = macosx10.8;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -193,11 +193,9 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1.0.0d13;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = 1.0.0d11;
 				PRODUCT_NAME = Wireless360Controller;
-				SDKROOT = macosx10.8;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -205,22 +203,22 @@
 		1DEB91DE08733DB10010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		1DEB91DF08733DB10010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
