@@ -12,6 +12,8 @@
 	<string>com.mice.Xbox360ControllerForceFeedback</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleSignature</key>
@@ -32,8 +34,6 @@
 			<string>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</string>
 		</array>
 	</dict>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
 </dict>

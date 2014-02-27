@@ -298,7 +298,7 @@ Please consider donating if you enjoy this driver!</string>
                         <constraints>
                             <constraint firstAttribute="height" constant="151" id="FyU-0S-29w"/>
                         </constraints>
-                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
+                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="195"/>
                         <connections>
                             <action selector="changeSetting:" target="-2" id="196"/>
                         </connections>
@@ -489,8 +489,10 @@ Please consider donating if you enjoy this driver!</string>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="218">
                         <rect key="frame" x="18" y="25" width="318" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="To save changes to this list, you must enter your password. A restart will be required for changes to take effect." id="219">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="219">
                             <font key="font" metaFont="smallSystem"/>
+                            <string key="title">To save changes to this list, you must enter your password.
+A restart will be required for changes to take effect.</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>

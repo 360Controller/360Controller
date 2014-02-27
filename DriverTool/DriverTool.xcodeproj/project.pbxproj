@@ -9,26 +9,13 @@
 /* Begin PBXBuildFile section */
 		8DD76F9A0486AA7600D96B5E /* DriverTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* DriverTool.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
-		8DD76F9F0486AA7600D96B5E /* DriverTool.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* DriverTool.1 */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				8DD76F9F0486AA7600D96B5E /* DriverTool.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* DriverTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverTool.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32A70AAB03705E1F00C91783 /* DriverTool_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverTool_Prefix.pch; sourceTree = "<group>"; };
+		55A3FDE518BFBDB500266EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* DriverTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DriverTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* DriverTool.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DriverTool.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +37,7 @@
 			children = (
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859EA2029092E104C91782 /* Documentation */,
+				55A3FDE418BFBAB100266EA3 /* Resources */,
 				08FB779DFE84155DC02AAC07 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
@@ -81,6 +69,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55A3FDE418BFBAB100266EA3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55A3FDE518BFBDB500266EA3 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		C6859EA2029092E104C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +94,6 @@
 			buildPhases = (
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
-				8DD76F9E0486AA7600D96B5E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -154,11 +149,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DriverTool_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = DriverTool;
 			};
@@ -169,9 +166,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DriverTool_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = DriverTool;
 			};

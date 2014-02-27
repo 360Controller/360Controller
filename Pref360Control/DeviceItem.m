@@ -76,12 +76,9 @@ static NSString* GetDeviceName(io_service_t device)
 {
     DeviceItem *item = [[DeviceItem alloc] initFromItemForDevice:device];
 
-	if (!item)
-		goto fail;
-    
-	return item;
+	if (item)
+		return item;
 	
-fail:
     IOObjectRelease(device);
     return nil;
 }
@@ -89,11 +86,11 @@ fail:
 - (void)dealloc
 {
     if(deviceHandle != 0)
-        IOObjectRelease(deviceHandle);
+		IOObjectRelease(deviceHandle);
     if(interface != NULL)
-        (*interface)->Release(interface);
+		(*interface)->Release(interface);
     if(forceFeedback != 0)
-        FFReleaseDevice(forceFeedback);
+		FFReleaseDevice(forceFeedback);
 }
 
 @end

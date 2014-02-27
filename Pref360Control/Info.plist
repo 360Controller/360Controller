@@ -5,9 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_US</string>
 	<key>CFBundleExecutable</key>
-	<string>Pref360Control</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mice.driver.360Controller.Prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
