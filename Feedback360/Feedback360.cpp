@@ -30,6 +30,7 @@
 
 // static var initialization
 UInt32 Feedback360::sFactoryRefCount = 0;
+CFUUIDRef Feedback360::factoryID = NULL;
 
 IOCFPlugInInterface functionMap360_IOCFPlugInInterface={
     // Padding required for COM
@@ -70,7 +71,6 @@ IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface={
 
 Feedback360::Feedback360(void) : fRefCount(1)
 {
-
     EffectCount = 0;
     EffectIndex = 1;
     EffectList = NULL;
@@ -90,9 +90,6 @@ Feedback360::Feedback360(void) : fRefCount(1)
     iIOForceFeedbackDeviceInterface.obj = this;
 
     sFactoryAddRef();
-
-
-
 }
 
 Feedback360::~Feedback360(void)
@@ -154,7 +151,7 @@ void Feedback360::sFactoryAddRef (void)
 {
     if ( sFactoryRefCount++ == 0 )
     {
-        CFUUIDRef factoryID = kFeedback360Uuid;
+        factoryID = kFeedback360Uuid;
         CFRetain ( factoryID );
         CFPlugInAddInstanceForFactory ( factoryID );
     }
@@ -164,7 +161,6 @@ void Feedback360::sFactoryRelease (void)
 {
     if ( sFactoryRefCount-- == 1 )
     {
-        CFUUIDRef factoryID = kFeedback360Uuid;
         CFPlugInRemoveInstanceForFactory ( factoryID );
         CFRelease ( factoryID );
     }
@@ -777,14 +773,12 @@ HRESULT Feedback360::sStopEffect( void * self, UInt32 downloadID ) {
     return Feedback360::getThis(self)->StopEffect(downloadID);
 }
 
-
-
 // External factory function
 
 extern "C" void* Control360Factory(CFAllocatorRef allocator,CFUUIDRef typeID)
 {
     void* result = NULL;
-    if(CFEqual(typeID,kIOForceFeedbackLibTypeID))
+    if(CFEqual(typeID, kIOForceFeedbackLibTypeID))
         result = (void*)Feedback360::Alloc();
     return (void*)result;
 }

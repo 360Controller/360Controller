@@ -33,12 +33,10 @@
 #include "devlink.h"
 #include "Feedback360Effect.h"
 
-
 #define FeedbackDriverVersionMajor              1
 #define FeedbackDriverVersionMinor              0
 #define FeedbackDriverVersionStage              developStage
 #define FeedbackDriverVersionNonRelRev          0
-
 
 class Feedback360
 {
@@ -64,7 +62,8 @@ private:
         Feedback360 *obj;
     } Xbox360InterfaceMap;
 
-
+	static CFUUIDRef factoryID;
+	
     // IOCFPlugin interfacing variables and functions
 public:
 
@@ -121,8 +120,6 @@ private:
     CFAbsoluteTime      LastTime;
     CFAbsoluteTime      PausedTime;
 
-
-
     void        SetForce(LONG LeftLevel, LONG RightLevel);
 
     // event loop func
@@ -153,10 +150,9 @@ private:
 };
 
 // B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83
-#define kFeedback360Uuid CFUUIDGetConstantUUIDWithBytes(NULL,  \
+#define kFeedback360Uuid CFUUIDGetConstantUUIDWithBytes(kCFAllocatorSystemDefault,  \
 0xB8, 0xED, 0x27, 0x8F, 0xEC, 0x8A, 0x4E, 0x8E,      \
 0xB4, 0xCF, 0x13, 0xE2, 0xA9, 0xD6, 0x8E, 0x83)
-
 
 // Factory function
 extern "C" {
