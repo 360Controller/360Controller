@@ -36,10 +36,9 @@ void SetAlertDisabled(int index)
 BOOL AlertDisabled(int index)
 {
     NSString *prop;
-    BOOL result;
+    BOOL result = NO;
     CFPropertyListRef value;
     
-    result = FALSE;
     prop = [NSString stringWithFormat:@"%@%i", D_SHOWONCE, index];
     value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     if (value != NULL)

@@ -27,7 +27,7 @@
 #import "ControlPrefs.h"
 #import "DeviceLister.h"
 
-#define NO_ITEMS            @"No devices found"
+#define NO_ITEMS @"No devices found"
 
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
@@ -42,15 +42,36 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     io_service_t object=0;
     BOOL update;
     
-    update=FALSE;
+    update=NO;
     while((object=IOIteratorNext(iterator))!=0) {
         IOObjectRelease(object);
-        update=TRUE;
+        update=YES;
     }
     if(update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
 }
 
 @implementation Pref360ControlPref
+@synthesize centreButtons;
+@synthesize deviceList;
+@synthesize digiStick;
+@synthesize leftShoulder;
+@synthesize leftStick;
+@synthesize leftLinked;
+@synthesize leftStickDeadzone;
+@synthesize leftStickInvertX;
+@synthesize leftStickInvertY;
+@synthesize leftTrigger;
+@synthesize rightButtons;
+@synthesize rightShoulder;
+@synthesize rightStick;
+@synthesize rightLinked;
+@synthesize rightStickDeadzone;
+@synthesize rightStickInvertX;
+@synthesize rightStickInvertY;
+@synthesize rightTrigger;
+@synthesize batteryLevel;
+@synthesize deviceLister;
+@synthesize powerOff;
 
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
@@ -237,7 +258,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         for(i=0,found=FALSE;(i<6)&&(!found);i++) {
             if(event.elementCookie==axis[i]) {
                 [self axisChanged:i newValue:event.value];
-                found=TRUE;
+                found=YES;
             }
         }
         if(found) continue;
@@ -245,7 +266,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         for(i=0,found=FALSE;(i<15)&&(!found);i++) {
             if(event.elementCookie==buttons[i]) {
                 [self buttonChanged:i newValue:event.value];
-                found=TRUE;
+                found=YES;
             }
         }
         if(found) continue;
@@ -272,25 +293,25 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     NSBundle *bundle;
     
     [leftStick setPositionX:0 y:0];
-    [leftStick setPressed:FALSE];
+    [leftStick setPressed:NO];
     [leftStick setDeadzone:0];
-    [digiStick setUp:FALSE];
-    [digiStick setDown:FALSE];
-    [digiStick setLeft:FALSE];
-    [digiStick setRight:FALSE];
-    [centreButtons setBack:FALSE];
-    [centreButtons setSpecific:FALSE];
-    [centreButtons setStart:FALSE];
+    [digiStick setUp:NO];
+    [digiStick setDown:NO];
+    [digiStick setLeft:NO];
+    [digiStick setRight:NO];
+    [centreButtons setBack:NO];
+    [centreButtons setSpecific:NO];
+    [centreButtons setStart:NO];
     [rightStick setPositionX:0 y:0];
-    [rightStick setPressed:FALSE];
+    [rightStick setPressed:NO];
     [rightStick setDeadzone:0];
-    [rightButtons setA:FALSE];
-    [rightButtons setB:FALSE];
-    [rightButtons setX:FALSE];
-    [rightButtons setY:FALSE];
-    [leftShoulder setPressed:FALSE];
+    [rightButtons setA:NO];
+    [rightButtons setB:NO];
+    [rightButtons setX:NO];
+    [rightButtons setY:NO];
+    [leftShoulder setPressed:NO];
     [leftTrigger setDoubleValue:0];
-    [rightShoulder setPressed:FALSE];
+    [rightShoulder setPressed:NO];
     [rightTrigger setDoubleValue:0];
     // Reset inputs
     [leftStickDeadzone setIntValue:0];

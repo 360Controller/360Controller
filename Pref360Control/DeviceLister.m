@@ -20,12 +20,12 @@
  along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#import <IOKit/usb/IOUSBLib.h>
+#include <IOKit/usb/IOUSBLib.h>
 #import "DeviceLister.h"
 #import "Pref360ControlPref.h"
 #import "ControlPrefs.h"
 
-#define TOOL_FILENAME       @"DriverTool"
+#define TOOL_FILENAME @"DriverTool"
 
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
@@ -147,12 +147,9 @@ static BOOL IsXBox360Controller(io_service_t device)
                 if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0])))
                 {
                     if (
-                        (ControllerInterfaces[interfaceNum].classNum == classNum)
-                    &&
-                        (ControllerInterfaces[interfaceNum].subClassNum == subClassNum)
-                    &&
-                        (ControllerInterfaces[interfaceNum].protocolNum == protocolNum)
-                    &&
+                        (ControllerInterfaces[interfaceNum].classNum == classNum) &&
+                        (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
+                        (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
                        )
                     {
@@ -174,6 +171,8 @@ static BOOL IsXBox360Controller(io_service_t device)
 }
 
 @implementation DeviceLister
+@synthesize list;
+@synthesize sheet;
 
 - init
 {
@@ -457,7 +456,6 @@ fail:
 }
 
 // NSTableView data source
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView
 {
     return [entries count];

@@ -27,18 +27,12 @@
 #import <IOKit/hid/IOHIDKeys.h>
 #import <ForceFeedback/ForceFeedback.h>
 
-@interface DeviceItem : NSObject {
-    IOHIDDeviceInterface122 **interface;
-    FFDeviceObjectReference forceFeedback;
-    io_service_t deviceHandle;
-    NSString *deviceName;
-}
+@interface DeviceItem : NSObject
+@property (strong, readonly) NSString *name;
+@property (readonly) io_service_t rawDevice;
+@property (readonly) FFDeviceObjectReference ffDevice;
+@property (readonly) IOHIDDeviceInterface122 **hidDevice;
 
-+ allocateDeviceItemForDevice:(io_service_t)device;
-
-- (NSString*)name;
-- (IOHIDDeviceInterface122**)hidDevice;
-- (FFDeviceObjectReference)ffDevice;
-- (io_service_t)rawDevice;
++ (instancetype)allocateDeviceItemForDevice:(io_service_t)device;
 
 @end

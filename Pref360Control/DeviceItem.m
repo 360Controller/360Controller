@@ -37,30 +37,53 @@ static NSString* GetDeviceName(io_service_t device)
     return deviceName;
 }
 
-@implementation DeviceItem
+@interface DeviceItem ()
+@property (strong, readwrite) NSString *name;
+@property (readwrite) io_service_t rawDevice;
+@property (readwrite) FFDeviceObjectReference ffDevice;
+@property (readwrite) IOHIDDeviceInterface122 **hidDevice;
+@end
 
-+ allocateDeviceItemForDevice:(io_service_t)device
+@implementation DeviceItem
+@synthesize name = deviceName;
+@synthesize rawDevice = deviceHandle;
+@synthesize ffDevice = forceFeedback;
+@synthesize hidDevice = interface;
+
+- (instancetype)initFromItemForDevice:(io_service_t)device
 {
-    DeviceItem *item;
-    IOReturn ret;
-    IOCFPlugInInterface **plugInInterface;
-    SInt32 score=0;
+	if (self = [super init]) {
+		IOReturn ret;
+		IOCFPlugInInterface **plugInInterface;
+		SInt32 score=0;
+
+		ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+		if (ret != kIOReturnSuccess)
+			return nil;
+		ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
+		(*plugInInterface)->Release(plugInInterface);
+		if (ret != kIOReturnSuccess)
+			return nil;
+		forceFeedback = 0;
+		FFCreateDevice(device, &forceFeedback);
+		self.rawDevice = device;
+		self.name = GetDeviceName(device);
+	}
+	return self;
+}
+
++ (instancetype)allocateDeviceItemForDevice:(io_service_t)device
+{
+    DeviceItem *item = [[DeviceItem alloc] initFromItemForDevice:device];
+
+	if (!item)
+		goto fail;
     
-    item=[[DeviceItem alloc] init];
-    if(item==nil) goto fail;
-    ret=IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID,kIOCFPlugInInterfaceID,&plugInInterface,&score);
-    if(ret!=kIOReturnSuccess) goto fail;
-    ret=(*plugInInterface)->QueryInterface(plugInInterface,CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122),(LPVOID)&item->interface);
-    (*plugInInterface)->Release(plugInInterface);
-    if(ret!=kIOReturnSuccess) goto fail;
-    item->forceFeedback=0;
-    FFCreateDevice(device,&item->forceFeedback);
-    item->deviceHandle=device;
-    item->deviceName = GetDeviceName(device);
-    return item;
+	return item;
+	
 fail:
     IOObjectRelease(device);
-    return NULL;
+    return nil;
 }
 
 - (void)dealloc
@@ -71,26 +94,6 @@ fail:
         (*interface)->Release(interface);
     if(forceFeedback != 0)
         FFReleaseDevice(forceFeedback);
-}
-
-- (NSString*)name
-{
-    return deviceName;
-}
-
-- (IOHIDDeviceInterface122**)hidDevice
-{
-    return interface;
-}
-
-- (FFDeviceObjectReference)ffDevice
-{
-    return forceFeedback;
-}
-
-- (io_service_t)rawDevice
-{
-    return deviceHandle;
 }
 
 @end

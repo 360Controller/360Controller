@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en_US</string>
 	<key>CFBundleExecutable</key>
 	<string>Pref360Control</string>
 	<key>CFBundleIconFile</key>
@@ -12,6 +12,8 @@
 	<string>com.mice.driver.360Controller.Prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>XBox 360 Controllers</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
@@ -24,11 +26,9 @@
 	<string>Pref360ControlPref</string>
 	<key>NSPrefPaneIconFile</key>
 	<string>Pref360ControlPref.tiff</string>
-	<key>NSPrincipalClass</key>
-	<string>Pref360ControlPref</string>
-	<key>CFBundleName</key>
-	<string>XBox 360 Controllers</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Xbox 360\nControllers</string>
+	<key>NSPrincipalClass</key>
+	<string>Pref360ControlPref</string>
 </dict>
 </plist>

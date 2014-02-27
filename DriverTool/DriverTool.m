@@ -22,13 +22,13 @@
  */
 #import <Foundation/Foundation.h>
 
-#define DRIVER_NAME     @"360Controller.kext"
+#define DRIVER_NAME @"360Controller.kext"
 
 static NSDictionary *infoPlistAttributes = nil;
 
 static NSString* GetDriverDirectory(void)
 {
-    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSSystemDomainMask, YES);
+    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSLocalDomainMask, YES);
     return [data[0] stringByAppendingPathComponent:@"Extensions"];
 }
 
@@ -70,15 +70,14 @@ static void WriteDriverConfig(NSString *driver, id config)
     data = [NSPropertyListSerialization dataFromPropertyList:config format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
     if (data == nil)
         NSLog(@"Error writing config for driver: %@", errorString);
+	
     if (![data writeToFile:filename atomically:NO])
         NSLog(@"Failed to write file!");
-    if (infoPlistAttributes != nil)
-    {
+	
+    if (infoPlistAttributes != nil) {
         NSError *error = nil;
-        if (![[NSFileManager defaultManager] setAttributes:infoPlistAttributes ofItemAtPath:filename error:&error])
-        {
-            NSLog(@"Error setting attributes on '%@': %@",
-                  filename, error);
+        if (![[NSFileManager defaultManager] setAttributes:infoPlistAttributes ofItemAtPath:filename error:&error]) {
+            NSLog(@"Error setting attributes on '%@': %@", filename, error);
         }
     }
 }
@@ -88,8 +87,7 @@ static void ScrubDevices(NSMutableDictionary *devices)
     NSMutableArray *deviceKeys;
     
     deviceKeys = [NSMutableArray arrayWithCapacity:10];
-    for (NSString *key in [devices allKeys])
-    {
+    for (NSString *key in [devices allKeys]) {
         NSDictionary *device = devices[key];
         if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] == NSOrderedSame)
             [deviceKeys addObject:key];
@@ -99,10 +97,9 @@ static void ScrubDevices(NSMutableDictionary *devices)
 
 static id MakeMutableCopy(id object)
 {
-    return (id<NSObject>)CFBridgingRelease(CFPropertyListCreateDeepCopy(
-                    kCFAllocatorDefault,
-                    (CFTypeRef)object,
-                    kCFPropertyListMutableContainers));
+    return CFBridgingRelease(CFPropertyListCreateDeepCopy(kCFAllocatorDefault,
+														  (CFTypeRef)object,
+														  kCFPropertyListMutableContainers));
 }
 
 static void AddDevice(NSMutableDictionary *personalities, NSString *name, int vendor, int product)
@@ -131,8 +128,7 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
     int i, count;
     
     count = (argc - 2) / 3;
-    for (i = 0; i < count; i++)
-    {
+    for (i = 0; i < count; i++) {
         NSString *name = @(argv[(i * 3) + 2]);
         int vendor = atoi(argv[(i * 3) + 3]);
         int product = atoi(argv[(i * 3) + 4]);
@@ -143,8 +139,7 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
 int main (int argc, const char * argv[]) {
     @autoreleasepool {
         NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
-        if (argc == 1)
-        {
+        if (argc == 1) {
             // Print out current types
             NSDictionary *types;
             NSArray *keys;
@@ -161,9 +156,7 @@ int main (int argc, const char * argv[]) {
                         [device[@"idVendor"] intValue],
                         [device[@"idProduct"] intValue]);
             }
-        }
-        else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0))
-        {
+        } else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0)) {
             NSMutableDictionary *saving;
             NSMutableDictionary *devices;
             
@@ -173,11 +166,10 @@ int main (int argc, const char * argv[]) {
             AddDevices(devices, argc, argv);
             WriteDriverConfig(DRIVER_NAME, saving);
 
-            system("/usr/bin/touch /System/Library/Extensions");
-        }
-        else
+            system("/usr/bin/touch /Library/Extensions");
+        } else
             NSLog(@"Invalid number of parameters (%i)", argc);
     
+		return 0;
     }
-    return 0;
 }

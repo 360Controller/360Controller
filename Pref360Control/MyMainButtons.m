@@ -22,14 +22,15 @@
 */
 #import "MyMainButtons.h"
 
-#define MINI_OFFSET         2
+#define MINI_OFFSET 2
 
 @implementation MyMainButtons
+@synthesize a, b, x, y;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-        a=b=x=y=FALSE;
+        a=b=x=y=NO;
 	}
 	return self;
 }
@@ -47,10 +48,10 @@
     path=[NSBezierPath bezierPathWithOvalInRect:rect];
     if(down) {
         [path fill];
-//        colour=[NSColor whiteColor];
+		//colour=[NSColor whiteColor];
     } else {
         [path stroke];
-//        colour=[NSColor blackColor];
+		//colour=[NSColor blackColor];
     }
     colour=[NSColor blackColor];
     bling=rect;

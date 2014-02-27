@@ -141,11 +141,11 @@ static void callbackConnected(void *param,io_iterator_t iterator)
         
         while ((object = IOIteratorNext(iterator)) != 0)
         {
-		/*
+#if 0
 		CFStringRef bob = IOObjectCopyClass(object);
 		NSLog(@"Found %p: %@", object, bob);
 		CFRelease(bob);
-		 */
+#endif
             if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
             {
                 FFDeviceObjectReference forceFeedback;
@@ -174,7 +174,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                                 c = 0x06 + i;
                                 if (leds[i] == nil)
                                     leds[i] = serialNumber;
-//                            NSLog(@"Added controller with LED %i", i);
+								// NSLog(@"Added controller with LED %i", i);
                                 break;
                             }
                         }
@@ -209,7 +209,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                                 break;
                             case 0x0719:    // Microsoft Wireless Gaming Receiver
                             case 0x0291:    // Third party Wireless Gaming Receiver
-                                foundWirelessReceiver = TRUE;
+                                foundWirelessReceiver = YES;
                                 break;
                         }
                     }
@@ -234,11 +234,11 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
         
         while ((object = IOIteratorNext(iterator)) != 0)
         {
-		/*
+#if 0
 		CFStringRef bob = IOObjectCopyClass(object);
 		NSLog(@"Lost %p: %@", object, bob);
 		CFRelease(bob);
-		 */
+#endif
             serial = GetSerialNumber(object);
             if (serial != nil)
             {
@@ -249,7 +249,7 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
                     if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
                     {
                         leds[i] = nil;
-//                    NSLog(@"Removed controller with LED %i", i);
+						// NSLog(@"Removed controller with LED %i", i);
                     }
                 }
             }
@@ -262,7 +262,7 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
 int main (int argc, const char * argv[])
 {
     @autoreleasepool {
-        foundWirelessReceiver = FALSE;
+        foundWirelessReceiver = NO;
         memset(leds, 0, sizeof(leds));
         // Get master port, for accessing I/O Kit
         IOMasterPort(MACH_PORT_NULL,&masterPort);
@@ -271,15 +271,15 @@ int main (int argc, const char * argv[])
         notifySource=IONotificationPortGetRunLoopSource(notifyPort);
         CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
         // Start listening
-            // USB devices
+		// USB devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
         callbackConnected(NULL, onIteratorOther);
-            // Wired 360 devices
+		// Wired 360 devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
         callbackConnected(NULL, onIteratorWired);
         IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
         callbackDisconnected(NULL, offIteratorWired);
-            // Wireless 360 devices
+		// Wireless 360 devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
         callbackConnected(NULL, onIteratorWireless);
         IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
@@ -295,7 +295,7 @@ int main (int argc, const char * argv[])
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
         CFRunLoopSourceInvalidate(notifySource);
         IONotificationPortDestroy(notifyPort);
-    // End
+		// End
     }
     return 0;
 }

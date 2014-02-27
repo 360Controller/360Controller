@@ -24,16 +24,17 @@
 
 @class Pref360ControlPref;
 
-@interface DeviceLister : NSObject {
+@interface DeviceLister : NSObject <NSTableViewDataSource>
+{
     Pref360ControlPref *owner;
-    IBOutlet NSWindow *sheet;
-    IBOutlet NSTableView *list;
     
     NSMutableDictionary *entries;
     NSMutableArray *connected, *enabled;
     
     BOOL changed;
 }
+@property (weak) IBOutlet NSWindow *sheet;
+@property (weak) IBOutlet NSTableView *list;
 
 - (void)showWithOwner:(Pref360ControlPref*)pane;
 - (IBAction)done:(id)sender;

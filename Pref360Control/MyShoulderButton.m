@@ -25,11 +25,12 @@
 #define INSET_AMOUNT        2
 
 @implementation MyShoulderButton
+@synthesize pressed;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		pressed=FALSE;
+		pressed=NO;
 	}
 	return self;
 }

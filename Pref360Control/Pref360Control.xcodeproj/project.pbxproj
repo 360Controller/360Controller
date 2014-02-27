@@ -28,11 +28,11 @@
 		3BC41F47096C8D0300664A42 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC41F46096C8D0300664A42 /* ForceFeedback.framework */; };
 		55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDDA18BEF99A00266EA3 /* Images.xcassets */; };
 		55A3FDDC18BEFCC400266EA3 /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDD618BEF6B200266EA3 /* DriverTool */; };
+		55A3FDE018BFB2C000266EA3 /* Pref360ControlPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDDE18BFB2C000266EA3 /* Pref360ControlPref.xib */; };
 		8D202CEA0486D31800D8A456 /* Pref360Control_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */; };
 		8D202CEB0486D31800D8A456 /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D202CEE0486D31800D8A456 /* Pref360ControlPref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */; };
-		8D202CEF0486D31800D8A456 /* Pref360ControlPref.nib in Resources */ = {isa = PBXBuildFile; fileRef = F506C042013D9D8C01CA16C8 /* Pref360ControlPref.nib */; };
 		8D202CF10486D31800D8A456 /* Pref360ControlPref.m in Sources */ = {isa = PBXBuildFile; fileRef = F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */; };
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
@@ -57,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
@@ -82,13 +81,14 @@
 		3BC41F46096C8D0300664A42 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DriverTool.xcodeproj; path = ../DriverTool/DriverTool.xcodeproj; sourceTree = "<group>"; };
 		55A3FDDA18BEF99A00266EA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		55A3FDE118BFB2E700266EA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
+		55A3FDE318BFB2FF00266EA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Pref360Control.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pref360Control.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 		F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360ControlPref.h; sourceTree = "<group>"; };
 		F506C03D013D9D7901CA16C8 /* Pref360ControlPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360ControlPref.m; sourceTree = "<group>"; };
 		F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Pref360ControlPref.tiff; sourceTree = "<group>"; };
-		F506C043013D9D8C01CA16C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Pref360ControlPref.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,7 @@
 				8D202CF70486D31800D8A456 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */,
-				F506C042013D9D8C01CA16C8 /* Pref360ControlPref.nib */,
+				55A3FDDE18BFB2C000266EA3 /* Pref360ControlPref.xib */,
 				55A3FDDA18BEF99A00266EA3 /* Images.xcassets */,
 			);
 			name = Resources;
@@ -255,6 +255,8 @@
 				Japanese,
 				French,
 				German,
+				Base,
+				en,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Pref360Control */;
 			projectDirPath = "";
@@ -287,10 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */,
+				55A3FDE018BFB2C000266EA3 /* Pref360ControlPref.xib in Resources */,
 				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
 				55A3FDDC18BEFCC400266EA3 /* DriverTool in Resources */,
 				8D202CEE0486D31800D8A456 /* Pref360ControlPref.tiff in Resources */,
-				8D202CEF0486D31800D8A456 /* Pref360ControlPref.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,17 +329,17 @@
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C167EFE841241C02AAC07 /* English */,
+				55A3FDE318BFB2FF00266EA3 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		F506C042013D9D8C01CA16C8 /* Pref360ControlPref.nib */ = {
+		55A3FDDE18BFB2C000266EA3 /* Pref360ControlPref.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F506C043013D9D8C01CA16C8 /* English */,
+				55A3FDE118BFB2E700266EA3 /* Base */,
 			);
-			name = Pref360ControlPref.nib;
+			name = Pref360ControlPref.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -362,11 +364,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
-				OTHER_LDFLAGS = (
-					"-bundle",
-					"-twolevel_namespace",
-				);
+				OTHER_LDFLAGS = "-twolevel_namespace";
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = prefPane;
@@ -390,10 +388,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"-bundle",
-					"-twolevel_namespace",
-				);
+				OTHER_LDFLAGS = "-twolevel_namespace";
 				PRODUCT_NAME = Pref360Control;
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = prefPane;
@@ -403,9 +398,11 @@
 		3BBDC6AA097946B50023AAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
@@ -416,8 +413,10 @@
 		3BBDC6AB097946B50023AAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};

@@ -26,15 +26,21 @@
 #define AREA_INSET          4
 
 @implementation MyAnalogStick
+@synthesize pressed;
+@synthesize appearance;
+@synthesize deadzone;
+@synthesize positionX = x;
+@synthesize positionY = y;
+@synthesize linked;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
+	if (self = [super initWithFrame:frameRect]) {
         deadzone=0;
         x=0;
         y=0;
-        pressed=FALSE;
-        linked=FALSE;
+        pressed=NO;
+        linked=NO;
 	}
 	return self;
 }
@@ -95,38 +101,38 @@
 
 - (void)setDeadzone:(int)pos
 {
-    deadzone=pos;
+	deadzone = pos;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setPositionX:(int)xPos y:(int)yPos
 {
-    x=xPos;
-    y=yPos;
+	x = xPos;
+	y = yPos;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setPositionX:(int)xPos
 {
-    x=xPos;
+	x = xPos;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setPositionY:(int)yPos
 {
-    y=yPos;
+	y = yPos;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setPressed:(BOOL)pressedState
 {
-    pressed=pressedState;
+	pressed = pressedState;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLinked:(BOOL)linkedState
 {
-    linked=linkedState;
+	linked = linkedState;
     [self setNeedsDisplay:YES];
 }
 

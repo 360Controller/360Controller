@@ -25,6 +25,10 @@
 #define INSET_AMOUNT        10
 
 @implementation MyDigitalStick
+@synthesize up = bUp;
+@synthesize down = bDown;
+@synthesize left = bLeft;
+@synthesize right = bRight;
 
 - (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
 {
@@ -61,7 +65,7 @@
 	if ((self = [super initWithFrame:frameRect]) != nil) {
         NSRect rect,triangle;
         
-        bUp=bDown=bLeft=bRight=FALSE;
+        bUp=bDown=bLeft=bRight=NO;
         rect=[self bounds];
         triangle.origin.x=INSET_AMOUNT;
         triangle.origin.y=INSET_AMOUNT;
@@ -99,25 +103,25 @@
 - (void)setUp:(BOOL)upState
 {
     bUp=upState;
-    [self setNeedsDisplay:TRUE];
+    [self setNeedsDisplay:YES];
 }
 
 - (void)setDown:(BOOL)downState
 {
     bDown=downState;
-    [self setNeedsDisplay:TRUE];
+    [self setNeedsDisplay:YES];
 }
 
 - (void)setLeft:(BOOL)leftState
 {
     bLeft=leftState;
-    [self setNeedsDisplay:TRUE];
+    [self setNeedsDisplay:YES];
 }
 
 - (void)setRight:(BOOL)rightState
 {
     bRight=rightState;
-    [self setNeedsDisplay:TRUE];
+    [self setNeedsDisplay:YES];
 }
 
 @end
