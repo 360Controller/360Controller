@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		3B04BE7313763D04005FA9F8 /* DeviceLister.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B04BE7113763D04005FA9F8 /* DeviceLister.h */; };
 		3B04BE7413763D04005FA9F8 /* DeviceLister.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04BE7213763D04005FA9F8 /* DeviceLister.m */; };
-		3B47D9ED0B93C2BF00F200B8 /* battNone.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EC0B93C2BF00F200B8 /* battNone.tif */; };
-		3B47D9F20B93C31400F200B8 /* batt1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EE0B93C31400F200B8 /* batt1.tif */; };
-		3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9EF0B93C31400F200B8 /* batt0.tif */; };
-		3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F00B93C31400F200B8 /* batt3.tif */; };
-		3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B47D9F10B93C31400F200B8 /* batt2.tif */; };
 		3B86987F0CE2A22100283CEC /* ControlPrefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B86987D0CE2A22100283CEC /* ControlPrefs.h */; };
 		3B8698800CE2A22100283CEC /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B86987E0CE2A22100283CEC /* ControlPrefs.m */; };
 		3B8B91321376FC120047D446 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8B91311376FC120047D446 /* Security.framework */; };
@@ -32,6 +27,7 @@
 		3BC41F33096C85CB00664A42 /* DeviceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC41F31096C85CB00664A42 /* DeviceItem.m */; };
 		3BC41F47096C8D0300664A42 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC41F46096C8D0300664A42 /* ForceFeedback.framework */; };
 		55A3FDD918BEF6CA00266EA3 /* DriverTool in Sources */ = {isa = PBXBuildFile; fileRef = 55A3FDD618BEF6B200266EA3 /* DriverTool */; };
+		55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3FDDA18BEF99A00266EA3 /* Images.xcassets */; };
 		8D202CEA0486D31800D8A456 /* Pref360Control_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */; };
 		8D202CEB0486D31800D8A456 /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* Pref360ControlPref.h */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -67,11 +63,6 @@
 		32DBCFA20370C41700C91783 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
 		3B04BE7113763D04005FA9F8 /* DeviceLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLister.h; sourceTree = "<group>"; };
 		3B04BE7213763D04005FA9F8 /* DeviceLister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLister.m; sourceTree = "<group>"; };
-		3B47D9EC0B93C2BF00F200B8 /* battNone.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = battNone.tif; sourceTree = "<group>"; };
-		3B47D9EE0B93C31400F200B8 /* batt1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt1.tif; sourceTree = "<group>"; };
-		3B47D9EF0B93C31400F200B8 /* batt0.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt0.tif; sourceTree = "<group>"; };
-		3B47D9F00B93C31400F200B8 /* batt3.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt3.tif; sourceTree = "<group>"; };
-		3B47D9F10B93C31400F200B8 /* batt2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = batt2.tif; sourceTree = "<group>"; };
 		3B86987D0CE2A22100283CEC /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPrefs.h; path = ../360Daemon/ControlPrefs.h; sourceTree = SOURCE_ROOT; };
 		3B86987E0CE2A22100283CEC /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlPrefs.m; path = ../360Daemon/ControlPrefs.m; sourceTree = SOURCE_ROOT; };
 		3B8B91311376FC120047D446 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -90,6 +81,7 @@
 		3BC41F31096C85CB00664A42 /* DeviceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceItem.m; sourceTree = "<group>"; };
 		3BC41F46096C8D0300664A42 /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		55A3FDD118BEF6B200266EA3 /* DriverTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DriverTool.xcodeproj; path = ../DriverTool/DriverTool.xcodeproj; sourceTree = "<group>"; };
+		55A3FDDA18BEF99A00266EA3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Pref360Control.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pref360Control.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
@@ -144,11 +136,7 @@
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				F506C040013D9D8001CA16C8 /* Pref360ControlPref.tiff */,
 				F506C042013D9D8C01CA16C8 /* Pref360ControlPref.nib */,
-				3B47D9EC0B93C2BF00F200B8 /* battNone.tif */,
-				3B47D9EF0B93C31400F200B8 /* batt0.tif */,
-				3B47D9EE0B93C31400F200B8 /* batt1.tif */,
-				3B47D9F10B93C31400F200B8 /* batt2.tif */,
-				3B47D9F00B93C31400F200B8 /* batt3.tif */,
+				55A3FDDA18BEF99A00266EA3 /* Images.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -313,14 +301,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A3FDDB18BEF99A00266EA3 /* Images.xcassets in Resources */,
 				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
 				8D202CEE0486D31800D8A456 /* Pref360ControlPref.tiff in Resources */,
 				8D202CEF0486D31800D8A456 /* Pref360ControlPref.nib in Resources */,
-				3B47D9ED0B93C2BF00F200B8 /* battNone.tif in Resources */,
-				3B47D9F20B93C31400F200B8 /* batt1.tif in Resources */,
-				3B47D9F30B93C31400F200B8 /* batt0.tif in Resources */,
-				3B47D9F40B93C31400F200B8 /* batt3.tif in Resources */,
-				3B47D9F50B93C31400F200B8 /* batt2.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,11 +417,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GCC = supported;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-fobjc-gc";
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -447,7 +434,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_GCC = supported;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-fobjc-gc";
 				SDKROOT = macosx;
 			};
