@@ -30,7 +30,7 @@
 
 #include <IOKit/IOCFPlugin.h>
 #include <ForceFeedback/IOForceFeedbackLib.h>
-#include	<math.h>
+#include <math.h>
 #include <string.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -55,12 +55,9 @@
 
 #define SCALE_MAX 255
 
-
 class Feedback360Effect
 {
-
 public:
-
 	Feedback360Effect();
 
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
@@ -75,7 +72,6 @@ public:
 	FFPERIODIC		DiPeriodic;
 	FFRAMPFORCE		DiRampforce;
 
-
 	DWORD			Status;
 	DWORD			PlayCount;
 	CFAbsoluteTime	StartTime;
@@ -84,12 +80,10 @@ public:
     DWORD           Index;
 
 private:
-
     void CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel);
 	void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);
     
-protected:
-    
+//protected:
 };
 
 #endif

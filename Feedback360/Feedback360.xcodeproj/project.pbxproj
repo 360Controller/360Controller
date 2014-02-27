@@ -143,12 +143,12 @@
 			isa = PBXGroup;
 			children = (
 				63519B3317F33691005B1010 /* Tests */,
-				3B2EF5440965B3C7007BFB7B /* Feedback360.h */,
 				08FB77B6FE84183AC02AAC07 /* Feedback360.cpp */,
+				3B2EF5440965B3C7007BFB7B /* Feedback360.h */,
 				63A4C8B517F3A937006BD66F /* Feedback360Effect.cpp */,
 				63A4C8B617F3A937006BD66F /* Feedback360Effect.h */,
-				3BBA03E1096A29B5008A46C9 /* devlink.h */,
 				3BBA03E2096A29B5008A46C9 /* devlink.cpp */,
+				3BBA03E1096A29B5008A46C9 /* devlink.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
