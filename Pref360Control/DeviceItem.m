@@ -30,12 +30,10 @@ static NSString* GetDeviceName(io_service_t device)
     
     if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) != KERN_SUCCESS)
         return nil;
-    properties = (NSDictionary*)serviceProperties;
-    deviceName = [properties objectForKey:(NSString*)CFSTR(kIOHIDProductKey)];
+    properties = CFBridgingRelease(serviceProperties);
+    deviceName = properties[@kIOHIDProductKey];
     if (deviceName == nil)
-        deviceName = [properties objectForKey:@"USB Product Name"];
-    [deviceName retain];
-    CFRelease(serviceProperties);
+        deviceName = properties[@"USB Product Name"];
     return deviceName;
 }
 
@@ -48,7 +46,7 @@ static NSString* GetDeviceName(io_service_t device)
     IOCFPlugInInterface **plugInInterface;
     SInt32 score=0;
     
-    item=[[[DeviceItem alloc] init] autorelease];
+    item=[[DeviceItem alloc] init];
     if(item==nil) goto fail;
     ret=IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID,kIOCFPlugInInterfaceID,&plugInInterface,&score);
     if(ret!=kIOReturnSuccess) goto fail;
@@ -73,8 +71,6 @@ fail:
         (*interface)->Release(interface);
     if(forceFeedback != 0)
         FFReleaseDevice(forceFeedback);
-    [deviceName release];
-    [super dealloc];
 }
 
 - (NSString*)name

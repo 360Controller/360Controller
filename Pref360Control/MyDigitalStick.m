@@ -53,7 +53,7 @@
     [path lineToPoint:point];
     [path closePath];
     // Done
-    return [path retain];
+    return path;
 }
 
 - (id)initWithFrame:(NSRect)frameRect
@@ -81,15 +81,6 @@
         right=[self makeTriangle:3 inRectangle:triangle];
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-    [up release];
-    [down release];
-    [left release];
-    [right release];
-    [super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect

@@ -28,9 +28,9 @@ void SetAlertDisabled(int index)
     NSNumber *value;
 
     prop = [NSString stringWithFormat:@"%@%i", D_SHOWONCE, index];
-    value = [NSNumber numberWithBool:TRUE];
-    CFPreferencesSetValue((CFStringRef)prop, value, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
-    CFPreferencesSynchronize((CFStringRef)DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    value = @YES;
+    CFPreferencesSetValue((__bridge CFStringRef)prop, (__bridge CFPropertyListRef)(value), DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
 BOOL AlertDisabled(int index)
@@ -41,18 +41,17 @@ BOOL AlertDisabled(int index)
     
     result = FALSE;
     prop = [NSString stringWithFormat:@"%@%i", D_SHOWONCE, index];
-    value = CFPreferencesCopyValue((CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     if (value != NULL)
     {
-        result = [((NSNumber*)value) boolValue];
-        CFRelease(value);
+        result = [CFBridgingRelease(value) boolValue];
     }
     return result;
 }
 
 void SetController(NSString *serial, NSDictionary *data)
 {
-    CFPreferencesSetValue((CFStringRef)serial, data, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSetValue((__bridge CFStringRef)serial, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
 }
 
@@ -61,8 +60,8 @@ NSDictionary* GetController(NSString *serial)
     CFPropertyListRef value;
     
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    value = CFPreferencesCopyValue((CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    return [((NSDictionary*)value) autorelease];
+    value = CFPreferencesCopyValue((__bridge CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    return CFBridgingRelease(value);
 }
 
 NSString* GetSerialNumber(io_service_t device)
@@ -72,19 +71,19 @@ NSString* GetSerialNumber(io_service_t device)
     value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("USB Serial Number"), kCFAllocatorDefault, kIORegistryIterateRecursively);
     if (value == NULL)
         value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("SerialNumber"), kCFAllocatorDefault, kIORegistryIterateRecursively);
-    return [((NSString*)value) autorelease];
+    return CFBridgingRelease(value);
 }
 
 void ConfigController(io_service_t device, NSDictionary *config)
 {
-    IORegistryEntrySetCFProperties(device, config);
+    IORegistryEntrySetCFProperties(device, (__bridge CFTypeRef)(config));
 }
 
 void SetKnownDevices(NSDictionary *devices)
 {
     // Setting the dictionary should work?
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
-    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, data, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
 }
 
@@ -95,7 +94,8 @@ NSDictionary* GetKnownDevices(void)
     
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    data = [(NSData*)value autorelease];
+
+    data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];

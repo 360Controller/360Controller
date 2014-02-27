@@ -48,7 +48,7 @@
         colour=[NSColor whiteColor];
     } else [path stroke];
     // Draw text
-    attributes=[NSDictionary dictionaryWithObject:colour forKey:NSForegroundColorAttributeName];
+    attributes=@{NSForegroundColorAttributeName: colour};
     size=[button sizeWithAttributes:attributes];
     point.x=rect.origin.x+((rect.size.width-size.width)/2);
     point.y=rect.origin.y+((rect.size.height-size.height)/2);

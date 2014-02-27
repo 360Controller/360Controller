@@ -32,7 +32,7 @@
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
-    if(target!=NULL) [((Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
+    if(target!=NULL) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
 }
 
 // Handle callback for when our device is connected or disconnected. Both events are
@@ -47,7 +47,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         IOObjectRelease(object);
         update=TRUE;
     }
-    if(update) [(Pref360ControlPref*)param handleDeviceChange];
+    if(update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
 }
 
 @implementation Pref360ControlPref
@@ -304,7 +304,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [powerOff setHidden:YES];
     // Hide battery icon
     bundle = [NSBundle bundleForClass:[self class]];
-    [batteryLevel setImage:[[[NSImage alloc] initByReferencingFile:[bundle pathForResource:@"battNone" ofType:@"tif"]] autorelease]];
+    [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:[bundle pathForResource:@"battNone" ofType:@"tif"]]];
 }
 
 // Stop using the HID device
@@ -351,7 +351,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     {
-        DeviceItem *item=[deviceArray objectAtIndex:i];
+        DeviceItem *item=deviceArray[i];
         
         device=[item hidDevice];
         ffDevice=[item ffDevice];
@@ -437,7 +437,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     // Set callback
-    ret=(*hidQueue)->setEventCallout(hidQueue,CallbackFunction,self,NULL);
+    ret=(*hidQueue)->setEventCallout(hidQueue,CallbackFunction,(__bridge void *)(self),NULL);
     if(ret!=kIOReturnSuccess) {
         NSLog(@"Unable to set event callback");
         // Error?
@@ -460,7 +460,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Read existing properties
     {
 //        CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
-        CFDictionaryRef dict = (CFDictionaryRef)[GetController(GetSerialNumber(registryEntry)) retain];
+        CFDictionaryRef dict = (CFDictionaryRef)CFBridgingRetain(GetController(GetSerialNumber(registryEntry)));
         if(dict!=0) {
             CFBooleanRef boolValue;
             CFNumberRef intValue;
@@ -535,7 +535,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         }
         if (path == nil)
             path = [bundle pathForResource:@"battNone" ofType:@"tif"];
-        [batteryLevel setImage:[[[NSImage alloc] initByReferencingFile:path] autorelease]];
+        [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:path]];
     }
 }
 
@@ -604,20 +604,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray=[[NSMutableArray arrayWithCapacity:1] retain];
+    deviceArray=[NSMutableArray arrayWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
         // Wired
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, self, &onIteratorWired);
-    callbackHandleDevice(self, onIteratorWired);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, self, &offIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &onIteratorWired);
+    callbackHandleDevice((__bridge void *)(self), onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &offIteratorWired);
     while((object = IOIteratorNext(offIteratorWired)) != 0)
         IOObjectRelease(object);
         // Wireless
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, self, &onIteratorWireless);
-    callbackHandleDevice(self, onIteratorWireless);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, self, &offIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &onIteratorWireless);
+    callbackHandleDevice((__bridge void *)(self), onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
 }
@@ -641,7 +641,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self stopDevice];
     for (i = 0; i < [deviceArray count]; i++)
     {
-        item = [deviceArray objectAtIndex:i];
+        item = deviceArray[i];
         if ([item ffDevice] == 0)
             continue;
         c = 0x06 + (i % 0x04);
@@ -654,7 +654,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         FFDeviceEscape([item ffDevice], &escape);
     }
     [self deleteDeviceList];
-    [deviceArray release];
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);
     // Done
@@ -702,7 +701,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     dict=CFDictionaryCreate(NULL,(const void**)keys,(const void**)values,sizeof(keys)/sizeof(keys[0]),&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, dict);
-    SetController(GetSerialNumber(registryEntry), (NSDictionary*)dict);
+    SetController(GetSerialNumber(registryEntry), (__bridge NSDictionary*)dict);
     // Update UI
     [leftStick setLinked:([leftLinked state]==NSOnState)];
     [leftStick setDeadzone:[leftStickDeadzone doubleValue]];
@@ -736,6 +735,5 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     escape.lpvOutBuffer=NULL;
     FFDeviceEscape(ffDevice,&escape);
 }
-
 
 @end

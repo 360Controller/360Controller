@@ -83,8 +83,6 @@
     FFEffectObjectReference effectRef;
 }
 
-- (void)mainViewDidLoad;
-
 - (void)eventQueueFired:(void*)sender withResult:(IOReturn)result;
 
 - (void)handleDeviceChange;

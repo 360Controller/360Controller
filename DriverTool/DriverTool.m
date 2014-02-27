@@ -29,7 +29,7 @@ static NSDictionary *infoPlistAttributes = nil;
 static NSString* GetDriverDirectory(void)
 {
     NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSSystemDomainMask, YES);
-    return [[data objectAtIndex:0] stringByAppendingPathComponent:@"Extensions"];
+    return [data[0] stringByAppendingPathComponent:@"Extensions"];
 }
 
 static NSString* GetDriverConfigPath(NSString *driver)
@@ -48,7 +48,7 @@ static id ReadDriverConfig(NSString *driver)
     NSDictionary *config;
     
     filename = GetDriverConfigPath(driver);
-    infoPlistAttributes = [[[NSFileManager defaultManager] attributesOfItemAtPath:filename error:&error] retain];
+    infoPlistAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filename error:&error];
     if (infoPlistAttributes == nil)
     {
         NSLog(@"Warning: Failed to read attributes of '%@': %@",
@@ -70,7 +70,6 @@ static void WriteDriverConfig(NSString *driver, id config)
     data = [NSPropertyListSerialization dataFromPropertyList:config format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
     if (data == nil)
         NSLog(@"Error writing config for driver: %@", errorString);
-    [errorString release];
     if (![data writeToFile:filename atomically:NO])
         NSLog(@"Failed to write file!");
     if (infoPlistAttributes != nil)
@@ -91,8 +90,8 @@ static void ScrubDevices(NSMutableDictionary *devices)
     deviceKeys = [NSMutableArray arrayWithCapacity:10];
     for (NSString *key in [devices allKeys])
     {
-        NSDictionary *device = [devices objectForKey:key];
-        if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360Peripheral"] == NSOrderedSame)
+        NSDictionary *device = devices[key];
+        if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] == NSOrderedSame)
             [deviceKeys addObject:key];
     }
     [devices removeObjectsForKeys:deviceKeys];
@@ -100,10 +99,10 @@ static void ScrubDevices(NSMutableDictionary *devices)
 
 static id MakeMutableCopy(id object)
 {
-    return [(id<NSObject>)CFPropertyListCreateDeepCopy(
+    return (id<NSObject>)CFBridgingRelease(CFPropertyListCreateDeepCopy(
                     kCFAllocatorDefault,
                     (CFTypeRef)object,
-                    kCFPropertyListMutableContainers) autorelease];
+                    kCFPropertyListMutableContainers));
 }
 
 static void AddDevice(NSMutableDictionary *personalities, NSString *name, int vendor, int product)
@@ -113,27 +112,18 @@ static void AddDevice(NSMutableDictionary *personalities, NSString *name, int ve
     controller = [NSMutableDictionary dictionaryWithCapacity:10];
     
     // Standard 
-    [controller setObject:@"com.mice.driver.Xbox360Controller"
-                   forKey:@"CFBundleIdentifier"];
-    [controller setObject:[NSDictionary dictionaryWithObject:@"360Controller.kext/Contents/PlugIns/Feedback360.plugin"
-                                                      forKey:@"F4545CE5-BF5B-11D6-A4BB-0003933E3E3E"]
-                   forKey:@"IOCFPlugInTypes"];
-    [controller setObject:@"Xbox360Peripheral"
-                   forKey:@"IOClass"];
-    [controller setObject:@"IOUSBDevice"
-                   forKey:@"IOProviderClass"];
-    [controller setObject:[NSNumber numberWithInt:65535]
-                   forKey:@"IOKitDebug"];
+    controller[@"CFBundleIdentifier"] = @"com.mice.driver.Xbox360Controller";
+    controller[@"IOCFPlugInTypes"] = @{@"F4545CE5-BF5B-11D6-A4BB-0003933E3E3E": @"360Controller.kext/Contents/PlugIns/Feedback360.plugin"};
+    controller[@"IOClass"] = @"Xbox360Peripheral";
+    controller[@"IOProviderClass"] = @"IOUSBDevice";
+    controller[@"IOKitDebug"] = @65535;
     
     // Device-specific
-    [controller setObject:[NSNumber numberWithInt:vendor]
-                   forKey:@"idVendor"];
-    [controller setObject:[NSNumber numberWithInt:product]
-                   forKey:@"idProduct"];
+    controller[@"idVendor"] = @(vendor);
+    controller[@"idProduct"] = @(product);
     
     // Add it to the tree
-    [personalities setObject:controller
-                      forKey:name];
+    personalities[name] = controller;
 }
 
 static void AddDevices(NSMutableDictionary *personalities, int argc, const char *argv[])
@@ -143,7 +133,7 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
     count = (argc - 2) / 3;
     for (i = 0; i < count; i++)
     {
-        NSString *name = [NSString stringWithCString:argv[(i * 3) + 2] encoding:NSUTF8StringEncoding];
+        NSString *name = @(argv[(i * 3) + 2]);
         int vendor = atoi(argv[(i * 3) + 3]);
         int product = atoi(argv[(i * 3) + 4]);
         AddDevice(personalities, name, vendor, product);
@@ -151,44 +141,43 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
 }
 
 int main (int argc, const char * argv[]) {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
-    NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
-    if (argc == 1)
-    {
-        // Print out current types
-        NSDictionary *types;
-        NSArray *keys;
-        
-        types = [config objectForKey:@"IOKitPersonalities"];
-        keys = [types allKeys];
-        for (NSString *key in keys)
+    @autoreleasepool {
+        NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
+        if (argc == 1)
         {
-            NSDictionary *device = [types objectForKey:key];
-            if ([(NSString*)[device objectForKey:@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
-                continue;
-            fprintf(stdout, "%s,%i,%i\n",
-                    [key UTF8String],
-                    [[device objectForKey:@"idVendor"] intValue],
-                    [[device objectForKey:@"idProduct"] intValue]);
+            // Print out current types
+            NSDictionary *types;
+            NSArray *keys;
+            
+            types = config[@"IOKitPersonalities"];
+            keys = [types allKeys];
+            for (NSString *key in keys)
+            {
+                NSDictionary *device = types[key];
+                if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
+                    continue;
+                fprintf(stdout, "%s,%i,%i\n",
+                        [key UTF8String],
+                        [device[@"idVendor"] intValue],
+                        [device[@"idProduct"] intValue]);
+            }
         }
-    }
-    else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0))
-    {
-        NSMutableDictionary *saving;
-        NSMutableDictionary *devices;
-        
-        saving = MakeMutableCopy(config);
-        devices = [saving objectForKey:@"IOKitPersonalities"];
-        ScrubDevices(devices);
-        AddDevices(devices, argc, argv);
-        WriteDriverConfig(DRIVER_NAME, saving);
+        else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0))
+        {
+            NSMutableDictionary *saving;
+            NSMutableDictionary *devices;
+            
+            saving = MakeMutableCopy(config);
+            devices = saving[@"IOKitPersonalities"];
+            ScrubDevices(devices);
+            AddDevices(devices, argc, argv);
+            WriteDriverConfig(DRIVER_NAME, saving);
 
-        system("/usr/bin/touch /System/Library/Extensions");
-    }
-    else
-        NSLog(@"Invalid number of parameters (%i)", argc);
+            system("/usr/bin/touch /System/Library/Extensions");
+        }
+        else
+            NSLog(@"Invalid number of parameters (%i)", argc);
     
-    [pool drain];
+    }
     return 0;
 }
