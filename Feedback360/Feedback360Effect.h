@@ -72,6 +72,7 @@ public:
 	FFPERIODIC		DiPeriodic;
 	FFRAMPFORCE		DiRampforce;
 
+
 	DWORD			Status;
 	DWORD			PlayCount;
 	CFAbsoluteTime	StartTime;

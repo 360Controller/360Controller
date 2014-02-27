@@ -33,10 +33,10 @@
 #include "devlink.h"
 #include "Feedback360Effect.h"
 
-#define FeedbackDriverVersionMajor              1
-#define FeedbackDriverVersionMinor              0
-#define FeedbackDriverVersionStage              developStage
-#define FeedbackDriverVersionNonRelRev          0
+#define FeedbackDriverVersionMajor		1
+#define FeedbackDriverVersionMinor		0
+#define FeedbackDriverVersionStage		developStage
+#define FeedbackDriverVersionNonRelRev	0
 
 class Feedback360
 {
@@ -50,9 +50,9 @@ private:
     void operator = (Feedback360 &src);
 
     // reference counting
-    static UInt32   sFactoryRefCount;
-    static void     sFactoryAddRef(void);
-    static void     sFactoryRelease(void);
+    static UInt32	sFactoryRefCount;
+    static void		sFactoryAddRef(void);
+    static void		sFactoryRelease(void);
 
     UInt32 fRefCount;
 
@@ -66,14 +66,12 @@ private:
 	
     // IOCFPlugin interfacing variables and functions
 public:
-
     static IOCFPlugInInterface** Alloc(void);
 
     // static functions called by the ForceFeedback API
-
     static HRESULT  sQueryInterface(void *self, REFIID iid, LPVOID *ppv);
-    static ULONG    sAddRef(void *self);
-    static ULONG    sRelease(void *self);
+    static ULONG sAddRef(void *self);
+    static ULONG sRelease(void *self);
 
     static IOReturn sProbe ( void * self, CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     static IOReturn sStart ( void * self, CFDictionaryRef propertyTable, io_service_t service );
