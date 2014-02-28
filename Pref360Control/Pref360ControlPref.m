@@ -691,28 +691,21 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)changeSetting:(id)sender
 {
     CFDictionaryRef dict;
-    CFStringRef keys[8];
+	const CFStringRef keys[8] = {CFSTR("InvertLeftX"), CFSTR("InvertLeftY"), CFSTR("InvertRightX"), CFSTR("InvertRightY"),
+	CFSTR("DeadzoneLeft"), CFSTR("DeadzoneRight"), CFSTR("RelativeLeft"), CFSTR("RelativeRight")};
     CFTypeRef values[8];
     UInt16 i;
     
     // Set keys and values
-    keys[0]=CFSTR("InvertLeftX");
     values[0]=([leftStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    keys[1]=CFSTR("InvertLeftY");
     values[1]=([leftStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    keys[2]=CFSTR("InvertRightX");
     values[2]=([rightStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    keys[3]=CFSTR("InvertRightY");
     values[3]=([rightStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    keys[4]=CFSTR("DeadzoneLeft");
     i=[leftStickDeadzone doubleValue];
     values[4]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    keys[5]=CFSTR("DeadzoneRight");
     i=[rightStickDeadzone doubleValue];
     values[5]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    keys[6]=CFSTR("RelativeLeft");
     values[6]=([leftLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    keys[7]=CFSTR("RelativeRight");
     values[7]=([rightLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
     // Create dictionary
     dict=CFDictionaryCreate(NULL,(const void**)keys,(const void**)values,sizeof(keys)/sizeof(keys[0]),&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);
