@@ -25,12 +25,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		55A2B8D518C116BD006829A2 /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637C718C10CB400CE933D /* 360Daemon.m */; };
+		55A2B8D818C116E0006829A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2B8DA18C116E0006829A2 /* Localizable.strings */; };
+		55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
 		55B636B818C104DB00CE933D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
 		55B636C218C104DB00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636C018C104DB00CE933D /* InfoPlist.strings */; };
-		55B636C418C104DB00CE933D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B636C318C104DB00CE933D /* main.m */; };
-		55B636CB18C104DB00CE933D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B636CA18C104DB00CE933D /* AppDelegate.m */; };
-		55B636CE18C104DB00CE933D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B636CC18C104DB00CE933D /* MainMenu.xib */; };
-		55B636D018C104DB00CE933D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B636CF18C104DB00CE933D /* Images.xcassets */; };
 		55B6371618C1058E00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636F918C1054F00CE933D /* InfoPlist.strings */; };
 		55B6371718C105B800CE933D /* _60Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B636EF18C1054F00CE933D /* _60Controller.cpp */; };
 		55B6371818C105B800CE933D /* ChatPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B636F118C1054F00CE933D /* ChatPad.cpp */; };
@@ -150,6 +149,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		55A2B8DC18C11A21006829A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 0;
+			files = (
+				55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		55B6375618C1099700CE933D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +172,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55B636B418C104DB00CE933D /* 360DaemonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 360DaemonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B636B718C104DB00CE933D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55B636BA18C104DB00CE933D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -170,12 +180,7 @@
 		55B636BC18C104DB00CE933D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55B636BF18C104DB00CE933D /* 360DaemonApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "360DaemonApp-Info.plist"; sourceTree = "<group>"; };
 		55B636C118C104DB00CE933D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		55B636C318C104DB00CE933D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55B636C518C104DB00CE933D /* 360DaemonApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "360DaemonApp-Prefix.pch"; sourceTree = "<group>"; };
-		55B636C918C104DB00CE933D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		55B636CA18C104DB00CE933D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		55B636CD18C104DB00CE933D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		55B636CF18C104DB00CE933D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55B636D618C104DB00CE933D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		55B636EF18C1054F00CE933D /* _60Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
 		55B636F018C1054F00CE933D /* _60Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; };
@@ -238,14 +243,13 @@
 		55B637BB18C10C2400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B637BC18C10C2400CE933D /* pref360controlpref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pref360controlpref.tiff; sourceTree = "<group>"; };
 		55B637BD18C10C2400CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		55B637C618C10CB400CE933D /* 360Daemon.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = 360Daemon.1; sourceTree = "<group>"; };
-		55B637C718C10CB400CE933D /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 360Daemon.m; sourceTree = "<group>"; };
-		55B637CB18C10CB400CE933D /* 360Daemon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 360Daemon_Prefix.pch; sourceTree = "<group>"; };
-		55B637CC18C10CB400CE933D /* Alert.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Alert.tif; sourceTree = "<group>"; };
-		55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mice.360Daemon.plist; sourceTree = "<group>"; };
-		55B637CE18C10CB400CE933D /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPrefs.h; sourceTree = "<group>"; };
-		55B637CF18C10CB400CE933D /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPrefs.m; sourceTree = "<group>"; };
-		55B637D018C10CB400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55B637C618C10CB400CE933D /* 360Daemon.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = 360Daemon.1; path = ../360Daemon/360Daemon.1; sourceTree = "<group>"; };
+		55B637C718C10CB400CE933D /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = 360Daemon.m; path = ../360Daemon/360Daemon.m; sourceTree = "<group>"; };
+		55B637CC18C10CB400CE933D /* Alert.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Alert.tif; path = ../360Daemon/Alert.tif; sourceTree = "<group>"; };
+		55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = com.mice.360Daemon.plist; path = ../360Daemon/com.mice.360Daemon.plist; sourceTree = "<group>"; };
+		55B637CE18C10CB400CE933D /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPrefs.h; path = ../360Daemon/ControlPrefs.h; sourceTree = "<group>"; };
+		55B637CF18C10CB400CE933D /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlPrefs.m; path = ../360Daemon/ControlPrefs.m; sourceTree = "<group>"; };
+		55B637D018C10CB400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../360Daemon/Info.plist; sourceTree = "<group>"; };
 		55B637DE18C10CFE00CE933D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		55B637E818C10D5000CE933D /* Wireless360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wireless360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B637F818C10DA300CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -335,7 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				55B636EB18C1054F00CE933D /* 360Controller */,
-				55B637C518C10CB400CE933D /* 360Daemon */,
 				55B636BD18C104DB00CE933D /* 360DaemonApp */,
 				55B6372C18C108D200CE933D /* Feedback360 */,
 				55B6376A18C10A5400CE933D /* DriverTool */,
@@ -390,10 +393,13 @@
 		55B636BD18C104DB00CE933D /* 360DaemonApp */ = {
 			isa = PBXGroup;
 			children = (
-				55B636C918C104DB00CE933D /* AppDelegate.h */,
-				55B636CA18C104DB00CE933D /* AppDelegate.m */,
-				55B636CC18C104DB00CE933D /* MainMenu.xib */,
-				55B636CF18C104DB00CE933D /* Images.xcassets */,
+				55B637C618C10CB400CE933D /* 360Daemon.1 */,
+				55B637C718C10CB400CE933D /* 360Daemon.m */,
+				55B637CC18C10CB400CE933D /* Alert.tif */,
+				55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */,
+				55B637CE18C10CB400CE933D /* ControlPrefs.h */,
+				55B637CF18C10CB400CE933D /* ControlPrefs.m */,
+				55B637D018C10CB400CE933D /* Info.plist */,
 				55B636BE18C104DB00CE933D /* Supporting Files */,
 			);
 			path = 360DaemonApp;
@@ -404,8 +410,8 @@
 			children = (
 				55B636BF18C104DB00CE933D /* 360DaemonApp-Info.plist */,
 				55B636C018C104DB00CE933D /* InfoPlist.strings */,
-				55B636C318C104DB00CE933D /* main.m */,
 				55B636C518C104DB00CE933D /* 360DaemonApp-Prefix.pch */,
+				55A2B8DA18C116E0006829A2 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -497,21 +503,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		55B637C518C10CB400CE933D /* 360Daemon */ = {
-			isa = PBXGroup;
-			children = (
-				55B637C618C10CB400CE933D /* 360Daemon.1 */,
-				55B637C718C10CB400CE933D /* 360Daemon.m */,
-				55B637CB18C10CB400CE933D /* 360Daemon_Prefix.pch */,
-				55B637CC18C10CB400CE933D /* Alert.tif */,
-				55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */,
-				55B637CE18C10CB400CE933D /* ControlPrefs.h */,
-				55B637CF18C10CB400CE933D /* ControlPrefs.m */,
-				55B637D018C10CB400CE933D /* Info.plist */,
-			);
-			path = 360Daemon;
-			sourceTree = "<group>";
-		};
 		55B637F618C10DA300CE933D /* Wireless360Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,19 +586,20 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		55B636B318C104DB00CE933D /* 360DaemonApp */ = {
+		55B636B318C104DB00CE933D /* 360Daemon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360DaemonApp" */;
+			buildConfigurationList = 55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360Daemon" */;
 			buildPhases = (
 				55B636B018C104DB00CE933D /* Sources */,
 				55B636B118C104DB00CE933D /* Frameworks */,
 				55B636B218C104DB00CE933D /* Resources */,
+				55A2B8DC18C11A21006829A2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = 360DaemonApp;
+			name = 360Daemon;
 			productName = 360DaemonApp;
 			productReference = 55B636B418C104DB00CE933D /* 360DaemonApp.app */;
 			productType = "com.apple.product-type.application";
@@ -745,7 +737,7 @@
 			projectRoot = "";
 			targets = (
 				55B6375F18C10A3200CE933D /* DriverTool */,
-				55B636B318C104DB00CE933D /* 360DaemonApp */,
+				55B636B318C104DB00CE933D /* 360Daemon */,
 				55B6371E18C108A500CE933D /* Feedback360 */,
 				55B6377C18C10B0B00CE933D /* Pref360Control */,
 				55B6370618C1057100CE933D /* 360Controller */,
@@ -762,9 +754,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				55B636C218C104DB00CE933D /* InfoPlist.strings in Resources */,
-				55B636D018C104DB00CE933D /* Images.xcassets in Resources */,
+				55A2B8D818C116E0006829A2 /* Localizable.strings in Resources */,
 				55B637D318C10CB400CE933D /* Alert.tif in Resources */,
-				55B636CE18C104DB00CE933D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,9 +820,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55B636CB18C104DB00CE933D /* AppDelegate.m in Sources */,
-				55B636C418C104DB00CE933D /* main.m in Sources */,
 				55B637D518C10CB400CE933D /* ControlPrefs.m in Sources */,
+				55A2B8D518C116BD006829A2 /* 360Daemon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,7 +903,7 @@
 		};
 		55B6383D18C10FA200CE933D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55B636B318C104DB00CE933D /* 360DaemonApp */;
+			target = 55B636B318C104DB00CE933D /* 360Daemon */;
 			targetProxy = 55B6383C18C10FA200CE933D /* PBXContainerItemProxy */;
 		};
 		55B6383F18C10FA200CE933D /* PBXTargetDependency */ = {
@@ -939,20 +929,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		55A2B8DA18C116E0006829A2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55A2B8DB18C116E2006829A2 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		55B636C018C104DB00CE933D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				55B636C118C104DB00CE933D /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		55B636CC18C104DB00CE933D /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B636CD18C104DB00CE933D /* Base */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		55B636F918C1054F00CE933D /* InfoPlist.strings */ = {
@@ -1283,7 +1273,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360DaemonApp" */ = {
+		55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360Daemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55B636E618C104DB00CE933D /* Debug */,
@@ -1299,6 +1289,7 @@
 				55B6371518C1057100CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B6372918C108A500CE933D /* Build configuration list for PBXNativeTarget "Feedback360" */ = {
 			isa = XCConfigurationList;
@@ -1307,6 +1298,7 @@
 				55B6372B18C108A500CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B6376718C10A3200CE933D /* Build configuration list for PBXNativeTarget "DriverTool" */ = {
 			isa = XCConfigurationList;
@@ -1315,6 +1307,7 @@
 				55B6376918C10A3200CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B6379018C10B0B00CE933D /* Build configuration list for PBXNativeTarget "Pref360Control" */ = {
 			isa = XCConfigurationList;
@@ -1323,6 +1316,7 @@
 				55B6379218C10B0B00CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B637F318C10D5000CE933D /* Build configuration list for PBXNativeTarget "Wireless360Controller" */ = {
 			isa = XCConfigurationList;
@@ -1331,6 +1325,7 @@
 				55B637F518C10D5000CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B6381918C10E9500CE933D /* Build configuration list for PBXNativeTarget "WirelessGamingReceiver" */ = {
 			isa = XCConfigurationList;
@@ -1339,6 +1334,7 @@
 				55B6381B18C10E9500CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B6383918C10F8E00CE933D /* Build configuration list for PBXAggregateTarget "Whole Driver" */ = {
 			isa = XCConfigurationList;
@@ -1347,6 +1343,7 @@
 				55B6383B18C10F8E00CE933D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
