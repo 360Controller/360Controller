@@ -364,7 +364,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/PreferencePanes;
+				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-twolevel_namespace";
 				PRODUCT_NAME = Pref360Control;
@@ -388,7 +388,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/PreferencePanes;
+				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-twolevel_namespace";
 				PRODUCT_NAME = Pref360Control;

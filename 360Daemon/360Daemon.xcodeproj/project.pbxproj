@@ -20,7 +20,7 @@
 		55A3FDF118BFBFC400266EA3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = /Library/LaunchDaemons;
+			dstPath = "${LOCAL_LIBRARY_DIR}/LaunchDaemons";
 			dstSubfolderSpec = 0;
 			files = (
 				55A3FDF318BFBFF100266EA3 /* com.mice.360Daemon.plist in CopyFiles */,
@@ -30,7 +30,7 @@
 		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = "/Library/Application Support/MICE/360Daemon/Resources";
+			dstPath = "${LOCAL_LIBRARY_DIR}/Application Support/MICE/360Daemon/Resources";
 			dstSubfolderSpec = 0;
 			files = (
 				55A3FDF218BFBFDF00266EA3 /* Alert.tif in CopyFiles */,
