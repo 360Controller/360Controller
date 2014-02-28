@@ -483,7 +483,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     {
 //        CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
         CFDictionaryRef dict = (CFDictionaryRef)CFBridgingRetain(GetController(GetSerialNumber(registryEntry)));
-        if(dict!=0) {
+        if(dict) {
             CFBooleanRef boolValue;
             CFNumberRef intValue;
             

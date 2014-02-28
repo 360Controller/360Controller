@@ -25,7 +25,7 @@
 	<key>NSMainNibFile</key>
 	<string>Pref360ControlPref</string>
 	<key>NSPrefPaneIconFile</key>
-	<string>Pref360ControlPref.tiff</string>
+	<string>pref360controlpref.tiff</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Xbox 360 Controllers</string>
 	<key>NSPrincipalClass</key>
