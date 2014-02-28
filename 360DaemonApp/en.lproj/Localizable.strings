@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  360 Driver
+
+  Created by C.W. Betts on 2/28/14.
+  Copyright (c) 2014 GitHub. All rights reserved.
+*/
+
+"Do not show this message again" = "Do not show this message again";
+"You have attached a Microsoft Play & Charge cable for your XBox 360 Wireless Controller. While this cable will allow you to charge your wireless controller, you will require the Microsoft Wireless Gaming Receiver for Windows to use your wireless controller in Mac OS X!" = "You have attached a Microsoft Play & Charge cable for your XBox 360 Wireless Controller. While this cable will allow you to charge your wireless controller, you will require the Microsoft Wireless Gaming Receiver for Windows to use your wireless controller in Mac OS X!";
+"XBox 360 Controller Driver" = "XBox 360 Controller Driver";

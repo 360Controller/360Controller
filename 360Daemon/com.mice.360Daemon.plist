@@ -6,7 +6,7 @@
 	<true/>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Library/Application Support/MICE/360Daemon/360Daemon</string>
+		<string>/Library/Application Support/MICE/360Daemon.app/Contents/MacOS/360Daemon</string>
 	</array>
 	<key>KeepAlive</key>
 	<true/>

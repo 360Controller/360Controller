@@ -77,23 +77,17 @@ static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags 
 
 static void ShowAlert(int index)
 {
-    SInt32 error;
-    NSArray *checkBoxes = @[CHECK_SHOWAGAIN];
-    NSArray *dictKeys = @[(NSString*)kCFUserNotificationAlertHeaderKey,
-        (NSString*)kCFUserNotificationAlertMessageKey,
-        (NSString*)kCFUserNotificationCheckBoxTitlesKey,
-        (NSString*)kCFUserNotificationIconURLKey];
-    NSArray *dictValues = @[@"XBox 360 Controller Driver",
-        alertStrings[index],
-        checkBoxes,
-        [NSURL fileURLWithPath:RESOURCE_PATH @"/Alert.tif"]];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:dictValues forKeys:dictKeys];
-    
+	SInt32 error;
+	NSArray *checkBoxes = @[NSLocalizedString(CHECK_SHOWAGAIN, nil)];
+	NSDictionary *dictionary = @{(NSString*)kCFUserNotificationAlertHeaderKey: NSLocalizedString(@"XBox 360 Controller Driver", nil),
+								 (NSString*)kCFUserNotificationAlertMessageKey: NSLocalizedString(alertStrings[index], nil),
+								 (NSString*)kCFUserNotificationCheckBoxTitlesKey: checkBoxes,
+								 (NSString*)kCFUserNotificationIconURLKey: [[NSBundle mainBundle] URLForImageResource:@"Alert"]};
+	
     if (AlertDisabled(index))
         return;
 
-    if (activeAlert != nil)
-    {
+    if (activeAlert != nil) {
         CFUserNotificationCancel(activeAlert);
         releaseAlert();
     }
@@ -139,12 +133,11 @@ static void callbackConnected(void *param,io_iterator_t iterator)
     @autoreleasepool {
         io_service_t object = 0;
         
-        while ((object = IOIteratorNext(iterator)) != 0)
-        {
+        while ((object = IOIteratorNext(iterator)) != 0) {
 #if 0
-		CFStringRef bob = IOObjectCopyClass(object);
-		NSLog(@"Found %p: %@", object, bob);
-		CFRelease(bob);
+			CFStringRef bob = IOObjectCopyClass(object);
+			NSLog(@"Found %p: %@", object, bob);
+			CFRelease(bob);
 #endif
             if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
             {
@@ -163,7 +156,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                     FFEFFESCAPE escape;
                     unsigned char c;
                     int i;
-        
+					
                     c = 0x0a;
                     if (serialNumber != nil)
                     {
