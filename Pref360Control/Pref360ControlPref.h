@@ -40,7 +40,6 @@
 @interface Pref360ControlPref : NSPreferencePane 
 {
     // Internal info
-    mach_port_t masterPort;
     NSMutableArray *deviceArray;
     IOHIDElementCookie axis[6],buttons[15];
     
@@ -70,7 +69,7 @@
 @property (weak) IBOutlet NSSlider *leftStickDeadzone;
 @property (weak) IBOutlet NSButton *leftStickInvertX;
 @property (weak) IBOutlet NSButton *leftStickInvertY;
-@property (weak) IBOutlet NSProgressIndicator *leftTrigger;
+@property (weak) IBOutlet NSLevelIndicator *leftTrigger;
 @property (weak) IBOutlet MyMainButtons *rightButtons;
 @property (weak) IBOutlet MyShoulderButton *rightShoulder;
 @property (weak) IBOutlet MyAnalogStick *rightStick;
@@ -78,10 +77,13 @@
 @property (weak) IBOutlet NSSlider *rightStickDeadzone;
 @property (weak) IBOutlet NSButton *rightStickInvertX;
 @property (weak) IBOutlet NSButton *rightStickInvertY;
-@property (weak) IBOutlet NSProgressIndicator *rightTrigger;
+@property (weak) IBOutlet NSLevelIndicator *rightTrigger;
 @property (weak) IBOutlet NSImageView *batteryLevel;
 @property (weak) IBOutlet DeviceLister *deviceLister;
 @property (weak) IBOutlet NSButton *powerOff;
+
+// Internal info
+@property (readonly) mach_port_t masterPort;
 
 - (void)eventQueueFired:(void*)sender withResult:(IOReturn)result;
 
@@ -89,7 +91,7 @@
 
 - (IBAction)showDeviceList:(id)sender;
 - (IBAction)powerOff:(id)sender;
-
-- (mach_port_t)masterPort;
+- (IBAction)selectDevice:(id)sender;
+- (IBAction)changeSetting:(id)sender;
 
 @end

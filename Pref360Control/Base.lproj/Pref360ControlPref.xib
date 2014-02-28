@@ -19,7 +19,7 @@
                 <outlet property="leftStickDeadzone" destination="194" id="197"/>
                 <outlet property="leftStickInvertX" destination="114" id="145"/>
                 <outlet property="leftStickInvertY" destination="115" id="127"/>
-                <outlet property="leftTrigger" destination="111" id="137"/>
+                <outlet property="leftTrigger" destination="zT8-q6-bax" id="adQ-mZ-Be5"/>
                 <outlet property="powerOff" destination="227" id="230"/>
                 <outlet property="rightButtons" destination="107" id="143"/>
                 <outlet property="rightLinked" destination="157" id="170"/>
@@ -28,7 +28,7 @@
                 <outlet property="rightStickDeadzone" destination="120" id="134"/>
                 <outlet property="rightStickInvertX" destination="116" id="128"/>
                 <outlet property="rightStickInvertY" destination="117" id="129"/>
-                <outlet property="rightTrigger" destination="112" id="138"/>
+                <outlet property="rightTrigger" destination="VCv-HS-YkX" id="7gM-Xk-1dE"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -70,7 +70,7 @@
                         </textFieldCell>
                     </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="104" customClass="MyAnalogStick">
-                        <rect key="frame" x="49" y="120" width="77" height="77"/>
+                        <rect key="frame" x="49" y="127" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="u3f-Xl-D3j"/>
@@ -94,7 +94,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
-                        <rect key="frame" x="312" y="120" width="77" height="77"/>
+                        <rect key="frame" x="312" y="127" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="SUB-tj-1Og"/>
@@ -110,7 +110,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="109" customClass="MyShoulderButton">
-                        <rect key="frame" x="49" y="205" width="77" height="18"/>
+                        <rect key="frame" x="49" y="212" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="2vY-ao-kAF"/>
@@ -118,23 +118,15 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="110" customClass="MyShoulderButton">
-                        <rect key="frame" x="312" y="205" width="77" height="18"/>
+                        <rect key="frame" x="312" y="212" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="HM7-UJ-OKn"/>
                             <constraint firstAttribute="height" constant="18" id="eFY-Zs-88D"/>
                         </constraints>
                     </customView>
-                    <progressIndicator verticalHuggingPriority="750" maxValue="255" bezeled="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="111">
-                        <rect key="frame" x="41" y="227" width="171" height="28"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </progressIndicator>
-                    <progressIndicator verticalHuggingPriority="750" maxValue="255" bezeled="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="112">
-                        <rect key="frame" x="220" y="227" width="171" height="28"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </progressIndicator>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="114">
-                        <rect key="frame" x="47" y="96" width="71" height="18"/>
+                        <rect key="frame" x="47" y="103" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="179">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -145,7 +137,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="115">
-                        <rect key="frame" x="47" y="76" width="71" height="18"/>
+                        <rect key="frame" x="47" y="83" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="180">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -156,7 +148,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                        <rect key="frame" x="315" y="96" width="71" height="18"/>
+                        <rect key="frame" x="315" y="103" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="181">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -167,7 +159,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="117">
-                        <rect key="frame" x="315" y="76" width="71" height="18"/>
+                        <rect key="frame" x="315" y="83" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="182">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -191,7 +183,7 @@
                         </connections>
                     </slider>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="156">
-                        <rect key="frame" x="47" y="56" width="64" height="18"/>
+                        <rect key="frame" x="47" y="63" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="185">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -202,7 +194,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="157">
-                        <rect key="frame" x="315" y="56" width="64" height="18"/>
+                        <rect key="frame" x="315" y="63" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="186">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -326,7 +318,7 @@ Please consider donating if you enjoy this driver!</string>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="battNone" id="193"/>
                     </imageView>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
-                        <rect key="frame" x="23" y="40" width="21" height="159"/>
+                        <rect key="frame" x="23" y="40" width="21" height="166"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
                         <connections>
@@ -359,6 +351,16 @@ Please consider donating if you enjoy this driver!</string>
                             <action selector="powerOff:" target="-2" id="229"/>
                         </connections>
                     </button>
+                    <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zT8-q6-bax">
+                        <rect key="frame" x="49" y="238" width="170" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="xJT-rp-fd2"/>
+                    </levelIndicator>
+                    <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCv-HS-YkX">
+                        <rect key="frame" x="227" y="238" width="169" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="TBS-cd-qyS"/>
+                    </levelIndicator>
                 </subviews>
                 <constraints>
                     <constraint firstItem="116" firstAttribute="top" secondItem="107" secondAttribute="bottom" constant="8" symbolic="YES" id="0Uk-Rc-6IF"/>
@@ -371,6 +373,7 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="116" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="8jz-J6-HZn"/>
                     <constraint firstItem="120" firstAttribute="leading" secondItem="227" secondAttribute="trailing" constant="52" id="AAP-mG-386"/>
                     <constraint firstItem="110" firstAttribute="leading" secondItem="174" secondAttribute="trailing" constant="77" id="Aci-YU-d9f"/>
+                    <constraint firstItem="VCv-HS-YkX" firstAttribute="leading" secondItem="zT8-q6-bax" secondAttribute="trailing" constant="8" symbolic="YES" id="Akm-m3-fLT"/>
                     <constraint firstItem="158" firstAttribute="leading" secondItem="116" secondAttribute="trailing" constant="20" id="Azb-5v-j7m"/>
                     <constraint firstItem="114" firstAttribute="leading" secondItem="115" secondAttribute="leading" id="BfN-VB-Q4M"/>
                     <constraint firstItem="104" firstAttribute="top" secondItem="194" secondAttribute="top" id="C55-gK-9ah"/>
@@ -379,42 +382,39 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="106" firstAttribute="top" secondItem="105" secondAttribute="top" id="ENB-Ho-eYh"/>
                     <constraint firstItem="103" firstAttribute="leading" secondItem="198" secondAttribute="trailing" constant="8" symbolic="YES" id="Eyz-dt-Zb9"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="110" secondAttribute="bottom" constant="8" symbolic="YES" id="FlY-gP-35L"/>
-                    <constraint firstItem="111" firstAttribute="top" secondItem="112" secondAttribute="top" id="FoB-DX-oBU"/>
                     <constraint firstItem="98" firstAttribute="trailing" secondItem="158" secondAttribute="trailing" id="Gqa-03-mz3"/>
                     <constraint firstItem="114" firstAttribute="leading" secondItem="104" secondAttribute="leading" id="Gtg-bv-iZN"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="104" secondAttribute="top" id="Jb7-V5-bAt"/>
+                    <constraint firstItem="VCv-HS-YkX" firstAttribute="width" secondItem="zT8-q6-bax" secondAttribute="width" id="Kx3-eJ-PRv"/>
                     <constraint firstItem="107" firstAttribute="trailing" secondItem="120" secondAttribute="trailing" id="LHI-jg-5AS"/>
                     <constraint firstItem="105" firstAttribute="bottom" secondItem="106" secondAttribute="bottom" id="O0R-MD-C1W"/>
                     <constraint firstItem="107" firstAttribute="leading" secondItem="108" secondAttribute="trailing" constant="29" id="Ohr-Ml-kjG"/>
-                    <constraint firstItem="111" firstAttribute="centerY" secondItem="112" secondAttribute="centerY" id="PfC-Yb-vDK"/>
                     <constraint firstItem="198" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="14" id="Ppf-SW-LUk"/>
                     <constraint firstItem="109" firstAttribute="trailing" secondItem="104" secondAttribute="trailing" id="RIM-w7-rgz"/>
-                    <constraint firstItem="158" firstAttribute="leading" secondItem="112" secondAttribute="trailing" constant="13" id="SaG-ge-POp"/>
                     <constraint firstItem="158" firstAttribute="top" secondItem="98" secondAttribute="bottom" constant="12" id="TJS-fZ-oyw"/>
+                    <constraint firstItem="VCv-HS-YkX" firstAttribute="top" secondItem="158" secondAttribute="top" id="Tt0-nW-p64"/>
                     <constraint firstItem="110" firstAttribute="trailing" secondItem="107" secondAttribute="trailing" id="V4i-4b-mMF"/>
                     <constraint firstItem="107" firstAttribute="bottom" secondItem="104" secondAttribute="bottom" id="WvO-xp-IK1"/>
                     <constraint firstItem="98" firstAttribute="leading" secondItem="103" secondAttribute="trailing" constant="8" symbolic="YES" id="X2Y-Ed-dRI"/>
-                    <constraint firstItem="111" firstAttribute="top" secondItem="158" secondAttribute="top" id="YX9-qh-b6Z"/>
                     <constraint firstItem="104" firstAttribute="leading" secondItem="194" secondAttribute="trailing" constant="7" id="YYU-hm-bje"/>
-                    <constraint firstItem="174" firstAttribute="top" secondItem="112" secondAttribute="bottom" constant="11" id="ZMm-vB-5SY"/>
                     <constraint firstAttribute="trailing" secondItem="158" secondAttribute="trailing" constant="20" symbolic="YES" id="Zwd-u6-HSk"/>
                     <constraint firstItem="120" firstAttribute="top" secondItem="106" secondAttribute="bottom" constant="8" symbolic="YES" id="bTy-2c-n06"/>
                     <constraint firstItem="157" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="cbA-Ma-UfC"/>
                     <constraint firstItem="106" firstAttribute="leading" secondItem="105" secondAttribute="trailing" constant="26" id="elS-7G-OMS"/>
                     <constraint firstAttribute="trailing" secondItem="98" secondAttribute="trailing" constant="20" symbolic="YES" id="ewf-xH-uT7"/>
+                    <constraint firstItem="109" firstAttribute="top" secondItem="zT8-q6-bax" secondAttribute="bottom" constant="8" symbolic="YES" id="fvM-pC-WKn"/>
+                    <constraint firstItem="VCv-HS-YkX" firstAttribute="top" secondItem="zT8-q6-bax" secondAttribute="top" id="gXN-lr-qjd"/>
                     <constraint firstItem="156" firstAttribute="top" secondItem="115" secondAttribute="bottom" constant="6" symbolic="YES" id="gnu-eg-JBM"/>
                     <constraint firstItem="115" firstAttribute="leading" secondItem="156" secondAttribute="leading" id="hpK-3v-Xwt"/>
                     <constraint firstItem="106" firstAttribute="leading" secondItem="120" secondAttribute="leading" id="ivh-gO-265"/>
-                    <constraint firstItem="111" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="41" id="ixk-L0-PbD"/>
                     <constraint firstItem="114" firstAttribute="top" secondItem="104" secondAttribute="bottom" constant="8" symbolic="YES" id="jxf-oT-auA"/>
                     <constraint firstItem="194" firstAttribute="bottom" secondItem="105" secondAttribute="bottom" id="kmc-bM-Io2"/>
                     <constraint firstItem="157" firstAttribute="top" secondItem="117" secondAttribute="bottom" constant="6" symbolic="YES" id="lkC-Yo-Ut4"/>
                     <constraint firstItem="115" firstAttribute="top" secondItem="114" secondAttribute="bottom" constant="6" symbolic="YES" id="lpe-uf-HLv"/>
-                    <constraint firstItem="111" firstAttribute="width" secondItem="112" secondAttribute="width" id="nGL-7z-lae"/>
                     <constraint firstItem="117" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="pi7-d4-yLK"/>
                     <constraint firstItem="105" firstAttribute="top" secondItem="108" secondAttribute="bottom" constant="21" id="qJa-ps-3cy"/>
-                    <constraint firstItem="109" firstAttribute="top" secondItem="111" secondAttribute="bottom" constant="5" id="r3N-Kb-06h"/>
-                    <constraint firstItem="112" firstAttribute="leading" secondItem="111" secondAttribute="trailing" constant="8" symbolic="YES" id="rdD-2g-Edk"/>
+                    <constraint firstItem="109" firstAttribute="leading" secondItem="zT8-q6-bax" secondAttribute="leading" id="rzx-Ue-liS"/>
+                    <constraint firstItem="158" firstAttribute="leading" secondItem="VCv-HS-YkX" secondAttribute="trailing" constant="8" symbolic="YES" id="tBy-0f-hyh"/>
                     <constraint firstItem="98" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="tUX-eV-8PA"/>
                     <constraint firstItem="158" firstAttribute="leading" secondItem="110" secondAttribute="trailing" constant="15" id="vQF-Tb-sEC"/>
                     <constraint firstItem="107" firstAttribute="leading" secondItem="110" secondAttribute="leading" id="wDo-rV-y2l"/>
