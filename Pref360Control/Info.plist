@@ -9,13 +9,13 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.mice.driver.360Controller.Prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleName</key>
 	<string>XBox 360 Controllers</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

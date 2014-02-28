@@ -12,10 +12,6 @@
 		3B8698090CE2903100283CEC /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8698080CE2903100283CEC /* ControlPrefs.m */; };
 		55A3FDF218BFBFDF00266EA3 /* Alert.tif in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3B7904D50CE3F13700ACB699 /* Alert.tif */; };
 		55A3FDF318BFBFF100266EA3 /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3BBB7EED16C387C600BC7827 /* com.mice.360Daemon.plist */; };
-		55B6367618C1015900CE933D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6367518C1015900CE933D /* Cocoa.framework */; };
-		55B636A718C1017200CE933D /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B8698080CE2903100283CEC /* ControlPrefs.m */; };
-		55B636A818C1017600CE933D /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */; };
-		55B636A918C1017D00CE933D /* Alert.tif in Resources */ = {isa = PBXBuildFile; fileRef = 3B7904D50CE3F13700ACB699 /* Alert.tif */; };
 		8DD76F9A0486AA7600D96B5E /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* 360Daemon.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -54,7 +50,6 @@
 		3B8698080CE2903100283CEC /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPrefs.m; sourceTree = "<group>"; };
 		3BBB7EED16C387C600BC7827 /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mice.360Daemon.plist; sourceTree = "<group>"; };
 		55A3FDE718BFBE8A00266EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B6367418C1015900CE933D /* 360DaemonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 360DaemonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6367518C1015900CE933D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55B6367818C1015900CE933D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		55B6367918C1015900CE933D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -65,14 +60,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		55B6367118C1015900CE933D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55B6367618C1015900CE933D /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8DD76F9B0486AA7600D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				8DD76FA10486AA7600D96B5E /* 360Daemon */,
-				55B6367418C1015900CE933D /* 360DaemonApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,23 +148,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55B6367318C1015900CE933D /* 360DaemonApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 55B636A518C1015900CE933D /* Build configuration list for PBXNativeTarget "360DaemonApp" */;
-			buildPhases = (
-				55B6367018C1015900CE933D /* Sources */,
-				55B6367118C1015900CE933D /* Frameworks */,
-				55B6367218C1015900CE933D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = 360DaemonApp;
-			productName = 360DaemonApp;
-			productReference = 55B6367418C1015900CE933D /* 360DaemonApp.app */;
-			productType = "com.apple.product-type.application";
-		};
 		8DD76F960486AA7600D96B5E /* 360Daemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "360Daemon" */;
@@ -223,32 +192,11 @@
 			projectRoot = "";
 			targets = (
 				8DD76F960486AA7600D96B5E /* 360Daemon */,
-				55B6367318C1015900CE933D /* 360DaemonApp */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		55B6367218C1015900CE933D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55B636A918C1017D00CE933D /* Alert.tif in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		55B6367018C1015900CE933D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55B636A718C1017200CE933D /* ControlPrefs.m in Sources */,
-				55B636A818C1017600CE933D /* 360Daemon.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8DD76F990486AA7600D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,77 +269,6 @@
 			};
 			name = Release;
 		};
-		55B636A118C1015900CE933D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "360DaemonApp/360DaemonApp-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Application Support/MICE";
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		55B636A218C1015900CE933D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "360DaemonApp/360DaemonApp-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Application Support/MICE";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -412,14 +289,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		55B636A518C1015900CE933D /* Build configuration list for PBXNativeTarget "360DaemonApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				55B636A118C1015900CE933D /* Debug */,
-				55B636A218C1015900CE933D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
