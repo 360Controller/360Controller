@@ -20,7 +20,7 @@
 		55A3FDF118BFBFC400266EA3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = /Library/LaunchDaemons;
+			dstPath = "${LOCAL_LIBRARY_DIR}/LaunchDaemons";
 			dstSubfolderSpec = 0;
 			files = (
 				55A3FDF318BFBFF100266EA3 /* com.mice.360Daemon.plist in CopyFiles */,
@@ -30,7 +30,7 @@
 		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = "/Library/Application Support/MICE/360Daemon/Resources";
+			dstPath = "${LOCAL_LIBRARY_DIR}/Application Support/MICE/360Daemon/Resources";
 			dstSubfolderSpec = 0;
 			files = (
 				55A3FDF218BFBFDF00266EA3 /* Alert.tif in CopyFiles */,
@@ -50,11 +50,6 @@
 		3B8698080CE2903100283CEC /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPrefs.m; sourceTree = "<group>"; };
 		3BBB7EED16C387C600BC7827 /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mice.360Daemon.plist; sourceTree = "<group>"; };
 		55A3FDE718BFBE8A00266EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B6367518C1015900CE933D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		55B6367818C1015900CE933D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		55B6367918C1015900CE933D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		55B6367A18C1015900CE933D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		55B6369418C1015900CE933D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8DD76FA10486AA7600D96B5E /* 360Daemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 360Daemon; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859EA3029092ED04C91782 /* 360Daemon.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = 360Daemon.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,9 +97,6 @@
 				3B7904FF0CE3F6A400ACB699 /* ForceFeedback.framework */,
 				3B7A8E2B0CE14E38005BB45B /* IOKit.framework */,
 				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
-				55B6367518C1015900CE933D /* Cocoa.framework */,
-				55B6369418C1015900CE933D /* XCTest.framework */,
-				55B6367718C1015900CE933D /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,16 +117,6 @@
 				55A3FDE718BFBE8A00266EA3 /* Info.plist */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		55B6367718C1015900CE933D /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				55B6367818C1015900CE933D /* AppKit.framework */,
-				55B6367918C1015900CE933D /* CoreData.framework */,
-				55B6367A18C1015900CE933D /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		C6859EA2029092E104C91782 /* Documentation */ = {
@@ -184,8 +166,6 @@
 				Japanese,
 				French,
 				German,
-				en,
-				Base,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* 360Daemon */;
 			projectDirPath = "";
