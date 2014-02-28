@@ -179,7 +179,7 @@
 		55B636BB18C104DB00CE933D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55B636BC18C104DB00CE933D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55B636BF18C104DB00CE933D /* 360DaemonApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "360DaemonApp-Info.plist"; sourceTree = "<group>"; };
-		55B636C118C104DB00CE933D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55B636C118C104DB00CE933D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B636C518C104DB00CE933D /* 360DaemonApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "360DaemonApp-Prefix.pch"; sourceTree = "<group>"; };
 		55B636D618C104DB00CE933D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		55B636EF18C1054F00CE933D /* _60Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		55B636F618C1054F00CE933D /* Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
 		55B636F718C1054F00CE933D /* Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		55B636F818C1054F00CE933D /* ControlStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; };
-		55B636FA18C1054F00CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55B636FA18C1054F00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B636FB18C1054F00CE933D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B636FC18C1054F00CE933D /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B636FD18C1054F00CE933D /* xbox360hid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		55B6372018C108A500CE933D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		55B6372D18C108D200CE933D /* devlink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = devlink.cpp; sourceTree = "<group>"; };
 		55B6372E18C108D200CE933D /* devlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devlink.h; sourceTree = "<group>"; };
-		55B6373018C108D200CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55B6373018C108D200CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B6373118C108D200CE933D /* Feedback360.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Feedback360.cpp; sourceTree = "<group>"; };
 		55B6373218C108D200CE933D /* Feedback360.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback360.h; sourceTree = "<group>"; };
 		55B6373618C108D200CE933D /* Feedback360Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Feedback360Effect.cpp; sourceTree = "<group>"; };
@@ -249,7 +249,6 @@
 		55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = com.mice.360Daemon.plist; path = ../360Daemon/com.mice.360Daemon.plist; sourceTree = "<group>"; };
 		55B637CE18C10CB400CE933D /* ControlPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPrefs.h; path = ../360Daemon/ControlPrefs.h; sourceTree = "<group>"; };
 		55B637CF18C10CB400CE933D /* ControlPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlPrefs.m; path = ../360Daemon/ControlPrefs.m; sourceTree = "<group>"; };
-		55B637D018C10CB400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../360Daemon/Info.plist; sourceTree = "<group>"; };
 		55B637DE18C10CFE00CE933D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		55B637E818C10D5000CE933D /* Wireless360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wireless360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B637F818C10DA300CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -335,6 +334,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55A2B8E018C11C7E006829A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55B6372F18C108D200CE933D /* InfoPlist.strings */,
+				55B6373818C108D200CE933D /* Info.plist */,
+				55B6373B18C108D200CE933D /* version.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		55A2B8E118C11C8F006829A2 /* Source code */ = {
+			isa = PBXGroup;
+			children = (
+				55B6372D18C108D200CE933D /* devlink.cpp */,
+				55B6372E18C108D200CE933D /* devlink.h */,
+				55B6373118C108D200CE933D /* Feedback360.cpp */,
+				55B6373218C108D200CE933D /* Feedback360.h */,
+				55B6373618C108D200CE933D /* Feedback360Effect.cpp */,
+				55B6373718C108D200CE933D /* Feedback360Effect.h */,
+			);
+			name = "Source code";
+			sourceTree = "<group>";
+		};
+		55A2B8E218C11D4D006829A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55B636F918C1054F00CE933D /* InfoPlist.strings */,
+				55B636FB18C1054F00CE933D /* Info.plist */,
+				55B636FC18C1054F00CE933D /* version.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		55A2B8E318C11DAD006829A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55B637F718C10DA300CE933D /* InfoPlist.strings */,
+				55B637F918C10DA300CE933D /* Info.plist */,
+				55B637FA18C10DA300CE933D /* version.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		55A2B8E418C11DC5006829A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55B6381E18C10EBE00CE933D /* InfoPlist.strings */,
+				55B6382018C10EBE00CE933D /* Info.plist */,
+				55B6382118C10EBE00CE933D /* version.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		55B636AB18C104DB00CE933D = {
 			isa = PBXGroup;
 			children = (
@@ -393,13 +445,9 @@
 		55B636BD18C104DB00CE933D /* 360DaemonApp */ = {
 			isa = PBXGroup;
 			children = (
-				55B637C618C10CB400CE933D /* 360Daemon.1 */,
 				55B637C718C10CB400CE933D /* 360Daemon.m */,
-				55B637CC18C10CB400CE933D /* Alert.tif */,
-				55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */,
 				55B637CE18C10CB400CE933D /* ControlPrefs.h */,
 				55B637CF18C10CB400CE933D /* ControlPrefs.m */,
-				55B637D018C10CB400CE933D /* Info.plist */,
 				55B636BE18C104DB00CE933D /* Supporting Files */,
 			);
 			path = 360DaemonApp;
@@ -408,6 +456,9 @@
 		55B636BE18C104DB00CE933D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55B637C618C10CB400CE933D /* 360Daemon.1 */,
+				55B637CC18C10CB400CE933D /* Alert.tif */,
+				55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */,
 				55B636BF18C104DB00CE933D /* 360DaemonApp-Info.plist */,
 				55B636C018C104DB00CE933D /* InfoPlist.strings */,
 				55B636C518C104DB00CE933D /* 360DaemonApp-Prefix.pch */,
@@ -429,10 +480,8 @@
 				55B636F618C1054F00CE933D /* Controller.cpp */,
 				55B636F718C1054F00CE933D /* Controller.h */,
 				55B636F818C1054F00CE933D /* ControlStruct.h */,
-				55B636F918C1054F00CE933D /* InfoPlist.strings */,
-				55B636FB18C1054F00CE933D /* Info.plist */,
-				55B636FC18C1054F00CE933D /* version.plist */,
 				55B636FD18C1054F00CE933D /* xbox360hid.h */,
+				55A2B8E218C11D4D006829A2 /* Resources */,
 			);
 			path = 360Controller;
 			sourceTree = "<group>";
@@ -440,17 +489,10 @@
 		55B6372C18C108D200CE933D /* Feedback360 */ = {
 			isa = PBXGroup;
 			children = (
-				55B6372D18C108D200CE933D /* devlink.cpp */,
-				55B6372E18C108D200CE933D /* devlink.h */,
-				55B6372F18C108D200CE933D /* InfoPlist.strings */,
-				55B6373118C108D200CE933D /* Feedback360.cpp */,
-				55B6373218C108D200CE933D /* Feedback360.h */,
-				55B6373618C108D200CE933D /* Feedback360Effect.cpp */,
-				55B6373718C108D200CE933D /* Feedback360Effect.h */,
-				55B6373818C108D200CE933D /* Info.plist */,
+				55A2B8E118C11C8F006829A2 /* Source code */,
 				55B6373918C108D200CE933D /* testhaptic.c */,
 				55B6373A18C108D200CE933D /* testrumble.c */,
-				55B6373B18C108D200CE933D /* version.plist */,
+				55A2B8E018C11C7E006829A2 /* Resources */,
 			);
 			path = Feedback360;
 			sourceTree = "<group>";
@@ -506,11 +548,9 @@
 		55B637F618C10DA300CE933D /* Wireless360Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55B637F718C10DA300CE933D /* InfoPlist.strings */,
-				55B637F918C10DA300CE933D /* Info.plist */,
-				55B637FA18C10DA300CE933D /* version.plist */,
 				55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */,
 				55B637FC18C10DA300CE933D /* Wireless360Controller.h */,
+				55A2B8E318C11DAD006829A2 /* Resources */,
 			);
 			path = Wireless360Controller;
 			sourceTree = "<group>";
@@ -519,15 +559,13 @@
 			isa = PBXGroup;
 			children = (
 				55B6381D18C10EBE00CE933D /* devices.h */,
-				55B6381E18C10EBE00CE933D /* InfoPlist.strings */,
-				55B6382018C10EBE00CE933D /* Info.plist */,
-				55B6382118C10EBE00CE933D /* version.plist */,
 				55B6382218C10EBE00CE933D /* WirelessDevice.cpp */,
 				55B6382318C10EBE00CE933D /* WirelessDevice.h */,
 				55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */,
 				55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */,
 				55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */,
 				55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */,
+				55A2B8E418C11DC5006829A2 /* Resources */,
 			);
 			path = WirelessGamingReceiver;
 			sourceTree = "<group>";
