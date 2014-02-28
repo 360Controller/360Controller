@@ -243,7 +243,6 @@
 		55B637BB18C10C2400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B637BC18C10C2400CE933D /* pref360controlpref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pref360controlpref.tiff; sourceTree = "<group>"; };
 		55B637BD18C10C2400CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		55B637C618C10CB400CE933D /* 360Daemon.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = 360Daemon.1; path = ../360Daemon/360Daemon.1; sourceTree = "<group>"; };
 		55B637C718C10CB400CE933D /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = 360Daemon.m; path = ../360Daemon/360Daemon.m; sourceTree = "<group>"; };
 		55B637CC18C10CB400CE933D /* Alert.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Alert.tif; path = ../360Daemon/Alert.tif; sourceTree = "<group>"; };
 		55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = com.mice.360Daemon.plist; path = ../360Daemon/com.mice.360Daemon.plist; sourceTree = "<group>"; };
@@ -456,7 +455,6 @@
 		55B636BE18C104DB00CE933D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55B637C618C10CB400CE933D /* 360Daemon.1 */,
 				55B637CC18C10CB400CE933D /* Alert.tif */,
 				55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */,
 				55B636BF18C104DB00CE933D /* 360DaemonApp-Info.plist */,

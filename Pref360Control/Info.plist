@@ -20,12 +20,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
 	<string>Pref360ControlPref</string>
 	<key>NSPrefPaneIconFile</key>
 	<string>Pref360ControlPref.tiff</string>
 	<key>NSPrefPaneIconLabel</key>
-	<string>Xbox 360\nControllers</string>
+	<string>Xbox 360 Controllers</string>
 	<key>NSPrincipalClass</key>
 	<string>Pref360ControlPref</string>
 </dict>

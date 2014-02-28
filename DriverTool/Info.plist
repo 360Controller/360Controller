@@ -12,6 +12,8 @@
 	<string>com.mice.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleShortVersionString</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 </dict>
