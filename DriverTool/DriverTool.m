@@ -24,11 +24,17 @@
 
 #define DRIVER_NAME @"360Controller.kext"
 
+#ifdef DEBUG
+#define NSCurrentExtensionDomainMask NSSystemDomainMask
+#else
+#define NSCurrentExtensionDomainMask NSLocalDomainMask
+#endif
+
 static NSDictionary *infoPlistAttributes = nil;
 
 static NSString* GetDriverDirectory(void)
 {
-    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSLocalDomainMask, YES);
+    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSCurrentExtensionDomainMask, YES);
     return [data[0] stringByAppendingPathComponent:@"Extensions"];
 }
 
@@ -166,7 +172,11 @@ int main (int argc, const char * argv[]) {
             AddDevices(devices, argc, argv);
             WriteDriverConfig(DRIVER_NAME, saving);
 
+#ifdef DEBUG
+			system("/usr/bin/touch /System/Library/Extensions");
+#else
             system("/usr/bin/touch /Library/Extensions");
+#endif
         } else
             NSLog(@"Invalid number of parameters (%i)", argc);
     
