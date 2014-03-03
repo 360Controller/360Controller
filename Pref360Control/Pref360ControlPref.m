@@ -291,8 +291,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Reset GUI components
 - (void)resetDisplay
 {
-    NSBundle *bundle;
-    
     [leftStick setPositionX:0 y:0];
     [leftStick setPressed:NO];
     [leftStick setDeadzone:0];
@@ -325,8 +323,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:NO];
     [powerOff setHidden:YES];
     // Hide battery icon
-    bundle = [NSBundle bundleForClass:[self class]];
-    [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:[bundle pathForImageResource:@"battNone"]]];
+    [batteryLevel setImage:[NSImage imageNamed:@"battNone"]];
 }
 
 // Stop using the HID device
@@ -537,27 +534,23 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     smallMotor=0;
     // Battery level?
     {
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSString *path;
+        NSString *imageName = nil;
         CFTypeRef prop;
         
-        path = nil;
-        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice"))
-        {
+        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice")) {
             prop = IORegistryEntryCreateCFProperty(registryEntry, CFSTR("BatteryLevel"), NULL, 0);
-            if (prop != nil)
-            {
+            if (prop != nil) {
                 unsigned char level;
                 
                 if (CFNumberGetValue(prop, kCFNumberCharType, &level))
-                    path = [bundle pathForImageResource:[NSString stringWithFormat:@"batt%i", level / 64]];
+                    imageName = [NSString stringWithFormat:@"batt%i", level / 64];
                 CFRelease(prop);
             }
             [powerOff setHidden:NO];
         }
-        if (path == nil)
-            path = [bundle pathForImageResource:@"battNone"];
-        [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:path]];
+        if (imageName == nil)
+            imageName = @"battNone";
+        [batteryLevel setImage:[NSImage imageNamed:imageName]];
     }
 }
 
