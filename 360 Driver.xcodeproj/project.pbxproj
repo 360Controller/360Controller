@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		55B1400B18C5252800ACD9AC /* BuildInstall */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 55B1400C18C5252900ACD9AC /* Build configuration list for PBXAggregateTarget "BuildInstall" */;
+			buildPhases = (
+				55B1400F18C5253100ACD9AC /* ShellScript */,
+			);
+			dependencies = (
+				55B1401118C5254300ACD9AC /* PBXTargetDependency */,
+			);
+			name = BuildInstall;
+			productName = BuildInstall;
+		};
 		55B6383818C10F8E00CE933D /* Whole Driver */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 55B6383918C10F8E00CE933D /* Build configuration list for PBXAggregateTarget "Whole Driver" */;
@@ -30,6 +42,24 @@
 		55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
 		55B13FC218C51F0600ACD9AC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FC118C51F0600ACD9AC /* Media.xcassets */; };
 		55B13FC318C51F0600ACD9AC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FC118C51F0600ACD9AC /* Media.xcassets */; };
+		55B13FC918C5233500ACD9AC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
+		55B13FCF18C5233500ACD9AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FCD18C5233500ACD9AC /* InfoPlist.strings */; };
+		55B13FD118C5233500ACD9AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B13FD018C5233500ACD9AC /* main.m */; };
+		55B13FD518C5233500ACD9AC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FD318C5233500ACD9AC /* Credits.rtf */; };
+		55B13FD818C5233500ACD9AC /* INSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B13FD718C5233500ACD9AC /* INSAppDelegate.m */; };
+		55B13FDB18C5233500ACD9AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FD918C5233500ACD9AC /* MainMenu.xib */; };
+		55B13FDD18C5233500ACD9AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FDC18C5233500ACD9AC /* Images.xcassets */; };
+		55B13FE318C5233600ACD9AC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636D618C104DB00CE933D /* XCTest.framework */; };
+		55B13FE418C5233600ACD9AC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
+		55B13FEC18C5233600ACD9AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FEA18C5233600ACD9AC /* InfoPlist.strings */; };
+		55B13FEE18C5233600ACD9AC /* _60_Driver_InstallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B13FED18C5233600ACD9AC /* _60_Driver_InstallerTests.m */; };
+		55B13FF518C5234C00ACD9AC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FC118C51F0600ACD9AC /* Media.xcassets */; };
+		55B13FF718C523A800ACD9AC /* Pref360Control.prefPane in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6377D18C10B0B00CE933D /* Pref360Control.prefPane */; };
+		55B1400318C5240D00ACD9AC /* 360Controller.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6370718C1057100CE933D /* 360Controller.kext */; };
+		55B1400418C5241000ACD9AC /* Wireless360Controller.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637E818C10D5000CE933D /* Wireless360Controller.kext */; };
+		55B1400518C5241300ACD9AC /* WirelessGamingReceiver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */; };
+		55B1400718C5245D00ACD9AC /* 360Daemon.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B636B418C104DB00CE933D /* 360Daemon.app */; };
+		55B1400918C524C000ACD9AC /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
 		55B636B818C104DB00CE933D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
 		55B636C218C104DB00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636C018C104DB00CE933D /* InfoPlist.strings */; };
 		55B6371618C1058E00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636F918C1054F00CE933D /* InfoPlist.strings */; };
@@ -99,6 +129,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		55B13FE518C5233600ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B13FC718C5233500ACD9AC;
+			remoteInfo = "360 Driver Installer";
+		};
+		55B13FF818C523BC00ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B636B318C104DB00CE933D;
+			remoteInfo = 360Daemon;
+		};
+		55B13FFA18C523BC00ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B6377C18C10B0B00CE933D;
+			remoteInfo = Pref360Control;
+		};
+		55B13FFC18C523BC00ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B6370618C1057100CE933D;
+			remoteInfo = 360Controller;
+		};
+		55B13FFE18C523BC00ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B637E718C10D5000CE933D;
+			remoteInfo = Wireless360Controller;
+		};
+		55B1400018C523BC00ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
+			remoteInfo = WirelessGamingReceiver;
+		};
+		55B1401018C5254300ACD9AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B13FC718C5233500ACD9AC;
+			remoteInfo = "360 Driver Installer";
+		};
 		55B6374D18C1097D00CE933D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
@@ -161,6 +240,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		55B13FF618C5238600ACD9AC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = root/Library/PreferencePanes;
+			dstSubfolderSpec = 7;
+			files = (
+				55B13FF718C523A800ACD9AC /* Pref360Control.prefPane in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B1400218C523F600ACD9AC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = root/Library/Extensions;
+			dstSubfolderSpec = 7;
+			files = (
+				55B1400318C5240D00ACD9AC /* 360Controller.kext in CopyFiles */,
+				55B1400418C5241000ACD9AC /* Wireless360Controller.kext in CopyFiles */,
+				55B1400518C5241300ACD9AC /* WirelessGamingReceiver.kext in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B1400618C5242F00ACD9AC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "root/Library/Application Support";
+			dstSubfolderSpec = 7;
+			files = (
+				55B1400718C5245D00ACD9AC /* 360Daemon.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B1400818C5248D00ACD9AC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = root/Library/LaunchDaemons;
+			dstSubfolderSpec = 7;
+			files = (
+				55B1400918C524C000ACD9AC /* com.mice.360Daemon.plist in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B6375618C1099700CE933D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,6 +298,20 @@
 		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55B13FC018C51DD400ACD9AC /* Feedback360.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = Feedback360.exp; sourceTree = "<group>"; };
 		55B13FC118C51F0600ACD9AC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		55B13FC818C5233500ACD9AC /* 360 Driver Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "360 Driver Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B13FCC18C5233500ACD9AC /* 360 Driver Installer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "360 Driver Installer-Info.plist"; sourceTree = "<group>"; };
+		55B13FCE18C5233500ACD9AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55B13FD018C5233500ACD9AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		55B13FD218C5233500ACD9AC /* 360 Driver Installer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "360 Driver Installer-Prefix.pch"; sourceTree = "<group>"; };
+		55B13FD418C5233500ACD9AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		55B13FD618C5233500ACD9AC /* INSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INSAppDelegate.h; sourceTree = "<group>"; };
+		55B13FD718C5233500ACD9AC /* INSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INSAppDelegate.m; sourceTree = "<group>"; };
+		55B13FDA18C5233500ACD9AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55B13FDC18C5233500ACD9AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		55B13FE218C5233600ACD9AC /* 360 Driver InstallerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "360 Driver InstallerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B13FE918C5233600ACD9AC /* 360 Driver InstallerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "360 Driver InstallerTests-Info.plist"; sourceTree = "<group>"; };
+		55B13FEB18C5233600ACD9AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55B13FED18C5233600ACD9AC /* _60_Driver_InstallerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _60_Driver_InstallerTests.m; sourceTree = "<group>"; };
 		55B636B418C104DB00CE933D /* 360Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 360Daemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B636B718C104DB00CE933D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55B636BA18C104DB00CE933D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -273,6 +408,23 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		55B13FC518C5233500ACD9AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FC918C5233500ACD9AC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B13FDF18C5233600ACD9AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FE418C5233600ACD9AC /* Cocoa.framework in Frameworks */,
+				55B13FE318C5233600ACD9AC /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B118C104DB00CE933D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -391,6 +543,48 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		55B13FCA18C5233500ACD9AC /* 360 Driver Installer */ = {
+			isa = PBXGroup;
+			children = (
+				55B13FD618C5233500ACD9AC /* INSAppDelegate.h */,
+				55B13FD718C5233500ACD9AC /* INSAppDelegate.m */,
+				55B13FD918C5233500ACD9AC /* MainMenu.xib */,
+				55B13FDC18C5233500ACD9AC /* Images.xcassets */,
+				55B13FCB18C5233500ACD9AC /* Supporting Files */,
+			);
+			path = "360 Driver Installer";
+			sourceTree = "<group>";
+		};
+		55B13FCB18C5233500ACD9AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55B13FCC18C5233500ACD9AC /* 360 Driver Installer-Info.plist */,
+				55B13FCD18C5233500ACD9AC /* InfoPlist.strings */,
+				55B13FD018C5233500ACD9AC /* main.m */,
+				55B13FD218C5233500ACD9AC /* 360 Driver Installer-Prefix.pch */,
+				55B13FD318C5233500ACD9AC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55B13FE718C5233600ACD9AC /* 360 Driver InstallerTests */ = {
+			isa = PBXGroup;
+			children = (
+				55B13FED18C5233600ACD9AC /* _60_Driver_InstallerTests.m */,
+				55B13FE818C5233600ACD9AC /* Supporting Files */,
+			);
+			path = "360 Driver InstallerTests";
+			sourceTree = "<group>";
+		};
+		55B13FE818C5233600ACD9AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55B13FE918C5233600ACD9AC /* 360 Driver InstallerTests-Info.plist */,
+				55B13FEA18C5233600ACD9AC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		55B636AB18C104DB00CE933D = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +595,8 @@
 				55B6378118C10B0B00CE933D /* Pref360Control */,
 				55B637F618C10DA300CE933D /* Wireless360Controller */,
 				55B6381C18C10EBE00CE933D /* WirelessGamingReceiver */,
+				55B13FCA18C5233500ACD9AC /* 360 Driver Installer */,
+				55B13FE718C5233600ACD9AC /* 360 Driver InstallerTests */,
 				55B636B618C104DB00CE933D /* Frameworks */,
 				55B636B518C104DB00CE933D /* Products */,
 			);
@@ -416,6 +612,8 @@
 				55B6377D18C10B0B00CE933D /* Pref360Control.prefPane */,
 				55B637E818C10D5000CE933D /* Wireless360Controller.kext */,
 				55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */,
+				55B13FC818C5233500ACD9AC /* 360 Driver Installer.app */,
+				55B13FE218C5233600ACD9AC /* 360 Driver InstallerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -628,6 +826,50 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		55B13FC718C5233500ACD9AC /* 360 Driver Installer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B13FEF18C5233600ACD9AC /* Build configuration list for PBXNativeTarget "360 Driver Installer" */;
+			buildPhases = (
+				55B13FC418C5233500ACD9AC /* Sources */,
+				55B13FC518C5233500ACD9AC /* Frameworks */,
+				55B13FC618C5233500ACD9AC /* Resources */,
+				55B13FF618C5238600ACD9AC /* CopyFiles */,
+				55B1400218C523F600ACD9AC /* CopyFiles */,
+				55B1400618C5242F00ACD9AC /* CopyFiles */,
+				55B1400818C5248D00ACD9AC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55B13FF918C523BC00ACD9AC /* PBXTargetDependency */,
+				55B13FFB18C523BC00ACD9AC /* PBXTargetDependency */,
+				55B13FFD18C523BC00ACD9AC /* PBXTargetDependency */,
+				55B13FFF18C523BC00ACD9AC /* PBXTargetDependency */,
+				55B1400118C523BC00ACD9AC /* PBXTargetDependency */,
+			);
+			name = "360 Driver Installer";
+			productName = "360 Driver Installer";
+			productReference = 55B13FC818C5233500ACD9AC /* 360 Driver Installer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		55B13FE118C5233600ACD9AC /* 360 Driver InstallerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B13FF218C5233600ACD9AC /* Build configuration list for PBXNativeTarget "360 Driver InstallerTests" */;
+			buildPhases = (
+				55B13FDE18C5233600ACD9AC /* Sources */,
+				55B13FDF18C5233600ACD9AC /* Frameworks */,
+				55B13FE018C5233600ACD9AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55B13FE618C5233600ACD9AC /* PBXTargetDependency */,
+			);
+			name = "360 Driver InstallerTests";
+			productName = "360 Driver InstallerTests";
+			productReference = 55B13FE218C5233600ACD9AC /* 360 Driver InstallerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		55B636B318C104DB00CE933D /* 360Daemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360Daemon" */;
@@ -763,6 +1005,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = GitHub;
+				TargetAttributes = {
+					55B13FE118C5233600ACD9AC = {
+						TestTargetID = 55B636B318C104DB00CE933D;
+					};
+				};
 			};
 			buildConfigurationList = 55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -786,11 +1033,34 @@
 				55B637E718C10D5000CE933D /* Wireless360Controller */,
 				55B6380D18C10E8700CE933D /* WirelessGamingReceiver */,
 				55B6383818C10F8E00CE933D /* Whole Driver */,
+				55B13FC718C5233500ACD9AC /* 360 Driver Installer */,
+				55B13FE118C5233600ACD9AC /* 360 Driver InstallerTests */,
+				55B1400B18C5252800ACD9AC /* BuildInstall */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		55B13FC618C5233500ACD9AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FF518C5234C00ACD9AC /* Media.xcassets in Resources */,
+				55B13FCF18C5233500ACD9AC /* InfoPlist.strings in Resources */,
+				55B13FDD18C5233500ACD9AC /* Images.xcassets in Resources */,
+				55B13FD518C5233500ACD9AC /* Credits.rtf in Resources */,
+				55B13FDB18C5233500ACD9AC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B13FE018C5233600ACD9AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FEC18C5233600ACD9AC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B218C104DB00CE933D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -859,7 +1129,40 @@
 		};
 /* End PBXRezBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		55B1400F18C5253100ACD9AC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		55B13FC418C5233500ACD9AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FD118C5233500ACD9AC /* main.m in Sources */,
+				55B13FD818C5233500ACD9AC /* INSAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B13FDE18C5233600ACD9AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B13FEE18C5233600ACD9AC /* _60_Driver_InstallerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B018C104DB00CE933D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -935,6 +1238,41 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		55B13FE618C5233600ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B13FC718C5233500ACD9AC /* 360 Driver Installer */;
+			targetProxy = 55B13FE518C5233600ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B13FF918C523BC00ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B636B318C104DB00CE933D /* 360Daemon */;
+			targetProxy = 55B13FF818C523BC00ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B13FFB18C523BC00ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B6377C18C10B0B00CE933D /* Pref360Control */;
+			targetProxy = 55B13FFA18C523BC00ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B13FFD18C523BC00ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B6370618C1057100CE933D /* 360Controller */;
+			targetProxy = 55B13FFC18C523BC00ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B13FFF18C523BC00ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B637E718C10D5000CE933D /* Wireless360Controller */;
+			targetProxy = 55B13FFE18C523BC00ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B1400118C523BC00ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
+			targetProxy = 55B1400018C523BC00ACD9AC /* PBXContainerItemProxy */;
+		};
+		55B1401118C5254300ACD9AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B13FC718C5233500ACD9AC /* 360 Driver Installer */;
+			targetProxy = 55B1401018C5254300ACD9AC /* PBXContainerItemProxy */;
+		};
 		55B6374E18C1097D00CE933D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55B6371E18C108A500CE933D /* Feedback360 */;
@@ -979,6 +1317,38 @@
 				55A2B8DB18C116E2006829A2 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		55B13FCD18C5233500ACD9AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B13FCE18C5233500ACD9AC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		55B13FD318C5233500ACD9AC /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B13FD418C5233500ACD9AC /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		55B13FD918C5233500ACD9AC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B13FDA18C5233500ACD9AC /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		55B13FEA18C5233600ACD9AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55B13FEB18C5233600ACD9AC /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		55B636C018C104DB00CE933D /* InfoPlist.strings */ = {
@@ -1041,6 +1411,92 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		55B13FF018C5233600ACD9AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "360 Driver Installer/360 Driver Installer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "360 Driver Installer/360 Driver Installer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		55B13FF118C5233600ACD9AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "360 Driver Installer/360 Driver Installer-Prefix.pch";
+				INFOPLIST_FILE = "360 Driver Installer/360 Driver Installer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		55B13FF318C5233600ACD9AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/360Daemon.app/Contents/MacOS/360Daemon";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "360 Driver Installer/360 Driver Installer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "360 Driver InstallerTests/360 Driver InstallerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		55B13FF418C5233600ACD9AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/360Daemon.app/Contents/MacOS/360Daemon";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "360 Driver Installer/360 Driver Installer-Prefix.pch";
+				INFOPLIST_FILE = "360 Driver InstallerTests/360 Driver InstallerTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		55B1400D18C5252900ACD9AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55B1400E18C5252900ACD9AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		55B636E318C104DB00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1317,6 +1773,30 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		55B13FEF18C5233600ACD9AC /* Build configuration list for PBXNativeTarget "360 Driver Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B13FF018C5233600ACD9AC /* Debug */,
+				55B13FF118C5233600ACD9AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55B13FF218C5233600ACD9AC /* Build configuration list for PBXNativeTarget "360 Driver InstallerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B13FF318C5233600ACD9AC /* Debug */,
+				55B13FF418C5233600ACD9AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55B1400C18C5252900ACD9AC /* Build configuration list for PBXAggregateTarget "BuildInstall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B1400D18C5252900ACD9AC /* Debug */,
+				55B1400E18C5252900ACD9AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
