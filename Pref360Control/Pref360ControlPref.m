@@ -683,28 +683,19 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Handle changing a setting
 - (IBAction)changeSetting:(id)sender
 {
-    CFDictionaryRef dict;
-	const CFStringRef keys[8] = {CFSTR("InvertLeftX"), CFSTR("InvertLeftY"), CFSTR("InvertRightX"), CFSTR("InvertRightY"),
-	CFSTR("DeadzoneLeft"), CFSTR("DeadzoneRight"), CFSTR("RelativeLeft"), CFSTR("RelativeRight")};
-    CFTypeRef values[8];
-    UInt16 i;
-    
-    // Set keys and values
-    values[0]=([leftStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[1]=([leftStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[2]=([rightStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[3]=([rightStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    i=[leftStickDeadzone doubleValue];
-    values[4]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    i=[rightStickDeadzone doubleValue];
-    values[5]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    values[6]=([leftLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[7]=([rightLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
     // Create dictionary
-    dict=CFDictionaryCreate(NULL,(const void**)keys,(const void**)values,sizeof(keys)/sizeof(keys[0]),&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);
+    NSDictionary *dict = @{@"InvertLeftX": ([leftStickInvertX state]==NSOnState) ? @YES : @NO,
+						   @"InvertLeftY": ([leftStickInvertY state]==NSOnState) ? @YES : @NO,
+						   @"InvertRightX": ([rightStickInvertX state]==NSOnState) ? @YES : @NO,
+						   @"InvertRightY": ([rightStickInvertY state]==NSOnState) ? @YES : @NO,
+						   @"DeadzoneLeft": @((UInt16)[leftStickDeadzone doubleValue]),
+						   @"DeadzoneRight": @((UInt16)[rightStickDeadzone doubleValue]),
+						   @"RelativeLeft": ([leftLinked state]==NSOnState) ? @YES : @NO,
+						   @"RelativeRight":([rightLinked state]==NSOnState) ? @YES : @NO,
+						   };
     // Set property
-    IORegistryEntrySetCFProperties(registryEntry, dict);
-    SetController(GetSerialNumber(registryEntry), (__bridge NSDictionary*)dict);
+    IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
+    SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
     [leftStick setLinked:([leftLinked state]==NSOnState)];
     [leftStick setDeadzone:[leftStickDeadzone doubleValue]];
