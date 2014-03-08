@@ -351,12 +351,12 @@
 		55A2B8E118C11C8F006829A2 /* Source code */ = {
 			isa = PBXGroup;
 			children = (
-				55B6372D18C108D200CE933D /* devlink.cpp */,
 				55B6372E18C108D200CE933D /* devlink.h */,
-				55B6373118C108D200CE933D /* Feedback360.cpp */,
+				55B6372D18C108D200CE933D /* devlink.cpp */,
 				55B6373218C108D200CE933D /* Feedback360.h */,
-				55B6373618C108D200CE933D /* Feedback360Effect.cpp */,
+				55B6373118C108D200CE933D /* Feedback360.cpp */,
 				55B6373718C108D200CE933D /* Feedback360Effect.h */,
+				55B6373618C108D200CE933D /* Feedback360Effect.cpp */,
 			);
 			name = "Source code";
 			sourceTree = "<group>";
