@@ -29,6 +29,7 @@
 #include <ForceFeedback/IOForceFeedbackLib.h>
 #include <IOKit/IOCFPlugin.h>
 #include <map>
+#include <list>
 
 #include "devlink.h"
 #include "Feedback360Effect.h"
@@ -104,8 +105,7 @@ private:
     dispatch_source_t   Timer;
 
     // effects handling
-    LONG                EffectCount;
-    Feedback360Effect   **EffectList;
+	std::list<Feedback360Effect> EffectList;
     UInt32              EffectIndex;
 
     DWORD Gain;
