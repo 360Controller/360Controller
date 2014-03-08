@@ -23,6 +23,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyCentreButtons : NSView
-@property (nonatomic) BOOL back, start, specific;
+@property BOOL back, start, specific;
 
 @end

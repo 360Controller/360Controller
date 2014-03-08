@@ -23,9 +23,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyDigitalStick : NSView
-{
-    NSBezierPath *up,*down,*left,*right;
-}
-@property (nonatomic) BOOL up, down, left, right;
+@property BOOL up, down, left, right;
 
 @end

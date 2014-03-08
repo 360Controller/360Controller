@@ -22,7 +22,7 @@
 */
 #import "MyShoulderButton.h"
 
-#define INSET_AMOUNT        2
+#define INSET_AMOUNT 2
 
 @implementation MyShoulderButton
 @synthesize pressed;
@@ -30,31 +30,35 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		pressed=NO;
+		[self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 	}
 	return self;
 }
 
+- (void)dealloc
+{
+	[self removeObserver:self forKeyPath:@"pressed"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (object == self) {
+		[self setNeedsDisplay:YES];
+	}
+}
+
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area;
-    
-    area=[self bounds];
-    NSDrawLightBezel(area,area);
-    if(pressed) {
-        area.origin.x+=INSET_AMOUNT;
-        area.origin.y+=INSET_AMOUNT;
-        area.size.width-=INSET_AMOUNT*2;
-        area.size.height-=INSET_AMOUNT*2;
+    NSRect area = [self bounds];
+    NSDrawLightBezel(area, area);
+    if (pressed) {
+        area.origin.x += INSET_AMOUNT;
+        area.origin.y += INSET_AMOUNT;
+        area.size.width -= INSET_AMOUNT * 2;
+        area.size.height -= INSET_AMOUNT * 2;
         [[NSColor blueColor] set];
         NSRectFill(area);
     }
-}
-
-- (void)setPressed:(BOOL)b
-{
-    pressed=b;
-    [self setNeedsDisplay:TRUE];
 }
 
 @end

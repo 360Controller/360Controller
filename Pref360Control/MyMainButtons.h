@@ -23,7 +23,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyMainButtons : NSView
-
-@property (nonatomic) BOOL a,b,x,y;
+@property BOOL a,b,x,y;
 
 @end
