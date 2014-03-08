@@ -44,6 +44,22 @@ Feedback360Effect::Feedback360Effect()
     LastTime = 0;
 }
 
+Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
+{
+	Type = src.Type;
+	DiEffect = src.DiEffect;
+	DiEnvelope = src.DiEnvelope;
+	DiCustomForce = src.DiCustomForce;
+	DiConstantForce = src.DiConstantForce;
+	DiPeriodic = src.DiPeriodic;
+	DiRampforce = src.DiRampforce;
+	Status = src.Status;
+	PlayCount = src.PlayCount;
+	StartTime = src.StartTime;
+	Index = src.Index;
+	LastTime = src.LastTime;
+}
+
 //----------------------------------------------------------------------------------------------
 // Calc
 //----------------------------------------------------------------------------------------------
