@@ -21,13 +21,13 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #import <Foundation/Foundation.h>
-#import <IOKit/IOKitLib.h>
-#import <IOKit/IOCFPlugIn.h>
-#import <IOKit/hid/IOHIDLib.h>
-#import <IOKit/hid/IOHIDKeys.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/hid/IOHIDLib.h>
+#include <IOKit/hid/IOHIDKeys.h>
 #include <IOKit/usb/IOUSBLib.h>
-#import <ForceFeedback/ForceFeedback.h>
-#include "ControlPrefs.h"
+#include <ForceFeedback/ForceFeedback.h>
+#import "ControlPrefs.h"
 
 #define CHECK_SHOWAGAIN     @"Do not show this message again"
 
