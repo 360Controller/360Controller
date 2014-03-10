@@ -35,30 +35,30 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if (self = [super initWithFrame:frameRect]) {
-		[self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-	}
-	return self;
+    if (self = [super initWithFrame:frameRect]) {
+        [self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"pressed"];
-	[self removeObserver:self forKeyPath:@"positionX"];
-	[self removeObserver:self forKeyPath:@"positiony"];
-	[self removeObserver:self forKeyPath:@"deadzone"];
-	[self removeObserver:self forKeyPath:@"linked"];
+    [self removeObserver:self forKeyPath:@"pressed"];
+    [self removeObserver:self forKeyPath:@"positionX"];
+    [self removeObserver:self forKeyPath:@"positiony"];
+    [self removeObserver:self forKeyPath:@"deadzone"];
+    [self removeObserver:self forKeyPath:@"linked"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (object == self) {
-		[self setNeedsDisplay:YES];
-	}
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (void)drawRect:(NSRect)rect
@@ -66,12 +66,12 @@
     NSRect area = [self bounds], deadRect, posRect;
     
     // Compute positions
-        // Deadzone
+    // Deadzone
     deadRect.size.width=(deadzone*area.size.width)/32768;
     deadRect.size.height=(deadzone*area.size.height)/32768;
     deadRect.origin.x=area.origin.x+((area.size.width-deadRect.size.width)/2);
     deadRect.origin.y=area.origin.y+((area.size.height-deadRect.size.height)/2);
-        // Position
+    // Position
     posRect.size.width=4;
     posRect.size.height=4;
     posRect.origin.x=area.origin.x+AREA_INSET+(((x+32768)*(area.size.width-(AREA_INSET*2)))/65536)-(posRect.size.width/2);
@@ -94,8 +94,8 @@
     if (deadzone != 0) {
         [[NSColor redColor] set];
         if (linked) {
-			NSFrameRect(deadRect);
-		} else {
+            NSFrameRect(deadRect);
+        } else {
             NSRect trueRect;
             
             trueRect=deadRect;
@@ -109,17 +109,17 @@
         }
     }
     // Draw position
-	if (pressed)
-		[[NSColor whiteColor] set];
-	else
-		[[NSColor blackColor] set];
+    if (pressed)
+        [[NSColor whiteColor] set];
+    else
+        [[NSColor blackColor] set];
     NSRectFill(posRect);
 }
 
 - (void)setPositionX:(int)xPos y:(int)yPos
 {
-	x = xPos;
-	self.positionY = yPos;
+    x = xPos;
+    self.positionY = yPos;
 }
 
 @end

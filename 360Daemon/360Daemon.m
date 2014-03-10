@@ -62,8 +62,8 @@ static void releaseAlert(void)
     CFRunLoopRemoveSource(CFRunLoopGetCurrent(), activeAlertSource, kCFRunLoopCommonModes);
     CFRelease(activeAlertSource);
     CFRelease(activeAlert);
-    activeAlertSource = nil;
-    activeAlert = nil;
+    activeAlertSource = NULL;
+    activeAlert = NULL;
 }
 
 static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags responseFlags)
@@ -77,21 +77,21 @@ static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags 
 
 static void ShowAlert(int index)
 {
-	SInt32 error;
-	NSArray *checkBoxes = @[NSLocalizedString(CHECK_SHOWAGAIN, nil)];
-	NSDictionary *dictionary = @{(NSString*)kCFUserNotificationAlertHeaderKey: NSLocalizedString(@"XBox 360 Controller Driver", nil),
-								 (NSString*)kCFUserNotificationAlertMessageKey: NSLocalizedString(alertStrings[index], nil),
-								 (NSString*)kCFUserNotificationCheckBoxTitlesKey: checkBoxes,
-								 (NSString*)kCFUserNotificationIconURLKey: [[NSBundle mainBundle] URLForImageResource:@"Alert"]};
-	
+    SInt32 error;
+    NSArray *checkBoxes = @[NSLocalizedString(CHECK_SHOWAGAIN, nil)];
+    NSDictionary *dictionary = @{(NSString*)kCFUserNotificationAlertHeaderKey: NSLocalizedString(@"XBox 360 Controller Driver", nil),
+                                 (NSString*)kCFUserNotificationAlertMessageKey: NSLocalizedString(alertStrings[index], nil),
+                                 (NSString*)kCFUserNotificationCheckBoxTitlesKey: checkBoxes,
+                                 (NSString*)kCFUserNotificationIconURLKey: [[NSBundle mainBundle] URLForImageResource:@"Alert"]};
+    
     if (AlertDisabled(index))
         return;
-
+    
     if (activeAlert != nil) {
         CFUserNotificationCancel(activeAlert);
         releaseAlert();
     }
-
+    
     activeAlertIndex = index;
     activeAlert = CFUserNotificationCreate(kCFAllocatorDefault, 0, kCFUserNotificationPlainAlertLevel, &error, (__bridge CFDictionaryRef)dictionary);
     activeAlertSource = CFUserNotificationCreateRunLoopSource(kCFAllocatorDefault, activeAlert, callbackAlert, 0);
@@ -135,9 +135,9 @@ static void callbackConnected(void *param,io_iterator_t iterator)
         
         while ((object = IOIteratorNext(iterator)) != 0) {
 #if 0
-			CFStringRef bob = IOObjectCopyClass(object);
-			NSLog(@"Found %p: %@", object, bob);
-			CFRelease(bob);
+            CFStringRef bob = IOObjectCopyClass(object);
+            NSLog(@"Found %p: %@", object, bob);
+            CFRelease(bob);
 #endif
             if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
             {
@@ -156,7 +156,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                     FFEFFESCAPE escape;
                     unsigned char c;
                     int i;
-					
+                    
                     c = 0x0a;
                     if (serialNumber != nil)
                     {
@@ -167,7 +167,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                                 c = 0x06 + i;
                                 if (leds[i] == nil)
                                     leds[i] = serialNumber;
-								// NSLog(@"Added controller with LED %i", i);
+                                // NSLog(@"Added controller with LED %i", i);
                                 break;
                             }
                         }
@@ -228,9 +228,9 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
         while ((object = IOIteratorNext(iterator)) != 0)
         {
 #if 0
-		CFStringRef bob = IOObjectCopyClass(object);
-		NSLog(@"Lost %p: %@", object, bob);
-		CFRelease(bob);
+            CFStringRef bob = IOObjectCopyClass(object);
+            NSLog(@"Lost %p: %@", object, bob);
+            CFRelease(bob);
 #endif
             serial = GetSerialNumber(object);
             if (serial != nil)
@@ -242,7 +242,7 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
                     if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
                     {
                         leds[i] = nil;
-						// NSLog(@"Removed controller with LED %i", i);
+                        // NSLog(@"Removed controller with LED %i", i);
                     }
                 }
             }
@@ -264,15 +264,15 @@ int main (int argc, const char * argv[])
         notifySource=IONotificationPortGetRunLoopSource(notifyPort);
         CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
         // Start listening
-		// USB devices
+        // USB devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
         callbackConnected(NULL, onIteratorOther);
-		// Wired 360 devices
+        // Wired 360 devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
         callbackConnected(NULL, onIteratorWired);
         IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
         callbackDisconnected(NULL, offIteratorWired);
-		// Wireless 360 devices
+        // Wireless 360 devices
         IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
         callbackConnected(NULL, onIteratorWireless);
         IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
@@ -288,7 +288,7 @@ int main (int argc, const char * argv[])
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
         CFRunLoopSourceInvalidate(notifySource);
         IONotificationPortDestroy(notifyPort);
-		// End
+        // End
     }
     return 0;
 }

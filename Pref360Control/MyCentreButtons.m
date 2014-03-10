@@ -29,26 +29,26 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-	}
-	return self;
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"back"];
-	[self removeObserver:self forKeyPath:@"start"];
-	[self removeObserver:self forKeyPath:@"specific"];
+    [self removeObserver:self forKeyPath:@"back"];
+    [self removeObserver:self forKeyPath:@"start"];
+    [self removeObserver:self forKeyPath:@"specific"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (object == self) {
-		[self setNeedsDisplay:YES];
-	}
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
@@ -78,7 +78,7 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area,button;
-
+    
     area=[self bounds];
     button.size.height=area.size.height/2;
     button.size.width=area.size.width/4;

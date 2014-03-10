@@ -39,45 +39,45 @@
 #define FeedbackDriverVersionStage		developStage
 #define FeedbackDriverVersionNonRelRev	0
 
-class Feedback360
+class Feedback360 : IUnknown
 {
 private:
     // constructor/destructor
     Feedback360(void);
     virtual ~Feedback360(void);
-
+    
     //disable copy constructor
     Feedback360(Feedback360 &src);
     void operator = (Feedback360 &src);
-
+    
     // reference counting
     static UInt32	sFactoryRefCount;
     static void		sFactoryAddRef(void);
     static void		sFactoryRelease(void);
-
+    
     UInt32 fRefCount;
-
+    
     typedef struct _Xbox360InterfaceMap
     {
         IUnknownVTbl *pseudoVTable;
         Feedback360 *obj;
     } Xbox360InterfaceMap;
-
-	static CFUUIDRef factoryID;
-	
+    
+    static CFUUIDRef factoryID;
+    
     // IOCFPlugin interfacing variables and functions
 public:
     static IOCFPlugInInterface** Alloc(void);
-
+    
     // static functions called by the ForceFeedback API
     static HRESULT  sQueryInterface(void *self, REFIID iid, LPVOID *ppv);
     static ULONG sAddRef(void *self);
     static ULONG sRelease(void *self);
-
+    
     static IOReturn sProbe ( void * self, CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     static IOReturn sStart ( void * self, CFDictionaryRef propertyTable, io_service_t service );
     static IOReturn sStop ( void * self );
-
+    
     static HRESULT  sGetVersion(void * interface, ForceFeedbackVersion * version);
     static HRESULT  sInitializeTerminate(void * interface, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin );
     static HRESULT  sDestroyEffect(void * interface, FFEffectDownloadID downloadID );
@@ -90,49 +90,49 @@ public:
     static HRESULT  sSetProperty( void * interface, FFProperty property, void * pValue );
     static HRESULT  sStartEffect( void * interface, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
-
+    
 private:
     // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
-
+    
     // interfacing
     Xbox360InterfaceMap iIOCFPlugInInterface;
     Xbox360InterfaceMap iIOForceFeedbackDeviceInterface;
     DeviceLink device;
-
+    
     // GCD queue and timer
     dispatch_queue_t    Queue;
     dispatch_source_t   Timer;
-
+    
     // effects handling
-	std::list<Feedback360Effect> EffectList;
+    std::list<Feedback360Effect> EffectList;
     UInt32              EffectIndex;
-
+    
     DWORD Gain;
     bool Actuator;
-
+    
     LONG                 PrvLeftLevel, PrvRightLevel;
     bool                Stopped;
     bool                Paused;
     bool                Manual;
     CFAbsoluteTime      LastTime;
     CFAbsoluteTime      PausedTime;
-
+    
     void        SetForce(LONG LeftLevel, LONG RightLevel);
-
+    
     // event loop func
     static void EffectProc( void *params );
-
+    
     // actual (internal) member functions ultimately called by the FF API (through the static functions)
-
+    
     virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
     virtual ULONG   AddRef(void);
     virtual ULONG   Release(void);
-
+    
     virtual IOReturn Probe ( CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     virtual IOReturn Start ( CFDictionaryRef propertyTable, io_service_t service );
     virtual IOReturn Stop ( void );
-
+    
     virtual HRESULT GetVersion(ForceFeedbackVersion * version);
     virtual HRESULT InitializeTerminate(NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin );
     virtual HRESULT DestroyEffect(FFEffectDownloadID downloadID );

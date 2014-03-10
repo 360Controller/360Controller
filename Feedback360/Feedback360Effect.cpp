@@ -46,18 +46,18 @@ Feedback360Effect::Feedback360Effect()
 
 Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
 {
-	Type = src.Type;
-	DiEffect = src.DiEffect;
-	DiEnvelope = src.DiEnvelope;
-	DiCustomForce = src.DiCustomForce;
-	DiConstantForce = src.DiConstantForce;
-	DiPeriodic = src.DiPeriodic;
-	DiRampforce = src.DiRampforce;
-	Status = src.Status;
-	PlayCount = src.PlayCount;
-	StartTime = src.StartTime;
-	Index = src.Index;
-	LastTime = src.LastTime;
+    Type = src.Type;
+    DiEffect = src.DiEffect;
+    DiEnvelope = src.DiEnvelope;
+    DiCustomForce = src.DiCustomForce;
+    DiConstantForce = src.DiConstantForce;
+    DiPeriodic = src.DiPeriodic;
+    DiRampforce = src.DiRampforce;
+    Status = src.Status;
+    PlayCount = src.PlayCount;
+    StartTime = src.StartTime;
+    Index = src.Index;
+    LastTime = src.LastTime;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -78,26 +78,26 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
         EndTime = BeginTime + Duration * PlayCount;
     }
     CFAbsoluteTime CurrentTime = CFAbsoluteTimeGetCurrent();
-
+    
     if( Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime )
     {
         // Used for force calculation
         LONG NormalLevel;
         LONG WorkLeftLevel;
         LONG WorkRightLevel;
-
+        
         // Used for envelope calculation
         LONG NormalRate;
         LONG AttackLevel;
         LONG FadeLevel;
-
+        
         CalcEnvelope(
                      (ULONG)(Duration*1000)
                      ,(ULONG)(fmod(CurrentTime - BeginTime, Duration)*1000)
                      ,&NormalRate
                      ,&AttackLevel
                      ,&FadeLevel );
-
+        
         // CustomForce allows setting each channel separately
         if(CFEqual(Type, kFFEffectType_CustomForce_ID)) {
             if((CFAbsoluteTimeGetCurrent() - LastTime)*1000*1000 < DiCustomForce.dwSamplePeriod) {
@@ -122,13 +122,13 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
                       ,&NormalLevel );
             //fprintf(stderr, "DeltaT %f\n", CurrentTime - BeginTime);
             //fprintf(stderr, "Duration %f; NormalRate: %d; AttackLevel: %d; FadeLevel: %d\n", Duration, NormalRate, AttackLevel, FadeLevel);
-
+            
             WorkLeftLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
             WorkRightLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
         }
         WorkLeftLevel = MIN( SCALE_MAX, WorkLeftLevel * SCALE_MAX / 10000 );
         WorkRightLevel = MIN( SCALE_MAX, WorkRightLevel * SCALE_MAX / 10000 );
-
+        
         *LeftLevel = *LeftLevel + WorkLeftLevel;
         *RightLevel = *RightLevel + WorkRightLevel;
     }
