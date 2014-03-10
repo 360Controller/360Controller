@@ -24,5 +24,4 @@
 
 @interface MyShoulderButton : NSView
 @property BOOL pressed;
-
 @end

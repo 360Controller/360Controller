@@ -29,22 +29,22 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-	}
-	return self;
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"pressed"];
+    [self removeObserver:self forKeyPath:@"pressed"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (object == self) {
-		[self setNeedsDisplay:YES];
-	}
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (void)drawRect:(NSRect)rect

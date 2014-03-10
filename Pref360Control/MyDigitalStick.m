@@ -33,7 +33,7 @@
 @synthesize left = bLeft;
 @synthesize right = bRight;
 
-- (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
++ (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
 {
     NSBezierPath *path;
     NSPoint centre,point;
@@ -65,15 +65,14 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-        NSRect rect, triangle;
-		
-		[self addObserver:self forKeyPath:@"up" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"down" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		
-        rect = [self bounds];
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        NSRect rect = [self bounds], triangle;
+        
+        [self addObserver:self forKeyPath:@"up" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"down" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        
         triangle.origin.x = INSET_AMOUNT;
         triangle.origin.y = INSET_AMOUNT;
         triangle.size.width =- INSET_AMOUNT * 2;
@@ -82,24 +81,24 @@
         triangle.size.height = rect.size.height / 3;
         triangle.origin.y = rect.origin.y + (triangle.size.height * 2);
         triangle.origin.x = rect.origin.x + triangle.size.width;
-        up = [self makeTriangle:0 inRectangle:triangle];
+        up = [[self class] makeTriangle:0 inRectangle:triangle];
         triangle.origin.y = rect.origin.y;
-        down = [self makeTriangle:2 inRectangle:triangle];
+        down = [[self class] makeTriangle:2 inRectangle:triangle];
         triangle.origin.y = rect.origin.y + triangle.size.height;
         triangle.origin.x = rect.origin.x;
-        left = [self makeTriangle:1 inRectangle:triangle];
+        left = [[self class] makeTriangle:1 inRectangle:triangle];
         triangle.origin.x = rect.origin.x + (triangle.size.width * 2);
-        right = [self makeTriangle:3 inRectangle:triangle];
-	}
-	return self;
+        right = [[self class] makeTriangle:3 inRectangle:triangle];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"up"];
-	[self removeObserver:self forKeyPath:@"down"];
-	[self removeObserver:self forKeyPath:@"left"];
-	[self removeObserver:self forKeyPath:@"right"];
+    [self removeObserver:self forKeyPath:@"up"];
+    [self removeObserver:self forKeyPath:@"down"];
+    [self removeObserver:self forKeyPath:@"left"];
+    [self removeObserver:self forKeyPath:@"right"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

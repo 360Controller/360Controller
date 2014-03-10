@@ -43,8 +43,7 @@ static NSString* SanitiseName(NSString *name)
     int i;
     
     output = [NSMutableString stringWithCapacity:100];
-    for (i = 0; i < [name length]; i++)
-    {
+    for (i = 0; i < [name length]; i++) {
         unichar c = [name characterAtIndex:i];
         if (c == ' ')
             c = '_';
@@ -116,7 +115,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     UInt8 interfaceNum, classNum, subClassNum, protocolNum, endpointCount;
     
     BOOL devValid;
-
+    
     // Get the interface to the device
     interface = GetDeviceInterface(device);
     if (interface == NULL)
@@ -151,7 +150,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
-                       )
+                        )
                     {
                         // Found another interface in the right place
                         interfaceCount++;
@@ -174,10 +173,9 @@ static BOOL IsXBox360Controller(io_service_t device)
 @synthesize list;
 @synthesize sheet;
 
-- init
+- (instancetype)init
 {
-    if (self = [super init])
-    {
+    if (self = [super init]) {
         entries = [NSMutableDictionary dictionaryWithCapacity:10];
         connected = [NSMutableArray arrayWithCapacity:10];
         enabled = [NSMutableArray arrayWithCapacity:10];
@@ -225,7 +223,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     // Execute the command
     result = AuthorizationExecuteWithPrivileges(authorisationRef,
-                                                [toolPath UTF8String],
+                                                [toolPath fileSystemRepresentation],
                                                 kAuthorizationFlagDefaults,
                                                 (char**)argv,
                                                 NULL);
@@ -310,12 +308,9 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     iterator = 0;
     IOServiceGetMatchingServices([owner masterPort], IOServiceMatching(kIOUSBDeviceClassName), &iterator);
-    if (iterator != 0)
-    {
-        while ((object = IOIteratorNext(iterator)) != 0)
-        {
-            if (IsXBox360Controller(object))
-            {
+    if (iterator != 0) {
+        while ((object = IOIteratorNext(iterator)) != 0) {
+            if (IsXBox360Controller(object)) {
                 NSNumber *vendorValue, *productValue;
                 UInt16 vendor,product;
                 
@@ -325,14 +320,12 @@ static BOOL IsXBox360Controller(io_service_t device)
                 productValue = GetDeviceValue(object, @"idProduct");
                 product = [productValue intValue];
                 
-                if ((vendorValue != nil) && (productValue != nil))
-                {
+                if ((vendorValue != nil) && (productValue != nil)) {
                     NSNumber *key;
                     
                     key = [NSNumber numberWithUnsignedInt:(vendor << 16) | product];
                     [connected addObject:key];
-                    if (entries[key] == nil)
-                    {
+                    if (entries[key] == nil) {
                         NSString *name = GetDeviceValue(object, @"USB Product Name");
                         if (name == nil)
                             name = [NSString stringWithFormat:@"Unknown_%.4x_%.4x", vendor, product];

@@ -23,6 +23,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyDigitalStick : NSView
-@property BOOL up, down, left, right;
-
+@property BOOL up;
+@property BOOL down;
+@property BOOL left;
+@property BOOL right;
 @end

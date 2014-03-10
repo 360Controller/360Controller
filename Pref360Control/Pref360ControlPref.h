@@ -54,7 +54,7 @@
     CFRunLoopSourceRef notifySource;
     io_iterator_t onIteratorWired, offIteratorWired;
     io_iterator_t onIteratorWireless, offIteratorWireless;
-
+    
     FFEFFECT *effect;
     FFCUSTOMFORCE *customforce;
     FFEffectObjectReference effectRef;

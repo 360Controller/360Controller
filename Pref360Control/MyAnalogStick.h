@@ -24,8 +24,10 @@
 
 @interface MyAnalogStick : NSView
 @property int deadzone;
-@property int positionX, positionY;
-@property BOOL pressed, linked;
+@property int positionX;
+@property int positionY;
+@property BOOL pressed;
+@property BOOL linked;
 
 - (void)setPositionX:(int)xPos y:(int)yPos;
 

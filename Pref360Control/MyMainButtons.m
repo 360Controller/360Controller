@@ -29,28 +29,28 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-		[self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-	}
-	return self;
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-	[self removeObserver:self forKeyPath:@"a"];
-	[self removeObserver:self forKeyPath:@"b"];
-	[self removeObserver:self forKeyPath:@"x"];
-	[self removeObserver:self forKeyPath:@"y"];
+    [self removeObserver:self forKeyPath:@"a"];
+    [self removeObserver:self forKeyPath:@"b"];
+    [self removeObserver:self forKeyPath:@"x"];
+    [self removeObserver:self forKeyPath:@"y"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if (object == self) {
-		[self setNeedsDisplay:YES];
-	}
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
@@ -66,10 +66,8 @@
     path=[NSBezierPath bezierPathWithOvalInRect:rect];
     if(down) {
         [path fill];
-		//colour=[NSColor whiteColor];
     } else {
         [path stroke];
-		//colour=[NSColor blackColor];
     }
     colour=[NSColor blackColor];
     bling=rect;
