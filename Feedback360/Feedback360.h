@@ -29,15 +29,15 @@
 #include <ForceFeedback/IOForceFeedbackLib.h>
 #include <IOKit/IOCFPlugin.h>
 #include <map>
-#include <list>
+#include <vector>
 
 #include "devlink.h"
 #include "Feedback360Effect.h"
 
-#define FeedbackDriverVersionMajor		1
-#define FeedbackDriverVersionMinor		0
-#define FeedbackDriverVersionStage		developStage
-#define FeedbackDriverVersionNonRelRev	0
+#define FeedbackDriverVersionMajor      1
+#define FeedbackDriverVersionMinor      0
+#define FeedbackDriverVersionStage      developStage
+#define FeedbackDriverVersionNonRelRev  0
 
 class Feedback360 : IUnknown
 {
@@ -51,9 +51,9 @@ private:
     void operator = (Feedback360 &src);
     
     // reference counting
-    static UInt32	sFactoryRefCount;
-    static void		sFactoryAddRef(void);
-    static void		sFactoryRelease(void);
+    static UInt32   sFactoryRefCount;
+    static void     sFactoryAddRef(void);
+    static void     sFactoryRelease(void);
     
     UInt32 fRefCount;
     
@@ -62,8 +62,6 @@ private:
         IUnknownVTbl *pseudoVTable;
         Feedback360 *obj;
     } Xbox360InterfaceMap;
-    
-    static CFUUIDRef factoryID;
     
     // IOCFPlugin interfacing variables and functions
 public:
@@ -105,7 +103,7 @@ private:
     dispatch_source_t   Timer;
     
     // effects handling
-    std::list<Feedback360Effect> EffectList;
+    std::vector<Feedback360Effect> EffectList;
     UInt32              EffectIndex;
     
     DWORD Gain;
