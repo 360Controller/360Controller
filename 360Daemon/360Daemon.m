@@ -47,7 +47,7 @@ NSString *leds[4];
 
 CFUserNotificationRef activeAlert = nil;
 CFRunLoopSourceRef activeAlertSource;
-int activeAlertIndex;
+NSInteger activeAlertIndex;
 
 enum {
     kaPlugNCharge = 0,
@@ -75,7 +75,7 @@ static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags 
     }
 }
 
-static void ShowAlert(int index)
+static void ShowAlert(NSInteger index)
 {
     SInt32 error;
     NSArray *checkBoxes = @[NSLocalizedString(CHECK_SHOWAGAIN, nil)];

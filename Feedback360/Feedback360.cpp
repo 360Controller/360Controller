@@ -93,7 +93,7 @@ Feedback360::Feedback360() : fRefCount(1)
 
 Feedback360::~Feedback360()
 {
-	sFactoryRelease();
+    sFactoryRelease();
 }
 
 HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
@@ -243,16 +243,18 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
     }
     
     dispatch_sync(Queue, ^{
-        
         if (*EffectHandle == 0) {
             Effect = new Feedback360Effect();
             Effect->Handle = (EffectIndex++);
             EffectList.push_back(*Effect);
             *EffectHandle = Effect->Handle;
+            //Clean up after ourselves
+            delete Effect;
+            Effect = &(*EffectList.end());
         } else {
             for (std::list<Feedback360Effect>::iterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
             {
-                if (effectIterator->Handle == *EffectHandle )
+                if (effectIterator->Handle == *EffectHandle)
                 {
                     Effect = &(*effectIterator);
                     break;
@@ -262,8 +264,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
         
         if(Effect == NULL || Result == -1) {
             Result = FFERR_INTERNAL;
-        }
-        else {
+        } else {
             Effect->Type = EffectType;
             
             Effect->DiEffect.dwFlags = DiEffect->dwFlags;
