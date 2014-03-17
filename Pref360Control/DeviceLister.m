@@ -168,9 +168,20 @@ static BOOL IsXBox360Controller(io_service_t device)
     return devValid && (interfaceCount >= 3);   // Only 3 in case the security descriptor is missing?
 }
 
+@interface DeviceLister ()
+@property (getter = isChanged) BOOL changed;
+@end
+
 @implementation DeviceLister
+{
+    Pref360ControlPref *owner;
+    
+    NSMutableDictionary *entries;
+    NSMutableArray *connected, *enabled;
+}
 @synthesize list;
 @synthesize sheet;
+@synthesize changed;
 
 - (instancetype)init
 {
@@ -191,19 +202,16 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (OSStatus)writeToolWithAuthorisation:(AuthorizationRef)authorisationRef
 {
     OSStatus result;
-    NSString *toolPath;
+    NSString *toolPath = [self toolPath];
     NSMutableArray *parameters;
     const char **argv;
     int i;
-    
-    toolPath = [self toolPath];
     
     // Build array of parameters
     parameters = [[NSMutableArray alloc] initWithCapacity:10];
     [parameters addObject:@"edit"];
     
-    for (NSNumber *key in enabled)
-    {
+    for (NSNumber *key in enabled) {
         NSString *name = entries[key];
         NSUInteger keyValue = [key unsignedIntValue];
         UInt16 vendor = (keyValue >> 16) & 0xFFFF;
@@ -354,7 +362,6 @@ static BOOL IsXBox360Controller(io_service_t device)
     NSString *error;
     
     // Initialise
-    error = nil;
     [entries removeAllObjects];
     [connected removeAllObjects];
     [enabled removeAllObjects];
@@ -376,7 +383,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     // Done
     SetKnownDevices(entries);
     [list reloadData];
-    changed = NO;
+    self.changed = NO;
     return YES;
 }
 
@@ -441,6 +448,16 @@ fail:
     [sheet close];
 }
 
+- (NSArray*)allEntries
+{
+    return [[entries allKeys] sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *str1 = obj1;
+        NSString *str2 = obj2;
+        NSComparisonResult retval = [str1 localizedStandardCompare:str2];
+        return retval;
+    }];
+}
+
 // NSTableView data source
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView
 {
@@ -450,7 +467,7 @@ fail:
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn row:(NSInteger)rowIndex
 {
     NSString *identifier = [aTableColumn identifier];
-    NSString *key = [entries allKeys][rowIndex];
+    NSString *key = [self allEntries][rowIndex];
     if ([identifier compare:@"enable"] == NSOrderedSame)
     {
         return @([enabled containsObject:key]);
@@ -471,27 +488,20 @@ fail:
 
 - (void)tableView:(NSTableView*)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn*)aTableColumn row:(NSInteger)rowIndex
 {
-    if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame)
-    {
-        NSString *key = [entries allKeys][rowIndex];
+    if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame) {
+        NSString *key = [self allEntries][rowIndex];
         BOOL contains = [enabled containsObject:key];
-        if ([(NSNumber*)anObject boolValue])
-        {
-            if (!contains)
-            {
+        if ([(NSNumber*)anObject boolValue]) {
+            if (!contains) {
                 [enabled addObject:key];
-                changed = YES;
+                self.changed = YES;
             }
-        }
-        else
-        {
-            if (contains)
-            {
+        } else {
+            if (contains) {
                 [enabled removeObject:key];
-                changed = YES;
+                self.changed = YES;
             }
         }
-
     }
 }
 
