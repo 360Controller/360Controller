@@ -34,20 +34,20 @@
 #define INSTALL_PATH        @"/Library/Application Support/MICE/360Daemon"
 #define RESOURCE_PATH       INSTALL_PATH @"/Resources"
 
-mach_port_t masterPort;
-IONotificationPortRef notifyPort;
-CFRunLoopSourceRef notifySource;
-io_iterator_t onIteratorWired;
-io_iterator_t onIteratorWireless;
-io_iterator_t onIteratorOther;
-io_iterator_t offIteratorWired;
-io_iterator_t offIteratorWireless;
-BOOL foundWirelessReceiver;
-NSString *leds[4];
+static mach_port_t masterPort;
+static IONotificationPortRef notifyPort;
+static CFRunLoopSourceRef notifySource;
+static io_iterator_t onIteratorWired;
+static io_iterator_t onIteratorWireless;
+static io_iterator_t onIteratorOther;
+static io_iterator_t offIteratorWired;
+static io_iterator_t offIteratorWireless;
+static BOOL foundWirelessReceiver;
+static NSString *leds[4];
 
-CFUserNotificationRef activeAlert = nil;
-CFRunLoopSourceRef activeAlertSource;
-NSInteger activeAlertIndex;
+static CFUserNotificationRef activeAlert = nil;
+static CFRunLoopSourceRef activeAlertSource;
+static NSInteger activeAlertIndex;
 
 enum {
     kaPlugNCharge = 0,
