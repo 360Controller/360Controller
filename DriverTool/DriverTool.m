@@ -41,19 +41,18 @@ static NSString* GetDriverDirectory(void)
 static NSString* GetDriverConfigPath(NSString *driver)
 {
     NSString *root = GetDriverDirectory();
-    NSString *driverPath = [root stringByAppendingPathComponent:driver];
-    NSString *contents = [driverPath stringByAppendingPathComponent:@"Contents"];
-    return [contents stringByAppendingPathComponent:@"Info.plist"];
+    NSArray *pathComp = [root pathComponents];
+    pathComp = [pathComp arrayByAddingObjectsFromArray:@[driver, @"Contents", @"Info.plist"]];
+    return [NSString pathWithComponents:pathComp];
 }
 
 static id ReadDriverConfig(NSString *driver)
 {
-    NSString *filename;
-    NSError *error = nil;
+    NSString *filename = GetDriverConfigPath(driver);
+    NSError *error;
     NSData *data;
     NSDictionary *config;
     
-    filename = GetDriverConfigPath(driver);
     infoPlistAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filename error:&error];
     if (infoPlistAttributes == nil)
     {
@@ -147,8 +146,7 @@ int main (int argc, const char * argv[]) {
             
             types = config[@"IOKitPersonalities"];
             keys = [types allKeys];
-            for (NSString *key in keys)
-            {
+            for (NSString *key in keys) {
                 NSDictionary *device = types[key];
                 if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
                     continue;
