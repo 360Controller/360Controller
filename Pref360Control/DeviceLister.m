@@ -27,6 +27,8 @@
 
 #define TOOL_FILENAME @"DriverTool"
 
+#define Three60LocalizedString(key, comment) NSLocalizedStringWithDefaultValue(key, nil, [NSBundle bundleForClass:[self class]], key, comment)
+
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
@@ -339,7 +341,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (void)showFailure:(NSString*)message
 {
-    NSAlert *alert = [NSAlert alertWithMessageText:nil
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
                                      defaultButton:nil
                                    alternateButton:nil
                                        otherButton:nil
@@ -390,7 +392,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                                  kAuthorizationFlagDefaults,
                                  &authorisationRef);
     if (status != errAuthorizationSuccess) {
-        [self showFailure:NSLocalizedString(@"Unable to create authorisation request", @"")];
+        [self showFailure:Three60LocalizedString(@"Unable to create authorisation request", @"")];
         return NO;
     }
     
@@ -401,16 +403,14 @@ static BOOL IsXBox360Controller(io_service_t device)
                                      NULL,
                                      kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights,
                                      NULL);
-    if (status != errAuthorizationSuccess)
-    {
-        [self showFailure:NSLocalizedString(@"Unable to acquire authorisation", @"")];
+    if (status != errAuthorizationSuccess) {
+        [self showFailure:Three60LocalizedString(@"Unable to acquire authorisation", @"")];
         goto fail;
     }
     
     status = [self writeToolWithAuthorisation:authorisationRef];
-    if (status != errAuthorizationSuccess)
-    {
-        [self showFailure:NSLocalizedString(@"Failed to execute the driver tool", @"")];
+    if (status != errAuthorizationSuccess) {
+        [self showFailure:Three60LocalizedString(@"Failed to execute the driver tool", @"")];
         goto fail;
     }
     

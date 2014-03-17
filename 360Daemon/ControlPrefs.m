@@ -41,8 +41,7 @@ BOOL AlertDisabled(NSInteger index)
     
     prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
-    if (value != NULL)
-    {
+    if (value != NULL) {
         result = [CFBridgingRelease(value) boolValue];
     }
     return result;

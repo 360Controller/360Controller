@@ -25,6 +25,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55852E2118D6B5580009BF55 /* Localizable.strings */; };
 		55A2B8D518C116BD006829A2 /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637C718C10CB400CE933D /* 360Daemon.m */; };
 		55A2B8D818C116E0006829A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2B8DA18C116E0006829A2 /* Localizable.strings */; };
 		55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
@@ -174,6 +175,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55852E2018D6B5580009BF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55B13FC018C51DD400ACD9AC /* Feedback360.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = Feedback360.exp; sourceTree = "<group>"; };
 		55B13FC118C51F0600ACD9AC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
 				55B637BD18C10C2400CE933D /* version.plist */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
+				55852E2118D6B5580009BF55 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -823,6 +826,7 @@
 				55B637BE18C10C2400CE933D /* Images.xcassets in Resources */,
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
+				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
 				55B6379718C10B8700CE933D /* Pref360ControlPref.xib in Resources */,
 				55B13FC318C51F0600ACD9AC /* Media.xcassets in Resources */,
 				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
@@ -971,6 +975,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		55852E2118D6B5580009BF55 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55852E2018D6B5580009BF55 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		55A2B8DA18C116E0006829A2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

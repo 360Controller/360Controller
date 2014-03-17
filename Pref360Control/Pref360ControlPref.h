@@ -48,7 +48,7 @@
     FFDeviceObjectReference ffDevice;
     io_registry_entry_t registryEntry;
     
-    int largeMotor,smallMotor;
+    int largeMotor, smallMotor;
     
     IONotificationPortRef notifyPort;
     CFRunLoopSourceRef notifySource;
