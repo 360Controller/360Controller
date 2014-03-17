@@ -188,20 +188,20 @@
 		55B636C118C104DB00CE933D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B636C518C104DB00CE933D /* 360DaemonApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "360DaemonApp-Prefix.pch"; sourceTree = "<group>"; };
 		55B636D618C104DB00CE933D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		55B636EF18C1054F00CE933D /* _60Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; };
-		55B636F018C1054F00CE933D /* _60Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; };
-		55B636F118C1054F00CE933D /* ChatPad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; };
-		55B636F218C1054F00CE933D /* ChatPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; };
-		55B636F318C1054F00CE933D /* chatpadhid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; };
-		55B636F418C1054F00CE933D /* chatpadkeys.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; };
-		55B636F518C1054F00CE933D /* chatpadkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; };
-		55B636F618C1054F00CE933D /* Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
-		55B636F718C1054F00CE933D /* Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
-		55B636F818C1054F00CE933D /* ControlStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; };
+		55B636EF18C1054F00CE933D /* _60Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = _60Controller.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F018C1054F00CE933D /* _60Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _60Controller.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F118C1054F00CE933D /* ChatPad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F218C1054F00CE933D /* ChatPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F318C1054F00CE933D /* chatpadhid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F418C1054F00CE933D /* chatpadkeys.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F518C1054F00CE933D /* chatpadkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F618C1054F00CE933D /* Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F718C1054F00CE933D /* Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B636F818C1054F00CE933D /* ControlStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B636FA18C1054F00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B636FB18C1054F00CE933D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B636FC18C1054F00CE933D /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		55B636FD18C1054F00CE933D /* xbox360hid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; };
+		55B636FD18C1054F00CE933D /* xbox360hid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6370718C1057100CE933D /* 360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6370818C1057100CE933D /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		55B6371F18C108A500CE933D /* Feedback360.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Feedback360.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,8 +258,8 @@
 		55B637F818C10DA300CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B637F918C10DA300CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B637FA18C10DA300CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wireless360Controller.cpp; sourceTree = "<group>"; };
-		55B637FC18C10DA300CE933D /* Wireless360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wireless360Controller.h; sourceTree = "<group>"; };
+		55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wireless360Controller.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B637FC18C10DA300CE933D /* Wireless360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wireless360Controller.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WirelessGamingReceiver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6381D18C10EBE00CE933D /* devices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devices.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6381F18C10EBE00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -475,15 +475,15 @@
 		55B636EB18C1054F00CE933D /* 360Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55B636EF18C1054F00CE933D /* _60Controller.cpp */,
 				55B636F018C1054F00CE933D /* _60Controller.h */,
-				55B636F118C1054F00CE933D /* ChatPad.cpp */,
+				55B636EF18C1054F00CE933D /* _60Controller.cpp */,
 				55B636F218C1054F00CE933D /* ChatPad.h */,
+				55B636F118C1054F00CE933D /* ChatPad.cpp */,
 				55B636F318C1054F00CE933D /* chatpadhid.h */,
-				55B636F418C1054F00CE933D /* chatpadkeys.cpp */,
 				55B636F518C1054F00CE933D /* chatpadkeys.h */,
-				55B636F618C1054F00CE933D /* Controller.cpp */,
+				55B636F418C1054F00CE933D /* chatpadkeys.cpp */,
 				55B636F718C1054F00CE933D /* Controller.h */,
+				55B636F618C1054F00CE933D /* Controller.cpp */,
 				55B636F818C1054F00CE933D /* ControlStruct.h */,
 				55B636FD18C1054F00CE933D /* xbox360hid.h */,
 				55A2B8E218C11D4D006829A2 /* Resources */,
@@ -553,8 +553,8 @@
 		55B637F618C10DA300CE933D /* Wireless360Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */,
 				55B637FC18C10DA300CE933D /* Wireless360Controller.h */,
+				55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */,
 				55A2B8E318C11DAD006829A2 /* Resources */,
 			);
 			path = Wireless360Controller;
@@ -564,12 +564,12 @@
 			isa = PBXGroup;
 			children = (
 				55B6381D18C10EBE00CE933D /* devices.h */,
-				55B6382218C10EBE00CE933D /* WirelessDevice.cpp */,
 				55B6382318C10EBE00CE933D /* WirelessDevice.h */,
-				55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */,
+				55B6382218C10EBE00CE933D /* WirelessDevice.cpp */,
 				55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */,
-				55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */,
+				55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */,
 				55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */,
+				55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */,
 				55A2B8E418C11DC5006829A2 /* Resources */,
 			);
 			path = WirelessGamingReceiver;

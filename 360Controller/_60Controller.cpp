@@ -55,11 +55,11 @@ public:
 // Find the maximum packet size of this pipe
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
-    const IOUSBEndpointDescriptor *ed;
-    
-    ed=pipe->GetEndpointDescriptor();
-    if(ed==NULL) return 0;
-    else return ed->wMaxPacketSize;
+    const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
+    if(ed==NULL)
+        return 0;
+    else
+        return ed->wMaxPacketSize;
 }
 
 void Xbox360Peripheral::SendSpecial(UInt16 value)
@@ -129,18 +129,13 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 	{
 		case tsToggle:
 			SendToggle();
-			if (serialActive)
-			{
-				if (!serialHeard)
-				{
+			if (serialActive) {
+				if (!serialHeard) {
 					serialActive = false;
 					serialGot = 2;
 				}
-			}
-			else
-			{
-				if (serialHeard)
-				{
+			} else {
+				if (serialHeard) {
 					serialTimerState = tsReset1;
 					serialResetCount = 0;
 					nextTime = 40;
@@ -150,20 +145,14 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 			
 		case tsMiniToggle:
 			SendToggle();
-			if (serialHeard)
-			{
+			if (serialHeard) {
 				serialTimerState = tsSet1;
 				nextTime = 40;
-			}
-			else
-			{
+			} else {
 				serialResetCount++;
-				if (serialResetCount > 3)
-				{
+				if (serialResetCount > 3) {
 					serialTimerState = tsToggle;
-				}
-				else
-				{
+				} else {
 					serialTimerState = tsReset1;
 					nextTime = 40;
 				}
@@ -205,8 +194,7 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 	sender->setTimeoutMS(nextTime);	// Todo: Make it take into account function execution time?
 	serialHeard = false;
 	// Make it happen after the timer's set, for minimum impact
-	switch (serialGot)
-	{
+	switch (serialGot) {
 		case 1:
 			SerialConnect();
 			break;
@@ -227,24 +215,33 @@ void Xbox360Peripheral::readSettings(void)
     OSBoolean *value;
     OSNumber *number;
     
-    dataDictionary=OSDynamicCast(OSDictionary,getProperty(kDriverSettingKey));
-    if(dataDictionary==NULL) return;
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftX"));
-    if(value!=NULL) invertLeftX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftY"));
-    if(value!=NULL) invertLeftY=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightX"));
-    if(value!=NULL) invertRightX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightY"));
-    if(value!=NULL) invertRightY=value->getValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneLeft"));
-    if(number!=NULL) deadzoneLeft=number->unsigned32BitValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneRight"));
-    if(number!=NULL) deadzoneRight=number->unsigned32BitValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeLeft"));
-    if(value!=NULL) relativeLeft=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
-    if(value!=NULL) relativeRight=value->getValue();
+    dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
+    if (dataDictionary == NULL)
+        return;
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
+    if (value != NULL)
+        invertLeftX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
+    if (value != NULL)
+        invertLeftY = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
+    if (value != NULL)
+        invertRightX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
+    if (value != NULL)
+        invertRightY = value->getValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
+    if (number != NULL)
+        deadzoneLeft = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
+    if (number != NULL)
+        deadzoneRight = number->unsigned32BitValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
+    if (value != NULL)
+        relativeLeft = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
+    if (value != NULL)
+        relativeRight=value->getValue();
     /*
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -483,12 +480,9 @@ bool Xbox360Peripheral::QueueSerialRead(void)
     complete.action = SerialReadCompleteInternal;
     complete.parameter = serialInBuffer;
     err = serialInPipe->Read(serialInBuffer, 0, 0, serialInBuffer->getLength(), &complete);
-    if (err == kIOReturnSuccess)
-	{
+    if (err == kIOReturnSuccess) {
 		return true;
-	}
-    else
-	{
+	} else {
         IOLog("read - failed to start for chatpad (0x%.8x)\n",err);
         return false;
     }
@@ -511,7 +505,8 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
     complete.action=WriteCompleteInternal;
     complete.parameter=outBuffer;
     err=outPipe->Write(outBuffer,0,0,length,&complete);
-    if(err==kIOReturnSuccess) return true;
+    if (err == kIOReturnSuccess)
+        return true;
     else {
         IOLog("send - failed to start (0x%.8x)\n",err);
         return false;
@@ -610,7 +605,7 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 #else
 #error Unknown CPU byte order
 #endif
-    return (reverse<0)?~reverse:reverse;
+    return (reverse < 0) ? ~reverse : reverse;
 }
 
 // Adjusts the report for any settings speciified by the user
