@@ -200,7 +200,6 @@
 		55B636F818C1054F00CE933D /* ControlStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlStruct.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B636FA18C1054F00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B636FB18C1054F00CE933D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B636FC18C1054F00CE933D /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B636FD18C1054F00CE933D /* xbox360hid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xbox360hid.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6370718C1057100CE933D /* 360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6370818C1057100CE933D /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
@@ -216,7 +215,6 @@
 		55B6373818C108D200CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B6373918C108D200CE933D /* testhaptic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testhaptic.c; sourceTree = "<group>"; };
 		55B6373A18C108D200CE933D /* testrumble.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testrumble.c; sourceTree = "<group>"; };
-		55B6373B18C108D200CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B6375818C109E600CE933D /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = System/Library/Frameworks/ForceFeedback.framework; sourceTree = SDKROOT; };
 		55B6375A18C109ED00CE933D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		55B6376018C10A3200CE933D /* DriverTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DriverTool; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,7 +245,6 @@
 		55B637BA18C10C2400CE933D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55B637BB18C10C2400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B637BC18C10C2400CE933D /* pref360controlpref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pref360controlpref.tiff; sourceTree = "<group>"; };
-		55B637BD18C10C2400CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B637C718C10CB400CE933D /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = 360Daemon.m; path = ../360Daemon/360Daemon.m; sourceTree = "<group>"; usesTabs = 0; };
 		55B637CC18C10CB400CE933D /* Alert.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Alert.tif; path = ../360Daemon/Alert.tif; sourceTree = "<group>"; };
 		55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = com.mice.360Daemon.plist; path = ../360Daemon/com.mice.360Daemon.plist; sourceTree = "<group>"; };
@@ -257,14 +254,12 @@
 		55B637E818C10D5000CE933D /* Wireless360Controller.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wireless360Controller.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B637F818C10DA300CE933D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B637F918C10DA300CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B637FA18C10DA300CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wireless360Controller.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		55B637FC18C10DA300CE933D /* Wireless360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wireless360Controller.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WirelessGamingReceiver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6381D18C10EBE00CE933D /* devices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devices.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6381F18C10EBE00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B6382018C10EBE00CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B6382118C10EBE00CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		55B6382218C10EBE00CE933D /* WirelessDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessDevice.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		55B6382318C10EBE00CE933D /* WirelessDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessDevice.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessGamingReceiver.cpp; sourceTree = "<group>"; usesTabs = 0; };
@@ -343,7 +338,6 @@
 			children = (
 				55B6372F18C108D200CE933D /* InfoPlist.strings */,
 				55B6373818C108D200CE933D /* Info.plist */,
-				55B6373B18C108D200CE933D /* version.plist */,
 				55B13FC018C51DD400ACD9AC /* Feedback360.exp */,
 			);
 			name = Resources;
@@ -367,7 +361,6 @@
 			children = (
 				55B636F918C1054F00CE933D /* InfoPlist.strings */,
 				55B636FB18C1054F00CE933D /* Info.plist */,
-				55B636FC18C1054F00CE933D /* version.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -377,7 +370,6 @@
 			children = (
 				55B637F718C10DA300CE933D /* InfoPlist.strings */,
 				55B637F918C10DA300CE933D /* Info.plist */,
-				55B637FA18C10DA300CE933D /* version.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -387,7 +379,6 @@
 			children = (
 				55B6381E18C10EBE00CE933D /* InfoPlist.strings */,
 				55B6382018C10EBE00CE933D /* Info.plist */,
-				55B6382118C10EBE00CE933D /* version.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -543,7 +534,6 @@
 				55B637BA18C10C2400CE933D /* Images.xcassets */,
 				55B637BB18C10C2400CE933D /* Info.plist */,
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
-				55B637BD18C10C2400CE933D /* version.plist */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
 				55852E2118D6B5580009BF55 /* Localizable.strings */,
 			);
