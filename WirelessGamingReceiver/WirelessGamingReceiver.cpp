@@ -33,17 +33,17 @@ typedef struct
 {
     int index;
     IOBufferMemoryDescriptor *buffer;
-}
-WGRREAD;
+} WGRREAD;
 
 // Get maximum packet size for a pipe
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
-    const IOUSBEndpointDescriptor *ed;
+    const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
     
-    ed=pipe->GetEndpointDescriptor();
-    if(ed==NULL) return 0;
-    else return ed->wMaxPacketSize;
+    if (ed==NULL)
+        return 0;
+    else
+        return ed->wMaxPacketSize;
 }
 
 // Start device
@@ -57,22 +57,22 @@ bool WirelessGamingReceiver::start(IOService *provider)
     
     if (!IOService::start(provider))
     {
-//        IOLog("start - superclass failed\n");
+        // IOLog("start - superclass failed\n");
         return false;
     }
-
+    
     device = OSDynamicCast(IOUSBDevice, provider);
     if (device == NULL)
     {
-//        IOLog("start - invalid provider\n");
+        // IOLog("start - invalid provider\n");
         goto fail;
     }
-
+    
     // Check for configurations
     if (device->GetNumConfigurations() < 1)
     {
         device = NULL;
-//        IOLog("start - device has no configurations!\n");
+        // IOLog("start - device has no configurations!\n");
         goto fail;
     }
     
@@ -81,22 +81,22 @@ bool WirelessGamingReceiver::start(IOService *provider)
     if (cd == NULL)
     {
         device = NULL;
-//        IOLog("start - couldn't get configuration descriptor\n");
+        // IOLog("start - couldn't get configuration descriptor\n");
         goto fail;
     }
     
     if (!device->open(this))
     {
         device = NULL;
-//        IOLog("start - failed to open device\n");
+        // IOLog("start - failed to open device\n");
         goto fail;
     }
     if (device->SetConfiguration(this, cd->bConfigurationValue, true) != kIOReturnSuccess)
     {
-//        IOLog("start - unable to set configuration\n");
+        // IOLog("start - unable to set configuration\n");
         goto fail;
     }
-        
+    
     for (i = 0; i < WIRELESS_CONNECTIONS; i++)
     {
         connections[i].controller = NULL;
@@ -127,7 +127,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
             case 129:   // Controller
                 if (!interface->open(this))
                 {
-//                    IOLog("start: Failed to open control interface\n");
+                    // IOLog("start: Failed to open control interface\n");
                     goto fail;
                 }
                 connections[iConnection].controller = interface;
@@ -135,7 +135,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 connections[iConnection].controllerIn = interface->FindNextPipe(NULL, &pipeRequest);
                 if (connections[iConnection].controllerIn == NULL)
                 {
-//                    IOLog("start: Failed to open control input pipe\n");
+                    // IOLog("start: Failed to open control input pipe\n");
                     goto fail;
                 }
                 else
@@ -144,7 +144,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 connections[iConnection].controllerOut = interface->FindNextPipe(NULL, &pipeRequest);
                 if (connections[iConnection].controllerOut == NULL)
                 {
-//                    IOLog("start: Failed to open control output pipe\n");
+                    // IOLog("start: Failed to open control output pipe\n");
                     goto fail;
                 }
                 else
@@ -154,7 +154,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
             case 130:   // It is a mystery
                 if (!interface->open(this))
                 {
-//                    IOLog("start: Failed to open mystery interface\n");
+                    // IOLog("start: Failed to open mystery interface\n");
                     goto fail;
                 }
                 connections[iOther].other = interface;
@@ -162,7 +162,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 connections[iOther].otherIn = interface->FindNextPipe(NULL, &pipeRequest);
                 if (connections[iOther].otherIn == NULL)
                 {
-//                    IOLog("start: Failed to open mystery input pipe\n");
+                    // IOLog("start: Failed to open mystery input pipe\n");
                     goto fail;
                 }
                 else
@@ -171,7 +171,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 connections[iOther].otherOut = interface->FindNextPipe(NULL, &pipeRequest);
                 if (connections[iOther].otherOut == NULL)
                 {
-//                    IOLog("start: Failed to open mystery output pipe\n");
+                    // IOLog("start: Failed to open mystery output pipe\n");
                     goto fail;
                 }
                 else
@@ -179,7 +179,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 iOther++;
                 break;
             default:
-//                IOLog("start: Ignoring interface (protocol %d)\n", interface->GetInterfaceProtocol());
+                // IOLog("start: Ignoring interface (protocol %d)\n", interface->GetInterfaceProtocol());
                 break;
         }
     }
@@ -193,17 +193,17 @@ bool WirelessGamingReceiver::start(IOService *provider)
         connections[i].inputArray = OSArray::withCapacity(5);
         if (connections[i].inputArray == NULL)
         {
-//            IOLog("start: Failed to allocate packet buffer %d\n", i);
+            // IOLog("start: Failed to allocate packet buffer %d\n", i);
             goto fail;
         }
         if (!QueueRead(i))
         {
-//            IOLog("start: Failed to start read %d\n", i);
+            // IOLog("start: Failed to start read %d\n", i);
             goto fail;
         }
     }
     
-//    IOLog("start: Transform and roll out (%d interfaces)\n", connectionCount);
+    // IOLog("start: Transform and roll out (%d interfaces)\n", connectionCount);
     return true;
     
 fail:
@@ -260,7 +260,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
         IOFree(data, sizeof(WGRREAD));
         return false;
     }
-
+    
     complete.target = this;
     complete.action = _ReadComplete;
     complete.parameter = data;
@@ -268,11 +268,11 @@ bool WirelessGamingReceiver::QueueRead(int index)
     err = connections[index].controllerIn->Read(data->buffer, 0, 0, data->buffer->getLength(), &complete);
     if (err == kIOReturnSuccess)
         return true;
-        
+    
     data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
     
-//    IOLog("read - failed to start (0x%.8x)\n", err);
+    // IOLog("read - failed to start (0x%.8x)\n", err);
     return false;
 }
 
@@ -285,14 +285,15 @@ void WirelessGamingReceiver::ReadComplete(void *parameter, IOReturn status, UInt
     switch (status)
     {
         case kIOReturnOverrun:
-//            IOLog("read - kIOReturnOverrun, clearing stall\n");
+            // IOLog("read - kIOReturnOverrun, clearing stall\n");
             connections[data->index].controllerIn->ClearStall();
             // fall through
         case kIOReturnSuccess:
             ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), (int)data->buffer->getLength() - bufferSizeRemaining);
             break;
+            
         case kIOReturnNotResponding:
-//            IOLog("read - kIOReturnNotResponding\n");
+            // IOLog("read - kIOReturnNotResponding\n");
             // fall through
         default:
             reread = false;
@@ -317,7 +318,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void *bytes, UInt32 len
     outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
     if (outBuffer == NULL)
     {
-//        IOLog("send - unable to allocate buffer\n");
+        // IOLog("send - unable to allocate buffer\n");
         return false;
     }
     outBuffer->writeBytes(0, bytes, length);
@@ -331,7 +332,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void *bytes, UInt32 len
         return true;
     else
     {
-//        IOLog("send - failed to start (0x%.8x)\n",err);
+        // IOLog("send - failed to start (0x%.8x)\n",err);
         return false;
     }
 }
@@ -401,8 +402,7 @@ void WirelessGamingReceiver::ReleaseAll(void)
         }
         connections[i].controllerStarted = false;
     }
-    if (device != NULL)
-    {
+    if (device != NULL) {
         device->close(this);
         device = NULL;
     }
@@ -537,17 +537,17 @@ void WirelessGamingReceiver::InstantiateService(int index)
         {
             connections[index].service->attach(this);
             connections[index].service->SetIndex(index);
-//            connections[index].service->registerService();
-//            IOLog("process: Device attached\n");
+            // connections[index].service->registerService();
+            // IOLog("process: Device attached\n");
             if (IsDataQueued(index))
                 connections[index].service->NewData();
-			connections[index].service->start(this);
+            connections[index].service->start(this);
         }
         else
         {
             connections[index].service->release();
             connections[index].service = NULL;
-//            IOLog("process: Device attach failure\n");
+            // IOLog("process: Device attach failure\n");
         }
     }
 }
@@ -582,12 +582,12 @@ OSNumber* WirelessGamingReceiver::newLocationIDNumber() const
         {
             location = number->unsigned32BitValue();
         }
-        else 
+        else
         {
             // Make up an address
             if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
                 location |= number->unsigned8BitValue() << 24;
-                
+            
             if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
                 location |= number->unsigned8BitValue() << 16;
         }
