@@ -97,6 +97,9 @@
 		55B6383418C10EBE00CE933D /* WirelessHIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */; };
 		55B6384618C10FE200CE933D /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
 		55B6384718C10FE700CE933D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375A18C109ED00CE933D /* IOKit.framework */; };
+		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
+		55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B6373918C108D200CE933D /* testhaptic.c */; };
+		55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE3CAC18D7B7B600D69E84 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +269,8 @@
 		55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; usesTabs = 0; };
+		55FE3CA118D7B77800D69E84 /* testhaptic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testhaptic; sourceTree = BUILT_PRODUCTS_DIR; };
+		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +332,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55FE3C9E18D7B77800D69E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */,
+				55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +422,7 @@
 				55B6377D18C10B0B00CE933D /* Pref360Control.prefPane */,
 				55B637E818C10D5000CE933D /* Wireless360Controller.kext */,
 				55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */,
+				55FE3CA118D7B77800D69E84 /* testhaptic */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -415,6 +430,7 @@
 		55B636B618C104DB00CE933D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55FE3CAC18D7B7B600D69E84 /* SDL2.framework */,
 				55B637DE18C10CFE00CE933D /* Security.framework */,
 				55B6375A18C109ED00CE933D /* IOKit.framework */,
 				55B6375818C109E600CE933D /* ForceFeedback.framework */,
@@ -746,6 +762,22 @@
 			productReference = 55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		55FE3CA018D7B77800D69E84 /* testhaptic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55FE3CAA18D7B77800D69E84 /* Build configuration list for PBXNativeTarget "testhaptic" */;
+			buildPhases = (
+				55FE3C9D18D7B77800D69E84 /* Sources */,
+				55FE3C9E18D7B77800D69E84 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testhaptic;
+			productName = testhaptic;
+			productReference = 55FE3CA118D7B77800D69E84 /* testhaptic */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -777,6 +809,7 @@
 				55B637E718C10D5000CE933D /* Wireless360Controller */,
 				55B6380D18C10E8700CE933D /* WirelessGamingReceiver */,
 				55B6383818C10F8E00CE933D /* Whole Driver */,
+				55FE3CA018D7B77800D69E84 /* testhaptic */,
 			);
 		};
 /* End PBXProject section */
@@ -921,6 +954,14 @@
 				55B6383318C10EBE00CE933D /* WirelessHIDDevice.cpp in Sources */,
 				55B6382F18C10EBE00CE933D /* WirelessDevice.cpp in Sources */,
 				55B6383118C10EBE00CE933D /* WirelessGamingReceiver.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55FE3C9D18D7B77800D69E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1314,6 +1355,40 @@
 			};
 			name = Release;
 		};
+		55FE3CA818D7B77800D69E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55FE3CA918D7B77800D69E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1394,6 +1469,15 @@
 			buildConfigurations = (
 				55B6383A18C10F8E00CE933D /* Debug */,
 				55B6383B18C10F8E00CE933D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55FE3CAA18D7B77800D69E84 /* Build configuration list for PBXNativeTarget "testhaptic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55FE3CA818D7B77800D69E84 /* Debug */,
+				55FE3CA918D7B77800D69E84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
