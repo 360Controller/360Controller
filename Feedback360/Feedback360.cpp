@@ -70,7 +70,7 @@ IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface = {
 Feedback360::Feedback360() : fRefCount(1)
 {
     EffectIndex = 1;
-    //EffectList = std::vector<Feedback360Effect>();
+    EffectList = std::vector<Feedback360Effect>();
     Stopped = TRUE;
     Paused = FALSE;
     PausedTime = 0;
