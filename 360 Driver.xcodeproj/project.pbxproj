@@ -1228,6 +1228,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/360Daemon",
+				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1241,6 +1245,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/360Daemon",
+				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				PRODUCT_NAME = "$(TARGET_NAME)";

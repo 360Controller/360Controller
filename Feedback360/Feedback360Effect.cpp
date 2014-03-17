@@ -47,12 +47,12 @@ Feedback360Effect::Feedback360Effect()
 Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
 {
     Type = src.Type;
-    DiEffect = src.DiEffect;
-    DiEnvelope = src.DiEnvelope;
-    DiCustomForce = src.DiCustomForce;
-    DiConstantForce = src.DiConstantForce;
-    DiPeriodic = src.DiPeriodic;
-    DiRampforce = src.DiRampforce;
+    memcpy(&DiEffect, &src.DiEffect, sizeof(FFEFFECT));
+    memcpy(&DiEnvelope, &src.DiEnvelope, sizeof(FFENVELOPE));
+    memcpy(&DiCustomForce, &src.DiCustomForce, sizeof(FFCUSTOMFORCE));
+    memcpy(&DiConstantForce, &src.DiConstantForce, sizeof(FFCONSTANTFORCE));
+    memcpy(&DiPeriodic, &src.DiPeriodic, sizeof(FFPERIODIC));
+    memcpy(&DiRampforce, &src.DiRampforce, sizeof(FFRAMPFORCE));
     Status = src.Status;
     PlayCount = src.PlayCount;
     StartTime = src.StartTime;
