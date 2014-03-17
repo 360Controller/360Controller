@@ -36,14 +36,14 @@
         <window title="&lt;&lt; do not localize >>" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="12" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="240" y="597" width="600" height="307"/>
+            <rect key="contentRect" x="240" y="597" width="600" height="304"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="307"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="304"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="98">
-                        <rect key="frame" x="112" y="263" width="471" height="26"/>
+                        <rect key="frame" x="112" y="263" width="471" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="101" id="177">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -78,19 +78,19 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="105" customClass="MyDigitalStick">
-                        <rect key="frame" x="129" y="43" width="77" height="80"/>
+                        <rect key="frame" x="129" y="43" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="QLP-S4-rvf"/>
-                            <constraint firstAttribute="height" constant="80" id="q4h-Dr-nPm"/>
+                            <constraint firstAttribute="height" constant="77" id="q4h-Dr-nPm"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="106" customClass="MyAnalogStick">
-                        <rect key="frame" x="232" y="43" width="77" height="80"/>
+                        <rect key="frame" x="232" y="43" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="9b6-pI-rGz"/>
-                            <constraint firstAttribute="height" constant="80" id="k3p-IM-dEU"/>
+                            <constraint firstAttribute="height" constant="77" id="k3p-IM-dEU"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
@@ -102,7 +102,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="108" customClass="MyCentreButtons">
-                        <rect key="frame" x="157" y="144" width="126" height="39"/>
+                        <rect key="frame" x="157" y="141" width="126" height="39"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="126" id="XGw-f2-1xS"/>
@@ -269,7 +269,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="168">
-                                    <rect key="frame" x="13" y="11" width="150" height="100"/>
+                                    <rect key="frame" x="13" y="11" width="152" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="192">
                                         <font key="font" size="10" name="LucidaGrande"/>
@@ -293,6 +293,8 @@ Please consider donating if you enjoy this driver!</string>
                             <constraint firstAttribute="trailing" secondItem="163" secondAttribute="trailing" constant="38" id="SdG-f2-ajn"/>
                             <constraint firstAttribute="bottom" secondItem="168" secondAttribute="bottom" constant="9" id="W83-Lr-XKQ"/>
                             <constraint firstAttribute="width" constant="176" id="WEp-5k-4eB"/>
+                            <constraint firstItem="168" firstAttribute="leading" secondItem="158" secondAttribute="leading" constant="14" id="bS4-OP-twj"/>
+                            <constraint firstAttribute="trailing" secondItem="168" secondAttribute="trailing" constant="14" id="eDe-Lo-pyP"/>
                             <constraint firstItem="166" firstAttribute="top" secondItem="163" secondAttribute="bottom" constant="21" id="f9e-xX-3cc"/>
                             <constraint firstItem="161" firstAttribute="top" secondItem="158" secondAttribute="top" constant="26" id="jDE-PY-Mmo"/>
                             <constraint firstItem="165" firstAttribute="top" secondItem="161" secondAttribute="bottom" constant="19" id="jgK-Kx-BCy"/>
@@ -309,7 +311,7 @@ Please consider donating if you enjoy this driver!</string>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                        <rect key="frame" x="203" y="193" width="32" height="24"/>
+                        <rect key="frame" x="203" y="190" width="32" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="32" id="1S3-ss-4Tr"/>
@@ -320,19 +322,19 @@ Please consider donating if you enjoy this driver!</string>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
                         <rect key="frame" x="23" y="40" width="21" height="166"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
+                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="195"/>
                         <connections>
                             <action selector="changeSetting:" target="-2" id="196"/>
                         </connections>
                     </slider>
                     <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="198">
-                        <rect key="frame" x="8" y="248" width="51" height="50"/>
+                        <rect key="frame" x="8" y="247" width="51" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="38" id="60P-3v-Wib"/>
                             <constraint firstAttribute="width" constant="38" id="wH6-0r-jMY"/>
                         </constraints>
-                        <buttonCell key="cell" type="round" title="+" bezelStyle="circular" imagePosition="left" alignment="center" borderStyle="border" id="199">
+                        <buttonCell key="cell" type="round" bezelStyle="circular" image="NSAddTemplate" imagePosition="only" alignment="center" borderStyle="border" id="199">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="18" name="LucidaGrande"/>
                         </buttonCell>
@@ -546,6 +548,7 @@ A restart will be required for changes to take effect.</string>
         </customObject>
     </objects>
     <resources>
+        <image name="NSAddTemplate" width="8" height="8"/>
         <image name="battNone" width="32" height="24"/>
     </resources>
 </document>

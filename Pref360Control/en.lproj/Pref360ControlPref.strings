@@ -42,7 +42,7 @@
 "187.title" = "Xbox 360 Controller Driver";
 
 /* Class = "NSTextFieldCell"; title = "Version 0.13"; ObjectID = "188"; */
-"188.title" = "Version 0.13";
+"188.title" = "Version 0.14";
 
 /* Class = "NSTextFieldCell"; title = "(C) 2006-13 Colin Munro"; ObjectID = "189"; */
 "189.title" = "(C) 2006-13 Colin Munro";
@@ -55,9 +55,6 @@
 
 /* Class = "NSTextFieldCell"; title = "For more information on this driver, please see the supplied Readme and Licence documents.\n\nPlease consider donating if you enjoy this driver!"; ObjectID = "192"; */
 "192.title" = "For more information on this driver, please see the supplied Readme and Licence documents.\n\nPlease consider donating if you enjoy this driver!";
-
-/* Class = "NSButtonCell"; title = "+"; ObjectID = "199"; */
-"199.title" = "+";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "200"; */
 "200.title" = "Window";
