@@ -39,10 +39,9 @@ static id GetDeviceValue(io_service_t device, NSString *key)
 // Make sure a name is as nice as possible for eventually going into the XML for the driver
 static NSString* SanitiseName(NSString *name)
 {
-    NSMutableString *output;
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
     int i;
     
-    output = [NSMutableString stringWithCapacity:100];
     for (i = 0; i < [name length]; i++) {
         unichar c = [name characterAtIndex:i];
         if (c == ' ')
@@ -51,7 +50,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return output;
+    return [NSString stringWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -143,15 +142,13 @@ static BOOL IsXBox360Controller(io_service_t device)
                 (*interfaceInterface)->GetInterfaceSubClass(interfaceInterface, &subClassNum);
                 (*interfaceInterface)->GetInterfaceProtocol(interfaceInterface, &protocolNum);
                 (*interfaceInterface)->GetNumEndpoints(interfaceInterface, &endpointCount);
-                if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0])))
-                {
+                if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0]))) {
                     if (
                         (ControllerInterfaces[interfaceNum].classNum == classNum) &&
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
-                        )
-                    {
+                        ) {
                         // Found another interface in the right place
                         interfaceCount++;
                     }
@@ -176,9 +173,9 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (instancetype)init
 {
     if (self = [super init]) {
-        entries = [NSMutableDictionary dictionaryWithCapacity:10];
-        connected = [NSMutableArray arrayWithCapacity:10];
-        enabled = [NSMutableArray arrayWithCapacity:10];
+        entries = [[NSMutableDictionary alloc] initWithCapacity:10];
+        connected = [[NSMutableArray alloc] initWithCapacity:10];
+        enabled = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
 }
@@ -200,7 +197,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     toolPath = [self toolPath];
     
     // Build array of parameters
-    parameters = [NSMutableArray arrayWithCapacity:10];
+    parameters = [[NSMutableArray alloc] initWithCapacity:10];
     [parameters addObject:@"edit"];
     
     for (NSNumber *key in enabled)
@@ -273,8 +270,8 @@ static BOOL IsXBox360Controller(io_service_t device)
         NSArray *values = [line componentsSeparatedByString:@","];
         if ([values count] != 3)
             continue;
-        NSUInteger vendor = [values[1] intValue];
-        NSUInteger product = [values[2] intValue];
+        unsigned int vendor = [values[1] intValue];
+        unsigned int product = [values[2] intValue];
         NSNumber *key = [NSNumber numberWithUnsignedInt:(int)((vendor << 16) | product)];
         [enabled addObject:key];
         if (entries[key] == nil)
@@ -292,8 +289,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     known = GetKnownDevices();
     keys = [known allKeys];
-    for (NSNumber *key in keys)
-    {
+    for (NSNumber *key in keys) {
         if (entries[key] == nil)
             entries[key] = known[key];
     }
@@ -303,10 +299,9 @@ static BOOL IsXBox360Controller(io_service_t device)
 // Find any matching devices currently plugged in
 - (NSString*)readIOKit
 {
-    io_iterator_t iterator;
+    io_iterator_t iterator = 0;
     io_service_t object;
     
-    iterator = 0;
     IOServiceGetMatchingServices([owner masterPort], IOServiceMatching(kIOUSBDeviceClassName), &iterator);
     if (iterator != 0) {
         while ((object = IOIteratorNext(iterator)) != 0) {
@@ -371,8 +366,7 @@ static BOOL IsXBox360Controller(io_service_t device)
         error = [self readIOKit];
     
     // Check for errors
-    if (error != nil)
-    {
+    if (error != nil) {
         [self showFailure:error];
         return NO;
     }
@@ -395,8 +389,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                                  kAuthorizationEmptyEnvironment,
                                  kAuthorizationFlagDefaults,
                                  &authorisationRef);
-    if (status != errAuthorizationSuccess)
-    {
+    if (status != errAuthorizationSuccess) {
         [self showFailure:NSLocalizedString(@"Unable to create authorisation request", @"")];
         return NO;
     }
