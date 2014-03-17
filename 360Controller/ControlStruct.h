@@ -66,7 +66,7 @@ typedef struct {
 } PACKED XBOX360_OUT_RUMBLE;
 
 // Enumeration of command types
-enum {
+enum CommandTypes {
     // In
     inReport  = 0,
     // Out
@@ -75,7 +75,7 @@ enum {
 };
 
 // Button bits
-enum {
+enum ButtonBits {
     btnHatRight      = 0x8000,
     btnHatLeft       = 0x4000,
     btnBack          = 0x2000,
@@ -95,7 +95,7 @@ enum {
 };
 
 // LED values
-enum {
+enum LEDValues {
     ledOff          = 0x00,
     ledBlinkingAll  = 0x01,
     ledFlashOn1     = 0x02,

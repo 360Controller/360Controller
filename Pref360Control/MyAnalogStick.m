@@ -27,7 +27,6 @@
 
 @implementation MyAnalogStick
 @synthesize pressed;
-@synthesize appearance;
 @synthesize deadzone;
 @synthesize positionX = x;
 @synthesize positionY = y;
