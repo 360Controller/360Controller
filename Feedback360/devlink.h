@@ -23,7 +23,7 @@
 #ifndef Feedback360_devlink_h
 #define Feedback360_devlink_h
 
-#include <Carbon/Carbon.h>
+#include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/hid/IOHIDLib.h>
 
 typedef struct {

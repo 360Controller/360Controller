@@ -25,8 +25,7 @@
 
 #include "Feedback360.h"
 
-#define LoopGranularity             10000         // Microseconds
-
+#define LoopGranularity 10000         // Microseconds
 
 // static var initialization
 UInt32 Feedback360::sFactoryRefCount = 0;
@@ -100,17 +99,19 @@ HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
 {
     CFUUIDRef interface;
     interface = CFUUIDCreateFromUUIDBytes(NULL,iid);
-    if(CFEqual(interface,kIOForceFeedbackDeviceInterfaceID))
+    if(CFEqual(interface,kIOForceFeedbackDeviceInterfaceID)) {
         *ppv=&this->iIOForceFeedbackDeviceInterface;
-    // IUnknown || IOCFPlugInInterface
-    else if(CFEqual(interface,IUnknownUUID)||CFEqual(interface,kIOCFPlugInInterfaceID))
+        // IUnknown || IOCFPlugInInterface
+    } else if(CFEqual(interface, IUnknownUUID) || CFEqual(interface, kIOCFPlugInInterfaceID)) {
         *ppv=&this->iIOCFPlugInInterface;
-    else
+    } else {
         *ppv=NULL;
+    }
     // Done
     CFRelease(interface);
-    if((*ppv)==NULL) return E_NOINTERFACE;
-    else {
+    if ((*ppv) == NULL) {
+        return E_NOINTERFACE;
+    } else {
         this->iIOCFPlugInInterface.pseudoVTable->AddRef(*ppv);
     }
     return FF_OK;
@@ -184,10 +185,10 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
     if(property != FFPROP_FFGAIN) {
         return FFERR_UNSUPPORTED;
     }
-
+    
     UInt32 NewGain = *((UInt32*)value);
     __block HRESULT Result = FF_OK;
-
+    
     dispatch_sync(Queue, ^{
         if( 1 <= NewGain && NewGain <= 10000 )
         {
@@ -197,7 +198,7 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
             Result = FF_TRUNCATED;
         }
     });
-
+    
     return Result;
 }
 
@@ -537,7 +538,6 @@ HRESULT Feedback360::DestroyEffect(FFEffectDownloadID EffectHandle)
         }
     });
     return Result;
-    
 }
 
 HRESULT Feedback360::Escape(FFEffectDownloadID downloadID, FFEFFESCAPE *escape)
@@ -606,12 +606,12 @@ void Feedback360::SetForce(LONG LeftLevel, LONG RightLevel)
 void Feedback360::EffectProc( void *params )
 {
     Feedback360 *cThis = (Feedback360 *)params;
-
+    
     LONG LeftLevel = 0;
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
     LONG CalcResult =0;
-
+    
     if (cThis->Actuator == TRUE) {
         for (std::list<Feedback360Effect>::iterator effectIterator = cThis->EffectList.begin() ; effectIterator != cThis->EffectList.end(); ++effectIterator)
         {
@@ -620,12 +620,12 @@ void Feedback360::EffectProc( void *params )
             }
         }
     }
-
+    
     if ((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && (CalcResult != -1))
     {
         //fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
         cThis->SetForce((unsigned char)MIN(255, LeftLevel * Gain / 10000),(unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
-
+        
         cThis->PrvLeftLevel = LeftLevel;
         cThis->PrvRightLevel = RightLevel;
     }
@@ -659,78 +659,96 @@ HRESULT Feedback360::GetVersion(ForceFeedbackVersion *version)
 }
 
 // static c->c++ glue functions
-HRESULT Feedback360::sQueryInterface(void *self, REFIID iid, LPVOID *ppv) {
+HRESULT Feedback360::sQueryInterface(void *self, REFIID iid, LPVOID *ppv)
+{
     Feedback360 *obj = ((Xbox360InterfaceMap *)self)->obj;
     return obj->QueryInterface(iid, ppv);
 }
 
-ULONG Feedback360::sAddRef(void *self) {
+ULONG Feedback360::sAddRef(void *self)
+{
     Feedback360 *obj = ( (Xbox360InterfaceMap *) self)->obj;
     return obj->AddRef();
 }
 
-ULONG Feedback360::sRelease(void *self) {
+ULONG Feedback360::sRelease(void *self)
+{
     Feedback360 *obj = ( (Xbox360InterfaceMap *) self)->obj;
     return obj->Release();
 }
 
-IOReturn Feedback360::sProbe(void *self, CFDictionaryRef propertyTable, io_service_t service, SInt32 *order) {
+IOReturn Feedback360::sProbe(void *self, CFDictionaryRef propertyTable, io_service_t service, SInt32 *order)
+{
     return getThis(self)->Probe(propertyTable, service, order);
 }
 
-IOReturn Feedback360::sStart(void *self, CFDictionaryRef propertyTable, io_service_t service) {
+IOReturn Feedback360::sStart(void *self, CFDictionaryRef propertyTable, io_service_t service)
+{
     return getThis(self)->Start(propertyTable, service);
 }
 
-IOReturn Feedback360::sStop(void *self) {
+IOReturn Feedback360::sStop(void *self)
+{
     return getThis(self)->Stop();
 }
 
-HRESULT Feedback360::sGetVersion(void * self, ForceFeedbackVersion * version) {
+HRESULT Feedback360::sGetVersion(void * self, ForceFeedbackVersion * version)
+{
     return Feedback360::getThis(self)->GetVersion(version);
 }
 
-HRESULT Feedback360::sInitializeTerminate(void * self, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin ) {
+HRESULT Feedback360::sInitializeTerminate(void * self, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin)
+{
     return Feedback360::getThis(self)->InitializeTerminate(forceFeedbackAPIVersion, hidDevice, begin);
 }
 
-HRESULT Feedback360::sDestroyEffect(void * self, FFEffectDownloadID downloadID) {
+HRESULT Feedback360::sDestroyEffect(void * self, FFEffectDownloadID downloadID)
+{
     return Feedback360::getThis(self)->DestroyEffect(downloadID);
 }
 
-HRESULT Feedback360::sDownloadEffect(void * self, CFUUIDRef effectType, FFEffectDownloadID *pDownloadID, FFEFFECT * pEffect, FFEffectParameterFlag flags ) {
+HRESULT Feedback360::sDownloadEffect(void * self, CFUUIDRef effectType, FFEffectDownloadID *pDownloadID, FFEFFECT * pEffect, FFEffectParameterFlag flags)
+{
     return Feedback360::getThis(self)->DownloadEffect(effectType, pDownloadID, pEffect, flags);
 }
 
-HRESULT Feedback360::sEscape( void * self, FFEffectDownloadID downloadID, FFEFFESCAPE * pEscape) {
+HRESULT Feedback360::sEscape(void * self, FFEffectDownloadID downloadID, FFEFFESCAPE * pEscape)
+{
     return Feedback360::getThis(self)->Escape(downloadID, pEscape);
 }
 
-HRESULT Feedback360::sGetEffectStatus( void * self, FFEffectDownloadID downloadID, FFEffectStatusFlag * pStatusCode ) {
+HRESULT Feedback360::sGetEffectStatus(void * self, FFEffectDownloadID downloadID, FFEffectStatusFlag * pStatusCode)
+{
     return Feedback360::getThis(self)->GetEffectStatus(downloadID, pStatusCode);
 }
 
-HRESULT Feedback360::sGetForceFeedbackState( void * self, ForceFeedbackDeviceState * pDeviceState ) {
+HRESULT Feedback360::sGetForceFeedbackState(void * self, ForceFeedbackDeviceState * pDeviceState)
+{
     return Feedback360::getThis(self)->GetForceFeedbackState(pDeviceState);
 }
 
-HRESULT Feedback360::sGetForceFeedbackCapabilities( void * self, FFCAPABILITIES * capabilities ) {
+HRESULT Feedback360::sGetForceFeedbackCapabilities(void * self, FFCAPABILITIES * capabilities)
+{
     return Feedback360::getThis(self)->GetForceFeedbackCapabilities(capabilities);
 }
 
-HRESULT Feedback360::sSendForceFeedbackCommand( void * self, FFCommandFlag state ) {
+HRESULT Feedback360::sSendForceFeedbackCommand(void * self, FFCommandFlag state)
+{
     return Feedback360::getThis(self)->SendForceFeedbackCommand(state);
 }
 
-HRESULT Feedback360::sSetProperty( void * self, FFProperty property, void * pValue ) {
+HRESULT Feedback360::sSetProperty(void * self, FFProperty property, void * pValue)
+{
     return Feedback360::getThis(self)->SetProperty(property, pValue);
 }
 
-HRESULT Feedback360::sStartEffect( void * self, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations ) {
+HRESULT Feedback360::sStartEffect(void * self, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations)
+{
     return Feedback360::getThis(self)->StartEffect(downloadID, mode, iterations);
 }
 
-HRESULT Feedback360::sStopEffect( void * self, UInt32 downloadID ) {
+HRESULT Feedback360::sStopEffect(void * self, UInt32 downloadID)
+{
     return Feedback360::getThis(self)->StopEffect(downloadID);
 }
 
