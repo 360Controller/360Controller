@@ -259,16 +259,16 @@
 		55B637FB18C10DA300CE933D /* Wireless360Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wireless360Controller.cpp; sourceTree = "<group>"; };
 		55B637FC18C10DA300CE933D /* Wireless360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wireless360Controller.h; sourceTree = "<group>"; };
 		55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WirelessGamingReceiver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		55B6381D18C10EBE00CE933D /* devices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devices.h; sourceTree = "<group>"; };
+		55B6381D18C10EBE00CE933D /* devices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devices.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6381F18C10EBE00CE933D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55B6382018C10EBE00CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B6382118C10EBE00CE933D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		55B6382218C10EBE00CE933D /* WirelessDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessDevice.cpp; sourceTree = "<group>"; };
-		55B6382318C10EBE00CE933D /* WirelessDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessDevice.h; sourceTree = "<group>"; };
-		55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessGamingReceiver.cpp; sourceTree = "<group>"; };
-		55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; };
-		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; };
-		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; };
+		55B6382218C10EBE00CE933D /* WirelessDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessDevice.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B6382318C10EBE00CE933D /* WirelessDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessDevice.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B6382418C10EBE00CE933D /* WirelessGamingReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessGamingReceiver.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; usesTabs = 0; };
+		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; usesTabs = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1055,6 +1055,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1097,6 +1098,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1120,7 +1122,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360DaemonApp/360DaemonApp-Prefix.pch";
 				INFOPLIST_FILE = "360DaemonApp/360DaemonApp-Info.plist";
@@ -1134,7 +1135,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360DaemonApp/360DaemonApp-Prefix.pch";
 				INFOPLIST_FILE = "360DaemonApp/360DaemonApp-Info.plist";
@@ -1147,7 +1147,6 @@
 		55B6371418C1057100CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
@@ -1160,7 +1159,6 @@
 		55B6371518C1057100CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
@@ -1174,7 +1172,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -1188,7 +1185,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -1228,7 +1224,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				INFOPLIST_FILE = Pref360Control/Info.plist;
@@ -1242,7 +1237,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				INFOPLIST_FILE = Pref360Control/Info.plist;
@@ -1255,7 +1249,6 @@
 		55B637F418C10D5000CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1267,7 +1260,6 @@
 		55B637F518C10D5000CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1279,7 +1271,6 @@
 		55B6381A18C10E9500CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1291,7 +1282,6 @@
 		55B6381B18C10E9500CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
