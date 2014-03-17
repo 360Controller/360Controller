@@ -100,12 +100,12 @@ HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
     CFUUIDRef interface;
     interface = CFUUIDCreateFromUUIDBytes(NULL,iid);
     if(CFEqual(interface,kIOForceFeedbackDeviceInterfaceID)) {
-        *ppv=&this->iIOForceFeedbackDeviceInterface;
+        *ppv = &this->iIOForceFeedbackDeviceInterface;
         // IUnknown || IOCFPlugInInterface
     } else if(CFEqual(interface, IUnknownUUID) || CFEqual(interface, kIOCFPlugInInterfaceID)) {
-        *ppv=&this->iIOCFPlugInInterface;
+        *ppv = &this->iIOCFPlugInInterface;
     } else {
-        *ppv=NULL;
+        *ppv = NULL;
     }
     // Done
     CFRelease(interface);
@@ -190,11 +190,10 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
     __block HRESULT Result = FF_OK;
     
     dispatch_sync(Queue, ^{
-        if( 1 <= NewGain && NewGain <= 10000 )
-        {
+        if (1 <= NewGain && NewGain <= 10000) {
             Gain = NewGain;
         } else {
-            Gain = MAX( 1, MIN( NewGain, 10000 ) );
+            Gain = MAX(1, MIN(NewGain, 10000));
             Result = FF_TRUNCATED;
         }
     });
@@ -245,25 +244,19 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
     
     dispatch_sync(Queue, ^{
         if (*EffectHandle == 0) {
-            Effect = new Feedback360Effect();
-            Effect->Handle = (EffectIndex++);
-            EffectList.push_back(*Effect);
-            *EffectHandle = Effect->Handle;
-            //Clean up after ourselves
-            delete Effect;
+            EffectList.push_back(Feedback360Effect(EffectIndex++));
             Effect = &(*EffectList.end());
+            *EffectHandle = Effect->Handle;
         } else {
-            for (std::list<Feedback360Effect>::iterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
-            {
-                if (effectIterator->Handle == *EffectHandle)
-                {
+            for (std::list<Feedback360Effect>::iterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator) {
+                if (effectIterator->Handle == *EffectHandle) {
                     Effect = &(*effectIterator);
                     break;
                 }
             }
         }
         
-        if(Effect == NULL || Result == -1) {
+        if (Effect == NULL || Result == -1) {
             Result = FFERR_INTERNAL;
         } else {
             Effect->Type = EffectType;
