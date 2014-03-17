@@ -721,6 +721,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"DeadzoneRight": @((UInt16)[rightStickDeadzone doubleValue]),
                            @"RelativeLeft": ([leftLinked state]==NSOnState) ? @YES : @NO,
                            @"RelativeRight":([rightLinked state]==NSOnState) ? @YES : @NO};
+    
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
     SetController(GetSerialNumber(registryEntry), dict);
