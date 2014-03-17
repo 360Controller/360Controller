@@ -44,28 +44,6 @@ Feedback360Effect::Feedback360Effect()
     LastTime = 0;
 }
 
-Feedback360Effect::Feedback360Effect(FFEffectDownloadID theHand) : Feedback360Effect()
-{
-    Handle = theHand;
-}
-
-Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
-{
-    Type = src.Type;
-    memcpy(&DiEffect, &src.DiEffect, sizeof(FFEFFECT));
-    memcpy(&DiEnvelope, &src.DiEnvelope, sizeof(FFENVELOPE));
-    memcpy(&DiCustomForce, &src.DiCustomForce, sizeof(FFCUSTOMFORCE));
-    memcpy(&DiConstantForce, &src.DiConstantForce, sizeof(FFCONSTANTFORCE));
-    memcpy(&DiPeriodic, &src.DiPeriodic, sizeof(FFPERIODIC));
-    memcpy(&DiRampforce, &src.DiRampforce, sizeof(FFRAMPFORCE));
-    Handle = src.Handle;
-    Status = src.Status;
-    PlayCount = src.PlayCount;
-    StartTime = src.StartTime;
-    Index = src.Index;
-    LastTime = src.LastTime;
-}
-
 //----------------------------------------------------------------------------------------------
 // Calc
 //----------------------------------------------------------------------------------------------
