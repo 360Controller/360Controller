@@ -57,13 +57,10 @@ IOReturn ChatPadKeyboardClass::getReport(IOMemoryDescriptor *report, IOHIDReport
 IOReturn ChatPadKeyboardClass::handleReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
 {
 	IOBufferMemoryDescriptor *realReport = OSDynamicCast(IOBufferMemoryDescriptor, report);
-	if (realReport != NULL)
-	{
+	if (realReport != NULL) {
 		unsigned char *data = (unsigned char*)realReport->getBytesNoCopy();
-		if (data[0] == 0x00)
-		{
-			for (int i = 2; i < 5; i++)
-			{
+		if (data[0] == 0x00) {
+			for (int i = 2; i < 5; i++) {
 				data[i] = ChatPad2USB(data[i]);
 			}
 		}
