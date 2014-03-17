@@ -22,24 +22,24 @@
  */
 #import "ControlPrefs.h"
 
-void SetAlertDisabled(int index)
+void SetAlertDisabled(NSInteger index)
 {
     NSString *prop;
     NSNumber *value;
     
-    prop = [NSString stringWithFormat:@"%@%i", D_SHOWONCE, index];
+    prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     value = @YES;
     CFPreferencesSetValue((__bridge CFStringRef)prop, (__bridge CFPropertyListRef)(value), DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
-BOOL AlertDisabled(int index)
+BOOL AlertDisabled(NSInteger index)
 {
     NSString *prop;
     BOOL result = NO;
     CFPropertyListRef value;
     
-    prop = [NSString stringWithFormat:@"%@%i", D_SHOWONCE, index];
+    prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     if (value != NULL)
     {
