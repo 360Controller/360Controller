@@ -60,7 +60,7 @@ class Feedback360Effect
 public:
     Feedback360Effect();
     Feedback360Effect(FFEffectDownloadID theHand);
-    //Feedback360Effect(const Feedback360Effect &src);
+    Feedback360Effect(const Feedback360Effect &src);
     
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
     
