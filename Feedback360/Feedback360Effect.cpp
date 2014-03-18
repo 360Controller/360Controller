@@ -49,7 +49,6 @@ Feedback360Effect::Feedback360Effect(FFEffectDownloadID theHand) : Feedback360Ef
     Handle = theHand;
 }
 
-#if 0
 Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
 {
     Type = src.Type;
@@ -66,7 +65,6 @@ Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
     Index = src.Index;
     LastTime = src.LastTime;
 }
-#endif
 
 //----------------------------------------------------------------------------------------------
 // Calc
