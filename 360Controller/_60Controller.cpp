@@ -785,11 +785,11 @@ void Xbox360Peripheral::PadConnect(void)
 			OSString::withCString("IOKitDebug"),
         };
         const OSObject *objects[] = {
-            OSNumber::withNumber((unsigned long long)1, 32),
+            OSNumber::withNumber((unsigned)1, 32),
 			getProperty("IOCFPlugInTypes"),
-            OSNumber::withNumber((unsigned long long)65535, 32),
+            OSNumber::withNumber((unsigned)65535, 32),
         };
-        OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]), 0);
+        OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]));
 		if (padHandler->init(dictionary))
 		{
 			padHandler->attach(this);
@@ -825,7 +825,7 @@ void Xbox360Peripheral::SerialConnect(void)
             OSString::withCString(kIOSerialDeviceType),
         };
         const OSObject *objects[] = {
-            OSNumber::withNumber((unsigned long long)0, 32),
+            OSNumber::withNumber((unsigned)0, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]), 0);
         if (serialHandler->init(dictionary))

@@ -530,7 +530,7 @@ void WirelessGamingReceiver::InstantiateService(int index)
             OSString::withCString(kIOWirelessDeviceType),
         };
         const OSObject *objects[1] = {
-            OSNumber::withNumber((unsigned long long)0, 32),
+            OSNumber::withNumber((unsigned)0, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1, 0);
         if (connections[index].service->init(dictionary))
