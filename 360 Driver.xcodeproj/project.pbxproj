@@ -270,7 +270,7 @@
 		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; usesTabs = 0; };
 		55FE3CA118D7B77800D69E84 /* testhaptic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testhaptic; sourceTree = BUILT_PRODUCTS_DIR; };
-		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,13 +400,13 @@
 		55B636AB18C104DB00CE933D = {
 			isa = PBXGroup;
 			children = (
-				55B636EB18C1054F00CE933D /* 360Controller */,
-				55B636BD18C104DB00CE933D /* 360DaemonApp */,
 				55B6372C18C108D200CE933D /* Feedback360 */,
-				55B6376A18C10A5400CE933D /* DriverTool */,
-				55B6378118C10B0B00CE933D /* Pref360Control */,
+				55B636EB18C1054F00CE933D /* 360Controller */,
 				55B637F618C10DA300CE933D /* Wireless360Controller */,
 				55B6381C18C10EBE00CE933D /* WirelessGamingReceiver */,
+				55B636BD18C104DB00CE933D /* 360DaemonApp */,
+				55B6376A18C10A5400CE933D /* DriverTool */,
+				55B6378118C10B0B00CE933D /* Pref360Control */,
 				55B636B618C104DB00CE933D /* Frameworks */,
 				55B636B518C104DB00CE933D /* Products */,
 			);
