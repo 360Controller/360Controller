@@ -25,7 +25,7 @@
 
 #include "Feedback360.h"
 
-#define LoopGranularity 10000         // Microseconds
+#define LoopGranularity 10000 // Microseconds
 
 // static var initialization
 UInt32 Feedback360::sFactoryRefCount = 0;
@@ -117,13 +117,13 @@ HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
     return FF_OK;
 }
 
-ULONG Feedback360::AddRef(void)
+ULONG Feedback360::AddRef()
 {
     fRefCount++;
     return fRefCount;
 }
 
-ULONG Feedback360::Release(void)
+ULONG Feedback360::Release()
 {
     ULONG returnValue = fRefCount - 1;
     if(returnValue > 0) {

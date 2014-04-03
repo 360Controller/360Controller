@@ -87,6 +87,12 @@ public:
     static HRESULT  sStartEffect( void * interface, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
     
+    // actual (internal) member functions ultimately called by the FF API (through the static functions)
+    
+    virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
+    virtual ULONG   AddRef(void);
+    virtual ULONG   Release(void);
+    
 private:
     // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
@@ -94,7 +100,7 @@ private:
     // interfacing
     Xbox360InterfaceMap iIOCFPlugInInterface;
     Xbox360InterfaceMap iIOForceFeedbackDeviceInterface;
-    DeviceLink device;
+    DeviceLink          device;
     
     // GCD queue and timer
     dispatch_queue_t    Queue;
@@ -105,47 +111,41 @@ private:
     Feedback360Effect   **EffectList;
     UInt32              EffectIndex;
     
-    DWORD Gain;
-    bool Actuator;
+    DWORD   Gain;
+    bool    Actuator;
     
-    LONG                 PrvLeftLevel, PrvRightLevel;
-    bool                Stopped;
-    bool                Paused;
-    bool                Manual;
-    CFAbsoluteTime      LastTime;
-    CFAbsoluteTime      PausedTime;
+    LONG            PrvLeftLevel, PrvRightLevel;
+    bool            Stopped;
+    bool            Paused;
+    bool            Manual;
+    CFAbsoluteTime  LastTime;
+    CFAbsoluteTime  PausedTime;
     
-    void        SetForce(LONG LeftLevel, LONG RightLevel);
+    void            SetForce(LONG LeftLevel, LONG RightLevel);
     
     // event loop func
-    static void EffectProc( void *params );
+    static void EffectProc(void *params);
     
-    // actual (internal) member functions ultimately called by the FF API (through the static functions)
-    
-    virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
-    virtual ULONG   AddRef(void);
-    virtual ULONG   Release(void);
-    
-    virtual IOReturn Probe ( CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
-    virtual IOReturn Start ( CFDictionaryRef propertyTable, io_service_t service );
-    virtual IOReturn Stop ( void );
+    virtual IOReturn Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 * order);
+    virtual IOReturn Start(CFDictionaryRef propertyTable, io_service_t service);
+    virtual IOReturn Stop();
     
     virtual HRESULT GetVersion(ForceFeedbackVersion * version);
-    virtual HRESULT InitializeTerminate(NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin );
-    virtual HRESULT DestroyEffect(FFEffectDownloadID downloadID );
-    virtual HRESULT DownloadEffect(CFUUIDRef effectType, FFEffectDownloadID *pDownloadID, FFEFFECT * pEffect, FFEffectParameterFlag flags );
-    virtual HRESULT Escape(FFEffectDownloadID downloadID, FFEFFESCAPE * pEscape );
-    virtual HRESULT GetEffectStatus(FFEffectDownloadID downloadID, FFEffectStatusFlag * pStatusCode );
-    virtual HRESULT GetForceFeedbackState(ForceFeedbackDeviceState * pDeviceState );
-    virtual HRESULT GetForceFeedbackCapabilities(FFCAPABILITIES *capabilities );
-    virtual HRESULT SendForceFeedbackCommand(FFCommandFlag state );
-    virtual HRESULT SetProperty(FFProperty property, void * pValue );
-    virtual HRESULT StartEffect(FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
-    virtual HRESULT StopEffect(UInt32 downloadID );
+    virtual HRESULT InitializeTerminate(NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin);
+    virtual HRESULT DestroyEffect(FFEffectDownloadID downloadID);
+    virtual HRESULT DownloadEffect(CFUUIDRef effectType, FFEffectDownloadID *pDownloadID, FFEFFECT * pEffect, FFEffectParameterFlag flags);
+    virtual HRESULT Escape(FFEffectDownloadID downloadID, FFEFFESCAPE * pEscape);
+    virtual HRESULT GetEffectStatus(FFEffectDownloadID downloadID, FFEffectStatusFlag * pStatusCode);
+    virtual HRESULT GetForceFeedbackState(ForceFeedbackDeviceState * pDeviceState);
+    virtual HRESULT GetForceFeedbackCapabilities(FFCAPABILITIES *capabilities);
+    virtual HRESULT SendForceFeedbackCommand(FFCommandFlag state);
+    virtual HRESULT SetProperty(FFProperty property, void * pValue);
+    virtual HRESULT StartEffect(FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations);
+    virtual HRESULT StopEffect(UInt32 downloadID);
 };
 
 // B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83
-#define kFeedback360Uuid CFUUIDGetConstantUUIDWithBytes(NULL, \
+#define kFeedback360Uuid CFUUIDGetConstantUUIDWithBytes(kCFAllocatorDefault, \
 0xB8, 0xED, 0x27, 0x8F, 0xEC, 0x8A, 0x4E, 0x8E, \
 0xB4, 0xCF, 0x13, 0xE2, 0xA9, 0xD6, 0x8E, 0x83)
 
