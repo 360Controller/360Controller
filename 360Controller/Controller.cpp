@@ -137,7 +137,7 @@ OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) c
     char buf[1024];
     const char *string;
     
-    err = GetOwnerProvider(this)->GetStringDescriptor(index,buf,sizeof(buf));
+    err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
     if(err==kIOReturnSuccess) string=buf;
     else {
         if(def == NULL)
@@ -170,7 +170,13 @@ OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 
 OSString* Xbox360ControllerClass::newProductString() const
 {
-    return getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+    if (retString->isEqualTo("Controller")) {
+        retString->release();
+        return OSString::withCString("Xbox 360 Wired Controller");
+    } else {
+        return retString;
+    }
 }
 
 OSString* Xbox360ControllerClass::newSerialNumberString() const
