@@ -142,19 +142,17 @@ static void callbackConnected(void *param,io_iterator_t iterator)
 #endif
         if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
         {
-            FFDeviceObjectReference forceFeedback;
-            NSString *serialNumber;
+            FFDeviceObjectReference forceFeedback = 0;
+            NSString *serialNumber = GetSerialNumber(object);
             
-            serialNumber = GetSerialNumber(object);
             // Supported device - load settings
             ConfigController(object, GetController(serialNumber));
             // Set LEDs
-            forceFeedback = 0;
             if (FFCreateDevice(object, &forceFeedback) != FF_OK)
                 forceFeedback = 0;
             if (forceFeedback != 0)
             {
-                FFEFFESCAPE escape;
+                FFEFFESCAPE escape = {0};
                 unsigned char c;
                 int i;
                 
@@ -166,9 +164,10 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                         if ([leds serialNumberAtLEDIsBlank:i] || ([[leds serialNumberAtLED:i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
                         {
                             c = 0x06 + i;
-                            if ([leds serialNumberAtLEDIsBlank:i])
+                            if ([leds serialNumberAtLEDIsBlank:i]) {
                                 [leds setLED:i toSerialNumber:serialNumber];
-                            // NSLog(@"Added controller with LED %i", i);
+                                // NSLog(@"Added controller with LED %i", i);
+							}
                             break;
                         }
                     }
@@ -177,20 +176,18 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                 escape.dwCommand = 0x02;
                 escape.cbInBuffer = sizeof(c);
                 escape.lpvInBuffer = &c;
-                escape.cbOutBuffer = 0;
-                escape.lpvOutBuffer = NULL;
                 FFDeviceEscape(forceFeedback, &escape);
                 FFReleaseDevice(forceFeedback);
             }
         }
         else
         {
-            CFTypeRef vendorID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idVendor"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
-            CFTypeRef productID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idProduct"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
+            NSNumber *vendorID = CFBridgingRelease(IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idVendor"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents));
+            NSNumber *productID = CFBridgingRelease(IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idProduct"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents));
             if ((vendorID != NULL) && (productID != NULL))
             {
-                UInt32 idVendor = [((__bridge NSNumber*)vendorID) unsignedIntValue];
-                UInt32 idProduct = [((__bridge NSNumber*)productID) unsignedIntValue];
+                UInt32 idVendor = [vendorID unsignedIntValue];
+                UInt32 idProduct = [productID unsignedIntValue];
                 if (idVendor == 0x045e)
                 {
                     // Microsoft
@@ -208,10 +205,6 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                     }
                 }
             }
-            if (vendorID != NULL)
-                CFRelease(vendorID);
-            if (productID != NULL)
-                CFRelease(productID);
         }
         IOObjectRelease(object);
     }

@@ -1,7 +1,5 @@
 //
-//  Prefix header
-//
-//  The contents of this file are implicitly included at the beginning of every source file.
+// Prefix header for all source files of the '360Daemon' target in the '360Daemon' project.
 //
 
 #ifdef __OBJC__
