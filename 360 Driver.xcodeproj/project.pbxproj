@@ -50,7 +50,7 @@
 		55B6375318C1098D00CE933D /* Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636F718C1054F00CE933D /* Controller.h */; };
 		55B6375418C1098D00CE933D /* ControlStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636F818C1054F00CE933D /* ControlStruct.h */; };
 		55B6375518C1098D00CE933D /* xbox360hid.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636FD18C1054F00CE933D /* xbox360hid.h */; };
-		55B6375718C1099F00CE933D /* Feedback360.plugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6371F18C108A500CE933D /* Feedback360.plugin */; };
+		55B6375718C1099F00CE933D /* Feedback360.plugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55B6371F18C108A500CE933D /* Feedback360.plugin */; };
 		55B6375918C109E600CE933D /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
 		55B6375B18C109ED00CE933D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375A18C109ED00CE933D /* IOKit.framework */; };
 		55B6377218C10A5400CE933D /* DriverTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6376C18C10A5400CE933D /* DriverTool.m */; };
@@ -162,14 +162,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		55B6375618C1099700CE933D /* CopyFiles */ = {
+		55B6375618C1099700CE933D /* Copy PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				55B6375718C1099F00CE933D /* Feedback360.plugin in CopyFiles */,
+				55B6375718C1099F00CE933D /* Feedback360.plugin in Copy PlugIns */,
 			);
+			name = "Copy PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -211,7 +212,7 @@
 		55B6373118C108D200CE933D /* Feedback360.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Feedback360.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		55B6373218C108D200CE933D /* Feedback360.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback360.h; sourceTree = "<group>"; usesTabs = 0; };
 		55B6373618C108D200CE933D /* Feedback360Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Feedback360Effect.cpp; sourceTree = "<group>"; usesTabs = 0; };
-		55B6373718C108D200CE933D /* Feedback360Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback360Effect.h; sourceTree = "<group>"; usesTabs = 0; };
+		55B6373718C108D200CE933D /* Feedback360Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback360Effect.h; sourceTree = "<group>"; usesTabs = 1; };
 		55B6373818C108D200CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B6373918C108D200CE933D /* testhaptic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testhaptic.c; sourceTree = "<group>"; };
 		55B6373A18C108D200CE933D /* testrumble.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = testrumble.c; sourceTree = "<group>"; };
@@ -645,7 +646,7 @@
 				55B6370218C1057100CE933D /* Frameworks */,
 				55B6370318C1057100CE933D /* Headers */,
 				55B6370418C1057100CE933D /* Resources */,
-				55B6375618C1099700CE933D /* CopyFiles */,
+				55B6375618C1099700CE933D /* Copy PlugIns */,
 			);
 			buildRules = (
 			);
@@ -1045,7 +1046,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1090,7 +1091,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1178,6 +1179,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -1191,6 +1193,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";

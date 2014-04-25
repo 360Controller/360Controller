@@ -68,11 +68,11 @@ static void releaseAlert(void)
 
 static void callbackAlert(CFUserNotificationRef userNotification, CFOptionFlags responseFlags)
 {
-    @autoreleasepool {
-        if (responseFlags & CFUserNotificationCheckBoxChecked(0))
-            SetAlertDisabled(activeAlertIndex);
-        releaseAlert();
-    }
+@autoreleasepool {
+    if (responseFlags & CFUserNotificationCheckBoxChecked(0))
+        SetAlertDisabled(activeAlertIndex);
+    releaseAlert();
+}
 }
 
 static void ShowAlert(NSInteger index)
@@ -130,165 +130,165 @@ static void ConfigureDevice(io_service_t object)
 // Supported device - connecting - set settings?
 static void callbackConnected(void *param,io_iterator_t iterator)
 {
-    @autoreleasepool {
-        io_service_t object = 0;
-        
-        while ((object = IOIteratorNext(iterator)) != 0) {
+@autoreleasepool {
+    io_service_t object = 0;
+    
+    while ((object = IOIteratorNext(iterator)) != 0) {
 #if 0
-            CFStringRef bob = IOObjectCopyClass(object);
-            NSLog(@"Found %p: %@", object, bob);
-            CFRelease(bob);
+        CFStringRef bob = IOObjectCopyClass(object);
+        NSLog(@"Found %p: %@", object, bob);
+        CFRelease(bob);
 #endif
-            if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
-            {
-                FFDeviceObjectReference forceFeedback;
-                NSString *serialNumber;
-                
-                serialNumber = GetSerialNumber(object);
-                // Supported device - load settings
-                ConfigController(object, GetController(serialNumber));
-                // Set LEDs
+        if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
+        {
+            FFDeviceObjectReference forceFeedback;
+            NSString *serialNumber;
+            
+            serialNumber = GetSerialNumber(object);
+            // Supported device - load settings
+            ConfigController(object, GetController(serialNumber));
+            // Set LEDs
+            forceFeedback = 0;
+            if (FFCreateDevice(object, &forceFeedback) != FF_OK)
                 forceFeedback = 0;
-                if (FFCreateDevice(object, &forceFeedback) != FF_OK)
-                    forceFeedback = 0;
-                if (forceFeedback != 0)
-                {
-                    FFEFFESCAPE escape;
-                    unsigned char c;
-                    int i;
-                    
-                    c = 0x0a;
-                    if (serialNumber != nil)
-                    {
-                        for (i = 0; i < 4; i++)
-                        {
-                            if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
-                            {
-                                c = 0x06 + i;
-                                if (leds[i] == nil)
-                                    leds[i] = serialNumber;
-                                // NSLog(@"Added controller with LED %i", i);
-                                break;
-                            }
-                        }
-                    }
-                    escape.dwSize = sizeof(escape);
-                    escape.dwCommand = 0x02;
-                    escape.cbInBuffer = sizeof(c);
-                    escape.lpvInBuffer = &c;
-                    escape.cbOutBuffer = 0;
-                    escape.lpvOutBuffer = NULL;
-                    FFDeviceEscape(forceFeedback, &escape);
-                    FFReleaseDevice(forceFeedback);
-                }
-            }
-            else
+            if (forceFeedback != 0)
             {
-                CFTypeRef vendorID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idVendor"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
-                CFTypeRef productID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idProduct"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
-                if ((vendorID != NULL) && (productID != NULL))
+                FFEFFESCAPE escape;
+                unsigned char c;
+                int i;
+                
+                c = 0x0a;
+                if (serialNumber != nil)
                 {
-                    UInt32 idVendor = [((__bridge NSNumber*)vendorID) unsignedIntValue];
-                    UInt32 idProduct = [((__bridge NSNumber*)productID) unsignedIntValue];
-                    if (idVendor == 0x045e)
+                    for (i = 0; i < 4; i++)
                     {
-                        // Microsoft
-                        switch (idProduct)
+                        if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
                         {
-                            case 0x028f:    // Plug'n'charge cable
-                                if (!foundWirelessReceiver)
-                                    ShowAlert(kaPlugNCharge);
-                                ConfigureDevice(object);
-                                break;
-                            case 0x0719:    // Microsoft Wireless Gaming Receiver
-                            case 0x0291:    // Third party Wireless Gaming Receiver
-                                foundWirelessReceiver = YES;
-                                break;
+                            c = 0x06 + i;
+                            if (leds[i] == nil)
+                                leds[i] = serialNumber;
+                            // NSLog(@"Added controller with LED %i", i);
+                            break;
                         }
                     }
                 }
-                if (vendorID != NULL)
-                    CFRelease(vendorID);
-                if (productID != NULL)
-                    CFRelease(productID);
+                escape.dwSize = sizeof(escape);
+                escape.dwCommand = 0x02;
+                escape.cbInBuffer = sizeof(c);
+                escape.lpvInBuffer = &c;
+                escape.cbOutBuffer = 0;
+                escape.lpvOutBuffer = NULL;
+                FFDeviceEscape(forceFeedback, &escape);
+                FFReleaseDevice(forceFeedback);
             }
-            IOObjectRelease(object);
         }
+        else
+        {
+            CFTypeRef vendorID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idVendor"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
+            CFTypeRef productID = IORegistryEntrySearchCFProperty(object,kIOServicePlane,CFSTR("idProduct"),kCFAllocatorDefault,kIORegistryIterateRecursively | kIORegistryIterateParents);
+            if ((vendorID != NULL) && (productID != NULL))
+            {
+                UInt32 idVendor = [((__bridge NSNumber*)vendorID) unsignedIntValue];
+                UInt32 idProduct = [((__bridge NSNumber*)productID) unsignedIntValue];
+                if (idVendor == 0x045e)
+                {
+                    // Microsoft
+                    switch (idProduct)
+                    {
+                        case 0x028f:    // Plug'n'charge cable
+                            if (!foundWirelessReceiver)
+                                ShowAlert(kaPlugNCharge);
+                            ConfigureDevice(object);
+                            break;
+                        case 0x0719:    // Microsoft Wireless Gaming Receiver
+                        case 0x0291:    // Third party Wireless Gaming Receiver
+                            foundWirelessReceiver = YES;
+                            break;
+                    }
+                }
+            }
+            if (vendorID != NULL)
+                CFRelease(vendorID);
+            if (productID != NULL)
+                CFRelease(productID);
+        }
+        IOObjectRelease(object);
     }
+}
 }
 
 // Supported device - disconnecting
 static void callbackDisconnected(void *param, io_iterator_t iterator)
 {
-    @autoreleasepool {
-        io_service_t object = 0;
-        NSString *serial;
-        int i;
-        
-        while ((object = IOIteratorNext(iterator)) != 0)
-        {
+@autoreleasepool {
+    io_service_t object = 0;
+    NSString *serial;
+    int i;
+    
+    while ((object = IOIteratorNext(iterator)) != 0)
+    {
 #if 0
-            CFStringRef bob = IOObjectCopyClass(object);
-            NSLog(@"Lost %p: %@", object, bob);
-            CFRelease(bob);
+        CFStringRef bob = IOObjectCopyClass(object);
+        NSLog(@"Lost %p: %@", object, bob);
+        CFRelease(bob);
 #endif
-            serial = GetSerialNumber(object);
-            if (serial != nil)
+        serial = GetSerialNumber(object);
+        if (serial != nil)
+        {
+            for (i = 0; i < 4; i++)
             {
-                for (i = 0; i < 4; i++)
+                if (leds[i] == nil)
+                    continue;
+                if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
                 {
-                    if (leds[i] == nil)
-                        continue;
-                    if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
-                    {
-                        leds[i] = nil;
-                        // NSLog(@"Removed controller with LED %i", i);
-                    }
+                    leds[i] = nil;
+                    // NSLog(@"Removed controller with LED %i", i);
                 }
             }
-            IOObjectRelease(object);
         }
+        IOObjectRelease(object);
     }
+}
 }
 
 // Entry point
 int main (int argc, const char * argv[])
 {
-    @autoreleasepool {
-        foundWirelessReceiver = NO;
-        memset(leds, 0, sizeof(leds));
-        // Get master port, for accessing I/O Kit
-        IOMasterPort(MACH_PORT_NULL,&masterPort);
-        // Set up notification of USB device addition/removal
-        notifyPort=IONotificationPortCreate(masterPort);
-        notifySource=IONotificationPortGetRunLoopSource(notifyPort);
-        CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
-        // Start listening
-        // USB devices
-        IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
-        callbackConnected(NULL, onIteratorOther);
-        // Wired 360 devices
-        IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
-        callbackConnected(NULL, onIteratorWired);
-        IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
-        callbackDisconnected(NULL, offIteratorWired);
-        // Wireless 360 devices
-        IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
-        callbackConnected(NULL, onIteratorWireless);
-        IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
-        callbackDisconnected(NULL, offIteratorWireless);
-        // Run loop
-        CFRunLoopRun();
-        // Stop listening
-        IOObjectRelease(onIteratorOther);
-        IOObjectRelease(onIteratorWired);
-        IOObjectRelease(offIteratorWired);
-        IOObjectRelease(onIteratorWireless);
-        IOObjectRelease(offIteratorWireless);
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
-        CFRunLoopSourceInvalidate(notifySource);
-        IONotificationPortDestroy(notifyPort);
-        // End
-    }
+@autoreleasepool {
+    foundWirelessReceiver = NO;
+    memset(leds, 0, sizeof(leds));
+    // Get master port, for accessing I/O Kit
+    IOMasterPort(MACH_PORT_NULL,&masterPort);
+    // Set up notification of USB device addition/removal
+    notifyPort=IONotificationPortCreate(masterPort);
+    notifySource=IONotificationPortGetRunLoopSource(notifyPort);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
+    // Start listening
+    // USB devices
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackConnected, NULL, &onIteratorOther);
+    callbackConnected(NULL, onIteratorOther);
+    // Wired 360 devices
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("Xbox360ControllerClass"), callbackConnected, NULL, &onIteratorWired);
+    callbackConnected(NULL, onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("Xbox360ControllerClass"), callbackDisconnected, NULL, &offIteratorWired);
+    callbackDisconnected(NULL, offIteratorWired);
+    // Wireless 360 devices
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
+    callbackConnected(NULL, onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
+    callbackDisconnected(NULL, offIteratorWireless);
+    // Run loop
+    CFRunLoopRun();
+    // Stop listening
+    IOObjectRelease(onIteratorOther);
+    IOObjectRelease(onIteratorWired);
+    IOObjectRelease(offIteratorWired);
+    IOObjectRelease(onIteratorWireless);
+    IOObjectRelease(offIteratorWireless);
+    CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
+    CFRunLoopSourceInvalidate(notifySource);
+    IONotificationPortDestroy(notifyPort);
+    // End
+}
     return 0;
 }

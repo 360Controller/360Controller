@@ -40,10 +40,8 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
     
-    if (ed == NULL)
-        return 0;
-    else
-        return ed->wMaxPacketSize;
+    if (ed == NULL) return 0;
+    else return ed->wMaxPacketSize;
 }
 
 // Start device
@@ -55,19 +53,22 @@ bool WirelessGamingReceiver::start(IOService *provider)
     IOUSBInterface *interface;
     int iConnection, iOther, i;
     
-    if (!IOService::start(provider)) {
+    if (!IOService::start(provider))
+    {
         // IOLog("start - superclass failed\n");
         return false;
     }
-    
+
     device = OSDynamicCast(IOUSBDevice, provider);
-    if (device == NULL) {
+    if (device == NULL)
+    {
         // IOLog("start - invalid provider\n");
         goto fail;
     }
-    
+
     // Check for configurations
-    if (device->GetNumConfigurations() < 1) {
+    if (device->GetNumConfigurations() < 1)
+    {
         device = NULL;
         // IOLog("start - device has no configurations!\n");
         goto fail;
@@ -75,23 +76,27 @@ bool WirelessGamingReceiver::start(IOService *provider)
     
     // Set configuration
     cd = device->GetFullConfigurationDescriptor(0);
-    if (cd == NULL) {
+    if (cd == NULL)
+    {
         device = NULL;
         // IOLog("start - couldn't get configuration descriptor\n");
         goto fail;
     }
     
-    if (!device->open(this)) {
+    if (!device->open(this))
+    {
         device = NULL;
         // IOLog("start - failed to open device\n");
         goto fail;
     }
-    if (device->SetConfiguration(this, cd->bConfigurationValue, true) != kIOReturnSuccess) {
+    if (device->SetConfiguration(this, cd->bConfigurationValue, true) != kIOReturnSuccess)
+    {
         // IOLog("start - unable to set configuration\n");
         goto fail;
     }
     
-    for (i = 0; i < WIRELESS_CONNECTIONS; i++) {
+    for (i = 0; i < WIRELESS_CONNECTIONS; i++)
+    {
         connections[i].controller = NULL;
         connections[i].controllerIn = NULL;
         connections[i].controllerOut = NULL;
@@ -113,10 +118,13 @@ bool WirelessGamingReceiver::start(IOService *provider)
     interface = NULL;
     iConnection = 0;
     iOther = 0;
-    while ((interface = device->FindNextInterface(interface, &interfaceRequest)) != NULL) {
-        switch (interface->GetInterfaceProtocol()) {
+    while ((interface = device->FindNextInterface(interface, &interfaceRequest)) != NULL)
+    {
+        switch (interface->GetInterfaceProtocol())
+        {
             case 129:   // Controller
-                if (!interface->open(this)) {
+                if (!interface->open(this))
+                {
                     // IOLog("start: Failed to open control interface\n");
                     goto fail;
                 }
@@ -143,24 +151,29 @@ bool WirelessGamingReceiver::start(IOService *provider)
                 break;
 				
             case 130:   // It is a mystery
-                if (!interface->open(this)) {
+                if (!interface->open(this))
+                {
                     // IOLog("start: Failed to open mystery interface\n");
                     goto fail;
                 }
                 connections[iOther].other = interface;
                 pipeRequest.direction = kUSBIn;
                 connections[iOther].otherIn = interface->FindNextPipe(NULL, &pipeRequest);
-                if (connections[iOther].otherIn == NULL) {
+                if (connections[iOther].otherIn == NULL)
+                {
                     // IOLog("start: Failed to open mystery input pipe\n");
                     goto fail;
-                } else
+                }
+                else
                     connections[iOther].otherIn->retain();
                 pipeRequest.direction = kUSBOut;
                 connections[iOther].otherOut = interface->FindNextPipe(NULL, &pipeRequest);
-                if (connections[iOther].otherOut == NULL) {
+                if (connections[iOther].otherOut == NULL)
+                {
                     // IOLog("start: Failed to open mystery output pipe\n");
                     goto fail;
-                } else
+                }
+                else
                     connections[iOther].otherOut->retain();
                 iOther++;
                 break;
@@ -175,14 +188,16 @@ bool WirelessGamingReceiver::start(IOService *provider)
         IOLog("start - interface mismatch?\n");
     connectionCount = iConnection;
     
-    for (i = 0; i < connectionCount; i++) {
+    for (i = 0; i < connectionCount; i++)
+    {
         connections[i].inputArray = OSArray::withCapacity(5);
-        if (connections[i].inputArray == NULL) {
+        if (connections[i].inputArray == NULL)
+        {
             // IOLog("start: Failed to allocate packet buffer %d\n", i);
             goto fail;
         }
-		
-        if (!QueueRead(i)) {
+        if (!QueueRead(i))
+        {
             // IOLog("start: Failed to start read %d\n", i);
             goto fail;
         }
@@ -242,7 +257,8 @@ bool WirelessGamingReceiver::QueueRead(int index)
         return false;
     data->index = index;
     data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
-    if (data->buffer == NULL) {
+    if (data->buffer == NULL)
+    {
         IOFree(data, sizeof(WGRREAD));
         return false;
     }
@@ -268,7 +284,8 @@ void WirelessGamingReceiver::ReadComplete(void *parameter, IOReturn status, UInt
     WGRREAD *data = (WGRREAD*)parameter;
     bool reread = true;
     
-    switch (status) {
+    switch (status)
+    {
         case kIOReturnOverrun:
             // IOLog("read - kIOReturnOverrun, clearing stall\n");
             connections[data->index].controllerIn->ClearStall();
@@ -337,56 +354,58 @@ void WirelessGamingReceiver::ReleaseAll(void)
 {
     int i;
     
-    for (i = 0; i < connectionCount; i++) {
-        if (connections[i].service != NULL) {
+    for (i = 0; i < connectionCount; i++)
+    {
+        if (connections[i].service != NULL)
+        {
             connections[i].service->terminate(kIOServiceRequired);
             connections[i].service->detachAll(gIOServicePlane);
             connections[i].service->release();
             connections[i].service = NULL;
         }
-		
-        if (connections[i].controllerIn != NULL) {
+        if (connections[i].controllerIn != NULL)
+        {
             connections[i].controllerIn->Abort();
             connections[i].controllerIn->release();
             connections[i].controllerIn = NULL;
         }
-		
-        if (connections[i].controllerOut != NULL) {
+        if (connections[i].controllerOut != NULL)
+        {
             connections[i].controllerOut->Abort();
             connections[i].controllerOut->release();
             connections[i].controllerOut = NULL;
         }
-		
-        if (connections[i].controller != NULL) {
+        if (connections[i].controller != NULL)
+        {
             connections[i].controller->close(this);
             connections[i].controller = NULL;
         }
-		
-        if (connections[i].otherIn != NULL) {
+        if (connections[i].otherIn != NULL)
+        {
             connections[i].otherIn->Abort();
             connections[i].otherIn->release();
             connections[i].otherIn = NULL;
         }
-		
-        if (connections[i].otherOut != NULL) {
+        if (connections[i].otherOut != NULL)
+        {
             connections[i].otherOut->Abort();
             connections[i].otherOut->release();
             connections[i].otherOut = NULL;
         }
-		
-        if (connections[i].other != NULL) {
+        if (connections[i].other != NULL)
+        {
             connections[i].other->close(this);
             connections[i].other = NULL;
         }
-		
-        if (connections[i].inputArray != NULL) {
+        if (connections[i].inputArray != NULL)
+        {
             connections[i].inputArray->release();
             connections[i].inputArray = NULL;
         }
         connections[i].controllerStarted = false;
     }
-	
-    if (device != NULL) {
+    if (device != NULL)
+    {
         device->close(this);
         device = NULL;
     }
@@ -440,12 +459,15 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
                 connections[index].service = NULL;
                 connections[index].controllerStarted = false;
             }
-        } else {
+        }
+        else
+        {
             // Device connected
 #ifdef PROTOCOL_DEBUG
             IOLog("process: Attempting to add new device\n");
 #endif
-            if (connections[index].service == NULL) {
+            if (connections[index].service == NULL)
+            {
                 bool ready;
                 int i, j;
                 IOMemoryDescriptor *data;
@@ -453,14 +475,16 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
                 
                 ready = false;
                 j = connections[index].inputArray->getCount();
-                for (i = 0; !ready && (i < j); i++) {
+                for (i = 0; !ready && (i < j); i++)
+                {
                     data = OSDynamicCast(IOMemoryDescriptor, connections[index].inputArray->getObject(i));
                     data->readBytes(1, &c, 1);
                     if (c == 0x0f)
                         ready = true;
                 }
                 InstantiateService(index);
-                if (ready && connections[index].service != NULL) {
+                if (ready && connections[index].service != NULL)
+                {
 #ifdef PROTOCOL_DEBUG
                     IOLog("Registering wireless device");
 #endif
@@ -478,13 +502,16 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
     connections[index].inputArray->setObject(copy);
     if (connections[index].service == NULL)
         InstantiateService(index);
-    if (connections[index].service != NULL) {
+    if (connections[index].service != NULL)
+    {
         connections[index].service->NewData();
-        if (!connections[index].controllerStarted) {
+        if (!connections[index].controllerStarted)
+        {
             char c;
             
             copy->readBytes(1, &c, 1);
-            if (c == 0x0f) {
+            if (c == 0x0f)
+            {
 #ifdef PROTOCOL_DEBUG
                 IOLog("Registering wireless device");
 #endif
@@ -505,10 +532,11 @@ void WirelessGamingReceiver::InstantiateService(int index)
             OSString::withCString(kIOWirelessDeviceType),
         };
         const OSObject *objects[1] = {
-            OSNumber::withNumber((unsigned)0, 32),
+            OSNumber::withNumber((unsigned long long)0, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1, 0);
-        if (connections[index].service->init(dictionary)) {
+        if (connections[index].service->init(dictionary))
+        {
             connections[index].service->attach(this);
             connections[index].service->SetIndex(index);
             // connections[index].service->registerService();
@@ -516,7 +544,9 @@ void WirelessGamingReceiver::InstantiateService(int index)
             if (IsDataQueued(index))
                 connections[index].service->NewData();
             connections[index].service->start(this);
-        } else {
+        }
+        else
+        {
             connections[index].service->release();
             connections[index].service = NULL;
             // IOLog("process: Device attach failure\n");
@@ -548,10 +578,14 @@ OSNumber* WirelessGamingReceiver::newLocationIDNumber() const
     OSNumber *number;
     UInt32    location = 0;
     
-    if (device) {
-        if ((number = OSDynamicCast(OSNumber, device->getProperty("locationID")))) {
+    if (device)
+    {
+        if ((number = OSDynamicCast(OSNumber, device->getProperty("locationID"))))
+        {
             location = number->unsigned32BitValue();
-        } else {
+        }
+        else 
+        {
             // Make up an address
             if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
                 location |= number->unsigned8BitValue() << 24;

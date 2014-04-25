@@ -31,12 +31,10 @@ bool Device_Initialise(DeviceLink *link,io_object_t device)
     IOReturn ret;
     
     ret=IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID,kIOCFPlugInInterfaceID,&plugInInterface,&score);
-    if (ret!=kIOReturnSuccess)
-        return FALSE;
+    if (ret!=kIOReturnSuccess) return FALSE;
     ret=(*plugInInterface)->QueryInterface(plugInInterface,CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121),(LPVOID*)(&link->interface));
     (*plugInInterface)->Release(plugInInterface);
-    if (ret!=kIOReturnSuccess)
-        return FALSE;
+    if (ret!=kIOReturnSuccess) return FALSE;
     (*link->interface)->open(link->interface,0);
     return TRUE;
 }
@@ -55,7 +53,8 @@ bool Device_Send(DeviceLink *link,void *data,int length)
     if(link->interface==NULL) {
         fprintf(stderr, "Attempting to send to a closed link!\n");
         return FALSE;
-    } else {
+    }
+    else {
         //fprintf(stderr, "Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
         IOReturn res=(*link->interface)->setReport(link->interface,kIOHIDReportTypeOutput,0,data,length,10000,NULL,NULL,NULL);
         if (res != kIOReturnSuccess)

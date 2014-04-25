@@ -58,27 +58,28 @@
 class Feedback360Effect
 {
 public:
-    Feedback360Effect();
-    
+	Feedback360Effect();
+
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
-    
-    CFUUIDRef		Type;
+
+	CFUUIDRef		Type;
     FFEffectDownloadID Handle;
-    
-    FFEFFECT		DiEffect;
+
+	FFEFFECT		DiEffect;
     FFENVELOPE		DiEnvelope;
-    FFCONSTANTFORCE	DiConstantForce;
+	FFCONSTANTFORCE	DiConstantForce;
     FFCUSTOMFORCE   DiCustomForce;
-    FFPERIODIC		DiPeriodic;
-    FFRAMPFORCE		DiRampforce;
-    
-    DWORD			Status;
-    DWORD			PlayCount;
-    CFAbsoluteTime	StartTime;
-    
+	FFPERIODIC		DiPeriodic;
+	FFRAMPFORCE		DiRampforce;
+
+
+	DWORD			Status;
+	DWORD			PlayCount;
+	CFAbsoluteTime	StartTime;
+
     CFAbsoluteTime  LastTime;
     DWORD           Index;
-    
+
 private:
     void CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel);
     void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);    
