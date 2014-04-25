@@ -28,6 +28,7 @@
 #include <IOKit/usb/IOUSBLib.h>
 #include <ForceFeedback/ForceFeedback.h>
 #import "ControlPrefs.h"
+#import "DaemonLEDs.h"
 
 #define CHECK_SHOWAGAIN     @"Do not show this message again"
 
@@ -43,7 +44,7 @@ static io_iterator_t onIteratorOther;
 static io_iterator_t offIteratorWired;
 static io_iterator_t offIteratorWireless;
 static BOOL foundWirelessReceiver;
-static NSString *leds[4];
+static DaemonLEDs *leds;
 
 static CFUserNotificationRef activeAlert = nil;
 static CFRunLoopSourceRef activeAlertSource;
@@ -162,11 +163,11 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                 {
                     for (i = 0; i < 4; i++)
                     {
-                        if ((leds[i] == nil) || ([leds[i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
+                        if ([leds serialNumberAtLEDIsBlank:i] || ([[leds serialNumberAtLED:i] caseInsensitiveCompare:serialNumber] == NSOrderedSame))
                         {
                             c = 0x06 + i;
-                            if (leds[i] == nil)
-                                leds[i] = serialNumber;
+                            if ([leds serialNumberAtLEDIsBlank:i])
+                                [leds setLED:i toSerialNumber:serialNumber];
                             // NSLog(@"Added controller with LED %i", i);
                             break;
                         }
@@ -237,11 +238,11 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
         {
             for (i = 0; i < 4; i++)
             {
-                if (leds[i] == nil)
+                if ([leds serialNumberAtLEDIsBlank:i])
                     continue;
-                if ([leds[i] caseInsensitiveCompare:serial] == NSOrderedSame)
+                if ([[leds serialNumberAtLED:i] caseInsensitiveCompare:serial] == NSOrderedSame)
                 {
-                    leds[i] = nil;
+                    [leds clearSerialNumberAtLED:i];
                     // NSLog(@"Removed controller with LED %i", i);
                 }
             }
@@ -256,7 +257,7 @@ int main (int argc, const char * argv[])
 {
 @autoreleasepool {
     foundWirelessReceiver = NO;
-    memset(leds, 0, sizeof(leds));
+    leds = [[DaemonLEDs alloc] init];
     // Get master port, for accessing I/O Kit
     IOMasterPort(MACH_PORT_NULL,&masterPort);
     // Set up notification of USB device addition/removal

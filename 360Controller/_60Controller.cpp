@@ -224,43 +224,34 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 // Read the settings from the registry
 void Xbox360Peripheral::readSettings(void)
 {
-    OSDictionary *dataDictionary;
-    OSBoolean *value;
-    OSNumber *number;
+    OSBoolean *value = nullptr;
+    OSNumber *number = nullptr;
+    OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
-    dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
-    if (dataDictionary == NULL)
-        return;
+    if (dataDictionary == NULL) return;
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
-    if (value != NULL)
-        invertLeftX = value->getValue();
+    if (value != NULL) invertLeftX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
-    if (value != NULL)
-        invertLeftY = value->getValue();
+    if (value != NULL) invertLeftY = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
-    if (value != NULL)
-        invertRightX = value->getValue();
+    if (value != NULL) invertRightX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
-    if (value != NULL)
-        invertRightY = value->getValue();
+    if (value != NULL) invertRightY = value->getValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
-    if (number != NULL)
-        deadzoneLeft = number->unsigned32BitValue();
+    if (number != NULL) deadzoneLeft = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
-    if (number != NULL)
-        deadzoneRight = number->unsigned32BitValue();
+    if (number != NULL) deadzoneRight = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
-    if (value != NULL)
-        relativeLeft = value->getValue();
+    if (value != NULL) relativeLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
-    if (value != NULL)
-        relativeRight=value->getValue();
-    /*
+    if (value != NULL) relativeRight=value->getValue();
+    
+#if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
             invertRightX?"True":"False",invertRightY?"True":"False",
             deadzoneLeft,deadzoneRight);
-    */
+#endif
 }
 
 // Initialise the extension
