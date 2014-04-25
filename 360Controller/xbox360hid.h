@@ -28,7 +28,7 @@
  * just kept working with this one anyway :)
  */
 
-char ReportDescriptor[196] = {
+static const unsigned char ReportDescriptor[] = {
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
     0x09, 0x05,                    // USAGE (Game Pad)
     0xa1, 0x01,                    // COLLECTION (Application)
