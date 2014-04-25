@@ -50,7 +50,7 @@ void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 // Sets the LED with the same format as the wired controller
 void WirelessHIDDevice::SetLEDs(int mode)
 {
-    char buf[] = {0x00, 0x00, 0x08, 0x40 + (mode % 0x0e), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char buf[] = {0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
 
     device = OSDynamicCast(WirelessDevice, getProvider());
@@ -69,7 +69,7 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
 
 void WirelessHIDDevice::PowerOff(void)
 {
-    char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    static const unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
     
     device = OSDynamicCast(WirelessDevice, getProvider());
@@ -252,7 +252,7 @@ void WirelessHIDDevice::receivedHIDupdate(unsigned char *data, int length)
     
     serialTimerCount = 0;
     report = IOMemoryDescriptor::withAddress(data, length, kIODirectionNone);
-    err = handleReport(report, kIOHIDReportTypeInput);
+    err = handleReport(report);
     report->release();
     if (err != kIOReturnSuccess)
         IOLog("handleReport return: 0x%.8x\n", err);

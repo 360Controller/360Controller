@@ -32,18 +32,18 @@ typedef SInt16 XBox360_SShort;
 #define PACKED __attribute__((__packed__))
 
 // Common structure format
-typedef struct {
+typedef struct XBOX360_PACKET {
     XBox360_Byte command;
     XBox360_Byte size;
 } PACKED XBOX360_PACKET;
 
 // Analog stick format
-typedef struct {
+typedef struct XBOX360_HAT {
     XBox360_SShort x,y;
 } PACKED XBOX360_HAT;
 
 // Structure describing the report had back from the controller
-typedef struct {
+typedef struct XBOX360_IN_REPORT {
     XBOX360_PACKET header;
     XBox360_Short buttons;
     XBox360_Byte trigL,trigR;
@@ -52,13 +52,13 @@ typedef struct {
 } PACKED XBOX360_IN_REPORT;
 
 // Structure describing the command to change LED status
-typedef struct {
+typedef struct XBOX360_OUT_LED {
     XBOX360_PACKET header;
     XBox360_Byte pattern;
 } PACKED XBOX360_OUT_LED;
 
 // Structure describing the command to change rumble motor status
-typedef struct {
+typedef struct XBOX360_OUT_RUMBLE {
     XBOX360_PACKET header;
     XBox360_Byte reserved1;
     XBox360_Byte big,little;
@@ -66,7 +66,7 @@ typedef struct {
 } PACKED XBOX360_OUT_RUMBLE;
 
 // Enumeration of command types
-enum {
+enum CommandTypes {
     // In
     inReport  = 0,
     // Out
@@ -75,7 +75,7 @@ enum {
 };
 
 // Button bits
-enum {
+enum ButtonBits {
     btnHatRight      = 0x8000,
     btnHatLeft       = 0x4000,
     btnBack          = 0x2000,
@@ -95,7 +95,7 @@ enum {
 };
 
 // LED values
-enum {
+enum LEDValues {
     ledOff          = 0x00,
     ledBlinkingAll  = 0x01,
     ledFlashOn1     = 0x02,

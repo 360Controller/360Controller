@@ -152,13 +152,13 @@ void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 
 void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char small)
 {
-    char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
     
     if (device != NULL)
         device->SendPacket(buf, sizeof(buf));
 }
-    
+
 IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
 {
     char data[2];
