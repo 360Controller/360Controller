@@ -26,7 +26,7 @@
 #include "../360Controller/ControlStruct.h"
 #include "../360Controller/xbox360hid.h"
 
-#define kDriverSettingKey       "DeviceData"
+#define kDriverSettingKey "DeviceData"
 
 OSDefineMetaClassAndStructors(Wireless360Controller, WirelessHIDDevice)
 #define super WirelessHIDDevice
@@ -66,32 +66,24 @@ void Wireless360Controller::readSettings(void)
     OSBoolean *value;
     OSNumber *number;
     OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
-    if (dataDictionary == NULL)
-		return;
-    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
-    if (value != NULL)
-		invertLeftX = value->getValue();
-    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
-    if (value!=NULL)
-		invertLeftY=value->getValue();
-    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
-    if (value!=NULL)
-		invertRightX=value->getValue();
-    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
-    if (value!=NULL)
-		invertRightY=value->getValue();
-    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
-    if (number!=NULL)
-		deadzoneLeft = number->unsigned32BitValue();
-    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
-    if (number != NULL)
-		deadzoneRight=number->unsigned32BitValue();
-    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
-    if (value != NULL)
-		relativeLeft=value->getValue();
-    value = OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
-    if (value != NULL)
-		relativeRight=value->getValue();
+    
+    if(dataDictionary==NULL) return;
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftX"));
+    if(value!=NULL) invertLeftX=value->getValue();
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftY"));
+    if(value!=NULL) invertLeftY=value->getValue();
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightX"));
+    if(value!=NULL) invertRightX=value->getValue();
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightY"));
+    if(value!=NULL) invertRightY=value->getValue();
+    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneLeft"));
+    if(number!=NULL) deadzoneLeft=number->unsigned32BitValue();
+    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneRight"));
+    if(number!=NULL) deadzoneRight=number->unsigned32BitValue();
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeLeft"));
+    if(value!=NULL) relativeLeft=value->getValue();
+    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
+    if(value!=NULL) relativeRight=value->getValue();
 #if 0
     IOLog("Xbox360ControllerClass preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -114,7 +106,8 @@ void Wireless360Controller::fiddleReport(unsigned char *data, int length)
     if (!invertRightY)
         report->right.y = ~report->right.y;
         
-    if (deadzoneLeft != 0) {
+    if (deadzoneLeft != 0)
+    {
         if (relativeLeft)
         {
             if ((getAbsolute(report->left.x) < deadzoneLeft) && (getAbsolute(report->left.y) < deadzoneLeft))
@@ -122,21 +115,27 @@ void Wireless360Controller::fiddleReport(unsigned char *data, int length)
                 report->left.x = 0;
                 report->left.y = 0;
             }
-        } else {
+        }
+        else
+        {
             if (getAbsolute(report->left.x) < deadzoneLeft)
                 report->left.x = 0;
             if (getAbsolute(report->left.y) < deadzoneLeft)
                 report->left.y = 0;
         }
     }
-    
-    if (deadzoneRight != 0) {
-        if (relativeRight) {
-            if ((getAbsolute(report->right.x) < deadzoneRight) && (getAbsolute(report->right.y) < deadzoneRight)) {
+    if (deadzoneRight != 0)
+    {
+        if (relativeRight)
+        {
+            if ((getAbsolute(report->right.x) < deadzoneRight) && (getAbsolute(report->right.y) < deadzoneRight))
+            {
                 report->right.x = 0;
                 report->right.y = 0;
             }
-        } else {
+        }
+        else
+        {
             if (getAbsolute(report->right.x) < deadzoneRight)
                 report->right.x = 0;
             if (getAbsolute(report->right.y) < deadzoneRight)
@@ -153,7 +152,7 @@ void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 
 void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char small)
 {
-    unsigned char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
+    char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
     
     if (device != NULL)
@@ -225,7 +224,7 @@ OSNumber* Wireless360Controller::newPrimaryUsagePageNumber() const
 
 OSNumber* Wireless360Controller::newProductIDNumber() const
 {
-    return OSNumber::withNumber((unsigned)0x28e, 16);
+    return OSNumber::withNumber((unsigned long long)0x28e, 16);
 }
 
 OSString* Wireless360Controller::newProductString() const
@@ -240,5 +239,5 @@ OSString* Wireless360Controller::newTransportString() const
 
 OSNumber* Wireless360Controller::newVendorIDNumber() const
 {
-    return OSNumber::withNumber((unsigned)0x45e, 16);
+    return OSNumber::withNumber((unsigned long long)0x45e, 16);
 }

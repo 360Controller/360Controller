@@ -32,8 +32,7 @@
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
-    if (target)
-        [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
+    if (target) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
 }
 
 // Handle callback for when our device is connected or disconnected. Both events are
@@ -48,8 +47,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         update=YES;
     }
     
-    if (update)
-        [(__bridge Pref360ControlPref*)param handleDeviceChange];
+    if (update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
 }
 
 @implementation Pref360ControlPref
@@ -103,8 +101,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFEFFESCAPE escape;
     unsigned char c;
     
-    if (ffDevice == 0)
-        return;
+    if (ffDevice == 0) return;
     c=ledIndex;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x02;
@@ -119,32 +116,31 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 - (void)testMotorsInit
 {
-    if (ffDevice == 0)
-        return;
-    
+    if (ffDevice == 0) return;
+
     FFCAPABILITIES capabs;
     FFDeviceGetForceFeedbackCapabilities(ffDevice, &capabs);
-    
+
     if(capabs.numFfAxes != 2) return;
-    
+
     effect = calloc(1, sizeof(FFEFFECT));
     customforce = calloc(1, sizeof(FFCUSTOMFORCE));
     LONG *c = calloc(2, sizeof(LONG));
     DWORD *a = calloc(2, sizeof(DWORD));
     LONG *d = calloc(2, sizeof(LONG));
-    
+
     c[0] = 0;
     c[1] = 0;
     a[0] = capabs.ffAxes[0];
     a[1] = capabs.ffAxes[1];
     d[0] = 0;
     d[1] = 0;
-    
+
     customforce->cChannels = 2;
     customforce->cSamples = 2;
     customforce->rglForceData = c;
     customforce->dwSamplePeriod = 100*1000;
-    
+
     effect->cAxes = capabs.numFfAxes;
     effect->rglDirection = d;
     effect->rgdwAxes = a;
@@ -162,8 +158,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 - (void)testMotorsCleanUp
 {
-    if (effectRef == NULL)
-        return;
+    if (effectRef == NULL) return;
     FFDeviceReleaseEffect(ffDevice, effectRef);
     free(customforce->rglForceData);
     free(effect->rgdwAxes);
@@ -173,8 +168,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 - (void)testMotorsLarge:(unsigned char)large small:(unsigned char)small
 {
-    if (effectRef == NULL)
-        return;
+    if (effectRef == NULL) return;
     customforce->rglForceData[0] = (large * 10000) / 255;
     customforce->rglForceData[1] = (small * 10000) / 255;
     FFEffectSetParameters(effectRef, effect, FFEP_TYPESPECIFICPARAMS);
@@ -298,12 +292,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     BOOL found;
     int i;
     
-    if (sender != hidQueue)
-        return;
+    if (sender != hidQueue) return;
     while (result == kIOReturnSuccess) {
         result = (*hidQueue)->getNextEvent(hidQueue,&event,zeroTime,0);
-        if (result != kIOReturnSuccess)
-            continue;
+        if (result != kIOReturnSuccess) continue;
         // Check axis
         for (i = 0, found = NO; (i < 6) && !found; i++) {
             if (event.elementCookie == axis[i]) {
@@ -311,8 +303,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 found = YES;
             }
         }
-        if (found)
-            continue;
+        if (found) continue;
         // Check buttons
         for (i = 0, found = NO; (i < 15) && !found; i++) {
             if(event.elementCookie==buttons[i]) {
@@ -320,8 +311,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 found = YES;
             }
         }
-        if(found)
-			continue;
+        if(found) continue;
         // Cookie wasn't for us?
     }
 }
@@ -343,7 +333,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)resetDisplay
 {
     [leftStick setPositionX:0 y:0];
-    [leftStick setPressed:NO];
+    leftStick.pressed = NO;
     [leftStick setDeadzone:0];
     [digiStick setUp:NO];
     [digiStick setDown:NO];
@@ -374,7 +364,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:NO];
     [powerOff setHidden:YES];
     // Hide battery icon
-    [batteryLevel setImage:[NSImage imageNamed:@"battNone"]];
+    [batteryLevel setImage:nil];
 }
 
 // Stop using the HID device
@@ -599,9 +589,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             }
             [powerOff setHidden:NO];
         }
-        if (imageName == nil)
-            imageName = @"battNone";
-        [batteryLevel setImage:[NSImage imageNamed:imageName]];
+        if (imageName) {
+            [batteryLevel setImage:[NSImage imageNamed:imageName]];
+        } else {
+            [batteryLevel setImage:nil];
+        }
     }
 }
 
@@ -705,7 +697,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IONotificationPortDestroy(notifyPort);
     // Release device and info
     [self stopDevice];
-    for (i = 0; i < [deviceArray count]; i++) {
+    for (i = 0; i < [deviceArray count]; i++)
+    {
         item = deviceArray[i];
         if ([item ffDevice] == 0)
             continue;
@@ -770,8 +763,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     FFEFFESCAPE escape;
     
-    if (ffDevice == 0)
-        return;
+    if (ffDevice == 0) return;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
     escape.cbInBuffer=0;

@@ -61,29 +61,30 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
         EndTime = BeginTime + Duration * PlayCount;
     }
     CFAbsoluteTime CurrentTime = CFAbsoluteTimeGetCurrent();
-    
+
     if (Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime) {
         // Used for force calculation
         LONG NormalLevel;
         LONG WorkLeftLevel;
         LONG WorkRightLevel;
-        
+
         // Used for envelope calculation
         LONG NormalRate;
         LONG AttackLevel;
         LONG FadeLevel;
-        
+
         CalcEnvelope((ULONG)(Duration*1000)
                      ,(ULONG)(fmod(CurrentTime - BeginTime, Duration)*1000)
                      ,&NormalRate
                      ,&AttackLevel
                      ,&FadeLevel);
-        
+
         // CustomForce allows setting each channel separately
         if(CFEqual(Type, kFFEffectType_CustomForce_ID)) {
             if((CFAbsoluteTimeGetCurrent() - LastTime)*1000*1000 < DiCustomForce.dwSamplePeriod) {
                 return -1;
-            } else {
+            }
+            else {
                 WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
                 WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
                 //fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
@@ -122,21 +123,23 @@ void Feedback360Effect::CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *Nor
 {
 	if( ( DiEffect.dwFlags & FFEP_ENVELOPE ) && DiEffect.lpEnvelope != NULL )
 	{
-		// Calculate attack factor
+        // Calculate attack factor
 		LONG	AttackRate	= 0;
 		ULONG	AttackTime	= MAX( 1, DiEnvelope.dwAttackTime / 1000 );
-		if (CurrentPos < AttackTime) {
+		if (CurrentPos < AttackTime)
+        {
 			AttackRate	= ( AttackTime - CurrentPos ) * 100 / AttackTime;
 		}
-		
-		// Calculate fade factor
-		LONG	FadeRate	= 0;
+
+        // Calculate fade factor
+        LONG	FadeRate	= 0;
 		ULONG	FadeTime	= MAX( 1, DiEnvelope.dwFadeTime / 1000 );
 		ULONG	FadePos		= Duration - FadeTime;
-		if (FadePos < CurrentPos) {
+		if (FadePos < CurrentPos)
+        {
 			FadeRate	= ( CurrentPos - FadePos ) * 100 / FadeTime;
 		}
-		
+
 		*NormalRate		= 100 - AttackRate - FadeRate;
 		*AttackLevel	= DiEnvelope.dwAttackLevel * AttackRate;
 		*FadeLevel		= DiEnvelope.dwFadeLevel * FadeRate;
@@ -149,30 +152,31 @@ void Feedback360Effect::CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *Nor
 
 void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel)
 {
-    
     LONG Magnitude = 0;
     LONG Period;
     LONG R;
     LONG Rate;
-    
+
     if (CFEqual(Type, kFFEffectType_ConstantForce_ID)) {
         Magnitude	= DiConstantForce.lMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-    } else if (CFEqual(Type, kFFEffectType_Square_ID)) {
+    }
+    else if (CFEqual(Type, kFFEffectType_Square_ID)) {
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= ( CurrentPos%Period) * 360 / Period;
         R	= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        
-        if (180 <= R){
+
+        if (180 <= R)
+        {
             Magnitude = Magnitude * -1;
         }
-        
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
-    } else if (CFEqual(Type, kFFEffectType_Sine_ID)) {
-        
+    }
+    else if (CFEqual(Type, kFFEffectType_Sine_ID)) {
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
@@ -181,54 +185,60 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
         
         Magnitude	= ( int)( Magnitude * sin( R * M_PI / 180.0 ) );
-        
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
-    } else if (CFEqual(Type, kFFEffectType_Triangle_ID)) {
+    }
+    else if (CFEqual(Type, kFFEffectType_Triangle_ID)) {
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        
-        if (0 <= R && R < 90) {
+
+        if (0 <= R && R < 90)
+        {
             Magnitude	= -Magnitude * ( 90 - R ) / 90;
         }
-		
-        if (90 <= R && R < 180) {
+        if (90 <= R && R < 180)
+        {
             Magnitude	= Magnitude * ( R - 90 ) / 90;
         }
-		
-        if (180 <= R && R < 270) {
+        if (180 <= R && R < 270)
+        {
             Magnitude	= Magnitude * ( 90 - ( R - 180 ) ) / 90;
         }
-		
-        if (270 <= R && R < 360) {
+        if (270 <= R && R < 360)
+        {
             Magnitude	= -Magnitude * ( R - 270 ) / 90;
         }
-        
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
-    } else if(CFEqual(Type, kFFEffectType_SawtoothUp_ID)) {
+    }
+    else if(CFEqual(Type, kFFEffectType_SawtoothUp_ID)) {
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
-        
-        if (0 <= R && R < 180) {
+
+        if (0 <= R && R < 180)
+        {
             Magnitude	= -Magnitude * ( 180 - R ) / 180;
         }
-        if (180 <= R && R < 360) {
+        if (180 <= R && R < 360)
+        {
             Magnitude	= Magnitude * ( R - 180 ) / 180;
         }
-        
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
-    } else if (CFEqual(Type, kFFEffectType_SawtoothDown_ID)) {
+    }
+    else if (CFEqual(Type, kFFEffectType_SawtoothDown_ID)) {
         Period	= MAX( 1, ( DiPeriodic.dwPeriod / 1000 ) );
         R		= (CurrentPos%Period) * 360 / Period;
         R		= ( R + ( DiPeriodic.dwPhase / 100 ) ) % 360;
-        
+
         Magnitude	= DiPeriodic.dwMagnitude;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
         if( 0 <= R && R < 180 )
@@ -239,17 +249,19 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
         {
             Magnitude	= -Magnitude * ( R - 180 ) / 180;
         }
-        
+
         Magnitude	= Magnitude + DiPeriodic.lOffset;
-    } else if (CFEqual(Type, kFFEffectType_RampForce_ID)) {
-        
+    }
+
+    else if (CFEqual(Type, kFFEffectType_RampForce_ID)) {
+
         Rate		= ( Duration - CurrentPos ) * 100
         / Duration;//MAX( 1, DiEffect.dwDuration / 1000 );
-        
+
         Magnitude	= ( DiRampforce.lStart * Rate
                        + DiRampforce.lEnd * ( 100 - Rate ) ) / 100;
         Magnitude	= ( Magnitude * NormalRate + AttackLevel + FadeLevel ) / 100;
     }
-    
+
     *NormalLevel = Magnitude * (LONG)DiEffect.dwGain / 10000;
 }

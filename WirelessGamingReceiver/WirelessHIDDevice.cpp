@@ -50,11 +50,12 @@ void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 // Sets the LED with the same format as the wired controller
 void WirelessHIDDevice::SetLEDs(int mode)
 {
-    unsigned char buf[] = {0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    char buf[] = {0x00, 0x00, 0x08, 0x40 + (mode % 0x0e), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
 
     device = OSDynamicCast(WirelessDevice, getProvider());
-    if (device != NULL) {
+    if (device != NULL)
+    {
         device->SendPacket(buf, sizeof(buf));
         device->SendPacket(weirdStart, sizeof(weirdStart));
     }
@@ -68,7 +69,7 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
 
 void WirelessHIDDevice::PowerOff(void)
 {
-    unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
     
     device = OSDynamicCast(WirelessDevice, getProvider());
@@ -118,12 +119,14 @@ bool WirelessHIDDevice::handleStart(IOService *provider)
     serialTimerCount = 0;
     
 	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
-	if (serialTimer == NULL) {
+	if (serialTimer == NULL)
+	{
 		IOLog("start - failed to create timer for chatpad\n");
 		goto fail;
 	}
     workloop = getWorkLoop();
-	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess)) {
+	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
+	{
 		IOLog("start - failed to connect timer for chatpad\n");
 		goto fail;
 	}
@@ -169,7 +172,8 @@ void WirelessHIDDevice::receivedData(void)
     if (device == NULL)
         return;
     
-    while ((data = device->NextPacket()) != NULL) {
+    while ((data = device->NextPacket()) != NULL)
+    {
         receivedMessage(data);
         data->release();
     }
@@ -187,7 +191,8 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
         
     data->readBytes(0, buf, 29);
     
-    switch (buf[1]) {
+    switch (buf[1])
+    {
         case 0x0f:  // Initial info
             if (buf[16] == 0x13)
                 receivedUpdate(0x13, buf + 17);
@@ -220,12 +225,14 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
 // Received an update of a specific value
 void WirelessHIDDevice::receivedUpdate(unsigned char type, unsigned char *data)
 {
-    switch (type) {
+    switch (type)
+    {
         case 0x13:  // Battery level
             battery = data[0];
             {
                 OSObject *prop = OSNumber::withNumber(battery, 8);
-                if (prop != NULL) {
+                if (prop != NULL)
+                {
                     setProperty(kIOWirelessBatteryLevel, prop);
                     prop->release();
                 }
