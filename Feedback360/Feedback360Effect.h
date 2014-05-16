@@ -61,26 +61,26 @@ public:
     Feedback360Effect();
     Feedback360Effect(FFEffectDownloadID theHand);
     Feedback360Effect(const Feedback360Effect &src);
-    
+
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
-    
+
     CFUUIDRef		Type;
     FFEffectDownloadID Handle;
-    
+
     FFEFFECT		DiEffect;
     FFENVELOPE		DiEnvelope;
     FFCONSTANTFORCE	DiConstantForce;
     FFCUSTOMFORCE   DiCustomForce;
     FFPERIODIC		DiPeriodic;
     FFRAMPFORCE		DiRampforce;
-    
+
     DWORD			Status;
     DWORD			PlayCount;
     CFAbsoluteTime	StartTime;
-    
+
     CFAbsoluteTime  LastTime;
     DWORD           Index;
-    
+
 private:
     void CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel);
     void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);    

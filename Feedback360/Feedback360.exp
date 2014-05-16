@@ -5,3 +5,9 @@
 #  Copyright (c) 2014 GitHub. All rights reserved.
 
 _Control360Factory
+__ZTI*
+__ZTN*
+__ZTV*
+__ZTS*
+__ZN11Feedback360*
+_Feedback360Version*
