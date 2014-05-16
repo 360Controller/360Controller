@@ -152,26 +152,6 @@ IOCFPlugInInterface** Feedback360::Alloc(void)
     return (IOCFPlugInInterface **)(&me->iIOCFPlugInInterface.pseudoVTable);
 }
 
-void Feedback360::sFactoryAddRef (void)
-{
-    if (sFactoryRefCount++ == 0)
-    {
-        CFUUIDRef factoryID = kFeedback360Uuid;
-        CFRetain(factoryID);
-        CFPlugInAddInstanceForFactory(factoryID);
-    }
-}
-
-void Feedback360::sFactoryRelease (void)
-{
-    if (sFactoryRefCount-- == 1)
-    {
-        CFUUIDRef factoryID = kFeedback360Uuid;
-        CFPlugInRemoveInstanceForFactory(factoryID);
-        CFRelease(factoryID);
-    }
-}
-
 IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 *order)
 {
     if ((service==0)
