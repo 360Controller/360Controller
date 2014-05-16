@@ -56,6 +56,7 @@ public:
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
+    
     if(ed==NULL)
         return 0;
     else
@@ -129,13 +130,18 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 	{
 		case tsToggle:
 			SendToggle();
-			if (serialActive) {
-				if (!serialHeard) {
+			if (serialActive)
+			{
+				if (!serialHeard)
+				{
 					serialActive = false;
 					serialGot = 2;
 				}
-			} else {
-				if (serialHeard) {
+			}
+			else
+			{
+				if (serialHeard)
+				{
 					serialTimerState = tsReset1;
 					serialResetCount = 0;
 					nextTime = 40;
@@ -145,14 +151,20 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 			
 		case tsMiniToggle:
 			SendToggle();
-			if (serialHeard) {
+			if (serialHeard)
+			{
 				serialTimerState = tsSet1;
 				nextTime = 40;
-			} else {
+			}
+			else
+			{
 				serialResetCount++;
-				if (serialResetCount > 3) {
+				if (serialResetCount > 3)
+				{
 					serialTimerState = tsToggle;
-				} else {
+				}
+				else
+				{
 					serialTimerState = tsReset1;
 					nextTime = 40;
 				}
@@ -194,7 +206,8 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 	sender->setTimeoutMS(nextTime);	// Todo: Make it take into account function execution time?
 	serialHeard = false;
 	// Make it happen after the timer's set, for minimum impact
-	switch (serialGot) {
+	switch (serialGot)
+	{
 		case 1:
 			SerialConnect();
 			break;
@@ -211,43 +224,34 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 // Read the settings from the registry
 void Xbox360Peripheral::readSettings(void)
 {
-    OSDictionary *dataDictionary;
-    OSBoolean *value;
-    OSNumber *number;
+    OSBoolean *value = nullptr;
+    OSNumber *number = nullptr;
+    OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
-    dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
-    if (dataDictionary == NULL)
-        return;
+    if (dataDictionary == NULL) return;
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
-    if (value != NULL)
-        invertLeftX = value->getValue();
+    if (value != NULL) invertLeftX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
-    if (value != NULL)
-        invertLeftY = value->getValue();
+    if (value != NULL) invertLeftY = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
-    if (value != NULL)
-        invertRightX = value->getValue();
+    if (value != NULL) invertRightX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
-    if (value != NULL)
-        invertRightY = value->getValue();
+    if (value != NULL) invertRightY = value->getValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
-    if (number != NULL)
-        deadzoneLeft = number->unsigned32BitValue();
+    if (number != NULL) deadzoneLeft = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
-    if (number != NULL)
-        deadzoneRight = number->unsigned32BitValue();
+    if (number != NULL) deadzoneRight = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
-    if (value != NULL)
-        relativeLeft = value->getValue();
+    if (value != NULL) relativeLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
-    if (value != NULL)
-        relativeRight=value->getValue();
-    /*
+    if (value != NULL) relativeRight=value->getValue();
+    
+#if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
             invertRightX?"True":"False",invertRightY?"True":"False",
             deadzoneLeft,deadzoneRight);
-    */
+#endif
 }
 
 // Initialise the extension
@@ -480,9 +484,12 @@ bool Xbox360Peripheral::QueueSerialRead(void)
     complete.action = SerialReadCompleteInternal;
     complete.parameter = serialInBuffer;
     err = serialInPipe->Read(serialInBuffer, 0, 0, serialInBuffer->getLength(), &complete);
-    if (err == kIOReturnSuccess) {
+    if (err == kIOReturnSuccess)
+	{
 		return true;
-	} else {
+	}
+    else
+	{
         IOLog("read - failed to start for chatpad (0x%.8x)\n",err);
         return false;
     }
@@ -505,8 +512,7 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
     complete.action=WriteCompleteInternal;
     complete.parameter=outBuffer;
     err=outPipe->Write(outBuffer,0,0,length,&complete);
-    if (err == kIOReturnSuccess)
-        return true;
+    if(err==kIOReturnSuccess) return true;
     else {
         IOLog("send - failed to start (0x%.8x)\n",err);
         return false;
@@ -605,7 +611,7 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 #else
 #error Unknown CPU byte order
 #endif
-    return (reverse < 0) ? ~reverse : reverse;
+    return (reverse<0)?~reverse:reverse;
 }
 
 // Adjusts the report for any settings speciified by the user
@@ -785,9 +791,9 @@ void Xbox360Peripheral::PadConnect(void)
 			OSString::withCString("IOKitDebug"),
         };
         const OSObject *objects[] = {
-            OSNumber::withNumber((unsigned)1, 32),
+            OSNumber::withNumber((unsigned long long)1, 32),
 			getProperty("IOCFPlugInTypes"),
-            OSNumber::withNumber((unsigned)65535, 32),
+            OSNumber::withNumber((unsigned long long)65535, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]));
 		if (padHandler->init(dictionary))
@@ -825,7 +831,7 @@ void Xbox360Peripheral::SerialConnect(void)
             OSString::withCString(kIOSerialDeviceType),
         };
         const OSObject *objects[] = {
-            OSNumber::withNumber((unsigned)0, 32),
+            OSNumber::withNumber((unsigned long long)0, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]), 0);
         if (serialHandler->init(dictionary))

@@ -64,15 +64,15 @@ public:
 
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
 
-    CFUUIDRef		Type;
+	CFUUIDRef		Type;
     FFEffectDownloadID Handle;
 
-    FFEFFECT		DiEffect;
+	FFEFFECT		DiEffect;
     FFENVELOPE		DiEnvelope;
-    FFCONSTANTFORCE	DiConstantForce;
+	FFCONSTANTFORCE	DiConstantForce;
     FFCUSTOMFORCE   DiCustomForce;
-    FFPERIODIC		DiPeriodic;
-    FFRAMPFORCE		DiRampforce;
+	FFPERIODIC		DiPeriodic;
+	FFRAMPFORCE		DiRampforce;
 
     DWORD			Status;
     DWORD			PlayCount;

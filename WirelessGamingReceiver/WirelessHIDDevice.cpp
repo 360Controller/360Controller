@@ -26,7 +26,7 @@
 #include "WirelessDevice.h"
 #include "devices.h"
 
-#define POWEROFF_TIMEOUT        (2 * 60)
+#define POWEROFF_TIMEOUT (2 * 60)
 
 OSDefineMetaClassAndAbstractStructors(WirelessHIDDevice, IOHIDDevice)
 #define super IOHIDDevice
@@ -50,7 +50,7 @@ void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 // Sets the LED with the same format as the wired controller
 void WirelessHIDDevice::SetLEDs(int mode)
 {
-    unsigned char buf[] = {0x00, 0x00, 0x08, static_cast<unsigned char>(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char buf[] = {0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
 
     device = OSDynamicCast(WirelessDevice, getProvider());
@@ -69,14 +69,14 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
 
 void WirelessHIDDevice::PowerOff(void)
 {
-    unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    static const unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device;
     
     device = OSDynamicCast(WirelessDevice, getProvider());
     if (device != NULL)
     {
         device->SendPacket(buf, sizeof(buf));
-//        device->SendPacket(weirdStart, sizeof(weirdStart));
+        // device->SendPacket(weirdStart, sizeof(weirdStart));
     }
 }
 
@@ -252,7 +252,7 @@ void WirelessHIDDevice::receivedHIDupdate(unsigned char *data, int length)
     
     serialTimerCount = 0;
     report = IOMemoryDescriptor::withAddress(data, length, kIODirectionNone);
-    err = handleReport(report, kIOHIDReportTypeInput);
+    err = handleReport(report);
     report->release();
     if (err != kIOReturnSuccess)
         IOLog("handleReport return: 0x%.8x\n", err);

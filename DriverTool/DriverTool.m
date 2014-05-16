@@ -32,7 +32,7 @@
 
 static NSDictionary *infoPlistAttributes = nil;
 
-static NSString* GetDriverDirectory(void)
+static inline NSString* GetDriverDirectory(void)
 {
     NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSCurrentExtensionDomainMask, YES);
     return [data[0] stringByAppendingPathComponent:@"Extensions"];
@@ -137,42 +137,42 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
 }
 
 int main (int argc, const char * argv[]) {
-    @autoreleasepool {
-        NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
-        if (argc == 1) {
-            // Print out current types
-            NSDictionary *types;
-            NSArray *keys;
-            
-            types = config[@"IOKitPersonalities"];
-            keys = [types allKeys];
-            for (NSString *key in keys) {
-                NSDictionary *device = types[key];
-                if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
-                    continue;
-                fprintf(stdout, "%s,%i,%i\n",
-                        [key UTF8String],
-                        [device[@"idVendor"] intValue],
-                        [device[@"idProduct"] intValue]);
-            }
-        } else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0)) {
-            NSMutableDictionary *saving;
-            NSMutableDictionary *devices;
-            
-            saving = MakeMutableCopy(config);
-            devices = saving[@"IOKitPersonalities"];
-            ScrubDevices(devices);
-            AddDevices(devices, argc, argv);
-            WriteDriverConfig(DRIVER_NAME, saving);
-            
-#ifdef DEBUG
-            system("/usr/bin/touch /System/Library/Extensions");
-#else
-            system("/usr/bin/touch /Library/Extensions");
-#endif
-        } else
-            NSLog(@"Invalid number of parameters (%i)", argc);
+@autoreleasepool {
+    NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
+    if (argc == 1) {
+        // Print out current types
+        NSDictionary *types;
+        NSArray *keys;
         
-        return 0;
-    }
+        types = config[@"IOKitPersonalities"];
+        keys = [types allKeys];
+        for (NSString *key in keys) {
+            NSDictionary *device = types[key];
+            if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
+                continue;
+            fprintf(stdout, "%s,%i,%i\n",
+                    [key UTF8String],
+                    [device[@"idVendor"] intValue],
+                    [device[@"idProduct"] intValue]);
+        }
+    } else if ((argc > 1) && (strcmp(argv[1], "edit") == 0) && (((argc - 2) % 3) == 0)) {
+        NSMutableDictionary *saving;
+        NSMutableDictionary *devices;
+        
+        saving = MakeMutableCopy(config);
+        devices = saving[@"IOKitPersonalities"];
+        ScrubDevices(devices);
+        AddDevices(devices, argc, argv);
+        WriteDriverConfig(DRIVER_NAME, saving);
+        
+#ifdef DEBUG
+        system("/usr/bin/touch /System/Library/Extensions");
+#else
+        system("/usr/bin/touch /Library/Extensions");
+#endif
+    } else
+        NSLog(@"Invalid number of parameters (%i)", argc);
+    
+    return 0;
+}
 }

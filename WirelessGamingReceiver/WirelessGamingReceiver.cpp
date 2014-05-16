@@ -40,10 +40,8 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
     
-    if (ed==NULL)
-        return 0;
-    else
-        return ed->wMaxPacketSize;
+    if (ed == NULL) return 0;
+    else return ed->wMaxPacketSize;
 }
 
 // Start device
@@ -60,14 +58,14 @@ bool WirelessGamingReceiver::start(IOService *provider)
         // IOLog("start - superclass failed\n");
         return false;
     }
-    
+
     device = OSDynamicCast(IOUSBDevice, provider);
     if (device == NULL)
     {
         // IOLog("start - invalid provider\n");
         goto fail;
     }
-    
+
     // Check for configurations
     if (device->GetNumConfigurations() < 1)
     {
@@ -122,7 +120,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
     iOther = 0;
     while ((interface = device->FindNextInterface(interface, &interfaceRequest)) != NULL)
     {
-        switch(interface->GetInterfaceProtocol())
+        switch (interface->GetInterfaceProtocol())
         {
             case 129:   // Controller
                 if (!interface->open(this))
@@ -151,6 +149,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                     connections[iConnection].controllerOut->retain();
                 iConnection++;
                 break;
+				
             case 130:   // It is a mystery
                 if (!interface->open(this))
                 {
@@ -178,6 +177,7 @@ bool WirelessGamingReceiver::start(IOService *provider)
                     connections[iOther].otherOut->retain();
                 iOther++;
                 break;
+				
             default:
                 // IOLog("start: Ignoring interface (protocol %d)\n", interface->GetInterfaceProtocol());
                 break;
@@ -230,17 +230,19 @@ bool WirelessGamingReceiver::didTerminate(IOService *provider, IOOptionBits opti
 // Handle message from provider
 IOReturn WirelessGamingReceiver::message(UInt32 type,IOService *provider,void *argument)
 {
-//    IOLog("Message\n");
-/*
+    // IOLog("Message\n");
+#if 0
     switch(type) {
         case kIOMessageServiceIsTerminated:
         case kIOMessageServiceIsRequestingClose:
             if(device->isOpen(this)) ReleaseAll();
             return kIOReturnSuccess;
         default:
-        */
             return IOService::message(type,provider,argument);
-//    }
+    }
+#else
+	return IOService::message(type,provider,argument);
+#endif
 }
 
 // Queue a read on a controller
@@ -402,7 +404,8 @@ void WirelessGamingReceiver::ReleaseAll(void)
         }
         connections[i].controllerStarted = false;
     }
-    if (device != NULL) {
+    if (device != NULL)
+    {
         device->close(this);
         device = NULL;
     }
@@ -524,13 +527,12 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
 void WirelessGamingReceiver::InstantiateService(int index)
 {
     connections[index].service = new WirelessDevice;
-    if (connections[index].service != NULL)
-    {
+    if (connections[index].service != NULL) {
         const OSString *keys[1] = {
             OSString::withCString(kIOWirelessDeviceType),
         };
         const OSObject *objects[1] = {
-            OSNumber::withNumber((unsigned)0, 32),
+            OSNumber::withNumber((unsigned long long)0, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1, 0);
         if (connections[index].service->init(dictionary))
@@ -582,7 +584,7 @@ OSNumber* WirelessGamingReceiver::newLocationIDNumber() const
         {
             location = number->unsigned32BitValue();
         }
-        else
+        else 
         {
             // Make up an address
             if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))

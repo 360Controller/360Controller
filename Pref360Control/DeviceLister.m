@@ -116,7 +116,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     UInt8 interfaceNum, classNum, subClassNum, protocolNum, endpointCount;
     
     BOOL devValid;
-    
+
     // Get the interface to the device
     interface = GetDeviceInterface(device);
     if (interface == NULL)
@@ -144,13 +144,15 @@ static BOOL IsXBox360Controller(io_service_t device)
                 (*interfaceInterface)->GetInterfaceSubClass(interfaceInterface, &subClassNum);
                 (*interfaceInterface)->GetInterfaceProtocol(interfaceInterface, &protocolNum);
                 (*interfaceInterface)->GetNumEndpoints(interfaceInterface, &endpointCount);
-                if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0]))) {
+                if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0])))
+                {
                     if (
                         (ControllerInterfaces[interfaceNum].classNum == classNum) &&
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
-                        ) {
+                        )
+                    {
                         // Found another interface in the right place
                         interfaceCount++;
                     }
@@ -211,7 +213,8 @@ static BOOL IsXBox360Controller(io_service_t device)
     parameters = [[NSMutableArray alloc] initWithCapacity:10];
     [parameters addObject:@"edit"];
     
-    for (NSNumber *key in enabled) {
+    for (NSNumber *key in enabled)
+    {
         NSString *name = entries[key];
         NSUInteger keyValue = [key unsignedIntValue];
         UInt16 vendor = (keyValue >> 16) & 0xFFFF;
@@ -299,7 +302,8 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     known = GetKnownDevices();
     keys = [known allKeys];
-    for (NSNumber *key in keys) {
+    for (NSNumber *key in keys)
+    {
         if (entries[key] == nil)
             entries[key] = known[key];
     }
@@ -313,9 +317,12 @@ static BOOL IsXBox360Controller(io_service_t device)
     io_service_t object;
     
     IOServiceGetMatchingServices([owner masterPort], IOServiceMatching(kIOUSBDeviceClassName), &iterator);
-    if (iterator != 0) {
-        while ((object = IOIteratorNext(iterator)) != 0) {
-            if (IsXBox360Controller(object)) {
+    if (iterator != 0)
+    {
+        while ((object = IOIteratorNext(iterator)) != 0)
+        {
+            if (IsXBox360Controller(object))
+            {
                 NSNumber *vendorValue, *productValue;
                 UInt16 vendor,product;
                 
@@ -325,12 +332,14 @@ static BOOL IsXBox360Controller(io_service_t device)
                 productValue = GetDeviceValue(object, @"idProduct");
                 product = [productValue intValue];
                 
-                if ((vendorValue != nil) && (productValue != nil)) {
+                if ((vendorValue != nil) && (productValue != nil))
+                {
                     NSNumber *key;
                     
                     key = [NSNumber numberWithUnsignedInt:(vendor << 16) | product];
                     [connected addObject:key];
-                    if (entries[key] == nil) {
+                    if (entries[key] == nil)
+                    {
                         NSString *name = GetDeviceValue(object, @"USB Product Name");
                         if (name == nil)
                             name = [NSString stringWithFormat:@"Unknown_%.4x_%.4x", vendor, product];
@@ -375,7 +384,8 @@ static BOOL IsXBox360Controller(io_service_t device)
         error = [self readIOKit];
     
     // Check for errors
-    if (error != nil) {
+    if (error != nil)
+    {
         [self showFailure:error];
         return NO;
     }
@@ -410,13 +420,15 @@ static BOOL IsXBox360Controller(io_service_t device)
                                      NULL,
                                      kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights,
                                      NULL);
-    if (status != errAuthorizationSuccess) {
+    if (status != errAuthorizationSuccess)
+    {
         [self showFailure:Three60LocalizedString(@"Unable to acquire authorisation", @"")];
         goto fail;
     }
     
     status = [self writeToolWithAuthorisation:authorisationRef];
-    if (status != errAuthorizationSuccess) {
+    if (status != errAuthorizationSuccess)
+    {
         [self showFailure:Three60LocalizedString(@"Failed to execute the driver tool", @"")];
         goto fail;
     }
@@ -488,16 +500,21 @@ fail:
 
 - (void)tableView:(NSTableView*)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn*)aTableColumn row:(NSInteger)rowIndex
 {
-    if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame) {
+    if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame)
+    {
         NSString *key = [self allEntries][rowIndex];
         BOOL contains = [enabled containsObject:key];
-        if ([(NSNumber*)anObject boolValue]) {
+        if ([(NSNumber*)anObject boolValue])
+        {
             if (!contains) {
                 [enabled addObject:key];
                 self.changed = YES;
             }
-        } else {
-            if (contains) {
+        }
+        else
+        {
+            if (contains)
+            {
                 [enabled removeObject:key];
                 self.changed = YES;
             }

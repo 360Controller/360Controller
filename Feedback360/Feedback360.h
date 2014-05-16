@@ -89,12 +89,12 @@ public:
     static HRESULT  sStartEffect( void * interface, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
 
-    // actual member functions ultimately called by the FF API (through the static functions)
+    // actual (internal) member functions ultimately called by the FF API (through the static functions)
     
     virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
     virtual ULONG   AddRef(void);
     virtual ULONG   Release(void);
-    
+
 private:
     typedef std::vector<Feedback360Effect> Feedback360EffectVector;
     // helper function
