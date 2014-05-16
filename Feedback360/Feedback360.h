@@ -92,6 +92,7 @@ public:
 
 private:
     typedef std::vector<Feedback360Effect> Feedback360EffectVector;
+    typedef Feedback360EffectVector::iterator Feedback360EffectIterator;
     // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
 
