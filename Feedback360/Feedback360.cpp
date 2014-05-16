@@ -67,7 +67,7 @@ static IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterf
 Feedback360::Feedback360() : fRefCount(1)
 {
     EffectIndex = 1;
-    EffectList = std::vector<Feedback360Effect>();
+    EffectList = Feedback360EffectVector();
     Stopped = TRUE;
     Paused = FALSE;
     PausedTime = 0;
@@ -639,7 +639,7 @@ void Feedback360::EffectProc( void *params )
 HRESULT Feedback360::GetEffectStatus(FFEffectDownloadID EffectHandle, FFEffectStatusFlag *Status)
 {
     dispatch_sync(Queue, ^{
-        for (std::vector<Feedback360Effect>::iterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
+        for (Feedback360EffectVector::iterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
         {
             if (effectIterator->Handle == EffectHandle) {
                 *Status = effectIterator->Status;
