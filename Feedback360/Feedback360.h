@@ -50,11 +50,6 @@ private:
     Feedback360(Feedback360 &src);
     void operator = (Feedback360 &src);
 
-    // reference counting
-    static UInt32   sFactoryRefCount;
-    static void     sFactoryAddRef(void);
-    static void     sFactoryRelease(void);
-
     UInt32 fRefCount;
 
     typedef struct _Xbox360InterfaceMap
