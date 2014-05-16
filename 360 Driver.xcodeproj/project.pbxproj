@@ -1123,6 +1123,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
+				WARNING_CFLAGS = "-Wno-deprecated-register";
 			};
 			name = Debug;
 		};
@@ -1160,6 +1161,7 @@
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				VERSIONING_SYSTEM = "apple-generic";
+				WARNING_CFLAGS = "-Wno-deprecated-register";
 			};
 			name = Release;
 		};
@@ -1230,6 +1232,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEAD_CODE_STRIPPING = YES;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";

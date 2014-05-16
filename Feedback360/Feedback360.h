@@ -28,7 +28,6 @@
 
 #include <ForceFeedback/IOForceFeedbackLib.h>
 #include <IOKit/IOCFPlugin.h>
-#include <map>
 #include <vector>
 
 #include "devlink.h"
@@ -41,41 +40,42 @@
 
 class Feedback360 : IUnknown
 {
-private:
+public:
     // constructor/destructor
     Feedback360(void);
     virtual ~Feedback360(void);
-    
+
+private:
     //disable copy constructor
     Feedback360(Feedback360 &src);
     void operator = (Feedback360 &src);
-    
+
     // reference counting
     static UInt32   sFactoryRefCount;
     static void     sFactoryAddRef(void);
     static void     sFactoryRelease(void);
-    
+
     UInt32 fRefCount;
-    
+
     typedef struct _Xbox360InterfaceMap
     {
         IUnknownVTbl *pseudoVTable;
         Feedback360 *obj;
     } Xbox360InterfaceMap;
-    
+
     // IOCFPlugin interfacing variables and functions
 public:
     static IOCFPlugInInterface** Alloc(void);
-    
+
     // static functions called by the ForceFeedback API
     static HRESULT  sQueryInterface(void *self, REFIID iid, LPVOID *ppv);
     static ULONG sAddRef(void *self);
     static ULONG sRelease(void *self);
-    
+
     static IOReturn sProbe ( void * self, CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     static IOReturn sStart ( void * self, CFDictionaryRef propertyTable, io_service_t service );
     static IOReturn sStop ( void * self );
-    
+
     static HRESULT  sGetVersion(void * interface, ForceFeedbackVersion * version);
     static HRESULT  sInitializeTerminate(void * interface, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin );
     static HRESULT  sDestroyEffect(void * interface, FFEffectDownloadID downloadID );
@@ -88,8 +88,8 @@ public:
     static HRESULT  sSetProperty( void * interface, FFProperty property, void * pValue );
     static HRESULT  sStartEffect( void * interface, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
-    
-    // actual (internal) member functions ultimately called by the FF API (through the static functions)
+
+    // actual member functions ultimately called by the FF API (through the static functions)
     
     virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
     virtual ULONG   AddRef(void);
@@ -99,23 +99,23 @@ private:
     typedef std::vector<Feedback360Effect> Feedback360EffectVector;
     // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
-    
+
     // interfacing
     Xbox360InterfaceMap iIOCFPlugInInterface;
     Xbox360InterfaceMap iIOForceFeedbackDeviceInterface;
     DeviceLink          device;
-    
+
     // GCD queue and timer
     dispatch_queue_t    Queue;
     dispatch_source_t   Timer;
-    
+
     // effects handling
     Feedback360EffectVector EffectList;
     UInt32              EffectIndex;
-    
+
     DWORD   Gain;
     bool    Actuator;
-    
+
     LONG            PrvLeftLevel, PrvRightLevel;
     bool            Stopped;
     bool            Paused;
@@ -123,16 +123,16 @@ private:
     CFAbsoluteTime  LastTime;
     CFAbsoluteTime  PausedTime;
     CFUUIDRef       FactoryID;
-    
+
     void            SetForce(LONG LeftLevel, LONG RightLevel);
-    
+
     // event loop func
-    static void EffectProc(void *params);
+    static void EffectProc( void *params );
     
-    virtual IOReturn Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 * order);
-    virtual IOReturn Start(CFDictionaryRef propertyTable, io_service_t service);
-    virtual IOReturn Stop();
-    
+    virtual IOReturn Probe ( CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
+    virtual IOReturn Start ( CFDictionaryRef propertyTable, io_service_t service );
+    virtual IOReturn Stop ( void );
+
     virtual HRESULT GetVersion(ForceFeedbackVersion * version);
     virtual HRESULT InitializeTerminate(NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin);
     virtual HRESULT DestroyEffect(FFEffectDownloadID downloadID);
@@ -154,7 +154,7 @@ private:
 
 // Factory function
 extern "C" {
-    void* Control360Factory(CFAllocatorRef allocator,CFUUIDRef uuid);
+    void* Control360Factory(CFAllocatorRef allocator, CFUUIDRef uuid);
 }
 
 #endif

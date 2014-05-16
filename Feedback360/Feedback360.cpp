@@ -27,7 +27,7 @@
 
 #define LoopGranularity 10000 // Microseconds
 
-IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
+static IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
     // Padding required for COM
     NULL,
     // IUnknown
@@ -41,7 +41,7 @@ IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
     &Feedback360::sStop
 };
 
-IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface = {
+static IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface = {
     // Padding required for COM
     NULL,
     // IUnknown
