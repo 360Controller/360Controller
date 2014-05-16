@@ -96,6 +96,7 @@ public:
     virtual ULONG   Release(void);
     
 private:
+    typedef std::vector<Feedback360Effect> Feedback360EffectVector;
     // helper function
     static inline Feedback360 *getThis (void *self) { return (Feedback360 *) ((Xbox360InterfaceMap *) self)->obj; }
     
@@ -109,7 +110,7 @@ private:
     dispatch_source_t   Timer;
     
     // effects handling
-    std::vector<Feedback360Effect> EffectList;
+    Feedback360EffectVector EffectList;
     UInt32              EffectIndex;
     
     DWORD   Gain;
@@ -121,6 +122,7 @@ private:
     bool            Manual;
     CFAbsoluteTime  LastTime;
     CFAbsoluteTime  PausedTime;
+    CFUUIDRef       FactoryID;
     
     void            SetForce(LONG LeftLevel, LONG RightLevel);
     
