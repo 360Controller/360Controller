@@ -9,7 +9,7 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "360-32-1.png",
+      "filename" : "360-32.png",
       "scale" : "2x"
     },
     {
@@ -27,32 +27,37 @@
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "360Alert.png",
+      "filename" : "360-128.png",
       "scale" : "1x"
     },
     {
       "idiom" : "mac",
       "size" : "128x128",
+      "filename" : "360-256.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "360-256.png",
       "scale" : "1x"
     },
     {
       "idiom" : "mac",
       "size" : "256x256",
+      "filename" : "360-512.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "360-512.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "360-1024.png",
       "scale" : "2x"
     }
   ],

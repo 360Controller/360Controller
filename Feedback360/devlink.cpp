@@ -26,17 +26,15 @@
 // Initialise the link
 bool Device_Initialise(DeviceLink *link,io_object_t device)
 {
-    IOCFPlugInInterface **plugInInterface;
-    SInt32 score;
+    IOCFPlugInInterface **plugInInterface = NULL;
+    SInt32 score = 0;
     IOReturn ret;
     
-    plugInInterface=NULL;
-    score=0;
     ret=IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID,kIOCFPlugInInterfaceID,&plugInInterface,&score);
-    if(ret!=kIOReturnSuccess) return FALSE;
+    if (ret!=kIOReturnSuccess) return FALSE;
     ret=(*plugInInterface)->QueryInterface(plugInInterface,CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121),(LPVOID*)(&link->interface));
     (*plugInInterface)->Release(plugInInterface);
-    if(ret!=kIOReturnSuccess) return FALSE;
+    if (ret!=kIOReturnSuccess) return FALSE;
     (*link->interface)->open(link->interface,0);
     return TRUE;
 }
@@ -46,7 +44,7 @@ void Device_Finalise(DeviceLink *link)
 {
     (*link->interface)->close(link->interface);
     (*link->interface)->Release(link->interface);
-    link->interface=NULL;
+    link->interface = NULL;
 }
 
 // Send a report via the link

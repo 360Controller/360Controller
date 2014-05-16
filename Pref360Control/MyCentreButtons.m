@@ -53,25 +53,24 @@
 
 - (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
 {
-    NSBezierPath *path;
+    NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:rect];
     NSSize size;
     NSDictionary *attributes;
     NSPoint point;
-    NSColor *colour;
+    NSColor *colour = [NSColor blackColor];
     
     // Draw circle
-    path=[NSBezierPath bezierPathWithOvalInRect:rect];
-    colour=[NSColor blackColor];
     [colour set];
     if(down) {
         [path fill];
-        colour=[NSColor whiteColor];
-    } else [path stroke];
+        colour = [NSColor whiteColor];
+    } else
+        [path stroke];
     // Draw text
-    attributes=@{NSForegroundColorAttributeName: colour};
-    size=[button sizeWithAttributes:attributes];
-    point.x=rect.origin.x+((rect.size.width-size.width)/2);
-    point.y=rect.origin.y+((rect.size.height-size.height)/2);
+    attributes = @{NSForegroundColorAttributeName: colour};
+    size = [button sizeWithAttributes:attributes];
+    point.x = rect.origin.x+((rect.size.width-size.width)/2);
+    point.y = rect.origin.y+((rect.size.height-size.height)/2);
     [button drawAtPoint:point withAttributes:attributes];
 }
 
