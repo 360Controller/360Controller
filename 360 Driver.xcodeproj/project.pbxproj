@@ -153,6 +153,13 @@
 			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
 			remoteInfo = WirelessGamingReceiver;
 		};
+		55DA7C6C1926BED3002F6A3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B6371E18C108A500CE933D;
+			remoteInfo = Feedback360;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -778,6 +785,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55DA7C6D1926BED3002F6A3A /* PBXTargetDependency */,
 			);
 			name = testhaptic;
 			productName = testhaptic;
@@ -1010,6 +1018,11 @@
 			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
 			targetProxy = 55B6384418C10FA200CE933D /* PBXContainerItemProxy */;
 		};
+		55DA7C6D1926BED3002F6A3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B6371E18C108A500CE933D /* Feedback360 */;
+			targetProxy = 55DA7C6C1926BED3002F6A3A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1189,6 +1202,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360Daemon/360DaemonApp-Prefix.pch";
 				INFOPLIST_FILE = "360Daemon/360DaemonApp-Info.plist";
@@ -1266,6 +1280,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DriverTool/DriverTool_Prefix.pch;
 				INFOPLIST_FILE = DriverTool/Info.plist;
@@ -1296,6 +1311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
