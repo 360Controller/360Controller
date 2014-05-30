@@ -28,20 +28,11 @@
 //----------------------------------------------------------------------------------------------
 // CEffect
 //----------------------------------------------------------------------------------------------
-Feedback360Effect::Feedback360Effect()
+Feedback360Effect::Feedback360Effect() : Type(NULL), Status(0), PlayCount(0),
+StartTime(0), Index(0), LastTime(0), Handle(0), DiEffect({0}), DiEnvelope({0}),
+DiCustomForce({0}), DiConstantForce({0}), DiPeriodic({0}), DiRampforce({0})
 {
-    Type  = NULL;
-    memset(&DiEffect, 0, sizeof(FFEFFECT));
-    memset(&DiEnvelope, 0, sizeof(FFENVELOPE));
-    memset(&DiCustomForce, 0, sizeof(FFCUSTOMFORCE));
-    memset(&DiConstantForce, 0, sizeof(FFCONSTANTFORCE));
-    memset(&DiPeriodic, 0, sizeof(FFPERIODIC));
-    memset(&DiRampforce, 0, sizeof(FFRAMPFORCE));
-    Status  = 0;
-    PlayCount = 0;
-    StartTime = 0;
-    Index = 0;
-    LastTime = 0;
+    
 }
 
 Feedback360Effect::Feedback360Effect(FFEffectDownloadID theHand) : Feedback360Effect()
@@ -49,21 +40,16 @@ Feedback360Effect::Feedback360Effect(FFEffectDownloadID theHand) : Feedback360Ef
     Handle = theHand;
 }
 
-Feedback360Effect::Feedback360Effect(const Feedback360Effect &src)
+Feedback360Effect::Feedback360Effect(const Feedback360Effect &src) : Type(src.Type),
+Handle(src.Handle), Status(src.Status), PlayCount(src.PlayCount),
+StartTime(src.StartTime), Index(src.Index), LastTime(src.LastTime)
 {
-    Type = src.Type;
     memcpy(&DiEffect, &src.DiEffect, sizeof(FFEFFECT));
     memcpy(&DiEnvelope, &src.DiEnvelope, sizeof(FFENVELOPE));
     memcpy(&DiCustomForce, &src.DiCustomForce, sizeof(FFCUSTOMFORCE));
     memcpy(&DiConstantForce, &src.DiConstantForce, sizeof(FFCONSTANTFORCE));
     memcpy(&DiPeriodic, &src.DiPeriodic, sizeof(FFPERIODIC));
     memcpy(&DiRampforce, &src.DiRampforce, sizeof(FFRAMPFORCE));
-    Handle = src.Handle;
-    Status = src.Status;
-    PlayCount = src.PlayCount;
-    StartTime = src.StartTime;
-    Index = src.Index;
-    LastTime = src.LastTime;
 }
 
 //----------------------------------------------------------------------------------------------
