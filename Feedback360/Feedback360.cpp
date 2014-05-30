@@ -82,7 +82,7 @@ Feedback360::Feedback360() : fRefCount(1)
 
     iIOForceFeedbackDeviceInterface.pseudoVTable = (IUnknownVTbl *) &functionMap360_IOForceFeedbackDeviceInterface;
     iIOForceFeedbackDeviceInterface.obj = this;
-    
+
     FactoryID = kFeedback360Uuid;
     CFRetain(FactoryID);
     CFPlugInAddInstanceForFactory(FactoryID);
@@ -236,7 +236,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
         Feedback360Effect *Effect = NULL;
         if (*EffectHandle == 0) {
             EffectList.push_back(Feedback360Effect(EffectIndex++));
-            Effect = &(*EffectList.end());
+            Effect = &(EffectList.back());
             *EffectHandle = Effect->Handle;
         } else {
             for (LONG Index = 0; Index < EffectList.size(); Index++) {

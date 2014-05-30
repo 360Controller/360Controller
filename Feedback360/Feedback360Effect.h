@@ -58,7 +58,6 @@
 class Feedback360Effect
 {
 public:
-    Feedback360Effect();
     Feedback360Effect(FFEffectDownloadID theHand);
     Feedback360Effect(const Feedback360Effect &src);
 
@@ -82,8 +81,9 @@ public:
     DWORD           Index;
 
 private:
+    Feedback360Effect();
     void CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel);
-    void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);    
+    void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);
 };
 
 #endif
