@@ -63,20 +63,12 @@ static IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterf
     &Feedback360::sStopEffect
 };
 
-
-Feedback360::Feedback360() : fRefCount(1)
+Feedback360::Feedback360() : fRefCount(1),  EffectIndex(1), Stopped(true),
+Paused(false), PausedTime(0), LastTime(0), Gain(10000), PrvLeftLevel(0),
+PrvRightLevel(0), Actuator(true), Manual(false)
 {
-    EffectIndex = 1;
     EffectList = Feedback360EffectVector();
-    Stopped = TRUE;
-    Paused = FALSE;
-    PausedTime = 0;
-    LastTime = 0;
-    Gain = 10000;
-    Actuator = TRUE;
-    Manual = FALSE;
-    PrvLeftLevel = 0;
-    PrvRightLevel = 0;
+
     iIOCFPlugInInterface.pseudoVTable = (IUnknownVTbl *) &functionMap360_IOCFPlugInInterface;
     iIOCFPlugInInterface.obj = this;
 
@@ -195,12 +187,14 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
 HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartFlag Mode, UInt32 Count)
 {
     dispatch_sync(Queue, ^{
-        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator) {
-            if (effectIterator->Handle == EffectHandle) {
+        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
+        {
+            if (effectIterator->Handle == EffectHandle)
+            {
                 effectIterator->Status  = FFEGES_PLAYING;
                 effectIterator->PlayCount = Count;
                 effectIterator->StartTime = CFAbsoluteTimeGetCurrent();
-                Stopped = FALSE;
+                Stopped = false;
             } else {
                 if (Mode & FFES_SOLO) {
                     effectIterator->Status = NULL;
@@ -214,8 +208,10 @@ HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartF
 HRESULT Feedback360::StopEffect(UInt32 EffectHandle)
 {
     dispatch_sync(Queue, ^{
-        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator) {
-            if (effectIterator->Handle == EffectHandle) {
+        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
+        {
+            if (effectIterator->Handle == EffectHandle)
+            {
                 effectIterator->Status = NULL;
                 break;
             }
@@ -373,15 +369,15 @@ HRESULT Feedback360::GetForceFeedbackState(ForceFeedbackDeviceState *DeviceState
         {
             DeviceState->dwState |= FFGFFS_EMPTY;
         }
-        if( Stopped == TRUE )
+        if( Stopped == true )
         {
             DeviceState->dwState |= FFGFFS_STOPPED;
         }
-        if( Paused == TRUE )
+        if( Paused == true )
         {
             DeviceState->dwState |= FFGFFS_PAUSED;
         }
-        if (Actuator == TRUE)
+        if (Actuator == true)
         {
             DeviceState->dwState |= FFGFFS_ACTUATORSON;
         } else {
@@ -520,8 +516,10 @@ HRESULT Feedback360::DestroyEffect(FFEffectDownloadID EffectHandle)
 {
     __block HRESULT Result = FF_OK;
     dispatch_sync(Queue, ^{
-        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator) {
-            if (effectIterator->Handle == EffectHandle) {
+        for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
+        {
+            if (effectIterator->Handle == EffectHandle)
+            {
                 EffectList.erase(effectIterator);
                 break;
             }
@@ -596,8 +594,9 @@ void Feedback360::EffectProc( void *params )
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
     LONG CalcResult =0;
-    
-    if (cThis->Actuator == TRUE) {
+
+    if (cThis->Actuator == true)
+    {
         for (Feedback360EffectIterator effectIterator = cThis->EffectList.begin() ; effectIterator != cThis->EffectList.end(); ++effectIterator)
         {
             if((CFAbsoluteTimeGetCurrent() - cThis->LastTime*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {

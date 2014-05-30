@@ -271,10 +271,10 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
 	serialTimer = NULL;
 	serialHandler = NULL;
     // Default settings
-    invertLeftX=invertLeftY=FALSE;
-    invertRightX=invertRightY=FALSE;
+    invertLeftX=invertLeftY=false;
+    invertRightX=invertRightY=false;
     deadzoneLeft=deadzoneRight=0;
-    relativeLeft=relativeRight=FALSE;
+    relativeLeft=relativeRight=false;
     // Done
     return res;
 }
