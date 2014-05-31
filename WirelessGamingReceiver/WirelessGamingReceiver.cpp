@@ -29,7 +29,7 @@
 OSDefineMetaClassAndStructors(WirelessGamingReceiver, IOService)
 
 // Holds data for asynchronous reads
-typedef struct
+typedef struct WGRREAD
 {
     int index;
     IOBufferMemoryDescriptor *buffer;
