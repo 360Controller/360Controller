@@ -92,7 +92,7 @@ static IOUSBInterfaceInterface** GetInterfaceInterface(io_service_t interface)
 }
 
 // List of interfaces we expect on a normal Microsoft controller
-const struct {
+const struct ControllerInterface {
     int numEndpoints;
     UInt8 classNum, subClassNum, protocolNum;
 } ControllerInterfaces[] = {
