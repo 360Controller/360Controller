@@ -91,25 +91,16 @@ HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
     CFUUIDRef interface;
     interface = CFUUIDCreateFromUUIDBytes(NULL,iid);
     if(CFEqual(interface,kIOForceFeedbackDeviceInterfaceID))
-    {
         *ppv = &this->iIOForceFeedbackDeviceInterface;
-        // IUnknown || IOCFPlugInInterface
-    }
+    // IUnknown || IOCFPlugInInterface
     else if(CFEqual(interface, IUnknownUUID) || CFEqual(interface, kIOCFPlugInInterfaceID))
-    {
         *ppv = &this->iIOCFPlugInInterface;
-    }
     else
-    {
         *ppv = NULL;
-    }
-    
+
     // Done
     CFRelease(interface);
-    if ((*ppv) == NULL)
-    {
-        return E_NOINTERFACE;
-    }
+    if ((*ppv) == NULL) return E_NOINTERFACE;
     else {
         this->iIOCFPlugInInterface.pseudoVTable->AddRef(*ppv);
     }
@@ -223,8 +214,9 @@ HRESULT Feedback360::StopEffect(UInt32 EffectHandle)
 HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *EffectHandle, FFEFFECT *DiEffect, FFEffectParameterFlag Flags)
 {
     __block HRESULT Result = FF_OK;
-    
-    if (Flags & FFEP_NODOWNLOAD) {
+
+    if (Flags & FFEP_NODOWNLOAD)
+    {
         return FF_OK;
     }
 
@@ -242,52 +234,51 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 }
             }
         }
-        
+
         if (Effect == NULL || Result == -1) {
             Result = FFERR_INTERNAL;
         }
         else {
             Effect->Type = EffectType;
-            
             Effect->DiEffect.dwFlags = DiEffect->dwFlags;
-            
+
             if( Flags & FFEP_DURATION )
             {
                 Effect->DiEffect.dwDuration = DiEffect->dwDuration;
             }
-            
+
             if( Flags & FFEP_SAMPLEPERIOD )
             {
                 Effect->DiEffect.dwSamplePeriod = DiEffect->dwSamplePeriod;
             }
-            
+
             if( Flags & FFEP_GAIN )
             {
                 Effect->DiEffect.dwGain = DiEffect->dwGain;
             }
-            
+
             if( Flags & FFEP_TRIGGERBUTTON )
             {
                 Effect->DiEffect.dwTriggerButton = DiEffect->dwTriggerButton;
             }
-            
+
             if( Flags & FFEP_TRIGGERREPEATINTERVAL )
             {
                 Effect->DiEffect.dwTriggerRepeatInterval = DiEffect->dwTriggerRepeatInterval;
             }
-            
+
             if( Flags & FFEP_AXES )
             {
                 Effect->DiEffect.cAxes  = DiEffect->cAxes;
                 Effect->DiEffect.rgdwAxes = NULL;
             }
-            
+
             if( Flags & FFEP_DIRECTION )
             {
                 Effect->DiEffect.cAxes   = DiEffect->cAxes;
                 Effect->DiEffect.rglDirection = NULL;
             }
-            
+
             if( ( Flags & FFEP_ENVELOPE ) && DiEffect->lpEnvelope != NULL )
             {
                 memcpy( &Effect->DiEnvelope, DiEffect->lpEnvelope, sizeof( FFENVELOPE ) );
@@ -298,9 +289,9 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                 }
                 Effect->DiEffect.lpEnvelope = &Effect->DiEnvelope;
             }
-            
+
             Effect->DiEffect.cbTypeSpecificParams = DiEffect->cbTypeSpecificParams;
-            
+
             if( Flags & FFEP_TYPESPECIFICPARAMS )
             {
                 if(CFEqual(EffectType, kFFEffectType_CustomForce_ID)) {
@@ -310,7 +301,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                            ,DiEffect->cbTypeSpecificParams );
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiCustomForce;
                 }
-                
+
                 else if(CFEqual(EffectType, kFFEffectType_ConstantForce_ID)) {
                     memcpy(
                            &Effect->DiConstantForce
@@ -333,19 +324,19 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
                     Effect->DiEffect.lpvTypeSpecificParams = &Effect->DiRampforce;
                 }
             }
-            
+
             if( Flags & FFEP_STARTDELAY )
             {
                 Effect->DiEffect.dwStartDelay = DiEffect->dwStartDelay;
             }
-            
+
             if( Flags & FFEP_START )
             {
                 Effect->Status  = FFEGES_PLAYING;
                 Effect->PlayCount = 1;
                 Effect->StartTime = CFAbsoluteTimeGetCurrent();
             }
-            
+
             if( Flags & FFEP_NORESTART )
             {
                 ;
@@ -434,7 +425,7 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
                 Stopped = true;
                 Paused = false;
                 break;
-                
+
             case FFSFFC_STOPALL:
                 for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
                 {

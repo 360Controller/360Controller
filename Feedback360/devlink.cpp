@@ -28,14 +28,13 @@ bool Device_Initialise(DeviceLink *link,io_object_t device)
 {
     IOCFPlugInInterface **plugInInterface = NULL;
     SInt32 score = 0;
-    IOReturn ret;
-    
-    ret=IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID,kIOCFPlugInInterfaceID,&plugInInterface,&score);
+    IOReturn ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+	
     if (ret!=kIOReturnSuccess) return false;
-    ret=(*plugInInterface)->QueryInterface(plugInInterface,CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121),(LPVOID*)(&link->interface));
+    ret=(*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121), (LPVOID*)(&link->interface));
     (*plugInInterface)->Release(plugInInterface);
     if (ret!=kIOReturnSuccess) return false;
-    (*link->interface)->open(link->interface,0);
+    (*link->interface)->open(link->interface, 0);
     return true;
 }
 
@@ -59,6 +58,6 @@ bool Device_Send(DeviceLink *link,void *data,int length)
         IOReturn res=(*link->interface)->setReport(link->interface,kIOHIDReportTypeOutput,0,data,length,10000,NULL,NULL,NULL);
         if (res != kIOReturnSuccess)
             fprintf(stderr, "Device_Send failed: 0x%.8x\n", res);
-        return res==kIOReturnSuccess;
+        return res == kIOReturnSuccess;
     }
 }
