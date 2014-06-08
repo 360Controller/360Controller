@@ -262,7 +262,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
         IOFree(data, sizeof(WGRREAD));
         return false;
     }
-    
+
     complete.target = this;
     complete.action = _ReadComplete;
     complete.parameter = data;
@@ -270,7 +270,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
     err = connections[index].controllerIn->Read(data->buffer, 0, 0, data->buffer->getLength(), &complete);
     if (err == kIOReturnSuccess)
         return true;
-    
+
     data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
     
@@ -527,7 +527,8 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
 void WirelessGamingReceiver::InstantiateService(int index)
 {
     connections[index].service = new WirelessDevice;
-    if (connections[index].service != NULL) {
+    if (connections[index].service != NULL)
+    {
         const OSString *keys[1] = {
             OSString::withCString(kIOWirelessDeviceType),
         };
@@ -589,7 +590,7 @@ OSNumber* WirelessGamingReceiver::newLocationIDNumber() const
             // Make up an address
             if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
                 location |= number->unsigned8BitValue() << 24;
-            
+
             if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
                 location |= number->unsigned8BitValue() << 16;
         }

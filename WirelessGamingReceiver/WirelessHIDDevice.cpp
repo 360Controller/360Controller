@@ -36,9 +36,8 @@ const char weirdStart[] = {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00,
 
 void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
 {
-	WirelessHIDDevice *device;
+	WirelessHIDDevice *device = OSDynamicCast(WirelessHIDDevice, owner);
     
-	device = OSDynamicCast(WirelessHIDDevice, owner);
     // Automatic shutoff
     device->serialTimerCount++;
     if (device->serialTimerCount > POWEROFF_TIMEOUT)
@@ -51,9 +50,8 @@ void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 void WirelessHIDDevice::SetLEDs(int mode)
 {
     unsigned char buf[] = {0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device;
+    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
 
-    device = OSDynamicCast(WirelessDevice, getProvider());
     if (device != NULL)
     {
         device->SendPacket(buf, sizeof(buf));
@@ -70,9 +68,8 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
 void WirelessHIDDevice::PowerOff(void)
 {
     static const unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device;
+    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
     
-    device = OSDynamicCast(WirelessDevice, getProvider());
     if (device != NULL)
     {
         device->SendPacket(buf, sizeof(buf));
@@ -146,9 +143,8 @@ fail:
 // Shut down the driver
 void WirelessHIDDevice::handleStop(IOService *provider)
 {
-    WirelessDevice *device;
-
-    device = OSDynamicCast(WirelessDevice, provider);
+    WirelessDevice *device = OSDynamicCast(WirelessDevice, provider);
+    
     if (device != NULL)
         device->RegisterWatcher(NULL, NULL, NULL);
 

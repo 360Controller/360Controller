@@ -32,9 +32,8 @@
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
-    CFTypeRef value;
-    
-    value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
+	
     return CFBridgingRelease(value);
 }
 
@@ -106,7 +105,7 @@ const struct ControllerInterface {
 // Detect if an IO service object is a Microsoft controller by running through and checking some things
 static BOOL IsXBox360Controller(io_service_t device)
 {
-    IOUSBDeviceInterface **interface;
+    IOUSBDeviceInterface **interface = GetDeviceInterface(device);
     IOUSBFindInterfaceRequest iRq;
     io_iterator_t iterator;
     io_service_t devInterface;
@@ -118,7 +117,6 @@ static BOOL IsXBox360Controller(io_service_t device)
     BOOL devValid;
 
     // Get the interface to the device
-    interface = GetDeviceInterface(device);
     if (interface == NULL)
         return NO;
     (*interface)->GetDeviceClass(interface, &classNum);
@@ -283,9 +281,9 @@ static BOOL IsXBox360Controller(io_service_t device)
         NSArray *values = [line componentsSeparatedByString:@","];
         if ([values count] != 3)
             continue;
-        unsigned int vendor = [values[1] intValue];
-        unsigned int product = [values[2] intValue];
-        NSNumber *key = [NSNumber numberWithUnsignedInt:(int)((vendor << 16) | product)];
+        unsigned int vendor = [values[1] unsignedIntValue];
+        unsigned int product = [values[2] unsignedIntValue];
+        NSNumber *key = @((UInt32)((vendor << 16) | product));
         [enabled addObject:key];
         if (entries[key] == nil)
             entries[key] = SanitiseName(values[0]);
@@ -334,9 +332,8 @@ static BOOL IsXBox360Controller(io_service_t device)
                 
                 if ((vendorValue != nil) && (productValue != nil))
                 {
-                    NSNumber *key;
+                    NSNumber *key = @((UInt32)((vendor << 16) | product));
                     
-                    key = [NSNumber numberWithUnsignedInt:(vendor << 16) | product];
                     [connected addObject:key];
                     if (entries[key] == nil)
                     {

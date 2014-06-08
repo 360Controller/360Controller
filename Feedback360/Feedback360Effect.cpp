@@ -65,12 +65,14 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
     }
     CFAbsoluteTime BeginTime = StartTime + ( DiEffect.dwStartDelay / (1000*1000) );
     CFAbsoluteTime EndTime  = DBL_MAX;
-    if (PlayCount != -1) {
+    if (PlayCount != -1)
+    {
         EndTime = BeginTime + Duration * PlayCount;
     }
     CFAbsoluteTime CurrentTime = CFAbsoluteTimeGetCurrent();
 
-    if (Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime) {
+    if (Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime)
+    {
         // Used for force calculation
         LONG NormalLevel;
         LONG WorkLeftLevel;
@@ -260,9 +262,7 @@ void Feedback360Effect::CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalR
 
         Magnitude	= Magnitude + DiPeriodic.lOffset;
     }
-
     else if (CFEqual(Type, kFFEffectType_RampForce_ID)) {
-
         Rate		= ( Duration - CurrentPos ) * 100
         / Duration;//MAX( 1, DiEffect.dwDuration / 1000 );
 
