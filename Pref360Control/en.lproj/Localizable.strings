@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  360 Driver
+
+  Created by C.W. Betts on 3/16/14.
+  Copyright (c) 2014 GitHub. All rights reserved.
+*/
+
+"Unable to create authorisation request" = "Unable to create authorization request";
+"Unable to acquire authorisation" = "Unable to acquire authorization";
+"Failed to execute the driver tool" = "Failed to execute the driver tool";

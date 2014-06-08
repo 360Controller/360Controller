@@ -52,45 +52,45 @@ static NSString* GetDeviceName(io_service_t device)
 
 - (instancetype)initFromItemForDevice:(io_service_t)device
 {
-	if (self = [super init]) {
-		IOReturn ret;
-		IOCFPlugInInterface **plugInInterface;
-		SInt32 score=0;
-
-		ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
-		if (ret != kIOReturnSuccess)
-			return nil;
-		ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
-		(*plugInInterface)->Release(plugInInterface);
-		if (ret != kIOReturnSuccess)
-			return nil;
-		forceFeedback = 0;
-		FFCreateDevice(device, &forceFeedback);
-		self.rawDevice = device;
-		self.name = GetDeviceName(device);
-	}
-	return self;
+    if (self = [super init]) {
+        IOReturn ret;
+        IOCFPlugInInterface **plugInInterface;
+        SInt32 score=0;
+        
+        ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+        if (ret != kIOReturnSuccess)
+            return nil;
+        ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
+        (*plugInInterface)->Release(plugInInterface);
+        if (ret != kIOReturnSuccess)
+            return nil;
+        forceFeedback = 0;
+        FFCreateDevice(device, &forceFeedback);
+        self.rawDevice = device;
+        self.name = GetDeviceName(device);
+    }
+    return self;
 }
 
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device
 {
     DeviceItem *item = [[DeviceItem alloc] initFromItemForDevice:device];
-
-	if (item)
-		return item;
-	
+    
+    if (item)
+        return item;
+    
     IOObjectRelease(device);
     return nil;
 }
 
 - (void)dealloc
 {
-    if(deviceHandle != 0)
-		IOObjectRelease(deviceHandle);
-    if(interface != NULL)
-		(*interface)->Release(interface);
-    if(forceFeedback != 0)
-		FFReleaseDevice(forceFeedback);
+    if (deviceHandle)
+        IOObjectRelease(deviceHandle);
+    if (interface)
+        (*interface)->Release(interface);
+    if (forceFeedback)
+        FFReleaseDevice(forceFeedback);
 }
 
 @end

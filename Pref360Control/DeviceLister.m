@@ -27,24 +27,23 @@
 
 #define TOOL_FILENAME @"DriverTool"
 
+#define Three60LocalizedString(key, comment) NSLocalizedStringWithDefaultValue(key, nil, [NSBundle bundleForClass:[self class]], key, comment)
+
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
-    CFTypeRef value;
-    
-    value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
+	
     return CFBridgingRelease(value);
 }
 
 // Make sure a name is as nice as possible for eventually going into the XML for the driver
 static NSString* SanitiseName(NSString *name)
 {
-    NSMutableString *output;
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
     int i;
     
-    output = [NSMutableString stringWithCapacity:100];
-    for (i = 0; i < [name length]; i++)
-    {
+    for (i = 0; i < [name length]; i++) {
         unichar c = [name characterAtIndex:i];
         if (c == ' ')
             c = '_';
@@ -52,7 +51,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return output;
+    return [NSString stringWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -92,7 +91,7 @@ static IOUSBInterfaceInterface** GetInterfaceInterface(io_service_t interface)
 }
 
 // List of interfaces we expect on a normal Microsoft controller
-const struct {
+const struct ControllerInterface {
     int numEndpoints;
     UInt8 classNum, subClassNum, protocolNum;
 } ControllerInterfaces[] = {
@@ -106,7 +105,7 @@ const struct {
 // Detect if an IO service object is a Microsoft controller by running through and checking some things
 static BOOL IsXBox360Controller(io_service_t device)
 {
-    IOUSBDeviceInterface **interface;
+    IOUSBDeviceInterface **interface = GetDeviceInterface(device);
     IOUSBFindInterfaceRequest iRq;
     io_iterator_t iterator;
     io_service_t devInterface;
@@ -118,7 +117,6 @@ static BOOL IsXBox360Controller(io_service_t device)
     BOOL devValid;
 
     // Get the interface to the device
-    interface = GetDeviceInterface(device);
     if (interface == NULL)
         return NO;
     (*interface)->GetDeviceClass(interface, &classNum);
@@ -151,7 +149,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
-                       )
+                        )
                     {
                         // Found another interface in the right place
                         interfaceCount++;
@@ -170,17 +168,27 @@ static BOOL IsXBox360Controller(io_service_t device)
     return devValid && (interfaceCount >= 3);   // Only 3 in case the security descriptor is missing?
 }
 
+@interface DeviceLister ()
+@property (getter = isChanged) BOOL changed;
+@end
+
 @implementation DeviceLister
+{
+    Pref360ControlPref *owner;
+    
+    NSMutableDictionary *entries;
+    NSMutableArray *connected, *enabled;
+}
 @synthesize list;
 @synthesize sheet;
+@synthesize changed;
 
-- init
+- (instancetype)init
 {
-    if (self = [super init])
-    {
-        entries = [NSMutableDictionary dictionaryWithCapacity:10];
-        connected = [NSMutableArray arrayWithCapacity:10];
-        enabled = [NSMutableArray arrayWithCapacity:10];
+    if (self = [super init]) {
+        entries = [[NSMutableDictionary alloc] initWithCapacity:10];
+        connected = [[NSMutableArray alloc] initWithCapacity:10];
+        enabled = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
 }
@@ -194,15 +202,13 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (OSStatus)writeToolWithAuthorisation:(AuthorizationRef)authorisationRef
 {
     OSStatus result;
-    NSString *toolPath;
+    NSString *toolPath = [self toolPath];
     NSMutableArray *parameters;
     const char **argv;
     int i;
     
-    toolPath = [self toolPath];
-    
     // Build array of parameters
-    parameters = [NSMutableArray arrayWithCapacity:10];
+    parameters = [[NSMutableArray alloc] initWithCapacity:10];
     [parameters addObject:@"edit"];
     
     for (NSNumber *key in enabled)
@@ -225,7 +231,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     // Execute the command
     result = AuthorizationExecuteWithPrivileges(authorisationRef,
-                                                [toolPath UTF8String],
+                                                [toolPath fileSystemRepresentation],
                                                 kAuthorizationFlagDefaults,
                                                 (char**)argv,
                                                 NULL);
@@ -275,9 +281,9 @@ static BOOL IsXBox360Controller(io_service_t device)
         NSArray *values = [line componentsSeparatedByString:@","];
         if ([values count] != 3)
             continue;
-        NSUInteger vendor = [values[1] intValue];
-        NSUInteger product = [values[2] intValue];
-        NSNumber *key = [NSNumber numberWithUnsignedInt:(int)((vendor << 16) | product)];
+        unsigned int vendor = [values[1] unsignedIntValue];
+        unsigned int product = [values[2] unsignedIntValue];
+        NSNumber *key = @((UInt32)((vendor << 16) | product));
         [enabled addObject:key];
         if (entries[key] == nil)
             entries[key] = SanitiseName(values[0]);
@@ -305,10 +311,9 @@ static BOOL IsXBox360Controller(io_service_t device)
 // Find any matching devices currently plugged in
 - (NSString*)readIOKit
 {
-    io_iterator_t iterator;
+    io_iterator_t iterator = 0;
     io_service_t object;
     
-    iterator = 0;
     IOServiceGetMatchingServices([owner masterPort], IOServiceMatching(kIOUSBDeviceClassName), &iterator);
     if (iterator != 0)
     {
@@ -327,9 +332,8 @@ static BOOL IsXBox360Controller(io_service_t device)
                 
                 if ((vendorValue != nil) && (productValue != nil))
                 {
-                    NSNumber *key;
+                    NSNumber *key = @((UInt32)((vendor << 16) | product));
                     
-                    key = [NSNumber numberWithUnsignedInt:(vendor << 16) | product];
                     [connected addObject:key];
                     if (entries[key] == nil)
                     {
@@ -351,7 +355,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (void)showFailure:(NSString*)message
 {
-    NSAlert *alert = [NSAlert alertWithMessageText:nil
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
                                      defaultButton:nil
                                    alternateButton:nil
                                        otherButton:nil
@@ -364,7 +368,6 @@ static BOOL IsXBox360Controller(io_service_t device)
     NSString *error;
     
     // Initialise
-    error = nil;
     [entries removeAllObjects];
     [connected removeAllObjects];
     [enabled removeAllObjects];
@@ -387,7 +390,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     // Done
     SetKnownDevices(entries);
     [list reloadData];
-    changed = NO;
+    self.changed = NO;
     return YES;
 }
 
@@ -402,9 +405,8 @@ static BOOL IsXBox360Controller(io_service_t device)
                                  kAuthorizationEmptyEnvironment,
                                  kAuthorizationFlagDefaults,
                                  &authorisationRef);
-    if (status != errAuthorizationSuccess)
-    {
-        [self showFailure:NSLocalizedString(@"Unable to create authorisation request", @"")];
+    if (status != errAuthorizationSuccess) {
+        [self showFailure:Three60LocalizedString(@"Unable to create authorisation request", @"")];
         return NO;
     }
     
@@ -417,14 +419,14 @@ static BOOL IsXBox360Controller(io_service_t device)
                                      NULL);
     if (status != errAuthorizationSuccess)
     {
-        [self showFailure:NSLocalizedString(@"Unable to acquire authorisation", @"")];
+        [self showFailure:Three60LocalizedString(@"Unable to acquire authorisation", @"")];
         goto fail;
     }
     
     status = [self writeToolWithAuthorisation:authorisationRef];
     if (status != errAuthorizationSuccess)
     {
-        [self showFailure:NSLocalizedString(@"Failed to execute the driver tool", @"")];
+        [self showFailure:Three60LocalizedString(@"Failed to execute the driver tool", @"")];
         goto fail;
     }
     
@@ -455,6 +457,16 @@ fail:
     [sheet close];
 }
 
+- (NSArray*)allEntries
+{
+    return [[entries allKeys] sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *str1 = obj1;
+        NSString *str2 = obj2;
+        NSComparisonResult retval = [str1 localizedStandardCompare:str2];
+        return retval;
+    }];
+}
+
 // NSTableView data source
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView
 {
@@ -464,7 +476,7 @@ fail:
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn row:(NSInteger)rowIndex
 {
     NSString *identifier = [aTableColumn identifier];
-    NSString *key = [entries allKeys][rowIndex];
+    NSString *key = [self allEntries][rowIndex];
     if ([identifier compare:@"enable"] == NSOrderedSame)
     {
         return @([enabled containsObject:key]);
@@ -487,14 +499,13 @@ fail:
 {
     if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame)
     {
-        NSString *key = [entries allKeys][rowIndex];
+        NSString *key = [self allEntries][rowIndex];
         BOOL contains = [enabled containsObject:key];
         if ([(NSNumber*)anObject boolValue])
         {
-            if (!contains)
-            {
+            if (!contains) {
                 [enabled addObject:key];
-                changed = YES;
+                self.changed = YES;
             }
         }
         else
@@ -502,10 +513,9 @@ fail:
             if (contains)
             {
                 [enabled removeObject:key];
-                changed = YES;
+                self.changed = YES;
             }
         }
-
     }
 }
 

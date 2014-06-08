@@ -55,11 +55,12 @@ public:
 // Find the maximum packet size of this pipe
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
-    const IOUSBEndpointDescriptor *ed;
+    const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
     
-    ed=pipe->GetEndpointDescriptor();
-    if(ed==NULL) return 0;
-    else return ed->wMaxPacketSize;
+    if(ed==NULL)
+        return 0;
+    else
+        return ed->wMaxPacketSize;
 }
 
 void Xbox360Peripheral::SendSpecial(UInt16 value)
@@ -223,34 +224,34 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 // Read the settings from the registry
 void Xbox360Peripheral::readSettings(void)
 {
-    OSDictionary *dataDictionary;
-    OSBoolean *value;
-    OSNumber *number;
+    OSBoolean *value = nullptr;
+    OSNumber *number = nullptr;
+    OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
-    dataDictionary=OSDynamicCast(OSDictionary,getProperty(kDriverSettingKey));
-    if(dataDictionary==NULL) return;
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftX"));
-    if(value!=NULL) invertLeftX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftY"));
-    if(value!=NULL) invertLeftY=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightX"));
-    if(value!=NULL) invertRightX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightY"));
-    if(value!=NULL) invertRightY=value->getValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneLeft"));
-    if(number!=NULL) deadzoneLeft=number->unsigned32BitValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneRight"));
-    if(number!=NULL) deadzoneRight=number->unsigned32BitValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeLeft"));
-    if(value!=NULL) relativeLeft=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
-    if(value!=NULL) relativeRight=value->getValue();
-    /*
+    if (dataDictionary == NULL) return;
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
+    if (value != NULL) invertLeftX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
+    if (value != NULL) invertLeftY = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
+    if (value != NULL) invertRightX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
+    if (value != NULL) invertRightY = value->getValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
+    if (number != NULL) deadzoneLeft = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
+    if (number != NULL) deadzoneRight = number->unsigned32BitValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
+    if (value != NULL) relativeLeft = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
+    if (value != NULL) relativeRight=value->getValue();
+    
+#if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
             invertRightX?"True":"False",invertRightY?"True":"False",
             deadzoneLeft,deadzoneRight);
-    */
+#endif
 }
 
 // Initialise the extension
@@ -270,10 +271,10 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
 	serialTimer = NULL;
 	serialHandler = NULL;
     // Default settings
-    invertLeftX=invertLeftY=FALSE;
-    invertRightX=invertRightY=FALSE;
+    invertLeftX=invertLeftY=false;
+    invertRightX=invertRightY=false;
     deadzoneLeft=deadzoneRight=0;
-    relativeLeft=relativeRight=FALSE;
+    relativeLeft=relativeRight=false;
     // Done
     return res;
 }
@@ -794,7 +795,7 @@ void Xbox360Peripheral::PadConnect(void)
 			getProperty("IOCFPlugInTypes"),
             OSNumber::withNumber((unsigned long long)65535, 32),
         };
-        OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]), 0);
+        OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]));
 		if (padHandler->init(dictionary))
 		{
 			padHandler->attach(this);

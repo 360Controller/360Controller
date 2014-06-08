@@ -76,7 +76,7 @@ IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descri
     IOBufferMemoryDescriptor *buffer;
     
     buffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,sizeof(HID_360::ReportDescriptor));
-    if(buffer==NULL) return kIOReturnNoResources;
+    if (buffer == NULL) return kIOReturnNoResources;
     buffer->writeBytes(0,HID_360::ReportDescriptor,sizeof(HID_360::ReportDescriptor));
     *descriptor=buffer;
     return kIOReturnSuccess;
@@ -90,7 +90,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
     report->readBytes(0,data,2);
     switch(data[0]) {
         case 0x00:  // Set force feedback
-            if((data[1]!=report->getLength())||(data[1]!=0x04)) return kIOReturnUnsupported;
+            if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
 		{
 			XBOX360_OUT_RUMBLE rumble;
 			
@@ -99,7 +99,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
 			rumble.big=data[0];
 			rumble.little=data[1];
 			GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
-//			IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
+			// IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
 		}
             return kIOReturnSuccess;
         case 0x01:  // Set LEDs
@@ -111,7 +111,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
 			Xbox360_Prepare(led,outLed);
 			led.pattern=data[0];
 			GetOwner(this)->QueueWrite(&led,sizeof(led));
-//			IOLog("Set LED: %d\n", led.pattern);
+			// IOLog("Set LED: %d\n", led.pattern);
 		}
             return kIOReturnSuccess;
         default:
@@ -134,11 +134,11 @@ OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) c
     char buf[1024];
     const char *string;
     
-    err = GetOwnerProvider(this)->GetStringDescriptor(index,buf,sizeof(buf));
+    err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
     if(err==kIOReturnSuccess) string=buf;
     else {
-        if(def==NULL) string="Unknown";
-        else string=def;
+        if(def == NULL) string = "Unknown";
+        else string = def;
     }
     return OSString::withCString(string);
 }
@@ -165,7 +165,13 @@ OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 
 OSString* Xbox360ControllerClass::newProductString() const
 {
-    return getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+    if (retString->isEqualTo("Controller")) {
+        retString->release();
+        return OSString::withCString("Xbox 360 Wired Controller");
+    } else {
+        return retString;
+    }
 }
 
 OSString* Xbox360ControllerClass::newSerialNumberString() const
