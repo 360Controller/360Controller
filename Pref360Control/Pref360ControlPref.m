@@ -32,7 +32,7 @@
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
-    if(target!=NULL) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
+    if (target) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
 }
 
 // Handle callback for when our device is connected or disconnected. Both events are
@@ -40,17 +40,38 @@ static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sen
 static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     io_service_t object=0;
-    BOOL update;
+    BOOL update = NO;
     
-    update=NO;
-    while((object=IOIteratorNext(iterator))!=0) {
+    while ((object = IOIteratorNext(iterator))) {
         IOObjectRelease(object);
         update=YES;
     }
-    if(update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
+    
+    if (update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
 }
 
 @implementation Pref360ControlPref
+{
+    // Internal info
+    NSMutableArray *deviceArray;
+    IOHIDElementCookie axis[6],buttons[15];
+    
+    IOHIDDeviceInterface122 **device;
+    IOHIDQueueInterface **hidQueue;
+    FFDeviceObjectReference ffDevice;
+    io_registry_entry_t registryEntry;
+    
+    int largeMotor, smallMotor;
+    
+    IONotificationPortRef notifyPort;
+    CFRunLoopSourceRef notifySource;
+    io_iterator_t onIteratorWired, offIteratorWired;
+    io_iterator_t onIteratorWireless, offIteratorWireless;
+    
+    FFEFFECT *effect;
+    FFCUSTOMFORCE *customforce;
+    FFEffectObjectReference effectRef;
+}
 @synthesize centreButtons;
 @synthesize deviceList;
 @synthesize digiStick;
@@ -80,7 +101,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFEFFESCAPE escape;
     unsigned char c;
     
-    if(ffDevice==0) return;
+    if (ffDevice == 0) return;
     c=ledIndex;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x02;
@@ -95,7 +116,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 - (void)testMotorsInit
 {
-    if(ffDevice == 0) return;
+    if (ffDevice == 0) return;
 
     FFCAPABILITIES capabs;
     FFDeviceGetForceFeedbackCapabilities(ffDevice, &capabs);
@@ -107,7 +128,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     LONG *c = calloc(2, sizeof(LONG));
     DWORD *a = calloc(2, sizeof(DWORD));
     LONG *d = calloc(2, sizeof(LONG));
-
 
     c[0] = 0;
     c[1] = 0;
@@ -138,7 +158,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 - (void)testMotorsCleanUp
 {
-    if(effectRef == NULL) return;
+    if (effectRef == NULL) return;
     FFDeviceReleaseEffect(ffDevice, effectRef);
     free(customforce->rglForceData);
     free(effect->rgdwAxes);
@@ -148,9 +168,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 - (void)testMotorsLarge:(unsigned char)large small:(unsigned char)small
 {
-    if(effectRef == NULL) return;
-    customforce->rglForceData[0] = (large*10000)/255;
-    customforce->rglForceData[1] = (small*10000)/255;
+    if (effectRef == NULL) return;
+    customforce->rglForceData[0] = (large * 10000) / 255;
+    customforce->rglForceData[1] = (small * 10000) / 255;
     FFEffectSetParameters(effectRef, effect, FFEP_TYPESPECIFICPARAMS);
     FFEffectStart(effectRef, 1, 0);
 }
@@ -162,25 +182,31 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         case 0:
             [leftStick setPositionX:value];
             break;
+            
         case 1:
             [leftStick setPositionY:value];
             break;
+            
         case 2:
             [rightStick setPositionX:value];
             break;
+            
         case 3:
             [rightStick setPositionY:value];
             break;
+            
         case 4:
             [leftTrigger setDoubleValue:value];
             largeMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
+            
         case 5:
             [rightTrigger setDoubleValue:value];
             smallMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
+            
         default:
             break;
     }
@@ -196,48 +222,63 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         case 0:
             [rightButtons setA:b];
             break;
+            
         case 1:
             [rightButtons setB:b];
             break;
+            
         case 2:
             [rightButtons setX:b];
             break;
+            
         case 3:
             [rightButtons setY:b];
             break;
+            
         case 4:
             [leftShoulder setPressed:b];
             break;
+            
         case 5:
             [rightShoulder setPressed:b];
             break;
+            
         case 6:
             [leftStick setPressed:b];
             break;
+            
         case 7:
             [rightStick setPressed:b];
             break;
+            
         case 8:
             [centreButtons setStart:b];
             break;
+            
         case 9:
             [centreButtons setBack:b];
             break;
+            
         case 10:
             [centreButtons setSpecific:b];
             break;
+            
         case 11:
             [digiStick setUp:b];
             break;
+            
         case 12:
             [digiStick setDown:b];
             break;
+            
         case 13:
             [digiStick setLeft:b];
             break;
+            
         case 14:
             [digiStick setRight:b];
             break;
+            
         default:
             break;
     }
@@ -251,23 +292,23 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     BOOL found;
     int i;
     
-    if(sender!=hidQueue) return;
-    while(result==kIOReturnSuccess) {
-        result=(*hidQueue)->getNextEvent(hidQueue,&event,zeroTime,0);
-        if(result!=kIOReturnSuccess) continue;
+    if (sender != hidQueue) return;
+    while (result == kIOReturnSuccess) {
+        result = (*hidQueue)->getNextEvent(hidQueue,&event,zeroTime,0);
+        if (result != kIOReturnSuccess) continue;
         // Check axis
-        for(i=0,found=FALSE;(i<6)&&(!found);i++) {
-            if(event.elementCookie==axis[i]) {
+        for (i = 0, found = NO; (i < 6) && !found; i++) {
+            if (event.elementCookie == axis[i]) {
                 [self axisChanged:i newValue:event.value];
-                found=YES;
+                found = YES;
             }
         }
-        if(found) continue;
+        if (found) continue;
         // Check buttons
-        for(i=0,found=FALSE;(i<15)&&(!found);i++) {
+        for (i = 0, found = NO; (i < 15) && !found; i++) {
             if(event.elementCookie==buttons[i]) {
                 [self buttonChanged:i newValue:event.value];
-                found=YES;
+                found = YES;
             }
         }
         if(found) continue;
@@ -291,10 +332,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Reset GUI components
 - (void)resetDisplay
 {
-    NSBundle *bundle;
-    
     [leftStick setPositionX:0 y:0];
-    [leftStick setPressed:NO];
+    leftStick.pressed = NO;
     [leftStick setDeadzone:0];
     [digiStick setUp:NO];
     [digiStick setDown:NO];
@@ -325,8 +364,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:NO];
     [powerOff setHidden:YES];
     // Hide battery icon
-    bundle = [NSBundle bundleForClass:[self class]];
-    [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:[bundle pathForImageResource:@"battNone"]]];
+    [batteryLevel setImage:nil];
 }
 
 // Stop using the HID device
@@ -336,7 +374,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self testMotorsLarge:0 small:0];
     [self testMotorsCleanUp];
     [self updateLED:0x00];
-    if(hidQueue!=NULL) {
+    if (hidQueue) {
         CFRunLoopSourceRef eventSource;
         
         (*hidQueue)->stop(hidQueue);
@@ -344,13 +382,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         if((eventSource!=NULL)&&CFRunLoopContainsSource(CFRunLoopGetCurrent(),eventSource,kCFRunLoopCommonModes))
             CFRunLoopRemoveSource(CFRunLoopGetCurrent(),eventSource,kCFRunLoopCommonModes);
         (*hidQueue)->Release(hidQueue);
-        hidQueue=NULL;
+        hidQueue = NULL;
     }
-    if(device!=NULL) {
+    if (device) {
         (*device)->close(device);
-        device=NULL;
+        device = NULL;
     }
-    registryEntry=0;
+    registryEntry = 0;
 }
 
 // Start using a HID device
@@ -369,7 +407,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self resetDisplay];
     i=(int)[deviceList indexOfSelectedItem];
     if(([deviceArray count]==0)||(i==-1)) {
-        NSLog(@"No devices found? :( device count==%i, i==%i",(int)[deviceArray count],i);
+        NSLog(@"No devices found? :( device count==%i, i==%i",(int)[deviceArray count], i);
         return;
     }
     {
@@ -481,7 +519,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     // Read existing properties
     {
-//        CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
+        // CFDictionaryRef dict=(CFDictionaryRef)IORegistryEntryCreateCFProperty(registryEntry,CFSTR("DeviceData"),NULL,0);
         CFDictionaryRef dict = (CFDictionaryRef)CFBridgingRetain(GetController(GetSerialNumber(registryEntry)));
         if(dict) {
             CFBooleanRef boolValue;
@@ -537,27 +575,25 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     smallMotor=0;
     // Battery level?
     {
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSString *path;
+        NSString *imageName = nil;
         CFTypeRef prop;
         
-        path = nil;
-        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice"))
-        {
+        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice")) {
             prop = IORegistryEntryCreateCFProperty(registryEntry, CFSTR("BatteryLevel"), NULL, 0);
-            if (prop != nil)
-            {
+            if (prop != nil) {
                 unsigned char level;
                 
                 if (CFNumberGetValue(prop, kCFNumberCharType, &level))
-                    path = [bundle pathForImageResource:[NSString stringWithFormat:@"batt%i", level / 64]];
+                    imageName = [NSString stringWithFormat:@"batt%i", level / 64];
                 CFRelease(prop);
             }
             [powerOff setHidden:NO];
         }
-        if (path == nil)
-            path = [bundle pathForImageResource:@"battNone"];
-        [batteryLevel setImage:[[NSImage alloc] initByReferencingFile:path]];
+        if (imageName) {
+            [batteryLevel setImage:[NSImage imageNamed:imageName]];
+        } else {
+            [batteryLevel setImage:nil];
+        }
     }
 }
 
@@ -626,7 +662,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray=[NSMutableArray arrayWithCapacity:1];
+    deviceArray=[[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -690,28 +726,19 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Handle changing a setting
 - (IBAction)changeSetting:(id)sender
 {
-    CFDictionaryRef dict;
-	const CFStringRef keys[8] = {CFSTR("InvertLeftX"), CFSTR("InvertLeftY"), CFSTR("InvertRightX"), CFSTR("InvertRightY"),
-	CFSTR("DeadzoneLeft"), CFSTR("DeadzoneRight"), CFSTR("RelativeLeft"), CFSTR("RelativeRight")};
-    CFTypeRef values[8];
-    UInt16 i;
-    
-    // Set keys and values
-    values[0]=([leftStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[1]=([leftStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[2]=([rightStickInvertX state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[3]=([rightStickInvertY state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    i=[leftStickDeadzone doubleValue];
-    values[4]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    i=[rightStickDeadzone doubleValue];
-    values[5]=CFNumberCreate(NULL,kCFNumberShortType,&i);
-    values[6]=([leftLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
-    values[7]=([rightLinked state]==NSOnState)?kCFBooleanTrue:kCFBooleanFalse;
     // Create dictionary
-    dict=CFDictionaryCreate(NULL,(const void**)keys,(const void**)values,sizeof(keys)/sizeof(keys[0]),&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);
+    NSDictionary *dict = @{@"InvertLeftX": ([leftStickInvertX state]==NSOnState) ? @YES : @NO,
+                           @"InvertLeftY": ([leftStickInvertY state]==NSOnState) ? @YES : @NO,
+                           @"InvertRightX": ([rightStickInvertX state]==NSOnState) ? @YES : @NO,
+                           @"InvertRightY": ([rightStickInvertY state]==NSOnState) ? @YES : @NO,
+                           @"DeadzoneLeft": @((UInt16)[leftStickDeadzone doubleValue]),
+                           @"DeadzoneRight": @((UInt16)[rightStickDeadzone doubleValue]),
+                           @"RelativeLeft": ([leftLinked state]==NSOnState) ? @YES : @NO,
+                           @"RelativeRight":([rightLinked state]==NSOnState) ? @YES : @NO};
+    
     // Set property
-    IORegistryEntrySetCFProperties(registryEntry, dict);
-    SetController(GetSerialNumber(registryEntry), (__bridge NSDictionary*)dict);
+    IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
+    SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
     [leftStick setLinked:([leftLinked state]==NSOnState)];
     [leftStick setDeadzone:[leftStickDeadzone doubleValue]];
@@ -736,7 +763,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     FFEFFESCAPE escape;
     
-    if(ffDevice==0) return;
+    if (ffDevice == 0) return;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
     escape.cbInBuffer=0;

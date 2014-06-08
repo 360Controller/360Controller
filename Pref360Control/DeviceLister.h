@@ -25,14 +25,6 @@
 @class Pref360ControlPref;
 
 @interface DeviceLister : NSObject <NSTableViewDataSource>
-{
-    Pref360ControlPref *owner;
-    
-    NSMutableDictionary *entries;
-    NSMutableArray *connected, *enabled;
-    
-    BOOL changed;
-}
 @property (weak) IBOutlet NSWindow *sheet;
 @property (weak) IBOutlet NSTableView *list;
 

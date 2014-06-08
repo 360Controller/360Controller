@@ -29,36 +29,15 @@
 #include <IOKit/hid/IOHIDKeys.h>
 #include <ForceFeedback/ForceFeedback.h>
 
-#include "MyCentreButtons.h"
-#include "MyDigitalStick.h"
-#include "MyAnalogStick.h"
-#include "MyMainButtons.h"
-#include "MyShoulderButton.h"
+#import "MyCentreButtons.h"
+#import "MyDigitalStick.h"
+#import "MyAnalogStick.h"
+#import "MyMainButtons.h"
+#import "MyShoulderButton.h"
 
 @class DeviceLister;
 
 @interface Pref360ControlPref : NSPreferencePane 
-{
-    // Internal info
-    NSMutableArray *deviceArray;
-    IOHIDElementCookie axis[6],buttons[15];
-    
-    IOHIDDeviceInterface122 **device;
-    IOHIDQueueInterface **hidQueue;
-    FFDeviceObjectReference ffDevice;
-    io_registry_entry_t registryEntry;
-    
-    int largeMotor,smallMotor;
-    
-    IONotificationPortRef notifyPort;
-    CFRunLoopSourceRef notifySource;
-    io_iterator_t onIteratorWired, offIteratorWired;
-    io_iterator_t onIteratorWireless, offIteratorWireless;
-
-    FFEFFECT *effect;
-    FFCUSTOMFORCE *customforce;
-    FFEffectObjectReference effectRef;
-}
 // Window components
 @property (weak) IBOutlet MyCentreButtons *centreButtons;
 @property (weak) IBOutlet NSPopUpButton *deviceList;

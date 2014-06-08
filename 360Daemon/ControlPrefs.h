@@ -29,8 +29,8 @@
 #define D_KNOWNDEV      @"KnownDevices"
 
 // Daemon's own settings
-void SetAlertDisabled(int index);
-BOOL AlertDisabled(int index);
+void SetAlertDisabled(NSInteger index);
+BOOL AlertDisabled(NSInteger index);
 
 // Controller settings
 void SetController(NSString *serial, NSDictionary *data);
@@ -38,7 +38,7 @@ NSDictionary* GetController(NSString *serial);
 
 // Configuration settings
 void SetKnownDevices(NSDictionary *devices);
-NSDictionary* GetKnownDevices(void);
+NSDictionary* GetKnownDevices();
 
 // Utility functions
 NSString* GetSerialNumber(io_service_t device);
