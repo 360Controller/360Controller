@@ -761,15 +761,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 - (IBAction)powerOff:(id)sender
 {
-    FFEFFESCAPE escape;
+    FFEFFESCAPE escape = {0};
     
     if (ffDevice == 0) return;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
-    escape.cbInBuffer=0;
-    escape.lpvInBuffer=NULL;
-    escape.cbOutBuffer=0;
-    escape.lpvOutBuffer=NULL;
     FFDeviceEscape(ffDevice,&escape);
 }
 
