@@ -2,56 +2,14 @@
 mkdir -p build
 zip -r build/360ControllerSource.zip * -x "build*"
 
-cd Feedback360
-xcrun xcodebuild -configuration Deployment
+xcrun xcodebuild -configuration Release -target "Whole Driver"
 if [ $? -ne 0 ]
   then
     echo "******** BUILD FAILED ********"
     exit 1
 fi
-cd ../DriverTool
-xcrun xcodebuild -configuration Release
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../360Controller
-xcrun xcodebuild -configuration Deployment
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../360Daemon
-xcrun xcodebuild -configuration Release
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../WirelessGamingReceiver
-xcrun xcodebuild -configuration Release
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../Wireless360Controller
-xcrun xcodebuild -configuration Release
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../Pref360Control
-xcrun xcodebuild -configuration Deployment 
-if [ $? -ne 0 ]
-  then
-    echo "******** BUILD FAILED ********"
-    exit 1
-fi
-cd ../Install360Controller
+
+cd Install360Controller
 packagesbuild -v Install360Controller.pkgproj
 mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -format UDZO ../build/360ControllerInstall.dmg
