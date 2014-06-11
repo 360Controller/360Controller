@@ -88,9 +88,9 @@ Feedback360::~Feedback360()
 
 HRESULT Feedback360::QueryInterface(REFIID iid, LPVOID *ppv)
 {
-    CFUUIDRef interface;
-    interface = CFUUIDCreateFromUUIDBytes(NULL,iid);
-    if(CFEqual(interface,kIOForceFeedbackDeviceInterfaceID))
+    CFUUIDRef interface = CFUUIDCreateFromUUIDBytes(kCFAllocatorDefault, iid);
+
+    if(CFEqual(interface, kIOForceFeedbackDeviceInterfaceID))
         *ppv = &this->iIOForceFeedbackDeviceInterface;
     // IUnknown || IOCFPlugInInterface
     else if(CFEqual(interface, IUnknownUUID) || CFEqual(interface, kIOCFPlugInInterfaceID))
@@ -128,7 +128,7 @@ ULONG Feedback360::Release()
 
 IOCFPlugInInterface** Feedback360::Alloc(void)
 {
-    Feedback360 *me = new Feedback360;
+    Feedback360 *me = new Feedback360();
     if (!me) {
         return NULL;
     }
