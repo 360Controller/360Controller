@@ -39,12 +39,12 @@ static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sen
 // actually handled identically.
 static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
-    io_service_t object=0;
+    io_service_t object = 0;
     BOOL update = NO;
     
     while ((object = IOIteratorNext(iterator))) {
         IOObjectRelease(object);
-        update=YES;
+        update = YES;
     }
     
     if (update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
@@ -490,26 +490,26 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     // Create event source
-    ret=(*hidQueue)->createAsyncEventSource(hidQueue,&eventSource);
+    ret=(*hidQueue)->createAsyncEventSource(hidQueue, &eventSource);
     if(ret!=kIOReturnSuccess) {
         NSLog(@"Unable to create async event source");
         // Error?
         return;
     }
     // Set callback
-    ret=(*hidQueue)->setEventCallout(hidQueue,CallbackFunction,(__bridge void *)(self),NULL);
+    ret=(*hidQueue)->setEventCallout(hidQueue, CallbackFunction, (__bridge void *)(self), NULL);
     if(ret!=kIOReturnSuccess) {
         NSLog(@"Unable to set event callback");
         // Error?
         return;
     }
     // Add to runloop
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),eventSource,kCFRunLoopCommonModes);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), eventSource, kCFRunLoopCommonModes);
     // Add some elements
     for(i=0;i<6;i++)
-        (*hidQueue)->addElement(hidQueue,axis[i],0);
+        (*hidQueue)->addElement(hidQueue, axis[i], 0);
     for(i=0;i<15;i++)
-        (*hidQueue)->addElement(hidQueue,buttons[i],0);
+        (*hidQueue)->addElement(hidQueue, buttons[i], 0);
     // Start
     ret=(*hidQueue)->start(hidQueue);
     if(ret!=kIOReturnSuccess) {
@@ -660,7 +660,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Set up notification of USB device addition/removal
     notifyPort=IONotificationPortCreate(masterPort);
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
-    CFRunLoopAddSource(CFRunLoopGetCurrent(),notifySource,kCFRunLoopCommonModes);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
     deviceArray=[[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
