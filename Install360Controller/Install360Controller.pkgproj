@@ -64,46 +64,13 @@
 															<key>GID</key>
 															<integer>80</integer>
 															<key>PATH</key>
-															<string>../360Daemon/build/Release/360Daemon</string>
+															<string>../build/Release/360Daemon.app</string>
 															<key>PATH_TYPE</key>
 															<integer>1</integer>
 															<key>PERMISSIONS</key>
 															<integer>493</integer>
 															<key>TYPE</key>
 															<integer>3</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-														<dict>
-															<key>CHILDREN</key>
-															<array>
-																<dict>
-																	<key>CHILDREN</key>
-																	<array/>
-																	<key>GID</key>
-																	<integer>80</integer>
-																	<key>PATH</key>
-																	<string>../360Daemon/Alert.tif</string>
-																	<key>PATH_TYPE</key>
-																	<integer>1</integer>
-																	<key>PERMISSIONS</key>
-																	<integer>420</integer>
-																	<key>TYPE</key>
-																	<integer>3</integer>
-																	<key>UID</key>
-																	<integer>0</integer>
-																</dict>
-															</array>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>Resources</string>
-															<key>PATH_TYPE</key>
-															<integer>0</integer>
-															<key>PERMISSIONS</key>
-															<integer>493</integer>
-															<key>TYPE</key>
-															<integer>2</integer>
 															<key>UID</key>
 															<integer>0</integer>
 														</dict>
@@ -162,6 +129,71 @@
 									<integer>493</integer>
 									<key>TYPE</key>
 									<integer>1</integer>
+									<key>UID</key>
+									<integer>0</integer>
+								</dict>
+								<dict>
+									<key>CHILDREN</key>
+									<array>
+										<dict>
+											<key>CHILDREN</key>
+											<array/>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>PATH</key>
+											<string>../build/Release/360Controller.kext</string>
+											<key>PATH_TYPE</key>
+											<integer>1</integer>
+											<key>PERMISSIONS</key>
+											<integer>493</integer>
+											<key>TYPE</key>
+											<integer>3</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+										<dict>
+											<key>CHILDREN</key>
+											<array/>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>PATH</key>
+											<string>../build/Release/Wireless360Controller.kext</string>
+											<key>PATH_TYPE</key>
+											<integer>1</integer>
+											<key>PERMISSIONS</key>
+											<integer>493</integer>
+											<key>TYPE</key>
+											<integer>3</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+										<dict>
+											<key>CHILDREN</key>
+											<array/>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>PATH</key>
+											<string>../build/Release/WirelessGamingReceiver.kext</string>
+											<key>PATH_TYPE</key>
+											<integer>1</integer>
+											<key>PERMISSIONS</key>
+											<integer>493</integer>
+											<key>TYPE</key>
+											<integer>3</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+									</array>
+									<key>GID</key>
+									<integer>0</integer>
+									<key>PATH</key>
+									<string>Extensions</string>
+									<key>PATH_TYPE</key>
+									<integer>0</integer>
+									<key>PERMISSIONS</key>
+									<integer>493</integer>
+									<key>TYPE</key>
+									<integer>2</integer>
 									<key>UID</key>
 									<integer>0</integer>
 								</dict>
@@ -287,7 +319,7 @@
 											<key>GID</key>
 											<integer>0</integer>
 											<key>PATH</key>
-											<string>../Pref360Control/build/Deployment/Pref360Control.prefPane</string>
+											<string>../build/Release/Pref360Control.prefPane</string>
 											<key>PATH_TYPE</key>
 											<integer>1</integer>
 											<key>PERMISSIONS</key>
@@ -477,58 +509,7 @@
 									<array>
 										<dict>
 											<key>CHILDREN</key>
-											<array>
-												<dict>
-													<key>BUNDLE_CAN_DOWNGRADE</key>
-													<true/>
-													<key>CHILDREN</key>
-													<array/>
-													<key>GID</key>
-													<integer>0</integer>
-													<key>PATH</key>
-													<string>../360Controller/build/Deployment/360Controller.kext</string>
-													<key>PATH_TYPE</key>
-													<integer>1</integer>
-													<key>PERMISSIONS</key>
-													<integer>493</integer>
-													<key>TYPE</key>
-													<integer>3</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-												<dict>
-													<key>CHILDREN</key>
-													<array/>
-													<key>GID</key>
-													<integer>0</integer>
-													<key>PATH</key>
-													<string>../Wireless360Controller/build/Release/Wireless360Controller.kext</string>
-													<key>PATH_TYPE</key>
-													<integer>1</integer>
-													<key>PERMISSIONS</key>
-													<integer>493</integer>
-													<key>TYPE</key>
-													<integer>3</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-												<dict>
-													<key>CHILDREN</key>
-													<array/>
-													<key>GID</key>
-													<integer>0</integer>
-													<key>PATH</key>
-													<string>../WirelessGamingReceiver/build/Release/WirelessGamingReceiver.kext</string>
-													<key>PATH_TYPE</key>
-													<integer>1</integer>
-													<key>PERMISSIONS</key>
-													<integer>493</integer>
-													<key>TYPE</key>
-													<integer>3</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-											</array>
+											<array/>
 											<key>GID</key>
 											<integer>0</integer>
 											<key>PATH</key>
@@ -654,7 +635,7 @@
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
 				<key>VERSION</key>
-				<string>0.13</string>
+				<string>0.14</string>
 			</dict>
 			<key>UUID</key>
 			<string>95C3DB03-4C99-4A29-AEC7-C73B3D9F6A04</string>

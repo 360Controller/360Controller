@@ -32,11 +32,6 @@
 		55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
 		55B13FC218C51F0600ACD9AC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FC118C51F0600ACD9AC /* Media.xcassets */; };
 		55B13FC318C51F0600ACD9AC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B13FC118C51F0600ACD9AC /* Media.xcassets */; };
-		55B44CF81948C9810007E68D /* 360Controller.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6370718C1057100CE933D /* 360Controller.kext */; };
-		55B44CF91948C9810007E68D /* Wireless360Controller.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637E818C10D5000CE933D /* Wireless360Controller.kext */; };
-		55B44CFA1948C9810007E68D /* WirelessGamingReceiver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */; };
-		55B44CFC1948C9B20007E68D /* 360Daemon.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B636B418C104DB00CE933D /* 360Daemon.app */; };
-		55B44CFE1948C9D40007E68D /* com.mice.360Daemon.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55B637CD18C10CB400CE933D /* com.mice.360Daemon.plist */; };
 		55B636B818C104DB00CE933D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
 		55B636C218C104DB00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636C018C104DB00CE933D /* InfoPlist.strings */; };
 		55B6371618C1058E00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B636F918C1054F00CE933D /* InfoPlist.strings */; };
@@ -83,6 +78,7 @@
 		55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A918C10C0C00CE933D /* Pref360ControlPref.m */; };
 		55B637BE18C10C2400CE933D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BA18C10C2400CE933D /* Images.xcassets */; };
 		55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BC18C10C2400CE933D /* pref360controlpref.tiff */; };
+		55B637C418C10C5E00CE933D /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 55B6376018C10A3200CE933D /* DriverTool */; };
 		55B637D318C10CB400CE933D /* Alert.tif in Resources */ = {isa = PBXBuildFile; fileRef = 55B637CC18C10CB400CE933D /* Alert.tif */; };
 		55B637D518C10CB400CE933D /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637CF18C10CB400CE933D /* ControlPrefs.m */; };
 		55B637DD18C10CCC00CE933D /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637CF18C10CB400CE933D /* ControlPrefs.m */; };
@@ -157,34 +153,6 @@
 			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
 			remoteInfo = WirelessGamingReceiver;
 		};
-		55B83C671948D4EB0009AAC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55B636B318C104DB00CE933D;
-			remoteInfo = 360Daemon;
-		};
-		55B83C691948D4EB0009AAC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55B6370618C1057100CE933D;
-			remoteInfo = 360Controller;
-		};
-		55B83C6B1948D4EB0009AAC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55B637E718C10D5000CE933D;
-			remoteInfo = Wireless360Controller;
-		};
-		55B83C6D1948D4EB0009AAC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
-			remoteInfo = WirelessGamingReceiver;
-		};
 		55DA7C6C1926BED3002F6A3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
@@ -204,38 +172,6 @@
 				55A2B8DD18C11A2F006829A2 /* com.mice.360Daemon.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
-		};
-		55B44CF71948C9670007E68D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = root/Library/Extensions;
-			dstSubfolderSpec = 7;
-			files = (
-				55B44CF81948C9810007E68D /* 360Controller.kext in CopyFiles */,
-				55B44CF91948C9810007E68D /* Wireless360Controller.kext in CopyFiles */,
-				55B44CFA1948C9810007E68D /* WirelessGamingReceiver.kext in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55B44CFB1948C9A20007E68D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "root/Library/Application Support";
-			dstSubfolderSpec = 7;
-			files = (
-				55B44CFC1948C9B20007E68D /* 360Daemon.app in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55B44CFD1948C9B60007E68D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = root/Library/LaunchDaemons;
-			dstSubfolderSpec = 7;
-			files = (
-				55B44CFE1948C9D40007E68D /* com.mice.360Daemon.plist in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		55B6375618C1099700CE933D /* Copy PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -792,17 +728,10 @@
 				55B6377818C10B0B00CE933D /* Frameworks */,
 				55B6377918C10B0B00CE933D /* Headers */,
 				55B6377A18C10B0B00CE933D /* Resources */,
-				55B44CF71948C9670007E68D /* CopyFiles */,
-				55B44CFB1948C9A20007E68D /* CopyFiles */,
-				55B44CFD1948C9B60007E68D /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				55B83C681948D4EB0009AAC7 /* PBXTargetDependency */,
-				55B83C6A1948D4EB0009AAC7 /* PBXTargetDependency */,
-				55B83C6C1948D4EB0009AAC7 /* PBXTargetDependency */,
-				55B83C6E1948D4EB0009AAC7 /* PBXTargetDependency */,
 				55B637C318C10C5600CE933D /* PBXTargetDependency */,
 			);
 			name = Pref360Control;
@@ -938,6 +867,7 @@
 				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
 				55B6379718C10B8700CE933D /* Pref360ControlPref.xib in Resources */,
 				55B13FC318C51F0600ACD9AC /* Media.xcassets in Resources */,
+				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,26 +1019,6 @@
 			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
 			targetProxy = 55B6384418C10FA200CE933D /* PBXContainerItemProxy */;
 		};
-		55B83C681948D4EB0009AAC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55B636B318C104DB00CE933D /* 360Daemon */;
-			targetProxy = 55B83C671948D4EB0009AAC7 /* PBXContainerItemProxy */;
-		};
-		55B83C6A1948D4EB0009AAC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55B6370618C1057100CE933D /* 360Controller */;
-			targetProxy = 55B83C691948D4EB0009AAC7 /* PBXContainerItemProxy */;
-		};
-		55B83C6C1948D4EB0009AAC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55B637E718C10D5000CE933D /* Wireless360Controller */;
-			targetProxy = 55B83C6B1948D4EB0009AAC7 /* PBXContainerItemProxy */;
-		};
-		55B83C6E1948D4EB0009AAC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
-			targetProxy = 55B83C6D1948D4EB0009AAC7 /* PBXContainerItemProxy */;
-		};
 		55DA7C6D1926BED3002F6A3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55B6371E18C108A500CE933D /* Feedback360 */;
@@ -1232,7 +1142,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wno-deprecated-register";
@@ -1271,7 +1180,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wno-deprecated-register";
@@ -1337,6 +1245,7 @@
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
@@ -1350,6 +1259,7 @@
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
@@ -1363,6 +1273,7 @@
 				INFOPLIST_FILE = DriverTool/Info.plist;
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1376,6 +1287,7 @@
 				INFOPLIST_FILE = DriverTool/Info.plist;
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1392,7 +1304,6 @@
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
@@ -1411,7 +1322,6 @@
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;
