@@ -24,22 +24,19 @@
 
 void SetAlertDisabled(NSInteger index)
 {
-    NSString *prop;
+    NSString *prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     NSNumber *value = @YES;
 
-    prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     CFPreferencesSetValue((__bridge CFStringRef)prop, (__bridge CFPropertyListRef)(value), DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
 BOOL AlertDisabled(NSInteger index)
 {
-    NSString *prop;
+    NSString *prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
     BOOL result = NO;
-    CFPropertyListRef value;
+    CFPropertyListRef value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     
-    prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
-    value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     if (value != NULL) {
         result = [CFBridgingRelease(value) boolValue];
     }
@@ -63,9 +60,7 @@ NSDictionary* GetController(NSString *serial)
 
 NSString* GetSerialNumber(io_service_t device)
 {
-    CFTypeRef value;
-    
-    value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("USB Serial Number"), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("USB Serial Number"), kCFAllocatorDefault, kIORegistryIterateRecursively);
     if (value == NULL)
         value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("SerialNumber"), kCFAllocatorDefault, kIORegistryIterateRecursively);
     return CFBridgingRelease(value);

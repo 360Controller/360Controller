@@ -28,7 +28,7 @@ bool Device_Initialise(DeviceLink *link,io_object_t device)
 {
     IOCFPlugInInterface **plugInInterface = NULL;
     SInt32 score = 0;
-    IOReturn ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+    IOReturn ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
 	
     if (ret!=kIOReturnSuccess) return false;
     ret=(*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121), (LPVOID*)(&link->interface));
