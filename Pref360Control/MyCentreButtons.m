@@ -30,9 +30,9 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]) != nil) {
-        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -64,8 +64,7 @@
     if(down) {
         [path fill];
         colour = [NSColor whiteColor];
-    } else
-        [path stroke];
+    } else [path stroke];
     // Draw text
     attributes = @{NSForegroundColorAttributeName: colour};
     size = [button sizeWithAttributes:attributes];
@@ -76,9 +75,8 @@
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area,button;
-    
-    area=[self bounds];
+    NSRect area = [self bounds],button;
+
     button.size.height=area.size.height/2;
     button.size.width=area.size.width/4;
     button.origin.x=area.origin.x;

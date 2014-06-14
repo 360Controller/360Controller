@@ -68,10 +68,10 @@
     if ((self = [super initWithFrame:frameRect]) != nil) {
         NSRect rect = [self bounds], triangle;
         
-        [self addObserver:self forKeyPath:@"up" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"down" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"up" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"down" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew context:NULL];
         
         triangle.origin.x = INSET_AMOUNT;
         triangle.origin.y = INSET_AMOUNT;
@@ -111,16 +111,13 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds];
+    
     NSDrawLightBezel(area,area);
     [[NSColor blackColor] set];
-    if (bUp)
-		[up fill];
-    if (bDown)
-		[down fill];
-    if (bLeft)
-		[left fill];
-    if (bRight)
-		[right fill];
+    if (bUp) [up fill];
+    if (bDown) [down fill];
+    if (bLeft) [left fill];
+    if (bRight) [right fill];
 }
 
 @end

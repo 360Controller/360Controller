@@ -41,7 +41,7 @@ static id GetDeviceValue(io_service_t device, NSString *key)
 static NSString* SanitiseName(NSString *name)
 {
     NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
-    int i;
+    NSInteger i;
     
     for (i = 0; i < [name length]; i++) {
         unichar c = [name characterAtIndex:i];
@@ -51,7 +51,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return [NSString stringWithString:output];
+    return [[NSString alloc] initWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -148,8 +148,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                         (ControllerInterfaces[interfaceNum].classNum == classNum) &&
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
-                        (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount)
-                        )
+                        (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount))
                     {
                         // Found another interface in the right place
                         interfaceCount++;
@@ -503,7 +502,8 @@ fail:
         BOOL contains = [enabled containsObject:key];
         if ([(NSNumber*)anObject boolValue])
         {
-            if (!contains) {
+            if (!contains)
+            {
                 [enabled addObject:key];
                 self.changed = YES;
             }

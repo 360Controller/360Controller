@@ -87,12 +87,13 @@ static void ShowAlert(NSInteger index)
     
     if (AlertDisabled(index))
         return;
-    
-    if (activeAlert != nil) {
+
+    if (activeAlert != nil)
+    {
         CFUserNotificationCancel(activeAlert);
         releaseAlert();
     }
-    
+
     activeAlertIndex = index;
     activeAlert = CFUserNotificationCreate(kCFAllocatorDefault, 0, kCFUserNotificationPlainAlertLevel, &error, (__bridge CFDictionaryRef)dictionary);
     activeAlertSource = CFUserNotificationCreateRunLoopSource(kCFAllocatorDefault, activeAlert, callbackAlert, 0);
@@ -155,7 +156,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                 FFEFFESCAPE escape = {0};
                 unsigned char c;
                 int i;
-                
+    
                 c = 0x0a;
                 if (serialNumber != nil)
                 {
@@ -167,7 +168,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                             if ([leds serialNumberAtLEDIsBlank:i]) {
                                 [leds setLED:i toSerialNumber:serialNumber];
                                 // NSLog(@"Added controller with LED %i", i);
-							}
+                            }
                             break;
                         }
                     }

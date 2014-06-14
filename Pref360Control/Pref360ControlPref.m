@@ -662,7 +662,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray=[[NSMutableArray alloc] initWithCapacity:1];
+    deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -727,14 +727,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)changeSetting:(id)sender
 {
     // Create dictionary
-    NSDictionary *dict = @{@"InvertLeftX": ([leftStickInvertX state]==NSOnState) ? @YES : @NO,
-                           @"InvertLeftY": ([leftStickInvertY state]==NSOnState) ? @YES : @NO,
-                           @"InvertRightX": ([rightStickInvertX state]==NSOnState) ? @YES : @NO,
-                           @"InvertRightY": ([rightStickInvertY state]==NSOnState) ? @YES : @NO,
+    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([leftStickInvertX state]==NSOnState)),
+                           @"InvertLeftY": @((BOOL)([leftStickInvertY state]==NSOnState)),
+                           @"InvertRightX": @((BOOL)([rightStickInvertX state]==NSOnState)),
+                           @"InvertRightY": @((BOOL)([rightStickInvertY state]==NSOnState)),
                            @"DeadzoneLeft": @((UInt16)[leftStickDeadzone doubleValue]),
                            @"DeadzoneRight": @((UInt16)[rightStickDeadzone doubleValue]),
-                           @"RelativeLeft": ([leftLinked state]==NSOnState) ? @YES : @NO,
-                           @"RelativeRight":([rightLinked state]==NSOnState) ? @YES : @NO};
+                           @"RelativeLeft": @((BOOL)([leftLinked state]==NSOnState)),
+                           @"RelativeRight": @((BOOL)([rightLinked state]==NSOnState))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
