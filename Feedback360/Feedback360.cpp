@@ -419,7 +419,6 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
 
     dispatch_sync(Queue, ^{
         switch (state) {
-
             case FFSFFC_RESET:
                 EffectList.clear();
                 Stopped = true;
@@ -611,7 +610,8 @@ HRESULT Feedback360::GetEffectStatus(FFEffectDownloadID EffectHandle, FFEffectSt
     dispatch_sync(Queue, ^{
         for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
         {
-            if (effectIterator->Handle == EffectHandle) {
+            if (effectIterator->Handle == EffectHandle)
+            {
                 *Status = effectIterator->Status;
                 break;
             }

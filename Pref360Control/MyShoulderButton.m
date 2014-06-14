@@ -30,7 +30,7 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]) != nil) {
-        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -50,6 +50,7 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds];
+    
     NSDrawLightBezel(area, area);
     if (pressed) {
         area.origin.x += INSET_AMOUNT;

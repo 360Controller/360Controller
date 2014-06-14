@@ -144,7 +144,7 @@ fail:
 void WirelessHIDDevice::handleStop(IOService *provider)
 {
     WirelessDevice *device = OSDynamicCast(WirelessDevice, provider);
-    
+
     if (device != NULL)
         device->RegisterWatcher(NULL, NULL, NULL);
 

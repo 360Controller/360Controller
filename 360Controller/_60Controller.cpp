@@ -57,10 +57,8 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
     
-    if(ed==NULL)
-        return 0;
-    else
-        return ed->wMaxPacketSize;
+    if(ed==NULL) return 0;
+    else return ed->wMaxPacketSize;
 }
 
 void Xbox360Peripheral::SendSpecial(UInt16 value)

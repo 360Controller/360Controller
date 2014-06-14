@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Pref360ControlPref">
@@ -317,12 +317,12 @@ Please consider donating if you enjoy this driver!</string>
                             <constraint firstAttribute="width" constant="32" id="1S3-ss-4Tr"/>
                             <constraint firstAttribute="height" constant="24" id="nmz-Rj-TnQ"/>
                         </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="battNone" id="193"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="193"/>
                     </imageView>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
                         <rect key="frame" x="23" y="40" width="21" height="166"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="195"/>
+                        <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
                         <connections>
                             <action selector="changeSetting:" target="-2" id="196"/>
                         </connections>
@@ -549,6 +549,5 @@ A restart will be required for changes to take effect.</string>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="8" height="8"/>
-        <image name="battNone" width="32" height="24"/>
     </resources>
 </document>

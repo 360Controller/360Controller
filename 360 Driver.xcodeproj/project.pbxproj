@@ -187,8 +187,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		55750C07190AFB5B0047FF41 /* DaemonLEDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaemonLEDs.h; sourceTree = "<group>"; };
-		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; };
+		55750C07190AFB5B0047FF41 /* DaemonLEDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaemonLEDs.h; sourceTree = "<group>"; usesTabs = 1; };
+		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; usesTabs = 1; };
 		55852E2018D6B5580009BF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55B13FC018C51DD400ACD9AC /* Feedback360.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = Feedback360.exp; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		55B636F118C1054F00CE933D /* ChatPad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; };
 		55B636F218C1054F00CE933D /* ChatPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; };
 		55B636F318C1054F00CE933D /* chatpadhid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; };
-		55B636F418C1054F00CE933D /* chatpadkeys.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; };
+		55B636F418C1054F00CE933D /* chatpadkeys.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; usesTabs = 1; };
 		55B636F518C1054F00CE933D /* chatpadkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; };
 		55B636F618C1054F00CE933D /* Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
 		55B636F718C1054F00CE933D /* Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };

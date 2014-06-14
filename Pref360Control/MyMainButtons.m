@@ -30,10 +30,10 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]) != nil) {
-        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -55,27 +55,24 @@
 
 - (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
 {
-    NSBezierPath *path;
+    NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:rect];
     NSSize size;
     NSDictionary *attributes;
     NSPoint point;
-    NSColor *colour;
-    NSRect bling;
+    NSColor *colour = [NSColor blackColor];
+    NSRect bling = rect;
     
     // Draw circle
-    path=[NSBezierPath bezierPathWithOvalInRect:rect];
     if(down) {
         [path fill];
     } else {
         [path stroke];
     }
-    colour=[NSColor blackColor];
-    bling=rect;
     bling.origin.x-=1;
     bling.origin.y-=1;
     bling.size.width+=2;
     bling.size.height+=2;
-    path=[NSBezierPath bezierPathWithOvalInRect:bling];
+    path = [NSBezierPath bezierPathWithOvalInRect:bling];
     [colour set];
     [path stroke];
     // Draw text
@@ -88,9 +85,8 @@
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area,bit;
+    NSRect area = [self bounds], bit;
     
-    area=[self bounds];
     bit.size.width=area.size.width/3;
     bit.size.height=area.size.height/3;
     bit.origin.x=area.origin.x+bit.size.width;
