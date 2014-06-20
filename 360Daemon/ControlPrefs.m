@@ -37,7 +37,8 @@ BOOL AlertDisabled(NSInteger index)
     BOOL result = NO;
     CFPropertyListRef value = CFPreferencesCopyValue((__bridge CFStringRef)prop, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     
-    if (value != NULL) {
+    if (value != NULL)
+    {
         result = [CFBridgingRelease(value) boolValue];
     }
     return result;
@@ -61,6 +62,7 @@ NSDictionary* GetController(NSString *serial)
 NSString* GetSerialNumber(io_service_t device)
 {
     CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("USB Serial Number"), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    
     if (value == NULL)
         value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, CFSTR("SerialNumber"), kCFAllocatorDefault, kIORegistryIterateRecursively);
     return CFBridgingRelease(value);
@@ -86,7 +88,6 @@ NSDictionary* GetKnownDevices(void)
     
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
