@@ -34,9 +34,8 @@ OSDefineMetaClassAndStructors(Xbox360ControllerClass, IOHIDDevice)
 
 static Xbox360Peripheral* GetOwner(IOService *us)
 {
-	IOService *prov;
-	
-	prov = us->getProvider();
+	IOService *prov = us->getProvider();
+    
 	if (prov == NULL)
 		return NULL;
 	return OSDynamicCast(Xbox360Peripheral, prov);
@@ -44,9 +43,8 @@ static Xbox360Peripheral* GetOwner(IOService *us)
 
 static IOUSBDevice* GetOwnerProvider(const IOService *us)
 {
-	IOService *prov, *provprov;
+	IOService *prov = us->getProvider(), *provprov;
 	
-	prov = us->getProvider();
 	if (prov == NULL)
 		return NULL;
 	provprov = prov->getProvider();
@@ -73,9 +71,8 @@ IOReturn Xbox360ControllerClass::setProperties(OSObject *properties)
 // Returns the HID descriptor for this device
 IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) const
 {
-    IOBufferMemoryDescriptor *buffer;
+    IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,sizeof(HID_360::ReportDescriptor));
     
-    buffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,sizeof(HID_360::ReportDescriptor));
     if (buffer == NULL) return kIOReturnNoResources;
     buffer->writeBytes(0,HID_360::ReportDescriptor,sizeof(HID_360::ReportDescriptor));
     *descriptor=buffer;
@@ -87,7 +84,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
 {
     char data[2];
     
-    report->readBytes(0,data,2);
+    report->readBytes(0, data, 2);
     switch(data[0]) {
         case 0x00:  // Set force feedback
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;

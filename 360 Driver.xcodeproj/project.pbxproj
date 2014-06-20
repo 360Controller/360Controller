@@ -1241,11 +1241,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				UNEXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
@@ -1255,11 +1255,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEAD_CODE_STRIPPING = YES;
-				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				UNEXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;

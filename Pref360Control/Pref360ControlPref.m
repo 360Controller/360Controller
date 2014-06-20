@@ -52,6 +52,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 @implementation Pref360ControlPref
 {
+    @private
     // Internal info
     NSMutableArray *deviceArray;
     IOHIDElementCookie axis[6],buttons[15];

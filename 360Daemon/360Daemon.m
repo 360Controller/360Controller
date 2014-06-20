@@ -135,7 +135,8 @@ static void callbackConnected(void *param,io_iterator_t iterator)
 @autoreleasepool {
     io_service_t object = 0;
     
-    while ((object = IOIteratorNext(iterator)) != 0) {
+    while ((object = IOIteratorNext(iterator)) != 0)
+    {
 #if 0
         CFStringRef bob = IOObjectCopyClass(object);
         NSLog(@"Found %p: %@", object, bob);
