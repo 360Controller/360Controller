@@ -144,8 +144,7 @@ static BOOL IsXBox360Controller(io_service_t device)
                 (*interfaceInterface)->GetNumEndpoints(interfaceInterface, &endpointCount);
                 if (interfaceNum < (sizeof(ControllerInterfaces) / sizeof(ControllerInterfaces[0])))
                 {
-                    if (
-                        (ControllerInterfaces[interfaceNum].classNum == classNum) &&
+                    if ((ControllerInterfaces[interfaceNum].classNum == classNum) &&
                         (ControllerInterfaces[interfaceNum].subClassNum == subClassNum) &&
                         (ControllerInterfaces[interfaceNum].protocolNum == protocolNum) &&
                         (ControllerInterfaces[interfaceNum].numEndpoints == endpointCount))

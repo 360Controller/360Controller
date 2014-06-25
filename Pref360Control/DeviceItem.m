@@ -74,7 +74,7 @@ static NSString* GetDeviceName(io_service_t device)
 
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device
 {
-    DeviceItem *item = [[DeviceItem alloc] initFromItemForDevice:device];
+    DeviceItem *item = [[[self class] alloc] initFromItemForDevice:device];
     
     if (item)
         return item;

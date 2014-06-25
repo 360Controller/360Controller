@@ -99,18 +99,16 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
 {
-    FFEFFESCAPE escape;
+    FFEFFESCAPE escape = {0};
     unsigned char c;
     
     if (ffDevice == 0) return;
-    c=ledIndex;
-    escape.dwSize=sizeof(escape);
-    escape.dwCommand=0x02;
-    escape.cbInBuffer=sizeof(c);
-    escape.lpvInBuffer=&c;
-    escape.cbOutBuffer=0;
-    escape.lpvOutBuffer=NULL;
-    FFDeviceEscape(ffDevice,&escape);
+    c = ledIndex;
+    escape.dwSize = sizeof(escape);
+    escape.dwCommand = 0x02;
+    escape.cbInBuffer = sizeof(c);
+    escape.lpvInBuffer = &c;
+    FFDeviceEscape(ffDevice, &escape);
 }
 
 // This will initialize the ff effect.
@@ -130,12 +128,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     DWORD *a = calloc(2, sizeof(DWORD));
     LONG *d = calloc(2, sizeof(LONG));
 
-    c[0] = 0;
-    c[1] = 0;
     a[0] = capabs.ffAxes[0];
     a[1] = capabs.ffAxes[1];
-    d[0] = 0;
-    d[1] = 0;
 
     customforce->cChannels = 2;
     customforce->cSamples = 2;
@@ -216,9 +210,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Update button GUI component
 - (void)buttonChanged:(int)index newValue:(int)value
 {
-    BOOL b;
+    BOOL b = (value != 0);
     
-    b=value!=0;
     switch(index) {
         case 0:
             [rightButtons setA:b];
@@ -288,7 +281,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Handle message from I/O Kit indicating something happened on the device
 - (void)eventQueueFired:(void*)sender withResult:(IOReturn)result
 {
-    AbsoluteTime zeroTime={0,0};
+    AbsoluteTime zeroTime = {0,0};
     IOHIDEventStruct event;
     BOOL found;
     int i;

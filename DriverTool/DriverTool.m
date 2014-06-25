@@ -46,12 +46,11 @@ static NSString* GetDriverConfigPath(NSString *driver)
     return [NSString pathWithComponents:pathComp];
 }
 
-static id ReadDriverConfig(NSString *driver)
+static NSDictionary *ReadDriverConfig(NSString *driver)
 {
     NSString *filename = GetDriverConfigPath(driver);
     NSError *error;
     NSData *data;
-    NSDictionary *config;
     
     infoPlistAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filename error:&error];
     if (infoPlistAttributes == nil)
@@ -60,27 +59,22 @@ static id ReadDriverConfig(NSString *driver)
               filename, error);
     }
     data = [NSData dataWithContentsOfFile:filename];
-    config = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:0 format:NULL errorDescription:NULL];
-    return config;
+    return [NSPropertyListSerialization propertyListFromData:data mutabilityOption:0 format:NULL errorDescription:NULL];
 }
 
 static void WriteDriverConfig(NSString *driver, id config)
 {
-    NSString *filename;
-    NSString *errorString;
-    NSData *data;
+    NSString *filename = GetDriverConfigPath(driver);
+    NSError *error;
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:config format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
     
-    filename = GetDriverConfigPath(driver);
-    errorString = nil;
-    data = [NSPropertyListSerialization dataFromPropertyList:config format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
     if (data == nil)
-        NSLog(@"Error writing config for driver: %@", errorString);
+        NSLog(@"Error writing config for driver: %@", error);
     
     if (![data writeToFile:filename atomically:NO])
         NSLog(@"Failed to write file!");
     
     if (infoPlistAttributes != nil) {
-        NSError *error = nil;
         if (![[NSFileManager defaultManager] setAttributes:infoPlistAttributes ofItemAtPath:filename error:&error]) {
             NSLog(@"Error setting attributes on '%@': %@", filename, error);
         }
@@ -141,12 +135,9 @@ int main (int argc, const char * argv[]) {
     NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
     if (argc == 1) {
         // Print out current types
-        NSDictionary *types;
-        NSArray *keys;
-        
-        types = config[@"IOKitPersonalities"];
-        keys = [types allKeys];
-        for (NSString *key in keys) {
+        NSDictionary *types = config[@"IOKitPersonalities"];
+
+        for (NSString *key in types) {
             NSDictionary *device = types[key];
             if ([(NSString*)device[@"IOClass"] compare:@"Xbox360Peripheral"] != NSOrderedSame)
                 continue;

@@ -53,7 +53,7 @@
     }
 }
 
-- (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
++ (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
 {
     NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:rect];
     NSSize size;
@@ -92,17 +92,17 @@
     bit.origin.x=area.origin.x+bit.size.width;
     bit.origin.y=area.origin.y+(bit.size.height*2)-MINI_OFFSET;
     [[NSColor yellowColor] set];
-    [self drawButton:@"Y" inRectangle:bit pressed:y];
+    [MyMainButtons drawButton:@"Y" inRectangle:bit pressed:y];
     bit.origin.y=area.origin.y+MINI_OFFSET;
     [[NSColor greenColor] set];
-    [self drawButton:@"A" inRectangle:bit pressed:a];
+    [MyMainButtons drawButton:@"A" inRectangle:bit pressed:a];
     bit.origin.y=area.origin.y+bit.size.height;
     bit.origin.x=area.origin.x+MINI_OFFSET;
     [[NSColor blueColor] set];
-    [self drawButton:@"X" inRectangle:bit pressed:x];
+    [MyMainButtons drawButton:@"X" inRectangle:bit pressed:x];
     bit.origin.x=area.origin.x+(bit.size.width*2)-MINI_OFFSET;
     [[NSColor redColor] set];
-    [self drawButton:@"B" inRectangle:bit pressed:b];
+    [MyMainButtons drawButton:@"B" inRectangle:bit pressed:b];
 }
 
 @end

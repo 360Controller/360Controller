@@ -51,7 +51,7 @@
     }
 }
 
-- (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
++ (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
 {
     NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:rect];
     NSSize size;
@@ -68,27 +68,27 @@
     // Draw text
     attributes = @{NSForegroundColorAttributeName: colour};
     size = [button sizeWithAttributes:attributes];
-    point.x = rect.origin.x+((rect.size.width-size.width)/2);
-    point.y = rect.origin.y+((rect.size.height-size.height)/2);
+    point.x = rect.origin.x + ((rect.size.width - size.width) / 2);
+    point.y = rect.origin.y + ((rect.size.height - size.height) / 2);
     [button drawAtPoint:point withAttributes:attributes];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area = [self bounds],button;
+    NSRect area = [self bounds], button;
 
-    button.size.height=area.size.height/2;
-    button.size.width=area.size.width/4;
-    button.origin.x=area.origin.x;
-    button.origin.y=area.origin.y+((area.size.height-button.size.height)/2);
-    [self drawButton:@"Back" inRectangle:button pressed:back];
-    button.origin.x=area.origin.x+area.size.width-button.size.width;
-    [self drawButton:@"Start" inRectangle:button pressed:start];
-    button.size.height=area.size.height-2;
-    button.size.width=button.size.height;
-    button.origin.x=area.origin.x+((area.size.width-button.size.width)/2);
-    button.origin.y=area.origin.y+1;
-    [self drawButton:@"" inRectangle:button pressed:appSpecific];
+    button.size.height = area.size.height / 2;
+    button.size.width = area.size.width / 4;
+    button.origin.x = area.origin.x;
+    button.origin.y = area.origin.y + ((area.size.height - button.size.height) / 2);
+    [MyCentreButtons drawButton:@"Back" inRectangle:button pressed:back];
+    button.origin.x = area.origin.x + area.size.width - button.size.width;
+    [MyCentreButtons drawButton:@"Start" inRectangle:button pressed:start];
+    button.size.height = area.size.height - 2;
+    button.size.width = button.size.height;
+    button.origin.x = area.origin.x + ((area.size.width-button.size.width) / 2);
+    button.origin.y = area.origin.y + 1;
+    [MyCentreButtons drawButton:@"" inRectangle:button pressed:appSpecific];
 }
 
 @end
