@@ -46,17 +46,17 @@
     };
     
     // Find central part
-    centre.x=rect.origin.x+(rect.size.width/2);
-    centre.y=rect.origin.y+(rect.size.height/2);
+    centre.x = rect.origin.x + (rect.size.width / 2);
+    centre.y = rect.origin.y + (rect.size.height / 2);
     // Create path
-    path=[NSBezierPath bezierPath];
+    path = [NSBezierPath bezierPath];
     // Make triangle
     [path moveToPoint:centre];
-    point.x=rect.origin.x+(rect.size.width*mult[start][0]);
-    point.y=rect.origin.y+(rect.size.height*mult[start][1]);
+    point.x = rect.origin.x + (rect.size.width * mult[start][0]);
+    point.y = rect.origin.y + (rect.size.height * mult[start][1]);
     [path lineToPoint:point];
-    point.x=rect.origin.x+(rect.size.width*mult[start+1][0]);
-    point.y=rect.origin.y+(rect.size.height*mult[start+1][1]);
+    point.x = rect.origin.x + (rect.size.width * mult[start + 1][0]);
+    point.y = rect.origin.y + (rect.size.height * mult[start + 1][1]);
     [path lineToPoint:point];
     [path closePath];
     // Done
@@ -81,14 +81,14 @@
         triangle.size.height = rect.size.height / 3;
         triangle.origin.y = rect.origin.y + (triangle.size.height * 2);
         triangle.origin.x = rect.origin.x + triangle.size.width;
-        up = [[self class] makeTriangle:0 inRectangle:triangle];
+        up = [MyDigitalStick makeTriangle:0 inRectangle:triangle];
         triangle.origin.y = rect.origin.y;
-        down = [[self class] makeTriangle:2 inRectangle:triangle];
+        down = [MyDigitalStick makeTriangle:2 inRectangle:triangle];
         triangle.origin.y = rect.origin.y + triangle.size.height;
         triangle.origin.x = rect.origin.x;
-        left = [[self class] makeTriangle:1 inRectangle:triangle];
+        left = [MyDigitalStick makeTriangle:1 inRectangle:triangle];
         triangle.origin.x = rect.origin.x + (triangle.size.width * 2);
-        right = [[self class] makeTriangle:3 inRectangle:triangle];
+        right = [MyDigitalStick makeTriangle:3 inRectangle:triangle];
     }
     return self;
 }

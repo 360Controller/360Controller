@@ -66,15 +66,15 @@
     
     // Compute positions
     // Deadzone
-    deadRect.size.width=(deadzone*area.size.width)/32768;
-    deadRect.size.height=(deadzone*area.size.height)/32768;
-    deadRect.origin.x=area.origin.x+((area.size.width-deadRect.size.width)/2);
-    deadRect.origin.y=area.origin.y+((area.size.height-deadRect.size.height)/2);
+    deadRect.size.width = (deadzone * area.size.width) / 32768;
+    deadRect.size.height = (deadzone * area.size.height) / 32768;
+    deadRect.origin.x = area.origin.x + ((area.size.width - deadRect.size.width) / 2);
+    deadRect.origin.y = area.origin.y + ((area.size.height - deadRect.size.height) / 2);
     // Position
-    posRect.size.width=4;
-    posRect.size.height=4;
-    posRect.origin.x=area.origin.x+AREA_INSET+(((x+32768)*(area.size.width-(AREA_INSET*2)))/65536)-(posRect.size.width/2);
-    posRect.origin.y=area.origin.y+area.size.height-AREA_INSET-(((y+32768)*(area.size.height-(AREA_INSET*2)))/65536)-(posRect.size.height/2);
+    posRect.size.width = 4;
+    posRect.size.height = 4;
+    posRect.origin.x = area.origin.x + AREA_INSET + (((x + 32768) * (area.size.width - (AREA_INSET * 2))) / 65536) - (posRect.size.width / 2);
+    posRect.origin.y = area.origin.y + area.size.height - AREA_INSET - (((y + 32768) * (area.size.height - (AREA_INSET * 2))) / 65536) - (posRect.size.height / 2);
     // Draw border
     NSDrawLightBezel(area,area);
     // Draw pressed state
@@ -82,10 +82,10 @@
         NSRect pressArea;
         
         pressArea=area;
-        pressArea.origin.x+=PRESSED_INSET;
-        pressArea.origin.y+=PRESSED_INSET;
-        pressArea.size.width-=PRESSED_INSET*2;
-        pressArea.size.height-=PRESSED_INSET*2;
+        pressArea.origin.x += PRESSED_INSET;
+        pressArea.origin.y += PRESSED_INSET;
+        pressArea.size.width -= PRESSED_INSET * 2;
+        pressArea.size.height -= PRESSED_INSET * 2;
         [[NSColor blackColor] set];
         NSRectFill(pressArea);
     }
@@ -96,13 +96,13 @@
         else {
             NSRect trueRect;
             
-            trueRect=deadRect;
-            trueRect.origin.x=area.origin.x;
-            trueRect.size.width=area.size.width;
+            trueRect = deadRect;
+            trueRect.origin.x = area.origin.x;
+            trueRect.size.width = area.size.width;
             NSFrameRect(trueRect);
-            trueRect=deadRect;
-            trueRect.origin.y=area.origin.y;
-            trueRect.size.height=area.size.height;
+            trueRect = deadRect;
+            trueRect.origin.y = area.origin.y;
+            trueRect.size.height = area.size.height;
             NSFrameRect(trueRect);
         }
     }
@@ -114,7 +114,10 @@
 
 - (void)setPositionX:(int)xPos y:(int)yPos
 {
+    // This does not trigger the key-value observer.
     x = xPos;
+    // This does.
+    // Done so the setNeedsDisplay: is only called once
     self.positionY = yPos;
 }
 
