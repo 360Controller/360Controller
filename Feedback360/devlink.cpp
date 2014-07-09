@@ -20,7 +20,13 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <IOKit/IOCFPlugin.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#if MAC_OS_X_VERSION_MAX_ALLOWED == __MAC_10_8
+#include "IOCFPlugIn.h"
+#else
+#include <IOKit/IOCFPlugIn.h>
+#endif
 #include "devlink.h"
 
 // Initialise the link
