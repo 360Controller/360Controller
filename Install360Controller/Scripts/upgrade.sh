@@ -25,14 +25,17 @@ fi
 # Remove drivers
 
 if [ -d /System/Library/Extensions/360Controller.kext ]; then
+   kextunload /System/Library/Extensions/360Controller.kext
    /bin/rm -r /System/Library/Extensions/360Controller.kext
 fi
 
 if [ -d /System/Library/Extensions/Wireless360Controller.kext ]; then
+   kextunload /System/Library/Extensions/Wireless360Controller.kext
    /bin/rm -r /System/Library/Extensions/Wireless360Controller.kext
 fi
 
 if [ -d /System/Library/Extensions/WirelessGamingReceiver.kext ]; then
+   kextunload /System/Library/Extensions/WirelessGamingReceiver.kext
    /bin/rm -r /System/Library/Extensions/WirelessGamingReceiver.kext
 fi
 

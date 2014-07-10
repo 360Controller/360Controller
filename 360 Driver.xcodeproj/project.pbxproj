@@ -1258,13 +1258,13 @@
 			buildSettings = {
 				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1274,13 +1274,13 @@
 			buildSettings = {
 				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1402,7 +1402,8 @@
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1417,7 +1418,8 @@
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1432,7 +1434,8 @@
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1447,7 +1450,8 @@
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.8;
-				WARNING_CFLAGS = "";
+				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
+				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
