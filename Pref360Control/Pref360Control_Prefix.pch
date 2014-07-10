@@ -11,6 +11,7 @@
 #include <ForceFeedback/ForceFeedback.h>
 
 #ifdef __OBJC__
+    #import "ARCBridge.h"
 	#import <Cocoa/Cocoa.h>
 	#import <PreferencePanes/PreferencePanes.h>
 #endif

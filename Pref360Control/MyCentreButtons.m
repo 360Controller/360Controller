@@ -20,6 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 #import "MyCentreButtons.h"
 
 @implementation MyCentreButtons
@@ -42,7 +43,20 @@
     [self removeObserver:self forKeyPath:@"back"];
     [self removeObserver:self forKeyPath:@"start"];
     [self removeObserver:self forKeyPath:@"specific"];
+    
+    SUPERDEALLOC;
 }
+
+#if !__has_feature(objc_arc)
+- (void)finalize
+{
+    [self removeObserver:self forKeyPath:@"back"];
+    [self removeObserver:self forKeyPath:@"start"];
+    [self removeObserver:self forKeyPath:@"specific"];
+    
+    [super finalize];
+}
+#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

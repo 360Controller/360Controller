@@ -25,6 +25,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */; };
 		553BDB44196DF3BA00D1F569 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
 		553BDB45196DF41500D1F569 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
 		553BDB46196DF41600D1F569 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
@@ -59,7 +60,6 @@
 		55B6377E18C10B0B00CE933D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636B718C104DB00CE933D /* Cocoa.framework */; };
 		55B6378018C10B0B00CE933D /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6377F18C10B0B00CE933D /* PreferencePanes.framework */; };
 		55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B6378418C10B0B00CE933D /* InfoPlist.strings */; };
-		55B6379718C10B8700CE933D /* Pref360ControlPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B6379318C10B8700CE933D /* Pref360ControlPref.xib */; };
 		55B637AA18C10C0C00CE933D /* DeviceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6379A18C10C0C00CE933D /* DeviceItem.h */; };
 		55B637AB18C10C0C00CE933D /* DeviceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6379B18C10C0C00CE933D /* DeviceItem.m */; };
 		55B637AC18C10C0C00CE933D /* DeviceLister.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6379C18C10C0C00CE933D /* DeviceLister.h */; };
@@ -187,6 +187,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		551CDFFA196EEE76000869B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
+		551CDFFC196EF458000869B6 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
+		551CDFFD196EF52F000869B6 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
+		551CDFFF196EFD34000869B6 /* Install360Controller.pkgproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Install360Controller.pkgproj; sourceTree = "<group>"; };
+		551CE001196EFD34000869B6 /* finish.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = finish.sh; sourceTree = "<group>"; };
+		551CE002196EFD34000869B6 /* upgrade.sh */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = text.script.sh; path = upgrade.sh; sourceTree = "<group>"; };
+		551CE004196EFD34000869B6 /* Welcome.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Welcome.rtf; sourceTree = "<group>"; };
 		553BDB43196DF3BA00D1F569 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		55750C07190AFB5B0047FF41 /* DaemonLEDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaemonLEDs.h; sourceTree = "<group>"; usesTabs = 1; };
 		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -236,8 +243,6 @@
 		55B6377D18C10B0B00CE933D /* Pref360Control.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pref360Control.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B6377F18C10B0B00CE933D /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		55B6378518C10B0B00CE933D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		55B6379418C10B8700CE933D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
-		55B6379918C10B9F00CE933D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pref360ControlPref.strings; sourceTree = "<group>"; };
 		55B6379A18C10C0C00CE933D /* DeviceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceItem.h; sourceTree = "<group>"; };
 		55B6379B18C10C0C00CE933D /* DeviceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceItem.m; sourceTree = "<group>"; };
 		55B6379C18C10C0C00CE933D /* DeviceLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLister.h; sourceTree = "<group>"; };
@@ -357,6 +362,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551CDFFE196EFD0A000869B6 /* Distribution */ = {
+			isa = PBXGroup;
+			children = (
+				551CDFFF196EFD34000869B6 /* Install360Controller.pkgproj */,
+				551CE000196EFD34000869B6 /* Scripts */,
+				551CE003196EFD34000869B6 /* Text */,
+			);
+			name = Distribution;
+			path = Install360Controller;
+			sourceTree = "<group>";
+		};
+		551CE000196EFD34000869B6 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				551CE001196EFD34000869B6 /* finish.sh */,
+				551CE002196EFD34000869B6 /* upgrade.sh */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		551CE003196EFD34000869B6 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				551CE004196EFD34000869B6 /* Welcome.rtf */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
 		55A2B8E018C11C7E006829A2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +450,7 @@
 				55B636BD18C104DB00CE933D /* 360Daemon */,
 				55B6376A18C10A5400CE933D /* DriverTool */,
 				55B6378118C10B0B00CE933D /* Pref360Control */,
+				551CDFFE196EFD0A000869B6 /* Distribution */,
 				55B636B618C104DB00CE933D /* Frameworks */,
 				55B636B518C104DB00CE933D /* Products */,
 			);
@@ -535,6 +569,7 @@
 		55B6378118C10B0B00CE933D /* Pref360Control */ = {
 			isa = PBXGroup;
 			children = (
+				551CDFFC196EF458000869B6 /* ARCBridge.h */,
 				55B6379A18C10C0C00CE933D /* DeviceItem.h */,
 				55B6379B18C10C0C00CE933D /* DeviceItem.m */,
 				55B6379C18C10C0C00CE933D /* DeviceLister.h */,
@@ -551,7 +586,7 @@
 				55B637A718C10C0C00CE933D /* MyShoulderButton.m */,
 				55B637A818C10C0C00CE933D /* Pref360ControlPref.h */,
 				55B637A918C10C0C00CE933D /* Pref360ControlPref.m */,
-				55B6379318C10B8700CE933D /* Pref360ControlPref.xib */,
+				551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */,
 				55B6378218C10B0B00CE933D /* Supporting Files */,
 			);
 			path = Pref360Control;
@@ -562,6 +597,7 @@
 			children = (
 				55B637BA18C10C2400CE933D /* Images.xcassets */,
 				55B637BB18C10C2400CE933D /* Info.plist */,
+				551CDFFD196EF52F000869B6 /* Pref360Control_Prefix.pch */,
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
 				55852E2118D6B5580009BF55 /* Localizable.strings */,
@@ -864,7 +900,7 @@
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
 				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
-				55B6379718C10B8700CE933D /* Pref360ControlPref.xib in Resources */,
+				551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */,
 				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
 				55DBC494196DF0930079FE88 /* 360Control.iconset in Resources */,
 			);
@@ -1026,6 +1062,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551CDFFA196EEE76000869B6 /* en */,
+			);
+			name = Pref360ControlPref.xib;
+			sourceTree = "<group>";
+		};
 		55852E2118D6B5580009BF55 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1072,15 +1116,6 @@
 				55B6378518C10B0B00CE933D /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		55B6379318C10B8700CE933D /* Pref360ControlPref.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55B6379418C10B8700CE933D /* Base */,
-				55B6379918C10B9F00CE933D /* en */,
-			);
-			name = Pref360ControlPref.xib;
 			sourceTree = "<group>";
 		};
 		55B637F718C10DA300CE933D /* InfoPlist.strings */ = {
@@ -1139,12 +1174,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-unknown-warning-option",
+					"-Wno-deprecated-register",
+				);
 			};
 			name = Debug;
 		};
@@ -1165,7 +1203,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
@@ -1179,11 +1217,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-unknown-warning-option",
+					"-Wno-deprecated-register",
+				);
 			};
 			name = Release;
 		};
@@ -1215,11 +1256,15 @@
 		55B6371418C1057100CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1227,11 +1272,15 @@
 		55B6371518C1057100CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1241,7 +1290,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				"HEADER_SEARCH_PATHS[sdk=macosx10.8]" = "$(SDK_DIR)/System/Library/Frameworks/IOKit.framework/Headers";
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1257,7 +1305,6 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEAD_CODE_STRIPPING = YES;
-				"HEADER_SEARCH_PATHS[sdk=macosx10.8]" = "$(SDK_DIR)/System/Library/Frameworks/IOKit.framework/Headers";
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1297,6 +1344,12 @@
 		55B6379118C10B0B00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
+				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
+				GCC_ENABLE_OBJC_GC = unsupported;
+				"GCC_ENABLE_OBJC_GC[sdk=macosx10.7]" = supported;
+				"GCC_ENABLE_OBJC_GC[sdk=macosx10.8]" = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1305,6 +1358,9 @@
 				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.7]" = 10.7;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.8]" = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
 			};
@@ -1313,7 +1369,13 @@
 		55B6379218C10B0B00CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
+				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
 				DEAD_CODE_STRIPPING = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
+				"GCC_ENABLE_OBJC_GC[sdk=macosx10.7]" = supported;
+				"GCC_ENABLE_OBJC_GC[sdk=macosx10.8]" = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1322,6 +1384,9 @@
 				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.7]" = 10.7;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.8]" = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
 			};
@@ -1330,10 +1395,14 @@
 		55B637F418C10D5000CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1341,10 +1410,14 @@
 		55B637F518C10D5000CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1352,10 +1425,14 @@
 		55B6381A18C10E9500CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1363,10 +1440,14 @@
 		55B6381B18C10E9500CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.8]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.8;
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;

@@ -35,8 +35,9 @@
 
 + (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
 {
-    NSBezierPath *path;
-    NSPoint centre,point;
+    // Create path
+    NSBezierPath *path = [NSBezierPath bezierPath];
+    NSPoint centre, point;
     const int mult[][2]={
         {0,0},
         {1,0},
@@ -48,8 +49,6 @@
     // Find central part
     centre.x = rect.origin.x + (rect.size.width / 2);
     centre.y = rect.origin.y + (rect.size.height / 2);
-    // Create path
-    path = [NSBezierPath bezierPath];
     // Make triangle
     [path moveToPoint:centre];
     point.x = rect.origin.x + (rect.size.width * mult[start][0]);
@@ -81,14 +80,14 @@
         triangle.size.height = rect.size.height / 3;
         triangle.origin.y = rect.origin.y + (triangle.size.height * 2);
         triangle.origin.x = rect.origin.x + triangle.size.width;
-        up = [MyDigitalStick makeTriangle:0 inRectangle:triangle];
+        up = RETAINOBJ([MyDigitalStick makeTriangle:0 inRectangle:triangle]);
         triangle.origin.y = rect.origin.y;
-        down = [MyDigitalStick makeTriangle:2 inRectangle:triangle];
+        down = RETAINOBJ([MyDigitalStick makeTriangle:2 inRectangle:triangle]);
         triangle.origin.y = rect.origin.y + triangle.size.height;
         triangle.origin.x = rect.origin.x;
-        left = [MyDigitalStick makeTriangle:1 inRectangle:triangle];
+        left = RETAINOBJ([MyDigitalStick makeTriangle:1 inRectangle:triangle]);
         triangle.origin.x = rect.origin.x + (triangle.size.width * 2);
-        right = [MyDigitalStick makeTriangle:3 inRectangle:triangle];
+        right = RETAINOBJ([MyDigitalStick makeTriangle:3 inRectangle:triangle]);
     }
     return self;
 }
@@ -99,7 +98,28 @@
     [self removeObserver:self forKeyPath:@"down"];
     [self removeObserver:self forKeyPath:@"left"];
     [self removeObserver:self forKeyPath:@"right"];
+    
+#if !__has_feature(objc_arc)
+    [up release];
+    [down release];
+    [left release];
+    [right release];
+    
+    [super dealloc];
+#endif
 }
+
+#if !__has_feature(objc_arc)
+- (void)finalize
+{
+    [self removeObserver:self forKeyPath:@"up"];
+    [self removeObserver:self forKeyPath:@"down"];
+    [self removeObserver:self forKeyPath:@"left"];
+    [self removeObserver:self forKeyPath:@"right"];
+    
+    [super finalize];
+}
+#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

@@ -28,11 +28,7 @@
 #ifndef Feedback360_Feedback360Effect_h
 #define Feedback360_Feedback360Effect_h
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED == __MAC_10_8
-#include "IOCFPlugIn.h"
-#else
 #include <IOKit/IOCFPlugIn.h>
-#endif
 #include <ForceFeedback/IOForceFeedbackLib.h>
 #include <math.h>
 #include <string.h>

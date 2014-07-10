@@ -32,7 +32,7 @@
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
-    if (target) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
+    if (target) [BRIDGE(Pref360ControlPref*, target) eventQueueFired:sender withResult:result];
 }
 
 // Handle callback for when our device is connected or disconnected. Both events are
@@ -47,7 +47,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         update = YES;
     }
     
-    if (update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
+    if (update) [BRIDGE(Pref360ControlPref*, param) handleDeviceChange];
 }
 
 @implementation Pref360ControlPref
@@ -491,7 +491,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     // Set callback
-    ret=(*hidQueue)->setEventCallout(hidQueue, CallbackFunction, (__bridge void *)(self), NULL);
+    ret=(*hidQueue)->setEventCallout(hidQueue, CallbackFunction, BRIDGE(void *, self), NULL);
     if(ret!=kIOReturnSuccess) {
         NSLog(@"Unable to set event callback");
         // Error?
@@ -661,15 +661,15 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     hidQueue=NULL;
     // Activate callbacks
         // Wired
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &onIteratorWired);
-    callbackHandleDevice((__bridge void *)(self), onIteratorWired);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &offIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, BRIDGE(void *, self), &onIteratorWired);
+    callbackHandleDevice(BRIDGE(void *, self), onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, BRIDGE(void *, self), &offIteratorWired);
     while((object = IOIteratorNext(offIteratorWired)) != 0)
         IOObjectRelease(object);
         // Wireless
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &onIteratorWireless);
-    callbackHandleDevice((__bridge void *)(self), onIteratorWireless);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, BRIDGE(void *, self), &onIteratorWireless);
+    callbackHandleDevice(BRIDGE(void *, self), onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, BRIDGE(void *, self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
 }
@@ -679,7 +679,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     int i;
     DeviceItem *item;
-    FFEFFESCAPE escape;
+    FFEFFESCAPE escape = {0};
     unsigned char c;
 
     // Remove notification source
@@ -701,8 +701,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         escape.dwCommand = 0x02;
         escape.cbInBuffer = sizeof(c);
         escape.lpvInBuffer = &c;
-        escape.cbOutBuffer = 0;
-        escape.lpvOutBuffer = NULL;
         FFDeviceEscape([item ffDevice], &escape);
     }
     [self deleteDeviceList];
@@ -731,7 +729,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"RelativeRight": @((BOOL)([rightLinked state]==NSOnState))};
     
     // Set property
-    IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
+    IORegistryEntrySetCFProperties(registryEntry, BRIDGE(CFTypeRef, dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
     [leftStick setLinked:([leftLinked state]==NSOnState)];
