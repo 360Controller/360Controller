@@ -24,17 +24,11 @@
 
 #define DRIVER_NAME @"360Controller.kext"
 
-#ifdef DEBUG
-#define NSCurrentExtensionDomainMask NSSystemDomainMask
-#else
-#define NSCurrentExtensionDomainMask NSLocalDomainMask
-#endif
-
 static NSDictionary *infoPlistAttributes = nil;
 
 static inline NSString* GetDriverDirectory(void)
 {
-    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSCurrentExtensionDomainMask, YES);
+    NSArray *data = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSSystemDomainMask, YES);
     return [data[0] stringByAppendingPathComponent:@"Extensions"];
 }
 
@@ -133,7 +127,8 @@ static void AddDevices(NSMutableDictionary *personalities, int argc, const char 
 int main (int argc, const char * argv[]) {
 @autoreleasepool {
     NSDictionary *config = ReadDriverConfig(DRIVER_NAME);
-    if (argc == 1) {
+    if (argc == 1)
+    {
         // Print out current types
         NSDictionary *types = config[@"IOKitPersonalities"];
 
@@ -155,13 +150,10 @@ int main (int argc, const char * argv[]) {
         ScrubDevices(devices);
         AddDevices(devices, argc, argv);
         WriteDriverConfig(DRIVER_NAME, saving);
-        
-#ifdef DEBUG
+
         system("/usr/bin/touch /System/Library/Extensions");
-#else
-        system("/usr/bin/touch /Library/Extensions");
-#endif
-    } else
+    }
+    else
         NSLog(@"Invalid number of parameters (%i)", argc);
     
     return 0;
