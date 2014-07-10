@@ -1263,7 +1263,7 @@
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
@@ -1280,7 +1280,7 @@
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
@@ -1404,7 +1404,7 @@
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
@@ -1421,7 +1421,7 @@
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
@@ -1438,7 +1438,7 @@
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
@@ -1455,7 +1455,7 @@
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = "";
 				"WARNING_CFLAGS[sdk=macosx10.7]" = "";
 				"WARNING_CFLAGS[sdk=macosx10.8]" = "";
 				WRAPPER_EXTENSION = kext;
