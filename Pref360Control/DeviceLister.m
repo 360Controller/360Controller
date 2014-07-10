@@ -32,7 +32,7 @@
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
-    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, BRIDGE(CFStringRef, key), kCFAllocatorDefault, kIORegistryIterateRecursively);
 	
     return CFBridgingRelease(value);
 }
@@ -236,6 +236,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     // Done
     free(argv);
+    RELEASEOBJ(parameters);
     return result;
 }
 
@@ -248,7 +249,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     NSArray *lines;
     
     // Prepare to run the tool
-    task = [[NSTask alloc] init];
+    task = AUTORELEASEOBJ([[NSTask alloc] init]);
     [task setLaunchPath:[self toolPath]];
     
     // Hook up the pipe to catch the output
@@ -265,12 +266,12 @@ static BOOL IsXBox360Controller(io_service_t device)
     if ([task terminationStatus] != 0)
     {
         data = [[error fileHandleForReading] readDataToEndOfFile];
-        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        return AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }
     
     // Read the data back
     data = [[pipe fileHandleForReading] readDataToEndOfFile];
-    response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    response = AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
     // Parse the results
     lines = [response componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
@@ -363,7 +364,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (BOOL)loadDevices
 {
-    NSString *error;
+    NSString *error = nil;
     
     // Initialise
     [entries removeAllObjects];
@@ -487,8 +488,9 @@ fail:
             colour = [NSColor blueColor];
         else
             colour = [NSColor blackColor];
-        return [[NSAttributedString alloc] initWithString:entries[key]
-                                                attributes:@{NSForegroundColorAttributeName: colour}];
+        return AUTORELEASEOBJ([[NSAttributedString alloc]
+                               initWithString:entries[key]
+                               attributes:@{NSForegroundColorAttributeName: colour}]);
     }
     return nil;
 }

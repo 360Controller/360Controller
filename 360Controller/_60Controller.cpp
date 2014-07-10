@@ -222,8 +222,8 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 // Read the settings from the registry
 void Xbox360Peripheral::readSettings(void)
 {
-    OSBoolean *value = nullptr;
-    OSNumber *number = nullptr;
+    OSBoolean *value = NULL;
+    OSNumber *number = NULL;
     OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
     if (dataDictionary == NULL) return;
