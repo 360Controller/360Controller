@@ -168,18 +168,19 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 @interface DeviceLister ()
 @property (getter = isChanged) BOOL changed;
+@property (arcstrong) NSMutableDictionary *entries;
 @end
 
 @implementation DeviceLister
 {
     Pref360ControlPref *owner;
     
-    NSMutableDictionary *entries;
     NSMutableArray *connected, *enabled;
 }
 @synthesize list;
 @synthesize sheet;
 @synthesize changed;
+@synthesize entries;
 
 - (instancetype)init
 {
