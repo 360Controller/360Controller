@@ -19,77 +19,90 @@
     You should have received a copy of the GNU General Public License
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/#import "MyCentreButtons.h"
+*/
+
+#import "MyCentreButtons.h"
 
 @implementation MyCentreButtons
+@synthesize back;
+@synthesize start;
+@synthesize specific = appSpecific;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		back=start=appSpecific=FALSE;
-	}
-	return self;
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    return self;
 }
 
-- (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
+- (void)dealloc
 {
-    NSBezierPath *path;
+    [self removeObserver:self forKeyPath:@"back"];
+    [self removeObserver:self forKeyPath:@"start"];
+    [self removeObserver:self forKeyPath:@"specific"];
+    
+    SUPERDEALLOC;
+}
+
+#if !__has_feature(objc_arc)
+- (void)finalize
+{
+    [self removeObserver:self forKeyPath:@"back"];
+    [self removeObserver:self forKeyPath:@"start"];
+    [self removeObserver:self forKeyPath:@"specific"];
+    
+    [super finalize];
+}
+#endif
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
+}
+
++ (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
+{
+    NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:rect];
     NSSize size;
     NSDictionary *attributes;
     NSPoint point;
-    NSColor *colour;
+    NSColor *colour = [NSColor blackColor];
     
     // Draw circle
-    path=[NSBezierPath bezierPathWithOvalInRect:rect];
-    colour=[NSColor blackColor];
     [colour set];
     if(down) {
         [path fill];
-        colour=[NSColor whiteColor];
+        colour = [NSColor whiteColor];
     } else [path stroke];
     // Draw text
-    attributes=[NSDictionary dictionaryWithObject:colour forKey:NSForegroundColorAttributeName];
-    size=[button sizeWithAttributes:attributes];
-    point.x=rect.origin.x+((rect.size.width-size.width)/2);
-    point.y=rect.origin.y+((rect.size.height-size.height)/2);
+    attributes = @{NSForegroundColorAttributeName: colour};
+    size = [button sizeWithAttributes:attributes];
+    point.x = rect.origin.x + ((rect.size.width - size.width) / 2);
+    point.y = rect.origin.y + ((rect.size.height - size.height) / 2);
     [button drawAtPoint:point withAttributes:attributes];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area,button;
+    NSRect area = [self bounds], button;
 
-    area=[self bounds];
-    button.size.height=area.size.height/2;
-    button.size.width=area.size.width/4;
-    button.origin.x=area.origin.x;
-    button.origin.y=area.origin.y+((area.size.height-button.size.height)/2);
-    [self drawButton:@"Back" inRectangle:button pressed:back];
-    button.origin.x=area.origin.x+area.size.width-button.size.width;
-    [self drawButton:@"Start" inRectangle:button pressed:start];
-    button.size.height=area.size.height-2;
-    button.size.width=button.size.height;
-    button.origin.x=area.origin.x+((area.size.width-button.size.width)/2);
-    button.origin.y=area.origin.y+1;
-    [self drawButton:@"" inRectangle:button pressed:appSpecific];
-}
-
-- (void)setBack:(BOOL)bBack
-{
-    back=bBack;
-    [self setNeedsDisplay:TRUE];
-}
-
-- (void)setStart:(BOOL)bStart
-{
-    start=bStart;
-    [self setNeedsDisplay:TRUE];
-}
-
-- (void)setSpecific:(BOOL)bSpecific
-{
-    appSpecific=bSpecific;
-    [self setNeedsDisplay:TRUE];
+    button.size.height = area.size.height / 2;
+    button.size.width = area.size.width / 4;
+    button.origin.x = area.origin.x;
+    button.origin.y = area.origin.y + ((area.size.height - button.size.height) / 2);
+    [MyCentreButtons drawButton:@"Back" inRectangle:button pressed:back];
+    button.origin.x = area.origin.x + area.size.width - button.size.width;
+    [MyCentreButtons drawButton:@"Start" inRectangle:button pressed:start];
+    button.size.height = area.size.height - 2;
+    button.size.width = button.size.height;
+    button.origin.x = area.origin.x + ((area.size.width-button.size.width) / 2);
+    button.origin.y = area.origin.y + 1;
+    [MyCentreButtons drawButton:@"" inRectangle:button pressed:appSpecific];
 }
 
 @end

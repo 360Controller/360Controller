@@ -26,7 +26,7 @@
 #include "../360Controller/ControlStruct.h"
 #include "../360Controller/xbox360hid.h"
 
-#define kDriverSettingKey       "DeviceData"
+#define kDriverSettingKey "DeviceData"
 
 OSDefineMetaClassAndStructors(Wireless360Controller, WirelessHIDDevice)
 #define super WirelessHIDDevice
@@ -50,10 +50,10 @@ bool Wireless360Controller::init(OSDictionary *propTable)
     bool res = super::init(propTable);
     
     // Default settings
-    invertLeftX=invertLeftY=FALSE;
-    invertRightX=invertRightY=FALSE;
-    deadzoneLeft=deadzoneRight=0;
-    relativeLeft=relativeRight=FALSE;
+    invertLeftX = invertLeftY = false;
+    invertRightX = invertRightY = false;
+    deadzoneLeft = deadzoneRight = 0;
+    relativeLeft = relativeRight = false;
     readSettings();
     
     // Done
@@ -63,11 +63,10 @@ bool Wireless360Controller::init(OSDictionary *propTable)
 // Read the settings from the registry
 void Wireless360Controller::readSettings(void)
 {
-    OSDictionary *dataDictionary;
     OSBoolean *value;
     OSNumber *number;
+    OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
-    dataDictionary=OSDynamicCast(OSDictionary,getProperty(kDriverSettingKey));
     if(dataDictionary==NULL) return;
     value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftX"));
     if(value!=NULL) invertLeftX=value->getValue();
@@ -85,12 +84,12 @@ void Wireless360Controller::readSettings(void)
     if(value!=NULL) relativeLeft=value->getValue();
     value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
     if(value!=NULL) relativeRight=value->getValue();
-    /*
+#if 0
     IOLog("Xbox360ControllerClass preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
             invertRightX?"True":"False",invertRightY?"True":"False",
             deadzoneLeft,deadzoneRight);
-    */
+#endif
 }
 
 // Adjusts the report for any settings specified by the user
@@ -153,19 +152,18 @@ void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 
 void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char small)
 {
-    char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device;
+    unsigned char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
+    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
     
-    device = OSDynamicCast(WirelessDevice, getProvider());
     if (device != NULL)
         device->SendPacket(buf, sizeof(buf));
 }
-    
+
 IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
 {
     char data[2];
     
-//    IOLog("setReport(%p, %d, %d)\n", report, reportType, options);
+    // IOLog("setReport(%p, %d, %d)\n", report, reportType, options);
     if (report->readBytes(0, data, 2) < 2)
         return kIOReturnUnsupported;
         
@@ -184,9 +182,8 @@ IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDRepor
 
 IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descriptor ) const
 {
-    IOBufferMemoryDescriptor *buffer;
+    IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
     
-    buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
     if (buffer == NULL)
         return kIOReturnNoResources;
     buffer->writeBytes(0, ReportDescriptor, sizeof(ReportDescriptor));
@@ -197,9 +194,8 @@ IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descri
 // Called by the userspace IORegistryEntrySetCFProperties function
 IOReturn Wireless360Controller::setProperties(OSObject *properties)
 {
-    OSDictionary *dictionary;
+    OSDictionary *dictionary = OSDynamicCast(OSDictionary,properties);
     
-    dictionary=OSDynamicCast(OSDictionary,properties);
     if(dictionary!=NULL) {
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
@@ -245,4 +241,3 @@ OSNumber* Wireless360Controller::newVendorIDNumber() const
 {
     return OSNumber::withNumber((unsigned long long)0x45e, 16);
 }
-

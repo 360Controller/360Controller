@@ -3,32 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>Pref360Control</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>360Control</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mice.driver.360Controller.Prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>XBox 360 Controllers</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>360D</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
 	<string>Pref360ControlPref</string>
 	<key>NSPrefPaneIconFile</key>
-	<string>Pref360ControlPref.tiff</string>
+	<string>pref360controlpref.tiff</string>
+	<key>NSPrefPaneIconLabel</key>
+	<string>Xbox 360 Controllers</string>
 	<key>NSPrincipalClass</key>
 	<string>Pref360ControlPref</string>
-	<key>CFBundleName</key>
-	<string>XBox 360 Controllers</string>
-	<key>NSPrefPaneIconLabel</key>
-	<string>Xbox 360\nControllers</string>
 </dict>
 </plist>

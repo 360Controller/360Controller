@@ -76,7 +76,7 @@ main(int argc, char **argv)
             return 0;
         }
 
-        i = strlen(name);
+        i = (int)strlen(name);
         if ((i < 3) && isdigit(name[0]) && ((i == 1) || isdigit(name[1]))) {
             index = atoi(name);
             name = NULL;

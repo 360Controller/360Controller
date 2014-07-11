@@ -23,14 +23,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyDigitalStick : NSView
-{
-    NSBezierPath *up,*down,*left,*right;
-    BOOL bUp,bDown,bLeft,bRight;
-}
-
-- (void)setUp:(BOOL)upState;
-- (void)setDown:(BOOL)downState;
-- (void)setLeft:(BOOL)leftState;
-- (void)setRight:(BOOL)rightState;
-
+@property BOOL up;
+@property BOOL down;
+@property BOOL left;
+@property BOOL right;
 @end

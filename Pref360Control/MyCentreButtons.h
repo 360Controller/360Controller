@@ -23,12 +23,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyCentreButtons : NSView
-{
-    BOOL back,start,appSpecific;
-}
-
-- (void)setBack:(BOOL)bBack;
-- (void)setStart:(BOOL)bStart;
-- (void)setSpecific:(BOOL)bSpecific;
-
+@property BOOL back;
+@property BOOL start;
+@property BOOL specific;
 @end
