@@ -16,6 +16,10 @@ if [ -d /Library/Application\ Support/MICE/360Daemon ]; then
    /bin/rm -r /Library/Application\ Support/MICE/360Daemon
 fi
 
+if [ -d /Library/Application\ Support/MICE/360Daemon.app ]; then
+   /bin/rm -r /Library/Application\ Support/MICE/360Daemon.app
+fi
+
 # Remove preference pane
 
 if [ -d /Library/PreferencePanes/Pref360Control.prefPane ]; then
