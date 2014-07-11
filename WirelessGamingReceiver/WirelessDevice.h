@@ -32,6 +32,7 @@ typedef void (*WirelessDeviceWatcher)(void *target, WirelessDevice *sender, void
 class WirelessDevice : public IOService
 {
     OSDeclareDefaultStructors(WirelessDevice);
+    
 public:
     bool init(OSDictionary *dictionary = 0);
 
@@ -44,11 +45,11 @@ public:
     void RegisterWatcher(void *target, WirelessDeviceWatcher function, void *parameter);
 
     OSNumber* newLocationIDNumber() const;
+    
 private:
     friend class WirelessGamingReceiver;
     void SetIndex(int i);
     void NewData(void);
-private:
     int index;
     // callback
     void *target, *parameter;

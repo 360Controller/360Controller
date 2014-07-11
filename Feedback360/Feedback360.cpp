@@ -733,5 +733,5 @@ void* Control360Factory(CFAllocatorRef allocator, CFUUIDRef typeID)
     void* result = NULL;
     if (CFEqual(typeID, kIOForceFeedbackLibTypeID))
         result = (void*)Feedback360::Alloc();
-    return (void*)result;
+    return result;
 }
