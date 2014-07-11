@@ -57,34 +57,17 @@
 											<array>
 												<dict>
 													<key>CHILDREN</key>
-													<array>
-														<dict>
-															<key>CHILDREN</key>
-															<array/>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>../build/Release/360Daemon.app</string>
-															<key>PATH_TYPE</key>
-															<integer>1</integer>
-															<key>PERMISSIONS</key>
-															<integer>493</integer>
-															<key>TYPE</key>
-															<integer>3</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-													</array>
+													<array/>
 													<key>GID</key>
 													<integer>80</integer>
 													<key>PATH</key>
-													<string>360Daemon</string>
+													<string>../build/Release/360Daemon.app</string>
 													<key>PATH_TYPE</key>
-													<integer>0</integer>
+													<integer>1</integer>
 													<key>PERMISSIONS</key>
 													<integer>493</integer>
 													<key>TYPE</key>
-													<integer>2</integer>
+													<integer>3</integer>
 													<key>UID</key>
 													<integer>0</integer>
 												</dict>
@@ -485,7 +468,7 @@
 													<key>GID</key>
 													<integer>0</integer>
 													<key>PATH</key>
-													<string>../build/Release//WirelessGamingReceiver.kext</string>
+													<string>../build/Release/WirelessGamingReceiver.kext</string>
 													<key>PATH_TYPE</key>
 													<integer>1</integer>
 													<key>PERMISSIONS</key>
@@ -641,7 +624,7 @@
 			ZW50LVN0eWxlLVR5cGUiIGNvbnRlbnQ9InRleHQvY3NzIj4KPHRp
 			dGxlPjwvdGl0bGU+CjxtZXRhIG5hbWU9IkdlbmVyYXRvciIgY29u
 			dGVudD0iQ29jb2EgSFRNTCBXcml0ZXIiPgo8bWV0YSBuYW1lPSJD
-			b2NvYVZlcnNpb24iIGNvbnRlbnQ9IjExODcuMzQiPgo8c3R5bGUg
+			b2NvYVZlcnNpb24iIGNvbnRlbnQ9IjEyNjUuMjEiPgo8c3R5bGUg
 			dHlwZT0idGV4dC9jc3MiPgo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5
 			Pgo8L2JvZHk+CjwvaHRtbD4K
 			</data>

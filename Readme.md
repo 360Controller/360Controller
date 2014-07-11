@@ -49,17 +49,18 @@ functional.
 -   Extra settings? E.g. trigger deadzones, control remapping.
 -   Someone has requested old Xbox Controller support too.
 
--   ****\
--   **Contact me**
+**Contact me**
+
 -   Please feel free to contact me with any comments, questions and so
     on using the form at the URL at the top of the file.
--   \
--   **Developer info**
+
+**Developer info**
+
 -   Anything below this probably doesn't affect end users, so you can
     stop reading now if you just want to use the driver.
 
 
-**Building**
+***Building***
 
 (This section does not yet discuss the source of the wireless drivers)
 
@@ -77,32 +78,32 @@ project includes a script to copy the Feedback360 bundle to the correct
 place in the .kext to make it work.
 
 
-To debug the driver, sudo cp -R 360Controller.kext /tmp/ to assign the
+To debug the driver, `sudo cp -R 360Controller.kext /tmp/` to assign the
 correct properties - note that the Force Feedback plugin only seems to
-be found by OSX if the driver is in /System/Library/Extensions so I
+be found by OSX if the driver is in `/System/Library/Extensions` so I
 could only debug it in place.
 
 
 To test the Preference Pane, just double-click the resulting file.
 
 
-**Debugging**
+***Debugging***
 
 Most of the debugging I did was via printing out text. In 360Controller,
 you can use IOLog(), and the output will appear in system.log. In
-Feedback360 normal fprintf(stderr,...), and the output will appear on
+Feedback360 normal `fprintf(stderr,...)`, and the output will appear on
 the console of whatever application is attempting to use Force Feedback.
-In Pref360Control NSLog() works as it's an Objective C program, and will
+In Pref360Control, `NSLog()` works as it's an Objective C program, and will
 output to the console of the Preferences application.
 
 
-**Installer**
+***Installer***
 
-Included is an installer project for Packages. Download Iceberg at
+Included is an installer project for Packages. Download Packages at
 [http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html)
 
 
-**Other information**
+***Other information***
 
 I wrote the driver from scratch, using Apple documentation and drivers
 simply as a reference and not basing it upon any existing source. As

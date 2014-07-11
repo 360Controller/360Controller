@@ -1,10 +1,10 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
 {\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
-\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\b\fs36 \cf0 XBox 360 Controller driver for Mac OS X
@@ -36,10 +36,7 @@ The driver exposes a standard game pad with a number of standard controls, so an
 \b Known Problems/Todo
 \b0 \
 \pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural
-\ls1\ilvl0\cf0 {\listtext	\'95	}The rumble motor test on the triggers of the Preference Pane bypasses the Force Feedback Framework functionality, so isn't actually testing it. It really should, for completeness (and it'd help adding support for more complex effects) - this test is now disabled in the normal release anyway\
-{\listtext	\'95	}Force Feedback plugin may make effects run slower (e.g. longer time) than they should\
-{\listtext	\'95	}Driver probably needs to be more resilient to errors and odd cases\
-{\listtext	\'95	}Better Force Feedback "emulation"\
+\ls1\ilvl0\cf0 {\listtext	\'95	}Driver probably needs to be more resilient to errors and odd cases\
 {\listtext	\'95	}Extra settings? E.g. trigger deadzones, control remapping.\
 {\listtext	\'95	}Someone has requested old Xbox Controller support too.\
 \pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural
@@ -77,10 +74,11 @@ Most of the debugging I did was via printing out text. In 360Controller, you can
 
 \b Installer
 \b0 \
-Included is an installer project for Iceberg. Download Iceberg at {\field{\*\fldinst{HYPERLINK "http://s.sudre.free.fr/Software/Iceberg.html"}}{\fldrslt http://s.sudre.free.fr/Software/Iceberg.html}}\
+Included is an installer project for Packages. Download Packages at {\field{\*\fldinst{HYPERLINK "http://s.sudre.free.fr/Software/Packages/about.html"}}{\fldrslt http://s.sudre.free.fr/Software/Packages/about.html}}\
 \
 
 \b Other information
 \b0 \
 I wrote the driver from scratch, using Apple documentation and drivers simply as a reference and not basing it upon any existing source. As such, some things may be done strangely or incorrectly, so excuse any weirdness. I've also tried to include comments to explain generally what's going on :)\
-}
+\
+The calculations for the updated Feedback360 plugin are based on the unmaintained xi driver for Windows.}
