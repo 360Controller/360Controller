@@ -169,18 +169,18 @@ static BOOL IsXBox360Controller(io_service_t device)
 @interface DeviceLister ()
 @property (getter = isChanged) BOOL changed;
 @property (arcstrong) NSMutableDictionary *entries;
+@property (weak) Pref360ControlPref *owner;
 @end
 
 @implementation DeviceLister
 {
-    Pref360ControlPref *owner;
-    
     NSMutableArray *connected, *enabled;
 }
 @synthesize list;
 @synthesize sheet;
 @synthesize changed;
 @synthesize entries;
+@synthesize owner;
 
 - (instancetype)init
 {
@@ -405,7 +405,8 @@ static BOOL IsXBox360Controller(io_service_t device)
                                  kAuthorizationEmptyEnvironment,
                                  kAuthorizationFlagDefaults,
                                  &authorisationRef);
-    if (status != errAuthorizationSuccess) {
+    if (status != errAuthorizationSuccess)
+    {
         [self showFailure:Three60LocalizedString(@"Unable to create authorisation request", @"")];
         return NO;
     }
@@ -439,7 +440,7 @@ fail:
 
 - (void)showWithOwner:(Pref360ControlPref*)pane
 {
-    owner = pane;
+    self.owner = pane;
     if (![self loadDevices])
         return;
     [NSApp beginSheet:sheet

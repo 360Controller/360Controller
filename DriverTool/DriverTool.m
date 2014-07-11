@@ -116,7 +116,8 @@ static void AddDevice(NSMutableDictionary *personalities, NSString *name, int ve
 static void AddDevices(NSMutableDictionary *personalities, int argc, const char *argv[])
 {
     int i, count = (argc - 2) / 3;
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < count; i++)
+    {
         NSString *name = @(argv[(i * 3) + 2]);
         int vendor = atoi(argv[(i * 3) + 3]);
         int product = atoi(argv[(i * 3) + 4]);

@@ -241,7 +241,7 @@ IOReturn WirelessGamingReceiver::message(UInt32 type,IOService *provider,void *a
             return IOService::message(type,provider,argument);
     }
 #else
-	return IOService::message(type,provider,argument);
+    return IOService::message(type,provider,argument);
 #endif
 }
 
@@ -250,9 +250,8 @@ bool WirelessGamingReceiver::QueueRead(int index)
 {
     IOUSBCompletion complete;
     IOReturn err;
-    WGRREAD *data;
+    WGRREAD *data = (WGRREAD*)IOMalloc(sizeof(WGRREAD));
     
-    data = (WGRREAD*)IOMalloc(sizeof(WGRREAD));
     if (data == NULL)
         return false;
     data->index = index;
@@ -352,9 +351,7 @@ void WirelessGamingReceiver::WriteComplete(void *parameter,IOReturn status,UInt3
 // Release any allocated objects
 void WirelessGamingReceiver::ReleaseAll(void)
 {
-    int i;
-    
-    for (i = 0; i < connectionCount; i++)
+    for (int i = 0; i < connectionCount; i++)
     {
         if (connections[i].service != NULL)
         {
