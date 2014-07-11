@@ -29,7 +29,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    if ((self = [super initWithFrame:frameRect]) != nil) {
+    if (self = [super initWithFrame:frameRect]) {
         [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;

@@ -50,11 +50,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if (update) [BRIDGE(Pref360ControlPref*, param) handleDeviceChange];
 }
 
+@interface Pref360ControlPref ()
+@property (arcstrong) NSMutableArray *deviceArray;
+@end
+
 @implementation Pref360ControlPref
 {
     @private
     // Internal info
-    NSMutableArray *deviceArray;
     IOHIDElementCookie axis[6],buttons[15];
     
     IOHIDDeviceInterface122 **device;
@@ -95,6 +98,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 @synthesize deviceLister;
 @synthesize powerOff;
 @synthesize masterPort;
+@synthesize deviceArray;
 
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
@@ -210,7 +214,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     BOOL b = (value != 0);
     
-    switch(index) {
+    switch (index) {
         case 0:
             [rightButtons setA:b];
             break;
@@ -386,7 +390,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Start using a HID device
 - (void)startDevice
 {
-    int i,j;
+    int i = (int)[deviceList indexOfSelectedItem];
+    int j;
     CFArrayRef elements;
     CFDictionaryRef element;
     CFTypeRef object;
@@ -397,17 +402,16 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOReturn ret;
     
     [self resetDisplay];
-    i=(int)[deviceList indexOfSelectedItem];
     if(([deviceArray count]==0)||(i==-1)) {
         NSLog(@"No devices found? :( device count==%i, i==%i",(int)[deviceArray count], i);
         return;
     }
     {
-        DeviceItem *item=deviceArray[i];
+        DeviceItem *item = deviceArray[i];
         
-        device=[item hidDevice];
-        ffDevice=[item ffDevice];
-        registryEntry=[item rawDevice];
+        device = [item hidDevice];
+        ffDevice = [item ffDevice];
+        registryEntry = [item rawDevice];
     }
     
     if((*device)->copyMatchingElements(device,NULL,&elements)!=kIOReturnSuccess) {
@@ -415,7 +419,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         // Make note of failure?
         return;
     }
-    for(i=0;i<CFArrayGetCount(elements);i++) {
+    
+    for (i = 0;i < CFArrayGetCount(elements); i++) {
         element=CFArrayGetValueAtIndex(elements,i);
         // Get cookie
         object=CFDictionaryGetValue(element,CFSTR(kIOHIDElementCookieKey));
@@ -499,14 +504,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Add to runloop
     CFRunLoopAddSource(CFRunLoopGetCurrent(), eventSource, kCFRunLoopCommonModes);
     // Add some elements
-    for(i=0;i<6;i++)
+    for (i = 0; i < 6; i++)
         (*hidQueue)->addElement(hidQueue, axis[i], 0);
-    for(i=0;i<15;i++)
+    for (i = 0; i < 15; i++)
         (*hidQueue)->addElement(hidQueue, buttons[i], 0);
     // Start
-    ret=(*hidQueue)->start(hidQueue);
-    if(ret!=kIOReturnSuccess) {
-        NSLog(@"Unable to start queue - 0x%.8x",ret);
+    ret = (*hidQueue)->start(hidQueue);
+    if (ret != kIOReturnSuccess) {
+        NSLog(@"Unable to start queue - 0x%.8x", ret);
         // Error?
         return;
     }
@@ -564,8 +569,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self updateLED:0x0a];
     [self testMotorsInit];
     [self testMotorsLarge:0 small:0];
-    largeMotor=0;
-    smallMotor=0;
+    largeMotor = 0;
+    smallMotor = 0;
     // Battery level?
     {
         NSString *imageName = nil;
@@ -603,9 +608,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     CFMutableDictionaryRef hidDictionary;
     IOReturn ioReturn;
     io_iterator_t iterator;
-    io_object_t hidDevice, parent;
-    int count;
-    DeviceItem *item;
+    io_object_t hidDevice;
+    int count = 0;
     
     // Scrub old items
     [self stopDevice];
@@ -613,13 +617,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Add new items
     hidDictionary=IOServiceMatching(kIOHIDDeviceKey);
     ioReturn=IOServiceGetMatchingServices(masterPort,hidDictionary,&iterator);
-    if((ioReturn!=kIOReturnSuccess)||(iterator==0)) {
+    if((ioReturn != kIOReturnSuccess) || (iterator == 0)) {
         [deviceList addItemWithTitle:NO_ITEMS];
         return;
     }
-    count=0;
-    while((hidDevice=IOIteratorNext(iterator))) {
-		parent = 0;
+    
+    while ((hidDevice = IOIteratorNext(iterator))) {
+		io_object_t parent = 0;
 		IORegistryEntryGetParentEntry(hidDevice, kIOServicePlane, &parent);
         BOOL deviceWired = IOObjectConformsTo(parent, "Xbox360Peripheral") && IOObjectConformsTo(hidDevice, "Xbox360ControllerClass");
         BOOL deviceWireless = IOObjectConformsTo(hidDevice, "WirelessHIDDevice");
@@ -628,8 +632,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             IOObjectRelease(hidDevice);
             continue;
         }
-        item=[DeviceItem allocateDeviceItemForDevice:hidDevice];
-        if(item==NULL) continue;
+        DeviceItem *item = [DeviceItem allocateDeviceItemForDevice:hidDevice];
+        if (item == nil) continue;
         // Add to item
         NSString *name = [item name];
         if (name == nil)
@@ -654,7 +658,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
+    self.deviceArray = [NSMutableArray arrayWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -700,6 +704,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         FFDeviceEscape([item ffDevice], &escape);
     }
     [self deleteDeviceList];
+    self.deviceArray = nil;
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);
     // Done
