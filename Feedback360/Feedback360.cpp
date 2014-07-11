@@ -433,12 +433,12 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
                 Stopped = true;
                 Paused = false;
                 break;
-                
+
             case FFSFFC_PAUSE:
                 Paused  = true;
                 PausedTime = CFAbsoluteTimeGetCurrent();
                 break;
-                
+
             case FFSFFC_CONTINUE:
                 for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
                 {
@@ -446,15 +446,15 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
                 }
                 Paused = false;
                 break;
-                
+
             case FFSFFC_SETACTUATORSON:
                 Actuator = true;
                 break;
-                
+
             case FFSFFC_SETACTUATORSOFF:
                 Actuator = false;
                 break;
-                
+
             default:
                 Result = FFERR_INVALIDPARAM;
                 break;
@@ -587,7 +587,7 @@ void Feedback360::EffectProc( void *params )
 
     if (cThis->Actuator == true)
     {
-        for (Feedback360EffectIterator effectIterator = cThis->EffectList.begin() ; effectIterator != cThis->EffectList.end(); ++effectIterator)
+        for (Feedback360EffectIterator effectIterator = cThis->EffectList.begin(); effectIterator != cThis->EffectList.end(); ++effectIterator)
         {
             if((CFAbsoluteTimeGetCurrent() - cThis->LastTime*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
                 CalcResult = effectIterator->Calc(&LeftLevel, &RightLevel);

@@ -100,10 +100,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)updateLED:(int)ledIndex
 {
     FFEFFESCAPE escape = {0};
-    unsigned char c;
+    unsigned char c = ledIndex;
     
     if (ffDevice == 0) return;
-    c = ledIndex;
     escape.dwSize = sizeof(escape);
     escape.dwCommand = 0x02;
     escape.cbInBuffer = sizeof(c);
@@ -112,7 +111,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 
 // This will initialize the ff effect.
-
 - (void)testMotorsInit
 {
     if (ffDevice == 0) return;
@@ -283,7 +281,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     AbsoluteTime zeroTime = {0,0};
     IOHIDEventStruct event;
-    BOOL found;
+    BOOL found = NO;
     int i;
     
     if (sender != hidQueue) return;
@@ -291,7 +289,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         result = (*hidQueue)->getNextEvent(hidQueue,&event,zeroTime,0);
         if (result != kIOReturnSuccess) continue;
         // Check axis
-        for (i = 0, found = NO; (i < 6) && !found; i++) {
+        for (i = 0; (i < 6) && !found; i++) {
             if (event.elementCookie == axis[i]) {
                 [self axisChanged:i newValue:event.value];
                 found = YES;
@@ -299,7 +297,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         }
         if (found) continue;
         // Check buttons
-        for (i = 0, found = NO; (i < 15) && !found; i++) {
+        for (i = 0; (i < 15) && !found; i++) {
             if(event.elementCookie==buttons[i]) {
                 [self buttonChanged:i newValue:event.value];
                 found = YES;
@@ -327,7 +325,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)resetDisplay
 {
     [leftStick setPositionX:0 y:0];
-    leftStick.pressed = NO;
+    [leftStick setPressed:NO];
     [leftStick setDeadzone:0];
     [digiStick setUp:NO];
     [digiStick setDown:NO];
@@ -411,6 +409,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         ffDevice=[item ffDevice];
         registryEntry=[item rawDevice];
     }
+    
     if((*device)->copyMatchingElements(device,NULL,&elements)!=kIOReturnSuccess) {
         NSLog(@"Can't get elements list");
         // Make note of failure?
@@ -632,15 +631,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         item=[DeviceItem allocateDeviceItemForDevice:hidDevice];
         if(item==NULL) continue;
         // Add to item
-        NSString *name;
-        name = [item name];
+        NSString *name = [item name];
         if (name == nil)
             name = @"Generic Controller";
         [deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [deviceArray addObject:item];
     }
     IOObjectRelease(iterator);
-    if(count==0) [deviceList addItemWithTitle:NO_ITEMS];
+    if (count==0) [deviceList addItemWithTitle:NO_ITEMS];
     [self startDevice];
 }
 
@@ -677,8 +675,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Shut down
 - (void)didUnselect
 {
-    int i;
-    DeviceItem *item;
     FFEFFESCAPE escape = {0};
     unsigned char c;
 
@@ -691,9 +687,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IONotificationPortDestroy(notifyPort);
     // Release device and info
     [self stopDevice];
-    for (i = 0; i < [deviceArray count]; i++)
+    for (DeviceItem *item in deviceArray)
     {
-        item = deviceArray[i];
+        NSInteger i = [deviceArray indexOfObject:item];
         if ([item ffDevice] == 0)
             continue;
         c = 0x06 + (i % 0x04);
@@ -732,9 +728,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IORegistryEntrySetCFProperties(registryEntry, BRIDGE(CFTypeRef, dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
-    [leftStick setLinked:([leftLinked state]==NSOnState)];
+    [leftStick setLinked:[leftLinked state] == NSOnState];
     [leftStick setDeadzone:[leftStickDeadzone doubleValue]];
-    [rightStick setLinked:([rightLinked state]==NSOnState)];
+    [rightStick setLinked:[rightLinked state] == NSOnState];
     [rightStick setDeadzone:[rightStickDeadzone doubleValue]];
 }
 

@@ -183,7 +183,7 @@ IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDRepor
 IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descriptor ) const
 {
     IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
-
+    
     if (buffer == NULL)
         return kIOReturnNoResources;
     buffer->writeBytes(0, ReportDescriptor, sizeof(ReportDescriptor));
@@ -195,7 +195,7 @@ IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descri
 IOReturn Wireless360Controller::setProperties(OSObject *properties)
 {
     OSDictionary *dictionary = OSDynamicCast(OSDictionary,properties);
-
+    
     if(dictionary!=NULL) {
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
