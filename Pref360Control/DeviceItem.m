@@ -61,13 +61,17 @@ static NSString* GetDeviceName(io_service_t device)
         IOCFPlugInInterface **plugInInterface;
         SInt32 score=0;
         
-        ret = IOCreatePlugInInterfaceForService(device,kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
-        if (ret != kIOReturnSuccess)
+        ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+        if (ret != kIOReturnSuccess) {
+            RELEASEOBJ(self);
             return nil;
+        }
         ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
         (*plugInInterface)->Release(plugInInterface);
-        if (ret != kIOReturnSuccess)
+        if (ret != kIOReturnSuccess) {
+            RELEASEOBJ(self);
             return nil;
+        }
         forceFeedback = 0;
         FFCreateDevice(device, &forceFeedback);
         self.rawDevice = device;
