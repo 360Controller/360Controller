@@ -55,8 +55,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 @end
 
 @implementation Pref360ControlPref
+#ifndef __i386__
 {
-    @private
+@private
     // Internal info
     IOHIDElementCookie axis[6],buttons[15];
     
@@ -76,6 +77,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFCUSTOMFORCE *customforce;
     FFEffectObjectReference effectRef;
 }
+#endif
 @synthesize centreButtons;
 @synthesize deviceList;
 @synthesize digiStick;
@@ -407,7 +409,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     {
-        DeviceItem *item = deviceArray[i];
+        DeviceItem *item = [deviceArray objectAtIndex:i];
         
         device = [item hidDevice];
         ffDevice = [item ffDevice];
@@ -759,7 +761,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if (ffDevice == 0) return;
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
-    FFDeviceEscape(ffDevice,&escape);
+    FFDeviceEscape(ffDevice, &escape);
 }
 
 @end

@@ -22,8 +22,9 @@
 */
 #import "DeviceItem.h"
 
-#if defined(__MAC_10_9) && MAC_OS_X_VERSION_MIN_REQUIRED != __MAC_10_7
-#warning building without Garbage Collection support. The Preference Pane won't be compatible with Lion.
+#if !defined(__OBJC_GC__) && defined(__x86_64__)
+#warning building without Garbage Collection support. The 64-bit Preference Pane won't be compatible with Lion.
+#warning The 32-bit preference pane, however, will be. But the user will have to re-launch System Preferences.
 #endif
 
 static NSString* GetDeviceName(io_service_t device)
@@ -35,9 +36,9 @@ static NSString* GetDeviceName(io_service_t device)
     if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) != KERN_SUCCESS)
         return nil;
     properties = CFBridgingRelease(serviceProperties);
-    deviceName = properties[@kIOHIDProductKey];
+    deviceName = [properties objectForKey:@kIOHIDProductKey];
     if (deviceName == nil)
-        deviceName = properties[@"USB Product Name"];
+        deviceName = [properties objectForKey:@"USB Product Name"];
     return deviceName;
 }
 
@@ -101,12 +102,12 @@ static NSString* GetDeviceName(io_service_t device)
         FFReleaseDevice(forceFeedback);
 #if !__has_feature(objc_arc)
     self.name = nil;
-#endif
     
-    SUPERDEALLOC;
+    [super dealloc];
+#endif
 }
 
-#if !__has_feature(objc_arc)
+#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
 - (void)finalize
 {
     if (deviceHandle)

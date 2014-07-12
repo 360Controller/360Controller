@@ -26,9 +26,8 @@
 void SetAlertDisabled(NSInteger index)
 {
     NSString *prop = [NSString stringWithFormat:@"%@%li", D_SHOWONCE, (long)index];
-    NSNumber *value = @YES;
 
-    CFPreferencesSetValue(BRIDGE(CFStringRef, prop), BRIDGE(CFPropertyListRef, value), DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    CFPreferencesSetValue(BRIDGE(CFStringRef, prop), kCFBooleanTrue, DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_DAEMON, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
