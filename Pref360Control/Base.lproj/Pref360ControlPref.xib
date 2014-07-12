@@ -36,15 +36,14 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="&lt;&lt; do not localize >>" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="12" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="240" y="597" width="600" height="321"/>
+            <rect key="contentRect" x="240" y="597" width="600" height="308"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="321"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="308"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="98">
-                        <rect key="frame" x="112" y="280" width="471" height="26"/>
+                        <rect key="frame" x="112" y="267" width="471" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="101" id="177">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -62,7 +61,7 @@
                         </connections>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="103">
-                        <rect key="frame" x="58" y="286" width="50" height="17"/>
+                        <rect key="frame" x="58" y="273" width="50" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="t30-ez-Z9k"/>
@@ -74,7 +73,7 @@
                         </textFieldCell>
                     </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="104" customClass="MyAnalogStick">
-                        <rect key="frame" x="49" y="144" width="77" height="77"/>
+                        <rect key="frame" x="49" y="131" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="77" id="PKp-ph-84K"/>
@@ -82,37 +81,38 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="105" customClass="MyDigitalStick">
-                        <rect key="frame" x="129" y="60" width="77" height="77"/>
+                        <rect key="frame" x="129" y="47" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="106" customClass="MyAnalogStick">
-                        <rect key="frame" x="232" y="60" width="77" height="77"/>
+                        <rect key="frame" x="232" y="47" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
-                        <rect key="frame" x="312" y="144" width="77" height="77"/>
+                        <rect key="frame" x="317" y="131" width="77" height="77"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="108" customClass="MyCentreButtons">
-                        <rect key="frame" x="157" y="158" width="126" height="39"/>
+                        <rect key="frame" x="157" y="145" width="126" height="39"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="126" id="L32-OU-r3X"/>
+                            <constraint firstAttribute="height" constant="39" id="yLF-RD-QHM"/>
+                        </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="109" customClass="MyShoulderButton">
-                        <rect key="frame" x="49" y="229" width="77" height="18"/>
+                        <rect key="frame" x="49" y="216" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="2rs-g7-BCp"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="110" customClass="MyShoulderButton">
-                        <rect key="frame" x="312" y="229" width="77" height="18"/>
+                        <rect key="frame" x="317" y="216" width="77" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="fXa-oy-cms"/>
-                        </constraints>
                     </customView>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="114">
-                        <rect key="frame" x="47" y="120" width="71" height="18"/>
+                        <rect key="frame" x="47" y="107" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="179">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -123,7 +123,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="115">
-                        <rect key="frame" x="47" y="100" width="71" height="18"/>
+                        <rect key="frame" x="47" y="87" width="71" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="180">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -134,7 +134,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                        <rect key="frame" x="315" y="120" width="71" height="18"/>
+                        <rect key="frame" x="315" y="107" width="69" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="181">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -145,7 +145,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="117">
-                        <rect key="frame" x="315" y="100" width="71" height="18"/>
+                        <rect key="frame" x="315" y="87" width="69" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="182">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -156,7 +156,7 @@
                         </connections>
                     </button>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="120">
-                        <rect key="frame" x="230" y="33" width="161" height="21"/>
+                        <rect key="frame" x="230" y="20" width="166" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="184">
                             <font key="font" size="12" name="Helvetica"/>
@@ -166,7 +166,7 @@
                         </connections>
                     </slider>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="156">
-                        <rect key="frame" x="47" y="80" width="64" height="18"/>
+                        <rect key="frame" x="47" y="67" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="185">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -177,7 +177,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="157">
-                        <rect key="frame" x="315" y="80" width="64" height="18"/>
+                        <rect key="frame" x="315" y="67" width="64" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="186">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -188,14 +188,14 @@
                         </connections>
                     </button>
                     <box title="About" translatesAutoresizingMaskIntoConstraints="NO" id="158">
-                        <rect key="frame" x="401" y="16" width="182" height="255"/>
+                        <rect key="frame" x="399" y="16" width="184" height="242"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="178" height="238"/>
+                            <rect key="frame" x="2" y="2" width="180" height="225"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="161">
-                                    <rect key="frame" x="13" y="216" width="152" height="11"/>
+                                    <rect key="frame" x="13" y="203" width="154" height="11"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Xbox 360 Controller Driver" id="187">
                                         <font key="font" metaFont="miniSystem"/>
@@ -204,7 +204,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="163">
-                                    <rect key="frame" x="13" y="197" width="128" height="11"/>
+                                    <rect key="frame" x="13" y="184" width="130" height="11"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Version 0.14" id="188">
                                         <font key="font" metaFont="miniSystem"/>
@@ -213,7 +213,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="165">
-                                    <rect key="frame" x="13" y="178" width="128" height="11"/>
+                                    <rect key="frame" x="13" y="165" width="111" height="11"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="© 2006-13 Colin Munro" id="189">
                                         <font key="font" metaFont="miniSystem"/>
@@ -222,7 +222,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="166">
-                                    <rect key="frame" x="13" y="159" width="128" height="11"/>
+                                    <rect key="frame" x="13" y="146" width="103" height="11"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://tattiebogle.net/" id="190">
                                         <font key="font" metaFont="miniSystem"/>
@@ -231,7 +231,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="167">
-                                    <rect key="frame" x="13" y="140" width="150" height="11"/>
+                                    <rect key="frame" x="13" y="127" width="152" height="11"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://mice-software.com/" id="191">
                                         <font key="font" metaFont="miniSystem"/>
@@ -240,11 +240,8 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="168" userLabel="More Info Text">
-                                    <rect key="frame" x="13" y="32" width="152" height="100"/>
+                                    <rect key="frame" x="13" y="53" width="154" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="Rh3-dw-pyg"/>
-                                    </constraints>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="192">
                                         <font key="font" metaFont="miniSystem"/>
                                         <string key="title">For more information on this driver, please see the supplied Readme and Licence documents.
@@ -259,7 +256,6 @@ Please consider donating if you enjoy this driver!</string>
                         <constraints>
                             <constraint firstItem="168" firstAttribute="trailing" secondItem="161" secondAttribute="trailing" id="2lx-oY-CyH"/>
                             <constraint firstItem="168" firstAttribute="top" secondItem="167" secondAttribute="bottom" constant="8" symbolic="YES" id="6zb-Uq-30m"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="168" secondAttribute="bottom" constant="9" id="7gj-kE-fbF"/>
                             <constraint firstItem="166" firstAttribute="top" secondItem="165" secondAttribute="bottom" constant="8" symbolic="YES" id="BQe-b5-KJX"/>
                             <constraint firstItem="168" firstAttribute="leading" secondItem="167" secondAttribute="leading" id="DWz-rm-SX1"/>
                             <constraint firstItem="161" firstAttribute="top" secondItem="158" secondAttribute="top" constant="26" id="TBr-Al-9mQ"/>
@@ -273,15 +269,14 @@ Please consider donating if you enjoy this driver!</string>
                             <constraint firstItem="161" firstAttribute="leading" secondItem="158" secondAttribute="leading" constant="14" id="nRA-hm-Wo7"/>
                             <constraint firstAttribute="trailing" secondItem="167" secondAttribute="trailing" constant="16" id="oAJ-90-RDj"/>
                             <constraint firstItem="163" firstAttribute="leading" secondItem="161" secondAttribute="leading" id="pP0-wY-p04"/>
-                            <constraint firstItem="163" firstAttribute="trailing" secondItem="165" secondAttribute="trailing" id="pe1-Fl-36z"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="168" secondAttribute="bottom" constant="11" id="pVo-jz-DlU"/>
                             <constraint firstAttribute="trailing" secondItem="163" secondAttribute="trailing" constant="38" id="vsn-Ni-0gZ"/>
-                            <constraint firstItem="165" firstAttribute="trailing" secondItem="166" secondAttribute="trailing" id="zoD-mg-90N"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                        <rect key="frame" x="203" y="207" width="32" height="24"/>
+                        <rect key="frame" x="208" y="194" width="32" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="K71-5x-oaA"/>
@@ -290,7 +285,7 @@ Please consider donating if you enjoy this driver!</string>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="193"/>
                     </imageView>
                     <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
-                        <rect key="frame" x="23" y="57" width="21" height="166"/>
+                        <rect key="frame" x="23" y="44" width="21" height="166"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="left" sliderType="linear" id="195"/>
                         <connections>
@@ -298,7 +293,7 @@ Please consider donating if you enjoy this driver!</string>
                         </connections>
                     </slider>
                     <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="198">
-                        <rect key="frame" x="8" y="264" width="39" height="38"/>
+                        <rect key="frame" x="8" y="251" width="39" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="round" bezelStyle="circular" image="NSAddTemplate" imagePosition="only" borderStyle="border" id="199">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -309,7 +304,7 @@ Please consider donating if you enjoy this driver!</string>
                         </connections>
                     </button>
                     <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="227">
-                        <rect key="frame" x="87" y="26" width="99" height="32"/>
+                        <rect key="frame" x="87" y="13" width="99" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Power off" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="228">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -320,7 +315,7 @@ Please consider donating if you enjoy this driver!</string>
                         </connections>
                     </button>
                     <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zT8-q6-bax">
-                        <rect key="frame" x="49" y="255" width="169" height="16"/>
+                        <rect key="frame" x="49" y="242" width="169" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="169" id="uEv-ot-Mg4"/>
@@ -328,7 +323,7 @@ Please consider donating if you enjoy this driver!</string>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="xJT-rp-fd2"/>
                     </levelIndicator>
                     <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCv-HS-YkX">
-                        <rect key="frame" x="226" y="255" width="170" height="16"/>
+                        <rect key="frame" x="226" y="242" width="168" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="TBS-cd-qyS"/>
                     </levelIndicator>
@@ -336,12 +331,11 @@ Please consider donating if you enjoy this driver!</string>
                 <constraints>
                     <constraint firstItem="156" firstAttribute="top" secondItem="115" secondAttribute="bottom" constant="6" symbolic="YES" id="1Yt-vm-Hh7"/>
                     <constraint firstItem="110" firstAttribute="trailing" secondItem="107" secondAttribute="trailing" id="1sw-Fa-LUA"/>
-                    <constraint firstItem="158" firstAttribute="leading" secondItem="157" secondAttribute="trailing" constant="27" id="3uE-O0-wwD"/>
                     <constraint firstItem="227" firstAttribute="top" secondItem="156" secondAttribute="bottom" constant="28" id="3w2-xR-H5u"/>
-                    <constraint firstItem="107" firstAttribute="leading" secondItem="108" secondAttribute="trailing" constant="29" id="4be-lQ-3SF"/>
                     <constraint firstItem="194" firstAttribute="top" secondItem="104" secondAttribute="top" id="4xg-L1-vRj"/>
                     <constraint firstItem="109" firstAttribute="leading" secondItem="zT8-q6-bax" secondAttribute="leading" id="5BT-ck-CWd"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="110" secondAttribute="bottom" constant="8" symbolic="YES" id="5f2-2V-vu2"/>
+                    <constraint firstAttribute="bottom" secondItem="227" secondAttribute="bottom" constant="20" symbolic="YES" id="6Ou-dd-CyR"/>
                     <constraint firstItem="104" firstAttribute="leading" secondItem="114" secondAttribute="leading" id="6oU-dY-n2O"/>
                     <constraint firstItem="157" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="7hF-Mb-yhW"/>
                     <constraint firstItem="105" firstAttribute="top" secondItem="6" secondAttribute="top" constant="184" id="8Vz-V3-fOQ"/>
@@ -353,7 +347,6 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="174" firstAttribute="top" secondItem="VCv-HS-YkX" secondAttribute="bottom" constant="24" id="Ckx-2p-QRg"/>
                     <constraint firstItem="106" firstAttribute="height" secondItem="104" secondAttribute="height" id="CxK-Jz-wtE"/>
                     <constraint firstItem="106" firstAttribute="height" secondItem="105" secondAttribute="height" id="DDh-2P-xgp"/>
-                    <constraint firstItem="108" firstAttribute="leading" secondItem="104" secondAttribute="trailing" constant="31" id="DsF-Mb-cXr"/>
                     <constraint firstItem="106" firstAttribute="height" secondItem="107" secondAttribute="height" id="Fcg-JV-gnC"/>
                     <constraint firstItem="194" firstAttribute="bottom" secondItem="105" secondAttribute="bottom" id="HBh-NE-5LF"/>
                     <constraint firstItem="198" firstAttribute="top" secondItem="6" secondAttribute="top" constant="22" id="I5j-7j-pbc"/>
@@ -375,36 +368,38 @@ Please consider donating if you enjoy this driver!</string>
                     <constraint firstItem="104" firstAttribute="top" secondItem="107" secondAttribute="top" id="WWe-UI-P61"/>
                     <constraint firstItem="107" firstAttribute="leading" secondItem="174" secondAttribute="trailing" constant="77" id="Xqa-OU-WfD"/>
                     <constraint firstItem="107" firstAttribute="leading" secondItem="110" secondAttribute="leading" id="XxX-U7-dsn"/>
+                    <constraint firstItem="157" firstAttribute="leading" secondItem="107" secondAttribute="leading" id="Z9s-wY-p0f"/>
                     <constraint firstItem="114" firstAttribute="top" secondItem="104" secondAttribute="bottom" constant="8" symbolic="YES" id="aHa-hO-m2r"/>
-                    <constraint firstItem="158" firstAttribute="leading" secondItem="VCv-HS-YkX" secondAttribute="trailing" constant="8" symbolic="YES" id="aqU-Qr-Rry"/>
                     <constraint firstItem="120" firstAttribute="leading" secondItem="106" secondAttribute="leading" id="b2W-PZ-HMC"/>
                     <constraint firstItem="106" firstAttribute="width" secondItem="104" secondAttribute="width" id="bEZ-NK-TWU"/>
                     <constraint firstItem="158" firstAttribute="trailing" secondItem="98" secondAttribute="trailing" id="bdQ-dV-FsS"/>
                     <constraint firstItem="116" firstAttribute="top" secondItem="107" secondAttribute="bottom" constant="8" symbolic="YES" id="bog-km-7Y9"/>
                     <constraint firstItem="109" firstAttribute="trailing" secondItem="104" secondAttribute="trailing" id="bqh-Dp-1U4"/>
+                    <constraint firstItem="157" firstAttribute="leading" secondItem="116" secondAttribute="leading" id="dD2-Cz-BCK"/>
+                    <constraint firstItem="158" firstAttribute="leading" secondItem="VCv-HS-YkX" secondAttribute="trailing" constant="8" symbolic="YES" id="eHH-AF-zSW"/>
                     <constraint firstItem="117" firstAttribute="baseline" secondItem="115" secondAttribute="baseline" id="eml-t8-t1a"/>
                     <constraint firstItem="104" firstAttribute="top" secondItem="109" secondAttribute="bottom" constant="8" symbolic="YES" id="fOB-hg-zIY"/>
                     <constraint firstItem="105" firstAttribute="bottom" secondItem="106" secondAttribute="bottom" id="gFX-lZ-iPF"/>
                     <constraint firstItem="106" firstAttribute="top" secondItem="105" secondAttribute="top" id="gS1-Fa-DqQ"/>
                     <constraint firstItem="105" firstAttribute="top" secondItem="108" secondAttribute="bottom" constant="21" id="gzD-0h-Uhd"/>
-                    <constraint firstItem="158" firstAttribute="leading" secondItem="110" secondAttribute="trailing" constant="15" id="h5d-Da-jKm"/>
                     <constraint firstItem="107" firstAttribute="trailing" secondItem="120" secondAttribute="trailing" id="hNd-VC-czn"/>
                     <constraint firstItem="115" firstAttribute="leading" secondItem="114" secondAttribute="leading" id="i6G-xg-OSN"/>
                     <constraint firstItem="115" firstAttribute="leading" secondItem="156" secondAttribute="leading" id="lVX-Fj-a3W"/>
-                    <constraint firstItem="174" firstAttribute="leading" secondItem="104" secondAttribute="trailing" constant="77" id="lgJ-kt-8oP"/>
+                    <constraint firstItem="VCv-HS-YkX" firstAttribute="trailing" secondItem="110" secondAttribute="trailing" id="n6V-uX-QiU"/>
                     <constraint firstItem="VCv-HS-YkX" firstAttribute="top" secondItem="158" secondAttribute="top" id="o7g-0W-xLP"/>
                     <constraint firstItem="106" firstAttribute="width" secondItem="107" secondAttribute="width" id="oA3-2t-qR8"/>
                     <constraint firstAttribute="bottom" secondItem="158" secondAttribute="bottom" constant="20" symbolic="YES" id="p1h-yC-FdV"/>
                     <constraint firstItem="194" firstAttribute="top" secondItem="198" secondAttribute="bottom" constant="52" id="peP-4E-cmz"/>
                     <constraint firstItem="116" firstAttribute="leading" secondItem="106" secondAttribute="trailing" constant="8" symbolic="YES" id="pq7-JO-Rfb"/>
-                    <constraint firstItem="116" firstAttribute="centerX" secondItem="107" secondAttribute="centerX" id="qPe-u3-8b6"/>
                     <constraint firstItem="157" firstAttribute="baseline" secondItem="156" secondAttribute="baseline" id="qjT-9J-45T"/>
                     <constraint firstItem="194" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="25" id="sBc-uW-rhY"/>
+                    <constraint firstItem="157" firstAttribute="leading" secondItem="117" secondAttribute="leading" id="uAD-JX-WBn"/>
                     <constraint firstItem="157" firstAttribute="centerX" secondItem="98" secondAttribute="centerX" id="ueY-Zc-4WS"/>
                     <constraint firstItem="106" firstAttribute="leading" secondItem="105" secondAttribute="trailing" constant="26" id="uey-ZE-FMc"/>
                     <constraint firstItem="103" firstAttribute="leading" secondItem="198" secondAttribute="trailing" constant="20" id="wCL-qK-eEH"/>
                     <constraint firstItem="108" firstAttribute="top" secondItem="174" secondAttribute="bottom" constant="10" id="wDI-ZX-NiS"/>
                     <constraint firstItem="227" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="93" id="xH6-6A-FVa"/>
+                    <constraint firstItem="108" firstAttribute="leading" secondItem="104" secondAttribute="trailing" constant="31" id="xjy-gg-0f0"/>
                     <constraint firstItem="117" firstAttribute="trailing" secondItem="116" secondAttribute="trailing" id="ybf-eL-C4L"/>
                     <constraint firstItem="109" firstAttribute="top" secondItem="zT8-q6-bax" secondAttribute="bottom" constant="8" symbolic="YES" id="z4y-jf-7mi"/>
                     <constraint firstItem="120" firstAttribute="leading" secondItem="227" secondAttribute="trailing" constant="52" id="zSA-zo-fAJ"/>
@@ -413,7 +408,6 @@ Please consider donating if you enjoy this driver!</string>
         </window>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="200" userLabel="DeviceSheet">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="166" width="519" height="336"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="490" height="150"/>
