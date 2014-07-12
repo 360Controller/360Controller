@@ -924,20 +924,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55DA1CED1970B901000C9C35 /* batt1.png in Resources */,
-				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
-				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
-				55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */,
-				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
 				55DA1CEB1970B901000C9C35 /* batt0.png in Resources */,
 				55DA1CEC1970B901000C9C35 /* batt0@2x.png in Resources */,
+				55DA1CED1970B901000C9C35 /* batt1.png in Resources */,
+				55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */,
 				55DA1CEF1970B901000C9C35 /* batt2.png in Resources */,
-				551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */,
-				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
 				55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */,
-				55DBC494196DF0930079FE88 /* 360Control.iconset in Resources */,
 				55DA1CF11970B901000C9C35 /* batt3.png in Resources */,
 				55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */,
+				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
+				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
+				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
+				551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */,
+				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
+				55DBC494196DF0930079FE88 /* 360Control.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
