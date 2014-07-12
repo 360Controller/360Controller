@@ -50,11 +50,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if (update) [BRIDGE(Pref360ControlPref*, param) handleDeviceChange];
 }
 
+@interface Pref360ControlPref ()
+@property (arcstrong) NSMutableArray *deviceArray;
+@end
+
 @implementation Pref360ControlPref
 {
     @private
     // Internal info
-    NSMutableArray *deviceArray;
     IOHIDElementCookie axis[6],buttons[15];
     
     IOHIDDeviceInterface122 **device;
@@ -95,6 +98,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 @synthesize deviceLister;
 @synthesize powerOff;
 @synthesize masterPort;
+@synthesize deviceArray;
 
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
@@ -403,7 +407,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     {
-        DeviceItem *item=deviceArray[i];
+        DeviceItem *item = deviceArray[i];
         
         device=[item hidDevice];
         ffDevice=[item ffDevice];
@@ -654,7 +658,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
+    self.deviceArray = [NSMutableArray arrayWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -700,6 +704,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         FFDeviceEscape([item ffDevice], &escape);
     }
     [self deleteDeviceList];
+    self.deviceArray = nil;
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);
     // Done
