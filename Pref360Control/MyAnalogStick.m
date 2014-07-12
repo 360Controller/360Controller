@@ -51,22 +51,7 @@
     [self removeObserver:self forKeyPath:@"positiony"];
     [self removeObserver:self forKeyPath:@"deadzone"];
     [self removeObserver:self forKeyPath:@"linked"];
-    
-    SUPERDEALLOC;
 }
-
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"pressed"];
-    [self removeObserver:self forKeyPath:@"positionX"];
-    [self removeObserver:self forKeyPath:@"positiony"];
-    [self removeObserver:self forKeyPath:@"deadzone"];
-    [self removeObserver:self forKeyPath:@"linked"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

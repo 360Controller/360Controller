@@ -32,7 +32,7 @@
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
-    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, BRIDGE(CFStringRef, key), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
 	
     return CFBridgingRelease(value);
 }
@@ -40,7 +40,7 @@ static id GetDeviceValue(io_service_t device, NSString *key)
 // Make sure a name is as nice as possible for eventually going into the XML for the driver
 static NSString* SanitiseName(NSString *name)
 {
-    NSMutableString *output = [NSMutableString stringWithCapacity:100];
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
     NSInteger i;
     
     for (i = 0; i < [name length]; i++)
@@ -52,7 +52,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return [NSString stringWithString:output];
+    return [[NSString alloc] initWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -169,16 +169,14 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 @interface DeviceLister ()
 @property (getter = isChanged) BOOL changed;
-@property (arcstrong) NSMutableDictionary *entries;
-@property (arcweak) Pref360ControlPref *owner;
+@property (strong) NSMutableDictionary *entries;
+@property (weak) Pref360ControlPref *owner;
 @end
 
 @implementation DeviceLister
-#ifndef __i386__
 {
     NSMutableArray *connected, *enabled;
 }
-#endif
 @synthesize list;
 @synthesize sheet;
 @synthesize changed;
@@ -188,23 +186,12 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.entries = [NSMutableDictionary dictionaryWithCapacity:10];
+        self.entries = [[NSMutableDictionary alloc] initWithCapacity:10];
         connected = [[NSMutableArray alloc] initWithCapacity:10];
         enabled = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-    self.entries = nil;
-    [connected release];
-    [enabled release];
-    
-    [super dealloc];
-}
-#endif
 
 - (NSString*)toolPath
 {
@@ -225,7 +212,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     
     for (NSNumber *key in enabled)
     {
-        NSString *name = [entries objectForKey:key];
+        NSString *name = entries[key];
         NSUInteger keyValue = [key unsignedIntValue];
         UInt16 vendor = (keyValue >> 16) & 0xFFFF;
         UInt16 product = keyValue & 0xFFFF;
@@ -278,13 +265,12 @@ static BOOL IsXBox360Controller(io_service_t device)
     if ([task terminationStatus] != 0)
     {
         data = [[error fileHandleForReading] readDataToEndOfFile];
-        RELEASEOBJ(task);
-        return AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }
     
     // Read the data back
     data = [[pipe fileHandleForReading] readDataToEndOfFile];
-    response = AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     // Parse the results
     lines = [response componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
@@ -293,14 +279,13 @@ static BOOL IsXBox360Controller(io_service_t device)
         NSArray *values = [line componentsSeparatedByString:@","];
         if ([values count] != 3)
             continue;
-        unsigned int vendor = [[values objectAtIndex:1] unsignedIntValue];
-        unsigned int product = [[values objectAtIndex:2] unsignedIntValue];
+        unsigned int vendor = [values[1] unsignedIntValue];
+        unsigned int product = [values[2] unsignedIntValue];
         NSNumber *key = @((UInt32)((vendor << 16) | product));
         [enabled addObject:key];
-        if ([entries objectForKey:key] == nil)
-            [entries setObject:SanitiseName([values objectAtIndex:0]) forKey:key];
+        if (entries[key] == nil)
+            entries[key] = SanitiseName(values[0]);
     }
-    RELEASEOBJ(task);
     
     return nil;
 }
@@ -315,8 +300,8 @@ static BOOL IsXBox360Controller(io_service_t device)
     keys = [known allKeys];
     for (NSNumber *key in keys)
     {
-        if ([entries objectForKey:key] == nil)
-            [entries setObject:[known objectForKey:key] forKey:key];
+        if (entries[key] == nil)
+            entries[key] = known[key];
     }
     return nil;
 }
@@ -348,14 +333,14 @@ static BOOL IsXBox360Controller(io_service_t device)
                     NSNumber *key = @((UInt32)((vendor << 16) | product));
                     
                     [connected addObject:key];
-                    if ([entries objectForKey:key] == nil)
+                    if (entries[key] == nil)
                     {
                         NSString *name = GetDeviceValue(object, @"USB Product Name");
                         if (name == nil)
                             name = [NSString stringWithFormat:@"Unknown_%.4x_%.4x", vendor, product];
                         else
                             name = SanitiseName(name);
-                        [entries setObject:name forKey:key];
+                        entries[key] = name;
                     }
                 }
             }
@@ -378,7 +363,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (BOOL)loadDevices
 {
-    NSString *error = nil;
+    NSString *error;
     
     // Initialise
     [entries removeAllObjects];
@@ -490,7 +475,7 @@ fail:
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn row:(NSInteger)rowIndex
 {
     NSString *identifier = [aTableColumn identifier];
-    NSString *key = [[self allEntries] objectAtIndex:rowIndex];
+    NSString *key = [self allEntries][rowIndex];
     if ([identifier compare:@"enable"] == NSOrderedSame)
     {
         return @([enabled containsObject:key]);
@@ -503,9 +488,8 @@ fail:
             colour = [NSColor blueColor];
         else
             colour = [NSColor blackColor];
-        return AUTORELEASEOBJ([[NSAttributedString alloc]
-                               initWithString:[entries objectForKey:key]
-                               attributes:@{NSForegroundColorAttributeName: colour}]);
+        return [[NSAttributedString alloc] initWithString:entries[key]
+                                                attributes:@{NSForegroundColorAttributeName: colour}];
     }
     return nil;
 }
@@ -514,7 +498,7 @@ fail:
 {
     if ([(NSString*)[aTableColumn identifier] compare:@"enable"] == NSOrderedSame)
     {
-        NSString *key = [[self allEntries] objectAtIndex:rowIndex];
+        NSString *key = [self allEntries][rowIndex];
         BOOL contains = [enabled containsObject:key];
         if ([(NSNumber*)anObject boolValue])
         {

@@ -22,11 +22,6 @@
 */
 #import "DeviceItem.h"
 
-#if !defined(__OBJC_GC__) && defined(__x86_64__)
-#warning building without Garbage Collection support. The 64-bit Preference Pane won't be compatible with Lion.
-#warning The 32-bit preference pane, however, will be. But the user will have to re-launch System Preferences.
-#endif
-
 static NSString* GetDeviceName(io_service_t device)
 {
     CFMutableDictionaryRef serviceProperties;
@@ -36,14 +31,14 @@ static NSString* GetDeviceName(io_service_t device)
     if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) != KERN_SUCCESS)
         return nil;
     properties = CFBridgingRelease(serviceProperties);
-    deviceName = [properties objectForKey:@kIOHIDProductKey];
+    deviceName = properties[@kIOHIDProductKey];
     if (deviceName == nil)
-        deviceName = [properties objectForKey:@"USB Product Name"];
+        deviceName = properties[@"USB Product Name"];
     return deviceName;
 }
 
 @interface DeviceItem ()
-@property (arcstrong, readwrite) NSString *name;
+@property (strong, readwrite) NSString *name;
 @property (readwrite) io_service_t rawDevice;
 @property (readwrite) FFDeviceObjectReference ffDevice;
 @property (readwrite) IOHIDDeviceInterface122 **hidDevice;
@@ -64,13 +59,11 @@ static NSString* GetDeviceName(io_service_t device)
         
         ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
         if (ret != kIOReturnSuccess) {
-            RELEASEOBJ(self);
             return nil;
         }
         ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
         (*plugInInterface)->Release(plugInInterface);
         if (ret != kIOReturnSuccess) {
-            RELEASEOBJ(self);
             return nil;
         }
         forceFeedback = 0;
@@ -86,7 +79,7 @@ static NSString* GetDeviceName(io_service_t device)
     DeviceItem *item = [[[self class] alloc] initWithItemForDevice:device];
     
     if (item)
-        return AUTORELEASEOBJ(item);
+        return item;
     
     IOObjectRelease(device);
     return nil;
@@ -100,25 +93,6 @@ static NSString* GetDeviceName(io_service_t device)
         (*interface)->Release(interface);
     if (forceFeedback)
         FFReleaseDevice(forceFeedback);
-#if !__has_feature(objc_arc)
-    self.name = nil;
-    
-    [super dealloc];
-#endif
 }
-
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
-- (void)finalize
-{
-    if (deviceHandle)
-        IOObjectRelease(deviceHandle);
-    if (interface)
-        (*interface)->Release(interface);
-    if (forceFeedback)
-        FFReleaseDevice(forceFeedback);
-    
-    [super finalize];
-}
-#endif
 
 @end

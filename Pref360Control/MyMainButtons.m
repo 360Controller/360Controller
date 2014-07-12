@@ -44,21 +44,7 @@
     [self removeObserver:self forKeyPath:@"b"];
     [self removeObserver:self forKeyPath:@"x"];
     [self removeObserver:self forKeyPath:@"y"];
-    
-    SUPERDEALLOC;
 }
-
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"a"];
-    [self removeObserver:self forKeyPath:@"b"];
-    [self removeObserver:self forKeyPath:@"x"];
-    [self removeObserver:self forKeyPath:@"y"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
