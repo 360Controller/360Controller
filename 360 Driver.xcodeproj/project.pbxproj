@@ -76,7 +76,6 @@
 		55B637B718C10C0C00CE933D /* MyShoulderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A718C10C0C00CE933D /* MyShoulderButton.m */; };
 		55B637B818C10C0C00CE933D /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A818C10C0C00CE933D /* Pref360ControlPref.h */; };
 		55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A918C10C0C00CE933D /* Pref360ControlPref.m */; };
-		55B637BE18C10C2400CE933D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BA18C10C2400CE933D /* Images.xcassets */; };
 		55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BC18C10C2400CE933D /* pref360controlpref.tiff */; };
 		55B637C418C10C5E00CE933D /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 55B6376018C10A3200CE933D /* DriverTool */; };
 		55B637D318C10CB400CE933D /* Alert.tif in Resources */ = {isa = PBXBuildFile; fileRef = 55B637CC18C10CB400CE933D /* Alert.tif */; };
@@ -96,6 +95,14 @@
 		55B6383318C10EBE00CE933D /* WirelessHIDDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */; };
 		55B6383418C10EBE00CE933D /* WirelessHIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */; };
 		55B6384618C10FE200CE933D /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
+		55DA1CEB1970B901000C9C35 /* batt0.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE31970B901000C9C35 /* batt0.png */; };
+		55DA1CEC1970B901000C9C35 /* batt0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE41970B901000C9C35 /* batt0@2x.png */; };
+		55DA1CED1970B901000C9C35 /* batt1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE51970B901000C9C35 /* batt1.png */; };
+		55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE61970B901000C9C35 /* batt1@2x.png */; };
+		55DA1CEF1970B901000C9C35 /* batt2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE71970B901000C9C35 /* batt2.png */; };
+		55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE81970B901000C9C35 /* batt2@2x.png */; };
+		55DA1CF11970B901000C9C35 /* batt3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE91970B901000C9C35 /* batt3.png */; };
+		55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CEA1970B901000C9C35 /* batt3@2x.png */; };
 		55DBC493196DF0930079FE88 /* 360Control.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 55DBC492196DF0930079FE88 /* 360Control.iconset */; };
 		55DBC494196DF0930079FE88 /* 360Control.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 55DBC492196DF0930079FE88 /* 360Control.iconset */; };
 		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
@@ -259,7 +266,6 @@
 		55B637A718C10C0C00CE933D /* MyShoulderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShoulderButton.m; sourceTree = "<group>"; };
 		55B637A818C10C0C00CE933D /* Pref360ControlPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360ControlPref.h; sourceTree = "<group>"; };
 		55B637A918C10C0C00CE933D /* Pref360ControlPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360ControlPref.m; sourceTree = "<group>"; };
-		55B637BA18C10C2400CE933D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55B637BB18C10C2400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B637BC18C10C2400CE933D /* pref360controlpref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pref360controlpref.tiff; sourceTree = "<group>"; };
 		55B637C718C10CB400CE933D /* 360Daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 360Daemon.m; sourceTree = "<group>"; };
@@ -283,6 +289,14 @@
 		55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; };
 		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; };
 		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; };
+		55DA1CE31970B901000C9C35 /* batt0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt0.png; path = Resources/batt0.png; sourceTree = "<group>"; };
+		55DA1CE41970B901000C9C35 /* batt0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt0@2x.png"; path = "Resources/batt0@2x.png"; sourceTree = "<group>"; };
+		55DA1CE51970B901000C9C35 /* batt1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt1.png; path = Resources/batt1.png; sourceTree = "<group>"; };
+		55DA1CE61970B901000C9C35 /* batt1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt1@2x.png"; path = "Resources/batt1@2x.png"; sourceTree = "<group>"; };
+		55DA1CE71970B901000C9C35 /* batt2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt2.png; path = Resources/batt2.png; sourceTree = "<group>"; };
+		55DA1CE81970B901000C9C35 /* batt2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt2@2x.png"; path = "Resources/batt2@2x.png"; sourceTree = "<group>"; };
+		55DA1CE91970B901000C9C35 /* batt3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt3.png; path = Resources/batt3.png; sourceTree = "<group>"; };
+		55DA1CEA1970B901000C9C35 /* batt3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt3@2x.png"; path = "Resources/batt3@2x.png"; sourceTree = "<group>"; };
 		55DBC492196DF0930079FE88 /* 360Control.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = 360Control.iconset; sourceTree = "<group>"; };
 		55E1C62819708E7300EC9DD8 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = SOURCE_ROOT; };
 		55E1C62919708E7300EC9DD8 /* clean.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = clean.sh; sourceTree = SOURCE_ROOT; };
@@ -603,12 +617,19 @@
 		55B6378218C10B0B00CE933D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55B637BA18C10C2400CE933D /* Images.xcassets */,
 				55B637BB18C10C2400CE933D /* Info.plist */,
 				551CDFFD196EF52F000869B6 /* Pref360Control_Prefix.pch */,
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
 				55852E2118D6B5580009BF55 /* Localizable.strings */,
+				55DA1CE31970B901000C9C35 /* batt0.png */,
+				55DA1CE41970B901000C9C35 /* batt0@2x.png */,
+				55DA1CE51970B901000C9C35 /* batt1.png */,
+				55DA1CE61970B901000C9C35 /* batt1@2x.png */,
+				55DA1CE71970B901000C9C35 /* batt2.png */,
+				55DA1CE81970B901000C9C35 /* batt2@2x.png */,
+				55DA1CE91970B901000C9C35 /* batt3.png */,
+				55DA1CEA1970B901000C9C35 /* batt3@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -808,7 +829,6 @@
 				55B6380918C10E8700CE933D /* Frameworks */,
 				55B6380A18C10E8700CE933D /* Headers */,
 				55B6380B18C10E8700CE933D /* Resources */,
-				55B6380C18C10E8700CE933D /* Rez */,
 			);
 			buildRules = (
 			);
@@ -904,7 +924,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55B637BE18C10C2400CE933D /* Images.xcassets in Resources */,
+				55DA1CEB1970B901000C9C35 /* batt0.png in Resources */,
+				55DA1CEC1970B901000C9C35 /* batt0@2x.png in Resources */,
+				55DA1CED1970B901000C9C35 /* batt1.png in Resources */,
+				55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */,
+				55DA1CEF1970B901000C9C35 /* batt2.png in Resources */,
+				55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */,
+				55DA1CF11970B901000C9C35 /* batt3.png in Resources */,
+				55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */,
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
 				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
@@ -931,16 +958,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXRezBuildPhase section */
-		55B6380C18C10E8700CE933D /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		55B636B018C104DB00CE933D /* Sources */ = {
@@ -1162,7 +1179,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
@@ -1211,7 +1227,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
@@ -1500,6 +1516,7 @@
 		55FE3CA918D7B77800D69E84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
