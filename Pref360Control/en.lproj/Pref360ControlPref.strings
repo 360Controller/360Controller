@@ -1,0 +1,75 @@
+
+/* Class = "NSWindow"; title = "<< do not localize >>"; ObjectID = "12"; */
+"12.title" = "<< do not localize >>";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "99"; */
+"99.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "100"; */
+"100.title" = "Item2";
+
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "101"; */
+"101.title" = "Item1";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "102"; */
+"102.title" = "Item3";
+
+/* Class = "NSBox"; title = "About"; ObjectID = "158"; */
+"158.title" = "About";
+
+/* Class = "NSTextFieldCell"; title = "Device:"; ObjectID = "178"; */
+"178.title" = "Device:";
+
+/* Class = "NSButtonCell"; title = "Invert X"; ObjectID = "179"; */
+"179.title" = "Invert X";
+
+/* Class = "NSButtonCell"; title = "Invert Y"; ObjectID = "180"; */
+"180.title" = "Invert Y";
+
+/* Class = "NSButtonCell"; title = "Invert X"; ObjectID = "181"; */
+"181.title" = "Invert X";
+
+/* Class = "NSButtonCell"; title = "Invert Y"; ObjectID = "182"; */
+"182.title" = "Invert Y";
+
+/* Class = "NSButtonCell"; title = "Linked"; ObjectID = "185"; */
+"185.title" = "Linked";
+
+/* Class = "NSButtonCell"; title = "Linked"; ObjectID = "186"; */
+"186.title" = "Linked";
+
+/* Class = "NSTextFieldCell"; title = "Xbox 360 Controller Driver"; ObjectID = "187"; */
+"187.title" = "Xbox 360 Controller Driver";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.14"; ObjectID = "188"; */
+"188.title" = "Version 0.14";
+
+/* Class = "NSTextFieldCell"; title = "© 2006-13 Colin Munro"; ObjectID = "189"; */
+"189.title" = "© 2006-13 Colin Munro";
+
+/* Class = "NSTextFieldCell"; title = "http://tattiebogle.net/"; ObjectID = "190"; */
+"190.title" = "http://tattiebogle.net/";
+
+/* Class = "NSTextFieldCell"; title = "http://mice-software.com/"; ObjectID = "191"; */
+"191.title" = "http://mice-software.com/";
+
+/* Class = "NSTextFieldCell"; title = "For more information on this driver, please see the supplied Readme and Licence documents.\n\nPlease consider donating if you enjoy this driver!"; ObjectID = "192"; */
+"192.title" = "For more information on this driver, please see the supplied Readme and Licence documents.\n\nPlease consider donating if you enjoy this driver!";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "200"; */
+"200.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "209"; */
+"209.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Select the devices you would like to use with the driver:"; ObjectID = "215"; */
+"215.title" = "Select the devices you would like to use with the driver:";
+
+/* Class = "NSButtonCell"; title = "Done"; ObjectID = "217"; */
+"217.title" = "Done";
+
+/* Class = "NSTextFieldCell"; title = "To save changes to this list, you must enter your password.\nA restart will be required for changes to take effect."; ObjectID = "219"; */
+"219.title" = "To save changes to this list, you must enter your password.\nA restart will be required for changes to take effect.";
+
+/* Class = "NSButtonCell"; title = "Power off"; ObjectID = "228"; */
+"228.title" = "Power off";

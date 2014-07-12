@@ -25,12 +25,10 @@
 #define INSET_AMOUNT 10
 
 @implementation MyDigitalStick
-#ifndef __i386__
 {
 @private
     NSBezierPath *up, *down, *left, *right;
 }
-#endif
 @synthesize up = bUp;
 @synthesize down = bDown;
 @synthesize left = bLeft;
@@ -83,14 +81,14 @@
         triangle.size.height = rect.size.height / 3;
         triangle.origin.y = rect.origin.y + (triangle.size.height * 2);
         triangle.origin.x = rect.origin.x + triangle.size.width;
-        up = RETAINOBJ([MyDigitalStick makeTriangle:0 inRectangle:triangle]);
+        up = [MyDigitalStick makeTriangle:0 inRectangle:triangle];
         triangle.origin.y = rect.origin.y;
-        down = RETAINOBJ([MyDigitalStick makeTriangle:2 inRectangle:triangle]);
+        down = [MyDigitalStick makeTriangle:2 inRectangle:triangle];
         triangle.origin.y = rect.origin.y + triangle.size.height;
         triangle.origin.x = rect.origin.x;
-        left = RETAINOBJ([MyDigitalStick makeTriangle:1 inRectangle:triangle]);
+        left = [MyDigitalStick makeTriangle:1 inRectangle:triangle];
         triangle.origin.x = rect.origin.x + (triangle.size.width * 2);
-        right = RETAINOBJ([MyDigitalStick makeTriangle:3 inRectangle:triangle]);
+        right = [MyDigitalStick makeTriangle:3 inRectangle:triangle];
     }
     return self;
 }
@@ -101,28 +99,7 @@
     [self removeObserver:self forKeyPath:@"down"];
     [self removeObserver:self forKeyPath:@"left"];
     [self removeObserver:self forKeyPath:@"right"];
-    
-#if !__has_feature(objc_arc)
-    [up release];
-    [down release];
-    [left release];
-    [right release];
-    
-    [super dealloc];
-#endif
 }
-
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"up"];
-    [self removeObserver:self forKeyPath:@"down"];
-    [self removeObserver:self forKeyPath:@"left"];
-    [self removeObserver:self forKeyPath:@"right"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

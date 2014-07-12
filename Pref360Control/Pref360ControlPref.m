@@ -32,7 +32,7 @@
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
-    if (target) [BRIDGE(Pref360ControlPref*, target) eventQueueFired:sender withResult:result];
+    if (target) [((__bridge Pref360ControlPref*)target) eventQueueFired:sender withResult:result];
 }
 
 // Handle callback for when our device is connected or disconnected. Both events are
@@ -47,15 +47,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         update = YES;
     }
     
-    if (update) [BRIDGE(Pref360ControlPref*, param) handleDeviceChange];
+    if (update) [(__bridge Pref360ControlPref*)param handleDeviceChange];
 }
 
 @interface Pref360ControlPref ()
-@property (arcstrong) NSMutableArray *deviceArray;
+@property (strong) NSMutableArray *deviceArray;
 @end
 
 @implementation Pref360ControlPref
-#ifndef __i386__
 {
 @private
     // Internal info
@@ -77,7 +76,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFCUSTOMFORCE *customforce;
     FFEffectObjectReference effectRef;
 }
-#endif
 @synthesize centreButtons;
 @synthesize deviceList;
 @synthesize digiStick;
@@ -409,7 +407,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     {
-        DeviceItem *item = [deviceArray objectAtIndex:i];
+        DeviceItem *item = deviceArray[i];
         
         device = [item hidDevice];
         ffDevice = [item ffDevice];
@@ -497,7 +495,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         return;
     }
     // Set callback
-    ret=(*hidQueue)->setEventCallout(hidQueue, CallbackFunction, BRIDGE(void *, self), NULL);
+    ret=(*hidQueue)->setEventCallout(hidQueue, CallbackFunction, (__bridge void *)(self), NULL);
     if(ret!=kIOReturnSuccess) {
         NSLog(@"Unable to set event callback");
         // Error?
@@ -660,20 +658,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    self.deviceArray = [NSMutableArray arrayWithCapacity:1];
+    self.deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
         // Wired
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, BRIDGE(void *, self), &onIteratorWired);
-    callbackHandleDevice(BRIDGE(void *, self), onIteratorWired);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, BRIDGE(void *, self), &offIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &onIteratorWired);
+    callbackHandleDevice((__bridge void *)(self), onIteratorWired);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching(kIOUSBDeviceClassName), callbackHandleDevice, (__bridge void *)(self), &offIteratorWired);
     while((object = IOIteratorNext(offIteratorWired)) != 0)
         IOObjectRelease(object);
         // Wireless
-    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, BRIDGE(void *, self), &onIteratorWireless);
-    callbackHandleDevice(BRIDGE(void *, self), onIteratorWireless);
-    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, BRIDGE(void *, self), &offIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &onIteratorWireless);
+    callbackHandleDevice((__bridge void *)(self), onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
 }
@@ -732,7 +730,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"RelativeRight": @((BOOL)([rightLinked state]==NSOnState))};
     
     // Set property
-    IORegistryEntrySetCFProperties(registryEntry, BRIDGE(CFTypeRef, dict));
+    IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
     [leftStick setLinked:[leftLinked state] == NSOnState];

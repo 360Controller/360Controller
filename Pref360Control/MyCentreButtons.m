@@ -43,20 +43,7 @@
     [self removeObserver:self forKeyPath:@"back"];
     [self removeObserver:self forKeyPath:@"start"];
     [self removeObserver:self forKeyPath:@"specific"];
-    
-    SUPERDEALLOC;
 }
-
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"back"];
-    [self removeObserver:self forKeyPath:@"start"];
-    [self removeObserver:self forKeyPath:@"specific"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
