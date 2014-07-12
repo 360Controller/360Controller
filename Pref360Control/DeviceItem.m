@@ -54,7 +54,7 @@ static NSString* GetDeviceName(io_service_t device)
 @synthesize ffDevice = forceFeedback;
 @synthesize hidDevice = interface;
 
-- (instancetype)initFromItemForDevice:(io_service_t)device
+- (instancetype)initWithItemForDevice:(io_service_t)device
 {
     if (self = [super init]) {
         IOReturn ret;
@@ -82,7 +82,7 @@ static NSString* GetDeviceName(io_service_t device)
 
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device
 {
-    DeviceItem *item = [[[self class] alloc] initFromItemForDevice:device];
+    DeviceItem *item = [[[self class] alloc] initWithItemForDevice:device];
     
     if (item)
         return AUTORELEASEOBJ(item);

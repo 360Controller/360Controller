@@ -35,4 +35,6 @@
 
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device;
 
+- (instancetype)initWithItemForDevice:(io_service_t)device;
+
 @end
