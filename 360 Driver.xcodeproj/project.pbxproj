@@ -1369,7 +1369,9 @@
 		55B6379118C10B0B00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CLANG_ENABLE_OBJC_ARC[arch=i386]" = NO;
 				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
 				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
 				GCC_ENABLE_OBJC_GC = unsupported;
@@ -1383,9 +1385,6 @@
 				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.7]" = 10.7;
-				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.8]" = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
 			};
@@ -1394,7 +1393,9 @@
 		55B6379218C10B0B00CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CLANG_ENABLE_OBJC_ARC[arch=i386]" = NO;
 				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
 				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -1409,9 +1410,6 @@
 				);
 				INFOPLIST_FILE = Pref360Control/Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/PreferencePanes";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.7]" = 10.7;
-				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.8]" = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
 			};

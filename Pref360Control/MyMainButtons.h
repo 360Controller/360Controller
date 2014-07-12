@@ -23,6 +23,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyMainButtons : NSView
+#ifdef __i386__
+{
+@private
+    BOOL a,b,x,y;
+}
+#endif
 @property BOOL a;
 @property BOOL b;
 @property BOOL x;

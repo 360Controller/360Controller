@@ -25,9 +25,12 @@
 #define INSET_AMOUNT 10
 
 @implementation MyDigitalStick
+#ifndef __i386__
 {
+@private
     NSBezierPath *up, *down, *left, *right;
 }
+#endif
 @synthesize up = bUp;
 @synthesize down = bDown;
 @synthesize left = bLeft;
@@ -109,7 +112,7 @@
 #endif
 }
 
-#if !__has_feature(objc_arc)
+#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
 - (void)finalize
 {
     [self removeObserver:self forKeyPath:@"up"];

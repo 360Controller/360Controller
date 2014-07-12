@@ -22,8 +22,8 @@
 */
 #import "MyAnalogStick.h"
 
-#define PRESSED_INSET       5
-#define AREA_INSET          4
+#define PRESSED_INSET   5
+#define AREA_INSET      4
 
 @implementation MyAnalogStick
 @synthesize pressed;
@@ -55,7 +55,7 @@
     SUPERDEALLOC;
 }
 
-#if !__has_feature(objc_arc)
+#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
 - (void)finalize
 {
     [self removeObserver:self forKeyPath:@"pressed"];
@@ -66,7 +66,6 @@
     
     [super finalize];
 }
-
 #endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
