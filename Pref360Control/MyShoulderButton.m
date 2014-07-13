@@ -29,7 +29,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    if ((self = [super initWithFrame:frameRect]) != nil) {
+    if (self = [super initWithFrame:frameRect]) {
         [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
@@ -42,7 +42,7 @@
     SUPERDEALLOC;
 }
 
-#if !__has_feature(objc_arc)
+#ifdef __OBJC_GC__
 - (void)finalize
 {
     [self removeObserver:self forKeyPath:@"pressed"];

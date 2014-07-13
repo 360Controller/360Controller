@@ -40,7 +40,7 @@ static id GetDeviceValue(io_service_t device, NSString *key)
 // Make sure a name is as nice as possible for eventually going into the XML for the driver
 static NSString* SanitiseName(NSString *name)
 {
-    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
+    NSMutableString *output = [NSMutableString stringWithCapacity:100];
     NSInteger i;
     
     for (i = 0; i < [name length]; i++) {
@@ -51,7 +51,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return [[NSString alloc] initWithString:output];
+    return [NSString stringWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -169,7 +169,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 @interface DeviceLister ()
 @property (getter = isChanged) BOOL changed;
 @property (arcstrong) NSMutableDictionary *entries;
-@property (weak) Pref360ControlPref *owner;
+@property (arcweak) Pref360ControlPref *owner;
 @end
 
 @implementation DeviceLister
@@ -184,13 +184,24 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (instancetype)init
 {
-    if (self = [super init]) {
-        entries = [[NSMutableDictionary alloc] initWithCapacity:10];
+    if (self = [super init])
+    {
+        self.entries = [NSMutableDictionary dictionaryWithCapacity:10];
         connected = [[NSMutableArray alloc] initWithCapacity:10];
         enabled = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
 }
+
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+    self.entries = nil;
+    [connected release];
+    [enabled release];
+    [super dealloc];
+}
+#endif
 
 - (NSString*)toolPath
 {

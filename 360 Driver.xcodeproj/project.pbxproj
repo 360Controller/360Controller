@@ -1370,9 +1370,7 @@
 		55B6379118C10B0B00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
-				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				"GCC_ENABLE_OBJC_GC[sdk=macosx10.7]" = supported;
 				"GCC_ENABLE_OBJC_GC[sdk=macosx10.8]" = supported;
@@ -1395,9 +1393,7 @@
 		55B6379218C10B0B00CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.7]" = NO;
-				"CLANG_ENABLE_OBJC_ARC[sdk=macosx10.8]" = NO;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				"GCC_ENABLE_OBJC_GC[sdk=macosx10.7]" = supported;

@@ -22,7 +22,7 @@
 */
 #import "DeviceItem.h"
 
-#if defined(__MAC_10_9) && MAC_OS_X_VERSION_MIN_REQUIRED != __MAC_10_7
+#ifndef __OBJC_GC__
 #warning building without Garbage Collection support. The Preference Pane won't be compatible with Lion.
 #endif
 
@@ -54,7 +54,7 @@ static NSString* GetDeviceName(io_service_t device)
 @synthesize ffDevice = forceFeedback;
 @synthesize hidDevice = interface;
 
-- (instancetype)initFromItemForDevice:(io_service_t)device
+- (instancetype)initWithItemForDevice:(io_service_t)device
 {
     if (self = [super init]) {
         IOReturn ret;
@@ -82,7 +82,7 @@ static NSString* GetDeviceName(io_service_t device)
 
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device
 {
-    DeviceItem *item = [[[self class] alloc] initFromItemForDevice:device];
+    DeviceItem *item = [[[self class] alloc] initWithItemForDevice:device];
     
     if (item)
         return AUTORELEASEOBJ(item);
@@ -101,12 +101,12 @@ static NSString* GetDeviceName(io_service_t device)
         FFReleaseDevice(forceFeedback);
 #if !__has_feature(objc_arc)
     self.name = nil;
-#endif
     
-    SUPERDEALLOC;
+    [super dealloc];
+#endif
 }
 
-#if !__has_feature(objc_arc)
+#ifdef __OBJC_GC__
 - (void)finalize
 {
     if (deviceHandle)
