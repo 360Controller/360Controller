@@ -29,7 +29,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    if ((self = [super initWithFrame:frameRect]) != nil) {
+    if (self = [super initWithFrame:frameRect]) {
         [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:NULL];
         [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew context:NULL];
         [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew context:NULL];
