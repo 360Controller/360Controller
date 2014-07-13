@@ -107,7 +107,7 @@ static NSString* GetDeviceName(io_service_t device)
 #endif
 }
 
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
+#ifdef __OBJC_GC__
 - (void)finalize
 {
     if (deviceHandle)

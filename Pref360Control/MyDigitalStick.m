@@ -112,7 +112,7 @@
 #endif
 }
 
-#if !__has_feature(objc_arc) && defined(__OBJC_GC__)
+#ifdef __OBJC_GC__
 - (void)finalize
 {
     [self removeObserver:self forKeyPath:@"up"];
