@@ -185,7 +185,8 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (instancetype)init
 {
-    if (self = [super init]) {
+    if (self = [super init])
+    {
         self.entries = [[NSMutableDictionary alloc] initWithCapacity:10];
         connected = [[NSMutableArray alloc] initWithCapacity:10];
         enabled = [[NSMutableArray alloc] initWithCapacity:10];
