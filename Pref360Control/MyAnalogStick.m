@@ -26,36 +26,71 @@
 #define AREA_INSET          4
 
 @implementation MyAnalogStick
+@synthesize pressed;
+@synthesize deadzone;
+@synthesize positionX = x;
+@synthesize positionY = y;
+@synthesize linked;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-        deadzone=0;
-        x=0;
-        y=0;
-        pressed=FALSE;
-        linked=FALSE;
-	}
-	return self;
+    if (self = [super initWithFrame:frameRect]) {
+        [self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"pressed"];
+    [self removeObserver:self forKeyPath:@"positionX"];
+    [self removeObserver:self forKeyPath:@"positiony"];
+    [self removeObserver:self forKeyPath:@"deadzone"];
+    [self removeObserver:self forKeyPath:@"linked"];
+    
+    SUPERDEALLOC;
+}
+
+#ifdef __OBJC_GC__
+- (void)finalize
+{
+    [self removeObserver:self forKeyPath:@"pressed"];
+    [self removeObserver:self forKeyPath:@"positionX"];
+    [self removeObserver:self forKeyPath:@"positiony"];
+    [self removeObserver:self forKeyPath:@"deadzone"];
+    [self removeObserver:self forKeyPath:@"linked"];
+    
+    [super finalize];
+}
+
+#endif
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == self) {
+        [self setNeedsDisplay:YES];
+    }
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area,deadRect,posRect;
+    NSRect area = [self bounds], deadRect, posRect;
     
     // Compute positions
-        // Area
-    area=[self bounds];
-        // Deadzone
-    deadRect.size.width=(deadzone*area.size.width)/32768;
-    deadRect.size.height=(deadzone*area.size.height)/32768;
-    deadRect.origin.x=area.origin.x+((area.size.width-deadRect.size.width)/2);
-    deadRect.origin.y=area.origin.y+((area.size.height-deadRect.size.height)/2);
-        // Position
-    posRect.size.width=4;
-    posRect.size.height=4;
-    posRect.origin.x=area.origin.x+AREA_INSET+(((x+32768)*(area.size.width-(AREA_INSET*2)))/65536)-(posRect.size.width/2);
-    posRect.origin.y=area.origin.y+area.size.height-AREA_INSET-(((y+32768)*(area.size.height-(AREA_INSET*2)))/65536)-(posRect.size.height/2);
+    // Deadzone
+    deadRect.size.width = (deadzone * area.size.width) / 32768;
+    deadRect.size.height = (deadzone * area.size.height) / 32768;
+    deadRect.origin.x = area.origin.x + ((area.size.width - deadRect.size.width) / 2);
+    deadRect.origin.y = area.origin.y + ((area.size.height - deadRect.size.height) / 2);
+    // Position
+    posRect.size.width = 4;
+    posRect.size.height = 4;
+    posRect.origin.x = area.origin.x + AREA_INSET + (((x + 32768) * (area.size.width - (AREA_INSET * 2))) / 65536) - (posRect.size.width / 2);
+    posRect.origin.y = area.origin.y + area.size.height - AREA_INSET - (((y + 32768) * (area.size.height - (AREA_INSET * 2))) / 65536) - (posRect.size.height / 2);
     // Draw border
     NSDrawLightBezel(area,area);
     // Draw pressed state
@@ -63,71 +98,43 @@
         NSRect pressArea;
         
         pressArea=area;
-        pressArea.origin.x+=PRESSED_INSET;
-        pressArea.origin.y+=PRESSED_INSET;
-        pressArea.size.width-=PRESSED_INSET*2;
-        pressArea.size.height-=PRESSED_INSET*2;
+        pressArea.origin.x += PRESSED_INSET;
+        pressArea.origin.y += PRESSED_INSET;
+        pressArea.size.width -= PRESSED_INSET * 2;
+        pressArea.size.height -= PRESSED_INSET * 2;
         [[NSColor blackColor] set];
         NSRectFill(pressArea);
     }
     // Draw deadzone
-    if(deadzone!=0) {
+    if (deadzone != 0) {
         [[NSColor redColor] set];
-        if(linked) NSFrameRect(deadRect);
+        if (linked)  NSFrameRect(deadRect);
         else {
             NSRect trueRect;
             
-            trueRect=deadRect;
-            trueRect.origin.x=area.origin.x;
-            trueRect.size.width=area.size.width;
+            trueRect = deadRect;
+            trueRect.origin.x = area.origin.x;
+            trueRect.size.width = area.size.width;
             NSFrameRect(trueRect);
-            trueRect=deadRect;
-            trueRect.origin.y=area.origin.y;
-            trueRect.size.height=area.size.height;
+            trueRect = deadRect;
+            trueRect.origin.y = area.origin.y;
+            trueRect.size.height = area.size.height;
             NSFrameRect(trueRect);
         }
     }
     // Draw position
-    if(pressed) [[NSColor whiteColor] set];
+    if (pressed) [[NSColor whiteColor] set];
     else [[NSColor blackColor] set];
     NSRectFill(posRect);
 }
 
-- (void)setDeadzone:(int)pos
-{
-    deadzone=pos;
-    [self setNeedsDisplay:YES];
-}
-
 - (void)setPositionX:(int)xPos y:(int)yPos
 {
-    x=xPos;
-    y=yPos;
-    [self setNeedsDisplay:YES];
-}
-
-- (void)setPositionX:(int)xPos
-{
-    x=xPos;
-    [self setNeedsDisplay:YES];
-}
-
-- (void)setPositionY:(int)yPos
-{
-    y=yPos;
-    [self setNeedsDisplay:YES];
-}
-
-- (void)setPressed:(BOOL)pressedState
-{
-    pressed=pressedState;
-    [self setNeedsDisplay:YES];
-}
-
-- (void)setLinked:(BOOL)linkedState
-{
-    linked=linkedState;
-    [self setNeedsDisplay:YES];
+    // This does not trigger the key-value observer.
+    x = xPos;
+    // This does.
+    // Done so the setNeedsDisplay: is only called once
+    self.positionY = yPos;
 }
 
 @end

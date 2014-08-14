@@ -2,24 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:360Controller/360Controller.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:360Daemon/360Daemon.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:DriverTool/DriverTool.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Pref360Control/Pref360Control.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Wireless360Controller/Wireless360Controller.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WirelessGamingReceiver/WirelessGamingReceiver.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Feedback360/Feedback360.xcodeproj">
+      location = "group:360 Driver.xcodeproj">
    </FileRef>
 </Workspace>

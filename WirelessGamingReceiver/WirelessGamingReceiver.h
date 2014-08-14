@@ -31,7 +31,7 @@
 
 class WirelessDevice;
 
-typedef struct
+typedef struct WIRELESS_CONNECTION
 {
     // Controller
     IOUSBInterface *controller;

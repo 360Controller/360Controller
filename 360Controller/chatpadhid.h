@@ -24,7 +24,7 @@
 // F:\Documents and Settings\Desktop\hid\ChatPad_Keyboard.h
 
 
-char ReportDescriptor[58] = {
+static const unsigned char ReportDescriptor[] = {
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
     0x09, 0x06,                    // USAGE (Keyboard)
     0xa1, 0x01,                    // COLLECTION (Application)
@@ -55,4 +55,3 @@ char ReportDescriptor[58] = {
     0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
     0xc0                           // END_COLLECTION
 };
-

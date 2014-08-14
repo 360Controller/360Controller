@@ -22,14 +22,22 @@
 */
 #import "MyDigitalStick.h"
 
-#define INSET_AMOUNT        10
+#define INSET_AMOUNT 10
 
 @implementation MyDigitalStick
-
-- (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
 {
-    NSBezierPath *path;
-    NSPoint centre,point;
+    NSBezierPath *up, *down, *left, *right;
+}
+@synthesize up = bUp;
+@synthesize down = bDown;
+@synthesize left = bLeft;
+@synthesize right = bRight;
+
++ (NSBezierPath*)makeTriangle:(int)start inRectangle:(NSRect)rect;
+{
+    // Create path
+    NSBezierPath *path = [NSBezierPath bezierPath];
+    NSPoint centre, point;
     const int mult[][2]={
         {0,0},
         {1,0},
@@ -39,94 +47,97 @@
     };
     
     // Find central part
-    centre.x=rect.origin.x+(rect.size.width/2);
-    centre.y=rect.origin.y+(rect.size.height/2);
-    // Create path
-    path=[NSBezierPath bezierPath];
+    centre.x = rect.origin.x + (rect.size.width / 2);
+    centre.y = rect.origin.y + (rect.size.height / 2);
     // Make triangle
     [path moveToPoint:centre];
-    point.x=rect.origin.x+(rect.size.width*mult[start][0]);
-    point.y=rect.origin.y+(rect.size.height*mult[start][1]);
+    point.x = rect.origin.x + (rect.size.width * mult[start][0]);
+    point.y = rect.origin.y + (rect.size.height * mult[start][1]);
     [path lineToPoint:point];
-    point.x=rect.origin.x+(rect.size.width*mult[start+1][0]);
-    point.y=rect.origin.y+(rect.size.height*mult[start+1][1]);
+    point.x = rect.origin.x + (rect.size.width * mult[start + 1][0]);
+    point.y = rect.origin.y + (rect.size.height * mult[start + 1][1]);
     [path lineToPoint:point];
     [path closePath];
     // Done
-    return [path retain];
+    return path;
 }
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-        NSRect rect,triangle;
+    if ((self = [super initWithFrame:frameRect]) != nil) {
+        NSRect rect = [self bounds], triangle;
         
-        bUp=bDown=bLeft=bRight=FALSE;
-        rect=[self bounds];
-        triangle.origin.x=INSET_AMOUNT;
-        triangle.origin.y=INSET_AMOUNT;
-        triangle.size.width=-INSET_AMOUNT*2;
-        triangle.size.height=-INSET_AMOUNT*2;
-        triangle.size.width=rect.size.width/3;
-        triangle.size.height=rect.size.height/3;
-        triangle.origin.y=rect.origin.y+(triangle.size.height*2);
-        triangle.origin.x=rect.origin.x+triangle.size.width;
-        up=[self makeTriangle:0 inRectangle:triangle];
-        triangle.origin.y=rect.origin.y;
-        down=[self makeTriangle:2 inRectangle:triangle];
-        triangle.origin.y=rect.origin.y+triangle.size.height;
-        triangle.origin.x=rect.origin.x;
-        left=[self makeTriangle:1 inRectangle:triangle];
-        triangle.origin.x=rect.origin.x+(triangle.size.width*2);
-        right=[self makeTriangle:3 inRectangle:triangle];
-	}
-	return self;
+        [self addObserver:self forKeyPath:@"up" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"down" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"right" options:NSKeyValueObservingOptionNew context:NULL];
+        
+        triangle.origin.x = INSET_AMOUNT;
+        triangle.origin.y = INSET_AMOUNT;
+        triangle.size.width =- INSET_AMOUNT * 2;
+        triangle.size.height =- INSET_AMOUNT * 2;
+        triangle.size.width = rect.size.width / 3;
+        triangle.size.height = rect.size.height / 3;
+        triangle.origin.y = rect.origin.y + (triangle.size.height * 2);
+        triangle.origin.x = rect.origin.x + triangle.size.width;
+        up = RETAINOBJ([MyDigitalStick makeTriangle:0 inRectangle:triangle]);
+        triangle.origin.y = rect.origin.y;
+        down = RETAINOBJ([MyDigitalStick makeTriangle:2 inRectangle:triangle]);
+        triangle.origin.y = rect.origin.y + triangle.size.height;
+        triangle.origin.x = rect.origin.x;
+        left = RETAINOBJ([MyDigitalStick makeTriangle:1 inRectangle:triangle]);
+        triangle.origin.x = rect.origin.x + (triangle.size.width * 2);
+        right = RETAINOBJ([MyDigitalStick makeTriangle:3 inRectangle:triangle]);
+    }
+    return self;
 }
 
 - (void)dealloc
 {
+    [self removeObserver:self forKeyPath:@"up"];
+    [self removeObserver:self forKeyPath:@"down"];
+    [self removeObserver:self forKeyPath:@"left"];
+    [self removeObserver:self forKeyPath:@"right"];
+    
+#if !__has_feature(objc_arc)
     [up release];
     [down release];
     [left release];
     [right release];
+    
     [super dealloc];
+#endif
+}
+
+#ifdef __OBJC_GC__
+- (void)finalize
+{
+    [self removeObserver:self forKeyPath:@"up"];
+    [self removeObserver:self forKeyPath:@"down"];
+    [self removeObserver:self forKeyPath:@"left"];
+    [self removeObserver:self forKeyPath:@"right"];
+    
+    [super finalize];
+}
+#endif
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (object == self) {
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect area;
+    NSRect area = [self bounds];
     
-    area=[self bounds];
     NSDrawLightBezel(area,area);
     [[NSColor blackColor] set];
-    if(bUp) [up fill];
-    if(bDown) [down fill];
-    if(bLeft) [left fill];
-    if(bRight) [right fill];
-}
-
-- (void)setUp:(BOOL)upState
-{
-    bUp=upState;
-    [self setNeedsDisplay:TRUE];
-}
-
-- (void)setDown:(BOOL)downState
-{
-    bDown=downState;
-    [self setNeedsDisplay:TRUE];
-}
-
-- (void)setLeft:(BOOL)leftState
-{
-    bLeft=leftState;
-    [self setNeedsDisplay:TRUE];
-}
-
-- (void)setRight:(BOOL)rightState
-{
-    bRight=rightState;
-    [self setNeedsDisplay:TRUE];
+    if (bUp) [up fill];
+    if (bDown) [down fill];
+    if (bLeft) [left fill];
+    if (bRight) [right fill];
 }
 
 @end

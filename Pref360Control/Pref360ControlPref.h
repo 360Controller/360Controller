@@ -23,67 +23,46 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 
-#import <IOKit/IOKitLib.h>
-#import <IOKit/IOCFPlugIn.h>
-#import <IOKit/hid/IOHIDLib.h>
-#import <IOKit/hid/IOHIDKeys.h>
-#import <ForceFeedback/ForceFeedback.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/hid/IOHIDLib.h>
+#include <IOKit/hid/IOHIDKeys.h>
+#include <ForceFeedback/ForceFeedback.h>
 
-#include "MyCentreButtons.h"
-#include "MyDigitalStick.h"
-#include "MyAnalogStick.h"
-#include "MyMainButtons.h"
-#include "MyShoulderButton.h"
+#import "MyCentreButtons.h"
+#import "MyDigitalStick.h"
+#import "MyAnalogStick.h"
+#import "MyMainButtons.h"
+#import "MyShoulderButton.h"
 
 @class DeviceLister;
 
 @interface Pref360ControlPref : NSPreferencePane 
-{
-    // Window components
-    IBOutlet MyCentreButtons *centreButtons;
-    IBOutlet NSPopUpButton *deviceList;
-    IBOutlet MyDigitalStick *digiStick;
-    IBOutlet MyShoulderButton *leftShoulder;
-    IBOutlet MyAnalogStick *leftStick;
-    IBOutlet NSButton *leftLinked;
-    IBOutlet NSSlider *leftStickDeadzone;
-    IBOutlet NSButton *leftStickInvertX;
-    IBOutlet NSButton *leftStickInvertY;
-    IBOutlet NSProgressIndicator *leftTrigger;
-    IBOutlet MyMainButtons *rightButtons;
-    IBOutlet MyShoulderButton *rightShoulder;
-    IBOutlet MyAnalogStick *rightStick;
-    IBOutlet NSButton *rightLinked;
-    IBOutlet NSSlider *rightStickDeadzone;
-    IBOutlet NSButton *rightStickInvertX;
-    IBOutlet NSButton *rightStickInvertY;
-    IBOutlet NSProgressIndicator *rightTrigger;
-    IBOutlet NSImageView *batteryLevel;
-    IBOutlet DeviceLister *deviceLister;
-    IBOutlet NSButton *powerOff;
-    // Internal info
-    mach_port_t masterPort;
-    NSMutableArray *deviceArray;
-    IOHIDElementCookie axis[6],buttons[15];
-    
-    IOHIDDeviceInterface122 **device;
-    IOHIDQueueInterface **hidQueue;
-    FFDeviceObjectReference ffDevice;
-    io_registry_entry_t registryEntry;
-    
-    int largeMotor,smallMotor;
-    
-    IONotificationPortRef notifyPort;
-    CFRunLoopSourceRef notifySource;
-    io_iterator_t onIteratorWired, offIteratorWired;
-    io_iterator_t onIteratorWireless, offIteratorWireless;
+// Window components
+@property (arcweak) IBOutlet MyCentreButtons *centreButtons;
+@property (arcweak) IBOutlet NSPopUpButton *deviceList;
+@property (arcweak) IBOutlet MyDigitalStick *digiStick;
+@property (arcweak) IBOutlet MyShoulderButton *leftShoulder;
+@property (arcweak) IBOutlet MyAnalogStick *leftStick;
+@property (arcweak) IBOutlet NSButton *leftLinked;
+@property (arcweak) IBOutlet NSSlider *leftStickDeadzone;
+@property (arcweak) IBOutlet NSButton *leftStickInvertX;
+@property (arcweak) IBOutlet NSButton *leftStickInvertY;
+@property (arcweak) IBOutlet NSLevelIndicator *leftTrigger;
+@property (arcweak) IBOutlet MyMainButtons *rightButtons;
+@property (arcweak) IBOutlet MyShoulderButton *rightShoulder;
+@property (arcweak) IBOutlet MyAnalogStick *rightStick;
+@property (arcweak) IBOutlet NSButton *rightLinked;
+@property (arcweak) IBOutlet NSSlider *rightStickDeadzone;
+@property (arcweak) IBOutlet NSButton *rightStickInvertX;
+@property (arcweak) IBOutlet NSButton *rightStickInvertY;
+@property (arcweak) IBOutlet NSLevelIndicator *rightTrigger;
+@property (arcweak) IBOutlet NSImageView *batteryLevel;
+@property (arcweak) IBOutlet DeviceLister *deviceLister;
+@property (arcweak) IBOutlet NSButton *powerOff;
 
-    FFEFFECT *effect;
-    FFCUSTOMFORCE *customforce;
-    FFEffectObjectReference effectRef;
-}
-
-- (void)mainViewDidLoad;
+// Internal info
+@property (readonly) mach_port_t masterPort;
 
 - (void)eventQueueFired:(void*)sender withResult:(IOReturn)result;
 
@@ -91,7 +70,7 @@
 
 - (IBAction)showDeviceList:(id)sender;
 - (IBAction)powerOff:(id)sender;
-
-- (mach_port_t)masterPort;
+- (IBAction)selectDevice:(id)sender;
+- (IBAction)changeSetting:(id)sender;
 
 @end

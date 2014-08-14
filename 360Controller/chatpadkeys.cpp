@@ -23,7 +23,7 @@
 
 #include "chatpadkeys.h"
 
-#define ROW_SIZE		8
+#define ROW_SIZE 8
 
 typedef struct MAP_DATA {
 	unsigned char row[ROW_SIZE];
@@ -42,12 +42,11 @@ static const MAP_DATA columns[] = {
 
 unsigned char ChatPad2USB(unsigned char input)
 {
-	unsigned char row, column;
+	unsigned char row = input & 0x0F;
+	unsigned char column = (input & 0xF0) >> 4;
 	
-	row = input & 0x0F;
 	if (row >= ROW_SIZE)
 		return 0x00;
-	column = (input & 0xF0) >> 4;
 	if (column >= (sizeof(columns) / sizeof(columns[0])))
 		return 0x00;
 	return columns[column].row[row];

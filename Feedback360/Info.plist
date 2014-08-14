@@ -6,18 +6,18 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mice.Xbox360ControllerForceFeedback</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFPlugInDynamicRegistration</key>
 	<string>NO</string>
 	<key>CFPlugInFactories</key>
@@ -32,8 +32,6 @@
 			<string>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</string>
 		</array>
 	</dict>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
 </dict>

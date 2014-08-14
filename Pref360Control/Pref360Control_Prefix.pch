@@ -2,7 +2,16 @@
 // Prefix header for all source files of the 'Pref360Control' target in the 'Pref360Control' project.
 //
 
+#include <CoreFoundation/CoreFoundation.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/hid/IOHIDLib.h>
+#include <IOKit/hid/IOHIDKeys.h>
+#include <IOKit/usb/IOUSBLib.h>
+#include <ForceFeedback/ForceFeedback.h>
+
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <AppKit/AppKit.h>
+    #import "ARCBridge.h"
+	#import <Cocoa/Cocoa.h>
+	#import <PreferencePanes/PreferencePanes.h>
 #endif
