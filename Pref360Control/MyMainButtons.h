@@ -23,13 +23,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyMainButtons : NSView
-{
-    BOOL a,b,x,y;
-}
-
-- (void)setA:(BOOL)aVal;
-- (void)setB:(BOOL)bVal;
-- (void)setX:(BOOL)xVal;
-- (void)setY:(BOOL)yVal;
-
+@property BOOL a;
+@property BOOL b;
+@property BOOL x;
+@property BOOL y;
 @end

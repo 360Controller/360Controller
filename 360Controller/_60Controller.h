@@ -64,7 +64,7 @@ private:
 	void SerialMessage(IOBufferMemoryDescriptor *data, size_t length);
 
 protected:
-	typedef enum {
+	typedef enum TIMER_STATE {
 		tsToggle,
 		tsReset1,
 		tsReset2,

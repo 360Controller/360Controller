@@ -28,9 +28,9 @@
 #ifndef Feedback360_Feedback360Effect_h
 #define Feedback360_Feedback360Effect_h
 
-#include <IOKit/IOCFPlugin.h>
+#include <IOKit/IOCFPlugIn.h>
 #include <ForceFeedback/IOForceFeedbackLib.h>
-#include	<math.h>
+#include <math.h>
 #include <string.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -55,13 +55,11 @@
 
 #define SCALE_MAX 255
 
-
 class Feedback360Effect
 {
-
 public:
-
-	Feedback360Effect();
+    Feedback360Effect(FFEffectDownloadID theHand);
+    Feedback360Effect(const Feedback360Effect &src);
 
     LONG Calc(LONG *LeftLevel, LONG *RightLevel);
 
@@ -75,21 +73,17 @@ public:
 	FFPERIODIC		DiPeriodic;
 	FFRAMPFORCE		DiRampforce;
 
-
-	DWORD			Status;
-	DWORD			PlayCount;
-	CFAbsoluteTime	StartTime;
+    DWORD			Status;
+    DWORD			PlayCount;
+    CFAbsoluteTime	StartTime;
 
     CFAbsoluteTime  LastTime;
     DWORD           Index;
 
 private:
-
+    Feedback360Effect();
     void CalcEnvelope(ULONG Duration, ULONG CurrentPos, LONG *NormalRate, LONG *AttackLevel, LONG *FadeLevel);
-	void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);
-    
-protected:
-    
+    void CalcForce(ULONG Duration, ULONG CurrentPos, LONG NormalRate, LONG AttackLevel, LONG FadeLevel, LONG * NormalLevel);
 };
 
 #endif

@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the '360Daemon' target in the '360Daemon' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
