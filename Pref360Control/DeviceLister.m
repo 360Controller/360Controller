@@ -197,47 +197,13 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (NSString*)toolPath
 {
     // Find the path of our tool in our bundle - should it be in the driver's bundle?
-    return [[[owner bundle] resourcePath] stringByAppendingPathComponent:TOOL_FILENAME];
+    return [[owner.bundle resourcePath] stringByAppendingPathComponent:TOOL_FILENAME];
 }
 
 - (OSStatus)writeToolWithAuthorisation:(AuthorizationRef)authorisationRef
 {
-    OSStatus result;
-    NSString *toolPath = [self toolPath];
-    NSMutableArray *parameters = [NSMutableArray arrayWithCapacity:10];
-    const char **argv;
-    int i = 0;
-    
-    // Build array of parameters
-    [parameters addObject:@"edit"];
-    
-    for (NSNumber *key in enabled)
-    {
-        NSString *name = entries[key];
-        NSUInteger keyValue = [key unsignedIntValue];
-        UInt16 vendor = (keyValue >> 16) & 0xFFFF;
-        UInt16 product = keyValue & 0xFFFF;
-        [parameters addObject:name];
-        [parameters addObject:[NSString stringWithFormat:@"%i", vendor]];
-        [parameters addObject:[NSString stringWithFormat:@"%i", product]];
-    }
-    
-    // Convert parameters to a C array
-    argv = malloc(sizeof(char*) * ([parameters count] + 1));
-    for (NSString *item in parameters)
-        argv[i++] = [item UTF8String];
-    argv[i] = NULL;
-    
-    // Execute the command
-    result = AuthorizationExecuteWithPrivileges(authorisationRef,
-                                                [toolPath fileSystemRepresentation],
-                                                kAuthorizationFlagDefaults,
-                                                (char**)argv,
-                                                NULL);
-    
-    // Done
-    free(argv);
-    return result;
+    // Pending major re-write, just return noErr
+    return noErr;
 }
 
 - (NSString*)readTool

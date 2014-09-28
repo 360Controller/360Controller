@@ -55,7 +55,7 @@
 		55B6375318C1098D00CE933D /* Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636F718C1054F00CE933D /* Controller.h */; };
 		55B6375418C1098D00CE933D /* ControlStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636F818C1054F00CE933D /* ControlStruct.h */; };
 		55B6375518C1098D00CE933D /* xbox360hid.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B636FD18C1054F00CE933D /* xbox360hid.h */; };
-		55B6375718C1099F00CE933D /* Feedback360.plugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55B6371F18C108A500CE933D /* Feedback360.plugin */; };
+		55B6375718C1099F00CE933D /* Feedback360.plugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55B6371F18C108A500CE933D /* Feedback360.plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55B6375918C109E600CE933D /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
 		55B6377218C10A5400CE933D /* DriverTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6376C18C10A5400CE933D /* DriverTool.m */; };
 		55B6377618C10ACC00CE933D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B636BC18C104DB00CE933D /* Foundation.framework */; };
@@ -79,7 +79,6 @@
 		55B637B818C10C0C00CE933D /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A818C10C0C00CE933D /* Pref360ControlPref.h */; };
 		55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A918C10C0C00CE933D /* Pref360ControlPref.m */; };
 		55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BC18C10C2400CE933D /* pref360controlpref.tiff */; };
-		55B637C418C10C5E00CE933D /* DriverTool in Resources */ = {isa = PBXBuildFile; fileRef = 55B6376018C10A3200CE933D /* DriverTool */; };
 		55B637D318C10CB400CE933D /* Alert.tif in Resources */ = {isa = PBXBuildFile; fileRef = 55B637CC18C10CB400CE933D /* Alert.tif */; };
 		55B637D518C10CB400CE933D /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637CF18C10CB400CE933D /* ControlPrefs.m */; };
 		55B637DD18C10CCC00CE933D /* ControlPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637CF18C10CB400CE933D /* ControlPrefs.m */; };
@@ -105,6 +104,7 @@
 		55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE81970B901000C9C35 /* batt2@2x.png */; };
 		55DA1CF11970B901000C9C35 /* batt3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE91970B901000C9C35 /* batt3.png */; };
 		55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CEA1970B901000C9C35 /* batt3@2x.png */; };
+		55F7E7C319D8C32000525388 /* DriverTool in Copy Tools */ = {isa = PBXBuildFile; fileRef = 55B6376018C10A3200CE933D /* DriverTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
 		55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B6373918C108D200CE933D /* testhaptic.c */; };
 		55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE3CAC18D7B7B600D69E84 /* SDL2.framework */; };
@@ -189,6 +189,17 @@
 				55B6375718C1099F00CE933D /* Feedback360.plugin in Copy PlugIns */,
 			);
 			name = "Copy PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55F7E7C219D8C31300525388 /* Copy Tools */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				55F7E7C319D8C32000525388 /* DriverTool in Copy Tools */,
+			);
+			name = "Copy Tools";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -791,6 +802,7 @@
 				55B6377818C10B0B00CE933D /* Frameworks */,
 				55B6377918C10B0B00CE933D /* Headers */,
 				55B6377A18C10B0B00CE933D /* Resources */,
+				55F7E7C219D8C31300525388 /* Copy Tools */,
 			);
 			buildRules = (
 			);
@@ -861,7 +873,7 @@
 		55B636AC18C104DB00CE933D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = GitHub;
 			};
 			buildConfigurationList = 55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */;
@@ -936,7 +948,6 @@
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
 				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
 				551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */,
-				55B637C418C10C5E00CE933D /* DriverTool in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,7 +1208,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1225,6 +1236,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.0.0d14;
@@ -1238,7 +1250,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				VERSIONING_SYSTEM = "apple-generic";
