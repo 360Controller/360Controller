@@ -26,7 +26,7 @@
 #include "WirelessDevice.h"
 #include "devices.h"
 
-#define POWEROFF_TIMEOUT (2 * 60)
+#define POWEROFF_TIMEOUT (15 * 60)
 
 OSDefineMetaClassAndAbstractStructors(WirelessHIDDevice, IOHIDDevice)
 #define super IOHIDDevice
