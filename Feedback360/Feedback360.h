@@ -84,7 +84,6 @@ public:
     static HRESULT  sStartEffect( void * interface, FFEffectDownloadID downloadID, FFEffectStartFlag mode, UInt32 iterations );
     static HRESULT  sStopEffect( void * interface, UInt32 downloadID );
 
-    // actual member functions ultimately called by the FF API (through the static functions)
     virtual HRESULT QueryInterface(REFIID iid, LPVOID* ppv);
     virtual ULONG   AddRef(void);
     virtual ULONG   Release(void);
@@ -124,6 +123,7 @@ private:
     // event loop func
     static void EffectProc( void *params );
     
+    // actual member functions ultimately called by the FF API (through the static functions)
     virtual IOReturn Probe ( CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     virtual IOReturn Start ( CFDictionaryRef propertyTable, io_service_t service );
     virtual IOReturn Stop ( void );
