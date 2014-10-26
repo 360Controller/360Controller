@@ -102,8 +102,9 @@ bool Xbox360Peripheral::SendSwitch(bool sendOut)
     if (err == kIOReturnSuccess)
         return true;
 
-    const char *errStr = stringFromReturn(err);
-    IOLog("start - failed to %s chatpad setting (%s)\n", sendOut ? "write" : "read", errStr);
+    const char *errStr = device->stringFromReturn(err);
+    IOLog("start - failed to %s chatpad setting (%x): %s\n",
+          sendOut ? "write" : "read", err, errStr);
     return false;
 }
 
