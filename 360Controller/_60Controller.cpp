@@ -98,9 +98,12 @@ bool Xbox360Peripheral::SendSwitch(bool sendOut)
 	controlReq.wIndex = 0xe416;
 	controlReq.wLength = sizeof(chatpadInit);
 	controlReq.pData = chatpadInit;
-	if (device->DeviceRequest(&controlReq, 100, 100, NULL) == kIOReturnSuccess)
+    IOReturn err = device->DeviceRequest(&controlReq, 100, 100, NULL);
+    if (err == kIOReturnSuccess)
         return true;
-    IOLog("start - failed to %s chatpad setting\n", sendOut ? "write" : "read");
+
+    const char *errStr = stringFromReturn(err);
+    IOLog("start - failed to %s chatpad setting (%s)\n", sendOut ? "write" : "read", errStr);
     return false;
 }
 
@@ -328,7 +331,7 @@ bool Xbox360Peripheral::start(IOService *provider)
         UInt16 release = device->GetDeviceRelease();
         switch (release) {
             default:
-                IOLog("Unknown device release %.4x", release);
+                IOLog("Unknown device release %.4x\n", release);
                 // fall through
             case 0x0110:
                 chatpadInit[0] = 0x01;
