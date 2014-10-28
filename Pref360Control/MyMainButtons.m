@@ -30,10 +30,10 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     return self;
 }
