@@ -679,7 +679,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Shut down
 - (void)didUnselect
 {
-    FFEFFESCAPE escape = {0};
     unsigned char c;
 
     // Remove notification source
@@ -693,6 +692,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self stopDevice];
     for (DeviceItem *item in deviceArray)
     {
+        FFEFFESCAPE escape = {0};
         NSInteger i = [deviceArray indexOfObject:item];
         if ([item ffDevice] == 0)
             continue;
