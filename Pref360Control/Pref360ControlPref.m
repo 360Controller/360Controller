@@ -130,8 +130,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     DWORD *a = calloc(2, sizeof(DWORD));
     LONG *d = calloc(2, sizeof(LONG));
 
+    c[0] = 0;
+    c[1] = 0;
     a[0] = capabs.ffAxes[0];
     a[1] = capabs.ffAxes[1];
+    d[0] = 0;
+    d[1] = 0;
 
     customforce->cChannels = 2;
     customforce->cSamples = 2;
@@ -293,7 +297,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         result = (*hidQueue)->getNextEvent(hidQueue,&event,zeroTime,0);
         if (result != kIOReturnSuccess) continue;
         // Check axis
-        for (i = 0; (i < 6) && !found; i++) {
+        for (i = 0, found = NO; (i < 6) && !found; i++) {
             if (event.elementCookie == axis[i]) {
                 [self axisChanged:i newValue:event.value];
                 found = YES;
@@ -301,7 +305,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         }
         if (found) continue;
         // Check buttons
-        for (i = 0; (i < 15) && !found; i++) {
+        for (i = 0, found = NO; (i < 15) && !found; i++) {
             if(event.elementCookie==buttons[i]) {
                 [self buttonChanged:i newValue:event.value];
                 found = YES;
@@ -658,7 +662,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    self.deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
+    deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -701,10 +705,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         escape.dwCommand = 0x02;
         escape.cbInBuffer = sizeof(c);
         escape.lpvInBuffer = &c;
+        escape.cbOutBuffer = 0;
+        escape.lpvOutBuffer = NULL;
         FFDeviceEscape([item ffDevice], &escape);
     }
     [self deleteDeviceList];
-    self.deviceArray = nil;
     // Close master port
     mach_port_deallocate(mach_task_self(),masterPort);
     // Done
