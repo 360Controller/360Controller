@@ -59,11 +59,11 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
 {
     CFTimeInterval Duration = NULL;
     if(DiEffect.dwDuration != FF_INFINITE) {
-        Duration = MAX(1, DiEffect.dwDuration / 1000 ) / 1000;
+        Duration = MAX(1, DiEffect.dwDuration / 1000.) / 1000.;
     } else {
         Duration = DBL_MAX;
     }
-    CFAbsoluteTime BeginTime = StartTime + ( DiEffect.dwStartDelay / (1000*1000) );
+    CFAbsoluteTime BeginTime = StartTime + ( DiEffect.dwStartDelay / 1000. / 1000.);
     CFAbsoluteTime EndTime  = DBL_MAX;
     if (PlayCount != -1)
     {
