@@ -428,7 +428,8 @@ bool Xbox360Peripheral::start(IOService *provider)
 	SendInit(0x5839, 0x6832);
 		// Set 'switch'
     if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false)))
-        goto fail;
+        // Commenting goto fail fixes the driver for the Hori Real Arcade Pro EX
+        //goto fail;
 		// Begin toggle
 	serialHeard = false;
 	serialActive = false;
