@@ -422,15 +422,16 @@ bool Xbox360Peripheral::start(IOService *provider)
 		goto fail;
 	}
 	// Configure ChatPad
-		// Send 'configuration'
+	// Send 'configuration'
 	SendInit(0xa30c, 0x4423);
 	SendInit(0x2344, 0x7f03);
 	SendInit(0x5839, 0x6832);
-		// Set 'switch'
-    if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false)))
+	// Set 'switch'
+    if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false))) {
         // Commenting goto fail fixes the driver for the Hori Real Arcade Pro EX
         //goto fail;
-		// Begin toggle
+	}
+	// Begin toggle
 	serialHeard = false;
 	serialActive = false;
 	serialToggle = false;
