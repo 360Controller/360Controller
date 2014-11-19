@@ -426,9 +426,19 @@ fail:
 - (NSArray*)allEntries
 {
     return [[entries allKeys] sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *str1 = obj1;
-        NSString *str2 = obj2;
-        NSComparisonResult retval = [str1 localizedStandardCompare:str2];
+        NSNumber *str1 = obj1;
+        NSNumber *str2 = obj2;
+        UInt32 num1 = str1.unsignedIntValue;
+        UInt32 num2 = str2.unsignedIntValue;
+        
+        NSComparisonResult retval;
+        if (num1 > num2) {
+            retval = NSOrderedAscending;
+        } else if (num1 < num2) {
+            retval = NSOrderedDescending;
+        } else {
+            retval = NSOrderedSame;
+        }
         return retval;
     }];
 }
