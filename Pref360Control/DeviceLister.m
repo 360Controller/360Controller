@@ -96,6 +96,7 @@ const struct ControllerInterface {
     UInt8 classNum, subClassNum, protocolNum;
 } ControllerInterfaces[] = {
 //  Endpoints   Class   Subclass    Protocol
+    {2,         255,    66,         0},
     {2,         255,    93,         1},
     {4,         255,    93,         3},
     {1,         255,    93,         2},
