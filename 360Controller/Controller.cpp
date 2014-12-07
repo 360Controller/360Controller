@@ -83,36 +83,22 @@ IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descri
 IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     char data[2];
-    
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (!owner) return kIOReturnUnsupported;
     report->readBytes(0, data, 2);
     switch(data[0]) {
         case 0x00:  // Set force feedback
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
-		{
-			XBOX360_OUT_RUMBLE rumble;
-			
-			Xbox360_Prepare(rumble,outRumble);
-			report->readBytes(2,data,2);
-			rumble.big=data[0];
-			rumble.little=data[1];
-			GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
-			// IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
-		}
-            return kIOReturnSuccess;
+	    report->readBytes(2,data,2);
+	    return owner->setRumble(data[0], data[1]);
+
         case 0x01:  // Set LEDs
             if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
-		{
-			XBOX360_OUT_LED led;
-			
-			report->readBytes(2,data,1);
-			Xbox360_Prepare(led,outLed);
-			led.pattern=data[0];
-			GetOwner(this)->QueueWrite(&led,sizeof(led));
-			// IOLog("Set LED: %d\n", led.pattern);
-		}
-            return kIOReturnSuccess;
+	    report->readBytes(2,data,1);
+	    return owner->setLeds(data[0]);
+
         default:
-			IOLog("Unknown escape %d\n", data[0]);
+	    IOLog("Unknown escape %d\n", data[0]);
             return kIOReturnUnsupported;
     }
 }
@@ -121,6 +107,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
 IOReturn Xbox360ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     // Doesn't do anything yet ;)
+    //IOLog("%s\n", __FUNCTION__);
     return kIOReturnUnsupported;
 }
 

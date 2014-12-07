@@ -100,6 +100,8 @@ protected:
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
 
+    bool xboxOriginal;
+
 public:
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);
@@ -121,6 +123,8 @@ public:
     virtual void WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
 
     bool QueueWrite(const void *bytes,UInt32 length);
+    IOReturn setRumble(UInt8 big, UInt8 little);
+    IOReturn setLeds(UInt8 leds);
 	
 	IOHIDDevice* getController(int index);
 };
