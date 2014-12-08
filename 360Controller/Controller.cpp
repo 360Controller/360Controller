@@ -32,25 +32,13 @@ namespace HID_360 {
 
 OSDefineMetaClassAndStructors(Xbox360ControllerClass, IOHIDDevice)
 
-static Xbox360Peripheral* GetOwner(IOService *us)
+static Xbox360Peripheral* GetOwner(const IOService *us)
 {
 	IOService *prov = us->getProvider();
     
 	if (prov == NULL)
 		return NULL;
 	return OSDynamicCast(Xbox360Peripheral, prov);
-}
-
-static IOUSBDevice* GetOwnerProvider(const IOService *us)
-{
-	IOService *prov = us->getProvider(), *provprov;
-	
-	if (prov == NULL)
-		return NULL;
-	provprov = prov->getProvider();
-	if (provprov == NULL)
-		return NULL;
-	return OSDynamicCast(IOUSBDevice, provprov);
 }
 
 bool Xbox360ControllerClass::start(IOService *provider)
@@ -111,25 +99,12 @@ IOReturn Xbox360ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDRepor
     return kIOReturnUnsupported;
 }
 
-// Returns the string for the specified index from the USB device's string list, with an optional default
-OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) const
-{
-    IOReturn err;
-    char buf[1024];
-    const char *string;
-    
-    err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
-    if(err==kIOReturnSuccess) string=buf;
-    else {
-        if(def == NULL) string = "Unknown";
-        else string = def;
-    }
-    return OSString::withCString(string);
-}
 
 OSString* Xbox360ControllerClass::newManufacturerString() const
 {
-    return getDeviceString(GetOwnerProvider(this)->GetManufacturerStringIndex());
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSString::withCString("Unknown");
+    return owner->getManufacturerString();
 }
 
 OSNumber* Xbox360ControllerClass::newPrimaryUsageNumber() const
@@ -144,23 +119,23 @@ OSNumber* Xbox360ControllerClass::newPrimaryUsagePageNumber() const
 
 OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 {
-    return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSNumber::withNumber(-1,16);
+    return owner->getProductIDNumber();
 }
 
 OSString* Xbox360ControllerClass::newProductString() const
 {
-    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
-    if (retString->isEqualTo("Controller")) {
-        retString->release();
-        return OSString::withCString("Xbox 360 Wired Controller");
-    } else {
-        return retString;
-    }
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSString::withCString("Unknown");
+    return owner->getProductString();
 }
 
 OSString* Xbox360ControllerClass::newSerialNumberString() const
 {
-    return getDeviceString(GetOwnerProvider(this)->GetSerialNumberStringIndex());
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSString::withCString("Unknown");
+    return owner->getSerialNumberString();
 }
 
 OSString* Xbox360ControllerClass::newTransportString() const
@@ -170,32 +145,14 @@ OSString* Xbox360ControllerClass::newTransportString() const
 
 OSNumber* Xbox360ControllerClass::newVendorIDNumber() const
 {
-    return OSNumber::withNumber(GetOwnerProvider(this)->GetVendorID(),16);
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSNumber::withNumber(-1,16);
+    return owner->getVendorIDNumber();
 }
 
 OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 {
-	IOUSBDevice *device;
-    OSNumber *number;
-    UInt32 location = 0;
-    
-	device = GetOwnerProvider(this);
-    if (device)
-    {
-        if ((number = OSDynamicCast(OSNumber, device->getProperty("locationID"))))
-        {
-            location = number->unsigned32BitValue();
-        }
-        else
-        {
-            // Make up an address
-            if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
-                location |= number->unsigned8BitValue() << 24;
-			
-            if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
-                location |= number->unsigned8BitValue() << 16;
-        }
-    }
-    
-    return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
+    Xbox360Peripheral *owner = GetOwner(this);
+    if (owner == NULL) return OSNumber::withNumber(-1,16);
+    return owner->getLocationIDNumber();
 }
