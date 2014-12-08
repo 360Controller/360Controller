@@ -27,9 +27,6 @@ class Xbox360ControllerClass : public IOHIDDevice
 {
 	OSDeclareDefaultStructors(Xbox360ControllerClass)
 
-private:
-    OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
-
 public:
     virtual bool start(IOService *provider);
 
