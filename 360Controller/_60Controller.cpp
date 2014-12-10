@@ -36,26 +36,6 @@
 OSDefineMetaClassAndStructors(Xbox360Peripheral, IOService)
 #define super IOService
 
-static void convertFromXBoxOriginal(UInt8 *data);
-
-typedef struct {
-    XBOX360_PACKET header;
-    XBox360_Byte buttons;
-    XBox360_Byte reserved1;
-    XBox360_Byte a, b, x, y, black, white;
-    XBox360_Byte trigL,trigR;
-    XBox360_Short xL,yL;
-    XBox360_Short xR,yR;
-} PACKED XBOX_IN_REPORT;
-
-typedef struct {
-    XBOX360_PACKET header;
-    XBox360_Byte reserved1;
-    XBox360_Byte left;
-    XBox360_Byte reserved2;
-    XBox360_Byte right;
-} PACKED XBOX_OUT_RUMBLE;
-
 class LockRequired
 {
 private:
@@ -296,7 +276,6 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     invertRightX=invertRightY=false;
     deadzoneLeft=deadzoneRight=0;
     relativeLeft=relativeRight=false;
-    xboxOriginal=FALSE;
     // Done
     return res;
 }
@@ -371,18 +350,8 @@ bool Xbox360Peripheral::start(IOService *provider)
     intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
     interface=device->FindNextInterface(NULL,&intf);
     if(interface==NULL) {
-        IOLog("start - unable to find the interface, trying xbox orginal\n");
-        // Find correct interface
-        intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
-        intf.bInterfaceSubClass=66;
-        intf.bInterfaceProtocol=0;
-        intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
-        interface=device->FindNextInterface(NULL,&intf);
-        if(interface==NULL) {
-            IOLog("start - unable to find the interface\n");
-            goto fail;
-        }
-        xboxOriginal = true;
+        IOLog("start - unable to find the interface\n");
+        goto fail;
     }
     interface->open(this);
     // Find pipes
@@ -650,9 +619,6 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
 {
     XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)buffer->getBytesNoCopy();
-    if (xboxOriginal) {
-        convertFromXBoxOriginal((UInt8 *)report);
-    }
     if(invertLeftX) report->left.x=~report->left.x;
     if(!invertLeftY) report->left.y=~report->left.y;
     if(invertRightX) report->right.x=~report->right.x;
@@ -680,161 +646,6 @@ void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
         }
     }
 }
-
-// This converts XBox original controller report into XBox360 form
-// See https://github.com/Grumbel/xboxdrv/blob/master/src/controller/xbox_controller.cpp
-static void convertFromXBoxOriginal(UInt8 *data) {
-    if (data[0] != 0x00 || data[1] != 0x14) {
-        IOLog("Unknown report command %d, length %d\n", (int)data[0], (int)data[1]);
-        return;
-    }
-    XBOX360_IN_REPORT report;
-    XBOX_IN_REPORT *in = (XBOX_IN_REPORT*)data;
-    report.header.command = 0;
-    report.header.size = sizeof(XBOX360_IN_REPORT);
-    XBox360_Short buttons = in->buttons;
-    if (in->a) buttons |= 1 << 12; // a
-    if (in->b) buttons |= 1 << 13; // b
-    if (in->x) buttons |= 1 << 14; // x
-    if (in->y) buttons |= 1 << 15; // y
-    if (in->black) buttons |= 1 << 9; // black mapped to shoulder right
-    if (in->white) buttons |= 1 << 8; // white mapped to shoulder left
-    report.buttons = buttons;
-    report.trigL = in->trigL;
-    report.trigR = in->trigR;
-    report.left.x = in->xL;
-    report.left.y = in->yL;
-    report.right.x = in->xR;
-    report.right.y = in->yR;
-    *((XBOX360_IN_REPORT *)data) = report;
-}
-
-IOReturn Xbox360Peripheral::setRumble(UInt8 big, UInt8 little)
-{
-    //IOLog("Set rumble: big(%d) little(%d)\n", big, little);
-    if (xboxOriginal) {
-        XBOX_OUT_RUMBLE rumble;
-        Xbox360_Prepare(rumble,outRumble);
-        rumble.left=big; // TODO check ? left, right != big, little
-        rumble.right=little;
-        QueueWrite(&rumble,sizeof(rumble));
-    } else {
-        XBOX360_OUT_RUMBLE rumble;
-        Xbox360_Prepare(rumble,outRumble);
-        rumble.big=big;
-        rumble.little=little;
-        QueueWrite(&rumble,sizeof(rumble));
-    }
-    return kIOReturnSuccess;
-}
-
-IOReturn Xbox360Peripheral::setLeds(UInt8 leds)
-{
-    //IOLog("Set LED: %d\n", leds);
-    if (xboxOriginal) {
-      // no leds
-      return kIOReturnSuccess;
-    } else {
-        XBOX360_OUT_LED led;
-        Xbox360_Prepare(led,outLed);
-        led.pattern=leds;
-        QueueWrite(&led,sizeof(led));
-    }
-    return kIOReturnSuccess;
-}
-
-static IOUSBDevice* GetOwnerProvider(const IOService *us)
-{
-    IOService *prov = us->getProvider();
-    if (prov == NULL)
-        return NULL;
-    return OSDynamicCast(IOUSBDevice, prov);
-}
-
-// Returns the string for the specified index from the USB device's string list, with an optional default
-OSString* Xbox360Peripheral::getDeviceString(UInt8 index,const char *def) const
-{
-    IOReturn err;
-    char buf[1024];
-    const char *string;
-    
-    err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
-    if(err==kIOReturnSuccess) string=buf;
-    else {
-        if(def == NULL) string = "Unknown";
-        else string = def;
-    }
-    return OSString::withCString(string);
-}
-
-OSString* Xbox360Peripheral::getManufacturerString()
-{
-    if (xboxOriginal) return OSString::withCString("Holtek");
-    return getDeviceString(GetOwnerProvider(this)->GetManufacturerStringIndex());
-}
-
-OSNumber* Xbox360Peripheral::getProductIDNumber()
-{
-    if (xboxOriginal) return OSNumber::withNumber(654,16);
-    return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
-}
-
-OSString* Xbox360Peripheral::getProductString()
-{
-    if (xboxOriginal) return OSString::withCString("Xbox 360 Wired Controller");
-    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
-    if (retString->isEqualTo("Controller")) {
-        retString->release();
-        return OSString::withCString("Xbox 360 Wired Controller");
-    } else {
-        return retString;
-    }
-}
-
-OSString* Xbox360Peripheral::getSerialNumberString()
-{
-    return getDeviceString(GetOwnerProvider(this)->GetSerialNumberStringIndex());
-}
-
-OSString* Xbox360Peripheral::getTransportString()
-{
-    return OSString::withCString("USB");
-}
-
-OSNumber* Xbox360Peripheral::getVendorIDNumber()
-{
-    if (xboxOriginal) return OSNumber::withNumber(1118,16);
-    return OSNumber::withNumber(GetOwnerProvider(this)->GetVendorID(),16);
-}
-
-OSNumber* Xbox360Peripheral::getLocationIDNumber()
-{
-    IOUSBDevice *device;
-    OSNumber *number;
-    UInt32 location = 0;
-    
-    device = GetOwnerProvider(this);
-    if (device)
-    {
-        if ((number = OSDynamicCast(OSNumber, device->getProperty("locationID"))))
-        {
-            location = number->unsigned32BitValue();
-        }
-        else
-        {
-            // Make up an address
-            if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
-                location |= number->unsigned8BitValue() << 24;
-            
-            if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
-                location |= number->unsigned8BitValue() << 16;
-        }
-    }
-    
-    return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
-}
-
-
 
 // This forwards a completed read notification to a member function
 void Xbox360Peripheral::ReadCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
