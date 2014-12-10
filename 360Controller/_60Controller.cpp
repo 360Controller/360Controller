@@ -344,14 +344,24 @@ bool Xbox360Peripheral::start(IOService *provider)
         }
     }
     // Find correct interface
+    controllerType = Xbox360;
     intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
     intf.bInterfaceSubClass=93;
     intf.bInterfaceProtocol=1;
     intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
     interface=device->FindNextInterface(NULL,&intf);
     if(interface==NULL) {
-        IOLog("start - unable to find the interface\n");
-        goto fail;
+        // Find correct interface, Xbox original
+        intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
+        intf.bInterfaceSubClass=66;
+        intf.bInterfaceProtocol=0;
+        intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
+        interface=device->FindNextInterface(NULL,&intf);
+        if(interface==NULL) {
+            IOLog("start - unable to find the interface\n");
+            goto fail;
+        }
+        controllerType = XboxOriginal;
     }
     interface->open(this);
     // Find pipes
@@ -687,7 +697,6 @@ void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 buff
 				{
 					const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
 					if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
-						fiddleReport(inBuffer);
 						err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
 						if(err!=kIOReturnSuccess) {
 							IOLog("read - failed to handle report: 0x%.8x\n",err);
@@ -783,7 +792,11 @@ IOHIDDevice* Xbox360Peripheral::getController(int index)
 void Xbox360Peripheral::PadConnect(void)
 {
 	PadDisconnect();
-	padHandler = new Xbox360ControllerClass;
+    if (controllerType == XboxOriginal) {
+        padHandler = new XboxOriginalControllerClass;
+    } else {
+        padHandler = new Xbox360ControllerClass;
+    }
 	if (padHandler != NULL)
 	{
         const OSString *keys[] = {
