@@ -49,8 +49,6 @@ private:
     
     void readSettings(void);
 
-    OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
-    
 	static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
 	void ChatPadTimerAction(IOTimerEventSource *sender);
 	void SendToggle(void);
@@ -102,8 +100,6 @@ protected:
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
 
-    bool xboxOriginal;
-
 public:
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);
@@ -125,17 +121,7 @@ public:
     virtual void WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
 
     bool QueueWrite(const void *bytes,UInt32 length);
-    IOReturn setRumble(UInt8 big, UInt8 little);
-    IOReturn setLeds(UInt8 leds);
-    
-    OSString* getManufacturerString();
-    OSNumber* getProductIDNumber();
-    OSString* getProductString();
-    OSString* getSerialNumberString();
-    OSString* getTransportString();
-    OSNumber* getVendorIDNumber();
-    OSNumber* getLocationIDNumber();
-    
+	
 	IOHIDDevice* getController(int index);
 };
 

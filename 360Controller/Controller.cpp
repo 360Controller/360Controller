@@ -32,13 +32,25 @@ namespace HID_360 {
 
 OSDefineMetaClassAndStructors(Xbox360ControllerClass, IOHIDDevice)
 
-static Xbox360Peripheral* GetOwner(const IOService *us)
+static Xbox360Peripheral* GetOwner(IOService *us)
 {
 	IOService *prov = us->getProvider();
     
 	if (prov == NULL)
 		return NULL;
 	return OSDynamicCast(Xbox360Peripheral, prov);
+}
+
+static IOUSBDevice* GetOwnerProvider(const IOService *us)
+{
+	IOService *prov = us->getProvider(), *provprov;
+	
+	if (prov == NULL)
+		return NULL;
+	provprov = prov->getProvider();
+	if (provprov == NULL)
+		return NULL;
+	return OSDynamicCast(IOUSBDevice, provprov);
 }
 
 bool Xbox360ControllerClass::start(IOService *provider)
@@ -71,22 +83,36 @@ IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descri
 IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     char data[2];
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (!owner) return kIOReturnUnsupported;
+    
     report->readBytes(0, data, 2);
     switch(data[0]) {
         case 0x00:  // Set force feedback
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
-	    report->readBytes(2,data,2);
-	    return owner->setRumble(data[0], data[1]);
-
+		{
+			XBOX360_OUT_RUMBLE rumble;
+			
+			Xbox360_Prepare(rumble,outRumble);
+			report->readBytes(2,data,2);
+			rumble.big=data[0];
+			rumble.little=data[1];
+			GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
+			// IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
+		}
+            return kIOReturnSuccess;
         case 0x01:  // Set LEDs
             if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
-	    report->readBytes(2,data,1);
-	    return owner->setLeds(data[0]);
-
+		{
+			XBOX360_OUT_LED led;
+			
+			report->readBytes(2,data,1);
+			Xbox360_Prepare(led,outLed);
+			led.pattern=data[0];
+			GetOwner(this)->QueueWrite(&led,sizeof(led));
+			// IOLog("Set LED: %d\n", led.pattern);
+		}
+            return kIOReturnSuccess;
         default:
-	    IOLog("Unknown escape %d\n", data[0]);
+			IOLog("Unknown escape %d\n", data[0]);
             return kIOReturnUnsupported;
     }
 }
@@ -95,16 +121,28 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
 IOReturn Xbox360ControllerClass::getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     // Doesn't do anything yet ;)
-    //IOLog("%s\n", __FUNCTION__);
     return kIOReturnUnsupported;
 }
 
+// Returns the string for the specified index from the USB device's string list, with an optional default
+OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) const
+{
+    IOReturn err;
+    char buf[1024];
+    const char *string;
+    
+    err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
+    if(err==kIOReturnSuccess) string=buf;
+    else {
+        if(def == NULL) string = "Unknown";
+        else string = def;
+    }
+    return OSString::withCString(string);
+}
 
 OSString* Xbox360ControllerClass::newManufacturerString() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSString::withCString("Unknown");
-    return owner->getManufacturerString();
+    return getDeviceString(GetOwnerProvider(this)->GetManufacturerStringIndex());
 }
 
 OSNumber* Xbox360ControllerClass::newPrimaryUsageNumber() const
@@ -119,23 +157,23 @@ OSNumber* Xbox360ControllerClass::newPrimaryUsagePageNumber() const
 
 OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSNumber::withNumber(-1,16);
-    return owner->getProductIDNumber();
+    return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
 }
 
 OSString* Xbox360ControllerClass::newProductString() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSString::withCString("Unknown");
-    return owner->getProductString();
+    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
+    if (retString->isEqualTo("Controller")) {
+        retString->release();
+        return OSString::withCString("Xbox 360 Wired Controller");
+    } else {
+        return retString;
+    }
 }
 
 OSString* Xbox360ControllerClass::newSerialNumberString() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSString::withCString("Unknown");
-    return owner->getSerialNumberString();
+    return getDeviceString(GetOwnerProvider(this)->GetSerialNumberStringIndex());
 }
 
 OSString* Xbox360ControllerClass::newTransportString() const
@@ -145,14 +183,32 @@ OSString* Xbox360ControllerClass::newTransportString() const
 
 OSNumber* Xbox360ControllerClass::newVendorIDNumber() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSNumber::withNumber(-1,16);
-    return owner->getVendorIDNumber();
+    return OSNumber::withNumber(GetOwnerProvider(this)->GetVendorID(),16);
 }
 
 OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 {
-    Xbox360Peripheral *owner = GetOwner(this);
-    if (owner == NULL) return OSNumber::withNumber(-1,16);
-    return owner->getLocationIDNumber();
+	IOUSBDevice *device;
+    OSNumber *number;
+    UInt32 location = 0;
+    
+	device = GetOwnerProvider(this);
+    if (device)
+    {
+        if ((number = OSDynamicCast(OSNumber, device->getProperty("locationID"))))
+        {
+            location = number->unsigned32BitValue();
+        }
+        else
+        {
+            // Make up an address
+            if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
+                location |= number->unsigned8BitValue() << 24;
+			
+            if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
+                location |= number->unsigned8BitValue() << 16;
+        }
+    }
+    
+    return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
 }
