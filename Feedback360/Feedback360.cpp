@@ -24,6 +24,8 @@
  */
 
 #include "Feedback360.h"
+using std::max;
+using std::min;
 
 #define LoopGranularity 10000 // Microseconds
 
@@ -167,7 +169,7 @@ HRESULT Feedback360::SetProperty(FFProperty property, void *value)
         {
             Gain = NewGain;
         } else {
-            Gain = MAX(1, MIN(NewGain, 10000));
+            Gain = max((UInt32)1, min(NewGain, (UInt32)10000));
             Result = FF_TRUNCATED;
         }
     });
@@ -572,7 +574,7 @@ HRESULT Feedback360::Escape(FFEffectDownloadID downloadID, FFEFFESCAPE *escape)
 void Feedback360::SetForce(LONG LeftLevel, LONG RightLevel)
 {
     //fprintf(stderr, "LS: %d; RS: %d\n", (unsigned char)MIN( 255, LeftLevel * Gain / 10000 ), (unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
-    unsigned char buf[] = {0x00, 0x04, (unsigned char)MIN(255, LeftLevel * Gain / 10000 ), (unsigned char)MIN(255, RightLevel * Gain / 10000 )};
+    unsigned char buf[] = {0x00, 0x04, (unsigned char)min((LONG)255, LeftLevel * (LONG)Gain / 10000 ), (unsigned char)min((LONG)255, RightLevel * (LONG)Gain / 10000 )};
     if (!Manual) Device_Send(&device, buf, sizeof(buf));
 }
 
@@ -583,7 +585,7 @@ void Feedback360::EffectProc( void *params )
     LONG LeftLevel = 0;
     LONG RightLevel = 0;
     LONG Gain  = cThis->Gain;
-    LONG CalcResult =0;
+    LONG CalcResult = 0;
 
     if (cThis->Actuator == true)
     {
@@ -598,7 +600,7 @@ void Feedback360::EffectProc( void *params )
     if ((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && (CalcResult != -1))
     {
         //fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
-        cThis->SetForce((unsigned char)MIN(255, LeftLevel * Gain / 10000),(unsigned char)MIN( 255, RightLevel * Gain / 10000 ));
+        cThis->SetForce((unsigned char)min(255, LeftLevel * Gain / 10000),(unsigned char)min( 255, RightLevel * Gain / 10000 ));
 
         cThis->PrvLeftLevel = LeftLevel;
         cThis->PrvRightLevel = RightLevel;
