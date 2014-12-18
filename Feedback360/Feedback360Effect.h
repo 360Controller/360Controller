@@ -51,7 +51,7 @@
 #define	FRICTION		0x0A
 #define	CUSTOM_FORCE	0x0B
 
-#define SCALE_MAX 255
+#define SCALE_MAX (LONG)255
 
 class Feedback360Effect
 {
