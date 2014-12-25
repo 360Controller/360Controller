@@ -373,7 +373,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if(registryEntry==0) return;
     [self testMotorsLarge:0 small:0];
     [self testMotorsCleanUp];
-    [self updateLED:0x00];
     if (hidQueue) {
         CFRunLoopSourceRef eventSource;
         
@@ -569,8 +568,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Enable GUI components
     [self inputEnable:YES];
     // Set device capabilities
-    // Set LED and FF motor control
-    [self updateLED:0x0a];
+    // Set FF motor control
     [self testMotorsInit];
     [self testMotorsLarge:0 small:0];
     largeMotor = 0;
