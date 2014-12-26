@@ -1,11 +1,6 @@
-**XBox 360 Controller driver for Mac OS X**
+# XBox 360 Controller driver for Mac OS X
 
-Copyright (C) 2006-2013 Colin Munro
-
-[http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller)
-
-
-**About**
+## About ##
 
 This driver supports the Microsoft Xbox 360 controller, including access
 to rumble motors and LEDs, on the Mac OS X platform. It includes a
@@ -16,14 +11,7 @@ connected via USB, and wireless 360 controllers connected via the
 Wireless Gaming Receiver for Windows, are supported.
 
 
-**Licence**
-
-This driver is licensed under the GNU Public License. A copy of this
-license is included in the distribution file, please inspect it before
-using the binary or source.
-
-
-**Installation**
+## Installation ##
 
 Simply complete the installer package to install the driver. The driver
 will recommend you restart - if you do not, the driver will only be
@@ -32,7 +20,7 @@ minute after the installer completes. If you are interested in
 installing as a developer please see below.
 
 
-**Usage**
+## Usage ##
 
 The driver exposes a standard game pad with a number of standard
 controls, so any game that supports gaming devices should work. In some
@@ -43,26 +31,20 @@ capabilities, so should be a good test that the installation is
 functional.
 
 
-**Known Problems/Todo**
+## Known Problems/Todo ##
 
--   Driver probably needs to be more resilient to errors and odd cases
--   Extra settings? E.g. trigger deadzones, control remapping.
--   Someone has requested old Xbox Controller support too.
-
-**Contact me**
-
--   Please feel free to contact me with any comments, questions and so
-    on using the form at the URL at the top of the file.
-
-**Developer info**
-
--   Anything below this probably doesn't affect end users, so you can
-    stop reading now if you just want to use the driver.
+ - Driver probably needs to be more resilient to errors and odd cases
+ - Extra settings? E.g. trigger deadzones, control remapping.
+ - Someone has requested old Xbox Controller support too.
 
 
-***Building***
+## Developer info ##
 
-(This section does not yet discuss the source of the wireless drivers)
+Anything below this probably doesn't affect end users, so you can stop reading
+now if you just want to use the driver.
+
+
+### Building ###
 
 The distribution currently consists of 3 projects - one for the driver
 (implemented in C++, as an I/O Kit C++ class), one for the force
@@ -87,7 +69,7 @@ could only debug it in place.
 To test the Preference Pane, just double-click the resulting file.
 
 
-***Debugging***
+### Debugging ###
 
 Most of the debugging I did was via printing out text. In 360Controller,
 you can use IOLog(), and the output will appear in system.log. In
@@ -97,13 +79,13 @@ In Pref360Control, `NSLog()` works as it's an Objective C program, and will
 output to the console of the Preferences application.
 
 
-***Installer***
+### Installer ###
 
 Included is an installer project for Packages. Download Packages at
 [http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html)
 
 
-***Other information***
+### Other information ###
 
 I wrote the driver from scratch, using Apple documentation and drivers
 simply as a reference and not basing it upon any existing source. As
@@ -113,3 +95,14 @@ what's going on :)
 
 The calculations for the updated Feedback360 plugin are based on the
 unmaintained xi driver for Windows.
+
+
+## Licence ##
+
+Copyright (C) 2006-2013 Colin Munro
+
+[http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller)
+
+This driver is licensed under the GNU Public License. A copy of this
+license is included in the distribution file, please inspect it before
+using the binary or source.
