@@ -590,7 +590,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             [powerOff setHidden:NO];
         }
         if (imageName) {
-            [batteryLevel setImage:[NSImage imageNamed:imageName]];
+            [batteryLevel setImage:[self.bundle imageForResource:imageName]];
         } else {
             [batteryLevel setImage:nil];
         }
