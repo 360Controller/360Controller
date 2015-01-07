@@ -157,7 +157,13 @@ OSNumber* Xbox360ControllerClass::newPrimaryUsagePageNumber() const
 
 OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 {
-    return OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
+    OSNumber *retNum = OSNumber::withNumber(GetOwnerProvider(this)->GetProductID(),16);
+    if (retNum->isEqualTo(OSNumber::withNumber(721,16))) {
+        if (GetOwnerProvider(this)->GetVendorID() == 1118) {
+            retNum = OSNumber::withNumber(654,16); // Change Xbox One ProductID into 360 Product ID
+        }
+    }
+    return retNum;
 }
 
 OSString* Xbox360ControllerClass::newProductString() const
