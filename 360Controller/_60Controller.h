@@ -45,6 +45,7 @@ private:
     
 	void SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
 	
+    void xoneTo360Packet(void *buffer, void *override);
     void fiddleReport(IOBufferMemoryDescriptor *buffer);
     
     void readSettings(void);
@@ -99,6 +100,11 @@ protected:
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
+    
+    // Xbox One support
+    bool isXboxOneController;
+    bool isXboxOneGuideButtonPressed;
+    void *prevReport;
 
 public:
     // this is from the IORegistryEntry - no provider yet

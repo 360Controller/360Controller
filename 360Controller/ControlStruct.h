@@ -65,6 +65,38 @@ typedef struct XBOX360_OUT_RUMBLE {
     XBox360_Byte reserved[3];
 } PACKED XBOX360_OUT_RUMBLE;
 
+typedef struct {
+    UInt8 command;
+    UInt8 reserved1;
+    UInt8 counter;
+    UInt8 size;
+} PACKED XBOXONE_HEADER;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt16 buttons;
+    UInt16 trigL, trigR;
+    XBOX360_HAT left, right;
+} PACKED XBOXONE_IN_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt8 state;
+    UInt8 dummy;
+} PACKED XBOXONE_IN_GUIDE_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt8 dummy;
+    UInt8 rumble_style;
+    UInt8 left_trigger;
+    UInt8 right_trigger;
+    UInt8 left_hand;
+    UInt8 right_hand;
+    UInt8 length; // Length of time to rumble
+    UInt16 dummy_pack;
+} PACKED XBOXONE_OUT_RUMBLE;
+
 // Enumeration of command types
 enum CommandTypes {
     // In
