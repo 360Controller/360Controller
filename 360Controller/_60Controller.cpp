@@ -346,13 +346,14 @@ bool Xbox360Peripheral::start(IOService *provider)
         }
     }
     // Find correct interface
+    controllerType = Xbox360;
     intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
     intf.bInterfaceSubClass=93;
     intf.bInterfaceProtocol=1;
     intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
     interface=device->FindNextInterface(NULL,&intf);
     if(interface==NULL) {
-        // Xbox One Controller
+        // Find correct interface, Xbox One
         intf.bInterfaceClass=255;
         intf.bInterfaceSubClass=71;
         intf.bInterfaceProtocol=208;
@@ -362,11 +363,7 @@ bool Xbox360Peripheral::start(IOService *provider)
             IOLog("start - unable to find the interface\n");
             goto fail;
         }
-        else
-        {
-            isXboxOneController = true;
-            prevReport = IOMalloc(20);
-        }
+        controllerType = XboxOne;
     }
     interface->open(this);
     // Find pipes
@@ -459,11 +456,15 @@ bool Xbox360Peripheral::start(IOService *provider)
 nochat:
     if (!QueueRead())
 		goto fail;
-    // Disable LED
-    Xbox360_Prepare(led,outLed);
-    led.pattern=ledOff;
-    QueueWrite(&led,sizeof(led));
-    QueueWrite(&xoneInit, sizeof(xoneInit)); // Xbox One Init
+    if (controllerType == XboxOne) {
+        QueueWrite(&xoneInit, sizeof(xoneInit));
+    } else {
+        // Disable LED
+        Xbox360_Prepare(led,outLed);
+        led.pattern=ledOff;
+        QueueWrite(&led,sizeof(led));
+    }
+    
     // Done
 	PadConnect();
 	registerService();
@@ -596,10 +597,6 @@ void Xbox360Peripheral::ReleaseAll(void)
         device->close(this);
         device=NULL;
     }
-    if(prevReport!=NULL) {
-        IOFree(prevReport, 20);
-        prevReport=NULL;
-    }
 }
 
 // Handle termination
@@ -635,58 +632,6 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 #error Unknown CPU byte order
 #endif
     return (reverse<0)?~reverse:reverse;
-}
-
-void Xbox360Peripheral::xoneTo360Packet(void *buffer, void *override)
-{
-    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
-    UInt8 trigL = 0, trigR = 0;
-    UInt16 new_buttons = 0;
-    XBOX360_HAT left, right;
-    
-    if (override == NULL)
-    {
-        XBOXONE_IN_REPORT *reportXone = (XBOXONE_IN_REPORT*)buffer;
-        report360->header.command = reportXone->header.command - 0x20; // Change 0x20 into 0x00
-        report360->header.size = reportXone->header.size + 0x06; // Change 0x0E into 0x14
-        
-        new_buttons |= ((reportXone->buttons & 4) == 4) << 4;
-        new_buttons |= ((reportXone->buttons & 8) == 8) << 5;
-        new_buttons |= ((reportXone->buttons & 16) == 16) << 12;
-        new_buttons |= ((reportXone->buttons & 32) == 32) << 13;
-        new_buttons |= ((reportXone->buttons & 64) == 64) << 14;
-        new_buttons |= ((reportXone->buttons & 128) == 128) << 15;
-        new_buttons |= ((reportXone->buttons & 256) == 256) << 0;
-        new_buttons |= ((reportXone->buttons & 512) == 512) << 1;
-        new_buttons |= ((reportXone->buttons & 1024) == 1024) << 2;
-        new_buttons |= ((reportXone->buttons & 2048) == 2048) << 3;
-        new_buttons |= ((reportXone->buttons & 4096) == 4096) << 8;
-        new_buttons |= ((reportXone->buttons & 8192) == 8192) << 9;
-        new_buttons |= ((reportXone->buttons & 16384) == 16384) << 6;
-        new_buttons |= ((reportXone->buttons & 32768) == 32768) << 7;
-        new_buttons |= (isXboxOneGuideButtonPressed) << 10;
-        trigL = (reportXone->trigL / 1023.0) * 255;
-        trigR = (reportXone->trigR / 1023.0) * 255;
-        left = reportXone->left;
-        right = reportXone->right;
-        
-        report360->buttons = new_buttons;
-        report360->trigL = trigL;
-        report360->trigR = trigR;
-        report360->left = left;
-        report360->right = right;
-    }
-    else
-    {
-        XBOX360_IN_REPORT *reportOverride = (XBOX360_IN_REPORT*)override;
-        report360->header = reportOverride->header;
-        report360->buttons = reportOverride->buttons;
-        report360->buttons |= (isXboxOneGuideButtonPressed) << 10;
-        report360->trigL = reportOverride->trigL;
-        report360->trigR = reportOverride->trigR;
-        report360->left = reportOverride->left;
-        report360->right = reportOverride->right;
-    }
 }
 
 // Adjusts the report for any settings speciified by the user
@@ -744,51 +689,40 @@ void Xbox360Peripheral::WriteCompleteInternal(void *target,void *parameter,IORet
 // This handles a completed asynchronous read
 void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
 {
-	if (padHandler != NULL) // avoid deadlock with release
-	{
-		LockRequired locker(mainLock);
-		IOReturn err;
-		bool reread=!isInactive();
-		
-		switch(status) {
-			case kIOReturnOverrun:
-				IOLog("read - kIOReturnOverrun, clearing stall\n");
-				if (inPipe != NULL)
-					inPipe->ClearStall();
-				// Fall through
-			case kIOReturnSuccess:
-				if (inBuffer != NULL)
-				{
-                    if (isXboxOneController) {
-                        const XBOXONE_IN_GUIDE_REPORT *xoneReport=(const XBOXONE_IN_GUIDE_REPORT*)inBuffer->getBytesNoCopy();
-                        if ((xoneReport->header.command==0x07)&&(xoneReport->header.size==0x02)) {
-                            isXboxOneGuideButtonPressed = (bool)xoneReport->state;
-                            xoneTo360Packet(inBuffer->getBytesNoCopy(), prevReport);
-                        }
-                        else {
-                            xoneTo360Packet(inBuffer->getBytesNoCopy(), NULL);
-                            memcpy(prevReport, inBuffer->getBytesNoCopy(), 20);
+    if (padHandler != NULL) // avoid deadlock with release
+    {
+        LockRequired locker(mainLock);
+        IOReturn err;
+        bool reread=!isInactive();
+        
+        switch(status) {
+            case kIOReturnOverrun:
+                IOLog("read - kIOReturnOverrun, clearing stall\n");
+                if (inPipe != NULL)
+                    inPipe->ClearStall();
+                // Fall through
+            case kIOReturnSuccess:
+                if (inBuffer != NULL)
+                {
+                    const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
+                    if(((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT)))
+                       || (report->header.command==0x20) || (report->header.command==0x07)) /* Xbox One */ {
+                        err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
+                        if(err!=kIOReturnSuccess) {
+                            IOLog("read - failed to handle report: 0x%.8x\n",err);
                         }
                     }
-					const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
-					if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
-						fiddleReport(inBuffer);
-						err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
-						if(err!=kIOReturnSuccess) {
-							IOLog("read - failed to handle report: 0x%.8x\n",err);
-						}
-					}
-				}
-				break;
-			case kIOReturnNotResponding:
-				IOLog("read - kIOReturnNotResponding\n");
-				reread=false;
-				break;
-			default:
-				reread=false;
-				break;
-		}
-		if(reread) QueueRead();
+                }
+                break;
+            case kIOReturnNotResponding:
+                IOLog("read - kIOReturnNotResponding\n");
+                reread=false;
+                break;
+            default:
+                reread=false;
+                break;
+        }
+        if(reread) QueueRead();
     }
 }
 
@@ -868,7 +802,11 @@ IOHIDDevice* Xbox360Peripheral::getController(int index)
 void Xbox360Peripheral::PadConnect(void)
 {
 	PadDisconnect();
-	padHandler = new Xbox360ControllerClass;
+    if (controllerType == XboxOne) {
+        padHandler = new XboxOneControllerClass;
+    } else {
+        padHandler = new Xbox360ControllerClass;
+    }
 	if (padHandler != NULL)
 	{
         const OSString *keys[] = {
