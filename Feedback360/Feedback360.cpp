@@ -78,7 +78,7 @@ IOCFPlugInInterface** Feedback360::Alloc(void)
 
 IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 *order)
 {
-    if ((service==0)
+    if ((service==0) || IOObjectConformsTo(service,"XboxOneControllerClass")
         || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
             && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
     return FF_OK;
