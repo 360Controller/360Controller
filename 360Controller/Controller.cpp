@@ -254,13 +254,16 @@ typedef struct {
 } PACKED XBOXONE_IN_GUIDE_REPORT;
 
 typedef struct {
-    XBOXONE_HEADER header;
-    UInt8 reserved1;
-    UInt8 rumbleStyle;
+    UInt8 command; // 0x09
+    UInt8 reserved1; // So far 0x08
+    UInt8 reserved2; // So far always 0x00
+    UInt8 substructure; // 0x08 - Continuous, 0x09 - Single
+    UInt8 mode; // So far always 0x00
+    UInt8 rumbleMask; // So far always 0x0F
     UInt8 trigL, trigR;
     UInt8 little, big;
     UInt8 length; // Length of time to rumble
-    UInt8 reserved[2];
+    UInt8 period; // Period of time between pulses. DO NOT INCLUDE WHEN SUBSTRUCTURE IS 0x09
 } PACKED XBOXONE_OUT_RUMBLE;
 
 OSDefineMetaClassAndStructors(XboxOneControllerClass, Xbox360ControllerClass)
@@ -363,31 +366,31 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
 
 IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
-    XBOXONE_HEADER header;
-    report->readBytes(0, &header, 4);
-    switch(header.command)
+    IOLog("Xbox One Controller - setReport\n");
+    unsigned char data[4];
+    report->readBytes(0, &data, 4);
+    IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
+    switch(data[0])//(header.command)
     {
         case 0x00:  // Set force feedback
-            IOLog("Rumble from 0x00");
-        case 0x09:  // Set force feedback
-            if ((header.size != report->getLength()) || (header.size != 0x04))
-                return kIOReturnUnsupported;
-            else
-            {
-                XBOXONE_OUT_RUMBLE rumble;
-                Xbox360_Prepare(rumble, 0x09)
-                rumble.header.counter = 0x03;
-                rumble.rumbleStyle = 0x0F;
-                rumble.trigL = 0x00;
-                rumble.trigR = 0x00;
-                rumble.little = 0x1D;
-                rumble.big = 0x1D;
-                rumble.length = 0xFF;
-                GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
-            }
+            XBOXONE_OUT_RUMBLE rumble;
+            rumble.command = 0x09;
+            rumble.reserved1 = 0x08;
+            rumble.reserved2 = 0x00;
+            rumble.substructure = 0x09;
+            rumble.mode = 0x00;
+            rumble.rumbleMask = 0x0F;
+            rumble.trigL = 0x00;
+            rumble.trigR = 0x00;
+            rumble.little = data[3];
+            rumble.big = data[2];
+            rumble.length = 0x80;
+            GetOwner(this)->QueueWrite(&rumble,11);
+            return kIOReturnSuccess;
+        case 0x01: // Unsupported LED
             return kIOReturnSuccess;
         default:
-            IOLog("Unknown escape %d\n", header.command);
+            IOLog("Unknown escape %d\n", data[0]);
             return kIOReturnUnsupported;
     }
 }
