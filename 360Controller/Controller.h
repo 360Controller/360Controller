@@ -57,15 +57,36 @@ public:
 };
 
 
+class XboxOriginalControllerClass : public Xbox360ControllerClass
+{
+    OSDeclareDefaultStructors(XboxOriginalControllerClass)
+    
+private:
+    UInt8 lastData[32];
+    UInt32 repeatCount;
+    
+public:
+    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
+    virtual IOReturn handleReport(
+                                  IOMemoryDescriptor * report,
+                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
+                                  IOOptionBits         options    = 0 );
+    
+    virtual OSString* newManufacturerString() const;
+    virtual OSNumber* newProductIDNumber() const;
+    virtual OSNumber* newVendorIDNumber() const;
+    virtual OSString* newProductString() const;
+};
+
+
 class XboxOneControllerClass : public Xbox360ControllerClass
 {
     OSDeclareDefaultStructors(XboxOneControllerClass)
     
-    #define XboxOne_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x-4);}
+#define XboxOne_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x-4);}
     
 private:
     UInt8 lastData[20];
-    UInt32 repeatCount;
     bool isXboxOneGuideButtonPressed;
     
 public:
@@ -79,5 +100,6 @@ public:
     virtual OSNumber* newProductIDNumber() const;
     virtual OSNumber* newVendorIDNumber() const;
     virtual OSString* newProductString() const;
+    <<<<<<< HEAD
     virtual void convertFromXboxOne(void *buffer, void* override);
 };
