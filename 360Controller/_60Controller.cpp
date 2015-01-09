@@ -353,18 +353,31 @@ bool Xbox360Peripheral::start(IOService *provider)
     intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
     interface=device->FindNextInterface(NULL,&intf);
     if(interface==NULL) {
-        // Find correct interface, Xbox One
-        intf.bInterfaceClass=255;
-        intf.bInterfaceSubClass=71;
-        intf.bInterfaceProtocol=208;
-        interface=device->FindNextInterface(NULL, &intf);
-        if(interface==NULL)
-        {
-            IOLog("start - unable to find the interface\n");
-            goto fail;
+        // Find correct interface, Xbox original
+        intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
+        intf.bInterfaceSubClass=66;
+        intf.bInterfaceProtocol=0;
+        intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
+        interface=device->FindNextInterface(NULL,&intf);
+        if(interface==NULL) {
+            // Find correct interface, Xbox One
+            intf.bInterfaceClass=255;
+            intf.bInterfaceSubClass=71;
+            intf.bInterfaceProtocol=208;
+            intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
+            interface=device->FindNextInterface(NULL, &intf);
+            if(interface==NULL)
+            {
+                IOLog("start - unable to find the interface\n");
+                goto fail;
+            }
+            controllerType = XboxOne;
+            goto interfacefound;
         }
-        controllerType = XboxOne;
+        controllerType = XboxOriginal;
+        goto interfacefound;
     }
+interfacefound:
     interface->open(this);
     // Find pipes
     pipe.direction=kUSBIn;
@@ -802,7 +815,9 @@ IOHIDDevice* Xbox360Peripheral::getController(int index)
 void Xbox360Peripheral::PadConnect(void)
 {
 	PadDisconnect();
-    if (controllerType == XboxOne) {
+    if (controllerType == XboxOriginal) {
+        padHandler = new XboxOriginalControllerClass;
+    } else if (controllerType == XboxOne) {
         padHandler = new XboxOneControllerClass;
     } else {
         padHandler = new Xbox360ControllerClass;

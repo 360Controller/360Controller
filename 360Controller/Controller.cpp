@@ -229,7 +229,157 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 }
 
 /*
- * Xbox One controller
+ * Xbox original controller.
+ * Convert reports to Xbox 360 controller format and fake product ids
+ */
+
+typedef struct {
+    XBOX360_PACKET header;
+    XBox360_Byte buttons;
+    XBox360_Byte reserved1;
+    XBox360_Byte a, b, x, y, black, white;
+    XBox360_Byte trigL,trigR;
+    XBox360_Short xL,yL;
+    XBox360_Short xR,yR;
+} PACKED XBOX_IN_REPORT;
+
+typedef struct {
+    XBOX360_PACKET header;
+    XBox360_Byte reserved1;
+    XBox360_Byte left;
+    XBox360_Byte reserved2;
+    XBox360_Byte right;
+} PACKED XBOX_OUT_RUMBLE;
+
+
+OSDefineMetaClassAndStructors(XboxOriginalControllerClass, Xbox360ControllerClass)
+
+OSNumber* XboxOriginalControllerClass::newVendorIDNumber() const
+{
+    return OSNumber::withNumber(1118,16);
+}
+
+OSString* XboxOriginalControllerClass::newManufacturerString() const
+{
+    return OSString::withCString("Holtek");
+}
+
+OSNumber* XboxOriginalControllerClass::newProductIDNumber() const
+{
+    return OSNumber::withNumber(654,16);
+}
+
+OSString* XboxOriginalControllerClass::newProductString() const
+{
+    return OSString::withCString("Xbox 360 Wired Controller");
+}
+
+static void logData(UInt8 *data, int len) {
+    for (int i = 0; i < len; i++) IOLog("%02x ", (int)data[i]);
+    IOLog("\n");
+}
+
+// This converts XBox original controller report into XBox360 form
+// See https://github.com/Grumbel/xboxdrv/blob/master/src/controller/xbox_controller.cpp
+static void convertFromXBoxOriginal(UInt8 *data) {
+    if (data[0] != 0x00 || data[1] != 0x14) {
+        IOLog("Unknown report command %d, length %d\n", (int)data[0], (int)data[1]);
+        return;
+    }
+    XBOX360_IN_REPORT report;
+    Xbox360_Prepare (report, 0);
+    XBOX_IN_REPORT *in = (XBOX_IN_REPORT*)data;
+    XBox360_Short buttons = in->buttons;
+    if (in->a) buttons |= 1 << 12; // a
+    if (in->b) buttons |= 1 << 13; // b
+    if (in->x) buttons |= 1 << 14; // x
+    if (in->y) buttons |= 1 << 15; // y
+    if (in->black) buttons |= 1 << 9; // black mapped to shoulder right
+    if (in->white) buttons |= 1 << 8; // white mapped to shoulder left
+    report.buttons = buttons;
+    report.trigL = in->trigL;
+    report.trigR = in->trigR;
+    report.left.x = in->xL;
+    report.left.y = in->yL;
+    report.right.x = in->xR;
+    report.right.y = in->yR;
+    *((XBOX360_IN_REPORT *)data) = report;
+}
+
+IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descriptor, IOHIDReportType reportType, IOOptionBits options) {
+    //IOLog("%s\n", __FUNCTION__);
+    UInt8 data[sizeof(XBOX360_IN_REPORT)];
+    if (descriptor->getLength() >= sizeof(XBOX360_IN_REPORT)) {
+        descriptor->readBytes(0, data, sizeof(XBOX360_IN_REPORT));
+        const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)data;
+        if ((report->header.command==inReport) && (report->header.size==sizeof(XBOX360_IN_REPORT))) {
+            convertFromXBoxOriginal(data);
+            if (memcmp(data, lastData, sizeof(XBOX360_IN_REPORT)) == 0) {
+                repeatCount ++;
+                // drop triplicate reports
+                if (repeatCount > 1) {
+                    return kIOReturnSuccess;
+                }
+            } else {
+                repeatCount = 0;
+            }
+            memcpy(lastData, data, sizeof(XBOX360_IN_REPORT));
+            descriptor->writeBytes(0, data, sizeof(XBOX360_IN_REPORT));
+            //if (data[2]&1) {
+            //    IOLog("%s after %d ", __FUNCTION__, (int)reportType);
+            //    logData(data, 20);
+            //}
+        } else {
+            IOLog("%s %d \n", __FUNCTION__, (int)descriptor->getLength());
+            IOLog("%s  %d \n", __FUNCTION__, (int)reportType);
+            logData(data, (int)descriptor->getLength());
+        }
+        
+    } else {
+        descriptor->readBytes(0, data, descriptor->getLength());
+        if (reportType != 0 && data[0] != 0) {
+            // not a rumble report
+            IOLog("%s %d \n", __FUNCTION__, (int)reportType);
+            logData(data, (int)descriptor->getLength());
+        }
+    }
+    
+    IOReturn ret = Xbox360ControllerClass::handleReport(descriptor, reportType, options);
+    //IOLog("%s END\n", __FUNCTION__);
+    return ret;
+}
+
+IOReturn XboxOriginalControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+{
+    char data[2];
+    
+    report->readBytes(0, data, 2);
+    switch(data[0]) {
+        case 0x00:  // Set force feedback
+            if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
+        {
+            XBOX_OUT_RUMBLE rumble;
+            Xbox360_Prepare(rumble,outRumble);
+            report->readBytes(2,data,2);
+            rumble.left=data[0]; // CHECKME != big, little
+            rumble.right=data[1];
+            GetOwner(this)->QueueWrite(&rumble,sizeof(rumble));
+            // IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
+        }
+            return kIOReturnSuccess;
+        case 0x01:  // Set LEDs
+            if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
+            // No leds
+            return kIOReturnSuccess;
+            
+        default:
+            IOLog("Unknown escape %d\n", data[0]);
+            return kIOReturnUnsupported;
+    }
+}
+
+/*
+ * Xbox One controller.
  * Convert reports to Xbox 360 controller format and fake product ids
  */
 
