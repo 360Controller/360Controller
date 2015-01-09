@@ -100,6 +100,5 @@ public:
     virtual OSNumber* newProductIDNumber() const;
     virtual OSNumber* newVendorIDNumber() const;
     virtual OSString* newProductString() const;
-    <<<<<<< HEAD
     virtual void convertFromXboxOne(void *buffer, void* override);
 };
