@@ -43,4 +43,21 @@ if [ -d /System/Library/Extensions/WirelessGamingReceiver.kext ]; then
    /bin/rm -r /System/Library/Extensions/WirelessGamingReceiver.kext
 fi
 
+# Mavericks and later
+
+if [ -d /Library/Extensions/360Controller.kext ]; then
+   kextunload /Library/Extensions/360Controller.kext
+   /bin/rm -r /Library/Extensions/360Controller.kext
+fi
+
+if [ -d /Library/Extensions/Wireless360Controller.kext ]; then
+   kextunload /Library/Extensions/Wireless360Controller.kext
+   /bin/rm -r /Library/Extensions/Wireless360Controller.kext
+fi
+
+if [ -d /Library/Extensions/WirelessGamingReceiver.kext ]; then
+   kextunload /Library/Extensions/WirelessGamingReceiver.kext
+   /bin/rm -r /Library/Extensions/WirelessGamingReceiver.kext
+fi
+
 exit 0

@@ -32,9 +32,7 @@
 #include <ForceFeedback/IOForceFeedbackLib.h>
 #include <math.h>
 #include <string.h>
-
-#define MIN(a,b) (((a)<(b))?(a):(b))
-#define MAX(a,b) (((a)>(b))?(a):(b))
+#include <algorithm>
 
 //----------------------------------------------------------------------------------------------
 //	Effects
@@ -53,7 +51,7 @@
 #define	FRICTION		0x0A
 #define	CUSTOM_FORCE	0x0B
 
-#define SCALE_MAX 255
+#define SCALE_MAX (LONG)255
 
 class Feedback360Effect
 {

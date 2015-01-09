@@ -30,10 +30,10 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     return self;
 }
@@ -44,21 +44,7 @@
     [self removeObserver:self forKeyPath:@"b"];
     [self removeObserver:self forKeyPath:@"x"];
     [self removeObserver:self forKeyPath:@"y"];
-    
-    SUPERDEALLOC;
 }
-
-#ifdef __OBJC_GC__
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"a"];
-    [self removeObserver:self forKeyPath:@"b"];
-    [self removeObserver:self forKeyPath:@"x"];
-    [self removeObserver:self forKeyPath:@"y"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -82,18 +68,18 @@
     } else {
         [path stroke];
     }
-    bling.origin.x-=1;
-    bling.origin.y-=1;
-    bling.size.width+=2;
-    bling.size.height+=2;
+    bling.origin.x -= 1;
+    bling.origin.y -= 1;
+    bling.size.width +=2 ;
+    bling.size.height +=2 ;
     path = [NSBezierPath bezierPathWithOvalInRect:bling];
     [colour set];
     [path stroke];
     // Draw text
-    attributes=@{NSForegroundColorAttributeName: colour};
-    size=[button sizeWithAttributes:attributes];
-    point.x=rect.origin.x+((rect.size.width-size.width)/2);
-    point.y=rect.origin.y+((rect.size.height-size.height)/2);
+    attributes = @{NSForegroundColorAttributeName: colour};
+    size = [button sizeWithAttributes:attributes];
+    point.x = rect.origin.x + ((rect.size.width - size.width) / 2);
+    point.y = rect.origin.y + ((rect.size.height - size.height) / 2);
     [button drawAtPoint:point withAttributes:attributes];
 }
 
@@ -101,20 +87,20 @@
 {
     NSRect area = [self bounds], bit;
     
-    bit.size.width=area.size.width/3;
-    bit.size.height=area.size.height/3;
-    bit.origin.x=area.origin.x+bit.size.width;
-    bit.origin.y=area.origin.y+(bit.size.height*2)-MINI_OFFSET;
+    bit.size.width = area.size.width / 3;
+    bit.size.height = area.size.height / 3;
+    bit.origin.x = area.origin.x + bit.size.width;
+    bit.origin.y = area.origin.y + (bit.size.height * 2) - MINI_OFFSET;
     [[NSColor yellowColor] set];
     [MyMainButtons drawButton:@"Y" inRectangle:bit pressed:y];
-    bit.origin.y=area.origin.y+MINI_OFFSET;
+    bit.origin.y = area.origin.y + MINI_OFFSET;
     [[NSColor greenColor] set];
     [MyMainButtons drawButton:@"A" inRectangle:bit pressed:a];
-    bit.origin.y=area.origin.y+bit.size.height;
-    bit.origin.x=area.origin.x+MINI_OFFSET;
+    bit.origin.y = area.origin.y + bit.size.height;
+    bit.origin.x = area.origin.x + MINI_OFFSET;
     [[NSColor blueColor] set];
     [MyMainButtons drawButton:@"X" inRectangle:bit pressed:x];
-    bit.origin.x=area.origin.x+(bit.size.width*2)-MINI_OFFSET;
+    bit.origin.x = area.origin.x + (bit.size.width * 2) - MINI_OFFSET;
     [[NSColor redColor] set];
     [MyMainButtons drawButton:@"B" inRectangle:bit pressed:b];
 }

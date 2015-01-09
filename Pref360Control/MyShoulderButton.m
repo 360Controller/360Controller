@@ -30,7 +30,7 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     return self;
 }
@@ -38,18 +38,7 @@
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:@"pressed"];
-    
-    SUPERDEALLOC;
 }
-
-#ifdef __OBJC_GC__
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"pressed"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

@@ -32,7 +32,7 @@
 // Get some sort of CF type for a field in the IORegistry
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
-    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, BRIDGE(CFStringRef, key), kCFAllocatorDefault, kIORegistryIterateRecursively);
+    CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
 	
     return CFBridgingRelease(value);
 }
@@ -40,10 +40,11 @@ static id GetDeviceValue(io_service_t device, NSString *key)
 // Make sure a name is as nice as possible for eventually going into the XML for the driver
 static NSString* SanitiseName(NSString *name)
 {
-    NSMutableString *output = [NSMutableString stringWithCapacity:100];
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
     NSInteger i;
     
-    for (i = 0; i < [name length]; i++) {
+    for (i = 0; i < [name length]; i++)
+    {
         unichar c = [name characterAtIndex:i];
         if (c == ' ')
             c = '_';
@@ -51,7 +52,7 @@ static NSString* SanitiseName(NSString *name)
             continue;
         [output appendFormat:@"%C", c];
     }
-    return [NSString stringWithString:output];
+    return [[NSString alloc] initWithString:output];
 }
 
 // Get the Device interface for a given IO service
@@ -168,8 +169,8 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 @interface DeviceLister ()
 @property (getter = isChanged) BOOL changed;
-@property (arcstrong) NSMutableDictionary *entries;
-@property (arcweak) Pref360ControlPref *owner;
+@property (strong) NSMutableDictionary *entries;
+@property (weak) Pref360ControlPref *owner;
 @end
 
 @implementation DeviceLister
@@ -186,70 +187,23 @@ static BOOL IsXBox360Controller(io_service_t device)
 {
     if (self = [super init])
     {
-        self.entries = [NSMutableDictionary dictionaryWithCapacity:10];
+        self.entries = [[NSMutableDictionary alloc] initWithCapacity:10];
         connected = [[NSMutableArray alloc] initWithCapacity:10];
         enabled = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
 }
 
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-    self.entries = nil;
-    [connected release];
-    [enabled release];
-    [super dealloc];
-}
-#endif
-
 - (NSString*)toolPath
 {
     // Find the path of our tool in our bundle - should it be in the driver's bundle?
-    return [[[owner bundle] resourcePath] stringByAppendingPathComponent:TOOL_FILENAME];
+    return [[owner.bundle resourcePath] stringByAppendingPathComponent:TOOL_FILENAME];
 }
 
 - (OSStatus)writeToolWithAuthorisation:(AuthorizationRef)authorisationRef
 {
-    OSStatus result;
-    NSString *toolPath = [self toolPath];
-    NSMutableArray *parameters;
-    const char **argv;
-    int i;
-    
-    // Build array of parameters
-    parameters = [[NSMutableArray alloc] initWithCapacity:10];
-    [parameters addObject:@"edit"];
-    
-    for (NSNumber *key in enabled)
-    {
-        NSString *name = entries[key];
-        NSUInteger keyValue = [key unsignedIntValue];
-        UInt16 vendor = (keyValue >> 16) & 0xFFFF;
-        UInt16 product = keyValue & 0xFFFF;
-        [parameters addObject:name];
-        [parameters addObject:[NSString stringWithFormat:@"%i", vendor]];
-        [parameters addObject:[NSString stringWithFormat:@"%i", product]];
-    }
-    
-    // Convert parameters to a C array
-    argv = malloc(sizeof(char*) * ([parameters count] + 1));
-    i = 0;
-    for (NSString *item in parameters)
-        argv[i++] = [item UTF8String];
-    argv[i] = NULL;
-    
-    // Execute the command
-    result = AuthorizationExecuteWithPrivileges(authorisationRef,
-                                                [toolPath fileSystemRepresentation],
-                                                kAuthorizationFlagDefaults,
-                                                (char**)argv,
-                                                NULL);
-    
-    // Done
-    free(argv);
-    RELEASEOBJ(parameters);
-    return result;
+    // Pending major re-write, just return noErr
+    return noErr;
 }
 
 - (NSString*)readTool
@@ -261,7 +215,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     NSArray *lines;
     
     // Prepare to run the tool
-    task = AUTORELEASEOBJ([[NSTask alloc] init]);
+    task = [[NSTask alloc] init];
     [task setLaunchPath:[self toolPath]];
     
     // Hook up the pipe to catch the output
@@ -278,12 +232,12 @@ static BOOL IsXBox360Controller(io_service_t device)
     if ([task terminationStatus] != 0)
     {
         data = [[error fileHandleForReading] readDataToEndOfFile];
-        return AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }
     
     // Read the data back
     data = [[pipe fileHandleForReading] readDataToEndOfFile];
-    response = AUTORELEASEOBJ([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     // Parse the results
     lines = [response componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
@@ -376,7 +330,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 
 - (BOOL)loadDevices
 {
-    NSString *error = nil;
+    NSString *error;
     
     // Initialise
     [entries removeAllObjects];
@@ -511,9 +465,8 @@ fail:
             colour = [NSColor blueColor];
         else
             colour = [NSColor blackColor];
-        return AUTORELEASEOBJ([[NSAttributedString alloc]
-                               initWithString:entries[key]
-                               attributes:@{NSForegroundColorAttributeName: colour}]);
+        return [[NSAttributedString alloc] initWithString:entries[key]
+                                                attributes:@{NSForegroundColorAttributeName: colour}];
     }
     return nil;
 }

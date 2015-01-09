@@ -31,9 +31,9 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]) != nil) {
-        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"back" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"start" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"specific" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     return self;
 }
@@ -43,20 +43,7 @@
     [self removeObserver:self forKeyPath:@"back"];
     [self removeObserver:self forKeyPath:@"start"];
     [self removeObserver:self forKeyPath:@"specific"];
-    
-    SUPERDEALLOC;
 }
-
-#ifdef __OBJC_GC__
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"back"];
-    [self removeObserver:self forKeyPath:@"start"];
-    [self removeObserver:self forKeyPath:@"specific"];
-    
-    [super finalize];
-}
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

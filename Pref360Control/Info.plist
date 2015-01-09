@@ -6,8 +6,6 @@
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>360Control</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mice.driver.360Controller.Prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
