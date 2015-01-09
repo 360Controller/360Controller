@@ -22,8 +22,8 @@
 */
 #import "MyAnalogStick.h"
 
-#define PRESSED_INSET       5
-#define AREA_INSET          4
+#define PRESSED_INSET   5
+#define AREA_INSET      4
 
 @implementation MyAnalogStick
 @synthesize pressed;
@@ -35,11 +35,11 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew context:NULL];
-        [self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     return self;
 }
@@ -51,23 +51,7 @@
     [self removeObserver:self forKeyPath:@"positiony"];
     [self removeObserver:self forKeyPath:@"deadzone"];
     [self removeObserver:self forKeyPath:@"linked"];
-    
-    SUPERDEALLOC;
 }
-
-#ifdef __OBJC_GC__
-- (void)finalize
-{
-    [self removeObserver:self forKeyPath:@"pressed"];
-    [self removeObserver:self forKeyPath:@"positionX"];
-    [self removeObserver:self forKeyPath:@"positiony"];
-    [self removeObserver:self forKeyPath:@"deadzone"];
-    [self removeObserver:self forKeyPath:@"linked"];
-    
-    [super finalize];
-}
-
-#endif
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

@@ -24,12 +24,15 @@
 	<dict>
 		<key>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</key>
 		<string>Control360Factory</string>
+		<key>3A816735-D3CE-4788-BE87-811B33BFB4CA</key>
+		<string>ControlXboxOneFactory</string>
 	</dict>
 	<key>CFPlugInTypes</key>
 	<dict>
 		<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
 		<array>
 			<string>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</string>
+			<string>3A816735-D3CE-4788-BE87-811B33BFB4CA</string>
 		</array>
 	</dict>
 	<key>NSHumanReadableCopyright</key>

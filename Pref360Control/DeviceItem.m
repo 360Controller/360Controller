@@ -22,10 +22,6 @@
 */
 #import "DeviceItem.h"
 
-#ifndef __OBJC_GC__
-#warning building without Garbage Collection support. The Preference Pane won't be compatible with Lion.
-#endif
-
 static NSString* GetDeviceName(io_service_t device)
 {
     CFMutableDictionaryRef serviceProperties;
@@ -42,7 +38,7 @@ static NSString* GetDeviceName(io_service_t device)
 }
 
 @interface DeviceItem ()
-@property (arcstrong, readwrite) NSString *name;
+@property (strong, readwrite) NSString *name;
 @property (readwrite) io_service_t rawDevice;
 @property (readwrite) FFDeviceObjectReference ffDevice;
 @property (readwrite) IOHIDDeviceInterface122 **hidDevice;
@@ -63,13 +59,11 @@ static NSString* GetDeviceName(io_service_t device)
         
         ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
         if (ret != kIOReturnSuccess) {
-            RELEASEOBJ(self);
             return nil;
         }
         ret = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122), (LPVOID)&interface);
         (*plugInInterface)->Release(plugInInterface);
         if (ret != kIOReturnSuccess) {
-            RELEASEOBJ(self);
             return nil;
         }
         forceFeedback = 0;
@@ -85,7 +79,7 @@ static NSString* GetDeviceName(io_service_t device)
     DeviceItem *item = [[[self class] alloc] initWithItemForDevice:device];
     
     if (item)
-        return AUTORELEASEOBJ(item);
+        return item;
     
     IOObjectRelease(device);
     return nil;
@@ -99,25 +93,6 @@ static NSString* GetDeviceName(io_service_t device)
         (*interface)->Release(interface);
     if (forceFeedback)
         FFReleaseDevice(forceFeedback);
-#if !__has_feature(objc_arc)
-    self.name = nil;
-    
-    [super dealloc];
-#endif
 }
-
-#ifdef __OBJC_GC__
-- (void)finalize
-{
-    if (deviceHandle)
-        IOObjectRelease(deviceHandle);
-    if (interface)
-        (*interface)->Release(interface);
-    if (forceFeedback)
-        FFReleaseDevice(forceFeedback);
-    
-    [super finalize];
-}
-#endif
 
 @end
