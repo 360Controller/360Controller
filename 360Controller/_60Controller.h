@@ -44,8 +44,6 @@ private:
     static void WriteCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     
 	void SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
-	
-    void fiddleReport(IOBufferMemoryDescriptor *buffer);
     
     void readSettings(void);
 
@@ -73,6 +71,12 @@ protected:
 		tsSet2,
 		tsSet3,
 	} TIMER_STATE;
+    
+    typedef enum CONTROLLER_TYPE {
+        Xbox360,
+        XboxOriginal,
+        XboxOne
+    } CONTROLLER_TYPE;
 	
     IOUSBDevice *device;
     IOLock *mainLock;
@@ -93,6 +97,7 @@ protected:
 	ChatPadKeyboardClass *serialHandler;
 	Xbox360ControllerClass *padHandler;
     UInt8 chatpadInit[2];
+    CONTROLLER_TYPE controllerType;
 
     // Settings
     bool invertLeftX,invertLeftY;
@@ -121,6 +126,7 @@ public:
     virtual void WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
 
     bool QueueWrite(const void *bytes,UInt32 length);
+    virtual void fiddleReport(IOBufferMemoryDescriptor *buffer);
 	
 	IOHIDDevice* getController(int index);
 };

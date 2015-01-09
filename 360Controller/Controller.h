@@ -39,6 +39,10 @@ public:
     
     virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
     virtual IOReturn getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options);
+    virtual IOReturn handleReport(
+                                  IOMemoryDescriptor * report,
+                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
+                                  IOOptionBits         options    = 0 );
 	
     virtual OSString* newManufacturerString() const;
     virtual OSNumber* newPrimaryUsageNumber() const;
@@ -50,4 +54,30 @@ public:
     virtual OSNumber* newVendorIDNumber() const;
 	
     virtual OSNumber* newLocationIDNumber() const;
+};
+
+
+class XboxOneControllerClass : public Xbox360ControllerClass
+{
+    OSDeclareDefaultStructors(XboxOneControllerClass)
+    
+    #define XboxOne_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x-4);}
+    
+private:
+    UInt8 lastData[20];
+    UInt32 repeatCount;
+    bool isXboxOneGuideButtonPressed;
+    
+public:
+    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
+    virtual IOReturn handleReport(
+                                  IOMemoryDescriptor * report,
+                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
+                                  IOOptionBits         options    = 0 );
+    
+    virtual OSString* newManufacturerString() const;
+    virtual OSNumber* newProductIDNumber() const;
+    virtual OSNumber* newVendorIDNumber() const;
+    virtual OSString* newProductString() const;
+    virtual void convertFromXboxOne(void *buffer, void* override);
 };
