@@ -294,8 +294,16 @@ bool Xbox360Peripheral::start(IOService *provider)
     IOUSBFindInterfaceRequest intf;
     IOUSBFindEndpointRequest pipe;
     XBOX360_OUT_LED led;
-    UInt8 xoneInit[] = { 0x05, 0x20 };
     IOWorkLoop *workloop = NULL;
+    /*
+     * Xbox One controller init packets.
+     * The Rock Candy Xbox One controller requires more than just 0x05
+     * Minimum required packets unknown.
+     */
+    UInt8 xoneInitFirst[] = { 0x02, 0x20, 0x01, 0x1C, 0x7E, 0xED, 0x8B, 0x11, 0x0F, 0xA8, 0x00, 0x00, 0x5E, 0x04, 0xD1, 0x02, 0x01, 0x00, 0x01, 0x00, 0x17, 0x01, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00 };
+    UInt8 xoneInitSecond[] = { 0x05, 0x20, 0x00, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
+    UInt8 xoneInitThird[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
+    UInt8 xoneInitFourth[] = { 0x0A, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
     
     if (!super::start(provider))
 		return false;
@@ -470,7 +478,10 @@ nochat:
     if (!QueueRead())
 		goto fail;
     if (controllerType == XboxOne) {
-        QueueWrite(&xoneInit, sizeof(xoneInit));
+        QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
+        QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
+        QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
+        QueueWrite(&xoneInitFourth, sizeof(xoneInitFourth));
     } else {
         // Disable LED
         Xbox360_Prepare(led,outLed);
