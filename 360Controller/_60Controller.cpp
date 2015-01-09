@@ -294,6 +294,7 @@ bool Xbox360Peripheral::start(IOService *provider)
     IOUSBFindInterfaceRequest intf;
     IOUSBFindEndpointRequest pipe;
     XBOX360_OUT_LED led;
+    UInt8 xoneInit[] = { 0x05, 0x20 };
     IOWorkLoop *workloop = NULL;
     
     if (!super::start(provider))
@@ -345,14 +346,24 @@ bool Xbox360Peripheral::start(IOService *provider)
         }
     }
     // Find correct interface
+    controllerType = Xbox360;
     intf.bInterfaceClass=kIOUSBFindInterfaceDontCare;
     intf.bInterfaceSubClass=93;
     intf.bInterfaceProtocol=1;
     intf.bAlternateSetting=kIOUSBFindInterfaceDontCare;
     interface=device->FindNextInterface(NULL,&intf);
     if(interface==NULL) {
-        IOLog("start - unable to find the interface\n");
-        goto fail;
+        // Find correct interface, Xbox One
+        intf.bInterfaceClass=255;
+        intf.bInterfaceSubClass=71;
+        intf.bInterfaceProtocol=208;
+        interface=device->FindNextInterface(NULL, &intf);
+        if(interface==NULL)
+        {
+            IOLog("start - unable to find the interface\n");
+            goto fail;
+        }
+        controllerType = XboxOne;
     }
     interface->open(this);
     // Find pipes
@@ -445,10 +456,15 @@ bool Xbox360Peripheral::start(IOService *provider)
 nochat:
     if (!QueueRead())
 		goto fail;
-    // Disable LED
-    Xbox360_Prepare(led,outLed);
-    led.pattern=ledOff;
-    QueueWrite(&led,sizeof(led));
+    if (controllerType == XboxOne) {
+        QueueWrite(&xoneInit, sizeof(xoneInit));
+    } else {
+        // Disable LED
+        Xbox360_Prepare(led,outLed);
+        led.pattern=ledOff;
+        QueueWrite(&led,sizeof(led));
+    }
+    
     // Done
 	PadConnect();
 	registerService();
@@ -673,40 +689,40 @@ void Xbox360Peripheral::WriteCompleteInternal(void *target,void *parameter,IORet
 // This handles a completed asynchronous read
 void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining)
 {
-	if (padHandler != NULL) // avoid deadlock with release
-	{
-		LockRequired locker(mainLock);
-		IOReturn err;
-		bool reread=!isInactive();
-		
-		switch(status) {
-			case kIOReturnOverrun:
-				IOLog("read - kIOReturnOverrun, clearing stall\n");
-				if (inPipe != NULL)
-					inPipe->ClearStall();
-				// Fall through
-			case kIOReturnSuccess:
-				if (inBuffer != NULL)
-				{
-					const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
-					if((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT))) {
-						fiddleReport(inBuffer);
-						err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
-						if(err!=kIOReturnSuccess) {
-							IOLog("read - failed to handle report: 0x%.8x\n",err);
-						}
-					}
-				}
-				break;
-			case kIOReturnNotResponding:
-				IOLog("read - kIOReturnNotResponding\n");
-				reread=false;
-				break;
-			default:
-				reread=false;
-				break;
-		}
-		if(reread) QueueRead();
+    if (padHandler != NULL) // avoid deadlock with release
+    {
+        LockRequired locker(mainLock);
+        IOReturn err;
+        bool reread=!isInactive();
+        
+        switch(status) {
+            case kIOReturnOverrun:
+                IOLog("read - kIOReturnOverrun, clearing stall\n");
+                if (inPipe != NULL)
+                    inPipe->ClearStall();
+                // Fall through
+            case kIOReturnSuccess:
+                if (inBuffer != NULL)
+                {
+                    const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)inBuffer->getBytesNoCopy();
+                    if(((report->header.command==inReport)&&(report->header.size==sizeof(XBOX360_IN_REPORT)))
+                       || (report->header.command==0x20) || (report->header.command==0x07)) /* Xbox One */ {
+                        err = padHandler->handleReport(inBuffer, kIOHIDReportTypeInput);
+                        if(err!=kIOReturnSuccess) {
+                            IOLog("read - failed to handle report: 0x%.8x\n",err);
+                        }
+                    }
+                }
+                break;
+            case kIOReturnNotResponding:
+                IOLog("read - kIOReturnNotResponding\n");
+                reread=false;
+                break;
+            default:
+                reread=false;
+                break;
+        }
+        if(reread) QueueRead();
     }
 }
 
@@ -786,7 +802,11 @@ IOHIDDevice* Xbox360Peripheral::getController(int index)
 void Xbox360Peripheral::PadConnect(void)
 {
 	PadDisconnect();
-	padHandler = new Xbox360ControllerClass;
+    if (controllerType == XboxOne) {
+        padHandler = new XboxOneControllerClass;
+    } else {
+        padHandler = new Xbox360ControllerClass;
+    }
 	if (padHandler != NULL)
 	{
         const OSString *keys[] = {
