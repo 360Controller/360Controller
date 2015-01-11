@@ -44,7 +44,7 @@ private:
     static void WriteCompleteInternal(void *target,void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
     
 	void SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
-	
+
     void readSettings(void);
 
 	static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
@@ -74,7 +74,8 @@ protected:
     
     typedef enum CONTROLLER_TYPE {
         Xbox360,
-        XboxOriginal
+        XboxOriginal,
+        XboxOne
     } CONTROLLER_TYPE;
 	
     IOUSBDevice *device;
