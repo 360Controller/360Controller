@@ -229,7 +229,7 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 }
 
 /*
- * Xbox original controller. 
+ * Xbox original controller.
  * Convert reports to Xbox 360 controller format and fake product ids
  */
 
@@ -378,4 +378,169 @@ IOReturn XboxOriginalControllerClass::setReport(IOMemoryDescriptor *report,IOHID
     }
 }
 
+/*
+ * Xbox One controller.
+ * Convert reports to Xbox 360 controller format and fake product ids
+ */
 
+typedef struct {
+    UInt8 command;
+    UInt8 reserved1;
+    UInt8 counter;
+    UInt8 size;
+} PACKED XBOXONE_HEADER;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt16 buttons;
+    UInt16 trigL, trigR;
+    XBOX360_HAT left, right;
+} PACKED XBOXONE_IN_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt8 state;
+    UInt8 dummy;
+} PACKED XBOXONE_IN_GUIDE_REPORT;
+
+typedef struct {
+    UInt8 command; // 0x09
+    UInt8 reserved1; // So far 0x08
+    UInt8 reserved2; // So far always 0x00
+    UInt8 substructure; // 0x08 - Continuous, 0x09 - Single
+    UInt8 mode; // So far always 0x00
+    UInt8 rumbleMask; // So far always 0x0F
+    UInt8 trigL, trigR;
+    UInt8 little, big;
+    UInt8 length; // Length of time to rumble
+    UInt8 period; // Period of time between pulses. DO NOT INCLUDE WHEN SUBSTRUCTURE IS 0x09
+} PACKED XBOXONE_OUT_RUMBLE;
+
+OSDefineMetaClassAndStructors(XboxOneControllerClass, Xbox360ControllerClass)
+
+OSNumber* XboxOneControllerClass::newVendorIDNumber() const
+{
+    return OSNumber::withNumber(1118,16);
+}
+
+OSString* XboxOneControllerClass::newManufacturerString() const
+{
+    return OSString::withCString("Microsoft");
+}
+
+OSNumber* XboxOneControllerClass::newProductIDNumber() const
+{
+    return OSNumber::withNumber(654,16);
+}
+
+OSString* XboxOneControllerClass::newProductString() const
+{
+    return OSString::withCString("Xbox One Wired Controller");
+}
+
+// This converts Xbox One controller report into Xbox360 form
+void XboxOneControllerClass::convertFromXboxOne(void *buffer, void* override) {
+    
+//    if (data[0] != 0x00 || data[1] != 0x14) {
+//        IOLog("Unknown report command %d, length %d\n", (int)data[0], (int)data[1]);
+//        return;
+//    }
+    
+    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    UInt8 trigL = 0, trigR = 0;
+    UInt16 new_buttons = 0;
+    XBOX360_HAT left, right;
+    
+    if (override == NULL) {
+        XBOXONE_IN_REPORT *reportXone = (XBOXONE_IN_REPORT*)buffer;
+        report360->header.command = reportXone->header.command - 0x20; // Change 0x20 into 0x00
+        report360->header.size = reportXone->header.size + 0x06; // Change 0x0E into 0x14
+        
+        new_buttons |= ((reportXone->buttons & 4) == 4) << 4;
+        new_buttons |= ((reportXone->buttons & 8) == 8) << 5;
+        new_buttons |= ((reportXone->buttons & 16) == 16) << 12;
+        new_buttons |= ((reportXone->buttons & 32) == 32) << 13;
+        new_buttons |= ((reportXone->buttons & 64) == 64) << 14;
+        new_buttons |= ((reportXone->buttons & 128) == 128) << 15;
+        new_buttons |= ((reportXone->buttons & 256) == 256) << 0;
+        new_buttons |= ((reportXone->buttons & 512) == 512) << 1;
+        new_buttons |= ((reportXone->buttons & 1024) == 1024) << 2;
+        new_buttons |= ((reportXone->buttons & 2048) == 2048) << 3;
+        new_buttons |= ((reportXone->buttons & 4096) == 4096) << 8;
+        new_buttons |= ((reportXone->buttons & 8192) == 8192) << 9;
+        new_buttons |= ((reportXone->buttons & 16384) == 16384) << 6;
+        new_buttons |= ((reportXone->buttons & 32768) == 32768) << 7;
+        new_buttons |= (isXboxOneGuideButtonPressed) << 10;
+        trigL = (reportXone->trigL / 1023.0) * 255;
+        trigR = (reportXone->trigR / 1023.0) * 255;
+        left = reportXone->left;
+        right = reportXone->right;
+        
+        report360->buttons = new_buttons;
+        report360->trigL = trigL;
+        report360->trigR = trigR;
+        report360->left = left;
+        report360->right = right;
+    } else {
+        XBOX360_IN_REPORT *reportOverride = (XBOX360_IN_REPORT*)override;
+        report360->header = reportOverride->header;
+        report360->buttons = reportOverride->buttons;
+        report360->buttons |= (isXboxOneGuideButtonPressed) << 10;
+        report360->trigL = reportOverride->trigL;
+        report360->trigR = reportOverride->trigR;
+        report360->left = reportOverride->left;
+        report360->right = reportOverride->right;
+    }
+}
+
+IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, IOHIDReportType reportType, IOOptionBits options) {
+    UInt8 data[sizeof(XBOXONE_IN_REPORT)];
+    descriptor->readBytes(0, data, sizeof(XBOXONE_IN_REPORT));
+    const XBOXONE_IN_REPORT *report=(const XBOXONE_IN_REPORT*)data;
+    if ((report->header.command==0x20) && report->header.size==(sizeof(XBOXONE_IN_REPORT)-4)) {
+        convertFromXboxOne(data, NULL);
+        memcpy(lastData, data, sizeof(XBOX360_IN_REPORT));
+        descriptor->writeBytes(0, data, sizeof(XBOX360_IN_REPORT));
+    }
+    else if (report->header.command==0x07 && report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4))
+    {
+        const XBOXONE_IN_GUIDE_REPORT *guideReport=(const XBOXONE_IN_GUIDE_REPORT*)report;
+        isXboxOneGuideButtonPressed = (bool)guideReport->state;
+        convertFromXboxOne(data, lastData);
+        descriptor->writeBytes(0, data, sizeof(XBOX360_IN_REPORT));
+    }
+    
+    IOReturn ret = Xbox360ControllerClass::handleReport(descriptor, reportType, options);
+    return ret;
+}
+
+IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
+{
+    IOLog("Xbox One Controller - setReport\n");
+    unsigned char data[4];
+    report->readBytes(0, &data, 4);
+    IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
+    switch(data[0])//(header.command)
+    {
+        case 0x00:  // Set force feedback
+            XBOXONE_OUT_RUMBLE rumble;
+            rumble.command = 0x09;
+            rumble.reserved1 = 0x08;
+            rumble.reserved2 = 0x00;
+            rumble.substructure = 0x09;
+            rumble.mode = 0x00;
+            rumble.rumbleMask = 0x0F;
+            rumble.trigL = 0x00;
+            rumble.trigR = 0x00;
+            rumble.little = data[2];
+            rumble.big = data[3];
+            rumble.length = 0x80;
+            GetOwner(this)->QueueWrite(&rumble,11);
+            return kIOReturnSuccess;
+        case 0x01: // Unsupported LED
+            return kIOReturnSuccess;
+        default:
+            IOLog("Unknown escape %d\n", data[0]);
+            return kIOReturnUnsupported;
+    }
+}
