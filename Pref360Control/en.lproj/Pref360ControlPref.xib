@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Pref360ControlPref">
@@ -76,14 +76,14 @@
                             <constraint firstAttribute="height" constant="77" id="wDt-rN-0ds"/>
                         </constraints>
                     </customView>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="105" customClass="MyDigitalStick">
-                        <rect key="frame" x="129" y="47" width="77" height="77"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="105" customClass="MyDigitalStick">
+                        <rect key="frame" x="130" y="47" width="77" height="77"/>
                     </customView>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="106" customClass="MyAnalogStick">
-                        <rect key="frame" x="232" y="47" width="77" height="77"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="106" customClass="MyAnalogStick">
+                        <rect key="frame" x="233" y="47" width="77" height="77"/>
                     </customView>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
-                        <rect key="frame" x="317" y="131" width="77" height="77"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="MyMainButtons">
+                        <rect key="frame" x="318" y="131" width="77" height="77"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="108" customClass="MyCentreButtons">
                         <rect key="frame" x="157" y="145" width="126" height="39"/>
@@ -98,11 +98,11 @@
                             <constraint firstAttribute="height" constant="18" id="2rs-g7-BCp"/>
                         </constraints>
                     </customView>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="110" customClass="MyShoulderButton">
-                        <rect key="frame" x="317" y="216" width="77" height="18"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="110" customClass="MyShoulderButton">
+                        <rect key="frame" x="318" y="216" width="77" height="18"/>
                     </customView>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="114">
-                        <rect key="frame" x="47" y="107" width="71" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="114">
+                        <rect key="frame" x="47" y="107" width="72" height="18"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="179">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -111,8 +111,8 @@
                             <action selector="changeSetting:" target="-2" id="152"/>
                         </connections>
                     </button>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="115">
-                        <rect key="frame" x="47" y="87" width="71" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="115">
+                        <rect key="frame" x="47" y="87" width="70" height="18"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="180">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -121,8 +121,8 @@
                             <action selector="changeSetting:" target="-2" id="153"/>
                         </connections>
                     </button>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                        <rect key="frame" x="315" y="107" width="69" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="116">
+                        <rect key="frame" x="316" y="107" width="69" height="18"/>
                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="181">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -131,8 +131,8 @@
                             <action selector="changeSetting:" target="-2" id="154"/>
                         </connections>
                     </button>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="117">
-                        <rect key="frame" x="315" y="87" width="69" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="117">
+                        <rect key="frame" x="316" y="87" width="69" height="18"/>
                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="182">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -141,8 +141,8 @@
                             <action selector="changeSetting:" target="-2" id="155"/>
                         </connections>
                     </button>
-                    <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="120">
-                        <rect key="frame" x="230" y="20" width="166" height="21"/>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="120">
+                        <rect key="frame" x="231" y="20" width="166" height="21"/>
                         <sliderCell key="cell" alignment="left" maxValue="32768" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="184">
                             <font key="font" size="12" name="Helvetica"/>
                         </sliderCell>
@@ -150,8 +150,8 @@
                             <action selector="changeSetting:" target="-2" id="151"/>
                         </connections>
                     </slider>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="156">
-                        <rect key="frame" x="47" y="67" width="64" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="156">
+                        <rect key="frame" x="47" y="67" width="63" height="18"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="185">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -160,8 +160,8 @@
                             <action selector="changeSetting:" target="-2" id="171"/>
                         </connections>
                     </button>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="157">
-                        <rect key="frame" x="315" y="67" width="64" height="18"/>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="157">
+                        <rect key="frame" x="316" y="67" width="63" height="18"/>
                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="186">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -170,54 +170,54 @@
                             <action selector="changeSetting:" target="-2" id="172"/>
                         </connections>
                     </button>
-                    <box misplaced="YES" title="About" translatesAutoresizingMaskIntoConstraints="NO" id="158">
-                        <rect key="frame" x="399" y="16" width="184" height="242"/>
+                    <box title="About" translatesAutoresizingMaskIntoConstraints="NO" id="158">
+                        <rect key="frame" x="400" y="16" width="183" height="242"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="180" height="225"/>
+                            <rect key="frame" x="2" y="2" width="179" height="225"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="161">
-                                    <rect key="frame" x="13" y="203" width="154" height="11"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="161">
+                                    <rect key="frame" x="13" y="203" width="153" height="11"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Xbox 360 Controller Driver" id="187">
                                         <font key="font" metaFont="miniSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="163">
-                                    <rect key="frame" x="13" y="184" width="130" height="11"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="163">
+                                    <rect key="frame" x="13" y="184" width="129" height="11"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Version 0.14" id="188">
                                         <font key="font" metaFont="miniSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="165">
-                                    <rect key="frame" x="13" y="165" width="111" height="11"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="165">
+                                    <rect key="frame" x="13" y="164" width="108" height="12"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="© 2006-13 Colin Munro" id="189">
                                         <font key="font" metaFont="miniSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="166">
-                                    <rect key="frame" x="13" y="146" width="103" height="11"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="166">
+                                    <rect key="frame" x="13" y="144" width="100" height="12"/>
                                     <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://tattiebogle.net/" id="190">
                                         <font key="font" metaFont="miniSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="167">
-                                    <rect key="frame" x="13" y="127" width="152" height="11"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="167">
+                                    <rect key="frame" x="13" y="125" width="151" height="11"/>
                                     <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://mice-software.com/" id="191">
                                         <font key="font" metaFont="miniSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="168" userLabel="More Info Text">
-                                    <rect key="frame" x="13" y="53" width="154" height="66"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="168" userLabel="More Info Text">
+                                    <rect key="frame" x="13" y="45" width="153" height="72"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="192">
                                         <font key="font" metaFont="miniSystem"/>
                                         <string key="title">For more information on this driver, please see the supplied Readme and Licence documents.
@@ -251,8 +251,8 @@ Please consider donating if you enjoy this driver!</string>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
-                    <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                        <rect key="frame" x="208" y="194" width="32" height="24"/>
+                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="174">
+                        <rect key="frame" x="209" y="194" width="32" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="K71-5x-oaA"/>
                             <constraint firstAttribute="width" constant="32" id="uZK-rs-KV7"/>
@@ -276,8 +276,8 @@ Please consider donating if you enjoy this driver!</string>
                             <action selector="showDeviceList:" target="-2" id="220"/>
                         </connections>
                     </button>
-                    <button hidden="YES" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="227">
-                        <rect key="frame" x="87" y="13" width="99" height="32"/>
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="227">
+                        <rect key="frame" x="87" y="13" width="100" height="32"/>
                         <buttonCell key="cell" type="push" title="Power off" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="228">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -293,8 +293,8 @@ Please consider donating if you enjoy this driver!</string>
                         </constraints>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="xJT-rp-fd2"/>
                     </levelIndicator>
-                    <levelIndicator verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCv-HS-YkX">
-                        <rect key="frame" x="226" y="242" width="168" height="16"/>
+                    <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCv-HS-YkX">
+                        <rect key="frame" x="226" y="242" width="169" height="16"/>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="255" levelIndicatorStyle="continuousCapacity" id="TBS-cd-qyS"/>
                     </levelIndicator>
                 </subviews>
@@ -440,16 +440,16 @@ Please consider donating if you enjoy this driver!</string>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="214">
-                        <rect key="frame" x="18" y="299" width="353" height="17"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="214">
+                        <rect key="frame" x="18" y="299" width="347" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select the devices you would like to use with the driver:" id="215">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="216">
-                        <rect key="frame" x="431" y="13" width="74" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="216">
+                        <rect key="frame" x="432" y="13" width="73" height="32"/>
                         <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="217">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

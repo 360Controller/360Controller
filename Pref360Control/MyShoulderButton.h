@@ -23,5 +23,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MyShoulderButton : NSView
-@property (getter = isPressed) BOOL pressed;
+@property (nonatomic, getter = isPressed) BOOL pressed;
 @end

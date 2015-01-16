@@ -32,32 +32,34 @@
 @synthesize positionY = y;
 @synthesize linked;
 
-- (id)initWithFrame:(NSRect)frameRect
+- (void)setPressed:(BOOL)apressed
 {
-    if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"deadzone" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"positionX" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"positionY" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"pressed" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"linked" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-    }
-    return self;
+    pressed = apressed;
+    self.needsDisplay = YES;
 }
 
-- (void)dealloc
+- (void)setDeadzone:(int)adeadzone
 {
-    [self removeObserver:self forKeyPath:@"pressed"];
-    [self removeObserver:self forKeyPath:@"positionX"];
-    [self removeObserver:self forKeyPath:@"positiony"];
-    [self removeObserver:self forKeyPath:@"deadzone"];
-    [self removeObserver:self forKeyPath:@"linked"];
+    deadzone = adeadzone;
+    self.needsDisplay = YES;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)setPositionX:(int)positionX
 {
-    if (object == self) {
-        [self setNeedsDisplay:YES];
-    }
+    x = positionX;
+    self.needsDisplay = YES;
+}
+
+- (void)setPositionY:(int)positionY
+{
+    y = positionY;
+    self.needsDisplay = YES;
+}
+
+- (void)setLinked:(BOOL)alinked
+{
+    linked = alinked;
+    self.needsDisplay = YES;
 }
 
 - (void)drawRect:(NSRect)rect

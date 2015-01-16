@@ -205,14 +205,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		551B911F1A68BDB000EA6527 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
 		551CDFFD196EF52F000869B6 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
 		551CDFFF196EFD34000869B6 /* Install360Controller.pkgproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Install360Controller.pkgproj; sourceTree = "<group>"; };
 		551CE001196EFD34000869B6 /* finish.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = finish.sh; sourceTree = "<group>"; };
 		551CE002196EFD34000869B6 /* upgrade.sh */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = text.script.sh; path = upgrade.sh; sourceTree = "<group>"; };
 		551CE004196EFD34000869B6 /* Welcome.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Welcome.rtf; sourceTree = "<group>"; };
 		553BDB43196DF3BA00D1F569 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		554B55691971CFBE00D762BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
-		554B556B1971CFE300D762BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pref360ControlPref.strings; sourceTree = "<group>"; };
 		55699CD51971D96E00C40A31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55750C07190AFB5B0047FF41 /* DaemonLEDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaemonLEDs.h; sourceTree = "<group>"; usesTabs = 1; };
 		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -1100,8 +1099,7 @@
 		551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				554B55691971CFBE00D762BF /* Base */,
-				554B556B1971CFE300D762BF /* en */,
+				551B911F1A68BDB000EA6527 /* en */,
 			);
 			name = Pref360ControlPref.xib;
 			sourceTree = "<group>";

@@ -25,32 +25,33 @@
 #define MINI_OFFSET 2
 
 @implementation MyMainButtons
-@synthesize a, b, x, y;
+@synthesize a;
+@synthesize b;
+@synthesize x;
+@synthesize y;
 
-- (id)initWithFrame:(NSRect)frameRect
+- (void)setA:(BOOL)aa
 {
-    if (self = [super initWithFrame:frameRect]) {
-        [self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"b" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"x" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        [self addObserver:self forKeyPath:@"y" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-    }
-    return self;
+    a = aa;
+    self.needsDisplay = YES;
 }
 
-- (void)dealloc
+- (void)setB:(BOOL)aa
 {
-    [self removeObserver:self forKeyPath:@"a"];
-    [self removeObserver:self forKeyPath:@"b"];
-    [self removeObserver:self forKeyPath:@"x"];
-    [self removeObserver:self forKeyPath:@"y"];
+    b = aa;
+    self.needsDisplay = YES;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)setX:(BOOL)aa
 {
-    if (object == self) {
-        [self setNeedsDisplay:YES];
-    }
+    x = aa;
+    self.needsDisplay = YES;
+}
+
+- (void)setY:(BOOL)aa
+{
+    y = aa;
+    self.needsDisplay = YES;
 }
 
 + (void)drawButton:(NSString*)button inRectangle:(NSRect)rect pressed:(BOOL)down
