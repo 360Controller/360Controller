@@ -199,7 +199,7 @@ A restart will be required for changes to take effect.</string>
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
                                     <connections>
-                                        <action selector="changeSetting:" target="-2" id="WdX-QS-Y68"/>
+                                        <action selector="changeSetting:" target="-2" id="cnq-uD-6cU"/>
                                     </connections>
                                 </slider>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="FGM-yX-zMk">
@@ -253,21 +253,21 @@ A restart will be required for changes to take effect.</string>
                                     <userDefinedRuntimeAttribute type="string" keyPath="name" value="RT"/>
                                 </userDefinedRuntimeAttributes>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="2nr-yn-Nnu" customClass="MyBatteryMonitor">
+                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2nr-yn-Nnu" customClass="MyBatteryMonitor">
                                 <rect key="frame" x="134" y="12" width="41" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="41" id="MvK-ee-hFK"/>
                                     <constraint firstAttribute="height" constant="21" id="XUK-gL-Tyy"/>
                                 </constraints>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PUC-ti-HkQ" customClass="MyDeadZoneViewer" customModule="Pref360Control" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PUC-ti-HkQ" customClass="MyDeadZoneViewer">
                                 <rect key="frame" x="37" y="123" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="1GI-Lc-QXY"/>
                                     <constraint firstAttribute="width" constant="65" id="bom-jS-DHk"/>
                                 </constraints>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PVh-uO-wxu" customClass="MyDeadZoneViewer" customModule="Pref360Control" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PVh-uO-wxu" customClass="MyDeadZoneViewer">
                                 <rect key="frame" x="163" y="72" width="65" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="3q8-IT-9jt"/>
@@ -340,7 +340,7 @@ A restart will be required for changes to take effect.</string>
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
                                     <connections>
-                                        <action selector="changeSetting:" target="-2" id="VeG-5s-33V"/>
+                                        <action selector="changeSetting:" target="-2" id="kZt-8K-n8W"/>
                                     </connections>
                                 </slider>
                             </subviews>

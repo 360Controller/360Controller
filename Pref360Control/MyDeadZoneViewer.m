@@ -11,17 +11,20 @@
 
 @implementation MyDeadZoneViewer
 
-@synthesize val, linked;
+-(void)setVal:(double)value {
+    _val = value;
+    [self setNeedsDisplay:YES];
+}
 
--(void)setVal:(int)value {
-    val = value;
+- (void)setLinked:(BOOL)linked {
+    _linked = linked;
     [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    [Pref360StyleKit drawDeadZoneViewerWithValue:val linked:linked];
+    [Pref360StyleKit drawDeadZoneViewerWithValue:_val / 32768 linked:_linked];
 }
 
 @end

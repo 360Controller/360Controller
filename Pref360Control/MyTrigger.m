@@ -11,25 +11,23 @@
 
 @implementation MyTrigger
 
-@synthesize name;
-@synthesize val;
 
-- (void)setName:(NSString *)aName {
-    name = aName;
+- (void)setName:(NSString *)name {
+    _name = name;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setVal:(int)value {
-    val = value;
+    _val = value;
     [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    if (name == NULL) 
-        name = @"";
-    [Pref360StyleKit drawTriggerMetterWithIntensity:(val / 255.0) triggerTitle:name];
+    if (_name == NULL)
+        _name = @"";
+    [Pref360StyleKit drawTriggerMetterWithIntensity:(_val / 255.0) triggerTitle:_name];
 }
 
 @end
