@@ -10,131 +10,145 @@
 
 @implementation MyWhole360Controller
 
-@synthesize aPressed, bPressed, xPressed, yPressed;
-@synthesize leftPressed, upPressed, rightPressed, downPressed;
-@synthesize backPressed, startPressed, homePressed;
-@synthesize lbPressed, rbPressed, leftStickPressed, rightStickPressed;
-@synthesize leftStickPosition, rightStickPosition;
-@synthesize leftStickXPos, leftStickYPos, rightStickXPos, rightStickYPos;
 
 - (void)setAPressed:(BOOL)pressed {
-    aPressed = pressed;
+    _aPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setBPressed:(BOOL)pressed {
-    bPressed = pressed;
+    _bPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setXPressed:(BOOL)pressed {
-    xPressed = pressed;
+    _xPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setYPressed:(BOOL)pressed {
-    yPressed = pressed;
+    _yPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLeftPressed:(BOOL)pressed {
-    leftPressed = pressed;
+    _leftPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setUpPressed:(BOOL)pressed {
-    upPressed = pressed;
+    _upPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setRightPressed:(BOOL)pressed {
-    rightPressed = pressed;
+    _rightPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setDownPressed:(BOOL)pressed {
-    downPressed = pressed;
+    _downPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setBackPressed:(BOOL)pressed {
-    backPressed = pressed;
+    _backPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setStartPressed:(BOOL)pressed {
-    startPressed = pressed;
+    _startPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setHomePressed:(BOOL)pressed {
-    homePressed = pressed;
+    _homePressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLbPressed:(BOOL)pressed {
-    lbPressed = pressed;
+    _lbPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setRbPressed:(BOOL)pressed {
-    rbPressed = pressed;
+    _rbPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLeftStickPressed:(BOOL)pressed {
-    leftStickPressed = pressed;
+    _leftStickPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setRightStickPressed:(BOOL)pressed {
-    rightStickPressed = pressed;
+    _rightStickPressed = pressed;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLeftStickPosition:(CGPoint)position {
-    leftStickPosition = position;
+    _leftStickPosition = position;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setRightStickPosition:(CGPoint)position {
-    rightStickPosition = position;
+    _rightStickPosition = position;
     [self setNeedsDisplay:YES];
 }
 
 - (void)setLeftStickXPos:(int)xPos {
-    CGPoint p = leftStickPosition;
+    CGPoint p = _leftStickPosition;
     p.x = xPos / 32768.0;
     [self setLeftStickPosition:p];
 }
 
 - (void)setLeftStickYPos:(int)yPos {
-    CGPoint p = leftStickPosition;
+    CGPoint p = _leftStickPosition;
     p.y = yPos / 32768.0;
     [self setLeftStickPosition:p];
 }
 
 - (void)setRightStickXPos:(int)xPos {
-    CGPoint p = rightStickPosition;
+    CGPoint p = _rightStickPosition;
     p.x = xPos / 32768.0;
     [self setRightStickPosition:p];
 }
 
 - (void)setRightStickYPos:(int)yPos {
-    CGPoint p = rightStickPosition;
+    CGPoint p = _rightStickPosition;
     p.y = yPos / 32768.0;
     [self setRightStickPosition:p];
 }
 
+- (void)reset {
+    [self setAPressed:NO];
+    [self setBPressed:NO];
+    [self setXPressed:NO];
+    [self setYPressed:NO];
+    [self setLeftPressed:NO];
+    [self setUpPressed:NO];
+    [self setRightPressed:NO];
+    [self setDownPressed:NO];
+    [self setBackPressed:NO];
+    [self setStartPressed:NO];
+    [self setHomePressed:NO];
+    [self setLbPressed:NO];
+    [self setRbPressed:NO];
+    [self setLeftStickPressed:NO];
+    [self setRightStickPressed:NO];
+    [self setLeftStickPosition:NSZeroPoint];
+    [self setRightStickPosition:NSZeroPoint];
+}
+
 - (void)awakeFromNib {
-    leftStickPosition = NSZeroPoint;
-    rightStickPosition = NSZeroPoint;
+    _leftStickPosition = NSZeroPoint;
+    _rightStickPosition = NSZeroPoint;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    [Pref360StyleKit drawX360ControllerWithControllerNumber:0 aPressed:aPressed bPressed:bPressed xPressed:xPressed yPressed:yPressed leftPressed:leftPressed upPressed:upPressed rightPressed:rightPressed downPressed:downPressed backPressed:backPressed startPressed:startPressed lbPressed:lbPressed rbPressed:rbPressed homePressed:homePressed leftStickPressed:leftStickPressed rightStickPressed:rightStickPressed leftStick:leftStickPosition rightStick:rightStickPosition];
+    [Pref360StyleKit drawX360ControllerWithControllerNumber:0 aPressed:_aPressed bPressed:_bPressed xPressed:_xPressed yPressed:_yPressed leftPressed:_leftPressed upPressed:_upPressed rightPressed:_rightPressed downPressed:_downPressed backPressed:_backPressed startPressed:_startPressed lbPressed:_lbPressed rbPressed:_rbPressed homePressed:_homePressed leftStickPressed:_leftStickPressed rightStickPressed:_rightStickPressed leftStick:_leftStickPosition rightStick:_rightStickPosition];
 }
 
 @end

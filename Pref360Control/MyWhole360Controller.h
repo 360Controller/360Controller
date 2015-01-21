@@ -36,4 +36,6 @@
 @property (nonatomic) int rightStickXPos;
 @property (nonatomic) int rightStickYPos;
 
+- (void)reset;
+
 @end

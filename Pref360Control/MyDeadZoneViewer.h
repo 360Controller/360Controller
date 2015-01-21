@@ -10,7 +10,7 @@
 
 @interface MyDeadZoneViewer : NSView
 
-@property (nonatomic) int val;
+@property (nonatomic) double val;
 @property (nonatomic) BOOL linked;
 
 @end

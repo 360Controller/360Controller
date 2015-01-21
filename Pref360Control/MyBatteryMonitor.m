@@ -11,17 +11,15 @@
 
 @implementation MyBatteryMonitor
 
-@synthesize bars;
-
 - (void)setBars:(int)value {
-    bars = value;
+    _bars = value;
     [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    [Pref360StyleKit drawBatteryMonitorWithBars:bars];
+    [Pref360StyleKit drawBatteryMonitorWithBars:_bars];
 }
 
 @end
