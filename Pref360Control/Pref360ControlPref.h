@@ -35,6 +35,10 @@
 #import "MyMainButtons.h"
 #import "MyShoulderButton.h"
 
+@class MyWhole360Controller;
+@class MyTrigger;
+@class MyBatteryMonitor;
+@class MyDeadZoneViewer;
 @class DeviceLister;
 
 @interface Pref360ControlPref : NSPreferencePane 
@@ -48,7 +52,7 @@
 @property (weak) IBOutlet NSSlider *leftStickDeadzone;
 @property (weak) IBOutlet NSButton *leftStickInvertX;
 @property (weak) IBOutlet NSButton *leftStickInvertY;
-@property (weak) IBOutlet NSLevelIndicator *leftTrigger;
+//@property (weak) IBOutlet NSLevelIndicator *leftTrigger;
 @property (weak) IBOutlet MyMainButtons *rightButtons;
 @property (weak) IBOutlet MyShoulderButton *rightShoulder;
 @property (weak) IBOutlet MyAnalogStick *rightStick;
@@ -56,10 +60,17 @@
 @property (weak) IBOutlet NSSlider *rightStickDeadzone;
 @property (weak) IBOutlet NSButton *rightStickInvertX;
 @property (weak) IBOutlet NSButton *rightStickInvertY;
-@property (weak) IBOutlet NSLevelIndicator *rightTrigger;
+//@property (weak) IBOutlet NSLevelIndicator *rightTrigger;
 @property (weak) IBOutlet NSImageView *batteryLevel;
 @property (weak) IBOutlet DeviceLister *deviceLister;
 @property (weak) IBOutlet NSButton *powerOff;
+@property (weak) IBOutlet MyWhole360Controller *wholeController;
+@property (weak) IBOutlet MyTrigger *leftTrigger;
+@property (weak) IBOutlet MyTrigger *rightTrigger;
+@property (weak) IBOutlet MyBatteryMonitor *batteryStatus;
+@property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
+@property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
+
 
 // Internal info
 @property (readonly) mach_port_t masterPort;

@@ -26,6 +26,10 @@
 #import "DeviceItem.h"
 #import "ControlPrefs.h"
 #import "DeviceLister.h"
+#import "MyWhole360Controller.h"
+#import "MyTrigger.h"
+#import "MyDeadZoneViewer.h"
+#import "MyBatteryMonitor.h"
 
 #define NO_ITEMS @"No devices found"
 
@@ -99,6 +103,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 @synthesize powerOff;
 @synthesize masterPort;
 @synthesize deviceArray;
+@synthesize wholeController;
+@synthesize leftDeadZone;
+@synthesize rightDeadZone;
+@synthesize batteryStatus;
 
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
@@ -181,29 +189,33 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     switch(index) {
         case 0:
+            [wholeController setLeftStickXPos:value];
             [leftStick setPositionX:value];
             break;
             
         case 1:
+            [wholeController setLeftStickYPos:value];
             [leftStick setPositionY:value];
             break;
             
         case 2:
+            [wholeController setRightStickXPos:value];
             [rightStick setPositionX:value];
             break;
             
         case 3:
+            [wholeController setRightStickYPos:value];
             [rightStick setPositionY:value];
             break;
             
         case 4:
-            [leftTrigger setDoubleValue:value];
+            [leftTrigger setVal:value];
             largeMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
             
         case 5:
-            [rightTrigger setDoubleValue:value];
+            [rightTrigger setVal:value];
             smallMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
@@ -220,62 +232,77 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     
     switch (index) {
         case 0:
+            [wholeController setAPressed:b];
             [rightButtons setA:b];
             break;
             
         case 1:
+            [wholeController setBPressed:b];
             [rightButtons setB:b];
             break;
             
         case 2:
+            [wholeController setXPressed:b];
             [rightButtons setX:b];
             break;
             
         case 3:
+            [wholeController setYPressed:b];
             [rightButtons setY:b];
             break;
             
         case 4:
+            [wholeController setLbPressed:b];
             [leftShoulder setPressed:b];
             break;
             
         case 5:
+            [wholeController setRbPressed:b];
             [rightShoulder setPressed:b];
             break;
             
         case 6:
+            [wholeController setLeftStickPressed:b];
             [leftStick setPressed:b];
             break;
             
         case 7:
+            [wholeController setRightStickPressed:b];
             [rightStick setPressed:b];
             break;
             
         case 8:
+            [wholeController setStartPressed:b];
             [centreButtons setStart:b];
             break;
             
         case 9:
+            [wholeController setBackPressed:b];
             [centreButtons setBack:b];
             break;
             
         case 10:
+            [wholeController setHomePressed:b];
             [centreButtons setSpecific:b];
             break;
             
         case 11:
+            [wholeController setUpPressed:b];
             [digiStick setUp:b];
             break;
             
         case 12:
+            [wholeController setDownPressed:b];
             [digiStick setDown:b];
             break;
             
         case 13:
+            [wholeController setLeftPressed:b];
             [digiStick setLeft:b];
             break;
             
         case 14:
+            [wholeController setRightPressed:b];
             [digiStick setRight:b];
             break;
             
@@ -350,9 +377,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [rightButtons setX:NO];
     [rightButtons setY:NO];
     [leftShoulder setPressed:NO];
-    [leftTrigger setDoubleValue:0];
+    [leftTrigger setVal:0];
     [rightShoulder setPressed:NO];
-    [rightTrigger setDoubleValue:0];
+    [rightTrigger setVal:0];
     // Reset inputs
     [leftStickDeadzone setIntValue:0];
     [leftStickInvertX setState:NSOffState];
