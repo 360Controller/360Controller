@@ -298,7 +298,7 @@ A restart will be required for changes to take effect.</string>
                         </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="xCG-fm-dVB"/>
                     </imageView>
-                    <box autoresizesSubviews="NO" title="RightStick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
+                    <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
                         <rect key="frame" x="500" y="156" width="151" height="124"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="149" height="108"/>
