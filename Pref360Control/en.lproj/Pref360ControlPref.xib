@@ -368,48 +368,19 @@ A restart will be required for changes to take effect.</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-rT-9yH">
-                                    <rect key="frame" x="16" y="99" width="122" height="12"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Xbox 360 Controller Driver" id="HFL-jc-7wd">
+                                    <rect key="frame" x="16" y="75" width="227" height="36"/>
+                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="HFL-jc-7wd">
                                         <font key="font" metaFont="miniSystem"/>
+                                        <string key="title">Xbox 360 Controller Driver — Version 0.14
+© 2006-13 Colin Munro
+ http://tattiebogle.net — http://mice-software.com</string>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jgk-Hb-ACg">
-                                    <rect key="frame" x="16" y="79" width="59" height="12"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Version 0.14" id="8vo-Dm-Fxe">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFH-dn-qdL">
-                                    <rect key="frame" x="16" y="59" width="108" height="12"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="© 2006-13 Colin Munro" id="shk-3y-ScL">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lW1-6U-pyT">
-                                    <rect key="frame" x="16" y="39" width="100" height="12"/>
-                                    <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://tattiebogle.net/" id="dwZ-qg-3EP">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stI-fA-ie4">
-                                    <rect key="frame" x="16" y="19" width="120" height="12"/>
-                                    <textFieldCell key="cell" controlSize="mini" selectable="YES" sendsActionOnEndEditing="YES" title="http://mice-software.com/" id="TDP-Al-Ohx">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AmS-A2-PcW" userLabel="More Info Text">
-                                    <rect key="frame" x="158" y="26" width="128" height="84"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="wcA-OG-uF3">
+                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ax9-AF-HDs" userLabel="More Info Text">
+                                    <rect key="frame" x="16" y="14" width="270" height="48"/>
+                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="eaT-KH-FhZ">
                                         <font key="font" metaFont="miniSystem"/>
                                         <string key="title">For more information on this driver, please see the supplied Readme and Licence documents.
 
@@ -418,31 +389,14 @@ Please consider donating if you enjoy this driver!</string>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="I7a-hP-qez">
-                                    <rect key="frame" x="149" y="19" width="5" height="91"/>
-                                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <font key="titleFont" metaFont="system"/>
-                                </box>
                             </subviews>
                         </view>
                         <constraints>
-                            <constraint firstItem="nFH-dn-qdL" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="4Or-ka-cK1"/>
-                            <constraint firstItem="AmS-A2-PcW" firstAttribute="leading" secondItem="I7a-hP-qez" secondAttribute="trailing" constant="8" id="BHf-zR-MVL"/>
-                            <constraint firstItem="jgk-Hb-ACg" firstAttribute="top" secondItem="xcg-rT-9yH" secondAttribute="bottom" constant="8" symbolic="YES" id="H07-rb-r1d"/>
+                            <constraint firstAttribute="bottom" secondItem="ax9-AF-HDs" secondAttribute="bottom" constant="11" id="3gc-bP-IDE"/>
                             <constraint firstItem="xcg-rT-9yH" firstAttribute="top" secondItem="1ph-NC-TOB" secondAttribute="top" constant="24" id="Ihh-76-hrG"/>
                             <constraint firstItem="xcg-rT-9yH" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="LQa-DL-eEX"/>
-                            <constraint firstItem="lW1-6U-pyT" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="NsJ-GC-pBA"/>
-                            <constraint firstItem="stI-fA-ie4" firstAttribute="top" secondItem="lW1-6U-pyT" secondAttribute="bottom" constant="8" id="VAU-es-Cu8"/>
-                            <constraint firstItem="I7a-hP-qez" firstAttribute="top" secondItem="1ph-NC-TOB" secondAttribute="top" constant="25" id="XcX-l2-Fzy"/>
-                            <constraint firstItem="jgk-Hb-ACg" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="YwD-aj-W7b"/>
-                            <constraint firstItem="lW1-6U-pyT" firstAttribute="top" secondItem="nFH-dn-qdL" secondAttribute="bottom" constant="8" id="am5-QK-Npa"/>
-                            <constraint firstAttribute="bottom" secondItem="I7a-hP-qez" secondAttribute="bottom" constant="16" id="aso-jK-O5B"/>
-                            <constraint firstItem="nFH-dn-qdL" firstAttribute="top" secondItem="jgk-Hb-ACg" secondAttribute="bottom" constant="8" id="hOl-xv-vof"/>
-                            <constraint firstAttribute="trailing" secondItem="AmS-A2-PcW" secondAttribute="trailing" constant="16" id="j5d-te-XbW"/>
-                            <constraint firstItem="AmS-A2-PcW" firstAttribute="top" secondItem="1ph-NC-TOB" secondAttribute="top" constant="25" id="lQb-ZS-Tfd"/>
-                            <constraint firstAttribute="bottom" secondItem="stI-fA-ie4" secondAttribute="bottom" constant="16" id="pRo-m2-kHE"/>
-                            <constraint firstItem="stI-fA-ie4" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="pnX-22-qmg"/>
+                            <constraint firstAttribute="trailing" secondItem="ax9-AF-HDs" secondAttribute="trailing" constant="16" id="bHQ-jk-4r4"/>
+                            <constraint firstItem="ax9-AF-HDs" firstAttribute="leading" secondItem="1ph-NC-TOB" secondAttribute="leading" constant="16" id="hWh-yS-p3L"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
