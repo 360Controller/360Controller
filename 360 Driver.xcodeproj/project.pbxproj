@@ -25,6 +25,16 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3FE789A01A701F3400FF4065 /* Pref360StyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */; };
+		3FE789A11A701F3400FF4065 /* Pref360StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */; };
+		3FE789A41A701FE200FF4065 /* MyWhole360Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */; };
+		3FE789A51A701FE200FF4065 /* MyWhole360Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE789A31A701FE200FF4065 /* MyWhole360Controller.m */; };
+		3FE789A81A70281200FF4065 /* MyBatteryMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE789A61A70281200FF4065 /* MyBatteryMonitor.h */; };
+		3FE789A91A70281200FF4065 /* MyBatteryMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE789A71A70281200FF4065 /* MyBatteryMonitor.m */; };
+		3FE789AC1A70288F00FF4065 /* MyDeadZoneViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE789AA1A70288F00FF4065 /* MyDeadZoneViewer.h */; };
+		3FE789AD1A70288F00FF4065 /* MyDeadZoneViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE789AB1A70288F00FF4065 /* MyDeadZoneViewer.m */; };
+		3FE789B01A70331C00FF4065 /* MyTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE789AE1A70331C00FF4065 /* MyTrigger.h */; };
+		3FE789B11A70331C00FF4065 /* MyTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE789AF1A70331C00FF4065 /* MyTrigger.m */; };
 		551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */; };
 		553BDB44196DF3BA00D1F569 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
 		553BDB45196DF41500D1F569 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
@@ -66,16 +76,6 @@
 		55B637AB18C10C0C00CE933D /* DeviceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6379B18C10C0C00CE933D /* DeviceItem.m */; };
 		55B637AC18C10C0C00CE933D /* DeviceLister.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6379C18C10C0C00CE933D /* DeviceLister.h */; };
 		55B637AD18C10C0C00CE933D /* DeviceLister.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6379D18C10C0C00CE933D /* DeviceLister.m */; };
-		55B637AE18C10C0C00CE933D /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6379E18C10C0C00CE933D /* MyAnalogStick.h */; };
-		55B637AF18C10C0C00CE933D /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B6379F18C10C0C00CE933D /* MyAnalogStick.m */; };
-		55B637B018C10C0C00CE933D /* MyCentreButtons.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A018C10C0C00CE933D /* MyCentreButtons.h */; };
-		55B637B118C10C0C00CE933D /* MyCentreButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A118C10C0C00CE933D /* MyCentreButtons.m */; };
-		55B637B218C10C0C00CE933D /* MyDigitalStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A218C10C0C00CE933D /* MyDigitalStick.h */; };
-		55B637B318C10C0C00CE933D /* MyDigitalStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A318C10C0C00CE933D /* MyDigitalStick.m */; };
-		55B637B418C10C0C00CE933D /* MyMainButtons.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A418C10C0C00CE933D /* MyMainButtons.h */; };
-		55B637B518C10C0C00CE933D /* MyMainButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A518C10C0C00CE933D /* MyMainButtons.m */; };
-		55B637B618C10C0C00CE933D /* MyShoulderButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A618C10C0C00CE933D /* MyShoulderButton.h */; };
-		55B637B718C10C0C00CE933D /* MyShoulderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A718C10C0C00CE933D /* MyShoulderButton.m */; };
 		55B637B818C10C0C00CE933D /* Pref360ControlPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B637A818C10C0C00CE933D /* Pref360ControlPref.h */; };
 		55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637A918C10C0C00CE933D /* Pref360ControlPref.m */; };
 		55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 55B637BC18C10C2400CE933D /* pref360controlpref.tiff */; };
@@ -96,14 +96,6 @@
 		55B6383318C10EBE00CE933D /* WirelessHIDDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */; };
 		55B6383418C10EBE00CE933D /* WirelessHIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */; };
 		55B6384618C10FE200CE933D /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
-		55DA1CEB1970B901000C9C35 /* batt0.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE31970B901000C9C35 /* batt0.png */; };
-		55DA1CEC1970B901000C9C35 /* batt0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE41970B901000C9C35 /* batt0@2x.png */; };
-		55DA1CED1970B901000C9C35 /* batt1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE51970B901000C9C35 /* batt1.png */; };
-		55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE61970B901000C9C35 /* batt1@2x.png */; };
-		55DA1CEF1970B901000C9C35 /* batt2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE71970B901000C9C35 /* batt2.png */; };
-		55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE81970B901000C9C35 /* batt2@2x.png */; };
-		55DA1CF11970B901000C9C35 /* batt3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CE91970B901000C9C35 /* batt3.png */; };
-		55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DA1CEA1970B901000C9C35 /* batt3@2x.png */; };
 		55F7E7C319D8C32000525388 /* DriverTool in Copy Tools */ = {isa = PBXBuildFile; fileRef = 55B6376018C10A3200CE933D /* DriverTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
 		55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B6373918C108D200CE933D /* testhaptic.c */; };
@@ -205,6 +197,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360StyleKit.h; sourceTree = "<group>"; };
+		3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360StyleKit.m; sourceTree = "<group>"; };
+		3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhole360Controller.h; sourceTree = "<group>"; };
+		3FE789A31A701FE200FF4065 /* MyWhole360Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360Controller.m; sourceTree = "<group>"; };
+		3FE789A61A70281200FF4065 /* MyBatteryMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBatteryMonitor.h; sourceTree = "<group>"; };
+		3FE789A71A70281200FF4065 /* MyBatteryMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBatteryMonitor.m; sourceTree = "<group>"; };
+		3FE789AA1A70288F00FF4065 /* MyDeadZoneViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDeadZoneViewer.h; sourceTree = "<group>"; };
+		3FE789AB1A70288F00FF4065 /* MyDeadZoneViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDeadZoneViewer.m; sourceTree = "<group>"; };
+		3FE789AE1A70331C00FF4065 /* MyTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrigger.h; sourceTree = "<group>"; };
+		3FE789AF1A70331C00FF4065 /* MyTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrigger.m; sourceTree = "<group>"; };
 		551B911F1A68BDB000EA6527 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Pref360ControlPref.xib; sourceTree = "<group>"; };
 		551CDFFD196EF52F000869B6 /* Pref360Control_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pref360Control_Prefix.pch; sourceTree = "<group>"; };
 		551CDFFF196EFD34000869B6 /* Install360Controller.pkgproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Install360Controller.pkgproj; sourceTree = "<group>"; };
@@ -265,16 +267,6 @@
 		55B6379B18C10C0C00CE933D /* DeviceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceItem.m; sourceTree = "<group>"; };
 		55B6379C18C10C0C00CE933D /* DeviceLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceLister.h; sourceTree = "<group>"; };
 		55B6379D18C10C0C00CE933D /* DeviceLister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceLister.m; sourceTree = "<group>"; };
-		55B6379E18C10C0C00CE933D /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnalogStick.h; sourceTree = "<group>"; };
-		55B6379F18C10C0C00CE933D /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnalogStick.m; sourceTree = "<group>"; };
-		55B637A018C10C0C00CE933D /* MyCentreButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCentreButtons.h; sourceTree = "<group>"; };
-		55B637A118C10C0C00CE933D /* MyCentreButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCentreButtons.m; sourceTree = "<group>"; };
-		55B637A218C10C0C00CE933D /* MyDigitalStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDigitalStick.h; sourceTree = "<group>"; };
-		55B637A318C10C0C00CE933D /* MyDigitalStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDigitalStick.m; sourceTree = "<group>"; };
-		55B637A418C10C0C00CE933D /* MyMainButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMainButtons.h; sourceTree = "<group>"; };
-		55B637A518C10C0C00CE933D /* MyMainButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMainButtons.m; sourceTree = "<group>"; };
-		55B637A618C10C0C00CE933D /* MyShoulderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShoulderButton.h; sourceTree = "<group>"; };
-		55B637A718C10C0C00CE933D /* MyShoulderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShoulderButton.m; sourceTree = "<group>"; };
 		55B637A818C10C0C00CE933D /* Pref360ControlPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360ControlPref.h; sourceTree = "<group>"; };
 		55B637A918C10C0C00CE933D /* Pref360ControlPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360ControlPref.m; sourceTree = "<group>"; };
 		55B637BB18C10C2400CE933D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -300,14 +292,6 @@
 		55B6382518C10EBE00CE933D /* WirelessGamingReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessGamingReceiver.h; sourceTree = "<group>"; };
 		55B6382918C10EBE00CE933D /* WirelessHIDDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessHIDDevice.cpp; sourceTree = "<group>"; };
 		55B6382A18C10EBE00CE933D /* WirelessHIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessHIDDevice.h; sourceTree = "<group>"; };
-		55DA1CE31970B901000C9C35 /* batt0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt0.png; path = Resources/batt0.png; sourceTree = "<group>"; };
-		55DA1CE41970B901000C9C35 /* batt0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt0@2x.png"; path = "Resources/batt0@2x.png"; sourceTree = "<group>"; };
-		55DA1CE51970B901000C9C35 /* batt1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt1.png; path = Resources/batt1.png; sourceTree = "<group>"; };
-		55DA1CE61970B901000C9C35 /* batt1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt1@2x.png"; path = "Resources/batt1@2x.png"; sourceTree = "<group>"; };
-		55DA1CE71970B901000C9C35 /* batt2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt2.png; path = Resources/batt2.png; sourceTree = "<group>"; };
-		55DA1CE81970B901000C9C35 /* batt2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt2@2x.png"; path = "Resources/batt2@2x.png"; sourceTree = "<group>"; };
-		55DA1CE91970B901000C9C35 /* batt3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = batt3.png; path = Resources/batt3.png; sourceTree = "<group>"; };
-		55DA1CEA1970B901000C9C35 /* batt3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "batt3@2x.png"; path = "Resources/batt3@2x.png"; sourceTree = "<group>"; };
 		55E1C62819708E7300EC9DD8 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = SOURCE_ROOT; };
 		55E1C62919708E7300EC9DD8 /* clean.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = clean.sh; sourceTree = SOURCE_ROOT; };
 		55E1C62A19708F8600EC9DD8 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme.md; sourceTree = SOURCE_ROOT; };
@@ -601,20 +585,20 @@
 		55B6378118C10B0B00CE933D /* Pref360Control */ = {
 			isa = PBXGroup;
 			children = (
+				3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */,
+				3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */,
 				55B6379A18C10C0C00CE933D /* DeviceItem.h */,
 				55B6379B18C10C0C00CE933D /* DeviceItem.m */,
 				55B6379C18C10C0C00CE933D /* DeviceLister.h */,
 				55B6379D18C10C0C00CE933D /* DeviceLister.m */,
-				55B6379E18C10C0C00CE933D /* MyAnalogStick.h */,
-				55B6379F18C10C0C00CE933D /* MyAnalogStick.m */,
-				55B637A018C10C0C00CE933D /* MyCentreButtons.h */,
-				55B637A118C10C0C00CE933D /* MyCentreButtons.m */,
-				55B637A218C10C0C00CE933D /* MyDigitalStick.h */,
-				55B637A318C10C0C00CE933D /* MyDigitalStick.m */,
-				55B637A418C10C0C00CE933D /* MyMainButtons.h */,
-				55B637A518C10C0C00CE933D /* MyMainButtons.m */,
-				55B637A618C10C0C00CE933D /* MyShoulderButton.h */,
-				55B637A718C10C0C00CE933D /* MyShoulderButton.m */,
+				3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */,
+				3FE789A31A701FE200FF4065 /* MyWhole360Controller.m */,
+				3FE789A61A70281200FF4065 /* MyBatteryMonitor.h */,
+				3FE789A71A70281200FF4065 /* MyBatteryMonitor.m */,
+				3FE789AA1A70288F00FF4065 /* MyDeadZoneViewer.h */,
+				3FE789AB1A70288F00FF4065 /* MyDeadZoneViewer.m */,
+				3FE789AE1A70331C00FF4065 /* MyTrigger.h */,
+				3FE789AF1A70331C00FF4065 /* MyTrigger.m */,
 				55B637A818C10C0C00CE933D /* Pref360ControlPref.h */,
 				55B637A918C10C0C00CE933D /* Pref360ControlPref.m */,
 				551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */,
@@ -631,14 +615,6 @@
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
 				55852E2118D6B5580009BF55 /* Localizable.strings */,
-				55DA1CE31970B901000C9C35 /* batt0.png */,
-				55DA1CE41970B901000C9C35 /* batt0@2x.png */,
-				55DA1CE51970B901000C9C35 /* batt1.png */,
-				55DA1CE61970B901000C9C35 /* batt1@2x.png */,
-				55DA1CE71970B901000C9C35 /* batt2.png */,
-				55DA1CE81970B901000C9C35 /* batt2@2x.png */,
-				55DA1CE91970B901000C9C35 /* batt3.png */,
-				55DA1CEA1970B901000C9C35 /* batt3@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -689,14 +665,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55B637AE18C10C0C00CE933D /* MyAnalogStick.h in Headers */,
-				55B637B418C10C0C00CE933D /* MyMainButtons.h in Headers */,
-				55B637B618C10C0C00CE933D /* MyShoulderButton.h in Headers */,
-				55B637B018C10C0C00CE933D /* MyCentreButtons.h in Headers */,
+				3FE789A81A70281200FF4065 /* MyBatteryMonitor.h in Headers */,
+				3FE789A01A701F3400FF4065 /* Pref360StyleKit.h in Headers */,
+				3FE789AC1A70288F00FF4065 /* MyDeadZoneViewer.h in Headers */,
+				3FE789B01A70331C00FF4065 /* MyTrigger.h in Headers */,
+				3FE789A41A701FE200FF4065 /* MyWhole360Controller.h in Headers */,
 				55B637AA18C10C0C00CE933D /* DeviceItem.h in Headers */,
 				55B637AC18C10C0C00CE933D /* DeviceLister.h in Headers */,
 				55B637B818C10C0C00CE933D /* Pref360ControlPref.h in Headers */,
-				55B637B218C10C0C00CE933D /* MyDigitalStick.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,14 +910,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55DA1CEB1970B901000C9C35 /* batt0.png in Resources */,
-				55DA1CEC1970B901000C9C35 /* batt0@2x.png in Resources */,
-				55DA1CED1970B901000C9C35 /* batt1.png in Resources */,
-				55DA1CEE1970B901000C9C35 /* batt1@2x.png in Resources */,
-				55DA1CEF1970B901000C9C35 /* batt2.png in Resources */,
-				55DA1CF01970B901000C9C35 /* batt2@2x.png in Resources */,
-				55DA1CF11970B901000C9C35 /* batt3.png in Resources */,
-				55DA1CF21970B901000C9C35 /* batt3@2x.png in Resources */,
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55699CD71971DA8100C40A31 /* Images.xcassets in Resources */,
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
@@ -1012,15 +980,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55B637AF18C10C0C00CE933D /* MyAnalogStick.m in Sources */,
 				55B637AD18C10C0C00CE933D /* DeviceLister.m in Sources */,
-				55B637B118C10C0C00CE933D /* MyCentreButtons.m in Sources */,
+				3FE789A51A701FE200FF4065 /* MyWhole360Controller.m in Sources */,
+				3FE789AD1A70288F00FF4065 /* MyDeadZoneViewer.m in Sources */,
+				3FE789A11A701F3400FF4065 /* Pref360StyleKit.m in Sources */,
 				55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */,
+				3FE789A91A70281200FF4065 /* MyBatteryMonitor.m in Sources */,
 				55B637AB18C10C0C00CE933D /* DeviceItem.m in Sources */,
-				55B637B518C10C0C00CE933D /* MyMainButtons.m in Sources */,
-				55B637B718C10C0C00CE933D /* MyShoulderButton.m in Sources */,
 				55B637DD18C10CCC00CE933D /* ControlPrefs.m in Sources */,
-				55B637B318C10C0C00CE933D /* MyDigitalStick.m in Sources */,
+				3FE789B11A70331C00FF4065 /* MyTrigger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
