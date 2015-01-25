@@ -25,6 +25,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3F9B7C0A1A729C1600149949 /* artworks.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F9B7C091A729C1600149949 /* artworks.xcassets */; };
 		3FE789A01A701F3400FF4065 /* Pref360StyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */; };
 		3FE789A11A701F3400FF4065 /* Pref360StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */; };
 		3FE789A41A701FE200FF4065 /* MyWhole360Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */; };
@@ -197,6 +198,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F9B7C091A729C1600149949 /* artworks.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = artworks.xcassets; path = Resources/artworks.xcassets; sourceTree = "<group>"; };
 		3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360StyleKit.h; sourceTree = "<group>"; };
 		3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360StyleKit.m; sourceTree = "<group>"; };
 		3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhole360Controller.h; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				55B637BC18C10C2400CE933D /* pref360controlpref.tiff */,
 				55B6378418C10B0B00CE933D /* InfoPlist.strings */,
 				55852E2118D6B5580009BF55 /* Localizable.strings */,
+				3F9B7C091A729C1600149949 /* artworks.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 			files = (
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55699CD71971DA8100C40A31 /* Images.xcassets in Resources */,
+				3F9B7C0A1A729C1600149949 /* artworks.xcassets in Resources */,
 				55B637C018C10C2400CE933D /* pref360controlpref.tiff in Resources */,
 				55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */,
 				551CDFF9196EEE76000869B6 /* Pref360ControlPref.xib in Resources */,

@@ -81,25 +81,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFEffectObjectReference effectRef;
 }
 
-@synthesize deviceList;
-@synthesize leftLinked;
-@synthesize leftStickDeadzone;
-@synthesize leftStickInvertX;
-@synthesize leftStickInvertY;
-@synthesize leftTrigger;
-@synthesize rightLinked;
-@synthesize rightStickDeadzone;
-@synthesize rightStickInvertX;
-@synthesize rightStickInvertY;
-@synthesize rightTrigger;
-@synthesize deviceLister;
-@synthesize powerOff;
-@synthesize masterPort;
-@synthesize deviceArray;
-@synthesize wholeController;
-@synthesize leftDeadZone;
-@synthesize rightDeadZone;
-@synthesize batteryStatus;
+
+-(void)awakeFromNib {
+    [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
+}
 
 // Set the pattern on the LEDs
 - (void)updateLED:(int)ledIndex
@@ -182,29 +167,29 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     switch(index) {
         case 0:
-            [wholeController setLeftStickXPos:value];
+            [_wholeController setLeftStickXPos:value];
             break;
             
         case 1:
-            [wholeController setLeftStickYPos:value];
+            [_wholeController setLeftStickYPos:value];
             break;
             
         case 2:
-            [wholeController setRightStickXPos:value];
+            [_wholeController setRightStickXPos:value];
             break;
             
         case 3:
-            [wholeController setRightStickYPos:value];
+            [_wholeController setRightStickYPos:value];
             break;
             
         case 4:
-            [leftTrigger setVal:value];
+            [_leftTrigger setVal:value];
             largeMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
             
         case 5:
-            [rightTrigger setVal:value];
+            [_rightTrigger setVal:value];
             smallMotor=value;
             [self testMotorsLarge:largeMotor small:smallMotor];
             break;
@@ -221,63 +206,63 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     
     switch (index) {
         case 0:
-            [wholeController setAPressed:b];
+            [_wholeController setAPressed:b];
             break;
             
         case 1:
-            [wholeController setBPressed:b];
+            [_wholeController setBPressed:b];
             break;
             
         case 2:
-            [wholeController setXPressed:b];
+            [_wholeController setXPressed:b];
             break;
             
         case 3:
-            [wholeController setYPressed:b];
+            [_wholeController setYPressed:b];
             break;
             
         case 4:
-            [wholeController setLbPressed:b];
+            [_wholeController setLbPressed:b];
             break;
             
         case 5:
-            [wholeController setRbPressed:b];
+            [_wholeController setRbPressed:b];
             break;
             
         case 6:
-            [wholeController setLeftStickPressed:b];
+            [_wholeController setLeftStickPressed:b];
             break;
             
         case 7:
-            [wholeController setRightStickPressed:b];
+            [_wholeController setRightStickPressed:b];
             break;
             
         case 8:
-            [wholeController setStartPressed:b];
+            [_wholeController setStartPressed:b];
             break;
             
         case 9:
-            [wholeController setBackPressed:b];
+            [_wholeController setBackPressed:b];
             break;
             
         case 10:
-            [wholeController setHomePressed:b];
+            [_wholeController setHomePressed:b];
             break;
             
         case 11:
-            [wholeController setUpPressed:b];
+            [_wholeController setUpPressed:b];
             break;
             
         case 12:
-            [wholeController setDownPressed:b];
+            [_wholeController setDownPressed:b];
             break;
             
         case 13:
-            [wholeController setLeftPressed:b];
+            [_wholeController setLeftPressed:b];
             break;
             
         case 14:
-            [wholeController setRightPressed:b];
+            [_wholeController setRightPressed:b];
             break;
             
         default:
@@ -320,38 +305,38 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Enable input components
 - (void)inputEnable:(BOOL)enable
 {
-    [leftStickDeadzone setEnabled:enable];
-    [leftStickInvertX setEnabled:enable];
-    [leftStickInvertY setEnabled:enable];
-    [leftLinked setEnabled:enable];
-    [rightStickDeadzone setEnabled:enable];
-    [rightStickInvertX setEnabled:enable];
-    [rightStickInvertY setEnabled:enable];
-    [rightLinked setEnabled:enable];
+    [_leftStickDeadzone setEnabled:enable];
+    [_leftStickInvertX setEnabled:enable];
+    [_leftStickInvertY setEnabled:enable];
+    [_leftLinked setEnabled:enable];
+    [_rightStickDeadzone setEnabled:enable];
+    [_rightStickInvertX setEnabled:enable];
+    [_rightStickInvertY setEnabled:enable];
+    [_rightLinked setEnabled:enable];
 }
 
 // Reset GUI components
 - (void)resetDisplay
 {
-    [leftTrigger setVal:0];
-    [rightTrigger setVal:0];
-    [wholeController reset];
-    [leftDeadZone setVal:0];
-    [leftDeadZone setLinked:NO];
-    [rightDeadZone setVal:0];
-    [rightDeadZone setLinked:NO];
+    [_leftTrigger setVal:0];
+    [_rightTrigger setVal:0];
+    [_wholeController reset];
+    [_leftDeadZone setVal:0];
+    [_leftDeadZone setLinked:NO];
+    [_rightDeadZone setVal:0];
+    [_rightDeadZone setLinked:NO];
     // Reset inputs
-    [leftStickDeadzone setIntValue:0];
-    [leftStickInvertX setState:NSOffState];
-    [leftStickInvertY setState:NSOffState];
-    [rightStickDeadzone setIntValue:0];
-    [rightStickInvertX setState:NSOffState];
-    [rightStickInvertY setState:NSOffState];
+    [_leftStickDeadzone setIntValue:0];
+    [_leftStickInvertX setState:NSOffState];
+    [_leftStickInvertY setState:NSOffState];
+    [_rightStickDeadzone setIntValue:0];
+    [_rightStickInvertX setState:NSOffState];
+    [_rightStickInvertY setState:NSOffState];
     // Disable inputs
     [self inputEnable:NO];
-    [powerOff setHidden:YES];
+    [_powerOff setHidden:YES];
     // Hide battery status
-    [batteryStatus setHidden:YES];
+    [_batteryStatus setHidden:YES];
 }
 
 // Stop using the HID device
@@ -380,7 +365,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Start using a HID device
 - (void)startDevice
 {
-    int i = (int)[deviceList indexOfSelectedItem];
+    int i = (int)[_deviceList indexOfSelectedItem];
     int j;
     CFArrayRef elements;
     CFDictionaryRef element;
@@ -392,12 +377,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOReturn ret;
     
     [self resetDisplay];
-    if(([deviceArray count]==0)||(i==-1)) {
-        NSLog(@"No devices found? :( device count==%i, i==%i",(int)[deviceArray count], i);
+    if(([_deviceArray count]==0)||(i==-1)) {
+        NSLog(@"No devices found? :( device count==%i, i==%i",(int)[_deviceArray count], i);
         return;
     }
     {
-        DeviceItem *item = deviceArray[i];
+        DeviceItem *item = _deviceArray[i];
         
         device = [item hidDevice];
         ffDevice = [item ffDevice];
@@ -514,40 +499,40 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             CFNumberRef intValue;
             
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftX"),(void*)&boolValue)) {
-                [leftStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_leftStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for InvertLeftX");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftY"),(void*)&boolValue)) {
-                [leftStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_leftStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for InvertLeftY");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeLeft"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [leftLinked setState:enable?NSOnState:NSOffState];
-                [leftDeadZone setLinked:enable];
+                [_leftLinked setState:enable?NSOnState:NSOffState];
+                [_leftDeadZone setLinked:enable];
             } else NSLog(@"No value for RelativeLeft");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadzoneLeft"),(void*)&intValue)) {
                 UInt16 i;
                 
                 CFNumberGetValue(intValue,kCFNumberShortType,&i);
-                [leftStickDeadzone setIntValue:i];
-                [leftDeadZone setVal:i];
+                [_leftStickDeadzone setIntValue:i];
+                [_leftDeadZone setVal:i];
             } else NSLog(@"No value for DeadzoneLeft");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightX"),(void*)&boolValue)) {
-                [rightStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_rightStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for InvertRightX");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightY"),(void*)&boolValue)) {
-                [rightStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_rightStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for InvertRightY");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeRight"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [rightLinked setState:enable?NSOnState:NSOffState];
-                [rightDeadZone setLinked:enable];
+                [_rightLinked setState:enable?NSOnState:NSOffState];
+                [_rightDeadZone setLinked:enable];
             } else NSLog(@"No value for RelativeRight");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadzoneRight"),(void*)&intValue)) {
                 UInt16 i;
                 
                 CFNumberGetValue(intValue,kCFNumberShortType,&i);
-                [rightStickDeadzone setIntValue:i];
-                [rightDeadZone setVal:i];
+                [_rightStickDeadzone setIntValue:i];
+                [_rightDeadZone setVal:i];
             } else NSLog(@"No value for DeadzoneRight");
             CFRelease(dict);
         } else NSLog(@"No settings found");
@@ -574,13 +559,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                     batteryLevel = level / 64;
                 CFRelease(prop);
             }
-            [powerOff setHidden:NO];
+            [_powerOff setHidden:NO];
         }
         if ( batteryLevel >= 0) {
-            [batteryStatus setBars:batteryLevel];
-            [batteryStatus setHidden:NO];
+            [_batteryStatus setBars:batteryLevel];
+            [_batteryStatus setHidden:NO];
         } else {
-            [batteryStatus setHidden:YES];
+            [_batteryStatus setHidden:YES];
         }
     }
 }
@@ -588,8 +573,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Clear out the device lists
 - (void)deleteDeviceList
 {
-    [deviceList removeAllItems];
-    [deviceArray removeAllObjects];
+    [_deviceList removeAllItems];
+    [_deviceArray removeAllObjects];
 }
 
 // Update the device list from the I/O Kit
@@ -606,9 +591,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self deleteDeviceList];
     // Add new items
     hidDictionary=IOServiceMatching(kIOHIDDeviceKey);
-    ioReturn=IOServiceGetMatchingServices(masterPort,hidDictionary,&iterator);
+    ioReturn=IOServiceGetMatchingServices(_masterPort,hidDictionary,&iterator);
     if((ioReturn != kIOReturnSuccess) || (iterator == 0)) {
-        [deviceList addItemWithTitle:NO_ITEMS];
+        [_deviceList addItemWithTitle:NO_ITEMS];
         return;
     }
     
@@ -628,11 +613,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         NSString *name = [item name];
         if (name == nil)
             name = @"Generic Controller";
-        [deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
-        [deviceArray addObject:item];
+        [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
+        [_deviceArray addObject:item];
     }
     IOObjectRelease(iterator);
-    if (count==0) [deviceList addItemWithTitle:NO_ITEMS];
+    if (count==0) [_deviceList addItemWithTitle:NO_ITEMS];
     [self startDevice];
 }
 
@@ -642,13 +627,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     io_object_t object;
     
     // Get master port, for accessing I/O Kit
-    IOMasterPort(MACH_PORT_NULL,&masterPort);
+    IOMasterPort(MACH_PORT_NULL,&_masterPort);
     // Set up notification of USB device addition/removal
-    notifyPort=IONotificationPortCreate(masterPort);
+    notifyPort=IONotificationPortCreate(_masterPort);
     notifySource=IONotificationPortGetRunLoopSource(notifyPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     // Prepare other fields
-    deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
+    _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     device=NULL;
     hidQueue=NULL;
     // Activate callbacks
@@ -680,10 +665,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IONotificationPortDestroy(notifyPort);
     // Release device and info
     [self stopDevice];
-    for (DeviceItem *item in deviceArray)
+    for (DeviceItem *item in _deviceArray)
     {
         FFEFFESCAPE escape = {0};
-        NSInteger i = [deviceArray indexOfObject:item];
+        NSInteger i = [_deviceArray indexOfObject:item];
         if ([item ffDevice] == 0)
             continue;
         c = 0x06 + (i % 0x04);
@@ -697,7 +682,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     [self deleteDeviceList];
     // Close master port
-    mach_port_deallocate(mach_task_self(),masterPort);
+    mach_port_deallocate(mach_task_self(), _masterPort);
     // Done
 }
 
@@ -711,23 +696,23 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)changeSetting:(id)sender
 {
     // Create dictionary
-    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([leftStickInvertX state]==NSOnState)),
-                           @"InvertLeftY": @((BOOL)([leftStickInvertY state]==NSOnState)),
-                           @"InvertRightX": @((BOOL)([rightStickInvertX state]==NSOnState)),
-                           @"InvertRightY": @((BOOL)([rightStickInvertY state]==NSOnState)),
-                           @"DeadzoneLeft": @((UInt16)[leftStickDeadzone doubleValue]),
-                           @"DeadzoneRight": @((UInt16)[rightStickDeadzone doubleValue]),
-                           @"RelativeLeft": @((BOOL)([leftLinked state]==NSOnState)),
-                           @"RelativeRight": @((BOOL)([rightLinked state]==NSOnState))};
+    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==NSOnState)),
+                           @"InvertLeftY": @((BOOL)([_leftStickInvertY state]==NSOnState)),
+                           @"InvertRightX": @((BOOL)([_rightStickInvertX state]==NSOnState)),
+                           @"InvertRightY": @((BOOL)([_rightStickInvertY state]==NSOnState)),
+                           @"DeadzoneLeft": @((UInt16)[_leftStickDeadzone doubleValue]),
+                           @"DeadzoneRight": @((UInt16)[_rightStickDeadzone doubleValue]),
+                           @"RelativeLeft": @((BOOL)([_leftLinked state]==NSOnState)),
+                           @"RelativeRight": @((BOOL)([_rightLinked state]==NSOnState))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
-    [leftDeadZone setLinked:[leftLinked state] == NSOnState];
-    [leftDeadZone setVal:[leftStickDeadzone doubleValue]];
-    [rightDeadZone setLinked:[rightLinked state] == NSOnState];
-    [rightDeadZone setVal:[rightStickDeadzone doubleValue]];
+    [_leftDeadZone setLinked:[_leftLinked state] == NSOnState];
+    [_leftDeadZone setVal:[_leftStickDeadzone doubleValue]];
+    [_rightDeadZone setLinked:[_rightLinked state] == NSOnState];
+    [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
 }
 
 // Handle I/O Kit device add/remove
@@ -736,11 +721,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Ideally, this function would make a note of the controller's Location ID, then
     // reselect it when the list is updated, if it's still in the list.
     [self updateDeviceList];
-}
-
-- (IBAction)showDeviceList:(id)sender
-{
-    [deviceLister showWithOwner:self];
 }
 
 - (IBAction)powerOff:(id)sender
@@ -753,4 +733,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     FFDeviceEscape(ffDevice, &escape);
 }
 
+- (IBAction)showAboutPopover:(id)sender {
+    [_aboutPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinXEdge];
+}
 @end
