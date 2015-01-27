@@ -54,6 +54,7 @@
 @property (weak) IBOutlet MyBatteryMonitor *batteryStatus;
 @property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
 @property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
+@property (strong) IBOutlet NSPopover *aboutPopover;
 
 
 // Internal info
@@ -63,9 +64,9 @@
 
 - (void)handleDeviceChange;
 
-- (IBAction)showDeviceList:(id)sender;
 - (IBAction)powerOff:(id)sender;
 - (IBAction)selectDevice:(id)sender;
 - (IBAction)changeSetting:(id)sender;
+- (IBAction)showAboutPopover:(id)sender;
 
 @end
