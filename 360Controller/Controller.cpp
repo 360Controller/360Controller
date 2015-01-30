@@ -271,7 +271,7 @@ OSNumber* XboxOriginalControllerClass::newProductIDNumber() const
 
 OSString* XboxOriginalControllerClass::newProductString() const
 {
-    return OSString::withCString("Xbox 360 Wired Controller");
+    return OSString::withCString("Xbox Original Wired Controller");
 }
 
 static void logData(UInt8 *data, int len) {
