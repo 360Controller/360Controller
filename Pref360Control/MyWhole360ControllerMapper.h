@@ -6,8 +6,16 @@
 //  Copyright (c) 2015 GitHub. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#import "MyWhole360Controller.h"
+#import "Pref360ControlPref.h"
 
-@interface MyWhole360ControllerMapper : NSObject
+@interface MyWhole360ControllerMapper : MyWhole360Controller
+
+@property BOOL isMapping;
+
+- (void)runMapperWithButton:(NSButton *)button  andOwner:(Pref360ControlPref *)pref;
+- (void)buttonPressedAtIndex:(int)index;
++ (UInt8 *)mapping;
 
 @end

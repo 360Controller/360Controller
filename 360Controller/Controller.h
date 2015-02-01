@@ -54,6 +54,8 @@ public:
     virtual OSNumber* newVendorIDNumber() const;
 	
     virtual OSNumber* newLocationIDNumber() const;
+    
+    virtual void remapButtons(void *buffer);
 };
 
 
