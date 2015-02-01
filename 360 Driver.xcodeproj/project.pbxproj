@@ -101,6 +101,12 @@
 		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
 		55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B6373918C108D200CE933D /* testhaptic.c */; };
 		55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE3CAC18D7B7B600D69E84 /* SDL2.framework */; };
+		622A73C21A7C339000784C02 /* MyWhole360ControllerMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */; };
+		622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */; };
+		622A73C61A7C51D400784C02 /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73C41A7C51D400784C02 /* MyAnalogStick.h */; };
+		622A73C71A7C51D400784C02 /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C51A7C51D400784C02 /* MyAnalogStick.m */; };
+		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
+		622A73CF1A7C879300784C02 /* BindingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73CD1A7C879300784C02 /* BindingTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,6 +306,12 @@
 		55E1C62B1970921E00EC9DD8 /* Readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Readme.rtf; sourceTree = SOURCE_ROOT; };
 		55FE3CA118D7B77800D69E84 /* testhaptic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testhaptic; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
+		622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhole360ControllerMapper.h; sourceTree = "<group>"; };
+		622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360ControllerMapper.m; sourceTree = "<group>"; };
+		622A73C41A7C51D400784C02 /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyAnalogStick.h; path = "../../../../../Downloads/360Controller-0.14-unofficial/Pref360Control/MyAnalogStick.h"; sourceTree = "<group>"; };
+		622A73C51A7C51D400784C02 /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyAnalogStick.m; path = "../../../../../Downloads/360Controller-0.14-unofficial/Pref360Control/MyAnalogStick.m"; sourceTree = "<group>"; };
+		622A73CC1A7C879300784C02 /* BindingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTableView.h; sourceTree = "<group>"; };
+		622A73CD1A7C879300784C02 /* BindingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,10 +607,16 @@
 				55B6379D18C10C0C00CE933D /* DeviceLister.m */,
 				3FE789A21A701FE200FF4065 /* MyWhole360Controller.h */,
 				3FE789A31A701FE200FF4065 /* MyWhole360Controller.m */,
+				622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */,
+				622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */,
+				622A73CC1A7C879300784C02 /* BindingTableView.h */,
+				622A73CD1A7C879300784C02 /* BindingTableView.m */,
 				3FE789A61A70281200FF4065 /* MyBatteryMonitor.h */,
 				3FE789A71A70281200FF4065 /* MyBatteryMonitor.m */,
 				3FE789AA1A70288F00FF4065 /* MyDeadZoneViewer.h */,
 				3FE789AB1A70288F00FF4065 /* MyDeadZoneViewer.m */,
+				622A73C41A7C51D400784C02 /* MyAnalogStick.h */,
+				622A73C51A7C51D400784C02 /* MyAnalogStick.m */,
 				3FE789AE1A70331C00FF4065 /* MyTrigger.h */,
 				3FE789AF1A70331C00FF4065 /* MyTrigger.m */,
 				55B637A818C10C0C00CE933D /* Pref360ControlPref.h */,
@@ -673,9 +691,12 @@
 				3FE789AC1A70288F00FF4065 /* MyDeadZoneViewer.h in Headers */,
 				3FE789B01A70331C00FF4065 /* MyTrigger.h in Headers */,
 				3FE789A41A701FE200FF4065 /* MyWhole360Controller.h in Headers */,
+				622A73C61A7C51D400784C02 /* MyAnalogStick.h in Headers */,
+				622A73C21A7C339000784C02 /* MyWhole360ControllerMapper.h in Headers */,
 				55B637AA18C10C0C00CE933D /* DeviceItem.h in Headers */,
 				55B637AC18C10C0C00CE933D /* DeviceLister.h in Headers */,
 				55B637B818C10C0C00CE933D /* Pref360ControlPref.h in Headers */,
+				622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,14 +1005,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				622A73C71A7C51D400784C02 /* MyAnalogStick.m in Sources */,
 				55B637AD18C10C0C00CE933D /* DeviceLister.m in Sources */,
 				3FE789A51A701FE200FF4065 /* MyWhole360Controller.m in Sources */,
 				3FE789AD1A70288F00FF4065 /* MyDeadZoneViewer.m in Sources */,
 				3FE789A11A701F3400FF4065 /* Pref360StyleKit.m in Sources */,
 				55B637B918C10C0C00CE933D /* Pref360ControlPref.m in Sources */,
 				3FE789A91A70281200FF4065 /* MyBatteryMonitor.m in Sources */,
+				622A73CF1A7C879300784C02 /* BindingTableView.m in Sources */,
 				55B637AB18C10C0C00CE933D /* DeviceItem.m in Sources */,
 				55B637DD18C10CCC00CE933D /* ControlPrefs.m in Sources */,
+				622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */,
 				3FE789B11A70331C00FF4065 /* MyTrigger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1342,6 +1366,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				DEPLOYMENT_LOCATION = NO;
+				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1360,6 +1386,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Pref360Control/Pref360Control_Prefix.pch;
 				HEADER_SEARCH_PATHS = (

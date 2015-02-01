@@ -128,9 +128,10 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
     if (descriptor->getLength() >= sizeof(XBOX360_IN_REPORT)) {
         IOBufferMemoryDescriptor *desc = OSDynamicCast(IOBufferMemoryDescriptor, descriptor);
         if (desc != NULL) {
-            const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)desc->getBytesNoCopy();
+            XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)desc->getBytesNoCopy();
             if ((report->header.command==inReport) && (report->header.size==sizeof(XBOX360_IN_REPORT))) {
                 GetOwner(this)->fiddleReport(desc);
+                remapButtons(report);
             }
         }
     }
@@ -180,7 +181,7 @@ OSString* Xbox360ControllerClass::newProductString() const
     OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
     if (retString->isEqualTo("Controller")) {
         retString->release();
-        return OSString::withCString("Xbox 360 Wired Controller");
+        return OSString::withCString("Xbox Original Wired Controller");
     } else {
         return retString;
     }
@@ -226,6 +227,52 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
     }
     
     return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
+}
+
+void Xbox360ControllerClass::remapButtons(void *buffer)
+{
+    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    UInt16 new_buttons = 0;
+
+//    IOLog("BUTTONS - %d\n", report360->buttons);
+//    
+//    new_buttons |= ((report360->buttons & 1) == 1) << 1;
+//    new_buttons |= ((report360->buttons & 2) == 2) << 0;
+//    new_buttons |= ((report360->buttons & 4) == 4) << 2;
+//    new_buttons |= ((report360->buttons & 8) == 8) << 3;
+//    new_buttons |= ((report360->buttons & 16) == 16) << 4;
+//    new_buttons |= ((report360->buttons & 32) == 32) << 5;
+//    new_buttons |= ((report360->buttons & 64) == 64) << 6;
+//    new_buttons |= ((report360->buttons & 128) == 128) << 7;
+//    new_buttons |= ((report360->buttons & 256) == 256) << 8;
+//    new_buttons |= ((report360->buttons & 512) == 512) << 9;
+//    new_buttons |= ((report360->buttons & 1024) == 1024) << 10;
+//    new_buttons |= ((report360->buttons & 4096) == 4096) << 12;
+//    new_buttons |= ((report360->buttons & 8192) == 8192) << 13;
+//    new_buttons |= ((report360->buttons & 16384) == 16384) << 14;
+//    new_buttons |= ((report360->buttons & 32768) == 32768) << 15;
+//    
+//    IOLog("NEW BUTTONS - %d\n", new_buttons);
+
+    new_buttons |= ((report360->buttons & 1) == 1) << GetOwner(this)->mapping[0];
+    new_buttons |= ((report360->buttons & 2) == 2) << GetOwner(this)->mapping[1];
+    new_buttons |= ((report360->buttons & 4) == 4) << GetOwner(this)->mapping[2];
+    new_buttons |= ((report360->buttons & 8) == 8) << GetOwner(this)->mapping[3];
+    new_buttons |= ((report360->buttons & 16) == 16) << GetOwner(this)->mapping[4];
+    new_buttons |= ((report360->buttons & 32) == 32) << GetOwner(this)->mapping[5];
+    new_buttons |= ((report360->buttons & 64) == 64) << GetOwner(this)->mapping[6];
+    new_buttons |= ((report360->buttons & 128) == 128) << GetOwner(this)->mapping[7];
+    new_buttons |= ((report360->buttons & 256) == 256) << GetOwner(this)->mapping[8];
+    new_buttons |= ((report360->buttons & 512) == 512) << GetOwner(this)->mapping[9];
+    new_buttons |= ((report360->buttons & 1024) == 1024) << GetOwner(this)->mapping[10];
+    new_buttons |= ((report360->buttons & 4096) == 4096) << GetOwner(this)->mapping[11];
+    new_buttons |= ((report360->buttons & 8192) == 8192) << GetOwner(this)->mapping[12];
+    new_buttons |= ((report360->buttons & 16384) == 16384) << GetOwner(this)->mapping[13];
+    new_buttons |= ((report360->buttons & 32768) == 32768) << GetOwner(this)->mapping[14];
+    
+//    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", GetOwner(this)->mapping[0], GetOwner(this)->mapping[1], GetOwner(this)->mapping[2], GetOwner(this)->mapping[3], GetOwner(this)->mapping[4], GetOwner(this)->mapping[5], GetOwner(this)->mapping[6], GetOwner(this)->mapping[7], GetOwner(this)->mapping[8], GetOwner(this)->mapping[9], GetOwner(this)->mapping[10], GetOwner(this)->mapping[11], GetOwner(this)->mapping[12], GetOwner(this)->mapping[13], GetOwner(this)->mapping[14]);
+    
+    report360->buttons = new_buttons;
 }
 
 /*
@@ -307,7 +354,7 @@ static void convertFromXBoxOriginal(UInt8 *data) {
 }
 
 IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descriptor, IOHIDReportType reportType, IOOptionBits options) {
-    //IOLog("%s\n", __FUNCTION__);
+//    IOLog("%s\n", __FUNCTION__);
     UInt8 data[sizeof(XBOX360_IN_REPORT)];
     if (descriptor->getLength() >= sizeof(XBOX360_IN_REPORT)) {
         descriptor->readBytes(0, data, sizeof(XBOX360_IN_REPORT));
@@ -516,10 +563,11 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
 
 IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
-    IOLog("Xbox One Controller - setReport\n");
+//    IOLog("Xbox One Controller - setReport\n");
     unsigned char data[4];
     report->readBytes(0, &data, 4);
-    IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
+//    IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
+    UInt8 rumbleType;
     switch(data[0])//(header.command)
     {
         case 0x00:  // Set force feedback
@@ -530,11 +578,31 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
             rumble.substructure = 0x09;
             rumble.mode = 0x00;
             rumble.rumbleMask = 0x0F;
-            rumble.trigL = 0x00;
-            rumble.trigR = 0x00;
-            rumble.little = data[2];
-            rumble.big = data[3];
             rumble.length = 0x80;
+            
+            rumbleType = GetOwner(this)->xoneRumbleType;
+            if (rumbleType == 0) // Default
+            {
+                rumble.trigL = 0x00;
+                rumble.trigR = 0x00;
+                rumble.little = data[2];
+                rumble.big = data[3];
+            }
+            else if (rumbleType == 1) // Trigger
+            {
+                rumble.trigL = data[2] / 2.0;
+                rumble.trigR = data[3] / 2.0;
+                rumble.little = 0x00;
+                rumble.big = 0x00;
+            }
+            else if (rumbleType == 2) // Both
+            {
+                rumble.trigL = data[2] / 2.0;
+                rumble.trigR = data[3] / 2.0;
+                rumble.little = data[2];
+                rumble.big = data[3];
+            }
+            
             GetOwner(this)->QueueWrite(&rumble,11);
             return kIOReturnSuccess;
         case 0x01: // Unsupported LED

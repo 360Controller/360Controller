@@ -247,7 +247,40 @@ void Xbox360Peripheral::readSettings(void)
     if (value != NULL) relativeLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
     if (value != NULL) relativeRight=value->getValue();
-    
+//    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("XoneRumbleType"));
+    if (number != NULL) xoneRumbleType = number->unsigned8BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingUp"));
+    if (number != NULL) mapping[0] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingDown"));
+    if (number != NULL) mapping[1] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLeft"));
+    if (number != NULL) mapping[2] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRight"));
+    if (number != NULL) mapping[3] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingStart"));
+    if (number != NULL) mapping[4] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingBack"));
+    if (number != NULL) mapping[5] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLSC"));
+    if (number != NULL) mapping[6] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRSC"));
+    if (number != NULL) mapping[7] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLB"));
+    if (number != NULL) mapping[8] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRB"));
+    if (number != NULL) mapping[9] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingGuide"));
+    if (number != NULL) mapping[10] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingA"));
+    if (number != NULL) mapping[11] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingB"));
+    if (number != NULL) mapping[12] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingX"));
+    if (number != NULL) mapping[13] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingY"));
+    if (number != NULL) mapping[14] = number->unsigned32BitValue();
+
 #if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -277,6 +310,17 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     invertRightX=invertRightY=false;
     deadzoneLeft=deadzoneRight=0;
     relativeLeft=relativeRight=false;
+    // Controller Specific
+    xoneRumbleType = 0;
+    // Bindings
+    for (int i = 0; i < 11; i++)
+    {
+        mapping[i] = i;
+    }
+    for (int i = 12; i < 16; i++)
+    {
+        mapping[i-1] = i;
+    }
     // Done
     return res;
 }
@@ -801,7 +845,10 @@ IOReturn Xbox360Peripheral::setProperties(OSObject *properties)
     OSDictionary *dictionary;
     
     dictionary=OSDynamicCast(OSDictionary,properties);
+    
     if(dictionary!=NULL) {
+        IOLog("CONTROLLER TYPE - DRIVER: %d\n", controllerType);
+        dictionary->setObject(OSString::withCString("ControllerType"), OSNumber::withNumber(controllerType, 8));
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
         return kIOReturnSuccess;
