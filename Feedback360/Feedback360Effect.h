@@ -53,6 +53,8 @@
 
 #define SCALE_MAX (LONG)255
 
+double CurrentTimeUsingMach();
+
 class Feedback360Effect
 {
 public:
@@ -73,9 +75,9 @@ public:
 
     DWORD			Status;
     DWORD			PlayCount;
-    CFAbsoluteTime	StartTime;
+    double			StartTime;
 
-    CFAbsoluteTime  LastTime;
+    double			LastTime;
     DWORD           Index;
 
 private:
