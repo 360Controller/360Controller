@@ -460,7 +460,7 @@
                                         </scrollView>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
                                             <rect key="frame" x="497" y="41" width="147" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Reset Remapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
+                                            <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
