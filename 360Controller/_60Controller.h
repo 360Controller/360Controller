@@ -73,9 +73,9 @@ protected:
 	} TIMER_STATE;
     
     typedef enum CONTROLLER_TYPE {
-        Xbox360,
-        XboxOriginal,
-        XboxOne
+        Xbox360 = 0,
+        XboxOriginal = 1,
+        XboxOne = 2
     } CONTROLLER_TYPE;
 	
     IOUSBDevice *device;
@@ -104,8 +104,13 @@ protected:
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
-
+    
 public:
+    // Controller specific
+    UInt8 xoneRumbleType;
+
+    UInt8 mapping[15];
+    
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);
     virtual void free(void);

@@ -30,12 +30,20 @@
 #include <ForceFeedback/ForceFeedback.h>
 
 @class MyWhole360Controller;
+@class MyWhole360ControllerMapper;
 @class MyTrigger;
 @class MyBatteryMonitor;
 @class MyDeadZoneViewer;
+@class MyAnalogStick;
 @class DeviceLister;
 
-@interface Pref360ControlPref : NSPreferencePane 
+typedef NS_ENUM(NSUInteger, ControllerType) {
+    Xbox360Controller = 0,
+    XboxOriginalController = 1,
+    XboxOneController = 2
+} controllerType;
+
+@interface Pref360ControlPref : NSPreferencePane
 // Window components
 @property (weak) IBOutlet NSPopUpButton *deviceList;
 @property (weak) IBOutlet NSButton *leftLinked;
@@ -55,7 +63,28 @@
 @property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
 @property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
 @property (strong) IBOutlet NSPopover *aboutPopover;
+@property (weak) IBOutlet NSPopUpButton *xoneRumbleOptions;
 
+// Binding Tab
+@property (weak) IBOutlet NSPopUpButton *deviceListBinding;
+@property (weak) IBOutlet MyWhole360ControllerMapper *wholeControllerMapper;
+@property (weak) IBOutlet NSTabView *tabView;
+@property (weak) IBOutlet NSButton *remappingButton;
+@property (weak) IBOutlet NSTableView *mappingTable;
+@property (weak) IBOutlet NSButton *remappingResetButton;
+
+// Deadzones Tab
+@property (weak) IBOutlet NSPopUpButton *deviceListDeadzones;
+@property (weak) IBOutlet MyAnalogStick *leftStickAnalog;
+@property (weak) IBOutlet MyAnalogStick *rightStickAnalog;
+@property (weak) IBOutlet NSButton *leftLinkedAlt;
+@property (weak) IBOutlet NSSlider *leftStickDeadzoneAlt;
+@property (weak) IBOutlet NSButton *leftStickInvertXAlt;
+@property (weak) IBOutlet NSButton *leftStickInvertYAlt;
+@property (weak) IBOutlet NSButton *rightLinkedAlt;
+@property (weak) IBOutlet NSSlider *rightStickDeadzoneAlt;
+@property (weak) IBOutlet NSButton *rightStickInvertXAlt;
+@property (weak) IBOutlet NSButton *rightStickInvertYAlt;
 
 // Internal info
 @property (readonly) mach_port_t masterPort;
