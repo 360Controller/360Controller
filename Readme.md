@@ -35,6 +35,8 @@ Preference Pane uses the standard Mac OS X Frameworks for accessing HID devices
 and accessing Force Feedback capabilities, so should be a good test that the
 installation is functional.
 
+[List of working and non-working games.](https://github.com/d235j/360Controller/wiki/Games)
+
 
 ## Developer info ##
 
