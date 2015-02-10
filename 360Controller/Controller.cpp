@@ -234,26 +234,6 @@ void Xbox360ControllerClass::remapButtons(void *buffer)
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
     UInt16 new_buttons = 0;
 
-//    IOLog("BUTTONS - %d\n", report360->buttons);
-//    
-//    new_buttons |= ((report360->buttons & 1) == 1) << 1;
-//    new_buttons |= ((report360->buttons & 2) == 2) << 0;
-//    new_buttons |= ((report360->buttons & 4) == 4) << 2;
-//    new_buttons |= ((report360->buttons & 8) == 8) << 3;
-//    new_buttons |= ((report360->buttons & 16) == 16) << 4;
-//    new_buttons |= ((report360->buttons & 32) == 32) << 5;
-//    new_buttons |= ((report360->buttons & 64) == 64) << 6;
-//    new_buttons |= ((report360->buttons & 128) == 128) << 7;
-//    new_buttons |= ((report360->buttons & 256) == 256) << 8;
-//    new_buttons |= ((report360->buttons & 512) == 512) << 9;
-//    new_buttons |= ((report360->buttons & 1024) == 1024) << 10;
-//    new_buttons |= ((report360->buttons & 4096) == 4096) << 12;
-//    new_buttons |= ((report360->buttons & 8192) == 8192) << 13;
-//    new_buttons |= ((report360->buttons & 16384) == 16384) << 14;
-//    new_buttons |= ((report360->buttons & 32768) == 32768) << 15;
-//    
-//    IOLog("NEW BUTTONS - %d\n", new_buttons);
-
     new_buttons |= ((report360->buttons & 1) == 1) << GetOwner(this)->mapping[0];
     new_buttons |= ((report360->buttons & 2) == 2) << GetOwner(this)->mapping[1];
     new_buttons |= ((report360->buttons & 4) == 4) << GetOwner(this)->mapping[2];
@@ -274,6 +254,7 @@ void Xbox360ControllerClass::remapButtons(void *buffer)
     
     report360->buttons = new_buttons;
 }
+
 
 /*
  * Xbox original controller.
@@ -318,7 +299,7 @@ OSNumber* XboxOriginalControllerClass::newProductIDNumber() const
 
 OSString* XboxOriginalControllerClass::newProductString() const
 {
-    return OSString::withCString("Xbox 360 Wired Controller");
+    return OSString::withCString("Xbox Original Wired Controller");
 }
 
 static void logData(UInt8 *data, int len) {
