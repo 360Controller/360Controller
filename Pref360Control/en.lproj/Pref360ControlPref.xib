@@ -29,6 +29,8 @@
                 <outlet property="linearDeadzoneLeft" destination="aq6-OM-5G7" id="VOw-Ze-go8"/>
                 <outlet property="linearDeadzoneRight" destination="26X-Mo-i1h" id="wri-MI-yjm"/>
                 <outlet property="mappingTable" destination="9SZ-KC-9Y6" id="hzo-cd-Nq7"/>
+                <outlet property="normalizeDeadzoneLeft" destination="aq6-OM-5G7" id="o8A-jo-yBb"/>
+                <outlet property="normalizeDeadzoneRight" destination="26X-Mo-i1h" id="29A-s0-xjH"/>
                 <outlet property="powerOff" destination="Ici-JG-9U7" id="aLb-dv-ZJp"/>
                 <outlet property="remappingButton" destination="yAI-iC-6ZJ" id="zms-RE-c9J"/>
                 <outlet property="remappingResetButton" destination="Zb5-mS-Byj" id="7G0-9w-yIf"/>
@@ -537,8 +539,8 @@
                                                         </connections>
                                                     </button>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
-                                                        <rect key="frame" x="16" y="12" width="61" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Linear" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
+                                                        <rect key="frame" x="16" y="12" width="117" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -609,8 +611,8 @@
                                                         </connections>
                                                     </slider>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
-                                                        <rect key="frame" x="16" y="12" width="61" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Linear" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
+                                                        <rect key="frame" x="16" y="12" width="117" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
