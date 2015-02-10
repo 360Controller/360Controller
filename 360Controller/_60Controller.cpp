@@ -247,6 +247,10 @@ void Xbox360Peripheral::readSettings(void)
     if (value != NULL) relativeLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
     if (value != NULL) relativeRight=value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffLeft"));
+    if (value != NULL) deadOffLeft = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffRight"));
+    if (value != NULL) deadOffRight = value->getValue();
 //    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("XoneRumbleType"));
     if (number != NULL) xoneRumbleType = number->unsigned8BitValue();
@@ -310,6 +314,8 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     invertRightX=invertRightY=false;
     deadzoneLeft=deadzoneRight=0;
     relativeLeft=relativeRight=false;
+    deadOffLeft = false;
+    deadOffRight = false;
     // Controller Specific
     xoneRumbleType = 0;
     // Bindings
@@ -716,9 +722,57 @@ void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
                 report->left.x=0;
                 report->left.y=0;
             }
+            else if(deadOffLeft) {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneLeft;
+                if (report->left.x<0) {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    report->left.x=~report->left.x;
+                } else {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                }
+                if (report->left.y<0) {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    report->left.y=~report->left.y;
+                } else {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                }
+            }
         } else {
-            if(getAbsolute(report->left.x)<deadzoneLeft) report->left.x=0;
-            if(getAbsolute(report->left.y)<deadzoneLeft) report->left.y=0;
+            if(getAbsolute(report->left.x)<deadzoneLeft)
+                report->left.x=0;
+            else if (deadOffLeft)
+            {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneLeft;
+                if (report->left.x<0) {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    report->left.x=~report->left.x;
+                } else {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                }
+            }
+            if(getAbsolute(report->left.y)<deadzoneLeft)
+                report->left.y=0;
+            else if (deadOffLeft)
+            {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneLeft;
+                if (report->left.y<0) {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    report->left.y=~report->left.y;
+                } else {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                }
+            }
         }
     }
     if(deadzoneRight!=0) {
@@ -727,9 +781,56 @@ void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
                 report->right.x=0;
                 report->right.y=0;
             }
+            else if(deadOffRight) {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneRight;
+                if (report->right.x<0) {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                    report->right.x=~report->right.x;
+                } else {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                }
+                if (report->right.y<0) {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                    report->right.y=~report->right.y;
+                } else {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                }
+            }
         } else {
             if(getAbsolute(report->right.x)<deadzoneRight) report->right.x=0;
-            if(getAbsolute(report->right.y)<deadzoneRight) report->right.y=0;
+            else if (deadOffRight)
+            {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneRight;
+                if (report->right.x<0) {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                    report->right.x=~report->right.x;
+                } else {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                }
+            }
+            if(getAbsolute(report->right.y)<deadzoneRight)
+                report->right.y=0;
+            else if (deadOffRight)
+            {
+                const UInt16 max16 = 32767;
+                float maxVal = max16 - deadzoneRight;
+                if (report->right.y<0) {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                    report->right.y=~report->right.y;
+                } else {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                }
+            }
         }
     }
 }
