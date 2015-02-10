@@ -723,54 +723,60 @@ void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
                 report->left.y=0;
             }
             else if(deadOffLeft) {
-                const UInt16 max16 = 32767;
-                float maxVal = max16 - deadzoneLeft;
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneLeft;
+                float valX=getAbsolute(report->left.x);
                 if (report->left.x<0) {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    report->left.x=~report->left.x;
-                } else {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    if (valX<deadzoneLeft)
+                        report->left.x=0;
+                    else if (report->left.x<0) {
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                        report->left.x=~report->left.x;
+                    } else {
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    }
                 }
+                float valY=getAbsolute(report->left.y);
                 if (report->left.y<0) {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    report->left.y=~report->left.y;
-                } else {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    if (valY<deadzoneLeft)
+                        report->left.y=0;
+                    else if (report->left.y<0) {
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                        report->left.y=~report->left.y;
+                    } else {
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    }
                 }
-            }
-        } else {
-            if(getAbsolute(report->left.x)<deadzoneLeft)
-                report->left.x=0;
-            else if (deadOffLeft)
-            {
-                const UInt16 max16 = 32767;
-                float maxVal = max16 - deadzoneLeft;
-                if (report->left.x<0) {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    report->left.x=~report->left.x;
-                } else {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+            } else {
+                if(getAbsolute(report->left.x)<deadzoneLeft)
+                    report->left.x=0;
+                else if (deadOffLeft)
+                {
+                    const UInt16 max16=32767;
+                    float maxVal=max16-deadzoneLeft;
+                    if (report->left.x<0) {
+                        float valX=getAbsolute(report->left.x);
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                        report->left.x=~report->left.x;
+                    } else {
+                        float valX=getAbsolute(report->left.x);
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    }
                 }
-            }
-            if(getAbsolute(report->left.y)<deadzoneLeft)
-                report->left.y=0;
-            else if (deadOffLeft)
-            {
-                const UInt16 max16 = 32767;
-                float maxVal = max16 - deadzoneLeft;
-                if (report->left.y<0) {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    report->left.y=~report->left.y;
-                } else {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                if(getAbsolute(report->left.y)<deadzoneLeft)
+                    report->left.y=0;
+                else if (deadOffLeft)
+                {
+                    const UInt16 max16=32767;
+                    float maxVal = max16-deadzoneLeft;
+                    if (report->left.y<0) {
+                        float valY=getAbsolute(report->left.y);
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                        report->left.y=~report->left.y;
+                    } else {
+                        float valY=getAbsolute(report->left.y);
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    }
                 }
             }
         }
@@ -784,21 +790,27 @@ void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
             else if(deadOffRight) {
                 const UInt16 max16 = 32767;
                 float maxVal = max16 - deadzoneRight;
-                if (report->right.x<0) {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    report->right.x=~report->right.x;
-                } else {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                float valX=getAbsolute(report->right.x);
+                if (valX>deadzoneRight) {
+                    if (valX<deadzoneRight)
+                        report->right.x=0;
+                    else if (report->right.x<0) {
+                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                        report->right.x=~report->right.x;
+                    } else {
+                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                    }
                 }
-                if (report->right.y<0) {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    report->right.y=~report->right.y;
-                } else {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                float valY=getAbsolute(report->right.y);
+                if (valY>deadzoneRight) {
+                    if (report->right.y)
+                        report->right.y=0;
+                    if (report->right.y<0) {
+                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                        report->right.y=~report->right.y;
+                    } else {
+                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                    }
                 }
             }
         } else {
