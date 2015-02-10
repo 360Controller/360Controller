@@ -85,8 +85,8 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSSlider *rightStickDeadzoneAlt;
 @property (weak) IBOutlet NSButton *rightStickInvertXAlt;
 @property (weak) IBOutlet NSButton *rightStickInvertYAlt;
-@property (weak) IBOutlet NSButton *linearDeadzoneLeft;
-@property (weak) IBOutlet NSButton *linearDeadzoneRight;
+@property (weak) IBOutlet NSButton *normalizeDeadzoneLeft;
+@property (weak) IBOutlet NSButton *normalizeDeadzoneRight;
 
 // Internal info
 @property (readonly) mach_port_t masterPort;
