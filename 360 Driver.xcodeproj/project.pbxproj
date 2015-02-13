@@ -101,6 +101,8 @@
 		55FE3CA218D7B77800D69E84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
 		55FE3CAB18D7B78D00D69E84 /* testhaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 55B6373918C108D200CE933D /* testhaptic.c */; };
 		55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE3CAC18D7B7B600D69E84 /* SDL2.framework */; };
+		5B943BE11A83EC6600E77A79 /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B943BDF1A83EC6600E77A79 /* MyAnalogStick.h */; };
+		5B943BE21A83EC6600E77A79 /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B943BE01A83EC6600E77A79 /* MyAnalogStick.m */; };
 		622A73C21A7C339000784C02 /* MyWhole360ControllerMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */; };
 		622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */; };
 		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
@@ -303,9 +305,10 @@
 		55E1C62819708E7300EC9DD8 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = SOURCE_ROOT; };
 		55E1C62919708E7300EC9DD8 /* clean.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = clean.sh; sourceTree = SOURCE_ROOT; };
 		55E1C62A19708F8600EC9DD8 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme.md; sourceTree = SOURCE_ROOT; };
-		55E1C62B1970921E00EC9DD8 /* Readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Readme.rtf; sourceTree = SOURCE_ROOT; };
 		55FE3CA118D7B77800D69E84 /* testhaptic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testhaptic; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
+		5B943BDF1A83EC6600E77A79 /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnalogStick.h; sourceTree = "<group>"; };
+		5B943BE01A83EC6600E77A79 /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnalogStick.m; sourceTree = "<group>"; };
 		622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhole360ControllerMapper.h; sourceTree = "<group>"; };
 		622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360ControllerMapper.m; sourceTree = "<group>"; };
 		622A73CC1A7C879300784C02 /* BindingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTableView.h; sourceTree = "<group>"; };
@@ -414,7 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				55E1C62A19708F8600EC9DD8 /* Readme.md */,
-				55E1C62B1970921E00EC9DD8 /* Readme.rtf */,
 				551CE004196EFD34000869B6 /* Welcome.rtf */,
 			);
 			path = Text;
@@ -615,8 +617,8 @@
 				3FE789A71A70281200FF4065 /* MyBatteryMonitor.m */,
 				3FE789AA1A70288F00FF4065 /* MyDeadZoneViewer.h */,
 				3FE789AB1A70288F00FF4065 /* MyDeadZoneViewer.m */,
-				62E511A81A8DA5AB0088928D /* MyAnalogStick.h */,
-				62E511AA1A8DA5B60088928D /* MyAnalogStick.m */,
+				5B943BDF1A83EC6600E77A79 /* MyAnalogStick.h */,
+				5B943BE01A83EC6600E77A79 /* MyAnalogStick.m */,
 				3FE789AE1A70331C00FF4065 /* MyTrigger.h */,
 				3FE789AF1A70331C00FF4065 /* MyTrigger.m */,
 				55B637A818C10C0C00CE933D /* Pref360ControlPref.h */,
@@ -686,6 +688,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B943BE11A83EC6600E77A79 /* MyAnalogStick.h in Headers */,
 				3FE789A81A70281200FF4065 /* MyBatteryMonitor.h in Headers */,
 				3FE789A01A701F3400FF4065 /* Pref360StyleKit.h in Headers */,
 				3FE789AC1A70288F00FF4065 /* MyDeadZoneViewer.h in Headers */,
@@ -1005,6 +1008,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B943BE21A83EC6600E77A79 /* MyAnalogStick.m in Sources */,
 				55B637AD18C10C0C00CE933D /* DeviceLister.m in Sources */,
 				3FE789A51A701FE200FF4065 /* MyWhole360Controller.m in Sources */,
 				3FE789AD1A70288F00FF4065 /* MyDeadZoneViewer.m in Sources */,
@@ -1185,7 +1189,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.0d14;
+				CURRENT_PROJECT_VERSION = 1.0.0d15;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1233,7 +1237,7 @@
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.0.0d14;
+				CURRENT_PROJECT_VERSION = 1.0.0d15;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1311,11 +1315,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				UNEXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
@@ -1326,11 +1330,11 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEAD_CODE_STRIPPING = YES;
+				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				UNEXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
