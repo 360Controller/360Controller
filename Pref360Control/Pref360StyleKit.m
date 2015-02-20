@@ -21,7 +21,7 @@
 
 #pragma mark Drawing Methods
 
-+ (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick
++ (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick leftStickDeadzone: (CGFloat)leftDeadzone rightStickDeadzone: (CGFloat)rightDeadzone isLeftNormalized: (BOOL)leftNormalized isRightNormalized: (BOOL)rightNormalized
 {
     //// General Declarations
     CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.graphicsPort;
@@ -786,6 +786,26 @@
 
     //// stickRight
     {
+        if (rightNormalized)
+        {
+            CGFloat rightDead = rightDeadzone * 15;
+            const CGFloat max16 = 15;
+            CGFloat maxVal = max16 - rightDead;
+            
+            if (rightStickPosition.x > 0)
+                rightStickPosition.x = (abs(rightStickPosition.x) * maxVal / max16) + rightDead;
+            else if (rightStickPosition.x < 0)
+                rightStickPosition.x = -((abs(rightStickPosition.x) * maxVal / max16) + rightDead);
+            else
+                rightStickPosition.x = 0;
+            
+            if (rightStickPosition.y > 0)
+                rightStickPosition.y = (abs(rightStickPosition.y) * maxVal / max16) + rightDead;
+            else if (rightStickPosition.y < 0)
+                rightStickPosition.y = -((abs(rightStickPosition.y) * maxVal / max16) + rightDead);
+            else
+                rightStickPosition.y = 0;
+        }
         [NSGraphicsContext saveGraphicsState];
         CGContextTranslateCTM(context, (rightStickPosition.x + 263), (rightStickPosition.y + 133));
 
@@ -874,6 +894,26 @@
 
     //// stickLeft
     {
+        if (leftNormalized)
+        {
+            CGFloat leftDead = leftDeadzone * 15;
+            const CGFloat max16 = 15;
+            CGFloat maxVal = max16 - leftDead;
+            
+            if (leftStickPosition.x > 0)
+                leftStickPosition.x = (abs(leftStickPosition.x) * maxVal / max16) + leftDead;
+            else if (leftStickPosition.x < 0)
+                leftStickPosition.x = -((abs(leftStickPosition.x) * maxVal / max16) + leftDead);
+            else
+                leftStickPosition.x = 0;
+            
+            if (leftStickPosition.y > 0)
+                leftStickPosition.y = (abs(leftStickPosition.y) * maxVal / max16) + leftDead;
+            else if (leftStickPosition.y < 0)
+                leftStickPosition.y = -((abs(leftStickPosition.y) * maxVal / max16) + leftDead);
+            else
+                leftStickPosition.y = 0;
+        }
         [NSGraphicsContext saveGraphicsState];
         CGContextTranslateCTM(context, (leftStickPosition.x + 104), (leftStickPosition.y + 240));
 
@@ -957,6 +997,63 @@
 
 
         [NSGraphicsContext restoreGraphicsState];
+    }
+    
+    
+    //// LEDs
+    {
+        //// Bezier Drawing
+        NSBezierPath* bezierPath = NSBezierPath.bezierPath;
+        [bezierPath moveToPoint: NSMakePoint(229.47, 261.06)];
+        [bezierPath curveToPoint: NSMakePoint(229.47, 259.31) controlPoint1: NSMakePoint(229.47, 260.58) controlPoint2: NSMakePoint(229.47, 259.99)];
+        [bezierPath curveToPoint: NSMakePoint(229.47, 256.11) controlPoint1: NSMakePoint(229.47, 258.4) controlPoint2: NSMakePoint(229.47, 257.32)];
+        [bezierPath curveToPoint: NSMakePoint(210.46, 237.1) controlPoint1: NSMakePoint(219.29, 255.42) controlPoint2: NSMakePoint(211.15, 247.28)];
+        [bezierPath lineToPoint: NSMakePoint(205.51, 237.1)];
+        [bezierPath curveToPoint: NSMakePoint(229.47, 261.06) controlPoint1: NSMakePoint(206.21, 250.01) controlPoint2: NSMakePoint(216.56, 260.35)];
+        [bezierPath closePath];
+        [led1Color setFill];
+        [bezierPath fill];
+        
+        
+        //// Bezier 3 Drawing
+        NSBezierPath* bezier3Path = NSBezierPath.bezierPath;
+        [bezier3Path moveToPoint: NSMakePoint(235.47, 261.06)];
+        [bezier3Path curveToPoint: NSMakePoint(259.43, 237.1) controlPoint1: NSMakePoint(248.38, 260.35) controlPoint2: NSMakePoint(258.72, 250.01)];
+        [bezier3Path curveToPoint: NSMakePoint(254.48, 237.1) controlPoint1: NSMakePoint(258.27, 237.1) controlPoint2: NSMakePoint(256.52, 237.1)];
+        [bezier3Path curveToPoint: NSMakePoint(235.47, 256.11) controlPoint1: NSMakePoint(253.78, 247.28) controlPoint2: NSMakePoint(245.65, 255.42)];
+        [bezier3Path curveToPoint: NSMakePoint(235.47, 261.06) controlPoint1: NSMakePoint(235.47, 258.24) controlPoint2: NSMakePoint(235.47, 259.95)];
+        [bezier3Path closePath];
+        [led2Color setFill];
+        [bezier3Path fill];
+        
+        
+        //// Bezier 2 Drawing
+        NSBezierPath* bezier2Path = NSBezierPath.bezierPath;
+        [bezier2Path moveToPoint: NSMakePoint(259.43, 231.1)];
+        [bezier2Path curveToPoint: NSMakePoint(235.47, 207.14) controlPoint1: NSMakePoint(258.72, 218.19) controlPoint2: NSMakePoint(248.38, 207.85)];
+        [bezier2Path curveToPoint: NSMakePoint(235.47, 212.09) controlPoint1: NSMakePoint(235.47, 208.26) controlPoint2: NSMakePoint(235.47, 209.97)];
+        [bezier2Path curveToPoint: NSMakePoint(254.48, 231.1) controlPoint1: NSMakePoint(245.65, 212.79) controlPoint2: NSMakePoint(253.78, 220.92)];
+        [bezier2Path lineToPoint: NSMakePoint(259.43, 231.1)];
+        [bezier2Path closePath];
+        [led4Color setFill];
+        [bezier2Path fill];
+        
+        
+        //// Bezier 4 Drawing
+        NSBezierPath* bezier4Path = NSBezierPath.bezierPath;
+        [bezier4Path moveToPoint: NSMakePoint(205.51, 231.1)];
+        [bezier4Path curveToPoint: NSMakePoint(207.41, 231.1) controlPoint1: NSMakePoint(206.03, 231.1) controlPoint2: NSMakePoint(206.67, 231.1)];
+        [bezier4Path curveToPoint: NSMakePoint(210.46, 231.1) controlPoint1: NSMakePoint(208.31, 231.1) controlPoint2: NSMakePoint(209.34, 231.1)];
+        [bezier4Path lineToPoint: NSMakePoint(210.48, 230.79)];
+        [bezier4Path curveToPoint: NSMakePoint(229.15, 212.12) controlPoint1: NSMakePoint(211.31, 220.87) controlPoint2: NSMakePoint(219.22, 212.95)];
+        [bezier4Path lineToPoint: NSMakePoint(229.47, 212.09)];
+        [bezier4Path curveToPoint: NSMakePoint(229.47, 207.14) controlPoint1: NSMakePoint(229.47, 209.97) controlPoint2: NSMakePoint(229.47, 208.26)];
+        [bezier4Path curveToPoint: NSMakePoint(228.25, 207.24) controlPoint1: NSMakePoint(229.06, 207.17) controlPoint2: NSMakePoint(228.65, 207.2)];
+        [bezier4Path curveToPoint: NSMakePoint(206.28, 226.11) controlPoint1: NSMakePoint(217.6, 208.33) controlPoint2: NSMakePoint(208.91, 216)];
+        [bezier4Path curveToPoint: NSMakePoint(205.51, 231.1) controlPoint1: NSMakePoint(205.87, 227.72) controlPoint2: NSMakePoint(205.6, 229.39)];
+        [bezier4Path closePath];
+        [led3Color setFill];
+        [bezier4Path fill];
     }
 
 
