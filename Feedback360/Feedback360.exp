@@ -4,7 +4,4 @@
 #  Created by C.W. Betts on 3/3/14.
 #  Copyright (c) 2014 GitHub. All rights reserved.
 
-__ZN17Feedback360Effect*
-__Z11Device_SendP10DeviceLinkPvi
-__Z15Device_FinaliseP10DeviceLink
-__Z17Device_InitialiseP10DeviceLinkj
+_Control360Factory

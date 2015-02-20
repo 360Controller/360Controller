@@ -114,8 +114,8 @@ private:
     bool            Stopped;
     bool            Paused;
     bool            Manual;
-    CFAbsoluteTime  LastTime;
-    CFAbsoluteTime  PausedTime;
+    double          LastTime;
+    double          PausedTime;
     CFUUIDRef       FactoryID;
 
     void            SetForce(LONG LeftLevel, LONG RightLevel);

@@ -24,10 +24,26 @@
  */
 
 #include "Feedback360.h"
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 using std::max;
 using std::min;
 
 #define LoopGranularity 10000 // Microseconds
+
+double CurrentTimeUsingMach()
+{
+    mach_timebase_info_data_t info = {0};
+	if (mach_timebase_info(&info) != KERN_SUCCESS) {
+		//FIXME: why would this fail/set to fail more gracefully.
+        return -1.0;
+	}
+	
+    uint64_t start = mach_absolute_time();
+
+    uint64_t nanos = start * info.numer / info.denom;
+    return (double)nanos / NSEC_PER_SEC;
+}
 
 static IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
     // Padding required for COM
@@ -186,7 +202,7 @@ HRESULT Feedback360::StartEffect(FFEffectDownloadID EffectHandle, FFEffectStartF
             {
                 effectIterator->Status  = FFEGES_PLAYING;
                 effectIterator->PlayCount = Count;
-                effectIterator->StartTime = CFAbsoluteTimeGetCurrent();
+                effectIterator->StartTime = CurrentTimeUsingMach();
                 Stopped = false;
             } else {
                 if (Mode & FFES_SOLO) {
@@ -336,7 +352,7 @@ HRESULT Feedback360::DownloadEffect(CFUUIDRef EffectType, FFEffectDownloadID *Ef
             {
                 Effect->Status  = FFEGES_PLAYING;
                 Effect->PlayCount = 1;
-                Effect->StartTime = CFAbsoluteTimeGetCurrent();
+                Effect->StartTime = CurrentTimeUsingMach();
             }
 
             if( Flags & FFEP_NORESTART )
@@ -438,13 +454,13 @@ HRESULT Feedback360::SendForceFeedbackCommand(FFCommandFlag state)
 
             case FFSFFC_PAUSE:
                 Paused  = true;
-                PausedTime = CFAbsoluteTimeGetCurrent();
+                PausedTime = CurrentTimeUsingMach();
                 break;
 
             case FFSFFC_CONTINUE:
                 for (Feedback360EffectIterator effectIterator = EffectList.begin() ; effectIterator != EffectList.end(); ++effectIterator)
                 {
-                    effectIterator->StartTime += ( CFAbsoluteTimeGetCurrent() - PausedTime );
+                    effectIterator->StartTime += ( CurrentTimeUsingMach() - PausedTime );
                 }
                 Paused = false;
                 break;
@@ -591,7 +607,7 @@ void Feedback360::EffectProc( void *params )
     {
         for (Feedback360EffectIterator effectIterator = cThis->EffectList.begin(); effectIterator != cThis->EffectList.end(); ++effectIterator)
         {
-            if((CFAbsoluteTimeGetCurrent() - cThis->LastTime*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
+            if((CurrentTimeUsingMach() - cThis->LastTime*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
                 CalcResult = effectIterator->Calc(&LeftLevel, &RightLevel);
             }
         }
