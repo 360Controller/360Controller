@@ -65,13 +65,13 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
     } else {
         Duration = DBL_MAX;
     }
-    CFAbsoluteTime BeginTime = StartTime + ( DiEffect.dwStartDelay / 1000. / 1000.);
-    CFAbsoluteTime EndTime  = DBL_MAX;
+    double BeginTime = StartTime + ( DiEffect.dwStartDelay / 1000. / 1000.);
+    double EndTime  = DBL_MAX;
     if (PlayCount != -1)
     {
         EndTime = BeginTime + Duration * PlayCount;
     }
-    CFAbsoluteTime CurrentTime = CFAbsoluteTimeGetCurrent();
+    double CurrentTime = CurrentTimeUsingMach();
 
     if (Status == FFEGES_PLAYING && BeginTime <= CurrentTime && CurrentTime <= EndTime)
     {
@@ -93,7 +93,7 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
 
         // CustomForce allows setting each channel separately
         if(CFEqual(Type, kFFEffectType_CustomForce_ID)) {
-            if((CFAbsoluteTimeGetCurrent() - LastTime)*1000*1000 < DiCustomForce.dwSamplePeriod) {
+            if((CurrentTimeUsingMach() - LastTime)*1000*1000 < DiCustomForce.dwSamplePeriod) {
                 return -1;
             }
             else {
@@ -101,7 +101,7 @@ LONG Feedback360Effect::Calc(LONG *LeftLevel, LONG *RightLevel)
                 WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
                 //fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
                 Index = (Index + 1) % (DiCustomForce.cSamples/2);
-                LastTime = CFAbsoluteTimeGetCurrent();
+                LastTime = CurrentTimeUsingMach();
             }
         }
         // Regular commands treat controller as a single output (both channels are together as one)
