@@ -30,6 +30,10 @@
 
 @property (nonatomic) CGPoint leftStickPosition;
 @property (nonatomic) CGPoint rightStickPosition;
+@property (nonatomic) CGFloat leftStickDeadzone;
+@property (nonatomic) CGFloat rightStickDeadzone;
+@property (nonatomic) BOOL leftNormalized;
+@property (nonatomic) BOOL rightNormalized;
 
 @property (nonatomic) int leftStickXPos;
 @property (nonatomic) int leftStickYPos;
