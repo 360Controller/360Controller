@@ -104,6 +104,7 @@ protected:
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
+    bool deadOffLeft, deadOffRight;
     
 public:
     // Controller specific

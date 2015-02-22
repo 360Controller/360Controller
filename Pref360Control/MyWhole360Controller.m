@@ -96,6 +96,26 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)setLeftStickDeadzone:(CGFloat)deadzone {
+    _leftStickDeadzone = deadzone / 32768.0;
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setRightStickDeadzone:(CGFloat)deadzone {
+    _rightStickDeadzone = deadzone / 32768.0;
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setLeftNormalized:(BOOL)normalized {
+    _leftNormalized = normalized;
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setRightNormalized:(BOOL)normalized {
+    _rightNormalized = normalized;
+    [self setNeedsDisplay:YES];
+}
+
 - (void)setLeftStickXPos:(int)xPos {
     CGPoint p = _leftStickPosition;
     p.x = xPos / 32768.0;
@@ -138,6 +158,10 @@
     [self setRightStickPressed:NO];
     [self setLeftStickPosition:NSZeroPoint];
     [self setRightStickPosition:NSZeroPoint];
+    [self setLeftStickDeadzone:0];
+    [self setRightStickDeadzone:0];
+    [self setLeftNormalized:NO];
+    [self setRightNormalized:NO];
 }
 
 - (void)awakeFromNib {
@@ -148,7 +172,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    [Pref360StyleKit drawX360ControllerWithControllerNumber:0 aPressed:_aPressed bPressed:_bPressed xPressed:_xPressed yPressed:_yPressed leftPressed:_leftPressed upPressed:_upPressed rightPressed:_rightPressed downPressed:_downPressed backPressed:_backPressed startPressed:_startPressed lbPressed:_lbPressed rbPressed:_rbPressed homePressed:_homePressed leftStickPressed:_leftStickPressed rightStickPressed:_rightStickPressed leftStick:_leftStickPosition rightStick:_rightStickPosition];
+    [Pref360StyleKit drawX360ControllerWithControllerNumber:0 aPressed:_aPressed bPressed:_bPressed xPressed:_xPressed yPressed:_yPressed leftPressed:_leftPressed upPressed:_upPressed rightPressed:_rightPressed downPressed:_downPressed backPressed:_backPressed startPressed:_startPressed lbPressed:_lbPressed rbPressed:_rbPressed homePressed:_homePressed leftStickPressed:_leftStickPressed rightStickPressed:_rightStickPressed leftStick:_leftStickPosition rightStick:_rightStickPosition leftStickDeadzone:_leftStickDeadzone rightStickDeadzone:_rightStickDeadzone isLeftNormalized:_leftNormalized isRightNormalized:_rightNormalized];
 }
 
 @end
