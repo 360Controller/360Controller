@@ -345,6 +345,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickInvertYAlt setEnabled:enable];
     [_rightLinked setEnabled:enable];
     [_rightLinkedAlt setEnabled:enable];
+    [_normalizeDeadzoneLeft setEnabled:enable];
+    [_normalizeDeadzoneRight setEnabled:enable];
     if (enable) { // If trying to enable, make sure its an Xbox One Controller
 //        if (controllerType == XboxOneController) // Ignore until settings are fixed (Issue #67
             [_xoneRumbleOptions setEnabled:enable];
@@ -569,6 +571,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_leftStickDeadzone setIntValue:i];
                 [_leftStickDeadzoneAlt setIntValue:i];
                 [_leftDeadZone setVal:i];
+                [_wholeController setLeftStickDeadzone:i];
                 [_leftStickAnalog setDeadzone:i];
             } else NSLog(@"No value for DeadzoneLeft\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightX"),(void*)&boolValue)) {
@@ -584,6 +587,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_rightLinked setState:enable?NSOnState:NSOffState];
                 [_rightLinkedAlt setState:enable?NSOnState:NSOffState];
                 [_rightDeadZone setLinked:enable];
+                [_wholeController setRightStickDeadzone:i];
                 [_rightStickAnalog setLinked:enable];
             } else NSLog(@"No value for RelativeRight\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadzoneRight"),(void*)&intValue)) {
@@ -599,7 +603,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("ControllerType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
                 controllerType = (ControllerType)[num integerValue];
-                NSLog(@"CONTROLLER TYPE PREF - %@, %lu\n", num, controllerType);
             } else NSLog(@"No value for ControllerType\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("XoneRumbleType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
@@ -852,6 +855,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 // Handle changing a setting
 - (IBAction)changeSetting:(id)sender
 {
+    // Send normalize to joysticks
+    [_wholeController setLeftNormalized:(BOOL)[_normalizeDeadzoneLeft state]];
+    [_leftStickAnalog setNormalized:(BOOL)[_normalizeDeadzoneLeft state]];
+    [_wholeController setRightNormalized:(BOOL)[_normalizeDeadzoneRight state]];
+    [_rightStickAnalog setNormalized:(BOOL)[_normalizeDeadzoneRight state]];
+    
     // Sync settings between tabs
     NSInteger tabIndex = [_tabView indexOfTabViewItem:[_tabView selectedTabViewItem]];
     
@@ -885,6 +894,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"DeadzoneRight": @((UInt16)[_rightStickDeadzone doubleValue]),
                            @"RelativeLeft": @((BOOL)([_leftLinked state]==NSOnState)),
                            @"RelativeRight": @((BOOL)([_rightLinked state]==NSOnState)),
+                           @"DeadOffLeft": @((BOOL)([_normalizeDeadzoneLeft state]==NSOnState)),
+                           @"DeadOffRight": @((BOOL)([_normalizeDeadzoneRight state]==NSOnState)),
                            @"ControllerType": @((UInt8)(controllerType)),
                            @"XoneRumbleType": @((UInt8)([_xoneRumbleOptions indexOfSelectedItem])),
                            @"BindingUp": @((UInt8)([MyWhole360ControllerMapper mapping][0])),
@@ -910,10 +921,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_leftDeadZone setLinked:[_leftLinked state] == NSOnState];
     [_leftStickAnalog setLinked:[_leftLinked state] == NSOnState];
     [_leftDeadZone setVal:[_leftStickDeadzone doubleValue]];
+    [_wholeController setLeftStickDeadzone:[_leftStickDeadzone doubleValue]];
     [_leftStickAnalog setDeadzone:[_leftStickDeadzone doubleValue]];
     [_rightDeadZone setLinked:[_rightLinked state] == NSOnState];
     [_rightStickAnalog setLinked:[_rightLinked state] == NSOnState];
     [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
+    [_wholeController setRightStickDeadzone:[_rightStickDeadzone doubleValue]];
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
 }
 
