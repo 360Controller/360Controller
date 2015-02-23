@@ -178,13 +178,7 @@ OSNumber* Xbox360ControllerClass::newProductIDNumber() const
 
 OSString* Xbox360ControllerClass::newProductString() const
 {
-    OSString *retString = getDeviceString(GetOwnerProvider(this)->GetProductStringIndex());
-    if (retString->isEqualTo("Controller")) {
-        retString->release();
-        return OSString::withCString("Xbox Original Wired Controller");
-    } else {
-        return retString;
-    }
+    return OSString::withCString("Xbox 360 Wired Controller");
 }
 
 OSString* Xbox360ControllerClass::newSerialNumberString() const
