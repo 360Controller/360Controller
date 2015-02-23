@@ -56,14 +56,14 @@
         <customObject id="221" customClass="DeviceLister"/>
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <rect key="contentRect" x="374" y="240" width="658" height="420"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="contentRect" x="374" y="240" width="668" height="420"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="Z4H-05-G2i">
-                <rect key="frame" x="0.0" y="0.0" width="658" height="420"/>
+                <rect key="frame" x="0.0" y="0.0" width="668" height="420"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-HG-Eem">
-                        <rect key="frame" x="194" y="390" width="270" height="23"/>
+                        <rect key="frame" x="199" y="390" width="270" height="23"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="4as-1K-roV">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -77,12 +77,12 @@
                         </connections>
                     </segmentedControl>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="hF4-J0-ko4">
-                        <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                        <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="8ls-wR-8ni">
@@ -188,13 +188,13 @@
                                                 <action selector="selectDevice:" target="-2" id="gsM-0x-TTV"/>
                                             </connections>
                                         </popUpButton>
-                                        <box autoresizesSubviews="NO" misplaced="YES" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
+                                        <box autoresizesSubviews="NO" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
                                             <rect key="frame" x="490" y="226" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
                                                         <rect key="frame" x="16" y="82" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="5wf-7e-ekz">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -204,7 +204,7 @@
                                                             <action selector="changeSetting:" target="-2" id="Oy1-El-lBZ"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
                                                         <rect key="frame" x="16" y="62" width="70" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RFR-wA-1SW">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -215,7 +215,7 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-ha-aE9">
-                                                        <rect key="frame" x="16" y="37" width="117" height="20"/>
+                                                        <rect key="frame" x="16" y="37" width="117" height="21"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="pUW-BW-6Gu">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -251,13 +251,13 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <box autoresizesSubviews="NO" misplaced="YES" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
+                                        <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
                                             <rect key="frame" x="490" y="98" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
                                                         <rect key="frame" x="16" y="82" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="acH-i4-MwR">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -267,7 +267,7 @@
                                                             <action selector="changeSetting:" target="-2" id="HPo-ks-d8X"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
                                                         <rect key="frame" x="16" y="62" width="70" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Vm-ce-hhc">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -288,7 +288,7 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wxg-qH-eBn">
-                                                        <rect key="frame" x="16" y="37" width="117" height="20"/>
+                                                        <rect key="frame" x="16" y="37" width="117" height="21"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="H8P-Ic-jNd">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -360,11 +360,11 @@
                             </tabViewItem>
                             <tabViewItem label="Tweaking" identifier="2" id="6In-9m-Iqh">
                                 <view key="view" id="apT-j1-uIX">
-                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-qF-rWd">
-                                            <rect key="frame" x="18" y="357" width="623" height="26"/>
+                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-qF-rWd">
+                                            <rect key="frame" x="18" y="357" width="633" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Fqs-9N-l7A" id="pey-Hr-vWo">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -380,7 +380,7 @@
                                                 <action selector="selectDevice:" target="-2" id="hQP-9h-SV0"/>
                                             </connections>
                                         </popUpButton>
-                                        <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmX-SJ-ewe" customClass="MyWhole360ControllerMapper">
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="jmX-SJ-ewe" customClass="MyWhole360ControllerMapper">
                                             <rect key="frame" x="20" y="20" width="465" height="330"/>
                                             <subviews>
                                                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aM0-GE-bqq">
@@ -401,8 +401,8 @@
                                                 <constraint firstAttribute="width" constant="465" id="uCz-5w-JdS"/>
                                             </constraints>
                                         </customView>
-                                        <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-Ik-hWq">
-                                            <rect key="frame" x="497" y="89" width="147" height="261"/>
+                                        <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-Ik-hWq">
+                                            <rect key="frame" x="493" y="94" width="155" height="256"/>
                                             <clipView key="contentView" misplaced="YES" id="SaB-pO-6ME">
                                                 <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -427,7 +427,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="input" width="71" minWidth="10" maxWidth="3.4028234663852886e+38" id="CU8-av-rwl">
+                                                            <tableColumn identifier="input" width="79" minWidth="10" maxWidth="3.4028234663852886e+38" id="CU8-av-rwl">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Input">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -462,8 +462,8 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
-                                            <rect key="frame" x="497" y="41" width="147" height="32"/>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
+                                            <rect key="frame" x="487" y="46" width="167" height="32"/>
                                             <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -472,8 +472,8 @@
                                                 <action selector="resetRemappingPressed:" target="-2" id="nLC-NT-tM4"/>
                                             </connections>
                                         </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yAI-iC-6ZJ">
-                                            <rect key="frame" x="497" y="13" width="147" height="32"/>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yAI-iC-6ZJ">
+                                            <rect key="frame" x="487" y="13" width="167" height="32"/>
                                             <buttonCell key="cell" type="push" title="Start Remapping" alternateTitle="Cancel Remapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgp-Mz-PQL">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -484,22 +484,36 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="rCs-qF-rWd" secondAttribute="trailing" constant="20" symbolic="YES" id="6CO-OO-vzQ"/>
+                                        <constraint firstItem="rCs-qF-rWd" firstAttribute="leading" secondItem="apT-j1-uIX" secondAttribute="leading" constant="20" symbolic="YES" id="8O8-gV-cb3"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="top" id="ASO-9R-pLM"/>
+                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="top" secondItem="Zb5-mS-Byj" secondAttribute="bottom" constant="12" symbolic="YES" id="N64-4s-mtE"/>
+                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="Nzc-fQ-pOM"/>
+                                        <constraint firstAttribute="trailing" secondItem="yAI-iC-6ZJ" secondAttribute="trailing" constant="20" symbolic="YES" id="PMi-ao-lU5"/>
+                                        <constraint firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" constant="20" symbolic="YES" id="PWc-2Q-xWK"/>
                                         <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="rCs-qF-rWd" secondAttribute="bottom" constant="10" id="UUr-wh-144"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="leading" secondItem="apT-j1-uIX" secondAttribute="leading" constant="20" symbolic="YES" id="bGj-aS-vub"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="hsl-G6-hR3"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" id="kgD-WX-cUF"/>
+                                        <constraint firstItem="w5N-Ik-hWq" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="nE5-vF-7hG"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="bottom" constant="20" symbolic="YES" id="o37-Ge-hA5"/>
+                                        <constraint firstAttribute="trailing" secondItem="w5N-Ik-hWq" secondAttribute="trailing" constant="20" symbolic="YES" id="ueT-RH-Gin"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zb5-mS-Byj" secondAttribute="trailing" constant="20" symbolic="YES" id="xeR-JC-iUn"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Deadzones" identifier="" id="fN4-Zi-Mei">
                                 <view key="view" id="fis-az-lAc">
-                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <box autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
+                                        <box autoresizesSubviews="NO" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
                                             <rect key="frame" x="138" y="70" width="151" height="143"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="127"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
                                                         <rect key="frame" x="16" y="101" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -509,7 +523,7 @@
                                                             <action selector="changeSetting:" target="-2" id="VEp-AK-N8D"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
                                                         <rect key="frame" x="16" y="81" width="70" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -519,8 +533,8 @@
                                                             <action selector="changeSetting:" target="-2" id="b7D-u7-Azf"/>
                                                         </connections>
                                                     </button>
-                                                    <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
-                                                        <rect key="frame" x="16" y="56" width="117" height="20"/>
+                                                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
+                                                        <rect key="frame" x="16" y="56" width="117" height="21"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="k4Y-aS-OZs">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -528,7 +542,7 @@
                                                             <action selector="changeSetting:" target="-2" id="h7N-8X-dCl"/>
                                                         </connections>
                                                     </slider>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
                                                         <rect key="frame" x="25" y="35" width="58" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -565,13 +579,13 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <box autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
+                                        <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
                                             <rect key="frame" x="369" y="70" width="151" height="143"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="127"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
                                                         <rect key="frame" x="16" y="101" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -581,7 +595,7 @@
                                                             <action selector="changeSetting:" target="-2" id="qnC-Fc-dpF"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
                                                         <rect key="frame" x="16" y="81" width="70" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -591,8 +605,8 @@
                                                             <action selector="changeSetting:" target="-2" id="3sZ-8s-1Hy"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
-                                                        <rect key="frame" x="25" y="34" width="58" height="18"/>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
+                                                        <rect key="frame" x="25" y="35" width="58" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -601,8 +615,8 @@
                                                             <action selector="changeSetting:" target="-2" id="nY3-vX-XFJ"/>
                                                         </connections>
                                                     </button>
-                                                    <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
-                                                        <rect key="frame" x="16" y="56" width="117" height="20"/>
+                                                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
+                                                        <rect key="frame" x="16" y="56" width="117" height="21"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="1uA-oq-a0L">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -637,8 +651,8 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v9g-pO-cIT">
-                                            <rect key="frame" x="18" y="357" width="623" height="26"/>
+                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v9g-pO-cIT">
+                                            <rect key="frame" x="18" y="357" width="633" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="ZBC-oI-z5d" id="LNS-E3-icM">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -654,29 +668,60 @@
                                                 <action selector="selectDevice:" target="-2" id="1tN-Qv-NBp"/>
                                             </connections>
                                         </popUpButton>
-                                        <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zxH-Fb-uux" customClass="MyAnalogStick">
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="zxH-Fb-uux" customClass="MyAnalogStick">
                                             <rect key="frame" x="175" y="221" width="77" height="77"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="77" id="9bG-zZ-3pY"/>
                                                 <constraint firstAttribute="height" constant="77" id="cVr-I5-Lkr"/>
                                             </constraints>
                                         </customView>
-                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vof-lR-v7y" customClass="MyAnalogStick">
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="vof-lR-v7y" customClass="MyAnalogStick">
                                             <rect key="frame" x="406" y="221" width="77" height="77"/>
                                         </customView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v9g-pO-cIT" firstAttribute="top" secondItem="fis-az-lAc" secondAttribute="top" id="5TT-YJ-Fad"/>
+                                        <constraint firstItem="XdF-ba-S8X" firstAttribute="top" secondItem="fis-az-lAc" secondAttribute="top" constant="168" id="ALt-S7-mcb"/>
+                                        <constraint firstAttribute="trailing" secondItem="v9g-pO-cIT" secondAttribute="trailing" constant="20" symbolic="YES" id="EZS-ig-Nz0"/>
+                                        <constraint firstItem="TKg-sh-mjm" firstAttribute="leading" secondItem="XdF-ba-S8X" secondAttribute="trailing" constant="86" id="Hhy-iy-xVo"/>
+                                        <constraint firstItem="TKg-sh-mjm" firstAttribute="top" secondItem="XdF-ba-S8X" secondAttribute="top" id="LLh-r7-E1b"/>
+                                        <constraint firstItem="v9g-pO-cIT" firstAttribute="leading" secondItem="fis-az-lAc" secondAttribute="leading" constant="20" symbolic="YES" id="Lfq-Rf-nJe"/>
+                                        <constraint firstItem="TKg-sh-mjm" firstAttribute="bottom" secondItem="XdF-ba-S8X" secondAttribute="bottom" id="bMN-eb-7vb"/>
+                                        <constraint firstItem="XdF-ba-S8X" firstAttribute="top" secondItem="zxH-Fb-uux" secondAttribute="bottom" constant="8" symbolic="YES" id="d3H-ks-qFL"/>
+                                        <constraint firstItem="TKg-sh-mjm" firstAttribute="top" secondItem="vof-lR-v7y" secondAttribute="bottom" constant="8" symbolic="YES" id="dKP-Kk-dKz"/>
+                                        <constraint firstItem="XdF-ba-S8X" firstAttribute="leading" secondItem="fis-az-lAc" secondAttribute="leading" constant="141" id="e0b-AV-zXw"/>
+                                        <constraint firstAttribute="bottom" secondItem="XdF-ba-S8X" secondAttribute="bottom" constant="74" id="iFR-xM-L9H"/>
+                                        <constraint firstItem="XdF-ba-S8X" firstAttribute="centerX" secondItem="zxH-Fb-uux" secondAttribute="centerX" id="lJs-l6-7U4"/>
+                                        <constraint firstItem="TKg-sh-mjm" firstAttribute="centerX" secondItem="vof-lR-v7y" secondAttribute="centerX" id="oVi-p9-7N2"/>
+                                        <constraint firstItem="vof-lR-v7y" firstAttribute="bottom" secondItem="zxH-Fb-uux" secondAttribute="bottom" id="opO-BY-0rr"/>
+                                        <constraint firstItem="vof-lR-v7y" firstAttribute="width" secondItem="zxH-Fb-uux" secondAttribute="width" id="syU-sv-Dhq"/>
+                                        <constraint firstItem="vof-lR-v7y" firstAttribute="height" secondItem="zxH-Fb-uux" secondAttribute="height" id="ttb-2Q-yVt"/>
+                                    </constraints>
                                 </view>
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
+                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Wyu-fg-4PN">
+                        <rect key="frame" x="0.0" y="417" width="668" height="5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="094-ir-dlJ"/>
+                            <constraint firstAttribute="width" constant="668" id="Meq-rA-xTE"/>
+                        </constraints>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
                 </subviews>
                 <constraints>
                     <constraint firstItem="hF4-J0-ko4" firstAttribute="top" secondItem="FxU-HG-Eem" secondAttribute="bottom" constant="10" id="2q3-1Q-tz8"/>
+                    <constraint firstAttribute="trailing" secondItem="Wyu-fg-4PN" secondAttribute="trailing" id="Cjn-2B-X8n"/>
+                    <constraint firstItem="Wyu-fg-4PN" firstAttribute="top" secondItem="Z4H-05-G2i" secondAttribute="top" id="LNM-vQ-6me"/>
                     <constraint firstAttribute="centerX" secondItem="FxU-HG-Eem" secondAttribute="centerX" id="Mhw-wx-Jkj"/>
                     <constraint firstAttribute="bottom" secondItem="hF4-J0-ko4" secondAttribute="bottom" id="Qwi-eb-4aT"/>
                     <constraint firstAttribute="trailing" secondItem="hF4-J0-ko4" secondAttribute="trailing" id="aX5-VD-2tB"/>
                     <constraint firstItem="FxU-HG-Eem" firstAttribute="top" secondItem="Z4H-05-G2i" secondAttribute="top" constant="8" id="kL5-VJ-yan"/>
                     <constraint firstItem="hF4-J0-ko4" firstAttribute="leading" secondItem="Z4H-05-G2i" secondAttribute="leading" id="llM-12-bOT"/>
+                    <constraint firstItem="Wyu-fg-4PN" firstAttribute="leading" secondItem="Z4H-05-G2i" secondAttribute="leading" id="mcW-Fp-2Bl"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="614" y="405"/>
