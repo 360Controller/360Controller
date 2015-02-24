@@ -418,10 +418,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     int i = (int)[_deviceList indexOfSelectedItem];
     int j;
-    CFArrayRef elements;
-    CFDictionaryRef element;
-    CFTypeRef object;
-    long number;
+    CFArrayRef CFelements;
     IOHIDElementCookie cookie;
     long usage,usagePage;
     CFRunLoopSourceRef eventSource;
@@ -440,29 +437,34 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         registryEntry = [item rawDevice];
     }
     
-    if((*device)->copyMatchingElements(device,NULL,&elements)!=kIOReturnSuccess) {
+    if((*device)->copyMatchingElements(device,NULL,&CFelements)!=kIOReturnSuccess) {
         NSLog(@"Can't get elements list");
         // Make note of failure?
         return;
     }
     
-    for (i = 0;i < CFArrayGetCount(elements); i++) {
-        element=CFArrayGetValueAtIndex(elements,i);
+    NSArray *elements = CFBridgingRelease(CFelements);
+    
+    for (NSDictionary *element in elements) {
+        id object;
         // Get cookie
-        object=CFDictionaryGetValue(element,CFSTR(kIOHIDElementCookieKey));
-        if((object==NULL)||(CFGetTypeID(object)!=CFNumberGetTypeID())) continue;
-        if(!CFNumberGetValue((CFNumberRef)object,kCFNumberLongType,&number)) continue;
-        cookie=(IOHIDElementCookie)number;
+        object = element[@kIOHIDElementCookieKey];
+        if (object == nil || ![object isKindOfClass:[NSNumber class]]) {
+            continue;
+        }
+        cookie = (IOHIDElementCookie)[(NSNumber*)object unsignedIntValue];
         // Get usage
-        object=CFDictionaryGetValue(element,CFSTR(kIOHIDElementUsageKey));
-        if((object==0)||(CFGetTypeID(object)!=CFNumberGetTypeID())) continue;
-        if(!CFNumberGetValue((CFNumberRef)object,kCFNumberLongType,&number)) continue;
-        usage=number;
+        object = element[@kIOHIDElementUsageKey];
+        if (object == nil || ![object isKindOfClass:[NSNumber class]]) {
+            continue;
+        }
+        usage = [(NSNumber*)object longValue];
         // Get usage page
-        object=CFDictionaryGetValue(element,CFSTR(kIOHIDElementUsagePageKey));
-        if((object==0)||(CFGetTypeID(object)!=CFNumberGetTypeID())) continue;
-        if(!CFNumberGetValue((CFNumberRef)object,kCFNumberLongType,&number)) continue;
-        usagePage=number;
+        object = element[@kIOHIDElementUsagePageKey];
+        if (object == nil || ![object isKindOfClass:[NSNumber class]]) {
+            continue;
+        }
+        usagePage = [(NSNumber*)object longValue];
         // Match up items
         switch(usagePage) {
             case 0x01:  // Generic Desktop
@@ -750,7 +752,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         DeviceItem *item = [DeviceItem allocateDeviceItemForDevice:hidDevice];
         if (item == nil) continue;
         // Add to item
-        NSString *name = [item name];
+        NSString *name = item.name;
         if (name == nil)
             name = @"Generic Controller";
         [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
@@ -912,7 +914,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingA": @((UInt8)([MyWhole360ControllerMapper mapping][11])),
                            @"BindingB": @((UInt8)([MyWhole360ControllerMapper mapping][12])),
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
-                           @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),};
+                           @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14]))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
