@@ -62,23 +62,21 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-HG-Eem">
-                        <rect key="frame" x="193" y="390" width="283" height="23"/>
+                        <rect key="frame" x="170" y="390" width="328" height="23"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="4as-1K-roV">
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment label="Controller Test" selected="YES"/>
                                 <segment label="Binding" tag="1"/>
                                 <segment label="Deadzones"/>
-                                <segment>
-                                    <nil key="label"/>
-                                </segment>
+                                <segment label="About"/>
                             </segments>
                         </segmentedCell>
                         <connections>
                             <action selector="takeSelectedTabViewItemFromSender:" target="hF4-J0-ko4" id="uZH-FR-qat"/>
                         </connections>
                     </segmentedControl>
-                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="hF4-J0-ko4">
+                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="hF4-J0-ko4" userLabel="TabView">
                         <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
@@ -682,6 +680,93 @@
                                         <constraint firstItem="vof-lR-v7y" firstAttribute="width" secondItem="zxH-Fb-uux" secondAttribute="width" id="syU-sv-Dhq"/>
                                         <constraint firstItem="vof-lR-v7y" firstAttribute="height" secondItem="zxH-Fb-uux" secondAttribute="height" id="ttb-2Q-yVt"/>
                                     </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="About" identifier="" id="SuI-sa-Ula">
+                                <view key="view" id="z25-ro-QkC">
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <box fixedFrame="YES" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-tN-LmC">
+                                            <rect key="frame" x="17" y="16" width="634" height="367"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="632" height="365"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
+                                                        <rect key="frame" x="18" y="14" width="596" height="339"/>
+                                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
+                                                            <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textView drawsBackground="NO" importsGraphics="NO" baseWritingDirection="leftToRight" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="3fX-WF-3zX">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="maxSize" width="596" height="10000000"/>
+                                                                    <attributedString key="textStorage">
+                                                                        <fragment>
+                                                                            <string key="content">About the Xbox 360 Controller Driver for Mac OS X
+</string>
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="18" name="LucidaGrande-Bold"/>
+                                                                                <real key="NSKern" value="0.0"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                                                    <tabStops/>
+                                                                                </paragraphStyle>
+                                                                                <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                        <fragment>
+                                                                            <mutableString key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis diam eget nunc maximus semper. Curabitur vel dui pellentesque, feugiat massa vitae, dignissim nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam laoreet lorem posuere felis faucibus semper at id dolor. In maximus pharetra tristique. Proin eu erat pharetra, ullamcorper nisi sit amet, fringilla risus. Phasellus venenatis molestie leo in bibendum. Cras arcu nibh, feugiat nec finibus eget, placerat quis nisl. Nullam quis ligula dignissim, placerat sapien id, volutpat turpis. Aliquam sed diam quis neque maximus pulvinar nec a tortor. Aliquam gravida nibh et rhoncus convallis. 
+Phasellus vel risus maximus, ultricies purus vel, finibus augue. Vivamus consectetur cursus congue. Phasellus at tortor vel magna elementum sollicitudin sit amet vitae ex. In risus felis, tincidunt in felis in, consequat commodo lacus. Donec id nibh et elit elementum egestas. In vel porta dui. Maecenas vel aliquet dolor. 
+Nunc ut consequat purus. Morbi sed risus eu magna dignissim pulvinar. Morbi et egestas odio, vitae consectetur neque. Nullam ante urna, lacinia id consectetur sed, eleifend id nulla. Nullam rhoncus ligula id interdum porta. Mauris in ligula diam. Nulla gravida vitae enim vitae pharetra. Suspendisse potenti. Sed sed massa a mauris scelerisque elementum. Etiam ac urna vestibulum, pellentesque dui eu, lobortis augue. Nunc ac elit sit amet augue malesuada malesuada vel id nisi. </mutableString>
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <real key="NSKern" value="0.0"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                                                    <tabStops/>
+                                                                                </paragraphStyle>
+                                                                                <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                        <fragment>
+                                                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="12" name="LucidaGrande"/>
+                                                                                <real key="NSKern" value="0.0"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
+                                                                                    <tabStops/>
+                                                                                </paragraphStyle>
+                                                                                <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="maxSize" width="596" height="10000000"/>
+                                                                </textView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uuF-8q-9ih">
+                                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
+                                                            <rect key="frame" x="224" y="1" width="15" height="133"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
+                                                </subviews>
+                                            </view>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                    </subviews>
                                 </view>
                             </tabViewItem>
                         </tabViewItems>
