@@ -87,6 +87,9 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSButton *normalizeDeadzoneLeft;
 @property (weak) IBOutlet NSButton *normalizeDeadzoneRight;
 
+// About Tab
+/* put About Tab's @properties here */
+
 // Internal info
 @property (readonly) mach_port_t masterPort;
 
