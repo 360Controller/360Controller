@@ -62,7 +62,6 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet MyBatteryMonitor *batteryStatus;
 @property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
 @property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
-@property (strong) IBOutlet NSPopover *aboutPopover;
 @property (weak) IBOutlet NSPopUpButton *xoneRumbleOptions;
 
 // Binding Tab
@@ -98,6 +97,5 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 - (IBAction)powerOff:(id)sender;
 - (IBAction)selectDevice:(id)sender;
 - (IBAction)changeSetting:(id)sender;
-- (IBAction)showAboutPopover:(id)sender;
 
 @end

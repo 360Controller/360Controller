@@ -57,7 +57,7 @@
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="420"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="420"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,20 +85,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="8ls-wR-8ni">
-                                            <rect key="frame" x="616" y="20" width="22" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="a4J-7Z-p8G"/>
-                                                <constraint firstAttribute="width" constant="22" id="kZy-lH-HYD"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="AboutTemplate" imagePosition="overlaps" alignment="center" state="on" inset="2" id="br3-uk-8ZJ">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="showAboutPopover:" target="-2" id="pJI-Dr-FcA"/>
-                                            </connections>
-                                        </button>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
                                             <rect key="frame" x="20" y="20" width="465" height="330"/>
                                             <subviews>
@@ -346,13 +332,10 @@
                                         <constraint firstItem="ZlQ-UU-WB8" firstAttribute="leading" secondItem="ILA-Sd-ahY" secondAttribute="trailing" constant="8" id="Cnk-yT-4eL"/>
                                         <constraint firstAttribute="trailing" secondItem="cqy-WX-TEQ" secondAttribute="trailing" constant="20" id="G4o-vq-FKm"/>
                                         <constraint firstItem="DoB-vG-8fZ" firstAttribute="top" secondItem="PCS-lN-muI" secondAttribute="top" id="GDt-fL-zcT"/>
-                                        <constraint firstAttribute="trailing" secondItem="8ls-wR-8ni" secondAttribute="trailing" constant="20" id="GhZ-xs-YJp"/>
                                         <constraint firstAttribute="trailing" secondItem="ZlQ-UU-WB8" secondAttribute="trailing" constant="20" id="Mcw-2N-lty"/>
                                         <constraint firstItem="ILA-Sd-ahY" firstAttribute="leading" secondItem="PCS-lN-muI" secondAttribute="leading" constant="20" id="Pgw-nC-auE"/>
-                                        <constraint firstItem="ILA-Sd-ahY" firstAttribute="bottom" secondItem="8ls-wR-8ni" secondAttribute="bottom" id="U2P-5d-Zc7"/>
                                         <constraint firstItem="cqy-WX-TEQ" firstAttribute="top" secondItem="ZlQ-UU-WB8" secondAttribute="bottom" constant="8" id="it2-dw-wk4"/>
                                         <constraint firstItem="DoB-vG-8fZ" firstAttribute="leading" secondItem="PCS-lN-muI" secondAttribute="leading" constant="20" id="j10-FT-hv0"/>
-                                        <constraint firstAttribute="bottom" secondItem="8ls-wR-8ni" secondAttribute="bottom" constant="20" id="lor-gd-2Uw"/>
                                         <constraint firstItem="cqy-WX-TEQ" firstAttribute="leading" secondItem="ILA-Sd-ahY" secondAttribute="trailing" constant="8" id="pIW-xT-M1f"/>
                                         <constraint firstAttribute="trailing" secondItem="DoB-vG-8fZ" secondAttribute="trailing" constant="20" id="x14-vT-DDZ"/>
                                     </constraints>
@@ -408,7 +391,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="Zwr-si-a4c" id="9SZ-KC-9Y6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="145" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="153" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="1" height="2"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -726,41 +709,15 @@
             </view>
             <point key="canvasLocation" x="614" y="405"/>
         </window>
-        <viewController id="6rV-WW-FeS" userLabel="Popover View Controller">
-            <connections>
-                <outlet property="view" destination="Ssq-G7-iKc" id="Wzo-s5-jy2"/>
-            </connections>
-        </viewController>
+        <viewController id="6rV-WW-FeS" userLabel="Popover View Controller"/>
         <popover appearance="HUD" behavior="t" id="w7a-sF-aQr">
             <connections>
                 <outlet property="contentViewController" destination="6rV-WW-FeS" id="Ijr-jC-bKA"/>
             </connections>
         </popover>
-        <view id="Ssq-G7-iKc" userLabel="About Popover View">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="88"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Ae-qY-kRA">
-                    <rect key="frame" x="18" y="20" width="264" height="48"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="About text" id="ecb-RX-glN">
-                        <font key="font" metaFont="systemBold" size="40"/>
-                        <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="5Ae-qY-kRA" secondAttribute="trailing" constant="20" id="DOl-2d-y1K"/>
-                <constraint firstItem="5Ae-qY-kRA" firstAttribute="leading" secondItem="Ssq-G7-iKc" secondAttribute="leading" constant="20" id="NbH-rv-aey"/>
-                <constraint firstAttribute="bottom" secondItem="5Ae-qY-kRA" secondAttribute="bottom" constant="20" id="jNU-8i-yeo"/>
-                <constraint firstItem="5Ae-qY-kRA" firstAttribute="top" secondItem="Ssq-G7-iKc" secondAttribute="top" constant="20" id="jcG-TC-IGo"/>
-            </constraints>
-            <point key="canvasLocation" x="149" y="1119"/>
-        </view>
         <customObject id="6cy-Ql-rP7" customClass="BindingTableView"/>
     </objects>
     <resources>
-        <image name="AboutTemplate" width="20" height="20"/>
         <image name="PowerOffTemplate" width="40" height="40"/>
     </resources>
 </document>

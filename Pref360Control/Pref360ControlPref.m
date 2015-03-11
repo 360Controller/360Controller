@@ -85,7 +85,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 
 -(void)awakeFromNib {
-    [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_xoneRumbleOptions removeAllItems];
     [_xoneRumbleOptions addItemsWithTitles:@[@"Default", @"Triggers Only", @"Both"]];
 }
@@ -948,10 +947,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
     FFDeviceEscape(ffDevice, &escape);
-}
-
-- (IBAction)showAboutPopover:(id)sender {
-    [_aboutPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinXEdge];
 }
 
 - (IBAction)startRemappingPressed:(id)sender {
