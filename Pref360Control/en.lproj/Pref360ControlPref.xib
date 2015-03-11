@@ -8,7 +8,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="Pref360ControlPref">
             <connections>
                 <outlet property="_window" destination="3g4-A8-wfV" id="jZs-Hc-dO7"/>
-                <outlet property="aboutPopover" destination="w7a-sF-aQr" id="wC1-E6-pB2"/>
                 <outlet property="batteryStatus" destination="2nr-yn-Nnu" id="5Q6-hJ-Qfy"/>
                 <outlet property="bindingInputColumn" destination="CU8-av-rwl" id="8eS-Q0-knN"/>
                 <outlet property="deviceList" destination="DoB-vG-8fZ" id="b90-MV-zZr"/>
@@ -63,13 +62,16 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-HG-Eem">
-                        <rect key="frame" x="199" y="390" width="270" height="23"/>
+                        <rect key="frame" x="193" y="390" width="283" height="23"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="4as-1K-roV">
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment label="Controller Test" selected="YES"/>
                                 <segment label="Binding" tag="1"/>
                                 <segment label="Deadzones"/>
+                                <segment>
+                                    <nil key="label"/>
+                                </segment>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -709,12 +711,6 @@
             </view>
             <point key="canvasLocation" x="614" y="405"/>
         </window>
-        <viewController id="6rV-WW-FeS" userLabel="Popover View Controller"/>
-        <popover appearance="HUD" behavior="t" id="w7a-sF-aQr">
-            <connections>
-                <outlet property="contentViewController" destination="6rV-WW-FeS" id="Ijr-jC-bKA"/>
-            </connections>
-        </popover>
         <customObject id="6cy-Ql-rP7" customClass="BindingTableView"/>
     </objects>
     <resources>
