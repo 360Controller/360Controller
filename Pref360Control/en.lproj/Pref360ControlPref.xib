@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -13,6 +14,7 @@
                 <outlet property="deviceListAdvanced" destination="v9g-pO-cIT" id="Rrn-x6-Zhy"/>
                 <outlet property="deviceListBinding" destination="rCs-qF-rWd" id="khP-yt-mEj"/>
                 <outlet property="deviceLister" destination="221" id="226"/>
+                <outlet property="enableDriverCheckBox" destination="bAx-wa-r7r" id="y4t-la-oGX"/>
                 <outlet property="leftDeadZone" destination="PUC-ti-HkQ" id="LLa-TQ-jre"/>
                 <outlet property="leftLinked" destination="FGM-yX-zMk" id="bmO-fI-Y3c"/>
                 <outlet property="leftLinkedAlt" destination="O2Y-4P-SwU" id="yEA-5b-yXV"/>
@@ -44,6 +46,7 @@
                 <outlet property="rightStickInvertYAlt" destination="ASV-58-sZ1" id="ADg-YG-KGA"/>
                 <outlet property="rightTrigger" destination="BLH-hs-koP" id="G2s-bp-VgK"/>
                 <outlet property="tabView" destination="hF4-J0-ko4" id="2mL-IX-fVY"/>
+                <outlet property="uninstallDriverButton" destination="LZ6-57-3mT" id="KiP-Hi-WRp"/>
                 <outlet property="wholeController" destination="ILA-Sd-ahY" id="Mr1-K0-ZLS"/>
                 <outlet property="wholeControllerMapper" destination="jmX-SJ-ewe" id="VCe-Dg-aIB"/>
                 <outlet property="xoneRumbleOptions" destination="g1A-0k-b7Y" id="2qP-z1-4Rn"/>
@@ -81,7 +84,7 @@
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
@@ -683,6 +686,9 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="willPerformUninstallation:" target="-2" id="hJ7-HN-KhT"/>
+                                                        </connections>
                                                     </button>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="362-jh-07U">
                                                         <rect key="frame" x="35" y="222" width="228" height="52"/>
@@ -698,6 +704,9 @@
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="toggleDriverEnabled:" target="-2" id="c5B-2V-moX"/>
+                                                        </connections>
                                                     </button>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-Ly-PFn">
                                                         <rect key="frame" x="16" y="45" width="247" height="42"/>
@@ -747,7 +756,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="339"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="minSize" width="581" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -790,7 +799,7 @@ Cg
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="minSize" width="581" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
@@ -800,7 +809,7 @@ Cg
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="224" y="1" width="15" height="133"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>

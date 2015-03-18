@@ -931,6 +931,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
 }
 
+- (IBAction)toggleDriverEnabled:(NSButton *)sender {
+    NSLog(@"TODO: enable/disable driver stuff");
+}
+
+- (IBAction)willPerformUninstallation:(id)sender {
+    NSLog(@"TODO: uninstall stuff");
+}
+
 // Handle I/O Kit device add/remove
 - (void)handleDeviceChange
 {
