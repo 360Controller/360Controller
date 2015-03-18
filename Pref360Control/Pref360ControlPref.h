@@ -72,8 +72,8 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSTableView *mappingTable;
 @property (weak) IBOutlet NSButton *remappingResetButton;
 
-// Deadzones Tab
-@property (weak) IBOutlet NSPopUpButton *deviceListDeadzones;
+// Advanced Tab
+@property (weak) IBOutlet NSPopUpButton *deviceListAdvanced;
 @property (weak) IBOutlet MyAnalogStick *leftStickAnalog;
 @property (weak) IBOutlet MyAnalogStick *rightStickAnalog;
 @property (weak) IBOutlet NSButton *leftLinkedAlt;

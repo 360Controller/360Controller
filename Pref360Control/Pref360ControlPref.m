@@ -712,7 +712,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     [_deviceList removeAllItems];
     [_deviceListBinding removeAllItems];
-    [_deviceListDeadzones removeAllItems];
+    [_deviceListAdvanced removeAllItems];
     [_deviceArray removeAllObjects];
 }
 
@@ -734,7 +734,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if((ioReturn != kIOReturnSuccess) || (iterator == 0)) {
         [_deviceList addItemWithTitle:NO_ITEMS];
         [_deviceListBinding addItemWithTitle:NO_ITEMS];
-        [_deviceListDeadzones addItemWithTitle:NO_ITEMS];
+        [_deviceListAdvanced addItemWithTitle:NO_ITEMS];
         return;
     }
     
@@ -756,14 +756,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             name = @"Generic Controller";
         [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceListBinding addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
-        [_deviceListDeadzones addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
+        [_deviceListAdvanced addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceArray addObject:item];
     }
     IOObjectRelease(iterator);
     if (count==0) {
         [_deviceList addItemWithTitle:NO_ITEMS];
         [_deviceListBinding addItemWithTitle:NO_ITEMS];
-        [_deviceListDeadzones addItemWithTitle:NO_ITEMS];
+        [_deviceListAdvanced addItemWithTitle:NO_ITEMS];
     }
     [self startDevice];
 }
@@ -839,15 +839,15 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     NSInteger tabIndex = [_tabView indexOfTabViewItem:[_tabView selectedTabViewItem]];
     if (tabIndex == 0) { // Controller Test
         [_deviceListBinding selectItemAtIndex:[_deviceList indexOfSelectedItem]];
-        [_deviceListDeadzones selectItemAtIndex:[_deviceList indexOfSelectedItem]];
+        [_deviceListAdvanced selectItemAtIndex:[_deviceList indexOfSelectedItem]];
     }
     else if (tabIndex == 1) { // Binding Tab
         [_deviceList selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
-        [_deviceListDeadzones selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
+        [_deviceListAdvanced selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
     }
     else if (tabIndex == 2) { // Deadzones Tab
-        [_deviceList selectItemAtIndex:[_deviceListDeadzones indexOfSelectedItem]];
-        [_deviceListBinding selectItemAtIndex:[_deviceListDeadzones indexOfSelectedItem]];
+        [_deviceList selectItemAtIndex:[_deviceListAdvanced indexOfSelectedItem]];
+        [_deviceListBinding selectItemAtIndex:[_deviceListAdvanced indexOfSelectedItem]];
     }
     
     [self startDevice];
@@ -875,7 +875,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertXAlt setState:[_rightStickInvertX state]];
         [_rightStickInvertYAlt setState:[_rightStickInvertY state]];
     }
-    else if (tabIndex == 2) { // Deadzone Tab
+    else if (tabIndex == 2) { // Advanced Tab
         [_leftLinked setState:[_leftLinkedAlt state]];
         [_leftStickDeadzone setDoubleValue:[_leftStickDeadzoneAlt doubleValue]];
         [_leftStickInvertX setState:[_leftStickInvertXAlt state]];
