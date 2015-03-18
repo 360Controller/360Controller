@@ -84,7 +84,7 @@
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
@@ -387,7 +387,7 @@
                                             </constraints>
                                         </customView>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-Ik-hWq">
-                                            <rect key="frame" x="493" y="94" width="155" height="256"/>
+                                            <rect key="frame" x="493" y="87" width="155" height="263"/>
                                             <clipView key="contentView" misplaced="YES" id="SaB-pO-6ME">
                                                 <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -447,16 +447,6 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
-                                            <rect key="frame" x="487" y="46" width="167" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="resetRemappingPressed:" target="-2" id="nLC-NT-tM4"/>
-                                            </connections>
-                                        </button>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yAI-iC-6ZJ">
                                             <rect key="frame" x="487" y="13" width="167" height="32"/>
                                             <buttonCell key="cell" type="push" title="Start Remapping" alternateTitle="Cancel Remapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgp-Mz-PQL">
@@ -467,23 +457,33 @@
                                                 <action selector="startRemappingPressed:" target="-2" id="bKs-m1-pd2"/>
                                             </connections>
                                         </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
+                                            <rect key="frame" x="487" y="46" width="167" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="resetRemappingPressed:" target="-2" id="nLC-NT-tM4"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="rCs-qF-rWd" secondAttribute="trailing" constant="20" symbolic="YES" id="6CO-OO-vzQ"/>
-                                        <constraint firstItem="rCs-qF-rWd" firstAttribute="leading" secondItem="apT-j1-uIX" secondAttribute="leading" constant="20" symbolic="YES" id="8O8-gV-cb3"/>
-                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="top" id="ASO-9R-pLM"/>
-                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="top" secondItem="Zb5-mS-Byj" secondAttribute="bottom" constant="12" symbolic="YES" id="N64-4s-mtE"/>
-                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="Nzc-fQ-pOM"/>
-                                        <constraint firstAttribute="trailing" secondItem="yAI-iC-6ZJ" secondAttribute="trailing" constant="20" symbolic="YES" id="PMi-ao-lU5"/>
-                                        <constraint firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" constant="20" symbolic="YES" id="PWc-2Q-xWK"/>
-                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="rCs-qF-rWd" secondAttribute="bottom" constant="10" id="UUr-wh-144"/>
-                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="leading" secondItem="apT-j1-uIX" secondAttribute="leading" constant="20" symbolic="YES" id="bGj-aS-vub"/>
-                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="hsl-G6-hR3"/>
-                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" id="kgD-WX-cUF"/>
-                                        <constraint firstItem="w5N-Ik-hWq" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="nE5-vF-7hG"/>
-                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="bottom" constant="20" symbolic="YES" id="o37-Ge-hA5"/>
-                                        <constraint firstAttribute="trailing" secondItem="w5N-Ik-hWq" secondAttribute="trailing" constant="20" symbolic="YES" id="ueT-RH-Gin"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zb5-mS-Byj" secondAttribute="trailing" constant="20" symbolic="YES" id="xeR-JC-iUn"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="trailing" secondItem="w5N-Ik-hWq" secondAttribute="trailing" id="03v-MN-dMu"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="rCs-qF-rWd" secondAttribute="bottom" constant="10" id="5B7-yp-NHH"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="5aq-nY-lak"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" id="7cW-Td-bfS"/>
+                                        <constraint firstAttribute="bottom" secondItem="jmX-SJ-ewe" secondAttribute="bottom" constant="20" symbolic="YES" id="AjE-td-t8Q"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="top" id="BFQ-sd-Qbf"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="leading" secondItem="rCs-qF-rWd" secondAttribute="leading" id="Cw7-qW-9N6"/>
+                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="WiU-m8-9tv"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zb5-mS-Byj" secondAttribute="trailing" constant="20" symbolic="YES" id="Wvj-kc-r2L"/>
+                                        <constraint firstItem="yAI-iC-6ZJ" firstAttribute="top" secondItem="Zb5-mS-Byj" secondAttribute="bottom" constant="12" symbolic="YES" id="ZGv-nb-3XG"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="trailing" secondItem="rCs-qF-rWd" secondAttribute="trailing" id="fl5-ut-zkh"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="trailing" secondItem="yAI-iC-6ZJ" secondAttribute="trailing" id="iDD-lp-epz"/>
+                                        <constraint firstItem="w5N-Ik-hWq" firstAttribute="leading" secondItem="jmX-SJ-ewe" secondAttribute="trailing" constant="8" symbolic="YES" id="jrV-lV-ser"/>
+                                        <constraint firstItem="Zb5-mS-Byj" firstAttribute="top" secondItem="w5N-Ik-hWq" secondAttribute="bottom" constant="13" id="oAv-uT-p9n"/>
+                                        <constraint firstItem="jmX-SJ-ewe" firstAttribute="leading" secondItem="apT-j1-uIX" secondAttribute="leading" constant="20" symbolic="YES" id="s4M-yJ-v83"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -793,7 +793,7 @@ This may be useful when using OnLive or playing some games ported by Aspyr if it
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="18" y="14" width="596" height="339"/>
-                                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
                                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -801,7 +801,7 @@ This may be useful when using OnLive or playing some games ported by Aspyr if it
                                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="339"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="minSize" width="581" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -844,7 +844,7 @@ Cg
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="596" height="339"/>
+                                                                    <size key="minSize" width="581" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
@@ -854,7 +854,7 @@ Cg
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="224" y="1" width="15" height="133"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
