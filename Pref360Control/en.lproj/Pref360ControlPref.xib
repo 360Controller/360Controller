@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -11,8 +10,8 @@
                 <outlet property="batteryStatus" destination="2nr-yn-Nnu" id="5Q6-hJ-Qfy"/>
                 <outlet property="bindingInputColumn" destination="CU8-av-rwl" id="8eS-Q0-knN"/>
                 <outlet property="deviceList" destination="DoB-vG-8fZ" id="b90-MV-zZr"/>
+                <outlet property="deviceListAdvanced" destination="v9g-pO-cIT" id="Rrn-x6-Zhy"/>
                 <outlet property="deviceListBinding" destination="rCs-qF-rWd" id="khP-yt-mEj"/>
-                <outlet property="deviceListDeadzones" destination="v9g-pO-cIT" id="vYT-DU-mVt"/>
                 <outlet property="deviceLister" destination="221" id="226"/>
                 <outlet property="leftDeadZone" destination="PUC-ti-HkQ" id="LLa-TQ-jre"/>
                 <outlet property="leftLinked" destination="FGM-yX-zMk" id="bmO-fI-Y3c"/>
