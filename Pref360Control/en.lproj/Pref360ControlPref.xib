@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Pref360ControlPref">
@@ -58,7 +58,7 @@
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="420"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="420"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,7 +84,7 @@
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
@@ -412,7 +412,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="input" width="79" minWidth="10" maxWidth="3.4028234663852886e+38" id="CU8-av-rwl">
+                                                            <tableColumn identifier="input" width="79" minWidth="10" maxWidth="1000" id="CU8-av-rwl">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Input">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -801,7 +801,7 @@ This may be useful when using OnLive or playing some games ported by Aspyr if it
                                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="339"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="581" height="339"/>
+                                                                    <size key="minSize" width="596" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -844,7 +844,7 @@ Cg
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="581" height="339"/>
+                                                                    <size key="minSize" width="596" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
@@ -854,7 +854,7 @@ Cg
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="224" y="1" width="15" height="133"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
@@ -881,7 +881,7 @@ Cg
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Wyu-fg-4PN">
+                    <box hidden="YES" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Wyu-fg-4PN">
                         <rect key="frame" x="0.0" y="417" width="668" height="5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="094-ir-dlJ"/>
@@ -890,6 +890,14 @@ Cg
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
+                        <attributedString key="userComments">
+                            <fragment content="This horizontal line is the width of a PreferencePane window.">
+                                <attributes>
+                                    <font key="NSFont" metaFont="smallSystem"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                     </box>
                 </subviews>
                 <constraints>
