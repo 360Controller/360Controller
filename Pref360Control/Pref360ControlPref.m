@@ -931,8 +931,80 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
 }
 
+// Run an AppleScript from String and returns YES on successful execution
+- (BOOL)runInlineAppleScript:(NSString *)scriptString
+{
+    NSDictionary* errorDict;
+    NSAppleEventDescriptor* returnDescriptor = NULL;
+
+    NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:scriptString];
+
+    returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
+    scriptObject = nil;
+
+    if (returnDescriptor != NULL)
+    {
+        // successful execution
+        if (kAENullEvent != [returnDescriptor descriptorType])
+        {
+            return YES;
+//            // script returned an AppleScript result
+//            if (cAEList == [returnDescriptor descriptorType])
+//            {
+//                // result is a list of other descriptors
+//            }
+//            else
+//            {
+//                // coerce the result to the appropriate ObjC type
+//            }
+        }
+    }
+    else
+    {
+        // no script result, handle error here
+        NSLog(@"ERROR");
+        NSLog(@"%@", returnDescriptor);
+        NSLog(@"%@", errorDict);
+    }
+    return NO;
+}
+
 - (IBAction)toggleDriverEnabled:(NSButton *)sender {
-    NSLog(@"TODO: enable/disable driver stuff");
+    NSLog(@"Enable/disable driver stuff: START");
+    NSString *script = nil;
+
+    if (sender.state == NSOnState) {
+        // The driver should be enabled
+        NSLog(@"Will Enable Driver...");
+        script =
+            @"do shell script \"\
+            cd \\\"/Library/Extensions\\\"\n\
+            kextload \\\"360Controller.kext\\\"\n\
+            \" with administrator privileges\n";
+
+    } else if (sender.state == NSOffState) {
+        // The driver should be disabled
+        NSLog(@"Will Disable Driver...");
+        [self powerOff:nil];
+        [self stopDevice];
+
+        script =
+            @"do shell script \"\
+            kextstat | grep 360Controller\n\
+            if [ $? -eq 0 ]\n\
+            then\n\
+                kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
+            fi\n\
+            \" with administrator privileges\n";
+    }
+
+    if (script != nil) {
+        if ([self runInlineAppleScript:script]) {
+            NSLog(@"...done!");
+        }
+    }
+
+    NSLog(@"Enable/disable driver stuff: END");
 }
 
 - (IBAction)willPerformUninstallation:(id)sender {
