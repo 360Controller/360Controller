@@ -948,6 +948,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         if (kAENullEvent != [returnDescriptor descriptorType])
         {
             return YES;
+            /* Uncomment this to handle the returned values */
 //            // script returned an AppleScript result
 //            if (cAEList == [returnDescriptor descriptorType])
 //            {
@@ -967,6 +968,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     return NO;
 }
 
+// Enable/disable the driver
+// FIXME: currently only works after the controller is connected and loaded once.
 - (IBAction)toggleDriverEnabled:(NSButton *)sender
 {
     NSLog(@"Enable/disable driver stuff: will change state...");
@@ -1004,6 +1007,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
 }
 
+// Asks the user to uninstall the package, If YES, runs inline AppleScript to do that procedure.
 - (IBAction)willPerformUninstallation:(id)sender
 {
     NSAlert *alert = [[NSAlert alloc] init];
@@ -1020,6 +1024,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
     NSLog(@"Will uninstall the driver...");
 
+    // quotes must be double escaped so the script will read \" properly
     NSString *script =
         @"do shell script \"\
         launchctl unload /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
@@ -1048,6 +1053,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                     informativeTextWithFormat:@"The driver was uninstalled successfully!"];
         [alert runModal];
 
+        // close the Preference Panel, as it needs to clean stuff
         [[NSApplication sharedApplication] terminate:nil];
     } else {
         NSLog(@"...error!");
