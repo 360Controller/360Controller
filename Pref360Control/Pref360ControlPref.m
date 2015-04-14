@@ -962,15 +962,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     else
     {
         // no script result, handle error here
-        NSLog(@"ERROR");
-        NSLog(@"%@", returnDescriptor);
-        NSLog(@"%@", errorDict);
+        NSLog(@"APPLESCRIPT ERROR:\n%@\n,\n%@", returnDescriptor, errorDict);
     }
     return NO;
 }
 
-- (IBAction)toggleDriverEnabled:(NSButton *)sender {
-    NSLog(@"Enable/disable driver stuff: START");
+- (IBAction)toggleDriverEnabled:(NSButton *)sender
+{
+    NSLog(@"Enable/disable driver stuff: will change state...");
     NSString *script = nil;
 
     if (sender.state == NSOnState) {
@@ -1003,12 +1002,62 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             NSLog(@"...done!");
         }
     }
-
-    NSLog(@"Enable/disable driver stuff: END");
 }
 
-- (IBAction)willPerformUninstallation:(id)sender {
-    NSLog(@"TODO: uninstall stuff");
+- (IBAction)willPerformUninstallation:(id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    [alert setMessageText:@"Do you want to uninstall?"];
+    [alert setInformativeText:@"This operation cannot be undone."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+
+    if ([alert runModal] != NSAlertFirstButtonReturn) {
+        NSLog(@"Uninstallation canceled!");
+        return;
+    }
+
+    NSLog(@"Will uninstall the driver...");
+
+    NSString *script =
+        @"do shell script \"\
+        launchctl unload /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
+        kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
+        kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
+        kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
+        rm -rf /Library/Application Support/MICE/360Daemon\n\
+        rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
+        rm -rf /System/Library/Extensions/360Controller.kext\n\
+        rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
+        rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
+        rm -rf /Library/Extensions/360Controller.kext\n\
+        rm -rf /Library/Extensions/Wireless360Controller.kext\n\
+        rm -rf /Library/Extensions/WirelessGamingReceiver.kext\n\
+        rm -rf /Library/PreferencePanes/Pref360Control.prefPane\n\
+        pkgutil --forget com.mice.pkg.Xbox360controller\
+        \" with administrator privileges";
+
+    if (script != nil && [self runInlineAppleScript:script]) {
+        NSLog(@"...done!");
+
+        alert = [NSAlert alertWithMessageText:@"Success!"
+                                defaultButton:nil
+                              alternateButton:nil
+                                  otherButton:nil
+                    informativeTextWithFormat:@"The driver was uninstalled successfully!"];
+        [alert runModal];
+
+        [[NSApplication sharedApplication] terminate:nil];
+    } else {
+        NSLog(@"...error!");
+        alert = [NSAlert alertWithMessageText:@"Error!"
+                                defaultButton:nil
+                              alternateButton:nil
+                                  otherButton:nil
+                    informativeTextWithFormat:@"Error Uninstalling the Driver!"];
+        [alert runModal];
+    }
 }
 
 // Handle I/O Kit device add/remove
