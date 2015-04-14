@@ -970,11 +970,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 // Enable/disable the driver
 // FIXME: currently only works after the controller is connected and loaded once.
+// FIXME: will not uncheck the "Enabled" box if the prefpane is started with the driver disabled
 - (IBAction)toggleDriverEnabled:(NSButton *)sender
 {
     NSLog(@"Enable/disable driver stuff: will change state...");
     NSString *script = nil;
 
+    // QUESTION: should I disable the daemon too?
     if (sender.state == NSOnState) {
         // The driver should be enabled
         NSLog(@"Will Enable Driver...");
@@ -1003,8 +1005,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if (script != nil) {
         if ([self runInlineAppleScript:script]) {
             NSLog(@"...done!");
+            sleep(1);
         }
     }
+
+    [self updateDeviceList];
 }
 
 // Asks the user to uninstall the package, If YES, runs inline AppleScript to do that procedure.
@@ -1031,8 +1036,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
         kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
         kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
-        rm -rf /Library/Application Support/MICE/360Daemon\n\
         rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
+        rm -rf /Library/Application\\ Support/MICE/360Daemon.app\n\
         rm -rf /System/Library/Extensions/360Controller.kext\n\
         rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
         rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
