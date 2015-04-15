@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
 @property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
 @property (strong) IBOutlet NSPopover *aboutPopover;
-@property (weak) IBOutlet NSPopUpButton *xoneRumbleOptions;
+@property (weak) IBOutlet NSPopUpButton *rumbleOptions;
 
 // Binding Tab
 @property (weak) IBOutlet NSPopUpButton *deviceListBinding;

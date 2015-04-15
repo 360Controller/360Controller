@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Pref360ControlPref">
@@ -45,6 +45,7 @@
                 <outlet property="rightStickInvertY" destination="jdE-2i-HVe" id="dwF-3g-pwn"/>
                 <outlet property="rightStickInvertYAlt" destination="ASV-58-sZ1" id="ADg-YG-KGA"/>
                 <outlet property="rightTrigger" destination="BLH-hs-koP" id="G2s-bp-VgK"/>
+                <outlet property="rumbleOptions" destination="g1A-0k-b7Y" id="pYH-oe-IbE"/>
                 <outlet property="tabView" destination="hF4-J0-ko4" id="2mL-IX-fVY"/>
                 <outlet property="wholeController" destination="ILA-Sd-ahY" id="Mr1-K0-ZLS"/>
                 <outlet property="wholeControllerMapper" destination="jmX-SJ-ewe" id="VCe-Dg-aIB"/>
@@ -314,14 +315,6 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-lL-cwP">
-                                            <rect key="frame" x="505" y="77" width="120" height="17"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Xbox One Rumble:" id="eqi-tt-Lwa">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1A-0k-b7Y">
                                             <rect key="frame" x="497" y="45" width="137" height="26"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="o1g-Uv-SAa">
@@ -339,6 +332,14 @@
                                                 <action selector="changeSetting:" target="-2" id="v1h-mW-iCb"/>
                                             </connections>
                                         </popUpButton>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-lL-cwP">
+                                            <rect key="frame" x="511" y="77" width="108" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rumble Options:" id="eqi-tt-Lwa">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ILA-Sd-ahY" firstAttribute="top" secondItem="ZlQ-UU-WB8" secondAttribute="top" id="3fS-0G-1A4"/>
@@ -411,7 +412,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="145" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="1" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="binding" width="72" minWidth="40" maxWidth="1000" id="VVi-lm-klv">

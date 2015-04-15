@@ -85,6 +85,8 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
     char data[2];
     
     report->readBytes(0, data, 2);
+    if (GetOwner(this)->rumbleType == 1) // Don't Rumble
+        return kIOReturnSuccess;
     switch(data[0]) {
         case 0x00:  // Set force feedback
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
@@ -382,6 +384,8 @@ IOReturn XboxOriginalControllerClass::setReport(IOMemoryDescriptor *report,IOHID
     char data[2];
     
     report->readBytes(0, data, 2);
+    if (GetOwner(this)->rumbleType == 1) // Don't Rumble
+        return kIOReturnSuccess;
     switch(data[0]) {
         case 0x00:  // Set force feedback
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
@@ -561,7 +565,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
             rumble.rumbleMask = 0x0F;
             rumble.length = 0x80;
             
-            rumbleType = GetOwner(this)->xoneRumbleType;
+            rumbleType = GetOwner(this)->rumbleType;
             if (rumbleType == 0) // Default
             {
                 rumble.trigL = 0x00;
@@ -569,14 +573,18 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
                 rumble.little = data[2];
                 rumble.big = data[3];
             }
-            else if (rumbleType == 1) // Trigger
+            else if (rumbleType == 1) // None
+            {
+                return kIOReturnSuccess;
+            }
+            else if (rumbleType == 2) // Trigger
             {
                 rumble.trigL = data[2] / 2.0;
                 rumble.trigR = data[3] / 2.0;
                 rumble.little = 0x00;
                 rumble.big = 0x00;
             }
-            else if (rumbleType == 2) // Both
+            else if (rumbleType == 3) // Both
             {
                 rumble.trigL = data[2] / 2.0;
                 rumble.trigR = data[3] / 2.0;
