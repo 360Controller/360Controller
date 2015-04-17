@@ -1066,7 +1066,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                                 defaultButton:nil
                               alternateButton:nil
                                   otherButton:nil
-                    informativeTextWithFormat:@"The driver was uninstalled successfully!"];
+                    informativeTextWithFormat:@"The driver was uninstalled successfully!\n Note that you may need to restart your Mac to be able to install it again properly."];
         [alert runModal];
 
         // close the Preference Panel, as it needs to clean stuff
