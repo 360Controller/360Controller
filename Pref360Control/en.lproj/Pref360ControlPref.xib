@@ -726,7 +726,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     </textField>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="bAx-wa-r7r">
                                                         <rect key="frame" x="16" y="282" width="105" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Enable Driver" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FhM-1g-G1s">
+                                                        <buttonCell key="cell" type="check" title="Enable Driver" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="FhM-1g-G1s">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
