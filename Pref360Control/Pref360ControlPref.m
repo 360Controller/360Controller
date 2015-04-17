@@ -705,6 +705,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     
     [_mappingTable reloadData];
+
+    // Allows the kext to be disabled when you connect a controller once
+    // FIXME: Allow disabling the driver at any time.
+    [self.enableDriverCheckBox setEnabled:YES];
 }
 
 // Clear out the device lists
