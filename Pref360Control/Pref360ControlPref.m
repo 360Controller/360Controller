@@ -800,6 +800,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
+
+    // TEMP: Enable the "enable driver" checkbox if the kext is loaded in the memory
+    int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
+    NSLog(@"Result of kextstat = %d", result);
+    if (result == 0) {
+        [self.enableDriverCheckBox setEnabled:YES];
+    }
 }
 
 // Shut down
