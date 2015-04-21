@@ -62,7 +62,6 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet MyBatteryMonitor *batteryStatus;
 @property (weak) IBOutlet MyDeadZoneViewer *leftDeadZone;
 @property (weak) IBOutlet MyDeadZoneViewer *rightDeadZone;
-@property (strong) IBOutlet NSPopover *aboutPopover;
 @property (weak) IBOutlet NSPopUpButton *xoneRumbleOptions;
 
 // Binding Tab
@@ -73,8 +72,12 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSTableView *mappingTable;
 @property (weak) IBOutlet NSButton *remappingResetButton;
 
-// Deadzones Tab
-@property (weak) IBOutlet NSPopUpButton *deviceListDeadzones;
+// Advanced Tab
+@property (weak) IBOutlet NSPopUpButton *deviceListAdvanced;
+// Advanced Tab - Options
+@property (weak) IBOutlet NSButton *enableDriverCheckBox;
+@property (weak) IBOutlet NSButton *uninstallDriverButton;
+// Advanced Tab - Deadzones
 @property (weak) IBOutlet MyAnalogStick *leftStickAnalog;
 @property (weak) IBOutlet MyAnalogStick *rightStickAnalog;
 @property (weak) IBOutlet NSButton *leftLinkedAlt;
@@ -88,6 +91,9 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSButton *normalizeDeadzoneLeft;
 @property (weak) IBOutlet NSButton *normalizeDeadzoneRight;
 
+// About Tab
+/* put About Tab's @properties here */
+
 // Internal info
 @property (readonly) mach_port_t masterPort;
 
@@ -98,6 +104,8 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 - (IBAction)powerOff:(id)sender;
 - (IBAction)selectDevice:(id)sender;
 - (IBAction)changeSetting:(id)sender;
-- (IBAction)showAboutPopover:(id)sender;
+
+- (IBAction)toggleDriverEnabled:(NSButton *)sender;
+- (IBAction)willPerformUninstallation:(id)sender;
 
 @end

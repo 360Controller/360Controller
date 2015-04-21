@@ -85,7 +85,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 
 -(void)awakeFromNib {
-    [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_xoneRumbleOptions removeAllItems];
     [_xoneRumbleOptions addItemsWithTitles:@[@"Default", @"Triggers Only", @"Both"]];
 }
@@ -706,6 +705,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     
     [_mappingTable reloadData];
+
+    // Allows the kext to be disabled when you connect a controller once
+    // FIXME: Allow disabling the driver at any time.
+    [self.enableDriverCheckBox setEnabled:YES];
 }
 
 // Clear out the device lists
@@ -713,7 +716,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 {
     [_deviceList removeAllItems];
     [_deviceListBinding removeAllItems];
-    [_deviceListDeadzones removeAllItems];
+    [_deviceListAdvanced removeAllItems];
     [_deviceArray removeAllObjects];
 }
 
@@ -735,7 +738,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if((ioReturn != kIOReturnSuccess) || (iterator == 0)) {
         [_deviceList addItemWithTitle:NO_ITEMS];
         [_deviceListBinding addItemWithTitle:NO_ITEMS];
-        [_deviceListDeadzones addItemWithTitle:NO_ITEMS];
+        [_deviceListAdvanced addItemWithTitle:NO_ITEMS];
         return;
     }
     
@@ -757,14 +760,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             name = @"Generic Controller";
         [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceListBinding addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
-        [_deviceListDeadzones addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
+        [_deviceListAdvanced addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceArray addObject:item];
     }
     IOObjectRelease(iterator);
     if (count==0) {
         [_deviceList addItemWithTitle:NO_ITEMS];
         [_deviceListBinding addItemWithTitle:NO_ITEMS];
-        [_deviceListDeadzones addItemWithTitle:NO_ITEMS];
+        [_deviceListAdvanced addItemWithTitle:NO_ITEMS];
     }
     [self startDevice];
 }
@@ -797,6 +800,13 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
+
+    // TEMP: Enable the "enable driver" checkbox if the kext is loaded in the memory
+    int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
+    NSLog(@"Result of kextstat = %d", result);
+    if (result == 0) {
+        [self.enableDriverCheckBox setEnabled:YES];
+    }
 }
 
 // Shut down
@@ -840,15 +850,15 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     NSInteger tabIndex = [_tabView indexOfTabViewItem:[_tabView selectedTabViewItem]];
     if (tabIndex == 0) { // Controller Test
         [_deviceListBinding selectItemAtIndex:[_deviceList indexOfSelectedItem]];
-        [_deviceListDeadzones selectItemAtIndex:[_deviceList indexOfSelectedItem]];
+        [_deviceListAdvanced selectItemAtIndex:[_deviceList indexOfSelectedItem]];
     }
     else if (tabIndex == 1) { // Binding Tab
         [_deviceList selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
-        [_deviceListDeadzones selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
+        [_deviceListAdvanced selectItemAtIndex:[_deviceListBinding indexOfSelectedItem]];
     }
     else if (tabIndex == 2) { // Deadzones Tab
-        [_deviceList selectItemAtIndex:[_deviceListDeadzones indexOfSelectedItem]];
-        [_deviceListBinding selectItemAtIndex:[_deviceListDeadzones indexOfSelectedItem]];
+        [_deviceList selectItemAtIndex:[_deviceListAdvanced indexOfSelectedItem]];
+        [_deviceListBinding selectItemAtIndex:[_deviceListAdvanced indexOfSelectedItem]];
     }
     
     [self startDevice];
@@ -876,7 +886,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertXAlt setState:[_rightStickInvertX state]];
         [_rightStickInvertYAlt setState:[_rightStickInvertY state]];
     }
-    else if (tabIndex == 2) { // Deadzone Tab
+    else if (tabIndex == 2) { // Advanced Tab
         [_leftLinked setState:[_leftLinkedAlt state]];
         [_leftStickDeadzone setDoubleValue:[_leftStickDeadzoneAlt doubleValue]];
         [_leftStickInvertX setState:[_leftStickInvertXAlt state]];
@@ -932,6 +942,146 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
 }
 
+// Run an AppleScript from String and returns YES on successful execution
+- (BOOL)runInlineAppleScript:(NSString *)scriptString
+{
+    NSDictionary* errorDict;
+    NSAppleEventDescriptor* returnDescriptor = NULL;
+
+    NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:scriptString];
+
+    returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
+    scriptObject = nil;
+
+    if (returnDescriptor != NULL)
+    {
+        // successful execution
+        if (kAENullEvent != [returnDescriptor descriptorType])
+        {
+            return YES;
+            /* Uncomment this to handle the returned values */
+//            // script returned an AppleScript result
+//            if (cAEList == [returnDescriptor descriptorType])
+//            {
+//                // result is a list of other descriptors
+//            }
+//            else
+//            {
+//                // coerce the result to the appropriate ObjC type
+//            }
+        }
+    }
+    else
+    {
+        // no script result, handle error here
+        NSLog(@"APPLESCRIPT ERROR:\n%@\n,\n%@", returnDescriptor, errorDict);
+    }
+    return NO;
+}
+
+// Enable/disable the driver
+// FIXME: currently only works after the controller is connected and loaded once.
+// FIXME: will not uncheck the "Enabled" box if the prefpane is started with the driver disabled
+- (IBAction)toggleDriverEnabled:(NSButton *)sender
+{
+    NSLog(@"Enable/disable driver stuff: will change state...");
+    NSString *script = nil;
+
+    // QUESTION: should I disable the daemon too?
+    if (sender.state == NSOnState) {
+        // The driver should be enabled
+        NSLog(@"Will Enable Driver...");
+        script =
+            @"do shell script \"\
+            cd \\\"/Library/Extensions\\\"\n\
+            kextload \\\"360Controller.kext\\\"\n\
+            \" with administrator privileges\n";
+
+    } else if (sender.state == NSOffState) {
+        // The driver should be disabled
+        NSLog(@"Will Disable Driver...");
+        [self powerOff:nil];
+        [self stopDevice];
+
+        script =
+            @"do shell script \"\
+            kextstat | grep 360Controller\n\
+            if [ $? -eq 0 ]\n\
+            then\n\
+                kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
+            fi\n\
+            \" with administrator privileges\n";
+    }
+
+    if (script != nil) {
+        if ([self runInlineAppleScript:script]) {
+            NSLog(@"...done!");
+            sleep(1);
+        }
+    }
+
+    [self updateDeviceList];
+}
+
+// Asks the user to uninstall the package, If YES, runs inline AppleScript to do that procedure.
+- (IBAction)willPerformUninstallation:(id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    [alert setMessageText:@"Do you want to uninstall?"];
+    [alert setInformativeText:@"This operation cannot be undone."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+
+    if ([alert runModal] != NSAlertFirstButtonReturn) {
+        NSLog(@"Uninstallation canceled!");
+        return;
+    }
+
+    NSLog(@"Will uninstall the driver...");
+
+    // quotes must be double escaped so the script will read \" properly
+    NSString *script =
+        @"do shell script \"\
+        launchctl unload /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
+        kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
+        kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
+        kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
+        rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
+        rm -rf /Library/Application\\ Support/MICE/360Daemon.app\n\
+        rm -rf /System/Library/Extensions/360Controller.kext\n\
+        rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
+        rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
+        rm -rf /Library/Extensions/360Controller.kext\n\
+        rm -rf /Library/Extensions/Wireless360Controller.kext\n\
+        rm -rf /Library/Extensions/WirelessGamingReceiver.kext\n\
+        rm -rf /Library/PreferencePanes/Pref360Control.prefPane\n\
+        pkgutil --forget com.mice.pkg.Xbox360controller\
+        \" with administrator privileges";
+
+    if (script != nil && [self runInlineAppleScript:script]) {
+        NSLog(@"...done!");
+
+        alert = [NSAlert alertWithMessageText:@"Success!"
+                                defaultButton:nil
+                              alternateButton:nil
+                                  otherButton:nil
+                    informativeTextWithFormat:@"The driver was uninstalled successfully!\n Note that you may need to restart your Mac to be able to install it again properly."];
+        [alert runModal];
+
+        // close the Preference Panel, as it needs to clean stuff
+        [[NSApplication sharedApplication] terminate:nil];
+    } else {
+        NSLog(@"...error!");
+        alert = [NSAlert alertWithMessageText:@"Error!"
+                                defaultButton:nil
+                              alternateButton:nil
+                                  otherButton:nil
+                    informativeTextWithFormat:@"Error Uninstalling the Driver!"];
+        [alert runModal];
+    }
+}
+
 // Handle I/O Kit device add/remove
 - (void)handleDeviceChange
 {
@@ -948,10 +1098,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     escape.dwSize=sizeof(escape);
     escape.dwCommand=0x03;
     FFDeviceEscape(ffDevice, &escape);
-}
-
-- (IBAction)showAboutPopover:(id)sender {
-    [_aboutPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinXEdge];
 }
 
 - (IBAction)startRemappingPressed:(id)sender {
