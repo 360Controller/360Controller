@@ -2,6 +2,9 @@
 
 # Clear out daemon
 
+# Startup Items is deprecated, should this be removed?
+# the daemon is already been launched using launchctl and this folder doent appear to be created anymore.
+# https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/StartupItems.html
 if [ -d /Library/StartupItems/360ControlDaemon ]; then
    /bin/rm -r /Library/StartupItems/360ControlDaemon
 fi
@@ -12,6 +15,7 @@ if [ -f /Library/LaunchDaemons/com.mice.360Daemon.plist ]; then
    /bin/rm /Library/LaunchDaemons/com.mice.360Daemon.plist
 fi
 
+# this folder doesnt appear to be created in recent versions too
 if [ -d /Library/Application\ Support/MICE/360Daemon ]; then
    /bin/rm -r /Library/Application\ Support/MICE/360Daemon
 fi
