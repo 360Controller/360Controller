@@ -52,7 +52,6 @@ void SetController(NSString *serial, NSDictionary *data)
 NSDictionary* GetController(NSString *serial)
 {
     CFPropertyListRef value;
-    
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((__bridge CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
     return CFBridgingRelease(value);

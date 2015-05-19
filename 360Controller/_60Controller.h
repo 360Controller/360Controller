@@ -108,7 +108,7 @@ protected:
     
 public:
     // Controller specific
-    UInt8 xoneRumbleType;
+    UInt8 rumbleType;
 
     UInt8 mapping[15];
     

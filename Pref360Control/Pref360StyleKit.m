@@ -793,16 +793,16 @@
             CGFloat maxVal = max16 - rightDead;
             
             if (rightStickPosition.x > 0)
-                rightStickPosition.x = (abs(rightStickPosition.x) * maxVal / max16) + rightDead;
+                rightStickPosition.x = (fabs(rightStickPosition.x) * maxVal / max16) + rightDead;
             else if (rightStickPosition.x < 0)
-                rightStickPosition.x = -((abs(rightStickPosition.x) * maxVal / max16) + rightDead);
+                rightStickPosition.x = -((fabs(rightStickPosition.x) * maxVal / max16) + rightDead);
             else
                 rightStickPosition.x = 0;
             
             if (rightStickPosition.y > 0)
-                rightStickPosition.y = (abs(rightStickPosition.y) * maxVal / max16) + rightDead;
+                rightStickPosition.y = (fabs(rightStickPosition.y) * maxVal / max16) + rightDead;
             else if (rightStickPosition.y < 0)
-                rightStickPosition.y = -((abs(rightStickPosition.y) * maxVal / max16) + rightDead);
+                rightStickPosition.y = -((fabs(rightStickPosition.y) * maxVal / max16) + rightDead);
             else
                 rightStickPosition.y = 0;
         }
@@ -901,16 +901,16 @@
             CGFloat maxVal = max16 - leftDead;
             
             if (leftStickPosition.x > 0)
-                leftStickPosition.x = (abs(leftStickPosition.x) * maxVal / max16) + leftDead;
+                leftStickPosition.x = (fabs(leftStickPosition.x) * maxVal / max16) + leftDead;
             else if (leftStickPosition.x < 0)
-                leftStickPosition.x = -((abs(leftStickPosition.x) * maxVal / max16) + leftDead);
+                leftStickPosition.x = -((fabs(leftStickPosition.x) * maxVal / max16) + leftDead);
             else
                 leftStickPosition.x = 0;
             
             if (leftStickPosition.y > 0)
-                leftStickPosition.y = (abs(leftStickPosition.y) * maxVal / max16) + leftDead;
+                leftStickPosition.y = (fabs(leftStickPosition.y) * maxVal / max16) + leftDead;
             else if (leftStickPosition.y < 0)
-                leftStickPosition.y = -((abs(leftStickPosition.y) * maxVal / max16) + leftDead);
+                leftStickPosition.y = -((fabs(leftStickPosition.y) * maxVal / max16) + leftDead);
             else
                 leftStickPosition.y = 0;
         }
