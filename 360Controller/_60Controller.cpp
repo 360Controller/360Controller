@@ -252,8 +252,8 @@ void Xbox360Peripheral::readSettings(void)
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffRight"));
     if (value != NULL) deadOffRight = value->getValue();
 //    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
-    number = OSDynamicCast(OSNumber, dataDictionary->getObject("XoneRumbleType"));
-    if (number != NULL) xoneRumbleType = number->unsigned8BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("rumbleType"));
+    if (number != NULL) rumbleType = number->unsigned8BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingUp"));
     if (number != NULL) mapping[0] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingDown"));
@@ -317,7 +317,7 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     deadOffLeft = false;
     deadOffRight = false;
     // Controller Specific
-    xoneRumbleType = 0;
+    rumbleType = 0;
     // Bindings
     for (int i = 0; i < 11; i++)
     {

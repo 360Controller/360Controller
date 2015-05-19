@@ -85,8 +85,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 
 -(void)awakeFromNib {
-    [_xoneRumbleOptions removeAllItems];
-    [_xoneRumbleOptions addItemsWithTitles:@[@"Default", @"Triggers Only", @"Both"]];
+    [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
+    [_rumbleOptions removeAllItems];
+    [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
+    if (controllerType == XboxOneController)
+        [_rumbleOptions addItemsWithTitles:@[@"Triggers Only", @"Both"]];
 }
 
 // Set the pattern on the LEDs
@@ -346,13 +349,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightLinkedAlt setEnabled:enable];
     [_normalizeDeadzoneLeft setEnabled:enable];
     [_normalizeDeadzoneRight setEnabled:enable];
-    if (enable) { // If trying to enable, make sure its an Xbox One Controller
-//        if (controllerType == XboxOneController) // Ignore until settings are fixed (Issue #67
-            [_xoneRumbleOptions setEnabled:enable];
-    }
-    else { // Always disable
-        [_xoneRumbleOptions setEnabled:enable];
-    }
+    [_rumbleOptions setEnabled:enable];
 }
 
 // Reset GUI components
@@ -605,10 +602,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 NSNumber *num = (__bridge NSNumber *)intValue;
                 controllerType = (ControllerType)[num integerValue];
             } else NSLog(@"No value for ControllerType\n");
-            if(CFDictionaryGetValueIfPresent(dict,CFSTR("XoneRumbleType"),(void*)&intValue)) {
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("RumbleType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
-                [_xoneRumbleOptions setState:[num integerValue]];
-            } else NSLog(@"No value for XoneRumbleType\n");
+                [_rumbleOptions setState:[num integerValue]];
+            } else NSLog(@"No value for RumbleType\n");
             
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("BindingUp"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
@@ -909,7 +906,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"DeadOffLeft": @((BOOL)([_normalizeDeadzoneLeft state]==NSOnState)),
                            @"DeadOffRight": @((BOOL)([_normalizeDeadzoneRight state]==NSOnState)),
                            @"ControllerType": @((UInt8)(controllerType)),
-                           @"XoneRumbleType": @((UInt8)([_xoneRumbleOptions indexOfSelectedItem])),
+                           @"RumbleType": @((UInt8)([_rumbleOptions indexOfSelectedItem])),
                            @"BindingUp": @((UInt8)([MyWhole360ControllerMapper mapping][0])),
                            @"BindingDown": @((UInt8)([MyWhole360ControllerMapper mapping][1])),
                            @"BindingLeft": @((UInt8)([MyWhole360ControllerMapper mapping][2])),
