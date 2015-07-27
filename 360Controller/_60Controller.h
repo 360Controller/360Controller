@@ -110,6 +110,7 @@ public:
     // Controller specific
     UInt8 rumbleType;
 
+    bool swapSticks;
     UInt8 mapping[15];
     
     // this is from the IORegistryEntry - no provider yet

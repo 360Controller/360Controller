@@ -134,6 +134,8 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             if ((report->header.command==inReport) && (report->header.size==sizeof(XBOX360_IN_REPORT))) {
                 GetOwner(this)->fiddleReport(desc);
                 remapButtons(report);
+                if (GetOwner(this)->swapSticks)
+                    remapAxes(report);
             }
         }
     }
@@ -249,6 +251,15 @@ void Xbox360ControllerClass::remapButtons(void *buffer)
 //    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", GetOwner(this)->mapping[0], GetOwner(this)->mapping[1], GetOwner(this)->mapping[2], GetOwner(this)->mapping[3], GetOwner(this)->mapping[4], GetOwner(this)->mapping[5], GetOwner(this)->mapping[6], GetOwner(this)->mapping[7], GetOwner(this)->mapping[8], GetOwner(this)->mapping[9], GetOwner(this)->mapping[10], GetOwner(this)->mapping[11], GetOwner(this)->mapping[12], GetOwner(this)->mapping[13], GetOwner(this)->mapping[14]);
     
     report360->buttons = new_buttons;
+}
+
+void Xbox360ControllerClass::remapAxes(void *buffer)
+{
+    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    
+    XBOX360_HAT temp = report360->left;
+    report360->left = report360->right;
+    report360->right = temp;
 }
 
 
