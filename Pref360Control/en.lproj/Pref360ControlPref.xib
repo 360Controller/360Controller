@@ -85,7 +85,7 @@
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
