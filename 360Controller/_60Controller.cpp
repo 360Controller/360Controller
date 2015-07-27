@@ -284,6 +284,8 @@ void Xbox360Peripheral::readSettings(void)
     if (number != NULL) mapping[13] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingY"));
     if (number != NULL) mapping[14] = number->unsigned32BitValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
+    if (value != NULL) swapSticks = value->getValue();
 
 #if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
@@ -316,6 +318,7 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     relativeLeft=relativeRight=false;
     deadOffLeft = false;
     deadOffRight = false;
+    swapSticks = false;
     // Controller Specific
     rumbleType = 0;
     // Bindings

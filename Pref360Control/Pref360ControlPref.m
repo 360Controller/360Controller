@@ -350,6 +350,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_normalizeDeadzoneLeft setEnabled:enable];
     [_normalizeDeadzoneRight setEnabled:enable];
     [_rumbleOptions setEnabled:enable];
+    [_swapSticks setEnabled:enable];
 }
 
 // Reset GUI components
@@ -667,6 +668,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 NSNumber *num = (__bridge NSNumber *)intValue;
                 [MyWhole360ControllerMapper mapping][14] = [num intValue];
             } else NSLog(@"No value for BindingY\n");
+            
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("SwapSticks"),(void*)&boolValue)) {
+                [_swapSticks setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+            } else NSLog(@"No value for SwapSticks\n");
         } else NSLog(@"No settings found\n");
     }
     // Enable GUI components
@@ -921,7 +926,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingA": @((UInt8)([MyWhole360ControllerMapper mapping][11])),
                            @"BindingB": @((UInt8)([MyWhole360ControllerMapper mapping][12])),
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
-                           @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14]))};
+                           @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
+                           @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
