@@ -80,12 +80,12 @@
                         </connections>
                     </segmentedControl>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="hF4-J0-ko4" userLabel="TabView">
-                        <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                        <rect key="frame" x="0.0" y="0.0" width="668" height="380"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
                                 <view key="view" id="PCS-lN-muI">
-                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="658" height="381"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
@@ -346,7 +346,7 @@
                             </tabViewItem>
                             <tabViewItem label="Tweaking" identifier="2" id="6In-9m-Iqh">
                                 <view key="view" id="apT-j1-uIX">
-                                    <rect key="frame" x="0.0" y="0.0" width="668" height="381"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="668" height="380"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-qF-rWd">
@@ -797,7 +797,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="18" y="14" width="596" height="339"/>
-                                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
                                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -805,7 +805,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="339"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="581" height="339"/>
+                                                                    <size key="minSize" width="596" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -950,7 +950,7 @@ Cg
                                                                         <fragment content="This driver supports the ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -958,7 +958,7 @@ Cg
                                                                         <fragment content="Microsoft Xbox 360 controller, Original Xbox Controller, Xbox One Controller">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -968,7 +968,7 @@ Cg
 This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -978,7 +978,7 @@ This project is a fork of the </mutableString>
                                                                                 <color key="NSColor" red="0.0" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                                 <integer key="NSUnderline" value="1"/>
@@ -988,7 +988,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" originally created by Colin Munro, and includes hard work from ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -997,7 +997,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/d235j/"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1005,7 +1005,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (who forked the project and fixed Force Feedback), ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1014,7 +1014,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/MaddTheSane"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1022,7 +1022,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (dozens of improvements and fixes!), ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1031,7 +1031,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/FranticRain"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1039,7 +1039,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (Xbox One Controller support and other improvements), ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1048,7 +1048,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/kasbert"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1056,7 +1056,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (Original Xbox Controller Support), ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1065,7 +1065,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/Pyroh"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1073,7 +1073,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (User Interface overhaul), ">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1082,7 +1082,7 @@ This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/RodrigoCard"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1092,7 +1092,7 @@ This project is a fork of the </mutableString>
 </string>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1102,7 +1102,7 @@ This project is a fork of the </mutableString>
 </string>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="18" name="Helvetica-Bold"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="6" paragraphSpacingBefore="10" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="6" paragraphSpacingBefore="10" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1112,14 +1112,14 @@ This project is a fork of the </mutableString>
 This driver is licensed under the GNU Public License. A copy of this license is included in the distribution file, please inspect it before using the binary or source.</string>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="14.15" defaultTabInterval="36">
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="581" height="339"/>
+                                                                    <size key="minSize" width="596" height="339"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
@@ -1176,8 +1176,8 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                     </box>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hF4-J0-ko4" firstAttribute="top" secondItem="FxU-HG-Eem" secondAttribute="bottom" constant="10" id="2q3-1Q-tz8"/>
                     <constraint firstAttribute="trailing" secondItem="Wyu-fg-4PN" secondAttribute="trailing" id="Cjn-2B-X8n"/>
+                    <constraint firstItem="hF4-J0-ko4" firstAttribute="top" secondItem="Z4H-05-G2i" secondAttribute="top" constant="40" id="GN2-uW-q37"/>
                     <constraint firstItem="Wyu-fg-4PN" firstAttribute="top" secondItem="Z4H-05-G2i" secondAttribute="top" id="LNM-vQ-6me"/>
                     <constraint firstAttribute="centerX" secondItem="FxU-HG-Eem" secondAttribute="centerX" id="Mhw-wx-Jkj"/>
                     <constraint firstAttribute="bottom" secondItem="hF4-J0-ko4" secondAttribute="bottom" id="Qwi-eb-4aT"/>
