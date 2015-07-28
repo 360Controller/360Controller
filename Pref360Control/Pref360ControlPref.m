@@ -970,8 +970,19 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     else
     {
-        // no script result, handle error here
-        NSLog(@"APPLESCRIPT ERROR:\n%@\n,\n%@", returnDescriptor, errorDict);
+        // no script result, handle error
+        id val = [errorDict objectForKey:@"NSAppleScriptErrorRange"];
+        if (!val) {
+            NSLog(@"APPLESCRIPT ERROR:\n%@", errorDict);
+        } else {
+            NSRange r = [val rangeValue];
+            NSMutableString *errorPoint = [NSMutableString stringWithString:scriptString];
+            [errorPoint insertString:@"<---***" atIndex:r.location+r.length]; // end
+            [errorPoint insertString:@"***ERROR_HERE--->" atIndex:r.location]; // start
+            NSLog(@"APPLESCRIPT ERROR:\n%@"
+                  @"\nERROR LOCATION:\n%@",
+                  errorDict, errorPoint);
+        }
     }
     return NO;
 }
