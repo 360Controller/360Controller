@@ -976,8 +976,19 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
     else
     {
-        // no script result, handle error here
-        NSLog(@"APPLESCRIPT ERROR:\n%@\n,\n%@", returnDescriptor, errorDict);
+        // no script result, handle error
+        id val = [errorDict objectForKey:@"NSAppleScriptErrorRange"];
+        if (!val) {
+            NSLog(@"APPLESCRIPT ERROR:\n%@", errorDict);
+        } else {
+            NSRange r = [val rangeValue];
+            NSMutableString *errorPoint = [NSMutableString stringWithString:scriptString];
+            [errorPoint insertString:@"<---***" atIndex:r.location+r.length]; // end
+            [errorPoint insertString:@"***ERROR_HERE--->" atIndex:r.location]; // start
+            NSLog(@"APPLESCRIPT ERROR:\n%@"
+                  @"\nERROR LOCATION:\n%@",
+                  errorDict, errorPoint);
+        }
     }
     return NO;
 }
@@ -1051,7 +1062,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
         kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
         rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
-        rm -rf /Library/Application\\ Support/MICE/360Daemon.app\n\
+        rm -rf /Library/Application\\\\ Support/MICE/360Daemon.app\n\
         rm -rf /System/Library/Extensions/360Controller.kext\n\
         rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
         rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
