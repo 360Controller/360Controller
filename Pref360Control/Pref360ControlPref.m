@@ -1056,7 +1056,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
         kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
         rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
-        rm -rf /Library/Application\\ Support/MICE/360Daemon.app\n\
+        rm -rf /Library/Application\\\\ Support/MICE/360Daemon.app\n\
         rm -rf /System/Library/Extensions/360Controller.kext\n\
         rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
         rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
