@@ -88,8 +88,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="658" height="380"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
-                                            <rect key="frame" x="20" y="20" width="465" height="330"/>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Sd-ahY" customClass="MyWhole360Controller">
+                                            <rect key="frame" x="20" y="19" width="465" height="330"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="auT-ii-eXB" customClass="MyTrigger">
                                                     <rect key="frame" x="4" y="281" width="45" height="45"/>
@@ -160,8 +160,8 @@
                                                 <constraint firstAttribute="centerX" secondItem="2nr-yn-Nnu" secondAttribute="centerX" id="mai-pC-xrX"/>
                                             </constraints>
                                         </customView>
-                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-vG-8fZ">
-                                            <rect key="frame" x="18" y="357" width="623" height="26"/>
+                                        <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-vG-8fZ">
+                                            <rect key="frame" x="18" y="356" width="623" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="l7B-sk-a7S" id="XEZ-Cj-WUE">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -177,8 +177,8 @@
                                                 <action selector="selectDevice:" target="-2" id="gsM-0x-TTV"/>
                                             </connections>
                                         </popUpButton>
-                                        <box autoresizesSubviews="NO" misplaced="YES" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
-                                            <rect key="frame" x="490" y="226" width="151" height="124"/>
+                                        <box autoresizesSubviews="NO" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
+                                            <rect key="frame" x="490" y="225" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,8 +240,8 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <box autoresizesSubviews="NO" misplaced="YES" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
-                                            <rect key="frame" x="490" y="98" width="151" height="124"/>
+                                        <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
+                                            <rect key="frame" x="490" y="97" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
