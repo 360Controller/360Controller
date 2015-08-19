@@ -68,22 +68,61 @@ void Wireless360Controller::readSettings(void)
     OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
     
     if(dataDictionary==NULL) return;
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftX"));
-    if(value!=NULL) invertLeftX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertLeftY"));
-    if(value!=NULL) invertLeftY=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightX"));
-    if(value!=NULL) invertRightX=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("InvertRightY"));
-    if(value!=NULL) invertRightY=value->getValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneLeft"));
-    if(number!=NULL) deadzoneLeft=number->unsigned32BitValue();
-    number=OSDynamicCast(OSNumber,dataDictionary->getObject("DeadzoneRight"));
-    if(number!=NULL) deadzoneRight=number->unsigned32BitValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeLeft"));
-    if(value!=NULL) relativeLeft=value->getValue();
-    value=OSDynamicCast(OSBoolean,dataDictionary->getObject("RelativeRight"));
-    if(value!=NULL) relativeRight=value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
+    if (value != NULL) invertLeftX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
+    if (value != NULL) invertLeftY = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
+    if (value != NULL) invertRightX = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
+    if (value != NULL) invertRightY = value->getValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
+    if (number != NULL) deadzoneLeft = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
+    if (number != NULL) deadzoneRight = number->unsigned32BitValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
+    if (value != NULL) relativeLeft = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
+    if (value != NULL) relativeRight=value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffLeft"));
+    if (value != NULL) deadOffLeft = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffRight"));
+    if (value != NULL) deadOffRight = value->getValue();
+    //    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("rumbleType"));
+    if (number != NULL) rumbleType = number->unsigned8BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingUp"));
+    if (number != NULL) mapping[0] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingDown"));
+    if (number != NULL) mapping[1] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLeft"));
+    if (number != NULL) mapping[2] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRight"));
+    if (number != NULL) mapping[3] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingStart"));
+    if (number != NULL) mapping[4] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingBack"));
+    if (number != NULL) mapping[5] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLSC"));
+    if (number != NULL) mapping[6] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRSC"));
+    if (number != NULL) mapping[7] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLB"));
+    if (number != NULL) mapping[8] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRB"));
+    if (number != NULL) mapping[9] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingGuide"));
+    if (number != NULL) mapping[10] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingA"));
+    if (number != NULL) mapping[11] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingB"));
+    if (number != NULL) mapping[12] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingX"));
+    if (number != NULL) mapping[13] = number->unsigned32BitValue();
+    number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingY"));
+    if (number != NULL) mapping[14] = number->unsigned32BitValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
+    if (value != NULL) swapSticks = value->getValue();
 #if 0
     IOLog("Xbox360ControllerClass preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -95,58 +134,184 @@ void Wireless360Controller::readSettings(void)
 // Adjusts the report for any settings specified by the user
 void Wireless360Controller::fiddleReport(unsigned char *data, int length)
 {
-    XBOX360_IN_REPORT *report = (XBOX360_IN_REPORT*)data;
+    XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)data;
+    if(invertLeftX) report->left.x=~report->left.x;
+    if(!invertLeftY) report->left.y=~report->left.y;
+    if(invertRightX) report->right.x=~report->right.x;
+    if(!invertRightY) report->right.y=~report->right.y;
+    if(deadzoneLeft!=0) {
+        if(relativeLeft) {
+            if((getAbsolute(report->left.x)<deadzoneLeft)&&(getAbsolute(report->left.y)<deadzoneLeft)) {
+                report->left.x=0;
+                report->left.y=0;
+            }
+            else if(deadOffLeft) {
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneLeft;
+                float valX=getAbsolute(report->left.x);
+                if (valX>deadzoneLeft) {
+                    if (report->left.x<0) {
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                        report->left.x=~report->left.x;
+                    } else {
+                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    }
+                } else {
+                    report->left.x=0;
+                }
+                float valY=getAbsolute(report->left.y);
+                if (valY>deadzoneLeft) {
+                    if (report->left.y<0) {
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                        report->left.y=~report->left.y;
+                    } else {
+                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    }
+                } else {
+                    report->left.y=0;
+                }
+            }
+        } else {
+            if(getAbsolute(report->left.x)<deadzoneLeft)
+                report->left.x=0;
+            else if (deadOffLeft)
+            {
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneLeft;
+                if (report->left.x<0) {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                    report->left.x=~report->left.x;
+                } else {
+                    float valX=getAbsolute(report->left.x);
+                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
+                }
+            }
+            if(getAbsolute(report->left.y)<deadzoneLeft)
+                report->left.y=0;
+            else if (deadOffLeft)
+            {
+                const UInt16 max16=32767;
+                float maxVal = max16-deadzoneLeft;
+                if (report->left.y<0) {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                    report->left.y=~report->left.y;
+                } else {
+                    float valY=getAbsolute(report->left.y);
+                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
+                }
+            }
+        }
+    }
+    if(deadzoneRight!=0) {
+        if(relativeRight) {
+            if((getAbsolute(report->right.x)<deadzoneRight)&&(getAbsolute(report->right.y)<deadzoneRight)) {
+                report->right.x=0;
+                report->right.y=0;
+            }
+            else if(deadOffRight) {
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneRight;
+                float valX=getAbsolute(report->right.x);
+                if (valX>deadzoneRight) {
+                    if (report->right.x<0) {
+                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                        report->right.x=~report->right.x;
+                    } else {
+                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                    }
+                } else {
+                    report->right.x = 0;
+                }
+                float valY=getAbsolute(report->right.y);
+                if (valY>deadzoneRight) {
+                    if (report->right.y<0) {
+                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                        report->right.y=~report->right.y;
+                    } else {
+                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                    }
+                } else {
+                    report->right.y = 0;
+                }
+            }
+        } else {
+            if(getAbsolute(report->right.x)<deadzoneRight)
+                report->right.x=0;
+            else if (deadOffRight)
+            {
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneRight;
+                if (report->right.x<0) {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                    report->right.x=~report->right.x;
+                } else {
+                    float valX=getAbsolute(report->right.x);
+                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
+                }
+            }
+            if(getAbsolute(report->right.y)<deadzoneRight)
+                report->right.y=0;
+            else if (deadOffRight)
+            {
+                const UInt16 max16=32767;
+                float maxVal=max16-deadzoneRight;
+                if (report->right.y<0) {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                    report->right.y=~report->right.y;
+                } else {
+                    float valY=getAbsolute(report->right.y);
+                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
+                }
+            }
+        }
+    }
+}
+
+void Wireless360Controller::remapButtons(void *buffer)
+{
+    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    UInt16 new_buttons = 0;
     
-    if (invertLeftX)
-        report->left.x = ~report->left.x;
-    if (!invertLeftY)
-        report->left.y = ~report->left.y;
-    if (invertRightX)
-        report->right.x = ~report->right.x;
-    if (!invertRightY)
-        report->right.y = ~report->right.y;
-        
-    if (deadzoneLeft != 0)
-    {
-        if (relativeLeft)
-        {
-            if ((getAbsolute(report->left.x) < deadzoneLeft) && (getAbsolute(report->left.y) < deadzoneLeft))
-            {
-                report->left.x = 0;
-                report->left.y = 0;
-            }
-        }
-        else
-        {
-            if (getAbsolute(report->left.x) < deadzoneLeft)
-                report->left.x = 0;
-            if (getAbsolute(report->left.y) < deadzoneLeft)
-                report->left.y = 0;
-        }
-    }
-    if (deadzoneRight != 0)
-    {
-        if (relativeRight)
-        {
-            if ((getAbsolute(report->right.x) < deadzoneRight) && (getAbsolute(report->right.y) < deadzoneRight))
-            {
-                report->right.x = 0;
-                report->right.y = 0;
-            }
-        }
-        else
-        {
-            if (getAbsolute(report->right.x) < deadzoneRight)
-                report->right.x = 0;
-            if (getAbsolute(report->right.y) < deadzoneRight)
-                report->right.y = 0;
-        }
-    }
+    new_buttons |= ((report360->buttons & 1) == 1) << mapping[0];
+    new_buttons |= ((report360->buttons & 2) == 2) << mapping[1];
+    new_buttons |= ((report360->buttons & 4) == 4) << mapping[2];
+    new_buttons |= ((report360->buttons & 8) == 8) << mapping[3];
+    new_buttons |= ((report360->buttons & 16) == 16) << mapping[4];
+    new_buttons |= ((report360->buttons & 32) == 32) << mapping[5];
+    new_buttons |= ((report360->buttons & 64) == 64) << mapping[6];
+    new_buttons |= ((report360->buttons & 128) == 128) << mapping[7];
+    new_buttons |= ((report360->buttons & 256) == 256) << mapping[8];
+    new_buttons |= ((report360->buttons & 512) == 512) << mapping[9];
+    new_buttons |= ((report360->buttons & 1024) == 1024) << mapping[10];
+    new_buttons |= ((report360->buttons & 4096) == 4096) << mapping[11];
+    new_buttons |= ((report360->buttons & 8192) == 8192) << mapping[12];
+    new_buttons |= ((report360->buttons & 16384) == 16384) << mapping[13];
+    new_buttons |= ((report360->buttons & 32768) == 32768) << mapping[14];
+    
+    //    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", mapping[0], mapping[1], mapping[2], mapping[3], mapping[4], mapping[5], mapping[6], mapping[7], mapping[8], mapping[9], mapping[10], mapping[11], mapping[12], mapping[13], mapping[14]);
+    
+    report360->buttons = new_buttons;
+}
+
+void Wireless360Controller::remapAxes(void *buffer)
+{
+    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    
+    XBOX360_HAT temp = report360->left;
+    report360->left = report360->right;
+    report360->right = temp;
 }
 
 void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 {
     fiddleReport(data, length);
+    remapButtons(data);
+    if (swapSticks)
+        remapAxes(data);
     super::receivedHIDupdate(data, length);
 }
 
