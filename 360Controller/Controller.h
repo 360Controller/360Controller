@@ -56,6 +56,7 @@ public:
     virtual OSNumber* newLocationIDNumber() const;
     
     virtual void remapButtons(void *buffer);
+    virtual void remapAxes(void *buffer);
 };
 
 
