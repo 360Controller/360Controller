@@ -380,6 +380,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickInvertXAlt setState:NSOffState];
     [_rightStickInvertY setState:NSOffState];
     [_rightStickInvertYAlt setState:NSOffState];
+    [_swapSticks setState:NSOffState];
     // Disable inputs
     [self inputEnable:NO];
     [_powerOff setHidden:YES];
