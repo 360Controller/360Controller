@@ -54,8 +54,17 @@ protected:
     bool invertRightX,invertRightY;
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
+    bool deadOffLeft, deadOffRight;
+    
+    UInt8 rumbleType;
+    
+    bool swapSticks;
+    UInt8 mapping[15];
+    
 private:
     void fiddleReport(unsigned char *data, int length);
+    void remapButtons(void *buffer);
+    void remapAxes(void *buffer);
 };
 
 #endif // __WIRELESS360CONTROLLER_H__
