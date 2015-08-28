@@ -560,7 +560,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
-                                                                    <rect key="frame" x="16" y="153" width="69" height="18"/>
+                                                                    <rect key="frame" x="16" y="164" width="69" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -570,7 +570,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
-                                                                    <rect key="frame" x="16" y="133" width="70" height="18"/>
+                                                                    <rect key="frame" x="16" y="144" width="70" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -580,7 +580,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
-                                                                    <rect key="frame" x="25" y="88" width="58" height="18"/>
+                                                                    <rect key="frame" x="25" y="99" width="58" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -590,7 +590,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
-                                                                    <rect key="frame" x="16" y="109" width="117" height="20"/>
+                                                                    <rect key="frame" x="16" y="120" width="117" height="20"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="1uA-oq-a0L">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -599,7 +599,7 @@
                                                                     </connections>
                                                                 </slider>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
-                                                                    <rect key="frame" x="16" y="65" width="117" height="18"/>
+                                                                    <rect key="frame" x="16" y="76" width="117" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -609,17 +609,21 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="vof-lR-v7y" userLabel="My Analog Stick R" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="184" width="77" height="88"/>
+                                                                    <rect key="frame" x="36" y="194" width="77" height="77"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="77" id="8if-Eb-Vw2"/>
+                                                                        <constraint firstAttribute="height" constant="77" id="I7B-1Y-fXE"/>
+                                                                    </constraints>
                                                                 </customView>
                                                             </subviews>
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="vof-lR-v7y" firstAttribute="leading" secondItem="TKg-sh-mjm" secondAttribute="leading" constant="34" id="03g-8r-LYb"/>
                                                             <constraint firstAttribute="trailing" secondItem="ASV-58-sZ1" secondAttribute="trailing" constant="63" id="12s-8o-Ver"/>
-                                                            <constraint firstItem="vof-lR-v7y" firstAttribute="top" secondItem="TKg-sh-mjm" secondAttribute="top" constant="25" id="4lD-Sg-np9"/>
+                                                            <constraint firstItem="vof-lR-v7y" firstAttribute="top" secondItem="TKg-sh-mjm" secondAttribute="top" constant="26" id="4lD-Sg-np9"/>
                                                             <constraint firstAttribute="trailing" secondItem="dhB-Ed-Icp" secondAttribute="trailing" constant="16" id="APv-TL-LrA"/>
                                                             <constraint firstItem="Hxn-JO-bAn" firstAttribute="leading" secondItem="TKg-sh-mjm" secondAttribute="leading" constant="26" id="Nrj-9Y-rdJ"/>
-                                                            <constraint firstItem="Xd5-aE-ddG" firstAttribute="top" secondItem="vof-lR-v7y" secondAttribute="bottom" constant="15" id="QRO-6s-Ukj"/>
+                                                            <constraint firstItem="Xd5-aE-ddG" firstAttribute="top" secondItem="vof-lR-v7y" secondAttribute="bottom" constant="14" id="QRO-6s-Ukj"/>
                                                             <constraint firstItem="26X-Mo-i1h" firstAttribute="trailing" secondItem="dhB-Ed-Icp" secondAttribute="trailing" id="SYY-wF-mGc"/>
                                                             <constraint firstItem="Xd5-aE-ddG" firstAttribute="leading" secondItem="TKg-sh-mjm" secondAttribute="leading" constant="16" id="WzL-7e-j0b"/>
                                                             <constraint firstItem="dhB-Ed-Icp" firstAttribute="top" secondItem="ASV-58-sZ1" secondAttribute="bottom" constant="8" symbolic="YES" id="Yvq-OZ-gGg"/>
@@ -630,7 +634,6 @@
                                                             <constraint firstItem="26X-Mo-i1h" firstAttribute="top" secondItem="Hxn-JO-bAn" secondAttribute="bottom" constant="10" id="fix-Pq-uCl"/>
                                                             <constraint firstItem="26X-Mo-i1h" firstAttribute="leading" secondItem="dhB-Ed-Icp" secondAttribute="leading" id="qbB-c2-BcJ"/>
                                                             <constraint firstAttribute="centerX" secondItem="vof-lR-v7y" secondAttribute="centerX" id="wal-j7-Ziw"/>
-                                                            <constraint firstAttribute="bottom" secondItem="26X-Mo-i1h" secondAttribute="bottom" constant="64" id="zRd-M2-KCl"/>
                                                         </constraints>
                                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -642,7 +645,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
-                                                                    <rect key="frame" x="16" y="153" width="69" height="18"/>
+                                                                    <rect key="frame" x="16" y="164" width="69" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -652,7 +655,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
-                                                                    <rect key="frame" x="16" y="133" width="70" height="18"/>
+                                                                    <rect key="frame" x="16" y="144" width="70" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -662,7 +665,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
-                                                                    <rect key="frame" x="16" y="109" width="117" height="20"/>
+                                                                    <rect key="frame" x="16" y="120" width="117" height="20"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="k4Y-aS-OZs">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -671,7 +674,7 @@
                                                                     </connections>
                                                                 </slider>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
-                                                                    <rect key="frame" x="25" y="88" width="58" height="18"/>
+                                                                    <rect key="frame" x="25" y="99" width="58" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -681,7 +684,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
-                                                                    <rect key="frame" x="16" y="65" width="117" height="18"/>
+                                                                    <rect key="frame" x="16" y="76" width="117" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -691,7 +694,11 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="zxH-Fb-uux" userLabel="My Analog Stick L" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="184" width="77" height="88"/>
+                                                                    <rect key="frame" x="36" y="194" width="77" height="77"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="77" id="6aK-uV-4t7"/>
+                                                                        <constraint firstAttribute="width" constant="77" id="dQw-ck-ELz"/>
+                                                                    </constraints>
                                                                 </customView>
                                                             </subviews>
                                                         </view>
@@ -703,14 +710,12 @@
                                                             <constraint firstItem="bu6-hT-9ND" firstAttribute="leading" secondItem="ejG-0P-eK6" secondAttribute="leading" id="OkZ-iv-di8"/>
                                                             <constraint firstItem="O2Y-4P-SwU" firstAttribute="top" secondItem="w59-p2-gVR" secondAttribute="bottom" constant="8" symbolic="YES" id="TQb-A0-mBB"/>
                                                             <constraint firstAttribute="centerX" secondItem="zxH-Fb-uux" secondAttribute="centerX" id="VP3-nY-6LJ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="aq6-OM-5G7" secondAttribute="bottom" constant="64" id="c7k-p8-k3Q"/>
-                                                            <constraint firstItem="bu6-hT-9ND" firstAttribute="top" secondItem="zxH-Fb-uux" secondAttribute="bottom" constant="15" id="cFJ-bX-ugq"/>
-                                                            <constraint firstItem="zxH-Fb-uux" firstAttribute="leading" secondItem="XdF-ba-S8X" secondAttribute="leading" constant="34" id="cPx-qs-Bwg"/>
+                                                            <constraint firstItem="bu6-hT-9ND" firstAttribute="top" secondItem="zxH-Fb-uux" secondAttribute="bottom" constant="14" id="cFJ-bX-ugq"/>
                                                             <constraint firstItem="w59-p2-gVR" firstAttribute="top" secondItem="ejG-0P-eK6" secondAttribute="bottom" constant="8" symbolic="YES" id="ctB-0o-tGb"/>
                                                             <constraint firstItem="w59-p2-gVR" firstAttribute="trailing" secondItem="aq6-OM-5G7" secondAttribute="trailing" id="lYL-br-3iL"/>
                                                             <constraint firstAttribute="trailing" secondItem="w59-p2-gVR" secondAttribute="trailing" constant="16" id="num-9q-3KX"/>
                                                             <constraint firstItem="aq6-OM-5G7" firstAttribute="leading" secondItem="w59-p2-gVR" secondAttribute="leading" id="sKT-QV-vjW"/>
-                                                            <constraint firstItem="zxH-Fb-uux" firstAttribute="top" secondItem="XdF-ba-S8X" secondAttribute="top" constant="25" id="vfI-qU-xUH"/>
+                                                            <constraint firstItem="zxH-Fb-uux" firstAttribute="top" secondItem="XdF-ba-S8X" secondAttribute="top" constant="26" id="vfI-qU-xUH"/>
                                                             <constraint firstItem="aq6-OM-5G7" firstAttribute="top" secondItem="O2Y-4P-SwU" secondAttribute="bottom" constant="10" id="wyV-w6-mvA"/>
                                                         </constraints>
                                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
