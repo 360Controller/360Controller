@@ -292,7 +292,7 @@ void Wireless360Controller::remapButtons(void *buffer)
     new_buttons |= ((report360->buttons & 16384) == 16384) << mapping[13];
     new_buttons |= ((report360->buttons & 32768) == 32768) << mapping[14];
     
-    //    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", mapping[0], mapping[1], mapping[2], mapping[3], mapping[4], mapping[5], mapping[6], mapping[7], mapping[8], mapping[9], mapping[10], mapping[11], mapping[12], mapping[13], mapping[14]);
+//    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", mapping[0], mapping[1], mapping[2], mapping[3], mapping[4], mapping[5], mapping[6], mapping[7], mapping[8], mapping[9], mapping[10], mapping[11], mapping[12], mapping[13], mapping[14]);
     
     report360->buttons = new_buttons;
 }
@@ -309,7 +309,7 @@ void Wireless360Controller::remapAxes(void *buffer)
 void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 {
     fiddleReport(data, length);
-    remapButtons(data);
+//    remapButtons(data);
     if (swapSticks)
         remapAxes(data);
     super::receivedHIDupdate(data, length);
