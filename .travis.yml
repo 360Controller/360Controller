@@ -1,0 +1,18 @@
+language: objective-c
+compiler:
+  - clang
+os:
+  - osx
+osx_image:
+  - xcode6.4
+before_install:
+  - brew update
+  - brew outdated <package-name> || brew upgrade <package-name>
+sudo: required
+before_install:
+  - wget "http://s.sudre.free.fr/Software/files/Packages.dmg"
+  - sudo installer -pkg Packages.dmg -target /
+  - rm -f Packages.dmg
+xcode_workspace: 360Driver.xcworkspace
+script:
+  - ./build.sh
