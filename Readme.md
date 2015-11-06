@@ -23,7 +23,7 @@ driver. Most users will want to install and run this.
 
 If you are interested in installing as a developer please see below.
 
-[2]: https://github.com/d235j/360Controller/releases
+[2]: https://github.com/360Controller/360Controller/releases
 
 
 ## Usage ##
@@ -35,7 +35,7 @@ Preference Pane uses the standard Mac OS X Frameworks for accessing HID devices
 and accessing Force Feedback capabilities, so should be a good test that the
 installation is functional.
 
-[List of working and non-working games.](https://github.com/d235j/360Controller/wiki/Games)
+[List of working and non-working games.](https://github.com/360Controller/360Controller/wiki/Games)
 
 
 ## Developer info ##
