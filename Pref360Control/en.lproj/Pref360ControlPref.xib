@@ -919,10 +919,10 @@ Downloaded from:
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="https://github.com/d235j/360Controller/releases">
+                                                                        <fragment content="https://github.com/360Controller/360Controller/releases">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
-                                                                                <url key="NSLink" string="https://github.com/d235j/360Controller/releases"/>
+                                                                                <url key="NSLink" string="https://github.com/360Controller/360Controller/releases"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547"/>
@@ -966,10 +966,10 @@ Project Home:
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="https://github.com/d235j/360Controller/">
+                                                                        <fragment content="https://github.com/360Controller/360Controller/">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
-                                                                                <url key="NSLink" string="https://github.com/d235j/360Controller/"/>
+                                                                                <url key="NSLink" string="https://github.com/360Controller/360Controller/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547"/>
