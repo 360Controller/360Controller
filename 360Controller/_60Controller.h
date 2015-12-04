@@ -26,6 +26,7 @@
 #include <IOKit/hid/IOHIDDevice.h>
 #include <IOKit/usb/IOUSBDevice.h>
 #include <IOKit/usb/IOUSBInterface.h>
+#include "ControlStruct.h"
 
 class Xbox360ControllerClass;
 class ChatPadKeyboardClass;
@@ -60,6 +61,8 @@ private:
 	void SerialConnect(void);
 	void SerialDisconnect(void);
 	void SerialMessage(IOBufferMemoryDescriptor *data, size_t length);
+    
+    void makeSettingsChanges(void);
 
 protected:
 	typedef enum TIMER_STATE {
@@ -75,7 +78,9 @@ protected:
     typedef enum CONTROLLER_TYPE {
         Xbox360 = 0,
         XboxOriginal = 1,
-        XboxOne = 2
+        XboxOne = 2,
+        XboxOnePretend360 = 3,
+        XboxOneElite = 4
     } CONTROLLER_TYPE;
 	
     IOUSBDevice *device;
@@ -98,6 +103,7 @@ protected:
 	Xbox360ControllerClass *padHandler;
     UInt8 chatpadInit[2];
     CONTROLLER_TYPE controllerType;
+    CONTROLLER_TYPE previousType;
 
     // Settings
     bool invertLeftX,invertLeftY;
@@ -106,12 +112,15 @@ protected:
     bool relativeLeft,relativeRight;
     bool deadOffLeft, deadOffRight;
     
+    void normalizeAxis(SInt16& axis, short deadzone);
+    
 public:
     // Controller specific
     UInt8 rumbleType;
 
     bool swapSticks;
     UInt8 mapping[15];
+    bool pretend360; // Change VID and PID to MS 360 Controller
     
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);
@@ -133,9 +142,12 @@ public:
     virtual void WriteComplete(void *parameter,IOReturn status,UInt32 bufferSizeRemaining);
 
     bool QueueWrite(const void *bytes,UInt32 length);
-    virtual void fiddleReport(IOBufferMemoryDescriptor *buffer);
+    void fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right);
+//    virtual void fiddleReport(IOBufferMemoryDescriptor *buffer);
 	
 	IOHIDDevice* getController(int index);
+    
+    
 };
 
 #endif /* __XBOX360CONTROLLER_H__ */

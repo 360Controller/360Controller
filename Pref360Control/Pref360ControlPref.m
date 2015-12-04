@@ -88,7 +88,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_rumbleOptions removeAllItems];
     [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
-    if (controllerType == XboxOneController)
+    if (controllerType == XboxOneController || controllerType == XboxOneEliteController || controllerType == XboxOnePretend360Controller)
         [_rumbleOptions addItemsWithTitles:@[@"Triggers Only", @"Both"]];
 }
 
