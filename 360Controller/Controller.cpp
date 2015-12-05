@@ -664,44 +664,6 @@ IOReturn XboxOnePretend360Class::newReportDescriptor(IOMemoryDescriptor **descri
     return Xbox360ControllerClass::newReportDescriptor(descriptor);
 }
 
-// This converts Xbox One controller report into Xbox360 form
-/*void XboxOnePretend360Class::convertFromXboxOne(void *buffer, void* overrideBuffer) {
-    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
-    UInt8 trigL = 0, trigR = 0;
-//    UInt16 new_buttons = 0;
-    XBOX360_HAT left { 0 }, right { 0 };
-    
-    if (overrideBuffer == NULL) {
-        XBOXONE_IN_REPORT *reportXone = (XBOXONE_IN_REPORT*)buffer;
-//        UInt8 mapping360[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
-//        reorderButtons(&reportXone->buttons, mapping360);
-        remapButtons(report360);
-        
-//        new_buttons |= (isXboxOneGuideButtonPressed) << 10;
-        trigL = (reportXone->trigL / 1023.0) * 255;
-        trigR = (reportXone->trigR / 1023.0) * 255;
-        left = reportXone->left;
-        right = reportXone->right;
-        
-        report360->header.command = 0x00;
-        report360->header.size = 0x14;
-//        report360->buttons = new_buttons;
-        report360->trigL = trigL;
-        report360->trigR = trigR;
-        report360->left = left;
-        report360->right = right;
-    } else {
-        XBOX360_IN_REPORT *reportOverride = (XBOX360_IN_REPORT*)overrideBuffer;
-        report360->header = reportOverride->header;
-        report360->buttons = reportOverride->buttons;
-        report360->buttons |= (isXboxOneGuideButtonPressed) << 10;
-        report360->trigL = reportOverride->trigL;
-        report360->trigR = reportOverride->trigR;
-        report360->left = reportOverride->left;
-        report360->right = reportOverride->right;
-    }
-}*/
-
 void XboxOnePretend360Class::convertFromXboxOne(void *buffer, void* overrideBuffer) {
     
     //    if (data[0] != 0x00 || data[1] != 0x14) {
@@ -847,8 +809,8 @@ IOReturn XboxOneEliteControllerClass::handleReport(IOMemoryDescriptor * descript
             XBOXONE_ELITE_IN_REPORT *report=(XBOXONE_ELITE_IN_REPORT*)desc->getBytesNoCopy();
             if ((report->header.command==0x20) && (report->header.size==sizeof(XBOXONE_ELITE_IN_REPORT)-4)) {
                 GetOwner(this)->fiddleReport(report->left, report->right);
-                fixTriggers(report);
                 reorderButtons(&report->buttons, GetOwner(this)->mapping);
+                fixTriggers(report);
                 if (GetOwner(this)->swapSticks)
                     remapAxes(report);
             }

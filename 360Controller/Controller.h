@@ -93,7 +93,6 @@ class XboxOneControllerClass : public Xbox360ControllerClass
     
 protected:
     bool isXboxOneGuideButtonPressed;
-//    UInt8 xoneMapping[15];
     void reorderButtons(UInt16* buttons, UInt8 mapping[]);
     
 public:
