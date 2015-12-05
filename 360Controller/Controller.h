@@ -93,7 +93,7 @@ class XboxOneControllerClass : public Xbox360ControllerClass
     
 protected:
     bool isXboxOneGuideButtonPressed;
-    UInt8 xoneMapping[15];
+//    UInt8 xoneMapping[15];
     void reorderButtons(UInt16* buttons, UInt8 mapping[]);
     
 public:
@@ -133,7 +133,7 @@ public:
     virtual OSNumber* newProductIDNumber() const;
     virtual OSNumber* newVendorIDNumber() const;
     
-    virtual void convertFromXboxOne(void *buffer, void* override);
+    virtual void convertFromXboxOne(void *buffer, void* overrideBuffer);
 };
 
 

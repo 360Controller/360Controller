@@ -62,7 +62,7 @@ private:
 	void SerialDisconnect(void);
 	void SerialMessage(IOBufferMemoryDescriptor *data, size_t length);
     
-    void makeSettingsChanges(void);
+    void MakeSettingsChanges(void);
 
 protected:
 	typedef enum TIMER_STATE {
