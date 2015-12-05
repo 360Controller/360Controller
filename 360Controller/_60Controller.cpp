@@ -912,6 +912,7 @@ void Xbox360Peripheral::MakeSettingsChanges()
         
         for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
         {
+            
             switch (mapping[i]) {
                 case  0: { mapping[i] =  8; } break; // Move to Up position
                 case  1: { mapping[i] =  9; } break; // Move to Down position
