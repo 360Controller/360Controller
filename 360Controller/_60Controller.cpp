@@ -536,7 +536,7 @@ interfacefound:
 nochat:
     if (!QueueRead())
 		goto fail;
-    if (controllerType == XboxOne) {
+    if (controllerType == XboxOne || controllerType == XboxOnePretend360 || controllerType == XboxOneElite) {
         QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
         QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
         QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
@@ -909,27 +909,25 @@ void Xbox360Peripheral::MakeSettingsChanges()
             controllerType = XboxOnePretend360;
             PadConnect();
         }
-        else // Change mappings to save time in remapping
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
         {
-            for (UInt8 i = 0; i < 15; i++)
-            {
-                switch (mapping[i]) {
-                    case  0: { mapping[i] =  8; } break; // Move to Up position
-                    case  1: { mapping[i] =  9; } break; // Move to Down position
-                    case  2: { mapping[i] = 10; } break; // Move to Left position
-                    case  3: { mapping[i] = 11; } break; // Move to Right position
-                    case  4: { mapping[i] =  2; } break; // Move to Start position
-                    case  5: { mapping[i] =  3; } break; // Move to Back position
-                    case  6: { mapping[i] = 12; } break; // Move to LB position
-                    case  7: { mapping[i] = 13; } break; // Move to RB position
-                    case  8: { mapping[i] = 14; } break; // Move to LSC position
-                    case  9: { mapping[i] = 15; } break; // Move to RSC position
-                    case 10: { mapping[i] =  0; } break; // Move to Guide position
-                    case 12: { mapping[i] =  4; } break; // Move to A position
-                    case 13: { mapping[i] =  5; } break; // Move to B position
-                    case 14: { mapping[i] =  6; } break; // Move to X position
-                    case 15: { mapping[i] =  7; } break; // Move to Y position
-                }
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
             }
         }
     }
@@ -940,6 +938,27 @@ void Xbox360Peripheral::MakeSettingsChanges()
             PadDisconnect();
             controllerType = previousType;
             PadConnect();
+        }
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
+        {
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
+            }
         }
     }
 }
@@ -994,7 +1013,6 @@ void Xbox360Peripheral::PadConnect(void)
     } else if (controllerType == XboxOnePretend360) {
         padHandler = new XboxOnePretend360Class;
     } else if (controllerType == XboxOneElite) {
-        IOLog("Debug(Drew): Made a proper XboxOneEliteControllerClass\n");
         padHandler = new XboxOneEliteControllerClass;
     } else {
         padHandler = new Xbox360ControllerClass;
