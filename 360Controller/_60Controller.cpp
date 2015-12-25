@@ -25,7 +25,6 @@
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOTimerEventSource.h>
 #include "_60Controller.h"
-#include "ControlStruct.h"
 #include "ChatPad.h"
 #include "Controller.h"
 
@@ -286,6 +285,8 @@ void Xbox360Peripheral::readSettings(void)
     if (number != NULL) mapping[14] = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
     if (value != NULL) swapSticks = value->getValue();
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("Pretend360"));
+    if (value != NULL) pretend360 = value->getValue();
 
 #if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
@@ -348,12 +349,12 @@ bool Xbox360Peripheral::start(IOService *provider)
     IOUSBFindEndpointRequest pipe;
     XBOX360_OUT_LED led;
     IOWorkLoop *workloop = NULL;
+    
     /*
      * Xbox One controller init packets.
-     * The Rock Candy Xbox One controller requires more than just 0x05
+     * Third party Xbox One controllers requires more than just 0x05 0x20
      * Minimum required packets unknown.
      */
-    
     UInt8 xoneInitFirst[] = { 0x04, 0x20, 0x01, 0x00 };
     UInt8 xoneInitSecond[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x9c, 0x00 };
     UInt8 xoneInitThird[] = { 0x01, 0x20, 0x02, 0x09, 0x00, 0x04, 0x20, 0xd6, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -361,11 +362,6 @@ bool Xbox360Peripheral::start(IOService *provider)
     UInt8 xoneInitFifth[] = { 0x05, 0x20, 0x03, 0x01, 0x00 };
     UInt8 xoneInitSixth[] = { 0x0a, 0x20, 0x04, 0x03, 0x00, 0x01, 0x14 };
     UInt8 xoneInitSeventh[] = { 0x06, 0x20, 0x01, 0x02, 0x01, 0x00 };
-    
-//    UInt8 xoneInitFirst[] = { 0x02, 0x20, 0x01, 0x1C, 0x7E, 0xED, 0x8B, 0x11, 0x0F, 0xA8, 0x00, 0x00, 0x5E, 0x04, 0xD1, 0x02, 0x01, 0x00, 0x01, 0x00, 0x17, 0x01, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00 };
-//    UInt8 xoneInitSecond[] = { 0x05, 0x20, 0x00, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
-//    UInt8 xoneInitThird[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
-//    UInt8 xoneInitFourth[] = { 0x0A, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
     
     if (!super::start(provider))
 		return false;
@@ -447,6 +443,7 @@ bool Xbox360Peripheral::start(IOService *provider)
         controllerType = XboxOriginal;
         goto interfacefound;
     }
+    previousType = controllerType;
 interfacefound:
     interface->open(this);
     // Find pipes
@@ -539,7 +536,7 @@ interfacefound:
 nochat:
     if (!QueueRead())
 		goto fail;
-    if (controllerType == XboxOne) {
+    if (controllerType == XboxOne || controllerType == XboxOnePretend360 || controllerType == XboxOneElite) {
         QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
         QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
         QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
@@ -723,142 +720,75 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
     return (reverse<0)?~reverse:reverse;
 }
 
-// Adjusts the report for any settings speciified by the user
-void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
+void Xbox360Peripheral::normalizeAxis(SInt16& axis, short deadzone)
 {
-    XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)buffer->getBytesNoCopy();
-    if(invertLeftX) report->left.x=~report->left.x;
-    if(!invertLeftY) report->left.y=~report->left.y;
-    if(invertRightX) report->right.x=~report->right.x;
-    if(!invertRightY) report->right.y=~report->right.y;
+    static const UInt16 max16=32767;
+    const float current=getAbsolute(axis);
+    const float maxVal=max16-deadzone;
+    
+    if (current>deadzone) {
+        if (axis<0) {
+            axis=max16*(current-deadzone)/maxVal;
+            axis=~axis;
+        } else {
+            axis=max16*(current-deadzone)/maxVal;
+        }
+    } else {
+        axis=0;
+    }
+}
+
+void Xbox360Peripheral::fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right)
+{
+    // deadOff - Normalize checkbox is checked if true
+    // relative - Linked checkbox is checked if true
+    
+    if(invertLeftX) left.x=~left.x;
+    if(!invertLeftY) left.y=~left.y;
+    if(invertRightX) right.x=~right.x;
+    if(!invertRightY) right.y=~right.y;
+    
     if(deadzoneLeft!=0) {
         if(relativeLeft) {
-            if((getAbsolute(report->left.x)<deadzoneLeft)&&(getAbsolute(report->left.y)<deadzoneLeft)) {
-                report->left.x=0;
-                report->left.y=0;
+            if((getAbsolute(left.x)<deadzoneLeft)&&(getAbsolute(left.y)<deadzoneLeft)) {
+                left.x=0;
+                left.y=0;
             }
             else if(deadOffLeft) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                float valX=getAbsolute(report->left.x);
-                if (valX>deadzoneLeft) {
-                    if (report->left.x<0) {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                        report->left.x=~report->left.x;
-                    } else {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.x=0;
-                }
-                float valY=getAbsolute(report->left.y);
-                if (valY>deadzoneLeft) {
-                    if (report->left.y<0) {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                        report->left.y=~report->left.y;
-                    } else {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.y=0;
-                }
+                normalizeAxis(left.x, deadzoneLeft);
+                normalizeAxis(left.y, deadzoneLeft);
             }
-        } else {
-            if(getAbsolute(report->left.x)<deadzoneLeft)
-                report->left.x=0;
+        } else { // Linked checkbox has no check
+            if(getAbsolute(left.x)<deadzoneLeft)
+                left.x=0;
             else if (deadOffLeft)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                if (report->left.x<0) {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    report->left.x=~report->left.x;
-                } else {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                }
-            }
-            if(getAbsolute(report->left.y)<deadzoneLeft)
-                report->left.y=0;
+                normalizeAxis(left.x, deadzoneLeft);
+            
+            if(getAbsolute(left.y)<deadzoneLeft)
+                left.y=0;
             else if (deadOffLeft)
-            {
-                const UInt16 max16=32767;
-                float maxVal = max16-deadzoneLeft;
-                if (report->left.y<0) {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    report->left.y=~report->left.y;
-                } else {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                }
-            }
+                normalizeAxis(left.y, deadzoneLeft);
         }
     }
     if(deadzoneRight!=0) {
         if(relativeRight) {
-            if((getAbsolute(report->right.x)<deadzoneRight)&&(getAbsolute(report->right.y)<deadzoneRight)) {
-                report->right.x=0;
-                report->right.y=0;
+            if((getAbsolute(right.x)<deadzoneRight)&&(getAbsolute(right.y)<deadzoneRight)) {
+                right.x=0;
+                right.y=0;
             }
             else if(deadOffRight) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                float valX=getAbsolute(report->right.x);
-                if (valX>deadzoneRight) {
-                    if (report->right.x<0) {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                        report->right.x=~report->right.x;
-                    } else {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.x = 0;
-                }
-                float valY=getAbsolute(report->right.y);
-                if (valY>deadzoneRight) {
-                    if (report->right.y<0) {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                        report->right.y=~report->right.y;
-                    } else {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.y = 0;
-                }
+                normalizeAxis(left.x, deadzoneRight);
+                normalizeAxis(left.y, deadzoneRight);
             }
         } else {
-            if(getAbsolute(report->right.x)<deadzoneRight)
-                report->right.x=0;
+            if(getAbsolute(right.x)<deadzoneRight)
+                right.x=0;
             else if (deadOffRight)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.x<0) {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    report->right.x=~report->right.x;
-                } else {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                }
-            }
-            if(getAbsolute(report->right.y)<deadzoneRight)
-                report->right.y=0;
+                normalizeAxis(right.x, deadzoneRight);
+            if(getAbsolute(right.y)<deadzoneRight)
+                right.y=0;
             else if (deadOffRight)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.y<0) {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    report->right.y=~report->right.y;
-                } else {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                }
-            }
+                normalizeAxis(right.y, deadzoneRight);
         }
     }
 }
@@ -968,6 +898,73 @@ void Xbox360Peripheral::WriteComplete(void *parameter,IOReturn status,UInt32 buf
 }
 
 
+void Xbox360Peripheral::MakeSettingsChanges()
+{
+    if (controllerType == XboxOne || controllerType == XboxOneElite)
+    {
+        if (pretend360) // Convert to a 360 controller
+        {
+            PadDisconnect();
+            previousType = controllerType;
+            controllerType = XboxOnePretend360;
+            PadConnect();
+        }
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
+        {
+            
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
+            }
+        }
+    }
+    if (controllerType == XboxOnePretend360)
+    {
+        if (!pretend360)
+        {
+            PadDisconnect();
+            controllerType = previousType;
+            PadConnect();
+        }
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
+        {
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
+            }
+        }
+    }
+}
+
+
 // Called by the userspace IORegistryEntrySetCFProperties function
 IOReturn Xbox360Peripheral::setProperties(OSObject *properties)
 {
@@ -979,6 +976,9 @@ IOReturn Xbox360Peripheral::setProperties(OSObject *properties)
         dictionary->setObject(OSString::withCString("ControllerType"), OSNumber::withNumber(controllerType, 8));
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
+        
+        MakeSettingsChanges();
+        
         return kIOReturnSuccess;
     } else return kIOReturnBadArgument;
 }
@@ -1004,7 +1004,17 @@ void Xbox360Peripheral::PadConnect(void)
     if (controllerType == XboxOriginal) {
         padHandler = new XboxOriginalControllerClass;
     } else if (controllerType == XboxOne) {
-        padHandler = new XboxOneControllerClass;
+        if ((device->GetVendorID() == 1118) && (device->GetProductID() == 739))
+        {
+            controllerType = XboxOneElite;
+            padHandler = new XboxOneEliteControllerClass;
+        }
+        else
+            padHandler = new XboxOneControllerClass;
+    } else if (controllerType == XboxOnePretend360) {
+        padHandler = new XboxOnePretend360Class;
+    } else if (controllerType == XboxOneElite) {
+        padHandler = new XboxOneEliteControllerClass;
     } else {
         padHandler = new Xbox360ControllerClass;
     }

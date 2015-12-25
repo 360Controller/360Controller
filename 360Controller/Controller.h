@@ -26,6 +26,9 @@
 class Xbox360ControllerClass : public IOHIDDevice
 {
 	OSDeclareDefaultStructors(Xbox360ControllerClass)
+    
+private:
+    bool pretend360;
 
 private:
     OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
@@ -88,11 +91,13 @@ class XboxOneControllerClass : public Xbox360ControllerClass
     
 #define XboxOne_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x-4);}
     
-private:
-    UInt8 lastData[20];
+protected:
     bool isXboxOneGuideButtonPressed;
+    void reorderButtons(UInt16* buttons, UInt8 mapping[]);
     
 public:
+    virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;
+    
     virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
     virtual IOReturn handleReport(
                                   IOMemoryDescriptor * report,
@@ -100,8 +105,49 @@ public:
                                   IOOptionBits         options    = 0 );
     
     virtual OSString* newManufacturerString() const;
+    virtual OSString* newProductString() const;
+    
+    virtual void remapButtons(void *buffer);
+    virtual void remapAxes(void *buffer);
+    virtual void fixTriggers(void *buffer);
+};
+
+
+class XboxOnePretend360Class : public XboxOneControllerClass
+{
+    OSDeclareDefaultStructors(XboxOnePretend360Class)
+    
+protected:
+    UInt8 lastData[20];
+    
+public:
+    virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;
+    
+    virtual IOReturn handleReport(
+                                  IOMemoryDescriptor * report,
+                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
+                                  IOOptionBits         options    = 0 );
+    
+    virtual OSString* newProductString() const;
     virtual OSNumber* newProductIDNumber() const;
     virtual OSNumber* newVendorIDNumber() const;
+    
+    virtual void convertFromXboxOne(void *buffer, void* overrideBuffer);
+};
+
+
+class XboxOneEliteControllerClass : public XboxOneControllerClass
+{
+    OSDeclareDefaultStructors(XboxOneEliteControllerClass)
+    
+public:
+    virtual IOReturn handleReport(
+                                  IOMemoryDescriptor * report,
+                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
+                                  IOOptionBits         options    = 0 );
+    
     virtual OSString* newProductString() const;
-    virtual void convertFromXboxOne(void *buffer, void* override);
+    
+    virtual void remapButtons(void *buffer);
+    virtual void remapAxes(void *buffer);
 };
