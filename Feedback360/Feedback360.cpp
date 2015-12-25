@@ -33,11 +33,16 @@ using std::min;
 
 double CurrentTimeUsingMach()
 {
-    mach_timebase_info_data_t info = {0};
-	if (mach_timebase_info(&info) != KERN_SUCCESS) {
-		//FIXME: why would this fail/set to fail more gracefully.
-        return -1.0;
-	}
+    static mach_timebase_info_data_t info = {0};
+    if (!info.denom)
+    {
+        if (mach_timebase_info(&info) != KERN_SUCCESS)
+        {
+            //Generally it can't fail here. Look at XNU sources //FIXME
+            info.denom  = 0;
+            return -1.0;
+        }
+    }
 	
     uint64_t start = mach_absolute_time();
 
@@ -607,7 +612,7 @@ void Feedback360::EffectProc( void *params )
     {
         for (Feedback360EffectIterator effectIterator = cThis->EffectList.begin(); effectIterator != cThis->EffectList.end(); ++effectIterator)
         {
-            if((CurrentTimeUsingMach() - cThis->LastTime*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
+            if(((CurrentTimeUsingMach() - cThis->LastTime)*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
                 CalcResult = effectIterator->Calc(&LeftLevel, &RightLevel);
             }
         }
