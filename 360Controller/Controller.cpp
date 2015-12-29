@@ -808,7 +808,7 @@ IOReturn XboxOneEliteControllerClass::handleReport(IOMemoryDescriptor * descript
             XBOXONE_ELITE_IN_REPORT *report=(XBOXONE_ELITE_IN_REPORT*)desc->getBytesNoCopy();
             if ((report->header.command==0x20) && (report->header.size==sizeof(XBOXONE_ELITE_IN_REPORT)-4)) {
                 GetOwner(this)->fiddleReport(report->left, report->right);
-                reorderButtons(&report->buttons, GetOwner(this)->mapping);
+//                reorderButtons(&report->buttons, GetOwner(this)->mapping);
                 fixTriggers(report);
                 if (GetOwner(this)->swapSticks)
                     remapAxes(report);
