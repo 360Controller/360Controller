@@ -31,16 +31,18 @@ unsigned char ReportDescriptor[] = {
     0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
     
     0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x95, 0x02,                    //     REPORT_COUNT (2)
     0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
     
     // Sync
-    0x05, 0x09,                    //     USAGE_PAGE (Button)
-    0x09, 0x0c,                    //     USAGE (Button 12)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-    0x75, 0x01,                    //     REPORT_SIZE (1)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+    // To reactivate sync button funcationality, uncomment below
+    //and change line 34 to: 0x95, 0x01,
+//    0x05, 0x09,                    //     USAGE_PAGE (Button)
+//    0x09, 0x0f,                    //     USAGE (Button 15)
+//    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+//    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+//    0x75, 0x01,                    //     REPORT_SIZE (1)
+//    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
     
     // Dummy (always zero)
     0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
@@ -60,8 +62,8 @@ unsigned char ReportDescriptor[] = {
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
     
     // D-Pad up, down, left & right
-    0x19, 0x0c,                    //     USAGE_MINIMUM (Button 12)
-    0x29, 0x0f,                    //     USAGE_MAXIMUM (Button 15)
+    0x19, 0x0b,                    //     USAGE_MINIMUM (Button 11)
+    0x29, 0x0e,                    //     USAGE_MAXIMUM (Button 14)
     0x95, 0x04,                    //     REPORT_COUNT (4)
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
     
