@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -32,6 +32,7 @@
                 <outlet property="normalizeDeadzoneLeft" destination="aq6-OM-5G7" id="o8A-jo-yBb"/>
                 <outlet property="normalizeDeadzoneRight" destination="26X-Mo-i1h" id="29A-s0-xjH"/>
                 <outlet property="powerOff" destination="Ici-JG-9U7" id="aLb-dv-ZJp"/>
+                <outlet property="pretend360Button" destination="egx-oO-7cv" id="UFY-Oc-yUF"/>
                 <outlet property="remappingButton" destination="yAI-iC-6ZJ" id="zms-RE-c9J"/>
                 <outlet property="remappingResetButton" destination="Zb5-mS-Byj" id="7G0-9w-yIf"/>
                 <outlet property="rightDeadZone" destination="PVh-uO-wxu" id="8yp-z7-tg6"/>
@@ -60,13 +61,14 @@
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="419"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="419"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-HG-Eem">
+                    <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-HG-Eem">
                         <rect key="frame" x="174" y="389" width="321" height="23"/>
+                        <animations/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="4as-1K-roV">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -86,6 +88,7 @@
                             <constraint firstAttribute="height" constant="1" id="094-ir-dlJ"/>
                             <constraint firstAttribute="width" constant="668" id="Meq-rA-xTE"/>
                         </constraints>
+                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
@@ -100,6 +103,7 @@
                     </box>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="hF4-J0-ko4" userLabel="TabView">
                         <rect key="frame" x="0.0" y="0.0" width="668" height="379"/>
+                        <animations/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Controller test" identifier="1" id="nsf-fv-1ul">
@@ -109,6 +113,7 @@
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-vG-8fZ">
                                             <rect key="frame" x="18" y="355" width="623" height="26"/>
+                                            <animations/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="l7B-sk-a7S" id="XEZ-Cj-WUE">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -133,6 +138,7 @@
                                                         <constraint firstAttribute="height" constant="45" id="EUb-Mv-6nt"/>
                                                         <constraint firstAttribute="width" constant="45" id="wFp-bT-ZPf"/>
                                                     </constraints>
+                                                    <animations/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="name" value="LT"/>
                                                     </userDefinedRuntimeAttributes>
@@ -143,6 +149,7 @@
                                                         <constraint firstAttribute="width" constant="45" id="12A-ul-ceu"/>
                                                         <constraint firstAttribute="height" constant="45" id="5C8-yp-RkF"/>
                                                     </constraints>
+                                                    <animations/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="name" value="RT"/>
                                                     </userDefinedRuntimeAttributes>
@@ -153,6 +160,7 @@
                                                         <constraint firstAttribute="width" constant="41" id="MvK-ee-hFK"/>
                                                         <constraint firstAttribute="height" constant="21" id="XUK-gL-Tyy"/>
                                                     </constraints>
+                                                    <animations/>
                                                 </customView>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="PUC-ti-HkQ" customClass="MyDeadZoneViewer">
                                                     <rect key="frame" x="71" y="208" width="65" height="65"/>
@@ -160,6 +168,7 @@
                                                         <constraint firstAttribute="height" constant="65" id="1GI-Lc-QXY"/>
                                                         <constraint firstAttribute="width" constant="65" id="bom-jS-DHk"/>
                                                     </constraints>
+                                                    <animations/>
                                                 </customView>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="PVh-uO-wxu" customClass="MyDeadZoneViewer">
                                                     <rect key="frame" x="261" y="131" width="65" height="65"/>
@@ -167,9 +176,11 @@
                                                         <constraint firstAttribute="height" constant="65" id="3q8-IT-9jt"/>
                                                         <constraint firstAttribute="width" constant="65" id="k94-n4-6SY"/>
                                                     </constraints>
+                                                    <animations/>
                                                 </customView>
                                                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ici-JG-9U7">
                                                     <rect key="frame" x="208" y="-3" width="50" height="50"/>
+                                                    <animations/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="PowerOffTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Ri-Jr-B5d">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -195,15 +206,17 @@
                                                 <constraint firstItem="BLH-hs-koP" firstAttribute="top" secondItem="ILA-Sd-ahY" secondAttribute="top" constant="4" id="kkf-MT-8Pd"/>
                                                 <constraint firstAttribute="centerX" secondItem="2nr-yn-Nnu" secondAttribute="centerX" id="mai-pC-xrX"/>
                                             </constraints>
+                                            <animations/>
                                         </customView>
-                                        <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
+                                        <box autoresizesSubviews="NO" misplaced="YES" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
                                             <rect key="frame" x="490" y="98" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
                                                         <rect key="frame" x="16" y="82" width="69" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="acH-i4-MwR">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -212,8 +225,9 @@
                                                             <action selector="changeSetting:" target="-2" id="HPo-ks-d8X"/>
                                                         </connections>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
                                                         <rect key="frame" x="16" y="62" width="70" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Vm-ce-hhc">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -222,8 +236,9 @@
                                                             <action selector="changeSetting:" target="-2" id="GcV-Wu-LAK"/>
                                                         </connections>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-h4-SLy">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-h4-SLy">
                                                         <rect key="frame" x="25" y="16" width="58" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="FRy-4y-nnb">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -233,7 +248,8 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wxg-qH-eBn">
-                                                        <rect key="frame" x="16" y="37" width="117" height="21"/>
+                                                        <rect key="frame" x="16" y="37" width="117" height="20"/>
+                                                        <animations/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="H8P-Ic-jNd">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -242,6 +258,7 @@
                                                         </connections>
                                                     </slider>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="ysF-It-Kag" firstAttribute="leading" secondItem="cqy-WX-TEQ" secondAttribute="leading" constant="16" id="4GN-kl-Cr9"/>
@@ -255,19 +272,22 @@
                                                 <constraint firstItem="Wxg-qH-eBn" firstAttribute="top" secondItem="jdE-2i-HVe" secondAttribute="bottom" constant="8" symbolic="YES" id="kSo-jD-rrD"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wxg-qH-eBn" secondAttribute="trailing" constant="16" id="vBE-iu-37U"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-lL-cwP">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-lL-cwP">
                                             <rect key="frame" x="511" y="77" width="108" height="17"/>
+                                            <animations/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rumble Options:" id="eqi-tt-Lwa">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g1A-0k-b7Y">
+                                        <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1A-0k-b7Y">
                                             <rect key="frame" x="491" y="45" width="150" height="26"/>
+                                            <animations/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="o1g-Uv-SAa">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -283,8 +303,9 @@
                                                 <action selector="changeSetting:" target="-2" id="v1h-mW-iCb"/>
                                             </connections>
                                         </popUpButton>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="PYW-Jo-Ujl">
+                                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYW-Jo-Ujl">
                                             <rect key="frame" x="516" y="24" width="99" height="18"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="check" title="Swap Sticks" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="7VQ-hw-19d">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -293,14 +314,15 @@
                                                 <action selector="changeSetting:" target="-2" id="U7t-zK-Tia"/>
                                             </connections>
                                         </button>
-                                        <box autoresizesSubviews="NO" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
+                                        <box autoresizesSubviews="NO" misplaced="YES" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
                                             <rect key="frame" x="490" y="226" width="151" height="124"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="149" height="108"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
                                                         <rect key="frame" x="16" y="82" width="69" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="5wf-7e-ekz">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -309,8 +331,9 @@
                                                             <action selector="changeSetting:" target="-2" id="Oy1-El-lBZ"/>
                                                         </connections>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
                                                         <rect key="frame" x="16" y="62" width="70" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RFR-wA-1SW">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -320,7 +343,8 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-ha-aE9">
-                                                        <rect key="frame" x="16" y="37" width="117" height="21"/>
+                                                        <rect key="frame" x="16" y="37" width="117" height="20"/>
+                                                        <animations/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="pUW-BW-6Gu">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -328,8 +352,9 @@
                                                             <action selector="changeSetting:" target="-2" id="cnq-uD-6cU"/>
                                                         </connections>
                                                     </slider>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="FGM-yX-zMk">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGM-yX-zMk">
                                                         <rect key="frame" x="25" y="16" width="58" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Uce-Uv-Hq5">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -339,6 +364,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="FGM-yX-zMk" firstAttribute="leading" secondItem="ZlQ-UU-WB8" secondAttribute="leading" constant="26" id="3eW-1K-zct"/>
@@ -353,6 +379,7 @@
                                                 <constraint firstAttribute="width" constant="145" id="u7n-7t-tpm"/>
                                                 <constraint firstItem="VrN-HB-a4l" firstAttribute="top" secondItem="0e9-VK-hzl" secondAttribute="bottom" constant="6" symbolic="YES" id="uim-GH-E0Z"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -378,6 +405,7 @@
                                         <constraint firstAttribute="trailing" secondItem="DoB-vG-8fZ" secondAttribute="trailing" constant="20" symbolic="YES" id="x14-vT-DDZ"/>
                                         <constraint firstItem="OTj-lL-cwP" firstAttribute="top" secondItem="cqy-WX-TEQ" secondAttribute="bottom" constant="8" symbolic="YES" id="zK2-sd-q9T"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Tweaking" identifier="2" id="6In-9m-Iqh">
@@ -387,6 +415,7 @@
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-qF-rWd">
                                             <rect key="frame" x="18" y="355" width="633" height="26"/>
+                                            <animations/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Fqs-9N-l7A" id="pey-Hr-vWo">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -407,6 +436,7 @@
                                             <subviews>
                                                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aM0-GE-bqq">
                                                     <rect key="frame" x="207" y="-3" width="50" height="50"/>
+                                                    <animations/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="PowerOffTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EaU-AD-Hjh">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -422,16 +452,18 @@
                                                 <constraint firstAttribute="bottom" secondItem="aM0-GE-bqq" secondAttribute="bottom" id="kQj-kg-oYS"/>
                                                 <constraint firstAttribute="width" constant="465" id="uCz-5w-JdS"/>
                                             </constraints>
+                                            <animations/>
                                         </customView>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-Ik-hWq">
                                             <rect key="frame" x="493" y="78" width="155" height="271"/>
-                                            <clipView key="contentView" id="SaB-pO-6ME">
+                                            <clipView key="contentView" misplaced="YES" id="SaB-pO-6ME">
                                                 <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="Zwr-si-a4c" id="9SZ-KC-9Y6">
                                                         <rect key="frame" x="0.0" y="0.0" width="153" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
+                                                        <animations/>
                                                         <size key="intercellSpacing" width="1" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -469,23 +501,29 @@
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </clipView>
+                                            <animations/>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="LWD-pC-O65">
                                                 <rect key="frame" x="1" y="119" width="223" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fTK-Gc-4OH">
                                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="Zwr-si-a4c">
                                                 <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
                                             </tableHeaderView>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yAI-iC-6ZJ">
                                             <rect key="frame" x="487" y="13" width="167" height="32"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="push" title="Start Remapping" alternateTitle="Cancel Remapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgp-Mz-PQL">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -496,6 +534,7 @@
                                         </button>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
                                             <rect key="frame" x="487" y="42" width="167" height="32"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -523,6 +562,7 @@
                                         <constraint firstItem="w5N-Ik-hWq" firstAttribute="top" secondItem="jmX-SJ-ewe" secondAttribute="top" constant="1" id="xYF-Op-NaV"/>
                                         <constraint firstItem="jmX-SJ-ewe" firstAttribute="bottom" secondItem="yAI-iC-6ZJ" secondAttribute="bottom" id="yVC-vu-z09"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Advanced" identifier="" id="fN4-Zi-Mei">
@@ -532,6 +572,7 @@
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v9g-pO-cIT">
                                             <rect key="frame" x="18" y="355" width="633" height="26"/>
+                                            <animations/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="ZBC-oI-z5d" id="LNS-E3-icM">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -548,19 +589,20 @@
                                             </connections>
                                         </popUpButton>
                                         <box autoresizesSubviews="NO" title="Deadzones" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="k7f-mn-n3T">
-                                            <rect key="frame" x="300" y="16" width="351" height="334"/>
+                                            <rect key="frame" x="300" y="66" width="351" height="284"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="1" y="1" width="349" height="318"/>
+                                                <rect key="frame" x="1" y="1" width="349" height="268"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <box autoresizesSubviews="NO" title="Right Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
-                                                        <rect key="frame" x="183" y="10" width="151" height="298"/>
+                                                        <rect key="frame" x="183" y="10" width="151" height="248"/>
                                                         <view key="contentView">
-                                                            <rect key="frame" x="1" y="1" width="149" height="282"/>
+                                                            <rect key="frame" x="1" y="1" width="149" height="232"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
-                                                                    <rect key="frame" x="16" y="164" width="69" height="18"/>
+                                                                    <rect key="frame" x="16" y="114" width="69" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -570,7 +612,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
-                                                                    <rect key="frame" x="16" y="144" width="70" height="18"/>
+                                                                    <rect key="frame" x="16" y="94" width="70" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -579,8 +622,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="3sZ-8s-1Hy"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
-                                                                    <rect key="frame" x="25" y="98" width="58" height="18"/>
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
+                                                                    <rect key="frame" x="25" y="48" width="58" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -589,8 +633,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="nY3-vX-XFJ"/>
                                                                     </connections>
                                                                 </button>
-                                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
-                                                                    <rect key="frame" x="16" y="119" width="117" height="21"/>
+                                                                <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
+                                                                    <rect key="frame" x="16" y="69" width="117" height="20"/>
+                                                                    <animations/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="1uA-oq-a0L">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -598,8 +643,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="abG-xT-Duq"/>
                                                                     </connections>
                                                                 </slider>
-                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
-                                                                    <rect key="frame" x="16" y="75" width="117" height="18"/>
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
+                                                                    <rect key="frame" x="16" y="25" width="117" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -609,13 +655,15 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="vof-lR-v7y" userLabel="My Analog Stick R" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="194" width="77" height="77"/>
+                                                                    <rect key="frame" x="36" y="144" width="77" height="77"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="77" id="8if-Eb-Vw2"/>
                                                                         <constraint firstAttribute="height" constant="77" id="I7B-1Y-fXE"/>
                                                                     </constraints>
+                                                                    <animations/>
                                                                 </customView>
                                                             </subviews>
+                                                            <animations/>
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="vof-lR-v7y" firstAttribute="leading" secondItem="TKg-sh-mjm" secondAttribute="leading" constant="34" id="03g-8r-LYb"/>
@@ -635,17 +683,19 @@
                                                             <constraint firstItem="26X-Mo-i1h" firstAttribute="leading" secondItem="dhB-Ed-Icp" secondAttribute="leading" id="qbB-c2-BcJ"/>
                                                             <constraint firstAttribute="centerX" secondItem="vof-lR-v7y" secondAttribute="centerX" id="wal-j7-Ziw"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </box>
                                                     <box autoresizesSubviews="NO" title="Left Stick" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
-                                                        <rect key="frame" x="15" y="10" width="151" height="298"/>
+                                                        <rect key="frame" x="15" y="10" width="151" height="248"/>
                                                         <view key="contentView">
-                                                            <rect key="frame" x="1" y="1" width="149" height="282"/>
+                                                            <rect key="frame" x="1" y="1" width="149" height="232"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
-                                                                    <rect key="frame" x="16" y="164" width="69" height="18"/>
+                                                                    <rect key="frame" x="16" y="114" width="69" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -654,8 +704,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="VEp-AK-N8D"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
-                                                                    <rect key="frame" x="16" y="144" width="70" height="18"/>
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
+                                                                    <rect key="frame" x="16" y="94" width="70" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -664,8 +715,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="b7D-u7-Azf"/>
                                                                     </connections>
                                                                 </button>
-                                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
-                                                                    <rect key="frame" x="16" y="119" width="117" height="21"/>
+                                                                <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
+                                                                    <rect key="frame" x="16" y="69" width="117" height="20"/>
+                                                                    <animations/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="k4Y-aS-OZs">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -673,8 +725,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="h7N-8X-dCl"/>
                                                                     </connections>
                                                                 </slider>
-                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
-                                                                    <rect key="frame" x="25" y="98" width="58" height="18"/>
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
+                                                                    <rect key="frame" x="25" y="48" width="58" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -683,8 +736,9 @@
                                                                         <action selector="changeSetting:" target="-2" id="MZZ-cQ-DfL"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
-                                                                    <rect key="frame" x="16" y="75" width="117" height="18"/>
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
+                                                                    <rect key="frame" x="16" y="25" width="117" height="18"/>
+                                                                    <animations/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -694,13 +748,15 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="zxH-Fb-uux" userLabel="My Analog Stick L" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="194" width="77" height="77"/>
+                                                                    <rect key="frame" x="36" y="144" width="77" height="77"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="77" id="6aK-uV-4t7"/>
                                                                         <constraint firstAttribute="width" constant="77" id="dQw-ck-ELz"/>
                                                                     </constraints>
+                                                                    <animations/>
                                                                 </customView>
                                                             </subviews>
+                                                            <animations/>
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="bu6-hT-9ND" firstAttribute="leading" secondItem="XdF-ba-S8X" secondAttribute="leading" constant="16" id="8vL-gK-c1A"/>
@@ -718,10 +774,12 @@
                                                             <constraint firstItem="zxH-Fb-uux" firstAttribute="top" secondItem="XdF-ba-S8X" secondAttribute="top" constant="26" id="vfI-qU-xUH"/>
                                                             <constraint firstItem="aq6-OM-5G7" firstAttribute="top" secondItem="O2Y-4P-SwU" secondAttribute="bottom" constant="10" id="wyV-w6-mvA"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </box>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="XdF-ba-S8X" firstAttribute="width" secondItem="TKg-sh-mjm" secondAttribute="width" id="BSF-gp-ZIo"/>
@@ -733,6 +791,7 @@
                                                 <constraint firstItem="XdF-ba-S8X" firstAttribute="top" secondItem="k7f-mn-n3T" secondAttribute="top" constant="25" id="skc-dX-BDy"/>
                                                 <constraint firstAttribute="bottom" secondItem="XdF-ba-S8X" secondAttribute="bottom" constant="11" id="yt7-0b-VkT"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -742,8 +801,9 @@
                                                 <rect key="frame" x="1" y="1" width="279" height="318"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZ6-57-3mT">
+                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZ6-57-3mT">
                                                         <rect key="frame" x="12" y="7" width="106" height="32"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="push" title="Uninstall..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QvN-mn-giT">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -757,6 +817,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="167" id="Nk2-fU-1WJ"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="IRF-DH-74j">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <string key="title">You can disable the driver temporarily so your Xbox device can be used in games that access the hardware directly.
@@ -768,8 +829,9 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="bAx-wa-r7r">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAx-wa-r7r">
                                                         <rect key="frame" x="16" y="292" width="105" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Enable Driver" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="FhM-1g-G1s">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -780,6 +842,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     </button>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-Ly-PFn">
                                                         <rect key="frame" x="16" y="45" width="247" height="42"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Click on this button to completely remove this driver from your computer (you may need to restart):" id="ix8-GT-Crq">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -788,11 +851,13 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     </textField>
                                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NTf-yJ-U41">
                                                         <rect key="frame" x="14" y="96" width="247" height="5"/>
+                                                        <animations/>
                                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <font key="titleFont" metaFont="system"/>
                                                     </box>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="bAx-wa-r7r" firstAttribute="top" secondItem="Q4L-nM-vW8" secondAttribute="top" constant="25" id="2z9-21-YNc"/>
@@ -808,15 +873,41 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                 <constraint firstItem="F4O-Ly-PFn" firstAttribute="trailing" secondItem="NTf-yJ-U41" secondAttribute="trailing" id="xFp-Hk-jwz"/>
                                                 <constraint firstItem="362-jh-07U" firstAttribute="leading" secondItem="Q4L-nM-vW8" secondAttribute="leading" constant="35" id="xnU-2Q-OiD"/>
                                             </constraints>
+                                            <animations/>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                        <box autoresizesSubviews="NO" ambiguous="YES" misplaced="YES" title="Xbox One Preferences" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="HND-46-X0K">
+                                            <rect key="frame" x="300" y="16" width="351" height="46"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="349" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egx-oO-7cv">
+                                                        <rect key="frame" x="16" y="1" width="317" height="32"/>
+                                                        <animations/>
+                                                        <buttonCell key="cell" type="check" title="Pretend to be an Xbox 360 Controller" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Yr-CF-I6K">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="changeSetting:" target="-2" id="dtd-7u-ewt"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                            </view>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="k7f-mn-n3T" firstAttribute="baseline" secondItem="Q4L-nM-vW8" secondAttribute="baseline" id="1hE-vI-HhS"/>
+                                        <constraint firstItem="k7f-mn-n3T" firstAttribute="baseline" secondItem="Q4L-nM-vW8" secondAttribute="baseline" constant="-50" id="1hE-vI-HhS"/>
                                         <constraint firstAttribute="trailing" secondItem="v9g-pO-cIT" secondAttribute="trailing" constant="20" symbolic="YES" id="4ul-v1-UeR"/>
                                         <constraint firstItem="k7f-mn-n3T" firstAttribute="trailing" secondItem="v9g-pO-cIT" secondAttribute="trailing" id="DiU-KK-0o4"/>
                                         <constraint firstItem="v9g-pO-cIT" firstAttribute="leading" secondItem="Q4L-nM-vW8" secondAttribute="leading" id="PLV-ge-J7r"/>
+                                        <constraint firstItem="k7f-mn-n3T" firstAttribute="bottom" secondItem="HND-46-X0K" secondAttribute="bottom" constant="-50" id="VHz-Wc-Klk"/>
                                         <constraint firstItem="k7f-mn-n3T" firstAttribute="leading" secondItem="Q4L-nM-vW8" secondAttribute="trailing" constant="8" symbolic="YES" id="a9M-N7-WVN"/>
                                         <constraint firstItem="v9g-pO-cIT" firstAttribute="leading" secondItem="fis-az-lAc" secondAttribute="leading" constant="20" symbolic="YES" id="pv3-rG-Kmi"/>
                                         <constraint firstItem="Q4L-nM-vW8" firstAttribute="top" secondItem="v9g-pO-cIT" secondAttribute="bottom" constant="8" symbolic="YES" id="qrs-2g-Ejd"/>
@@ -824,6 +915,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                         <constraint firstAttribute="bottom" secondItem="Q4L-nM-vW8" secondAttribute="bottom" constant="20" symbolic="YES" id="wRn-tA-5nA"/>
                                         <constraint firstItem="k7f-mn-n3T" firstAttribute="top" secondItem="Q4L-nM-vW8" secondAttribute="top" id="wmF-Qp-Nav"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="About" identifier="" id="SuI-sa-Ula">
@@ -839,15 +931,16 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="18" y="14" width="596" height="337"/>
-                                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
                                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView drawsBackground="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="3fX-WF-3zX">
                                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="339"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <animations/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="581" height="337"/>
+                                                                    <size key="minSize" width="596" height="337"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -857,18 +950,42 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 <font key="NSFont" size="21" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -878,18 +995,42 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -903,18 +1044,42 @@ Downloaded from:
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -925,18 +1090,42 @@ Downloaded from:
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/releases"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -950,18 +1139,42 @@ Project Home:
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -972,18 +1185,42 @@ Project Home:
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -996,18 +1233,42 @@ Cg
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1020,18 +1281,42 @@ Cg
                                                                                 <font key="NSFont" size="18" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
-                                                                                        <textTab alignment="left" location="28.299999237060547"/>
-                                                                                        <textTab alignment="left" location="56.650001525878906"/>
-                                                                                        <textTab alignment="left" location="85"/>
-                                                                                        <textTab alignment="left" location="113.34999847412109"/>
-                                                                                        <textTab alignment="left" location="141.69999694824219"/>
-                                                                                        <textTab alignment="left" location="170.05000305175781"/>
-                                                                                        <textTab alignment="left" location="198.39999389648438"/>
-                                                                                        <textTab alignment="left" location="226.75"/>
-                                                                                        <textTab alignment="left" location="255.10000610351562"/>
-                                                                                        <textTab alignment="left" location="283.45001220703125"/>
-                                                                                        <textTab alignment="left" location="311.79998779296875"/>
-                                                                                        <textTab alignment="left" location="340.14999389648438"/>
+                                                                                        <textTab alignment="left" location="28.299999237060547">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="56.650001525878906">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="85">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="113.34999847412109">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="141.69999694824219">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="170.05000305175781">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="198.39999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="226.75">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="255.10000610351562">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="283.45001220703125">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="311.79998779296875">
+                                                                                            <options/>
+                                                                                        </textTab>
+                                                                                        <textTab alignment="left" location="340.14999389648438">
+                                                                                            <options/>
+                                                                                        </textTab>
                                                                                     </tabStops>
                                                                                 </paragraphStyle>
                                                                             </attributes>
@@ -1208,22 +1493,27 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="581" height="337"/>
+                                                                    <size key="minSize" width="596" height="337"/>
                                                                     <size key="maxSize" width="596" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
+                                                            <animations/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </clipView>
+                                                        <animations/>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uuF-8q-9ih">
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="224" y="1" width="15" height="133"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                     </scrollView>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="F1g-i5-hyw" secondAttribute="bottom" constant="11" id="GvB-E6-Tsx"/>
@@ -1231,6 +1521,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                 <constraint firstItem="F1g-i5-hyw" firstAttribute="top" secondItem="gfy-tN-LmC" secondAttribute="top" constant="11" id="ZJH-uX-gbS"/>
                                                 <constraint firstAttribute="trailing" secondItem="F1g-i5-hyw" secondAttribute="trailing" constant="16" id="bxk-eQ-uac"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -1241,6 +1532,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                         <constraint firstItem="gfy-tN-LmC" firstAttribute="top" secondItem="z25-ro-QkC" secondAttribute="top" id="xu4-pO-vyg"/>
                                         <constraint firstAttribute="bottom" secondItem="gfy-tN-LmC" secondAttribute="bottom" constant="20" symbolic="YES" id="yew-jD-kuy"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                         </tabViewItems>
@@ -1257,6 +1549,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                     <constraint firstItem="hF4-J0-ko4" firstAttribute="leading" secondItem="Z4H-05-G2i" secondAttribute="leading" id="llM-12-bOT"/>
                     <constraint firstItem="Wyu-fg-4PN" firstAttribute="leading" secondItem="Z4H-05-G2i" secondAttribute="leading" id="mcW-Fp-2Bl"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="614" y="404.5"/>
         </window>

@@ -1,31 +1,30 @@
 /*
-    MICE Xbox 360 Controller driver for Mac OS X
-    Copyright (C) 2006-2013 Colin Munro
-    Bug fixes contributed by Cody "codeman38" Boisclair
-    
-    _60Controller.cpp - main source of the driver
-    
-    This file is part of Xbox360Controller.
-
-    Xbox360Controller is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Xbox360Controller is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Foobar; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+ MICE Xbox 360 Controller driver for Mac OS X
+ Copyright (C) 2006-2013 Colin Munro
+ Bug fixes contributed by Cody "codeman38" Boisclair
+ 
+ _60Controller.cpp - main source of the driver
+ 
+ This file is part of Xbox360Controller.
+ 
+ Xbox360Controller is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ 
+ Xbox360Controller is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with Foobar; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 #include <IOKit/IOLib.h>
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOTimerEventSource.h>
 #include "_60Controller.h"
-#include "ControlStruct.h"
 #include "ChatPad.h"
 #include "Controller.h"
 
@@ -63,45 +62,45 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 
 void Xbox360Peripheral::SendSpecial(UInt16 value)
 {
-	IOUSBDevRequest controlReq;
-
-	controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBInterface);
-	controlReq.bRequest = 0x00;
-	controlReq.wValue = value;
-	controlReq.wIndex = 0x0002;
-	controlReq.wLength = 0;
-	controlReq.pData = NULL;
-	if (device->DeviceRequest(&controlReq, 100, 100, NULL) != kIOReturnSuccess)
-		IOLog("Failed to send special message %.4x\n", value);
+    IOUSBDevRequest controlReq;
+    
+    controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBInterface);
+    controlReq.bRequest = 0x00;
+    controlReq.wValue = value;
+    controlReq.wIndex = 0x0002;
+    controlReq.wLength = 0;
+    controlReq.pData = NULL;
+    if (device->DeviceRequest(&controlReq, 100, 100, NULL) != kIOReturnSuccess)
+        IOLog("Failed to send special message %.4x\n", value);
 }
 
 void Xbox360Peripheral::SendInit(UInt16 value, UInt16 index)
 {
-	IOUSBDevRequest controlReq;
-	
-	controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBDevice);
-	controlReq.bRequest = 0xa9;
-	controlReq.wValue = value;
-	controlReq.wIndex = index;
-	controlReq.wLength = 0;
-	controlReq.pData = NULL;
-	device->DeviceRequest(&controlReq, 100, 100, NULL);	// Will fail - but device should still act on it
+    IOUSBDevRequest controlReq;
+    
+    controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBDevice);
+    controlReq.bRequest = 0xa9;
+    controlReq.wValue = value;
+    controlReq.wIndex = index;
+    controlReq.wLength = 0;
+    controlReq.pData = NULL;
+    device->DeviceRequest(&controlReq, 100, 100, NULL);	// Will fail - but device should still act on it
 }
 
 bool Xbox360Peripheral::SendSwitch(bool sendOut)
 {
-	IOUSBDevRequest controlReq;
-
-	controlReq.bmRequestType = USBmakebmRequestType(sendOut ? kUSBOut : kUSBIn, kUSBVendor, kUSBDevice);
-	controlReq.bRequest = 0xa1;
-	controlReq.wValue = 0x0000;
-	controlReq.wIndex = 0xe416;
-	controlReq.wLength = sizeof(chatpadInit);
-	controlReq.pData = chatpadInit;
+    IOUSBDevRequest controlReq;
+    
+    controlReq.bmRequestType = USBmakebmRequestType(sendOut ? kUSBOut : kUSBIn, kUSBVendor, kUSBDevice);
+    controlReq.bRequest = 0xa1;
+    controlReq.wValue = 0x0000;
+    controlReq.wIndex = 0xe416;
+    controlReq.wLength = sizeof(chatpadInit);
+    controlReq.pData = chatpadInit;
     IOReturn err = device->DeviceRequest(&controlReq, 100, 100, NULL);
     if (err == kIOReturnSuccess)
         return true;
-
+    
     const char *errStr = device->stringFromReturn(err);
     IOLog("start - failed to %s chatpad setting (%x): %s\n",
           sendOut ? "write" : "read", err, errStr);
@@ -110,117 +109,117 @@ bool Xbox360Peripheral::SendSwitch(bool sendOut)
 
 void Xbox360Peripheral::SendToggle(void)
 {
-	SendSpecial(serialToggle ? 0x1F : 0x1E);
-	serialToggle = !serialToggle;
+    SendSpecial(serialToggle ? 0x1F : 0x1E);
+    serialToggle = !serialToggle;
 }
 
 void Xbox360Peripheral::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
 {
-	Xbox360Peripheral *controller;
-
-	controller = OSDynamicCast(Xbox360Peripheral, owner);
-	controller->ChatPadTimerAction(sender);
+    Xbox360Peripheral *controller;
+    
+    controller = OSDynamicCast(Xbox360Peripheral, owner);
+    controller->ChatPadTimerAction(sender);
 }
 
 void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 {
-	int nextTime, serialGot;
-	
-	serialGot = 0;
-	nextTime = 1000;
-	switch (serialTimerState)
-	{
-		case tsToggle:
-			SendToggle();
-			if (serialActive)
-			{
-				if (!serialHeard)
-				{
-					serialActive = false;
-					serialGot = 2;
-				}
-			}
-			else
-			{
-				if (serialHeard)
-				{
-					serialTimerState = tsReset1;
-					serialResetCount = 0;
-					nextTime = 40;
-				}
-			}
-			break;
-			
-		case tsMiniToggle:
-			SendToggle();
-			if (serialHeard)
-			{
-				serialTimerState = tsSet1;
-				nextTime = 40;
-			}
-			else
-			{
-				serialResetCount++;
-				if (serialResetCount > 3)
-				{
-					serialTimerState = tsToggle;
-				}
-				else
-				{
-					serialTimerState = tsReset1;
-					nextTime = 40;
-				}
-			}
-			break;
-			
-		case tsReset1:
-			SendSpecial(0x1B);
-			serialTimerState = tsReset2;
-			nextTime = 35;
-			break;
-			
-		case tsReset2:
-			SendSpecial(0x1B);
-			serialTimerState = tsMiniToggle;
-			nextTime = 150;
-			break;
-			
-		case tsSet1:
-			SendSpecial(0x18);
-			serialTimerState = tsSet2;
-			nextTime = 10;
-			break;
-			
-		case tsSet2:
-			SendSpecial(0x10);
-			serialTimerState = tsSet3;
-			nextTime = 10;
-			break;
-			
-		case tsSet3:
-			SendSpecial(0x03);
-			serialTimerState = tsToggle;
-			nextTime = 940;
-			serialActive = true;
-			serialGot = 1;
-			break;
-	}
-	sender->setTimeoutMS(nextTime);	// Todo: Make it take into account function execution time?
-	serialHeard = false;
-	// Make it happen after the timer's set, for minimum impact
-	switch (serialGot)
-	{
-		case 1:
-			SerialConnect();
-			break;
-			
-		case 2:
-			SerialDisconnect();
-			break;
-			
-		default:
-			break;
-	}
+    int nextTime, serialGot;
+    
+    serialGot = 0;
+    nextTime = 1000;
+    switch (serialTimerState)
+    {
+        case tsToggle:
+            SendToggle();
+            if (serialActive)
+            {
+                if (!serialHeard)
+                {
+                    serialActive = false;
+                    serialGot = 2;
+                }
+            }
+            else
+            {
+                if (serialHeard)
+                {
+                    serialTimerState = tsReset1;
+                    serialResetCount = 0;
+                    nextTime = 40;
+                }
+            }
+            break;
+            
+        case tsMiniToggle:
+            SendToggle();
+            if (serialHeard)
+            {
+                serialTimerState = tsSet1;
+                nextTime = 40;
+            }
+            else
+            {
+                serialResetCount++;
+                if (serialResetCount > 3)
+                {
+                    serialTimerState = tsToggle;
+                }
+                else
+                {
+                    serialTimerState = tsReset1;
+                    nextTime = 40;
+                }
+            }
+            break;
+            
+        case tsReset1:
+            SendSpecial(0x1B);
+            serialTimerState = tsReset2;
+            nextTime = 35;
+            break;
+            
+        case tsReset2:
+            SendSpecial(0x1B);
+            serialTimerState = tsMiniToggle;
+            nextTime = 150;
+            break;
+            
+        case tsSet1:
+            SendSpecial(0x18);
+            serialTimerState = tsSet2;
+            nextTime = 10;
+            break;
+            
+        case tsSet2:
+            SendSpecial(0x10);
+            serialTimerState = tsSet3;
+            nextTime = 10;
+            break;
+            
+        case tsSet3:
+            SendSpecial(0x03);
+            serialTimerState = tsToggle;
+            nextTime = 940;
+            serialActive = true;
+            serialGot = 1;
+            break;
+    }
+    sender->setTimeoutMS(nextTime);	// Todo: Make it take into account function execution time?
+    serialHeard = false;
+    // Make it happen after the timer's set, for minimum impact
+    switch (serialGot)
+    {
+        case 1:
+            SerialConnect();
+            break;
+            
+        case 2:
+            SerialDisconnect();
+            break;
+            
+        default:
+            break;
+    }
 }
 
 // Read the settings from the registry
@@ -251,7 +250,7 @@ void Xbox360Peripheral::readSettings(void)
     if (value != NULL) deadOffLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffRight"));
     if (value != NULL) deadOffRight = value->getValue();
-//    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
+    //    number = OSDynamicCast(OSNumber, dataDictionary->getObject("ControllerType")); // No use currently.
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("rumbleType"));
     if (number != NULL) rumbleType = number->unsigned8BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingUp"));
@@ -286,12 +285,14 @@ void Xbox360Peripheral::readSettings(void)
     if (number != NULL) mapping[14] = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
     if (value != NULL) swapSticks = value->getValue();
-
+    value = OSDynamicCast(OSBoolean, dataDictionary->getObject("Pretend360"));
+    if (value != NULL) pretend360 = value->getValue();
+    
 #if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
-            invertLeftX?"True":"False",invertLeftY?"True":"False",
-            invertRightX?"True":"False",invertRightY?"True":"False",
-            deadzoneLeft,deadzoneRight);
+          invertLeftX?"True":"False",invertLeftY?"True":"False",
+          invertRightX?"True":"False",invertRightY?"True":"False",
+          deadzoneLeft,deadzoneRight);
 #endif
 }
 
@@ -305,12 +306,12 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     inPipe=NULL;
     outPipe=NULL;
     inBuffer=NULL;
-	padHandler = NULL;
-	serialIn = NULL;
-	serialInPipe = NULL;
-	serialInBuffer = NULL;
-	serialTimer = NULL;
-	serialHandler = NULL;
+    padHandler = NULL;
+    serialIn = NULL;
+    serialInPipe = NULL;
+    serialInBuffer = NULL;
+    serialTimer = NULL;
+    serialHandler = NULL;
     // Default settings
     invertLeftX=invertLeftY=false;
     invertRightX=invertRightY=false;
@@ -348,12 +349,12 @@ bool Xbox360Peripheral::start(IOService *provider)
     IOUSBFindEndpointRequest pipe;
     XBOX360_OUT_LED led;
     IOWorkLoop *workloop = NULL;
+    
     /*
      * Xbox One controller init packets.
-     * The Rock Candy Xbox One controller requires more than just 0x05
+     * Third party Xbox One controllers requires more than just 0x05 0x20
      * Minimum required packets unknown.
      */
-    
     UInt8 xoneInitFirst[] = { 0x04, 0x20, 0x01, 0x00 };
     UInt8 xoneInitSecond[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x9c, 0x00 };
     UInt8 xoneInitThird[] = { 0x01, 0x20, 0x02, 0x09, 0x00, 0x04, 0x20, 0xd6, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -362,13 +363,8 @@ bool Xbox360Peripheral::start(IOService *provider)
     UInt8 xoneInitSixth[] = { 0x0a, 0x20, 0x04, 0x03, 0x00, 0x01, 0x14 };
     UInt8 xoneInitSeventh[] = { 0x06, 0x20, 0x01, 0x02, 0x01, 0x00 };
     
-//    UInt8 xoneInitFirst[] = { 0x02, 0x20, 0x01, 0x1C, 0x7E, 0xED, 0x8B, 0x11, 0x0F, 0xA8, 0x00, 0x00, 0x5E, 0x04, 0xD1, 0x02, 0x01, 0x00, 0x01, 0x00, 0x17, 0x01, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00 };
-//    UInt8 xoneInitSecond[] = { 0x05, 0x20, 0x00, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
-//    UInt8 xoneInitThird[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
-//    UInt8 xoneInitFourth[] = { 0x0A, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
-    
     if (!super::start(provider))
-		return false;
+        return false;
     // Get device
     device=OSDynamicCast(IOUSBDevice,provider);
     if(device==NULL) {
@@ -447,6 +443,7 @@ bool Xbox360Peripheral::start(IOService *provider)
         controllerType = XboxOriginal;
         goto interfacefound;
     }
+    previousType = controllerType;
 interfacefound:
     interface->open(this);
     // Find pipes
@@ -473,73 +470,73 @@ interfacefound:
         IOLog("start - failed to allocate input buffer\n");
         goto fail;
     }
-	// Find chatpad interface
-	intf.bInterfaceClass = kIOUSBFindInterfaceDontCare;
-	intf.bInterfaceSubClass = 93;
-	intf.bInterfaceProtocol = 2;
-	intf.bAlternateSetting = kIOUSBFindInterfaceDontCare;
-	serialIn = device->FindNextInterface(NULL, &intf);
-	if (serialIn == NULL) {
-		IOLog("start - unable to find chatpad interface\n");
+    // Find chatpad interface
+    intf.bInterfaceClass = kIOUSBFindInterfaceDontCare;
+    intf.bInterfaceSubClass = 93;
+    intf.bInterfaceProtocol = 2;
+    intf.bAlternateSetting = kIOUSBFindInterfaceDontCare;
+    serialIn = device->FindNextInterface(NULL, &intf);
+    if (serialIn == NULL) {
+        IOLog("start - unable to find chatpad interface\n");
         goto nochat;
     }
-	serialIn->open(this);
-	// Find chatpad pipe
-	pipe.direction = kUSBIn;
-	pipe.interval = 0;
-	pipe.type = kUSBInterrupt;
-	pipe.maxPacketSize = 0;
-	serialInPipe = serialIn->FindNextPipe(NULL, &pipe);
-	if (serialInPipe == NULL)
-	{
-		IOLog("start - unable to find chatpad in pipe\n");
-		goto fail;
-	}
-	serialInPipe->retain();
-	// Get a buffer for the chatpad
-	serialInBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(serialInPipe));
-	if (serialInBuffer == NULL)
-	{
-		IOLog("start - failed to allocate input buffer for chatpad\n");
-		goto fail;
-	}
-	// Create timer for chatpad
-	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
-	if (serialTimer == NULL)
-	{
-		IOLog("start - failed to create timer for chatpad\n");
-		goto fail;
-	}
+    serialIn->open(this);
+    // Find chatpad pipe
+    pipe.direction = kUSBIn;
+    pipe.interval = 0;
+    pipe.type = kUSBInterrupt;
+    pipe.maxPacketSize = 0;
+    serialInPipe = serialIn->FindNextPipe(NULL, &pipe);
+    if (serialInPipe == NULL)
+    {
+        IOLog("start - unable to find chatpad in pipe\n");
+        goto fail;
+    }
+    serialInPipe->retain();
+    // Get a buffer for the chatpad
+    serialInBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(serialInPipe));
+    if (serialInBuffer == NULL)
+    {
+        IOLog("start - failed to allocate input buffer for chatpad\n");
+        goto fail;
+    }
+    // Create timer for chatpad
+    serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
+    if (serialTimer == NULL)
+    {
+        IOLog("start - failed to create timer for chatpad\n");
+        goto fail;
+    }
     workloop = getWorkLoop();
-	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
-	{
-		IOLog("start - failed to connect timer for chatpad\n");
-		goto fail;
-	}
-	// Configure ChatPad
-	// Send 'configuration'
-	SendInit(0xa30c, 0x4423);
-	SendInit(0x2344, 0x7f03);
-	SendInit(0x5839, 0x6832);
-	// Set 'switch'
+    if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
+    {
+        IOLog("start - failed to connect timer for chatpad\n");
+        goto fail;
+    }
+    // Configure ChatPad
+    // Send 'configuration'
+    SendInit(0xa30c, 0x4423);
+    SendInit(0x2344, 0x7f03);
+    SendInit(0x5839, 0x6832);
+    // Set 'switch'
     if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false))) {
         // Commenting goto fail fixes the driver for the Hori Real Arcade Pro EX
         //goto fail;
-	}
-	// Begin toggle
-	serialHeard = false;
-	serialActive = false;
-	serialToggle = false;
-	serialResetCount = 0;
-	serialTimerState = tsToggle;
-	serialTimer->setTimeoutMS(1000);
+    }
+    // Begin toggle
+    serialHeard = false;
+    serialActive = false;
+    serialToggle = false;
+    serialResetCount = 0;
+    serialTimerState = tsToggle;
+    serialTimer->setTimeoutMS(1000);
     // Begin reading
     if (!QueueSerialRead())
         goto fail;
 nochat:
     if (!QueueRead())
-		goto fail;
-    if (controllerType == XboxOne) {
+        goto fail;
+    if (controllerType == XboxOne || controllerType == XboxOnePretend360 || controllerType == XboxOneElite) {
         QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
         QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
         QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
@@ -555,8 +552,8 @@ nochat:
     }
     
     // Done
-	PadConnect();
-	registerService();
+    PadConnect();
+    registerService();
     return true;
 fail:
     ReleaseAll();
@@ -568,7 +565,7 @@ bool Xbox360Peripheral::QueueRead(void)
 {
     IOUSBCompletion complete;
     IOReturn err;
-
+    
     if ((inPipe == NULL) || (inBuffer == NULL))
         return false;
     complete.target=this;
@@ -586,7 +583,7 @@ bool Xbox360Peripheral::QueueSerialRead(void)
 {
     IOUSBCompletion complete;
     IOReturn err;
-	
+    
     if ((serialInPipe == NULL) || (serialInBuffer == NULL))
         return false;
     complete.target = this;
@@ -594,11 +591,11 @@ bool Xbox360Peripheral::QueueSerialRead(void)
     complete.parameter = serialInBuffer;
     err = serialInPipe->Read(serialInBuffer, 0, 0, serialInBuffer->getLength(), &complete);
     if (err == kIOReturnSuccess)
-	{
-		return true;
-	}
+    {
+        return true;
+    }
     else
-	{
+    {
         IOLog("read - failed to start for chatpad (0x%.8x)\n",err);
         return false;
     }
@@ -639,31 +636,31 @@ void Xbox360Peripheral::ReleaseAll(void)
 {
     LockRequired locker(mainLock);
     
-	SerialDisconnect();
-	PadDisconnect();
-	if (serialTimer != NULL)
-	{
-		serialTimer->cancelTimeout();
-		getWorkLoop()->removeEventSource(serialTimer);
-		serialTimer->release();
-		serialTimer = NULL;
-	}
-	if (serialInPipe != NULL)
-	{
-		serialInPipe->Abort();
-		serialInPipe->release();
-		serialInPipe = NULL;
-	}
-	if (serialInBuffer != NULL)
-	{
-		serialInBuffer->release();
-		serialInBuffer = NULL;
-	}
-	if (serialIn != NULL)
-	{
-		serialIn->close(this);
-		serialIn = NULL;
-	}
+    SerialDisconnect();
+    PadDisconnect();
+    if (serialTimer != NULL)
+    {
+        serialTimer->cancelTimeout();
+        getWorkLoop()->removeEventSource(serialTimer);
+        serialTimer->release();
+        serialTimer = NULL;
+    }
+    if (serialInPipe != NULL)
+    {
+        serialInPipe->Abort();
+        serialInPipe->release();
+        serialInPipe = NULL;
+    }
+    if (serialInBuffer != NULL)
+    {
+        serialInBuffer->release();
+        serialInBuffer = NULL;
+    }
+    if (serialIn != NULL)
+    {
+        serialIn->close(this);
+        serialIn = NULL;
+    }
     if(outPipe!=NULL) {
         outPipe->Abort();
         outPipe->release();
@@ -723,142 +720,75 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
     return (reverse<0)?~reverse:reverse;
 }
 
-// Adjusts the report for any settings speciified by the user
-void Xbox360Peripheral::fiddleReport(IOBufferMemoryDescriptor *buffer)
+void Xbox360Peripheral::normalizeAxis(SInt16& axis, short deadzone)
 {
-    XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)buffer->getBytesNoCopy();
-    if(invertLeftX) report->left.x=~report->left.x;
-    if(!invertLeftY) report->left.y=~report->left.y;
-    if(invertRightX) report->right.x=~report->right.x;
-    if(!invertRightY) report->right.y=~report->right.y;
+    static const UInt16 max16=32767;
+    const float current=getAbsolute(axis);
+    const float maxVal=max16-deadzone;
+    
+    if (current>deadzone) {
+        if (axis<0) {
+            axis=max16*(current-deadzone)/maxVal;
+            axis=~axis;
+        } else {
+            axis=max16*(current-deadzone)/maxVal;
+        }
+    } else {
+        axis=0;
+    }
+}
+
+void Xbox360Peripheral::fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right)
+{
+    // deadOff - Normalize checkbox is checked if true
+    // relative - Linked checkbox is checked if true
+    
+    if(invertLeftX) left.x=~left.x;
+    if(!invertLeftY) left.y=~left.y;
+    if(invertRightX) right.x=~right.x;
+    if(!invertRightY) right.y=~right.y;
+    
     if(deadzoneLeft!=0) {
         if(relativeLeft) {
-            if((getAbsolute(report->left.x)<deadzoneLeft)&&(getAbsolute(report->left.y)<deadzoneLeft)) {
-                report->left.x=0;
-                report->left.y=0;
+            if((getAbsolute(left.x)<deadzoneLeft)&&(getAbsolute(left.y)<deadzoneLeft)) {
+                left.x=0;
+                left.y=0;
             }
             else if(deadOffLeft) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                float valX=getAbsolute(report->left.x);
-                if (valX>deadzoneLeft) {
-                    if (report->left.x<0) {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                        report->left.x=~report->left.x;
-                    } else {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.x=0;
-                }
-                float valY=getAbsolute(report->left.y);
-                if (valY>deadzoneLeft) {
-                    if (report->left.y<0) {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                        report->left.y=~report->left.y;
-                    } else {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.y=0;
-                }
+                normalizeAxis(left.x, deadzoneLeft);
+                normalizeAxis(left.y, deadzoneLeft);
             }
-        } else {
-            if(getAbsolute(report->left.x)<deadzoneLeft)
-                report->left.x=0;
+        } else { // Linked checkbox has no check
+            if(getAbsolute(left.x)<deadzoneLeft)
+                left.x=0;
             else if (deadOffLeft)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                if (report->left.x<0) {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    report->left.x=~report->left.x;
-                } else {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                }
-            }
-            if(getAbsolute(report->left.y)<deadzoneLeft)
-                report->left.y=0;
+                normalizeAxis(left.x, deadzoneLeft);
+            
+            if(getAbsolute(left.y)<deadzoneLeft)
+                left.y=0;
             else if (deadOffLeft)
-            {
-                const UInt16 max16=32767;
-                float maxVal = max16-deadzoneLeft;
-                if (report->left.y<0) {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    report->left.y=~report->left.y;
-                } else {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                }
-            }
+                normalizeAxis(left.y, deadzoneLeft);
         }
     }
     if(deadzoneRight!=0) {
         if(relativeRight) {
-            if((getAbsolute(report->right.x)<deadzoneRight)&&(getAbsolute(report->right.y)<deadzoneRight)) {
-                report->right.x=0;
-                report->right.y=0;
+            if((getAbsolute(right.x)<deadzoneRight)&&(getAbsolute(right.y)<deadzoneRight)) {
+                right.x=0;
+                right.y=0;
             }
             else if(deadOffRight) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                float valX=getAbsolute(report->right.x);
-                if (valX>deadzoneRight) {
-                    if (report->right.x<0) {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                        report->right.x=~report->right.x;
-                    } else {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.x = 0;
-                }
-                float valY=getAbsolute(report->right.y);
-                if (valY>deadzoneRight) {
-                    if (report->right.y<0) {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                        report->right.y=~report->right.y;
-                    } else {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.y = 0;
-                }
+                normalizeAxis(left.x, deadzoneRight);
+                normalizeAxis(left.y, deadzoneRight);
             }
         } else {
-            if(getAbsolute(report->right.x)<deadzoneRight)
-                report->right.x=0;
+            if(getAbsolute(right.x)<deadzoneRight)
+                right.x=0;
             else if (deadOffRight)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.x<0) {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    report->right.x=~report->right.x;
-                } else {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                }
-            }
-            if(getAbsolute(report->right.y)<deadzoneRight)
-                report->right.y=0;
+                normalizeAxis(right.x, deadzoneRight);
+            if(getAbsolute(right.y)<deadzoneRight)
+                right.y=0;
             else if (deadOffRight)
-            {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.y<0) {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    report->right.y=~report->right.y;
-                } else {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                }
-            }
+                normalizeAxis(right.y, deadzoneRight);
         }
     }
 }
@@ -872,8 +802,8 @@ void Xbox360Peripheral::ReadCompleteInternal(void *target,void *parameter,IORetu
 
 void Xbox360Peripheral::SerialReadCompleteInternal(void *target, void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
-	if (target != NULL)
-		((Xbox360Peripheral*)target)->SerialReadComplete(parameter, status, bufferSizeRemaining);
+    if (target != NULL)
+        ((Xbox360Peripheral*)target)->SerialReadComplete(parameter, status, bufferSizeRemaining);
 }
 
 // This forwards a completed write notification to a member function
@@ -925,36 +855,36 @@ void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 buff
 
 void Xbox360Peripheral::SerialReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
-	if (padHandler != NULL) // avoid deadlock with release
-	{
-		LockRequired locker(mainLock);
-		bool reread = !isInactive();
-	
-		switch (status)
-		{
-			case kIOReturnOverrun:
-				IOLog("read (serial) - kIOReturnOverrun, clearing stall\n");
-				if (serialInPipe != NULL)
-					serialInPipe->ClearStall();
-				// Fall through
-			case kIOReturnSuccess:
-				serialHeard = true;
-				if (serialInBuffer != NULL)
-					SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
-				break;
-				
-			case kIOReturnNotResponding:
-				IOLog("read (serial) - kIOReturnNotResponding\n");
-				reread = false;
-				break;
-				
-			default:
-				reread = false;
-				break;
-		}
-		if (reread)
-			QueueSerialRead();
-	}
+    if (padHandler != NULL) // avoid deadlock with release
+    {
+        LockRequired locker(mainLock);
+        bool reread = !isInactive();
+        
+        switch (status)
+        {
+            case kIOReturnOverrun:
+                IOLog("read (serial) - kIOReturnOverrun, clearing stall\n");
+                if (serialInPipe != NULL)
+                    serialInPipe->ClearStall();
+                // Fall through
+            case kIOReturnSuccess:
+                serialHeard = true;
+                if (serialInBuffer != NULL)
+                    SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
+                break;
+                
+            case kIOReturnNotResponding:
+                IOLog("read (serial) - kIOReturnNotResponding\n");
+                reread = false;
+                break;
+                
+            default:
+                reread = false;
+                break;
+        }
+        if (reread)
+            QueueSerialRead();
+    }
 }
 
 // Handle a completed asynchronous write
@@ -965,6 +895,73 @@ void Xbox360Peripheral::WriteComplete(void *parameter,IOReturn status,UInt32 buf
         IOLog("write - Error writing: 0x%.8x\n",status);
     }
     memory->release();
+}
+
+
+void Xbox360Peripheral::MakeSettingsChanges()
+{
+    if (controllerType == XboxOne || controllerType == XboxOneElite)
+    {
+        if (pretend360) // Convert to a 360 controller
+        {
+            PadDisconnect();
+            previousType = controllerType;
+            controllerType = XboxOnePretend360;
+            PadConnect();
+        }
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
+        {
+            
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
+            }
+        }
+    }
+    if (controllerType == XboxOnePretend360)
+    {
+        if (!pretend360)
+        {
+            PadDisconnect();
+            controllerType = previousType;
+            PadConnect();
+        }
+        
+        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
+        {
+            switch (mapping[i]) {
+                case  0: { mapping[i] =  8; } break; // Move to Up position
+                case  1: { mapping[i] =  9; } break; // Move to Down position
+                case  2: { mapping[i] = 10; } break; // Move to Left position
+                case  3: { mapping[i] = 11; } break; // Move to Right position
+                case  4: { mapping[i] =  2; } break; // Move to Start position
+                case  5: { mapping[i] =  3; } break; // Move to Back position
+                case  6: { mapping[i] = 14; } break; // Move to LB position
+                case  7: { mapping[i] = 15; } break; // Move to RB position
+                case  8: { mapping[i] = 12; } break; // Move to LSC position
+                case  9: { mapping[i] = 13; } break; // Move to RSC position
+                case 10: { mapping[i] =  0; } break; // Move to Guide position
+                case 12: { mapping[i] =  4; } break; // Move to A position
+                case 13: { mapping[i] =  5; } break; // Move to B position
+                case 14: { mapping[i] =  6; } break; // Move to X position
+                case 15: { mapping[i] =  7; } break; // Move to Y position
+            }
+        }
+    }
 }
 
 
@@ -979,77 +976,90 @@ IOReturn Xbox360Peripheral::setProperties(OSObject *properties)
         dictionary->setObject(OSString::withCString("ControllerType"), OSNumber::withNumber(controllerType, 8));
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
+        
+        MakeSettingsChanges();
+        
         return kIOReturnSuccess;
     } else return kIOReturnBadArgument;
 }
 
 IOHIDDevice* Xbox360Peripheral::getController(int index)
 {
-	switch (index)
-	{
-		case 0:
-			return padHandler;
-		case 1:
-			return serialHandler;
-		default:
-			return NULL;
-	}
+    switch (index)
+    {
+        case 0:
+            return padHandler;
+        case 1:
+            return serialHandler;
+        default:
+            return NULL;
+    }
 }
 
 // Main controller support
 
 void Xbox360Peripheral::PadConnect(void)
 {
-	PadDisconnect();
+    PadDisconnect();
     if (controllerType == XboxOriginal) {
         padHandler = new XboxOriginalControllerClass;
     } else if (controllerType == XboxOne) {
-        padHandler = new XboxOneControllerClass;
+        if ((device->GetVendorID() == 1118) && (device->GetProductID() == 739))
+        {
+            controllerType = XboxOneElite;
+            padHandler = new XboxOneEliteControllerClass;
+        }
+        else
+            padHandler = new XboxOneControllerClass;
+    } else if (controllerType == XboxOnePretend360) {
+        padHandler = new XboxOnePretend360Class;
+    } else if (controllerType == XboxOneElite) {
+        padHandler = new XboxOneEliteControllerClass;
     } else {
         padHandler = new Xbox360ControllerClass;
     }
-	if (padHandler != NULL)
-	{
+    if (padHandler != NULL)
+    {
         const OSString *keys[] = {
             OSString::withCString(kIOSerialDeviceType),
-			OSString::withCString("IOCFPlugInTypes"),
-			OSString::withCString("IOKitDebug"),
+            OSString::withCString("IOCFPlugInTypes"),
+            OSString::withCString("IOKitDebug"),
         };
         const OSObject *objects[] = {
             OSNumber::withNumber((unsigned long long)1, 32),
-			getProperty("IOCFPlugInTypes"),
+            getProperty("IOCFPlugInTypes"),
             OSNumber::withNumber((unsigned long long)65535, 32),
         };
         OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, sizeof(keys) / sizeof(keys[0]));
-		if (padHandler->init(dictionary))
-		{
-			padHandler->attach(this);
-			padHandler->start(this);
-		}
-		else
-		{
-			padHandler->release();
-			padHandler = NULL;
-		}
-	}
+        if (padHandler->init(dictionary))
+        {
+            padHandler->attach(this);
+            padHandler->start(this);
+        }
+        else
+        {
+            padHandler->release();
+            padHandler = NULL;
+        }
+    }
 }
 
 void Xbox360Peripheral::PadDisconnect(void)
 {
-	if (padHandler != NULL)
-	{
-		padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
-		padHandler->release();
-		padHandler = NULL;
-	}
+    if (padHandler != NULL)
+    {
+        padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        padHandler->release();
+        padHandler = NULL;
+    }
 }
 
 // Serial peripheral support
 
 void Xbox360Peripheral::SerialConnect(void)
 {
-	SerialDisconnect();
-	serialHandler = new ChatPadKeyboardClass;
+    SerialDisconnect();
+    serialHandler = new ChatPadKeyboardClass;
     if (serialHandler != NULL)
     {
         const OSString *keys[] = {
@@ -1062,7 +1072,7 @@ void Xbox360Peripheral::SerialConnect(void)
         if (serialHandler->init(dictionary))
         {
             serialHandler->attach(this);
-			serialHandler->start(this);
+            serialHandler->start(this);
         }
         else
         {
@@ -1074,21 +1084,21 @@ void Xbox360Peripheral::SerialConnect(void)
 
 void Xbox360Peripheral::SerialDisconnect(void)
 {
-	if (serialHandler != NULL)
-	{
+    if (serialHandler != NULL)
+    {
         // Hope it's okay to terminate twice...
-		serialHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
-		serialHandler->release();
-		serialHandler = NULL;
-	}
+        serialHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        serialHandler->release();
+        serialHandler = NULL;
+    }
 }
 
 void Xbox360Peripheral::SerialMessage(IOBufferMemoryDescriptor *data, size_t length)
 {
-	if (serialHandler != NULL)
-	{
-		char *buffer = (char*)data->getBytesNoCopy();
-		if ((length == 5) && (buffer[0] == 0x00))
-			serialHandler->handleReport(data, kIOHIDReportTypeInput);
-	}
+    if (serialHandler != NULL)
+    {
+        char *buffer = (char*)data->getBytesNoCopy();
+        if ((length == 5) && (buffer[0] == 0x00))
+            serialHandler->handleReport(data, kIOHIDReportTypeInput);
+    }
 }

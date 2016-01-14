@@ -40,7 +40,9 @@
 typedef NS_ENUM(NSUInteger, ControllerType) {
     Xbox360Controller = 0,
     XboxOriginalController = 1,
-    XboxOneController = 2
+    XboxOneController = 2,
+    XboxOnePretend360Controller = 3,
+    XboxOneEliteController = 4
 } controllerType;
 
 @interface Pref360ControlPref : NSPreferencePane
@@ -92,6 +94,7 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSButton *rightStickInvertYAlt;
 @property (weak) IBOutlet NSButton *normalizeDeadzoneLeft;
 @property (weak) IBOutlet NSButton *normalizeDeadzoneRight;
+@property (weak) IBOutlet NSButton *pretend360Button;
 
 // About Tab
 /* put About Tab's @properties here */

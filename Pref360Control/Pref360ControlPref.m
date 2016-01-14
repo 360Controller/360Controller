@@ -88,7 +88,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_rumbleOptions removeAllItems];
     [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
-    if (controllerType == XboxOneController)
+    if (controllerType == XboxOneController || controllerType == XboxOneEliteController || controllerType == XboxOnePretend360Controller)
         [_rumbleOptions addItemsWithTitles:@[@"Triggers Only", @"Both"]];
 }
 
@@ -673,6 +673,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("SwapSticks"),(void*)&boolValue)) {
                 [_swapSticks setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for SwapSticks\n");
+            
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("Pretend360"),(void*)&boolValue)) {
+                [_pretend360Button setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+            } else NSLog(@"No value for Pretend360");
         } else NSLog(@"No settings found\n");
     }
     // Enable GUI components
@@ -928,7 +932,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingB": @((UInt8)([MyWhole360ControllerMapper mapping][12])),
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
                            @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
-                           @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState))};
+                           @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState)),
+                           @"Pretend360": @((BOOL)([_pretend360Button state]==NSOnState))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
