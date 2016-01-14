@@ -674,10 +674,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_swapSticks setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
             } else NSLog(@"No value for SwapSticks\n");
             
-            // TODO(Drew): Add connection to UI
-//            if(CFDictionaryGetValueIfPresent(dict,CFSTR("Pretend360"),(void*)&boolValue)) {
-//                [_pretend360 setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
-//            } else NSLog(@"No value for Pretend360");
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("Pretend360"),(void*)&boolValue)) {
+                [_pretend360Button setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+            } else NSLog(@"No value for Pretend360");
         } else NSLog(@"No settings found\n");
     }
     // Enable GUI components
@@ -934,7 +933,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
                            @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
                            @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState)),
-                           @"Pretend360": @((BOOL)(NO))}; // TODO(Drew): Add connection to UI
+                           @"Pretend360": @((BOOL)([_pretend360Button state]==NSOnState))};
     
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
