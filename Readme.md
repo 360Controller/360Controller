@@ -93,8 +93,32 @@ sudo nvram boot-args="kext-dev-mode=1"
 sudo kextcache -m /System/Library/Caches/com.apple.kext.caches/Startup/Extensions.mkext /System/Library/Extensions
 ```
 
-Note that this is probably a bad idea unless you understand the implications of
-running unsigned driver code.
+In addition, you will need to disable System Integrity Protection. In order to
+do this, you must boot into recovery mode. When starting the computer, hold
+down `CMD + R`. This will get you into recovery mode. From there, simply open
+the terminal using the utilities menu item, then enter this command:
+
+``` bash
+csrutil disable
+```
+
+In order to undo these changes, within recovery mode run:
+
+``` bash
+csrutil enable
+```
+
+And within the normal OS, reset the boot args using:
+
+``` bash
+sudo nvram -d boot-args
+```
+
+This will clear all boot args, so if you have boot args already, you will have
+to change your boot args an alterate way.
+
+Note that disabling driver signing is probably a bad idea unless you understand
+the implications of running unsigned driver code.
 
 
 ### Debugging ###
