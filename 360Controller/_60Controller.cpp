@@ -355,13 +355,19 @@ bool Xbox360Peripheral::start(IOService *provider)
      * Third party Xbox One controllers requires more than just 0x05 0x20
      * Minimum required packets unknown.
      */
-    UInt8 xoneInitFirst[] = { 0x04, 0x20, 0x01, 0x00 };
-    UInt8 xoneInitSecond[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x9c, 0x00 };
-    UInt8 xoneInitThird[] = { 0x01, 0x20, 0x02, 0x09, 0x00, 0x04, 0x20, 0xd6, 0x00, 0x00, 0x00, 0x00, 0x00 };
-    UInt8 xoneInitFourth[] = { 0x05, 0x20, 0x02, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
-    UInt8 xoneInitFifth[] = { 0x05, 0x20, 0x03, 0x01, 0x00 };
-    UInt8 xoneInitSixth[] = { 0x0a, 0x20, 0x04, 0x03, 0x00, 0x01, 0x14 };
-    UInt8 xoneInitSeventh[] = { 0x06, 0x20, 0x01, 0x02, 0x01, 0x00 };
+//    UInt8 xoneInitFirst[] = { 0x05, 0x20, 0x00, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
+    UInt8 xoneInitFirst[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
+//    UInt8 xoneInitThird[] = { 0x0a, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
+//    UInt8 xoneInitFourth[] = { 0x09, 0x00, 0x03, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x1d, 0x1d, 0xff, 0x00, 0x00 };
+//    UInt8 xoneInitFourth[] = { 0x09, 0x08, 0x04, 0x08, 0x00, 0x03, 0x00, 0x00, 0xff, 0xff, 0x80, 0x00, 0x00 };
+//    UInt8 xoneInitFifth[] = { 0x09, 0x00, 0x04, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00 };
+//    UInt8 xoneInitFirst[] = { 0x04, 0x20, 0x01, 0x00 };
+//    UInt8 xoneInitSecond[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x9c, 0x00 };
+//    UInt8 xoneInitThird[] = { 0x01, 0x20, 0x02, 0x09, 0x00, 0x04, 0x20, 0xd6, 0x00, 0x00, 0x00, 0x00, 0x00 };
+//    UInt8 xoneInitFourth[] = { 0x05, 0x20, 0x02, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
+//    UInt8 xoneInitFifth[] = { 0x05, 0x20, 0x03, 0x01, 0x00 };
+//    UInt8 xoneInitSixth[] = { 0x0a, 0x20, 0x04, 0x03, 0x00, 0x01, 0x14 };
+//    UInt8 xoneInitSeventh[] = { 0x06, 0x20, 0x01, 0x02, 0x01, 0x00 };
     
     if (!super::start(provider))
         return false;
@@ -443,7 +449,6 @@ bool Xbox360Peripheral::start(IOService *provider)
         controllerType = XboxOriginal;
         goto interfacefound;
     }
-    previousType = controllerType;
 interfacefound:
     interface->open(this);
     // Find pipes
@@ -536,14 +541,15 @@ interfacefound:
 nochat:
     if (!QueueRead())
         goto fail;
-    if (controllerType == XboxOne || controllerType == XboxOnePretend360 || controllerType == XboxOneElite) {
+    if (controllerType == XboxOne || controllerType == XboxOnePretend360) {
         QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
-        QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
-        QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
-        QueueWrite(&xoneInitFourth, sizeof(xoneInitFourth));
-        QueueWrite(&xoneInitFifth, sizeof(xoneInitFifth));
-        QueueWrite(&xoneInitSixth, sizeof(xoneInitSixth));
-        QueueWrite(&xoneInitSeventh, sizeof(xoneInitSeventh));
+//        QueueWrite(&xoneInitSecond, sizeof(xoneInitSecond));
+//        QueueWrite(&xoneInitThird, sizeof(xoneInitThird));
+//        QueueWrite(&xoneInitFourth, sizeof(xoneInitFourth));
+//        QueueWrite(&xoneInitFifth, sizeof(xoneInitFifth));
+//        QueueWrite(&xoneInitSixth, sizeof(xoneInitSixth));
+//        QueueWrite(&xoneInitSeventh, sizeof(xoneInitSeventh));
+        IOLog("Xbox One Init send\n");
     } else {
         // Disable LED
         Xbox360_Prepare(led,outLed);
@@ -900,66 +906,20 @@ void Xbox360Peripheral::WriteComplete(void *parameter,IOReturn status,UInt32 buf
 
 void Xbox360Peripheral::MakeSettingsChanges()
 {
-    if (controllerType == XboxOne || controllerType == XboxOneElite)
+    if (controllerType == XboxOne)
     {
-        if (pretend360) // Convert to a 360 controller
+        if (pretend360)
         {
-            PadDisconnect();
-            previousType = controllerType;
             controllerType = XboxOnePretend360;
             PadConnect();
         }
-        
-        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
-        {
-            
-            switch (mapping[i]) {
-                case  0: { mapping[i] =  8; } break; // Move to Up position
-                case  1: { mapping[i] =  9; } break; // Move to Down position
-                case  2: { mapping[i] = 10; } break; // Move to Left position
-                case  3: { mapping[i] = 11; } break; // Move to Right position
-                case  4: { mapping[i] =  2; } break; // Move to Start position
-                case  5: { mapping[i] =  3; } break; // Move to Back position
-                case  6: { mapping[i] = 14; } break; // Move to LB position
-                case  7: { mapping[i] = 15; } break; // Move to RB position
-                case  8: { mapping[i] = 12; } break; // Move to LSC position
-                case  9: { mapping[i] = 13; } break; // Move to RSC position
-                case 10: { mapping[i] =  0; } break; // Move to Guide position
-                case 12: { mapping[i] =  4; } break; // Move to A position
-                case 13: { mapping[i] =  5; } break; // Move to B position
-                case 14: { mapping[i] =  6; } break; // Move to X position
-                case 15: { mapping[i] =  7; } break; // Move to Y position
-            }
-        }
     }
-    if (controllerType == XboxOnePretend360)
+    else if (controllerType == XboxOnePretend360)
     {
         if (!pretend360)
         {
-            PadDisconnect();
-            controllerType = previousType;
+            controllerType = XboxOne;
             PadConnect();
-        }
-        
-        for (UInt8 i = 0; i < 15; i++) // Change mappings to save time in remapping
-        {
-            switch (mapping[i]) {
-                case  0: { mapping[i] =  8; } break; // Move to Up position
-                case  1: { mapping[i] =  9; } break; // Move to Down position
-                case  2: { mapping[i] = 10; } break; // Move to Left position
-                case  3: { mapping[i] = 11; } break; // Move to Right position
-                case  4: { mapping[i] =  2; } break; // Move to Start position
-                case  5: { mapping[i] =  3; } break; // Move to Back position
-                case  6: { mapping[i] = 14; } break; // Move to LB position
-                case  7: { mapping[i] = 15; } break; // Move to RB position
-                case  8: { mapping[i] = 12; } break; // Move to LSC position
-                case  9: { mapping[i] = 13; } break; // Move to RSC position
-                case 10: { mapping[i] =  0; } break; // Move to Guide position
-                case 12: { mapping[i] =  4; } break; // Move to A position
-                case 13: { mapping[i] =  5; } break; // Move to B position
-                case 14: { mapping[i] =  6; } break; // Move to X position
-                case 15: { mapping[i] =  7; } break; // Move to Y position
-            }
         }
     }
 }
@@ -1004,17 +964,9 @@ void Xbox360Peripheral::PadConnect(void)
     if (controllerType == XboxOriginal) {
         padHandler = new XboxOriginalControllerClass;
     } else if (controllerType == XboxOne) {
-        if ((device->GetVendorID() == 1118) && (device->GetProductID() == 739))
-        {
-            controllerType = XboxOneElite;
-            padHandler = new XboxOneEliteControllerClass;
-        }
-        else
-            padHandler = new XboxOneControllerClass;
+        padHandler = new XboxOneControllerClass;
     } else if (controllerType == XboxOnePretend360) {
         padHandler = new XboxOnePretend360Class;
-    } else if (controllerType == XboxOneElite) {
-        padHandler = new XboxOneEliteControllerClass;
     } else {
         padHandler = new Xbox360ControllerClass;
     }
@@ -1048,7 +1000,7 @@ void Xbox360Peripheral::PadDisconnect(void)
 {
     if (padHandler != NULL)
     {
-        padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        bool b1 = padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
         padHandler->release();
         padHandler = NULL;
     }

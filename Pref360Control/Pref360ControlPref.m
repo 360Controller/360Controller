@@ -88,7 +88,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_rumbleOptions removeAllItems];
     [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
-    if (controllerType == XboxOneController || controllerType == XboxOneEliteController || controllerType == XboxOnePretend360Controller)
+    if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
         [_rumbleOptions addItemsWithTitles:@[@"Triggers Only", @"Both"]];
 }
 
@@ -198,7 +198,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if (tabIndex == 0) { // Controller Test
                 [_leftTrigger setVal:value];
                 largeMotor=value;
-                [self testMotorsLarge:largeMotor small:smallMotor];
+//                [self testMotorsLarge:largeMotor small:smallMotor];
             }
             break;
             
@@ -206,7 +206,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if (tabIndex == 0) {
                 [_rightTrigger setVal:value];
                 smallMotor=value;
-                [self testMotorsLarge:largeMotor small:smallMotor];
+//                [self testMotorsLarge:largeMotor small:smallMotor];
             }
             break;
             
@@ -351,6 +351,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_normalizeDeadzoneRight setEnabled:enable];
     [_rumbleOptions setEnabled:enable];
     [_swapSticks setEnabled:enable];
+    [_pretend360Button setEnabled:enable];
 }
 
 // Reset GUI components
@@ -392,8 +393,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)stopDevice
 {
     if(registryEntry==0) return;
-    [self testMotorsLarge:0 small:0];
-    [self testMotorsCleanUp];
+//    [self testMotorsLarge:0 small:0];
+//    [self testMotorsCleanUp];
     if (hidQueue) {
         CFRunLoopSourceRef eventSource;
         
@@ -683,8 +684,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:YES];
     // Set device capabilities
     // Set FF motor control
-    [self testMotorsInit];
-    [self testMotorsLarge:0 small:0];
+//    [self testMotorsInit];
+//    [self testMotorsLarge:0 small:0];
     largeMotor = 0;
     smallMotor = 0;
     // Battery level?
@@ -949,6 +950,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
     [_wholeController setRightStickDeadzone:[_rightStickDeadzone doubleValue]];
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
+    
+    [self updateDeviceList];
 }
 
 // Run an AppleScript from String and returns YES on successful execution
@@ -1130,6 +1133,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)resetRemappingPressed:(id)sender {
     [_remappingButton setState:NSOffState];
     [_wholeControllerMapper reset];
+}
+
+- (IBAction)pretend360Checked:(id)sender {
+    [self changeSetting:NULL];
+    [self performSelector:@selector(updateDeviceList) withObject:nil afterDelay:0.5];
 }
 
 @end

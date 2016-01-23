@@ -121,5 +121,30 @@ static const unsigned char ReportDescriptor[] = {
     0x81, 0x02,                    //       INPUT (Data,Var,Abs)
     0xc0,                          //     END_COLLECTION
     0xc0,                          //   END_COLLECTION
+    
+    0xa1, 0x00,                    //   COLLECTION (Physical)
+    0x85, 0x07,                    //     REPORT_ID (7)
+    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+    0x09, 0x00,                    //     USAGE (Undefined)
+    0x95, 0x02,                    //     REPORT_COUNT (2)
+    0x75, 0x08,                    //     REPORT_SIZE (8)
+    0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+    
+    0x75, 0x08,                    //     REPORT_SIZE (8)
+    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+    
+    // Xbox button
+    0x05, 0x09,                    //     USAGE_PAGE (Button)
+    0x09, 0x0b,                    //     USAGE (Button 11)
+    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+    
+    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+    0x09, 0x00,                    //     USAGE (Undefined)
+    0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+    0xc0,                          //   END_COLLECTION
+    
     0xc0                           // END_COLLECTION
 };
