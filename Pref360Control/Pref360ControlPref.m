@@ -950,8 +950,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
     [_wholeController setRightStickDeadzone:[_rightStickDeadzone doubleValue]];
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
-    
-    [self updateDeviceList];
 }
 
 // Run an AppleScript from String and returns YES on successful execution

@@ -1000,7 +1000,7 @@ void Xbox360Peripheral::PadDisconnect(void)
 {
     if (padHandler != NULL)
     {
-        bool b1 = padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        padHandler->terminate(kIOServiceRequired | kIOServiceSynchronous);
         padHandler->release();
         padHandler = NULL;
     }
