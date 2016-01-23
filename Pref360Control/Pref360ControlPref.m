@@ -198,7 +198,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if (tabIndex == 0) { // Controller Test
                 [_leftTrigger setVal:value];
                 largeMotor=value;
-//                [self testMotorsLarge:largeMotor small:smallMotor];
+                [self testMotorsLarge:largeMotor small:smallMotor];
             }
             break;
             
@@ -206,7 +206,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if (tabIndex == 0) {
                 [_rightTrigger setVal:value];
                 smallMotor=value;
-//                [self testMotorsLarge:largeMotor small:smallMotor];
+                [self testMotorsLarge:largeMotor small:smallMotor];
             }
             break;
             
@@ -393,8 +393,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (void)stopDevice
 {
     if(registryEntry==0) return;
-//    [self testMotorsLarge:0 small:0];
-//    [self testMotorsCleanUp];
+    [self testMotorsLarge:0 small:0];
+    [self testMotorsCleanUp];
     if (hidQueue) {
         CFRunLoopSourceRef eventSource;
         
@@ -684,8 +684,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self inputEnable:YES];
     // Set device capabilities
     // Set FF motor control
-//    [self testMotorsInit];
-//    [self testMotorsLarge:0 small:0];
+    [self testMotorsInit];
+    [self testMotorsLarge:0 small:0];
     largeMotor = 0;
     smallMotor = 0;
     // Battery level?
