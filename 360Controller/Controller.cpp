@@ -27,9 +27,6 @@
 namespace HID_360 {
 #include "xbox360hid.h"
 }
-namespace HID_ONE {
-#include "xboxOnehid.h"
-}
 #include "_60Controller.h"
 
 #pragma mark - Xbox360ControllerClass
