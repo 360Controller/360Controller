@@ -529,28 +529,6 @@ UInt16 XboxOneControllerClass::convertButtonPacket(UInt16 buttons)
 
 void XboxOneControllerClass::convertFromXboxOne(void *buffer)
 {
-    XBOXONE_IN_REPORT *reportXone = (XBOXONE_IN_REPORT*)buffer;
-    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
-    UInt8 trigL = 0, trigR = 0;
-    XBOX360_HAT left, right;
-    
-    report360->header.command = 0x00;
-    report360->header.size = 0x14;
-    
-    trigL = (reportXone->trigL / 1023.0) * 255;
-    trigR = (reportXone->trigR / 1023.0) * 255;
-    left = reportXone->left;
-    right = reportXone->right;
-    
-    report360->buttons = convertButtonPacket(reportXone->buttons);
-    report360->trigL = trigL;
-    report360->trigR = trigR;
-    report360->left = left;
-    report360->right = right;
-}
-
-void XboxOneControllerClass::convertFromXboxOneElite(void *buffer)
-{
     XBOXONE_ELITE_IN_REPORT *reportXone = (XBOXONE_ELITE_IN_REPORT*)buffer;
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
     UInt8 trigL = 0, trigR = 0;
@@ -579,19 +557,9 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             XBOXONE_ELITE_IN_REPORT *report=(XBOXONE_ELITE_IN_REPORT*)desc->getBytesNoCopy();
             if (report->header.command==0x20)
             {
-                if (report->header.size==0x0e)//(sizeof(XBOXONE_IN_REPORT)-4)) //0x0e
+                if (report->header.size==0x0e || report->header.size==0x1d)
                 {
                     convertFromXboxOne(report);
-                    XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
-                    remapButtons(report360);
-                    GetOwner(this)->fiddleReport(report360->left, report360->right);
-                    
-                    if (GetOwner(this)->swapSticks)
-                        remapAxes(report360);
-                }
-                else if (report->header.size==0x1d)//(sizeof(XBOXONE_ELITE_IN_REPORT)-5)) //0x1d
-                {
-                    convertFromXboxOneElite(report);
                     XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
                     remapButtons(report360);
                     GetOwner(this)->fiddleReport(report360->left, report360->right);

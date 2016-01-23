@@ -104,7 +104,6 @@ public:
                                   IOOptionBits         options    = 0 );
     
     virtual void convertFromXboxOne(void *buffer);
-    virtual void convertFromXboxOneElite(void *buffer);
     virtual OSString* newProductString() const;
 };
 
