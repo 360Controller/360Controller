@@ -107,7 +107,6 @@
 		622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */; };
 		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
 		622A73CF1A7C879300784C02 /* BindingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73CD1A7C879300784C02 /* BindingTableView.m */; };
-		6235D51F1C4B1BA0000A33E7 /* xboxOnehid.h in Headers */ = {isa = PBXBuildFile; fileRef = 6235D51E1C4B1BA0000A33E7 /* xboxOnehid.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,7 +311,6 @@
 		622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360ControllerMapper.m; sourceTree = "<group>"; };
 		622A73CC1A7C879300784C02 /* BindingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTableView.h; sourceTree = "<group>"; };
 		622A73CD1A7C879300784C02 /* BindingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingTableView.m; sourceTree = "<group>"; };
-		6235D51E1C4B1BA0000A33E7 /* xboxOnehid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xboxOnehid.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -570,7 +568,6 @@
 				55B636F618C1054F00CE933D /* Controller.cpp */,
 				55B636F818C1054F00CE933D /* ControlStruct.h */,
 				55B636FD18C1054F00CE933D /* xbox360hid.h */,
-				6235D51E1C4B1BA0000A33E7 /* xboxOnehid.h */,
 				55A2B8E218C11D4D006829A2 /* Resources */,
 			);
 			path = 360Controller;
@@ -675,7 +672,6 @@
 			files = (
 				55B6375218C1098D00CE933D /* chatpadkeys.h in Headers */,
 				55B6375318C1098D00CE933D /* Controller.h in Headers */,
-				6235D51F1C4B1BA0000A33E7 /* xboxOnehid.h in Headers */,
 				55B6375518C1098D00CE933D /* xbox360hid.h in Headers */,
 				55B6375018C1098D00CE933D /* ChatPad.h in Headers */,
 				55B6375118C1098D00CE933D /* chatpadhid.h in Headers */,

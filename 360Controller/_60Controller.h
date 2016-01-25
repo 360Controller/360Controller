@@ -79,8 +79,7 @@ protected:
         Xbox360 = 0,
         XboxOriginal = 1,
         XboxOne = 2,
-        XboxOnePretend360 = 3,
-        XboxOneElite = 4
+        XboxOnePretend360 = 3
     } CONTROLLER_TYPE;
     
     IOUSBDevice *device;
@@ -103,7 +102,6 @@ protected:
     Xbox360ControllerClass *padHandler;
     UInt8 chatpadInit[2];
     CONTROLLER_TYPE controllerType;
-    CONTROLLER_TYPE previousType;
     
     // Settings
     bool invertLeftX,invertLeftY;
@@ -143,7 +141,6 @@ public:
     
     bool QueueWrite(const void *bytes,UInt32 length);
     void fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right);
-    //    virtual void fiddleReport(IOBufferMemoryDescriptor *buffer);
     
     IOHIDDevice* getController(int index);
     

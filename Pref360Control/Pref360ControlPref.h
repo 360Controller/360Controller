@@ -41,8 +41,7 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
     Xbox360Controller = 0,
     XboxOriginalController = 1,
     XboxOneController = 2,
-    XboxOnePretend360Controller = 3,
-    XboxOneEliteController = 4
+    XboxOnePretend360Controller = 3
 } controllerType;
 
 @interface Pref360ControlPref : NSPreferencePane

@@ -163,7 +163,7 @@ static UInt8 mapping[15];
     [remappingButton setState:NSOffState];
     [pref changeSetting:nil];
     [[BindingTableView tableView] reloadData];
-//    [pref changeSetting:nil];
+    [pref changeSetting:nil];
 }
 
 - (void)awakeFromNib {
