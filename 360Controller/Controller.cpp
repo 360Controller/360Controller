@@ -458,16 +458,14 @@ typedef struct {
 } PACKED XBOXONE_IN_GUIDE_REPORT;
 
 typedef struct {
-    UInt8 command; // 0x09
-    UInt8 reserved1; // So far 0x08
-    UInt8 reserved2; // So far always 0x00
-    UInt8 substructure; // 0x08 - Continuous, 0x09 - Single
+    XBOXONE_HEADER header;
     UInt8 mode; // So far always 0x00
     UInt8 rumbleMask; // So far always 0x0F
     UInt8 trigL, trigR;
     UInt8 little, big;
     UInt8 length; // Length of time to rumble
     UInt8 period; // Period of time between pulses. DO NOT INCLUDE WHEN SUBSTRUCTURE IS 0x09
+    UInt8 extra;
 } PACKED XBOXONE_OUT_RUMBLE;
 
 typedef enum {
@@ -573,6 +571,10 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
                 const XBOXONE_IN_GUIDE_REPORT *guideReport=(const XBOXONE_IN_GUIDE_REPORT*)report;
                 isXboxOneGuideButtonPressed = (bool)guideReport->state;
             }
+            else
+            {
+                IOLog("Xbox One - Other packet: %d\n", report->header.command);
+            }
         }
     }
     IOReturn ret = IOHIDDevice::handleReport(descriptor, reportType, options);
@@ -590,14 +592,17 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
     {
         case 0x00:  // Set force feedback
             XBOXONE_OUT_RUMBLE rumble;
-            rumble.command = 0x09;
-            rumble.reserved1 = 0x08;
-            rumble.reserved2 = 0x00;
-            rumble.substructure = 0x09;
+            rumble.header.command = 0x09;
+            rumble.header.reserved1 = 0x00;
+            rumble.header.counter = outCounter++;
+            rumble.header.size = 0x09;
             rumble.mode = 0x00;
             rumble.rumbleMask = 0x0F;
-            rumble.length = 0x80;
-            
+            rumble.length = 0xFF;
+            rumble.period = 0x00;
+            rumble.extra = 0x00;
+//            IOLog("Data: %d %d %d %d, outCounter: %d\n", data[0], data[1], data[2], data[3], rumble.reserved2);
+
             rumbleType = GetOwner(this)->rumbleType;
             if (rumbleType == 0) // Default
             {
@@ -625,7 +630,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
                 rumble.big = data[3];
             }
             
-            GetOwner(this)->QueueWrite(&rumble,11);
+            GetOwner(this)->QueueWrite(&rumble,13);
             return kIOReturnSuccess;
         case 0x01: // Unsupported LED
             return kIOReturnSuccess;

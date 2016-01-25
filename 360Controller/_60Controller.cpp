@@ -350,13 +350,6 @@ bool Xbox360Peripheral::start(IOService *provider)
     XBOX360_OUT_LED led;
     IOWorkLoop *workloop = NULL;
     
-    /*
-     * Xbox One controller init packets.
-     * Third party Xbox One controllers requires more than just 0x05 0x20
-     * Minimum required packets unknown.
-     */
-    UInt8 xoneInitFirst[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
-    
     if (!super::start(provider))
         return false;
     // Get device
@@ -530,7 +523,15 @@ nochat:
     if (!QueueRead())
         goto fail;
     if (controllerType == XboxOne || controllerType == XboxOnePretend360) {
-        QueueWrite(&xoneInitFirst, sizeof(xoneInitFirst));
+        UInt8 xoneInit1[] = { 0x05, 0x20, 0x00, 0x09, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x53 };
+        UInt8 xoneInit2[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
+        UInt8 xoneInit3[] = { 0x0a, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
+        UInt8 xoneInit4[] = { 0x09, 0x00, 0x03, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x1d, 0x1d, 0xff, 0x00, 0x00 };
+//        UInt8 xoneInit5[] = { 0x09, 0x00, 0x04, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00 };
+        QueueWrite(&xoneInit1, sizeof(xoneInit1));
+        QueueWrite(&xoneInit2, sizeof(xoneInit2));
+        QueueWrite(&xoneInit3, sizeof(xoneInit3));
+        QueueWrite(&xoneInit4, sizeof(xoneInit4));
     } else {
         // Disable LED
         Xbox360_Prepare(led,outLed);
