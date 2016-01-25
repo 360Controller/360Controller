@@ -320,6 +320,7 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     deadOffLeft = false;
     deadOffRight = false;
     swapSticks = false;
+    pretend360 = false;
     // Controller Specific
     rumbleType = 0;
     // Bindings
@@ -527,7 +528,6 @@ nochat:
         UInt8 xoneInit2[] = { 0x05, 0x20, 0x01, 0x01, 0x00 };
         UInt8 xoneInit3[] = { 0x0a, 0x20, 0x02, 0x03, 0x00, 0x01, 0x14 };
         UInt8 xoneInit4[] = { 0x09, 0x00, 0x03, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x1d, 0x1d, 0xff, 0x00, 0x00 };
-//        UInt8 xoneInit5[] = { 0x09, 0x00, 0x04, 0x09, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00 };
         QueueWrite(&xoneInit1, sizeof(xoneInit1));
         QueueWrite(&xoneInit2, sizeof(xoneInit2));
         QueueWrite(&xoneInit3, sizeof(xoneInit3));

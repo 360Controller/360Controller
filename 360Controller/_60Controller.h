@@ -141,7 +141,6 @@ public:
     
     bool QueueWrite(const void *bytes,UInt32 length);
     void fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right);
-    //    virtual void fiddleReport(IOBufferMemoryDescriptor *buffer);
     
     IOHIDDevice* getController(int index);
     
