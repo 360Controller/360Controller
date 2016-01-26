@@ -553,7 +553,15 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
         IOBufferMemoryDescriptor *desc = OSDynamicCast(IOBufferMemoryDescriptor, descriptor);
         if (desc != NULL) {
             XBOXONE_ELITE_IN_REPORT *report=(XBOXONE_ELITE_IN_REPORT*)desc->getBytesNoCopy();
-            if (report->header.command==0x20)
+            if ((report->header.command==0x07) && (report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4)))
+            {
+                XBOXONE_IN_GUIDE_REPORT *guideReport=(XBOXONE_IN_GUIDE_REPORT*)report;
+                isXboxOneGuideButtonPressed = (bool)guideReport->state;
+                XBOX360_IN_REPORT *oldReport = (XBOX360_IN_REPORT*)lastData;
+                oldReport->buttons ^= (-isXboxOneGuideButtonPressed ^ oldReport->buttons) & (1 << GetOwner(this)->mapping[10]);
+                memcpy(report, lastData, sizeof(XBOX360_IN_REPORT));
+            }
+            else if (report->header.command==0x20)
             {
                 if (report->header.size==0x0e || report->header.size==0x1d)
                 {
@@ -564,16 +572,9 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
                     
                     if (GetOwner(this)->swapSticks)
                         remapAxes(report360);
+                    
+                    memcpy(lastData, report360, sizeof(XBOX360_IN_REPORT));
                 }
-            }
-            else if ((report->header.command==0x07) && (report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4)))
-            {
-                const XBOXONE_IN_GUIDE_REPORT *guideReport=(const XBOXONE_IN_GUIDE_REPORT*)report;
-                isXboxOneGuideButtonPressed = (bool)guideReport->state;
-            }
-            else
-            {
-                IOLog("Xbox One - Other packet: %d\n", report->header.command);
             }
         }
     }
