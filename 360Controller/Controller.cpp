@@ -134,7 +134,8 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)desc->getBytesNoCopy();
             if ((report->header.command==inReport) && (report->header.size==sizeof(XBOX360_IN_REPORT))) {
                 GetOwner(this)->fiddleReport(report->left, report->right);
-                remapButtons(report);
+                if (!(GetOwner(this)->noMapping))
+                    remapButtons(report);
                 if (GetOwner(this)->swapSticks)
                     remapAxes(report);
             }
@@ -445,6 +446,16 @@ typedef struct {
     UInt16 buttons;
     UInt16 trigL, trigR;
     XBOX360_HAT left, right;
+    UInt8 unknown1[6];
+    UInt8 triggersAsButtons; // 0x40 is RT. 0x80 is LT
+    UInt8 unknown2[7];
+} PACKED XBOXONE_IN_FIGHTSTICK_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt16 buttons;
+    UInt16 trigL, trigR;
+    XBOX360_HAT left, right;
     UInt16 true_buttons;
     UInt16 true_trigL, true_trigR;
     XBOX360_HAT true_left, true_right;
@@ -525,7 +536,7 @@ UInt16 XboxOneControllerClass::convertButtonPacket(UInt16 buttons)
     return new_buttons;
 }
 
-void XboxOneControllerClass::convertFromXboxOne(void *buffer)
+void XboxOneControllerClass::convertFromXboxOne(void *buffer, UInt8 packetSize)
 {
     XBOXONE_ELITE_IN_REPORT *reportXone = (XBOXONE_ELITE_IN_REPORT*)buffer;
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
@@ -535,8 +546,16 @@ void XboxOneControllerClass::convertFromXboxOne(void *buffer)
     report360->header.command = 0x00;
     report360->header.size = 0x14;
     
-    trigL = (reportXone->trigL / 1023.0) * 255;
-    trigR = (reportXone->trigR / 1023.0) * 255;
+    if (packetSize == 0x1a) // Fight Stick
+    {
+        if ((0x80 & reportXone->true_trigR) == 0x80) { trigL = 255; }
+        if ((0x40 & reportXone->true_trigR) == 0x40) { trigR = 255; }
+    }
+    else
+    {
+        trigL = (reportXone->trigL / 1023.0) * 255;
+        trigR = (reportXone->trigR / 1023.0) * 255;
+    }
     left = reportXone->left;
     right = reportXone->right;
     
@@ -553,27 +572,29 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
         IOBufferMemoryDescriptor *desc = OSDynamicCast(IOBufferMemoryDescriptor, descriptor);
         if (desc != NULL) {
             XBOXONE_ELITE_IN_REPORT *report=(XBOXONE_ELITE_IN_REPORT*)desc->getBytesNoCopy();
-            if (report->header.command==0x20)
+            if ((report->header.command==0x07) && (report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4)))
             {
-                if (report->header.size==0x0e || report->header.size==0x1d)
+                XBOXONE_IN_GUIDE_REPORT *guideReport=(XBOXONE_IN_GUIDE_REPORT*)report;
+                isXboxOneGuideButtonPressed = (bool)guideReport->state;
+                XBOX360_IN_REPORT *oldReport = (XBOX360_IN_REPORT*)lastData;
+                oldReport->buttons ^= (-isXboxOneGuideButtonPressed ^ oldReport->buttons) & (1 << GetOwner(this)->mapping[10]);
+                memcpy(report, lastData, sizeof(XBOX360_IN_REPORT));
+            }
+            else if (report->header.command==0x20)
+            {
+                if (report->header.size==0x0e || report->header.size==0x1d || report->header.size==0x1a)
                 {
-                    convertFromXboxOne(report);
+                    convertFromXboxOne(report, report->header.size);
                     XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
-                    remapButtons(report360);
+                    if (!(GetOwner(this)->noMapping))
+                        remapButtons(report360);
                     GetOwner(this)->fiddleReport(report360->left, report360->right);
                     
                     if (GetOwner(this)->swapSticks)
                         remapAxes(report360);
+                    
+                    memcpy(lastData, report360, sizeof(XBOX360_IN_REPORT));
                 }
-            }
-            else if ((report->header.command==0x07) && (report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4)))
-            {
-                const XBOXONE_IN_GUIDE_REPORT *guideReport=(const XBOXONE_IN_GUIDE_REPORT*)report;
-                isXboxOneGuideButtonPressed = (bool)guideReport->state;
-            }
-            else
-            {
-                IOLog("Xbox One - Other packet: %d\n", report->header.command);
             }
         }
     }

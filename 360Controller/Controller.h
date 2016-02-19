@@ -92,6 +92,7 @@ class XboxOneControllerClass : public Xbox360ControllerClass
 #define XboxOne_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x-4);}
     
 protected:
+    UInt8 lastData[20];
     UInt8 outCounter = 4;
     bool isXboxOneGuideButtonPressed;
     void reorderButtons(UInt16* buttons, UInt8 mapping[]);
@@ -104,7 +105,7 @@ public:
                                   IOHIDReportType      reportType = kIOHIDReportTypeInput,
                                   IOOptionBits         options    = 0 );
     
-    virtual void convertFromXboxOne(void *buffer);
+    virtual void convertFromXboxOne(void *buffer, UInt8 packetSize);
     virtual OSString* newProductString() const;
 };
 

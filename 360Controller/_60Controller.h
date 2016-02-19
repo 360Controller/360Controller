@@ -118,6 +118,7 @@ public:
     
     bool swapSticks;
     UInt8 mapping[15];
+    bool noMapping = true;
     bool pretend360; // Change VID and PID to MS 360 Controller
     
     // this is from the IORegistryEntry - no provider yet

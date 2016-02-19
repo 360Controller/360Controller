@@ -324,6 +324,7 @@ bool Xbox360Peripheral::init(OSDictionary *propTable)
     // Controller Specific
     rumbleType = 0;
     // Bindings
+    noMapping = true;
     for (int i = 0; i < 11; i++)
     {
         mapping[i] = i;
@@ -902,6 +903,17 @@ void Xbox360Peripheral::MakeSettingsChanges()
         {
             controllerType = XboxOne;
             PadConnect();
+        }
+    }
+    
+    noMapping = true;
+    UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
+    for (int i = 0; i < 15; i++)
+    {
+        if (normalMapping[i] != mapping[i])
+        {
+            noMapping = false;
+            break;
         }
     }
 }
