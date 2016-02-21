@@ -105,7 +105,7 @@ public:
                                   IOHIDReportType      reportType = kIOHIDReportTypeInput,
                                   IOOptionBits         options    = 0 );
     
-    virtual void convertFromXboxOne(void *buffer);
+    virtual void convertFromXboxOne(void *buffer, UInt8 packetSize);
     virtual OSString* newProductString() const;
 };
 
