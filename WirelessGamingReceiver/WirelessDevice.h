@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     WirelessDevice.h - declaration of the base wireless 360 device driver class
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -32,20 +32,20 @@ typedef void (*WirelessDeviceWatcher)(void *target, WirelessDevice *sender, void
 class WirelessDevice : public IOService
 {
     OSDeclareDefaultStructors(WirelessDevice);
-    
+
 public:
     bool init(OSDictionary *dictionary = 0);
 
     // Controller interface
     bool IsDataAvailable(void);
     IOMemoryDescriptor* NextPacket(void);
-    
+
     void SendPacket(const void *data, size_t length);
-    
+
     void RegisterWatcher(void *target, WirelessDeviceWatcher function, void *parameter);
 
     OSNumber* newLocationIDNumber() const;
-    
+
 private:
     friend class WirelessGamingReceiver;
     void SetIndex(int i);

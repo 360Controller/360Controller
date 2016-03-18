@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     WirelessHIDDevice.cpp - generic wireless 360 device driver with HID support
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -37,7 +37,7 @@ const char weirdStart[] = {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00,
 void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
 {
 	WirelessHIDDevice *device = OSDynamicCast(WirelessHIDDevice, owner);
-    
+
     // Automatic shutoff
     device->serialTimerCount++;
     if (device->serialTimerCount > POWEROFF_TIMEOUT)
@@ -69,7 +69,7 @@ void WirelessHIDDevice::PowerOff(void)
 {
     static const unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
-    
+
     if (device != NULL)
     {
         device->SendPacket(buf, sizeof(buf));
@@ -84,7 +84,7 @@ IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor *report, IOHIDReportTyp
 
     if (report->readBytes(0, data, 2) < 2)
         return kIOReturnUnsupported;
-    
+
     switch (data[0]) {
         case 0x01:  // LED
             if ((data[1] != report->getLength()) || (data[1] != 0x03))
@@ -105,16 +105,16 @@ bool WirelessHIDDevice::handleStart(IOService *provider)
 {
     WirelessDevice *device;
     IOWorkLoop *workloop;
-    
+
     if (!super::handleStart(provider))
         goto fail;
 
     device = OSDynamicCast(WirelessDevice, provider);
     if (device == NULL)
         goto fail;
-    
+
     serialTimerCount = 0;
-    
+
 	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
 	if (serialTimer == NULL)
 	{
@@ -127,15 +127,15 @@ bool WirelessHIDDevice::handleStart(IOService *provider)
 		IOLog("start - failed to connect timer for chatpad\n");
 		goto fail;
 	}
-    
+
     device->RegisterWatcher(this, _receivedData, NULL);
-    
+
     device->SendPacket(weirdStart, sizeof(weirdStart));
 
     serialTimer->setTimeoutMS(1000);
 
     return true;
-    
+
 fail:
     return false;
 }
@@ -156,7 +156,7 @@ void WirelessHIDDevice::handleStop(IOService *provider)
         serialTimer->release();
         serialTimer = NULL;
     }
-    
+
     super::handleStop(provider);
 }
 
@@ -167,7 +167,7 @@ void WirelessHIDDevice::receivedData(void)
     WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
     if (device == NULL)
         return;
-    
+
     while ((data = device->NextPacket()) != NULL)
     {
         receivedMessage(data);
@@ -181,12 +181,12 @@ const char *HexData = "0123456789ABCDEF";
 void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
 {
     unsigned char buf[29];
-    
+
     if (data->getLength() != 29)
         return;
-        
+
     data->readBytes(0, buf, 29);
-    
+
     switch (buf[1])
     {
         case 0x0f:  // Initial info
@@ -203,16 +203,16 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
             serialString[8] = '\0';
             IOLog("Got serial number: %s", serialString);
             break;
-            
+
         case 0x01:  // HID info update
             if (buf[3] == 0xf0)
                 receivedHIDupdate(buf + 4, buf[5]);
             break;
-            
+
         case 0x00:  // Info update
             receivedUpdate(buf[3], buf + 4);
             break;
-            
+
         default:
             break;
     }
@@ -234,7 +234,7 @@ void WirelessHIDDevice::receivedUpdate(unsigned char type, unsigned char *data)
                 }
             }
             break;
-            
+
         default:
             break;
     }
@@ -245,7 +245,7 @@ void WirelessHIDDevice::receivedHIDupdate(unsigned char *data, int length)
 {
     IOReturn err;
     IOMemoryDescriptor *report;
-    
+
     serialTimerCount = 0;
     report = IOMemoryDescriptor::withAddress(data, length, kIODirectionNone);
     err = handleReport(report);

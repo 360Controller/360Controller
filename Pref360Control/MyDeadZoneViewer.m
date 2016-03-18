@@ -22,7 +22,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+
     [Pref360StyleKit drawDeadZoneViewerWithValue:_val / 32768 linked:_linked];
 }
 

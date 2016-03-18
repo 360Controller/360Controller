@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     MyDigitalStick.m - implementation of digital stick view
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -70,7 +70,7 @@
         {0,1},
         {0,0}
     };
-    
+
     // Find central part
     centre.x = rect.origin.x + (rect.size.width / 2);
     centre.y = rect.origin.y + (rect.size.height / 2);
@@ -91,7 +91,7 @@
 {
     if ((self = [super initWithFrame:frameRect]) != nil) {
         NSRect rect = [self bounds], triangle;
-        
+
         triangle.origin.x = INSET_AMOUNT;
         triangle.origin.y = INSET_AMOUNT;
         triangle.size.width =- INSET_AMOUNT * 2;
@@ -115,7 +115,7 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds];
-    
+
     NSDrawLightBezel(area, area);
     [[NSColor blackColor] set];
     if (bUp) [up fill];

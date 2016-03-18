@@ -1,21 +1,21 @@
 /*
  MICE Xbox 360 Controller driver for Mac OS X
  Copyright (C) 2006-2013 Colin Munro
- 
+
  Controller.cpp - driver class for the 360 controller
- 
+
  This file is part of Xbox360Controller.
- 
+
  Xbox360Controller is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  Xbox360Controller is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
  along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -36,7 +36,7 @@ OSDefineMetaClassAndStructors(Xbox360ControllerClass, IOHIDDevice)
 static Xbox360Peripheral* GetOwner(IOService *us)
 {
 	IOService *prov = us->getProvider();
-    
+
 	if (prov == NULL)
 		return NULL;
 	return OSDynamicCast(Xbox360Peripheral, prov);
@@ -45,7 +45,7 @@ static Xbox360Peripheral* GetOwner(IOService *us)
 static IOUSBDevice* GetOwnerProvider(const IOService *us)
 {
 	IOService *prov = us->getProvider(), *provprov;
-	
+
 	if (prov == NULL)
 		return NULL;
 	provprov = prov->getProvider();
@@ -73,7 +73,7 @@ IOReturn Xbox360ControllerClass::setProperties(OSObject *properties)
 IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descriptor) const
 {
     IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,sizeof(HID_360::ReportDescriptor));
-    
+
     if (buffer == NULL) return kIOReturnNoResources;
     buffer->writeBytes(0,HID_360::ReportDescriptor,sizeof(HID_360::ReportDescriptor));
     *descriptor=buffer;
@@ -84,7 +84,7 @@ IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor **descri
 IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     char data[2];
-    
+
     report->readBytes(0, data, 2);
     if (GetOwner(this)->rumbleType == 1) // Don't Rumble
         return kIOReturnSuccess;
@@ -93,7 +93,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
             if((data[1]!=report->getLength()) || (data[1]!=0x04)) return kIOReturnUnsupported;
 		{
 			XBOX360_OUT_RUMBLE rumble;
-			
+
 			Xbox360_Prepare(rumble,outRumble);
 			report->readBytes(2,data,2);
 			rumble.big=data[0];
@@ -106,7 +106,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
             if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
 		{
 			XBOX360_OUT_LED led;
-			
+
 			report->readBytes(2,data,1);
 			Xbox360_Prepare(led,outLed);
 			led.pattern=data[0];
@@ -152,7 +152,7 @@ OSString* Xbox360ControllerClass::getDeviceString(UInt8 index,const char *def) c
     IOReturn err;
     char buf[1024];
     const char *string;
-    
+
     err = GetOwnerProvider(this)->GetStringDescriptor(index, buf, sizeof(buf));
     if(err==kIOReturnSuccess) string=buf;
     else {
@@ -207,7 +207,7 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
 	IOUSBDevice *device;
     OSNumber *number;
     UInt32 location = 0;
-    
+
 	device = GetOwnerProvider(this);
     if (device)
     {
@@ -220,12 +220,12 @@ OSNumber* Xbox360ControllerClass::newLocationIDNumber() const
             // Make up an address
             if ((number = OSDynamicCast(OSNumber, device->getProperty("USB Address"))))
                 location |= number->unsigned8BitValue() << 24;
-			
+
             if ((number = OSDynamicCast(OSNumber, device->getProperty("idProduct"))))
                 location |= number->unsigned8BitValue() << 16;
         }
     }
-    
+
     return (location != 0) ? OSNumber::withNumber(location, 32) : 0;
 }
 
@@ -249,16 +249,16 @@ void Xbox360ControllerClass::remapButtons(void *buffer)
     new_buttons |= ((report360->buttons & 8192) == 8192) << GetOwner(this)->mapping[12];
     new_buttons |= ((report360->buttons & 16384) == 16384) << GetOwner(this)->mapping[13];
     new_buttons |= ((report360->buttons & 32768) == 32768) << GetOwner(this)->mapping[14];
-    
+
 //    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", GetOwner(this)->mapping[0], GetOwner(this)->mapping[1], GetOwner(this)->mapping[2], GetOwner(this)->mapping[3], GetOwner(this)->mapping[4], GetOwner(this)->mapping[5], GetOwner(this)->mapping[6], GetOwner(this)->mapping[7], GetOwner(this)->mapping[8], GetOwner(this)->mapping[9], GetOwner(this)->mapping[10], GetOwner(this)->mapping[11], GetOwner(this)->mapping[12], GetOwner(this)->mapping[13], GetOwner(this)->mapping[14]);
-    
+
     report360->buttons = new_buttons;
 }
 
 void Xbox360ControllerClass::remapAxes(void *buffer)
 {
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
-    
+
     XBOX360_HAT temp = report360->left;
     report360->left = report360->right;
     report360->right = temp;
@@ -373,7 +373,7 @@ IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descript
             IOLog("%s  %d \n", __FUNCTION__, (int)reportType);
             logData(data, (int)descriptor->getLength());
         }
-        
+
     } else {
         descriptor->readBytes(0, data, descriptor->getLength());
         if (reportType != 0 && data[0] != 0) {
@@ -382,7 +382,7 @@ IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descript
             logData(data, (int)descriptor->getLength());
         }
     }
-    
+
     IOReturn ret = Xbox360ControllerClass::handleReport(descriptor, reportType, options);
     //IOLog("%s END\n", __FUNCTION__);
     return ret;
@@ -391,7 +391,7 @@ IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descript
 IOReturn XboxOriginalControllerClass::setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options)
 {
     char data[2];
-    
+
     report->readBytes(0, data, 2);
     if (GetOwner(this)->rumbleType == 1) // Don't Rumble
         return kIOReturnSuccess;
@@ -412,7 +412,7 @@ IOReturn XboxOriginalControllerClass::setReport(IOMemoryDescriptor *report,IOHID
             if((data[1]!=report->getLength())||(data[1]!=0x03)) return kIOReturnUnsupported;
             // No leds
             return kIOReturnSuccess;
-            
+
         default:
             IOLog("Unknown escape %d\n", data[0]);
             return kIOReturnUnsupported;
@@ -515,7 +515,7 @@ OSString* XboxOneControllerClass::newProductString() const
 UInt16 XboxOneControllerClass::convertButtonPacket(UInt16 buttons)
 {
     UInt16 new_buttons = 0;
-    
+
     new_buttons |= ((buttons & 4) == 4) << 4;
     new_buttons |= ((buttons & 8) == 8) << 5;
     new_buttons |= ((buttons & 16) == 16) << 12;
@@ -530,9 +530,9 @@ UInt16 XboxOneControllerClass::convertButtonPacket(UInt16 buttons)
     new_buttons |= ((buttons & 8192) == 8192) << 9;
     new_buttons |= ((buttons & 16384) == 16384) << 6;
     new_buttons |= ((buttons & 32768) == 32768) << 7;
-    
+
     new_buttons |= (isXboxOneGuideButtonPressed) << 10;
-    
+
     return new_buttons;
 }
 
@@ -542,10 +542,10 @@ void XboxOneControllerClass::convertFromXboxOne(void *buffer, UInt8 packetSize)
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
     UInt8 trigL = 0, trigR = 0;
     XBOX360_HAT left, right;
-    
+
     report360->header.command = 0x00;
     report360->header.size = 0x14;
-    
+
     if (packetSize == 0x1a) // Fight Stick
     {
         if ((0x80 & reportXone->true_trigR) == 0x80) { trigL = 255; }
@@ -558,7 +558,7 @@ void XboxOneControllerClass::convertFromXboxOne(void *buffer, UInt8 packetSize)
     }
     left = reportXone->left;
     right = reportXone->right;
-    
+
     report360->buttons = convertButtonPacket(reportXone->buttons);
     report360->trigL = trigL;
     report360->trigR = trigR;
@@ -589,10 +589,10 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
                     if (!(GetOwner(this)->noMapping))
                         remapButtons(report360);
                     GetOwner(this)->fiddleReport(report360->left, report360->right);
-                    
+
                     if (GetOwner(this)->swapSticks)
                         remapAxes(report360);
-                    
+
                     memcpy(lastData, report360, sizeof(XBOX360_IN_REPORT));
                 }
             }
@@ -650,7 +650,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
                 rumble.little = data[2];
                 rumble.big = data[3];
             }
-            
+
             GetOwner(this)->QueueWrite(&rumble,13);
             return kIOReturnSuccess;
         case 0x01: // Unsupported LED

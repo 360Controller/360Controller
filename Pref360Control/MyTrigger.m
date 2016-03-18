@@ -23,7 +23,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+
     if (_name == NULL)
         _name = @"";
     [Pref360StyleKit drawTriggerMetterWithIntensity:(_val / 255.0) triggerTitle:_name];

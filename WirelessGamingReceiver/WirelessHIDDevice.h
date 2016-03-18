@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     WirelessHIDDevice.h - declaration of generic wireless HID device
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -34,7 +34,7 @@ public:
     void SetLEDs(int mode);
     void PowerOff(void);
     unsigned char GetBatteryLevel(void);
-    
+
     IOReturn setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options);
 
     OSNumber* newLocationIDNumber() const;
@@ -49,10 +49,10 @@ protected:
 private:
     static void _receivedData(void *target, WirelessDevice *sender, void *parameter);
     static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
-    
+
 	IOTimerEventSource *serialTimer;
     int serialTimerCount;
-    
+
     unsigned char battery;
     char serialString[10];
 };

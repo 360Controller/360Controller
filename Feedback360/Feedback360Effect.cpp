@@ -5,7 +5,7 @@
     Based on xi, Copyright (C) 2011 Masahiko Morii
 
     Feedback360Effect.cpp - Main code for the FF plugin
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -34,7 +34,7 @@ Feedback360Effect::Feedback360Effect() : Type(NULL), Status(0), PlayCount(0),
 StartTime(0), Index(0), LastTime(0), Handle(0), DiEffect({0}), DiEnvelope({0}),
 DiCustomForce({0}), DiConstantForce({0}), DiPeriodic({0}), DiRampforce({0})
 {
-    
+
 }
 
 Feedback360Effect::Feedback360Effect(FFEffectDownloadID theHand) : Feedback360Effect()

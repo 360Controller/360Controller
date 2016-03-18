@@ -72,76 +72,76 @@ static UInt8 mapping[15];
             [self setUpPressed:NO];
             [self setDownPressed:YES];
             break;
-            
+
         case 2:
             [self setDownPressed:NO];
             [self setLeftPressed:YES];
             break;
-            
+
         case 3:
             [self setLeftPressed:NO];
             [self setRightPressed:YES];
             break;
-            
+
         case 4:
             [self setRightPressed:NO];
             [self setStartPressed:YES];
             break;
-            
+
         case 5:
             [self setStartPressed:NO];
             [self setBackPressed:YES];
             break;
-            
+
         case 6:
             [self setBackPressed:NO];
             [self setLeftStickPressed:YES];
             break;
-            
+
         case 7:
             [self setLeftStickPressed:NO];
             [self setRightStickPressed:YES];
             break;
-            
+
         case 8:
             [self setRightStickPressed:NO];
             [self setLbPressed:YES];
             break;
-            
+
         case 9:
             [self setLbPressed:NO];
             [self setRbPressed:YES];
             break;
-            
+
         case 10:
             [self setRbPressed:NO];
             [self setHomePressed:YES];
             break;
-            
+
         case 11:
             [self setHomePressed:NO];
             [self setAPressed:YES];
             break;
-            
+
         case 12:
             [self setAPressed:NO];
             [self setBPressed:YES];
             break;
-            
+
         case 13:
             [self setBPressed:NO];
             [self setXPressed:YES];
             break;
-            
+
         case 14:
             [self setXPressed:NO];
             [self setYPressed:YES];
             break;
-            
+
         case 15:
             [self setYPressed:NO];
             break;
-            
+
         default:
             break;
     }

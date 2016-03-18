@@ -1,21 +1,21 @@
 /*
  MICE Xbox 360 Controller driver for Mac OS X
  Copyright (C) 2006-2013 Colin Munro
- 
+
  DeviceLister.m - implementation of a class to list supported devices
- 
+
  This file is part of Xbox360Controller.
- 
+
  Xbox360Controller is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  Xbox360Controller is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
  along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -33,7 +33,7 @@
 static id GetDeviceValue(io_service_t device, NSString *key)
 {
     CFTypeRef value = IORegistryEntrySearchCFProperty(device, kIOServicePlane, (__bridge CFStringRef)key, kCFAllocatorDefault, kIORegistryIterateRecursively);
-	
+
     return CFBridgingRelease(value);
 }
 
@@ -42,7 +42,7 @@ static NSString* SanitiseName(NSString *name)
 {
     NSMutableString *output = [[NSMutableString alloc] initWithCapacity:100];
     NSInteger i;
-    
+
     for (i = 0; i < [name length]; i++)
     {
         unichar c = [name characterAtIndex:i];
@@ -62,7 +62,7 @@ static IOUSBDeviceInterface** GetDeviceInterface(io_service_t device)
     IOUSBDeviceInterface **dev;
     IOReturn err;
     SInt32 score;
-    
+
     if ((IOCreatePlugInInterfaceForService(device, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &iodev, &score) == kIOReturnSuccess) && (iodev != NULL))
     {
         err = (*iodev)->QueryInterface(iodev, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID)&dev);
@@ -80,7 +80,7 @@ static IOUSBInterfaceInterface** GetInterfaceInterface(io_service_t interface)
     IOUSBInterfaceInterface **intf;
     IOReturn err;
     SInt32 score;
-    
+
     if ((IOCreatePlugInInterfaceForService(interface, kIOUSBInterfaceUserClientTypeID, kIOCFPlugInInterfaceID, &iodev, &score) == kIOReturnSuccess) && (iodev != NULL))
     {
         err = (*iodev)->QueryInterface(iodev, CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID), (LPVOID)&intf);
@@ -111,10 +111,10 @@ static BOOL IsXBox360Controller(io_service_t device)
     io_iterator_t iterator;
     io_service_t devInterface;
     IOUSBInterfaceInterface **interfaceInterface;
-    
+
     int interfaceCount;
     UInt8 interfaceNum, classNum, subClassNum, protocolNum, endpointCount;
-    
+
     BOOL devValid;
 
     // Get the interface to the device
@@ -124,7 +124,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     (*interface)->GetDeviceSubClass(interface, &subClassNum);
     (*interface)->GetDeviceProtocol(interface, &protocolNum);
     devValid = (classNum == 0xFF) && (subClassNum == 0xFF) && (protocolNum == 0xFF);
-    
+
     // Search the interfaces
     iRq.bInterfaceClass = kIOUSBFindInterfaceDontCare;
     iRq.bInterfaceSubClass = kIOUSBFindInterfaceDontCare;
@@ -160,10 +160,10 @@ static BOOL IsXBox360Controller(io_service_t device)
         }
         IOObjectRelease(iterator);
     }
-    
+
     // Done
     (*interface)->Release(interface);
-    
+
     return devValid && (interfaceCount >= 3);   // Only 3 in case the security descriptor is missing?
 }
 
@@ -213,32 +213,32 @@ static BOOL IsXBox360Controller(io_service_t device)
     NSData *data;
     NSString *response;
     NSArray *lines;
-    
+
     // Prepare to run the tool
     task = [[NSTask alloc] init];
     [task setLaunchPath:[self toolPath]];
-    
+
     // Hook up the pipe to catch the output
     pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
     error = [NSPipe pipe];
     [task setStandardError:error];
-    
+
     // Run the tool
     [task launch];
     [task waitUntilExit];
-    
+
     // Check result
     if ([task terminationStatus] != 0)
     {
         data = [[error fileHandleForReading] readDataToEndOfFile];
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }
-    
+
     // Read the data back
     data = [[pipe fileHandleForReading] readDataToEndOfFile];
     response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
+
     // Parse the results
     lines = [response componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     for (NSString *line in lines)
@@ -253,7 +253,7 @@ static BOOL IsXBox360Controller(io_service_t device)
         if (entries[key] == nil)
             entries[key] = SanitiseName(values[0]);
     }
-    
+
     return nil;
 }
 
@@ -262,7 +262,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 {
     NSDictionary *known;
     NSArray *keys;
-    
+
     known = GetKnownDevices();
     keys = [known allKeys];
     for (NSNumber *key in keys)
@@ -278,7 +278,7 @@ static BOOL IsXBox360Controller(io_service_t device)
 {
     io_iterator_t iterator = 0;
     io_service_t object;
-    
+
     IOServiceGetMatchingServices([owner masterPort], IOServiceMatching(kIOUSBDeviceClassName), &iterator);
     if (iterator != 0)
     {
@@ -288,17 +288,17 @@ static BOOL IsXBox360Controller(io_service_t device)
             {
                 NSNumber *vendorValue, *productValue;
                 UInt16 vendor,product;
-                
+
                 vendorValue = GetDeviceValue(object, @"idVendor");
                 vendor = [vendorValue intValue];
-                
+
                 productValue = GetDeviceValue(object, @"idProduct");
                 product = [productValue intValue];
-                
+
                 if ((vendorValue != nil) && (productValue != nil))
                 {
                     NSNumber *key = @((UInt32)((vendor << 16) | product));
-                    
+
                     [connected addObject:key];
                     if (entries[key] == nil)
                     {
@@ -331,12 +331,12 @@ static BOOL IsXBox360Controller(io_service_t device)
 - (BOOL)loadDevices
 {
     NSString *error;
-    
+
     // Initialise
     [entries removeAllObjects];
     [connected removeAllObjects];
     [enabled removeAllObjects];
-    
+
     // These can be done in any order, depending on the behaviour desired
     if (error == nil)
         error = [self readKnownDevices];
@@ -344,14 +344,14 @@ static BOOL IsXBox360Controller(io_service_t device)
         error = [self readTool];
     if (error == nil)
         error = [self readIOKit];
-    
+
     // Check for errors
     if (error != nil)
     {
         [self showFailure:error];
         return NO;
     }
-    
+
     // Done
     SetKnownDevices(entries);
     [list reloadData];
@@ -365,7 +365,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     OSStatus status;
     AuthorizationRef authorisationRef;
     BOOL success = NO;
-    
+
     status = AuthorizationCreate(NULL,
                                  kAuthorizationEmptyEnvironment,
                                  kAuthorizationFlagDefaults,
@@ -375,7 +375,7 @@ static BOOL IsXBox360Controller(io_service_t device)
         [self showFailure:Three60LocalizedString(@"Unable to create authorisation request", @"")];
         return NO;
     }
-    
+
     AuthorizationItem right = {kAuthorizationRightExecute, 0, NULL, 0};
     AuthorizationRights rights = {1, &right};
     status = AuthorizationCopyRights(authorisationRef,
@@ -388,16 +388,16 @@ static BOOL IsXBox360Controller(io_service_t device)
         [self showFailure:Three60LocalizedString(@"Unable to acquire authorisation", @"")];
         goto fail;
     }
-    
+
     status = [self writeToolWithAuthorisation:authorisationRef];
     if (status != errAuthorizationSuccess)
     {
         [self showFailure:Three60LocalizedString(@"Failed to execute the driver tool", @"")];
         goto fail;
     }
-    
+
     success = YES;
-    
+
 fail:
     AuthorizationFree(authorisationRef, kAuthorizationFlagDestroyRights);
     return success;
@@ -430,7 +430,7 @@ fail:
         NSNumber *str2 = obj2;
         UInt32 num1 = str1.unsignedIntValue;
         UInt32 num2 = str2.unsignedIntValue;
-        
+
         NSComparisonResult retval;
         if (num1 > num2) {
             retval = NSOrderedAscending;
@@ -460,7 +460,7 @@ fail:
     if ([identifier compare:@"name"] == NSOrderedSame)
     {
         NSColor *colour;
-        
+
         if ([connected containsObject:key])
             colour = [NSColor blueColor];
         else
