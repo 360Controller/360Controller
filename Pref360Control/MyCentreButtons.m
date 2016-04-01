@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     MyCentreButtons.m - implementation of central button view
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -53,7 +53,7 @@
     NSDictionary *attributes;
     NSPoint point;
     NSColor *colour = [NSColor blackColor];
-    
+
     // Draw circle
     [colour set];
     if(down) {

@@ -1,21 +1,21 @@
 /*
  MICE Xbox 360 Controller driver for Mac OS X
  Copyright (C) 2006-2013 Colin Munro
- 
+
  360Daemon.m - main functionality of the support daemon
- 
+
  This file is part of Xbox360Controller.
- 
+
  Xbox360Controller is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  Xbox360Controller is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
  along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -84,7 +84,7 @@ static void ShowAlert(NSInteger index)
                                  (NSString*)kCFUserNotificationAlertMessageKey: NSLocalizedString(alertStrings[index], nil),
                                  (NSString*)kCFUserNotificationCheckBoxTitlesKey: checkBoxes,
                                  (NSString*)kCFUserNotificationIconURLKey: [[NSBundle mainBundle] URLForImageResource:@"Alert"]};
-    
+
     if (AlertDisabled(index))
         return;
 
@@ -106,7 +106,7 @@ static void ConfigureDevice(io_service_t object)
     IOUSBDeviceInterface **dev;
     IOReturn err;
     SInt32 score;
-    
+
     if ((!IOCreatePlugInInterfaceForService(object, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &iodev, &score))&&iodev)
     {
         err = (*iodev)->QueryInterface(iodev, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID)&dev);
@@ -116,7 +116,7 @@ static void ConfigureDevice(io_service_t object)
             if ((*dev)->USBDeviceOpen(dev) == 0)
             {
                 IOUSBConfigurationDescriptorPtr confDesc;
-                
+
                 if ((*dev)->GetConfigurationDescriptorPtr(dev, 0, &confDesc) == 0)
                 {
                     (*dev)->SetConfiguration(dev, confDesc->bConfigurationValue);
@@ -134,7 +134,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
 {
 @autoreleasepool {
     io_service_t object = 0;
-    
+
     while ((object = IOIteratorNext(iterator)) != 0)
     {
 #if 0
@@ -146,7 +146,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
         {
             FFDeviceObjectReference forceFeedback = 0;
             NSString *serialNumber = GetSerialNumber(object);
-            
+
             // Supported device - load settings
             ConfigController(object, GetController(serialNumber));
             // Set LEDs
@@ -157,7 +157,7 @@ static void callbackConnected(void *param,io_iterator_t iterator)
                 FFEFFESCAPE escape = {0};
                 unsigned char c;
                 int i;
-    
+
                 c = 0x0a;
                 if (serialNumber != nil)
                 {
@@ -220,7 +220,7 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
     io_service_t object = 0;
     NSString *serial;
     int i;
-    
+
     while ((object = IOIteratorNext(iterator)) != 0)
     {
 #if 0

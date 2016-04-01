@@ -5,7 +5,7 @@
     based on xi, Copyright (C) 2011 Masahiko Morii
 
     Feedback360Effect.cpp - Main code for the FF plugin
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify

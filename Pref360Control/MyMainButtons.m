@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     MyMainButtons.m - implementation of A/B/X/Y button view
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -62,7 +62,7 @@
     NSPoint point;
     NSColor *colour = [NSColor blackColor];
     NSRect bling = rect;
-    
+
     // Draw circle
     if(down) {
         [path fill];
@@ -87,7 +87,7 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds], bit;
-    
+
     bit.size.width = area.size.width / 3;
     bit.size.height = area.size.height / 3;
     bit.origin.x = area.origin.x + bit.size.width;

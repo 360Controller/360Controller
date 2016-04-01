@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     MyAnalogStick.m - implementation of analog stick view
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -50,12 +50,12 @@
 - (void)setPositionX:(int)positionX
 {
     x = positionX;
-    
+
     if (normalized)
     {
         const UInt16 max16 = 32767;
         float maxVal = max16 - deadzone;
-        
+
         if (x > 0)
             realX = (abs(x) * maxVal / max16) + deadzone + 1;
         else if (x < 0)
@@ -67,19 +67,19 @@
     {
         realX = 0;
     }
-    
+
     self.needsDisplay = YES;
 }
 
 - (void)setPositionY:(int)positionY
 {
     y = positionY;
-    
+
     if (normalized)
     {
         const UInt16 max16 = 32767;
         float maxVal = max16 - deadzone;
-        
+
         if (y > 0)
             realY = (abs(y) * maxVal / max16) + deadzone + 1;
         else if (y < 0)
@@ -91,7 +91,7 @@
     {
         realY = 0;
     }
-    
+
     self.needsDisplay = YES;
 }
 
@@ -109,7 +109,7 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds], deadRect, posRect, realPosRect;
-    
+
     // Compute positions
     // Deadzone
     deadRect.size.width = (deadzone * area.size.width) / 32768;
@@ -131,7 +131,7 @@
     // Draw pressed state
     if(pressed) {
         NSRect pressArea;
-        
+
         pressArea=area;
         pressArea.origin.x += PRESSED_INSET;
         pressArea.origin.y += PRESSED_INSET;
@@ -146,7 +146,7 @@
         if (linked)  NSFrameRect(deadRect);
         else {
             NSRect trueRect;
-            
+
             trueRect = deadRect;
             trueRect.origin.x = area.origin.x;
             trueRect.size.width = area.size.width;

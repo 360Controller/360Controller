@@ -171,7 +171,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+
     [Pref360StyleKit drawX360ControllerWithControllerNumber:0 aPressed:_aPressed bPressed:_bPressed xPressed:_xPressed yPressed:_yPressed leftPressed:_leftPressed upPressed:_upPressed rightPressed:_rightPressed downPressed:_downPressed backPressed:_backPressed startPressed:_startPressed lbPressed:_lbPressed rbPressed:_rbPressed homePressed:_homePressed leftStickPressed:_leftStickPressed rightStickPressed:_rightStickPressed leftStick:_leftStickPosition rightStick:_rightStickPosition leftStickDeadzone:_leftStickDeadzone rightStickDeadzone:_rightStickDeadzone isLeftNormalized:_leftNormalized isRightNormalized:_rightNormalized];
 }
 

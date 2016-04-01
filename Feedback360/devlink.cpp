@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     devlink.c - code to speak to the driver itself
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@ bool Device_Initialise(DeviceLink *link,io_object_t device)
     IOCFPlugInInterface **plugInInterface = NULL;
     SInt32 score = 0;
     IOReturn ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
-    
+
     if (ret!=kIOReturnSuccess) return false;
     ret=(*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID121), (LPVOID*)(&link->interface));
     (*plugInInterface)->Release(plugInInterface);

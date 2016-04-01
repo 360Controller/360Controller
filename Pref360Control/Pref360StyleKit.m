@@ -791,14 +791,14 @@
             CGFloat rightDead = rightDeadzone * 15;
             const CGFloat max16 = 15;
             CGFloat maxVal = max16 - rightDead;
-            
+
             if (rightStickPosition.x > 0)
                 rightStickPosition.x = (fabs(rightStickPosition.x) * maxVal / max16) + rightDead;
             else if (rightStickPosition.x < 0)
                 rightStickPosition.x = -((fabs(rightStickPosition.x) * maxVal / max16) + rightDead);
             else
                 rightStickPosition.x = 0;
-            
+
             if (rightStickPosition.y > 0)
                 rightStickPosition.y = (fabs(rightStickPosition.y) * maxVal / max16) + rightDead;
             else if (rightStickPosition.y < 0)
@@ -899,14 +899,14 @@
             CGFloat leftDead = leftDeadzone * 15;
             const CGFloat max16 = 15;
             CGFloat maxVal = max16 - leftDead;
-            
+
             if (leftStickPosition.x > 0)
                 leftStickPosition.x = (fabs(leftStickPosition.x) * maxVal / max16) + leftDead;
             else if (leftStickPosition.x < 0)
                 leftStickPosition.x = -((fabs(leftStickPosition.x) * maxVal / max16) + leftDead);
             else
                 leftStickPosition.x = 0;
-            
+
             if (leftStickPosition.y > 0)
                 leftStickPosition.y = (fabs(leftStickPosition.y) * maxVal / max16) + leftDead;
             else if (leftStickPosition.y < 0)
@@ -998,8 +998,8 @@
 
         [NSGraphicsContext restoreGraphicsState];
     }
-    
-    
+
+
     //// LEDs
     {
         //// Bezier Drawing
@@ -1013,8 +1013,8 @@
         [bezierPath closePath];
         [led1Color setFill];
         [bezierPath fill];
-        
-        
+
+
         //// Bezier 3 Drawing
         NSBezierPath* bezier3Path = NSBezierPath.bezierPath;
         [bezier3Path moveToPoint: NSMakePoint(235.47, 261.06)];
@@ -1025,8 +1025,8 @@
         [bezier3Path closePath];
         [led2Color setFill];
         [bezier3Path fill];
-        
-        
+
+
         //// Bezier 2 Drawing
         NSBezierPath* bezier2Path = NSBezierPath.bezierPath;
         [bezier2Path moveToPoint: NSMakePoint(259.43, 231.1)];
@@ -1037,8 +1037,8 @@
         [bezier2Path closePath];
         [led4Color setFill];
         [bezier2Path fill];
-        
-        
+
+
         //// Bezier 4 Drawing
         NSBezierPath* bezier4Path = NSBezierPath.bezierPath;
         [bezier4Path moveToPoint: NSMakePoint(205.51, 231.1)];

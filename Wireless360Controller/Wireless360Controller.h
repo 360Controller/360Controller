@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     Wireless360Controller.h - declaration of the wireless controller driver class
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -32,7 +32,7 @@ public:
     bool init(OSDictionary *propTable = NULL);
 
     void SetRumbleMotors(unsigned char large, unsigned char small);
-    
+
     IOReturn setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options);
     IOReturn newReportDescriptor(IOMemoryDescriptor ** descriptor ) const;
 
@@ -55,12 +55,12 @@ protected:
     short deadzoneLeft,deadzoneRight;
     bool relativeLeft,relativeRight;
     bool deadOffLeft, deadOffRight;
-    
+
     UInt8 rumbleType;
-    
+
     bool swapSticks;
     UInt8 mapping[15];
-    
+
 private:
     void fiddleReport(unsigned char *data, int length);
     void remapButtons(void *buffer);

@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     Wireless360Controller.cpp - main source of the standard wireless controller driver
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -34,7 +34,7 @@ OSDefineMetaClassAndStructors(Wireless360Controller, WirelessHIDDevice)
 static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 {
     XBox360_SShort reverse;
-    
+
 #ifdef __LITTLE_ENDIAN__
     reverse=value;
 #elif __BIG_ENDIAN__
@@ -48,14 +48,14 @@ static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 bool Wireless360Controller::init(OSDictionary *propTable)
 {
     bool res = super::init(propTable);
-    
+
     // Default settings
     invertLeftX = invertLeftY = false;
     invertRightX = invertRightY = false;
     deadzoneLeft = deadzoneRight = 0;
     relativeLeft = relativeRight = false;
     readSettings();
-    
+
     // Done
     return res;
 }
@@ -66,7 +66,7 @@ void Wireless360Controller::readSettings(void)
     OSBoolean *value;
     OSNumber *number;
     OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
-    
+
     if(dataDictionary==NULL) return;
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
     if (value != NULL) invertLeftX = value->getValue();
@@ -275,7 +275,7 @@ void Wireless360Controller::remapButtons(void *buffer)
 {
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
     UInt16 new_buttons = 0;
-    
+
     new_buttons |= ((report360->buttons & 1) == 1) << mapping[0];
     new_buttons |= ((report360->buttons & 2) == 2) << mapping[1];
     new_buttons |= ((report360->buttons & 4) == 4) << mapping[2];
@@ -291,16 +291,16 @@ void Wireless360Controller::remapButtons(void *buffer)
     new_buttons |= ((report360->buttons & 8192) == 8192) << mapping[12];
     new_buttons |= ((report360->buttons & 16384) == 16384) << mapping[13];
     new_buttons |= ((report360->buttons & 32768) == 32768) << mapping[14];
-    
+
 //    IOLog("BUTTON PACKET - %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", mapping[0], mapping[1], mapping[2], mapping[3], mapping[4], mapping[5], mapping[6], mapping[7], mapping[8], mapping[9], mapping[10], mapping[11], mapping[12], mapping[13], mapping[14]);
-    
+
     report360->buttons = new_buttons;
 }
 
 void Wireless360Controller::remapAxes(void *buffer)
 {
     XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
-    
+
     XBOX360_HAT temp = report360->left;
     report360->left = report360->right;
     report360->right = temp;
@@ -319,7 +319,7 @@ void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char s
 {
     unsigned char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
     WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
-    
+
     if (device != NULL)
         device->SendPacket(buf, sizeof(buf));
 }
@@ -327,11 +327,11 @@ void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char s
 IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
 {
     char data[2];
-    
+
     // IOLog("setReport(%p, %d, %d)\n", report, reportType, options);
     if (report->readBytes(0, data, 2) < 2)
         return kIOReturnUnsupported;
-        
+
     // Rumble
     if (data[0] == 0x00)
     {
@@ -341,14 +341,14 @@ IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDRepor
         SetRumbleMotors(data[0], data[1]);
         return kIOReturnSuccess;
     }
-    
+
     return super::setReport(report, reportType, options);
 }
 
 IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descriptor ) const
 {
     IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
-    
+
     if (buffer == NULL)
         return kIOReturnNoResources;
     buffer->writeBytes(0, ReportDescriptor, sizeof(ReportDescriptor));
@@ -360,7 +360,7 @@ IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descri
 IOReturn Wireless360Controller::setProperties(OSObject *properties)
 {
     OSDictionary *dictionary = OSDynamicCast(OSDictionary,properties);
-    
+
     if(dictionary!=NULL) {
         setProperty(kDriverSettingKey,dictionary);
         readSettings();

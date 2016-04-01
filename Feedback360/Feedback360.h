@@ -122,7 +122,7 @@ private:
 
     // event loop func
     static void EffectProc( void *params );
-    
+
     // actual member functions ultimately called by the FF API (through the static functions)
     virtual IOReturn Probe ( CFDictionaryRef propertyTable, io_service_t service, SInt32 * order );
     virtual IOReturn Start ( CFDictionaryRef propertyTable, io_service_t service );

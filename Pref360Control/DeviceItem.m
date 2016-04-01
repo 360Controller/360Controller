@@ -1,9 +1,9 @@
 /*
     MICE Xbox 360 Controller driver for Mac OS X
     Copyright (C) 2006-2013 Colin Munro
-    
+
     DeviceItem.m - implementation of device wrapper class
-    
+
     This file is part of Xbox360Controller.
 
     Xbox360Controller is free software; you can redistribute it and/or modify
@@ -27,7 +27,7 @@ static NSString* GetDeviceName(io_service_t device)
     CFMutableDictionaryRef serviceProperties;
     NSDictionary *properties;
     NSString *deviceName = nil;
-    
+
     if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) != KERN_SUCCESS)
         return nil;
     properties = CFBridgingRelease(serviceProperties);
@@ -56,7 +56,7 @@ static NSString* GetDeviceName(io_service_t device)
         IOReturn ret;
         IOCFPlugInInterface **plugInInterface;
         SInt32 score=0;
-        
+
         ret = IOCreatePlugInInterfaceForService(device, kIOHIDDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
         if (ret != kIOReturnSuccess) {
             return nil;
@@ -77,10 +77,10 @@ static NSString* GetDeviceName(io_service_t device)
 + (instancetype)allocateDeviceItemForDevice:(io_service_t)device
 {
     DeviceItem *item = [[[self class] alloc] initWithItemForDevice:device];
-    
+
     if (item)
         return item;
-    
+
     IOObjectRelease(device);
     return nil;
 }

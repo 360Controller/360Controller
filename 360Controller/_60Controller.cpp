@@ -2,21 +2,21 @@
  MICE Xbox 360 Controller driver for Mac OS X
  Copyright (C) 2006-2013 Colin Munro
  Bug fixes contributed by Cody "codeman38" Boisclair
- 
+
  _60Controller.cpp - main source of the driver
- 
+
  This file is part of Xbox360Controller.
- 
+
  Xbox360Controller is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
- 
+
  Xbox360Controller is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License
  along with Foobar; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -55,7 +55,7 @@ public:
 static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 {
     const IOUSBEndpointDescriptor *ed = pipe->GetEndpointDescriptor();
-    
+
     if(ed==NULL) return 0;
     else return ed->wMaxPacketSize;
 }
@@ -63,7 +63,7 @@ static UInt32 GetMaxPacketSize(IOUSBPipe *pipe)
 void Xbox360Peripheral::SendSpecial(UInt16 value)
 {
     IOUSBDevRequest controlReq;
-    
+
     controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBInterface);
     controlReq.bRequest = 0x00;
     controlReq.wValue = value;
@@ -77,7 +77,7 @@ void Xbox360Peripheral::SendSpecial(UInt16 value)
 void Xbox360Peripheral::SendInit(UInt16 value, UInt16 index)
 {
     IOUSBDevRequest controlReq;
-    
+
     controlReq.bmRequestType = USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBDevice);
     controlReq.bRequest = 0xa9;
     controlReq.wValue = value;
@@ -90,7 +90,7 @@ void Xbox360Peripheral::SendInit(UInt16 value, UInt16 index)
 bool Xbox360Peripheral::SendSwitch(bool sendOut)
 {
     IOUSBDevRequest controlReq;
-    
+
     controlReq.bmRequestType = USBmakebmRequestType(sendOut ? kUSBOut : kUSBIn, kUSBVendor, kUSBDevice);
     controlReq.bRequest = 0xa1;
     controlReq.wValue = 0x0000;
@@ -100,7 +100,7 @@ bool Xbox360Peripheral::SendSwitch(bool sendOut)
     IOReturn err = device->DeviceRequest(&controlReq, 100, 100, NULL);
     if (err == kIOReturnSuccess)
         return true;
-    
+
     const char *errStr = device->stringFromReturn(err);
     IOLog("start - failed to %s chatpad setting (%x): %s\n",
           sendOut ? "write" : "read", err, errStr);
@@ -116,7 +116,7 @@ void Xbox360Peripheral::SendToggle(void)
 void Xbox360Peripheral::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
 {
     Xbox360Peripheral *controller;
-    
+
     controller = OSDynamicCast(Xbox360Peripheral, owner);
     controller->ChatPadTimerAction(sender);
 }
@@ -124,7 +124,7 @@ void Xbox360Peripheral::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
 {
     int nextTime, serialGot;
-    
+
     serialGot = 0;
     nextTime = 1000;
     switch (serialTimerState)
@@ -149,7 +149,7 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
                 }
             }
             break;
-            
+
         case tsMiniToggle:
             SendToggle();
             if (serialHeard)
@@ -171,31 +171,31 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
                 }
             }
             break;
-            
+
         case tsReset1:
             SendSpecial(0x1B);
             serialTimerState = tsReset2;
             nextTime = 35;
             break;
-            
+
         case tsReset2:
             SendSpecial(0x1B);
             serialTimerState = tsMiniToggle;
             nextTime = 150;
             break;
-            
+
         case tsSet1:
             SendSpecial(0x18);
             serialTimerState = tsSet2;
             nextTime = 10;
             break;
-            
+
         case tsSet2:
             SendSpecial(0x10);
             serialTimerState = tsSet3;
             nextTime = 10;
             break;
-            
+
         case tsSet3:
             SendSpecial(0x03);
             serialTimerState = tsToggle;
@@ -212,11 +212,11 @@ void Xbox360Peripheral::ChatPadTimerAction(IOTimerEventSource *sender)
         case 1:
             SerialConnect();
             break;
-            
+
         case 2:
             SerialDisconnect();
             break;
-            
+
         default:
             break;
     }
@@ -228,7 +228,7 @@ void Xbox360Peripheral::readSettings(void)
     OSBoolean *value = NULL;
     OSNumber *number = NULL;
     OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
-    
+
     if (dataDictionary == NULL) return;
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
     if (value != NULL) invertLeftX = value->getValue();
@@ -287,7 +287,7 @@ void Xbox360Peripheral::readSettings(void)
     if (value != NULL) swapSticks = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("Pretend360"));
     if (value != NULL) pretend360 = value->getValue();
-    
+
 #if 0
     IOLog("Xbox360Peripheral preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
           invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -351,7 +351,7 @@ bool Xbox360Peripheral::start(IOService *provider)
     IOUSBFindEndpointRequest pipe;
     XBOX360_OUT_LED led;
     IOWorkLoop *workloop = NULL;
-    
+
     if (!super::start(provider))
         return false;
     // Get device
@@ -539,7 +539,7 @@ nochat:
         led.pattern=ledOff;
         QueueWrite(&led,sizeof(led));
     }
-    
+
     // Done
     PadConnect();
     registerService();
@@ -554,7 +554,7 @@ bool Xbox360Peripheral::QueueRead(void)
 {
     IOUSBCompletion complete;
     IOReturn err;
-    
+
     if ((inPipe == NULL) || (inBuffer == NULL))
         return false;
     complete.target=this;
@@ -572,7 +572,7 @@ bool Xbox360Peripheral::QueueSerialRead(void)
 {
     IOUSBCompletion complete;
     IOReturn err;
-    
+
     if ((serialInPipe == NULL) || (serialInBuffer == NULL))
         return false;
     complete.target = this;
@@ -596,7 +596,7 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
     IOBufferMemoryDescriptor *outBuffer;
     IOUSBCompletion complete;
     IOReturn err;
-    
+
     outBuffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,0,length);
     if(outBuffer==NULL) {
         IOLog("send - unable to allocate buffer\n");
@@ -624,7 +624,7 @@ void Xbox360Peripheral::stop(IOService *provider)
 void Xbox360Peripheral::ReleaseAll(void)
 {
     LockRequired locker(mainLock);
-    
+
     SerialDisconnect();
     PadDisconnect();
     if (serialTimer != NULL)
@@ -698,7 +698,7 @@ IOReturn Xbox360Peripheral::message(UInt32 type,IOService *provider,void *argume
 static inline XBox360_SShort getAbsolute(XBox360_SShort value)
 {
     XBox360_SShort reverse;
-    
+
 #ifdef __LITTLE_ENDIAN__
     reverse=value;
 #elif __BIG_ENDIAN__
@@ -714,7 +714,7 @@ void Xbox360Peripheral::normalizeAxis(SInt16& axis, short deadzone)
     static const UInt16 max16=32767;
     const float current=getAbsolute(axis);
     const float maxVal=max16-deadzone;
-    
+
     if (current>deadzone) {
         if (axis<0) {
             axis=max16*(current-deadzone)/maxVal;
@@ -731,12 +731,12 @@ void Xbox360Peripheral::fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right)
 {
     // deadOff - Normalize checkbox is checked if true
     // relative - Linked checkbox is checked if true
-    
+
     if(invertLeftX) left.x=~left.x;
     if(!invertLeftY) left.y=~left.y;
     if(invertRightX) right.x=~right.x;
     if(!invertRightY) right.y=~right.y;
-    
+
     if(deadzoneLeft!=0) {
         if(relativeLeft) {
             if((getAbsolute(left.x)<deadzoneLeft)&&(getAbsolute(left.y)<deadzoneLeft)) {
@@ -752,7 +752,7 @@ void Xbox360Peripheral::fiddleReport(XBOX360_HAT& left, XBOX360_HAT& right)
                 left.x=0;
             else if (deadOffLeft)
                 normalizeAxis(left.x, deadzoneLeft);
-            
+
             if(getAbsolute(left.y)<deadzoneLeft)
                 left.y=0;
             else if (deadOffLeft)
@@ -810,7 +810,7 @@ void Xbox360Peripheral::ReadComplete(void *parameter,IOReturn status,UInt32 buff
         LockRequired locker(mainLock);
         IOReturn err;
         bool reread=!isInactive();
-        
+
         switch(status) {
             case kIOReturnOverrun:
                 IOLog("read - kIOReturnOverrun, clearing stall\n");
@@ -848,7 +848,7 @@ void Xbox360Peripheral::SerialReadComplete(void *parameter, IOReturn status, UIn
     {
         LockRequired locker(mainLock);
         bool reread = !isInactive();
-        
+
         switch (status)
         {
             case kIOReturnOverrun:
@@ -861,12 +861,12 @@ void Xbox360Peripheral::SerialReadComplete(void *parameter, IOReturn status, UIn
                 if (serialInBuffer != NULL)
                     SerialMessage(serialInBuffer, serialInBuffer->getCapacity() - bufferSizeRemaining);
                 break;
-                
+
             case kIOReturnNotResponding:
                 IOLog("read (serial) - kIOReturnNotResponding\n");
                 reread = false;
                 break;
-                
+
             default:
                 reread = false;
                 break;
@@ -905,7 +905,7 @@ void Xbox360Peripheral::MakeSettingsChanges()
             PadConnect();
         }
     }
-    
+
     noMapping = true;
     UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
     for (int i = 0; i < 15; i++)
@@ -923,16 +923,16 @@ void Xbox360Peripheral::MakeSettingsChanges()
 IOReturn Xbox360Peripheral::setProperties(OSObject *properties)
 {
     OSDictionary *dictionary;
-    
+
     dictionary=OSDynamicCast(OSDictionary,properties);
-    
+
     if(dictionary!=NULL) {
         dictionary->setObject(OSString::withCString("ControllerType"), OSNumber::withNumber(controllerType, 8));
         setProperty(kDriverSettingKey,dictionary);
         readSettings();
-        
+
         MakeSettingsChanges();
-        
+
         return kIOReturnSuccess;
     } else return kIOReturnBadArgument;
 }
