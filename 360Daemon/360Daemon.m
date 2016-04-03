@@ -26,6 +26,8 @@
 #include <IOKit/hid/IOHIDLib.h>
 #include <IOKit/hid/IOHIDKeys.h>
 #include <IOKit/usb/IOUSBLib.h>
+#include <IOKit/pwr_mgt/IOPMLib.h>
+#include <IOKit/IOMessage.h>
 #include <ForceFeedback/ForceFeedback.h>
 #import "ControlPrefs.h"
 #import "DaemonLEDs.h"
@@ -43,6 +45,8 @@ static io_iterator_t onIteratorWireless;
 static io_iterator_t onIteratorOther;
 static io_iterator_t offIteratorWired;
 static io_iterator_t offIteratorWireless;
+static io_object_t powerNotifier;
+static io_connect_t root_power_port; // a reference to the Root Power Domain IOService
 static BOOL foundWirelessReceiver;
 static DaemonLEDs *leds;
 
@@ -247,12 +251,50 @@ static void callbackDisconnected(void *param, io_iterator_t iterator)
 }
 }
 
+static void callbackPower(void *refCon, io_service_t service, natural_t messageType, void *messageArgument)
+{
+    switch (messageType)
+    {
+        case kIOMessageCanSystemSleep:
+            // we will allow idle sleep
+            IOAllowPowerChange(root_power_port, (long)messageArgument);
+            break;
+            
+        case kIOMessageSystemWillSleep:
+            IOAllowPowerChange(root_power_port, (long)messageArgument);
+            break;
+            
+        case kIOMessageSystemHasPoweredOn:
+            //System has finished waking up...
+        {
+            io_iterator_t newItr;
+            IOServiceGetMatchingServices(masterPort, IOServiceMatching(kIOUSBDeviceClassName), &newItr);
+            callbackConnected(NULL, newItr);
+            IOObjectRelease(newItr);
+            // Wired 360 devices
+            IOServiceGetMatchingServices(masterPort, IOServiceMatching("Xbox360ControllerClass"), &newItr);
+            callbackConnected(NULL, newItr);
+            IOObjectRelease(newItr);
+            // Wireless 360 devices
+            IOServiceGetMatchingServices(masterPort, IOServiceMatching("WirelessHIDDevice"), &newItr);
+            callbackConnected(NULL, newItr);
+            IOObjectRelease(newItr);
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 // Entry point
 int main (int argc, const char * argv[])
 {
 @autoreleasepool {
     foundWirelessReceiver = NO;
     leds = [[DaemonLEDs alloc] init];
+    // notification port allocated by IORegisterForSystemPower
+    IONotificationPortRef sleepNotifyPort;
     // Get master port, for accessing I/O Kit
     IOMasterPort(MACH_PORT_NULL,&masterPort);
     // Set up notification of USB device addition/removal
@@ -273,6 +315,18 @@ int main (int argc, const char * argv[])
     callbackConnected(NULL, onIteratorWireless);
     IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
     callbackDisconnected(NULL, offIteratorWireless);
+    // wake/sleep watching
+    root_power_port = IORegisterForSystemPower(NULL, &sleepNotifyPort, callbackPower, &powerNotifier);
+    if (root_power_port == 0)
+    {
+        printf("IORegisterForSystemPower failed\n");
+    }
+    else
+    {
+        CFRunLoopAddSource(CFRunLoopGetCurrent(),
+                           IONotificationPortGetRunLoopSource(sleepNotifyPort), kCFRunLoopCommonModes);
+    }
+
     // Run loop
     CFRunLoopRun();
     // Stop listening
@@ -284,6 +338,14 @@ int main (int argc, const char * argv[])
     CFRunLoopRemoveSource(CFRunLoopGetCurrent(), notifySource, kCFRunLoopCommonModes);
     CFRunLoopSourceInvalidate(notifySource);
     IONotificationPortDestroy(notifyPort);
+    if (root_power_port) {
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(),
+                              IONotificationPortGetRunLoopSource(sleepNotifyPort),
+                              kCFRunLoopCommonModes);
+        IODeregisterForSystemPower(&powerNotifier);
+        IOServiceClose(root_power_port);
+        IONotificationPortDestroy(sleepNotifyPort);
+    }
     // End
 }
     return 0;
