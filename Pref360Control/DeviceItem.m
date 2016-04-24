@@ -38,14 +38,13 @@ static NSString* GetDeviceName(io_service_t device)
 }
 
 @interface DeviceItem ()
-@property (strong, readwrite) NSString *name;
+@property (strong, readwrite) NSString *deviceName;
 @property (readwrite) io_service_t rawDevice;
 @property (readwrite) FFDeviceObjectReference ffDevice;
 @property (readwrite) IOHIDDeviceInterface122 **hidDevice;
 @end
 
 @implementation DeviceItem
-@synthesize name = deviceName;
 @synthesize rawDevice = deviceHandle;
 @synthesize ffDevice = forceFeedback;
 @synthesize hidDevice = interface;
@@ -69,7 +68,7 @@ static NSString* GetDeviceName(io_service_t device)
         forceFeedback = 0;
         FFCreateDevice(device, &forceFeedback);
         self.rawDevice = device;
-        self.name = GetDeviceName(device);
+        self.deviceName = GetDeviceName(device);
     }
     return self;
 }
@@ -93,6 +92,12 @@ static NSString* GetDeviceName(io_service_t device)
         (*interface)->Release(interface);
     if (forceFeedback)
         FFReleaseDevice(forceFeedback);
+}
+
+- (NSString *)displayName {
+    if (self.deviceName == nil)
+        return @"Generic Controller";
+    return self.deviceName;
 }
 
 @end

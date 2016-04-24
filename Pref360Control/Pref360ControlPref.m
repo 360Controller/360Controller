@@ -763,9 +763,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         DeviceItem *item = [DeviceItem allocateDeviceItemForDevice:hidDevice];
         if (item == nil) continue;
         // Add to item
-        NSString *name = item.name;
-        if (name == nil)
-            name = @"Generic Controller";
+        NSString *name = item.displayName;
         [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceListBinding addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
         [_deviceListAdvanced addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", count, name, deviceWireless ? @"Wireless" : @"Wired"]];
