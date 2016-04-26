@@ -140,7 +140,10 @@ static ControllerType GetControllerType(io_service_t device)
 - (NSString *)displayName {
     if (self.deviceName == nil)
         return @"Generic Controller";
-    return self.deviceName;
+    else if (self.controllerType == XboxOnePretend360Controller)
+        return @"Xbox One Controller (Xbox 360)";
+    else
+        return self.deviceName;
 }
 
 @end
