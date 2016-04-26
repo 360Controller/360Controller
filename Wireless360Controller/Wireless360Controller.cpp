@@ -55,6 +55,16 @@ bool Wireless360Controller::init(OSDictionary *propTable)
     deadzoneLeft = deadzoneRight = 0;
     relativeLeft = relativeRight = false;
     readSettings();
+    // Bindings
+    noMapping = true;
+    for (int i = 0; i < 11; i++)
+    {
+        mapping[i] = i;
+    }
+    for (int i = 12; i < 16; i++)
+    {
+        mapping[i-1] = i;
+    }
 
     // Done
     return res;
@@ -123,6 +133,17 @@ void Wireless360Controller::readSettings(void)
     if (number != NULL) mapping[14] = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
     if (value != NULL) swapSticks = value->getValue();
+    
+    noMapping = true;
+    UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
+    for (int i = 0; i < 15; i++)
+    {
+        if (normalMapping[i] != mapping[i])
+        {
+            noMapping = false;
+            break;
+        }
+    }
 #if 0
     IOLog("Xbox360ControllerClass preferences loaded:\n  invertLeft X: %s, Y: %s\n   invertRight X: %s, Y:%s\n  deadzone Left: %d, Right: %d\n\n",
             invertLeftX?"True":"False",invertLeftY?"True":"False",
@@ -309,7 +330,8 @@ void Wireless360Controller::remapAxes(void *buffer)
 void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
 {
     fiddleReport(data, length);
-//    remapButtons(data);
+    if (!noMapping)
+        remapButtons(data);
     if (swapSticks)
         remapAxes(data);
     super::receivedHIDupdate(data, length);
