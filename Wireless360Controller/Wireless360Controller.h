@@ -60,6 +60,7 @@ protected:
 
     bool swapSticks;
     UInt8 mapping[15];
+    bool noMapping = true;
 
 private:
     void fiddleReport(unsigned char *data, int length);
