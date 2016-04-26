@@ -434,6 +434,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         device = [item hidDevice];
         ffDevice = [item ffDevice];
         registryEntry = [item rawDevice];
+        controllerType = [item controllerType];
     }
 
     if((*device)->copyMatchingElements(device,NULL,&CFelements)!=kIOReturnSuccess) {
@@ -603,7 +604,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("ControllerType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
-                controllerType = (ControllerType)[num integerValue];
+                ControllerType controllerTypePrefs = (ControllerType)[num integerValue];
+                if (controllerTypePrefs != controllerType)
+                    NSLog(@"ControllerType from prefs was %d, expected %d", (int)controllerTypePrefs, (int)controllerType);
             } else NSLog(@"No value for ControllerType\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RumbleType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
@@ -902,6 +905,15 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertX setState:[_rightStickInvertXAlt state]];
         [_rightStickInvertY setState:[_rightStickInvertYAlt state]];
     }
+    
+    BOOL pretend360 = ([_pretend360Button state] == NSOnState);
+    if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
+    {
+        if (pretend360)
+            controllerType = XboxOnePretend360Controller;
+        else
+            controllerType = XboxOneController;
+    }
 
     // Create dictionary
     NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==NSOnState)),
@@ -932,7 +944,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
                            @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
                            @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState)),
-                           @"Pretend360": @((BOOL)([_pretend360Button state]==NSOnState))};
+                           @"Pretend360": @((BOOL)pretend360)};
 
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
