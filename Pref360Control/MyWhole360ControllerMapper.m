@@ -156,7 +156,14 @@ static UInt8 mapping[15];
     }
 }
 
+- (void)resetWithOwner:(Pref360ControlPref *)prefPref {
+    pref = prefPref;
+    [self reset];
+}
+
 - (void)reset {
+    if (pref == nil)
+        NSLog(@"Unable to reset remapping (pref is nil)");
     [super reset];
     _isMapping = NO;
     [self resetMapping];
