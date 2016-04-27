@@ -26,9 +26,11 @@
 #include <IOKit/hid/IOHIDLib.h>
 #include <IOKit/hid/IOHIDKeys.h>
 #include <ForceFeedback/ForceFeedback.h>
+#import "Pref360ControlPref.h"
 
 @interface DeviceItem : NSObject
-@property (strong, readonly) NSString *name;
+@property (strong, readonly) NSString *displayName;
+@property (readonly) ControllerType controllerType;
 @property (readonly) io_service_t rawDevice;
 @property (readonly) FFDeviceObjectReference ffDevice;
 @property (readonly) IOHIDDeviceInterface122 **hidDevice;

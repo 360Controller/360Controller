@@ -37,15 +37,56 @@ static NSString* GetDeviceName(io_service_t device)
     return deviceName;
 }
 
+static ControllerType GetControllerType(io_service_t device)
+{
+    io_service_t parent;
+    CFMutableDictionaryRef serviceProperties;
+    
+    // Check for the DeviceData dictionary in device
+    if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) == KERN_SUCCESS)
+    {
+        NSDictionary *properties = CFBridgingRelease(serviceProperties);
+        NSDictionary *deviceData = properties[@"DeviceData"];
+        
+        if (deviceData != nil)
+        {
+            NSNumber *controllerType = deviceData[@"ControllerType"];
+            if (controllerType != nil)
+                return (ControllerType)[controllerType intValue];
+        }
+    }
+    
+    // Check for the DeviceData dictionary in the device's parent
+    if (IORegistryEntryGetParentEntry(device, kIOServicePlane, &parent) == KERN_SUCCESS)
+    {
+        if(IORegistryEntryCreateCFProperties(parent, &serviceProperties, kCFAllocatorDefault, kNilOptions) == KERN_SUCCESS)
+        {
+            NSDictionary *properties = CFBridgingRelease(serviceProperties);
+            NSDictionary *deviceData = properties[@"DeviceData"];
+            
+            if (deviceData != nil)
+            {
+                NSNumber *controllerType = deviceData[@"ControllerType"];
+                if (controllerType != nil)
+                    return (ControllerType)[controllerType intValue];
+            }
+        }
+    }
+    
+    NSLog(@"Error: couldn't find ControllerType");
+    return Xbox360Controller;
+}
+
 @interface DeviceItem ()
-@property (strong, readwrite) NSString *name;
+@property (strong, readwrite) NSString *deviceName;
+@property (readwrite) ControllerType controllerType;
 @property (readwrite) io_service_t rawDevice;
 @property (readwrite) FFDeviceObjectReference ffDevice;
 @property (readwrite) IOHIDDeviceInterface122 **hidDevice;
 @end
 
 @implementation DeviceItem
-@synthesize name = deviceName;
+@synthesize controllerType = controllerType;
 @synthesize rawDevice = deviceHandle;
 @synthesize ffDevice = forceFeedback;
 @synthesize hidDevice = interface;
@@ -69,7 +110,8 @@ static NSString* GetDeviceName(io_service_t device)
         forceFeedback = 0;
         FFCreateDevice(device, &forceFeedback);
         self.rawDevice = device;
-        self.name = GetDeviceName(device);
+        self.deviceName = GetDeviceName(device);
+        self.controllerType = GetControllerType(device);
     }
     return self;
 }
@@ -93,6 +135,15 @@ static NSString* GetDeviceName(io_service_t device)
         (*interface)->Release(interface);
     if (forceFeedback)
         FFReleaseDevice(forceFeedback);
+}
+
+- (NSString *)displayName {
+    if (self.deviceName == nil)
+        return @"Generic Controller";
+    else if (self.controllerType == XboxOnePretend360Controller)
+        return @"Xbox One Controller (Xbox 360)";
+    else
+        return self.deviceName;
 }
 
 @end

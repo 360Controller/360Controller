@@ -673,7 +673,7 @@ OSDefineMetaClassAndStructors(XboxOnePretend360Class, XboxOneControllerClass)
 
 OSString* XboxOnePretend360Class::newProductString() const
 {
-    return OSString::withCString("Xbox One Wired Controller (Xbox 360)");
+    return OSString::withCString("Xbox 360 Wired Controller");
 }
 
 OSNumber* XboxOnePretend360Class::newProductIDNumber() const
