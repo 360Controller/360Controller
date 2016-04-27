@@ -88,8 +88,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_rumbleOptions removeAllItems];
     [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
-    if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
-        [_rumbleOptions addItemsWithTitles:@[@"Triggers Only", @"Both"]];
 }
 
 // Set the pattern on the LEDs
@@ -435,6 +433,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         ffDevice = [item ffDevice];
         registryEntry = [item rawDevice];
         controllerType = [item controllerType];
+        
+        if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
+        {
+            [_rumbleOptions removeAllItems];
+            [_rumbleOptions addItemsWithTitles:@[@"Default", @"None", @"Triggers Only", @"Both"]];
+        }
+        else
+        {
+            [_rumbleOptions removeAllItems];
+            [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
+        }
     }
 
     if((*device)->copyMatchingElements(device,NULL,&CFelements)!=kIOReturnSuccess) {
