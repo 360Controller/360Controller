@@ -60,8 +60,8 @@ static UInt8 previousMapping[15];
     pref = prefPref;
     remappingButton = button;
     [self saveCurrentMapping];
-//    [self resetMapping];
-//    [pref changeSetting:nil];
+    [self resetMapping];
+    [pref changeSetting:nil];
     [self startMapping];
 }
 
