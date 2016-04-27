@@ -51,6 +51,10 @@ static UInt8 mapping[15];
     [self startMapping];
 }
 
+- (void)cancelMappingWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)prefPref {
+    [self resetWithOwner:prefPref];
+}
+
 - (int)realignButtonToByte:(int)index {
     if (index == 0) return 12;
     if (index == 1) return 13;
