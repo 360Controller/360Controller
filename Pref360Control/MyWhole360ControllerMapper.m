@@ -18,6 +18,7 @@
 }
 
 static UInt8 mapping[15];
+static UInt8 previousMapping[15];
 
 + (UInt8 *)mapping
 {
@@ -43,16 +44,33 @@ static UInt8 mapping[15];
     [pref changeSetting:nil];
 }
 
+- (void)saveCurrentMapping {
+    for (int i = 0; i < 15; i++) {
+        previousMapping[i] = mapping[i];
+    }
+}
+
+- (void)restorePreviousMapping {
+    for (int i = 0; i < 15; i++) {
+        mapping[i] = previousMapping[i];
+    }
+}
+
 - (void)runMapperWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)prefPref {
     pref = prefPref;
     remappingButton = button;
+    [self saveCurrentMapping];
 //    [self resetMapping];
 //    [pref changeSetting:nil];
     [self startMapping];
 }
 
 - (void)cancelMappingWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)prefPref {
-    [self resetWithOwner:prefPref];
+    pref = prefPref;
+    remappingButton = button;
+    
+    [self restorePreviousMapping];
+    [self stopMapping];
 }
 
 - (int)realignButtonToByte:(int)index {
