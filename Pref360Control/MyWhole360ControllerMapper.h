@@ -14,7 +14,9 @@
 
 @property BOOL isMapping;
 
-- (void)runMapperWithButton:(NSButton *)button  andOwner:(Pref360ControlPref *)pref;
+- (void)runMapperWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)pref;
+- (void)cancelMappingWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)pref;
+- (void)resetWithOwner:(Pref360ControlPref *)pref;
 - (void)buttonPressedAtIndex:(int)index;
 + (UInt8 *)mapping;
 

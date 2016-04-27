@@ -1135,12 +1135,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     if (![_wholeControllerMapper isMapping])
         [_wholeControllerMapper runMapperWithButton:_remappingButton andOwner:self];
     else
-        [_wholeControllerMapper reset];
+        [_wholeControllerMapper cancelMappingWithButton:_remappingButton andOwner:self];
 }
 
 - (IBAction)resetRemappingPressed:(id)sender {
     [_remappingButton setState:NSOffState];
-    [_wholeControllerMapper reset];
+    [_wholeControllerMapper resetWithOwner:self];
 }
 
 - (IBAction)pretend360Checked:(id)sender {
