@@ -24,14 +24,31 @@ static UInt8 mapping[15];
     return mapping;
 }
 
+- (void)startMapping
+{
+    currentMappingIndex = 0;
+    _isMapping = YES;
+    [self setUpPressed:YES];
+}
+
+- (void)stopMapping
+{
+    [super reset];
+    currentMappingIndex = 0;
+    _isMapping = NO;
+    if (remappingButton != nil)
+        [remappingButton setState:NSOffState];
+    [pref changeSetting:nil];
+    [[BindingTableView tableView] reloadData];
+    [pref changeSetting:nil];
+}
+
 - (void)runMapperWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)prefPref {
     pref = prefPref;
     remappingButton = button;
 //    [self resetMapping];
 //    [pref changeSetting:nil];
-    currentMappingIndex = 0;
-    _isMapping = YES;
-    [self setUpPressed:YES];
+    [self startMapping];
 }
 
 - (int)realignButtonToByte:(int)index {
@@ -57,13 +74,8 @@ static UInt8 mapping[15];
     mapping[currentMappingIndex] = [self realignButtonToByte:index];
     currentMappingIndex++;
     [self setButtonAtIndex:currentMappingIndex];
-    if (currentMappingIndex == 15) {
-        _isMapping = NO;
-        currentMappingIndex = 0;
-        [remappingButton setState:NSOffState];
-        [[BindingTableView tableView] reloadData];
-        [pref changeSetting:nil];
-    }
+    if (currentMappingIndex == 15)
+        [self stopMapping];
 }
 
 - (void)setButtonAtIndex:(int)index {
@@ -164,13 +176,8 @@ static UInt8 mapping[15];
 - (void)reset {
     if (pref == nil)
         NSLog(@"Unable to reset remapping (pref is nil)");
-    [super reset];
-    _isMapping = NO;
     [self resetMapping];
-    [remappingButton setState:NSOffState];
-    [pref changeSetting:nil];
-    [[BindingTableView tableView] reloadData];
-    [pref changeSetting:nil];
+    [self stopMapping];
 }
 
 - (void)awakeFromNib {
