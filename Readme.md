@@ -26,6 +26,11 @@ If you are interested in installing as a developer please see below.
 [2]: https://github.com/360Controller/360Controller/releases
 
 
+## Uninstall ##
+
+System Preferences -> Xbox 360 Controllers -> Advanced Tab -> Uninstall button.
+
+
 ## Usage ##
 
 The driver exposes a standard game pad with a number of standard controls, so
