@@ -40,6 +40,9 @@ If you have a third party controller, make an issue with the "Product ID" and "V
 ### Wireless Xbox One Controllers
 Wireless Xbox One controllers are currently not supported. Please be patient as we figure out this complicated protocol.
 
+### My Xbox One controller doesn't work with a game!
+It is entirely possible that the game doesn't work with controllers, but to get best compatibility from your Xbox One controllers you need to change a setting. First open up the preference pane, navigate to the "Advanced" tab, and check "Pretend to be an Xbox 360 Controller."
+
 ## Developer Info
 Drivers inherently modify the core operating system kernel. Using the driver as a developer can lead to dangerous kernel panics that can cause data loss or other permanent damage to your computer. Be very careful about how you use this information. We are not responsible for anything this driver does to your computer, or any loss it may incur. Normal users will never have to worry about the developer section of this README.
 
