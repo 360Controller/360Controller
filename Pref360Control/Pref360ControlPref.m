@@ -619,7 +619,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             } else NSLog(@"No value for ControllerType\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RumbleType"),(void*)&intValue)) {
                 NSNumber *num = (__bridge NSNumber *)intValue;
-                [_rumbleOptions setState:[num integerValue]];
+                [_rumbleOptions selectItemAtIndex:[num integerValue]];
+//                [_rumbleOptions setState:[num integerValue]];
             } else NSLog(@"No value for RumbleType\n");
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("BindingUp"),(void*)&intValue)) {
