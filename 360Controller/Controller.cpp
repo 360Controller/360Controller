@@ -607,7 +607,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
     //    IOLog("Xbox One Controller - setReport\n");
     unsigned char data[4];
     report->readBytes(0, &data, 4);
-    //    IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
+//        IOLog("Attempting to send: %d %d %d %d\n",((unsigned char*)data)[0], ((unsigned char*)data)[1], ((unsigned char*)data)[2], ((unsigned char*)data)[3]);
     UInt8 rumbleType;
     switch(data[0])//(header.command)
     {
@@ -615,7 +615,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
             XBOXONE_OUT_RUMBLE rumble;
             rumble.header.command = 0x09;
             rumble.header.reserved1 = 0x00;
-            rumble.header.counter = outCounter++;
+            rumble.header.counter = (GetOwner(this)->outCounter)++;
             rumble.header.size = 0x09;
             rumble.mode = 0x00;
             rumble.rumbleMask = 0x0F;
@@ -650,7 +650,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
                 rumble.little = data[2];
                 rumble.big = data[3];
             }
-
+            
             GetOwner(this)->QueueWrite(&rumble,13);
             return kIOReturnSuccess;
         case 0x01: // Unsupported LED

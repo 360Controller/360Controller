@@ -120,6 +120,7 @@ public:
     UInt8 mapping[15];
     bool noMapping = true;
     bool pretend360; // Change VID and PID to MS 360 Controller
+    UInt8 outCounter = 6;
 
     // this is from the IORegistryEntry - no provider yet
     virtual bool init(OSDictionary *propTable);

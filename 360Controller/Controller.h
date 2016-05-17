@@ -93,7 +93,6 @@ class XboxOneControllerClass : public Xbox360ControllerClass
 
 protected:
     UInt8 lastData[20];
-    UInt8 outCounter = 6;
     bool isXboxOneGuideButtonPressed;
     void reorderButtons(UInt16* buttons, UInt8 mapping[]);
     UInt16 convertButtonPacket(UInt16 buttons);
