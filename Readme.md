@@ -71,6 +71,7 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 * Select the `Build Settings` tab from the top of the screen.
 * In the `Code Signing` section, find `Code Signing Identity` section and expand it.
 * In the `Release` section, change the selection to `Don't Code Sign`.
+* Set the code signing identity for `360Daemon`, `Feedback360`, `360Controller`, `DriverTool`, `Pref360Control`, `Wireless360Controller`, `WirelessGamingReceiver` and `Whole Driver`.
 * Run `./build.sh` to build the .pkg. This .pkg can be found in the `Install360Controller` directory.
 
 #### If you have a signing certificate
@@ -81,6 +82,7 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 * Select the `Build Settings` tab from the top of the screen.
 * In the `Code Signing` section, find `Code Signing Identity` section and expand it.
 * In the `Release` section, change the selection to your `Developer ID Application` certificate.
+* Set the code signing identity for `360Daemon`, `Feedback360`, `360Controller`, `DriverTool`, `Pref360Control`, `Wireless360Controller`, `WirelessGamingReceiver` and `Whole Driver`.
 * Run `./build.sh` to build the .pkg. This .pkg can be found in the `Install360Controller` directory.
 
 ### Disabling signing requirements
