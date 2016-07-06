@@ -87,12 +87,12 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSSlider *leftStickDeadzoneAlt;
 @property (weak) IBOutlet NSButton *leftStickInvertXAlt;
 @property (weak) IBOutlet NSButton *leftStickInvertYAlt;
+@property (weak) IBOutlet NSButton *leftStickNormalize;
 @property (weak) IBOutlet NSButton *rightLinkedAlt;
 @property (weak) IBOutlet NSSlider *rightStickDeadzoneAlt;
 @property (weak) IBOutlet NSButton *rightStickInvertXAlt;
 @property (weak) IBOutlet NSButton *rightStickInvertYAlt;
-@property (weak) IBOutlet NSButton *normalizeDeadzoneLeft;
-@property (weak) IBOutlet NSButton *normalizeDeadzoneRight;
+@property (weak) IBOutlet NSButton *rightStickNormalize;
 @property (weak) IBOutlet NSButton *pretend360Button;
 
 // About Tab

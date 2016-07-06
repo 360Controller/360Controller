@@ -337,6 +337,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_leftStickInvertYAlt setEnabled:enable];
     [_leftLinked setEnabled:enable];
     [_leftLinkedAlt setEnabled:enable];
+    [_leftStickNormalize setEnabled:enable];
     [_rightStickDeadzone setEnabled:enable];
     [_rightStickDeadzoneAlt setEnabled:enable];
     [_rightStickInvertX setEnabled:enable];
@@ -345,8 +346,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [_rightStickInvertYAlt setEnabled:enable];
     [_rightLinked setEnabled:enable];
     [_rightLinkedAlt setEnabled:enable];
-    [_normalizeDeadzoneLeft setEnabled:enable];
-    [_normalizeDeadzoneRight setEnabled:enable];
+    [_rightStickNormalize setEnabled:enable];
     [_rumbleOptions setEnabled:enable];
     [_swapSticks setEnabled:enable];
     [_pretend360Button setEnabled:enable];
@@ -575,6 +575,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_leftDeadZone setLinked:enable];
                 [_leftStickAnalog setLinked:enable];
             } else NSLog(@"No value for RelativeLeft\n");
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadOffLeft"),(void*)&boolValue)) {
+                BOOL enable=CFBooleanGetValue(boolValue);
+                [_leftStickNormalize setState:enable];
+                [_wholeController setLeftNormalized:enable];
+                [_leftStickAnalog setNormalized:enable];
+            } else NSLog(@"No value for DeadOffLeft\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadzoneLeft"),(void*)&intValue)) {
                 UInt16 i;
 
@@ -601,6 +607,12 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_wholeController setRightStickDeadzone:i];
                 [_rightStickAnalog setLinked:enable];
             } else NSLog(@"No value for RelativeRight\n");
+            if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadOffRight"),(void*)&boolValue)) {
+                BOOL enable=CFBooleanGetValue(boolValue);
+                [_rightStickNormalize setState:enable];
+                [_wholeController setRightNormalized:enable];
+                [_rightStickAnalog setNormalized:enable];
+            } else NSLog(@"No value for DeadOffRight\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("DeadzoneRight"),(void*)&intValue)) {
                 UInt16 i;
 
@@ -887,10 +899,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)changeSetting:(id)sender
 {
     // Send normalize to joysticks
-    [_wholeController setLeftNormalized:(BOOL)[_normalizeDeadzoneLeft state]];
-    [_leftStickAnalog setNormalized:(BOOL)[_normalizeDeadzoneLeft state]];
-    [_wholeController setRightNormalized:(BOOL)[_normalizeDeadzoneRight state]];
-    [_rightStickAnalog setNormalized:(BOOL)[_normalizeDeadzoneRight state]];
+    [_wholeController setLeftNormalized:(BOOL)[_leftStickNormalize state]];
+    [_leftStickAnalog setNormalized:(BOOL)[_leftStickNormalize state]];
+    [_wholeController setRightNormalized:(BOOL)[_rightStickNormalize state]];
+    [_rightStickAnalog setNormalized:(BOOL)[_rightStickNormalize state]];
 
     // Sync settings between tabs
     NSInteger tabIndex = [_tabView indexOfTabViewItem:[_tabView selectedTabViewItem]];
@@ -934,8 +946,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"DeadzoneRight": @((UInt16)[_rightStickDeadzone doubleValue]),
                            @"RelativeLeft": @((BOOL)([_leftLinked state]==NSOnState)),
                            @"RelativeRight": @((BOOL)([_rightLinked state]==NSOnState)),
-                           @"DeadOffLeft": @((BOOL)([_normalizeDeadzoneLeft state]==NSOnState)),
-                           @"DeadOffRight": @((BOOL)([_normalizeDeadzoneRight state]==NSOnState)),
+                           @"DeadOffLeft": @((BOOL)([_leftStickNormalize state]==NSOnState)),
+                           @"DeadOffRight": @((BOOL)([_rightStickNormalize state]==NSOnState)),
                            @"ControllerType": @((UInt8)(controllerType)),
                            @"RumbleType": @((UInt8)([_rumbleOptions indexOfSelectedItem])),
                            @"BindingUp": @((UInt8)([MyWhole360ControllerMapper mapping][0])),
