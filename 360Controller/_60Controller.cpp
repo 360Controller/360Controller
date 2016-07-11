@@ -524,7 +524,6 @@ nochat:
     if (!QueueRead())
         goto fail;
     if (controllerType == XboxOne || controllerType == XboxOnePretend360) {
-#if 1
         UInt8 xoneInit0[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x80, 0x00 };
         UInt8 xoneInit1[] = { 0x05, 0x20, 0x03, 0x01, 0x00 };
         QueueWrite(&xoneInit0, sizeof(xoneInit0));
