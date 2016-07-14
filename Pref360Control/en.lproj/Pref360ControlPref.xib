@@ -941,11 +941,11 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="18" y="14" width="596" height="337"/>
                                                         <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="596" height="337"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="581" height="337"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="3fX-WF-3zX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="433.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="581" height="433.5"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <animations/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -999,7 +999,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 0.16.2">
+                                                                        <fragment content="Version 0.16.3">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1515,8 +1515,8 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <animations/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
-                                                            <rect key="frame" x="580" y="0.0" width="16" height="337"/>
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v6N-fu-NBq">
+                                                            <rect key="frame" x="581" y="0.0" width="15" height="337"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <animations/>
                                                         </scroller>
