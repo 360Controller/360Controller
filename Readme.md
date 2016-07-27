@@ -29,13 +29,13 @@ The Tattiebogle driver is NOT the same driver as this Github project. We do NOT 
 Make an issue describing your problem.
 
 ### Wired Xbox 360 Controllers
-If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
 ### Wireless Xbox 360 Controllers
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
 ### Wired Xbox One Controllers
-If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
 ### Wireless Xbox One Controllers
 Wireless Xbox One controllers are currently not supported. Please be patient as we figure out this complicated protocol.
