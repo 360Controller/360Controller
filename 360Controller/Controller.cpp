@@ -265,6 +265,30 @@ void Xbox360ControllerClass::remapAxes(void *buffer)
 }
 
 
+#pragma mark - XboxOnePretend360Class
+
+/*
+ * Xbox 360 controller.
+ * Fake PID and VID of Xbox 360 controller
+ */
+
+OSDefineMetaClassAndStructors(Xbox360Pretend360Class, Xbox360ControllerClass)
+
+OSString* Xbox360Pretend360Class::newProductString() const
+{
+    return OSString::withCString("Xbox 360 Wired Controller");
+}
+
+OSNumber* Xbox360Pretend360Class::newProductIDNumber() const
+{
+    return OSNumber::withNumber(654,16);
+}
+
+OSNumber* Xbox360Pretend360Class::newVendorIDNumber() const
+{
+    return OSNumber::withNumber(1118,16);
+}
+
 #pragma mark - XboxOriginalControllerClass
 
 /*

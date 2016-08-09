@@ -900,6 +900,23 @@ void Xbox360Peripheral::MakeSettingsChanges()
             PadConnect();
         }
     }
+    
+    if (controllerType == Xbox360)
+    {
+        if (pretend360)
+        {
+            controllerType = Xbox360Pretend360;
+            PadConnect();
+        }
+    }
+    else if (controllerType == Xbox360Pretend360)
+    {
+        if (!pretend360)
+        {
+            controllerType == Xbox360;
+            PadConnect();
+        }
+    }
 
     noMapping = true;
     UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
@@ -956,6 +973,8 @@ void Xbox360Peripheral::PadConnect(void)
         padHandler = new XboxOneControllerClass;
     } else if (controllerType == XboxOnePretend360) {
         padHandler = new XboxOnePretend360Class;
+    } else if (controllerType == Xbox360Pretend360) {
+        padHandler = new Xbox360Pretend360Class;
     } else {
         padHandler = new Xbox360ControllerClass;
     }

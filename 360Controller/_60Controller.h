@@ -79,7 +79,8 @@ protected:
         Xbox360 = 0,
         XboxOriginal = 1,
         XboxOne = 2,
-        XboxOnePretend360 = 3
+        XboxOnePretend360 = 3,
+        Xbox360Pretend360 = 4,
     } CONTROLLER_TYPE;
 
     IOUSBDevice *device;

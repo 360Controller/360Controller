@@ -63,6 +63,17 @@ public:
 };
 
 
+class Xbox360Pretend360Class : public Xbox360ControllerClass
+{
+    OSDeclareDefaultStructors(Xbox360Pretend360Class)
+    
+public:
+    virtual OSString* newProductString() const;
+    virtual OSNumber* newProductIDNumber() const;
+    virtual OSNumber* newVendorIDNumber() const;
+};
+
+
 class XboxOriginalControllerClass : public Xbox360ControllerClass
 {
     OSDeclareDefaultStructors(XboxOriginalControllerClass)
