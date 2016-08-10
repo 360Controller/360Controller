@@ -913,7 +913,7 @@ void Xbox360Peripheral::MakeSettingsChanges()
     {
         if (!pretend360)
         {
-            controllerType == Xbox360;
+            controllerType = Xbox360;
             PadConnect();
         }
     }
