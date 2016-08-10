@@ -227,6 +227,8 @@
 		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; usesTabs = 1; };
 		55852E2018D6B5580009BF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XboxOneBluetooth.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		55ACBFE41D5B9E2F00E4F677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B13FC018C51DD400ACD9AC /* Feedback360.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = Feedback360.exp; sourceTree = "<group>"; };
 		55B636B418C104DB00CE933D /* 360Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 360Daemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B636B718C104DB00CE933D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -468,6 +470,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		55ACBFE11D5B9E2E00E4F677 /* XboxOneBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				55ACBFE41D5B9E2F00E4F677 /* Info.plist */,
+			);
+			path = XboxOneBluetooth;
+			sourceTree = "<group>";
+		};
 		55B636AB18C104DB00CE933D = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +489,7 @@
 				55B6376A18C10A5400CE933D /* DriverTool */,
 				55B6378118C10B0B00CE933D /* Pref360Control */,
 				551CDFFE196EFD0A000869B6 /* Distribution */,
+				55ACBFE11D5B9E2E00E4F677 /* XboxOneBluetooth */,
 				55B636B618C104DB00CE933D /* Frameworks */,
 				55B636B518C104DB00CE933D /* Products */,
 			);
@@ -496,6 +507,7 @@
 				55B637E818C10D5000CE933D /* Wireless360Controller.kext */,
 				55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */,
 				55FE3CA118D7B77800D69E84 /* testhaptic */,
+				55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -666,6 +678,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		55ACBFDD1D5B9E2E00E4F677 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B6370318C1057100CE933D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -720,6 +739,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55ACBFE71D5B9E2F00E4F677 /* Build configuration list for PBXNativeTarget "XboxOneBluetooth" */;
+			buildPhases = (
+				55ACBFDD1D5B9E2E00E4F677 /* Headers */,
+				55ACBFDE1D5B9E2E00E4F677 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XboxOneBluetooth;
+			productName = XboxOneBluetooth;
+			productReference = 55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		55B636B318C104DB00CE933D /* 360Daemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55B636E518C104DB00CE933D /* Build configuration list for PBXNativeTarget "360Daemon" */;
@@ -872,6 +907,11 @@
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = GitHub;
+				TargetAttributes = {
+					55ACBFDF1D5B9E2E00E4F677 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
 			};
 			buildConfigurationList = 55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -895,12 +935,20 @@
 				55B6370618C1057100CE933D /* 360Controller */,
 				55B637E718C10D5000CE933D /* Wireless360Controller */,
 				55B6380D18C10E8700CE933D /* WirelessGamingReceiver */,
+				55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */,
 				55FE3CA018D7B77800D69E84 /* testhaptic */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		55ACBFDE1D5B9E2E00E4F677 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B218C104DB00CE933D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1165,6 +1213,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		55ACBFE51D5B9E2F00E4F677 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = XboxOneBluetooth/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULE_NAME = com.mice.driver.XboxOneBluetooth;
+				MODULE_START = XboxOneBluetooth_start;
+				MODULE_STOP = XboxOneBluetooth_stop;
+				MODULE_VERSION = 1.0.0d1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XboxOneBluetooth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		55ACBFE61D5B9E2F00E4F677 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = XboxOneBluetooth/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULE_NAME = com.mice.driver.XboxOneBluetooth;
+				MODULE_START = XboxOneBluetooth_start;
+				MODULE_STOP = XboxOneBluetooth_stop;
+				MODULE_VERSION = 1.0.0d1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XboxOneBluetooth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		55B636E318C104DB00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1490,6 +1582,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		55ACBFE71D5B9E2F00E4F677 /* Build configuration list for PBXNativeTarget "XboxOneBluetooth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55ACBFE51D5B9E2F00E4F677 /* Debug */,
+				55ACBFE61D5B9E2F00E4F677 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
