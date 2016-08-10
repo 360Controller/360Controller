@@ -162,7 +162,8 @@ IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service,
 {
     if ((service==0)
         || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
-            && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
+            && (!IOObjectConformsTo(service,"Wireless360Controller"))
+            && (!IOObjectConformsTo(hidDevice, "IOBluetoothHIDDriver")))) return kIOReturnBadArgument;
     return FF_OK;
 }
 
@@ -498,7 +499,8 @@ HRESULT Feedback360::InitializeTerminate(NumVersion APIversion, io_object_t hidD
         // From probe
         if( (hidDevice==0)
            || ((!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))
-               &&  (!IOObjectConformsTo(hidDevice,"Wireless360Controller"))) )
+               &&  (!IOObjectConformsTo(hidDevice,"Wireless360Controller"))
+               &&  (!IOObjectConformsTo(hidDevice, "IOBluetoothHIDDriver"))) )
         {
             // fprintf(stderr,"Feedback: Invalid device\n");
             return FFERR_INVALIDPARAM;
