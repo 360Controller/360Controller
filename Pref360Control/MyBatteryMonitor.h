@@ -10,5 +10,6 @@
 @interface MyBatteryMonitor : NSView
 
 @property (nonatomic) int bars;
+@property (nonatomic) int percentage;
 
 @end

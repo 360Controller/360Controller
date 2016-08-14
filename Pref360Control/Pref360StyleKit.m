@@ -1182,7 +1182,7 @@
     [ovalPath stroke];
 }
 
-+ (void)drawBatteryMonitorWithBars: (CGFloat)bars
++ (void)drawBatteryMonitorWithBars: (CGFloat)bars andPercentage: (int)percentage
 {
     //// Color Declarations
     NSColor* buttonB = [NSColor colorWithCalibratedRed: 1 green: 0.094 blue: 0.072 alpha: 1];
@@ -1243,6 +1243,23 @@
     NSBezierPath* rectangle5Path = [NSBezierPath bezierPathWithRoundedRect: NSMakeRect(36, 6, 5, 9) xRadius: 1 yRadius: 1];
     [batteryColor setFill];
     [rectangle5Path fill];
+
+
+    //// Battery Text
+    NSRect batteryTextBoundingRect = NSMakeRect(1, 1, 36, 19);
+
+    NSMutableParagraphStyle* batteryTextStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+    batteryTextStyle.alignment = NSCenterTextAlignment;
+
+    NSDictionary* batteryTextFontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: batteryTextStyle, NSStrokeColorAttributeName: NSColor.blackColor, NSStrokeWidthAttributeName: @-6.0 };
+
+    NSString* percentageString = [NSString stringWithFormat:@"%d%%", percentage];
+    CGFloat batteryTextHeight = NSHeight([percentageString boundingRectWithSize: batteryTextBoundingRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: batteryTextFontAttributes]);
+    NSRect batteryTextRect = NSMakeRect(NSMinX(batteryTextBoundingRect), NSMinY(batteryTextBoundingRect) + (NSHeight(batteryTextBoundingRect) - batteryTextHeight) / 2, NSWidth(batteryTextBoundingRect), batteryTextHeight);
+    [NSGraphicsContext saveGraphicsState];
+    NSRectClip(batteryTextRect);
+    [percentageString drawInRect: NSOffsetRect(batteryTextRect, 0, 1) withAttributes: batteryTextFontAttributes];
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 + (void)drawDeadZoneViewerWithValue: (CGFloat)value linked: (BOOL)linked

@@ -15,10 +15,15 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)setPercentage:(int)value {
+    _percentage = value;
+    [self setNeedsDisplay:YES];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
 
-    [Pref360StyleKit drawBatteryMonitorWithBars:_bars];
+    [Pref360StyleKit drawBatteryMonitorWithBars:_bars andPercentage:_percentage];
 }
 
 @end

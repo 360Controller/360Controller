@@ -716,6 +716,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Battery level?
     {
         int batteryLevel = -1;
+        int batteryPercentage = -1;
         CFTypeRef prop;
 
         if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice")) {
@@ -723,14 +724,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             if (prop != nil) {
                 unsigned char level;
 
-                if (CFNumberGetValue(prop, kCFNumberCharType, &level))
+                if (CFNumberGetValue(prop, kCFNumberCharType, &level)) {
                     batteryLevel = level / 64;
+                    batteryPercentage = level * 100 / 255.0f + 0.5f;
+                }
                 CFRelease(prop);
             }
             [_powerOff setHidden:NO];
         }
         if ( batteryLevel >= 0) {
             [_batteryStatus setBars:batteryLevel];
+            [_batteryStatus setPercentage:batteryPercentage];
             [_batteryStatus setHidden:NO];
         } else {
             [_batteryStatus setHidden:YES];
