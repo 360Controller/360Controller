@@ -163,7 +163,7 @@ IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service,
     if ((service==0)
         || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
             && (!IOObjectConformsTo(service,"Wireless360Controller"))
-            && (!IOObjectConformsTo(hidDevice, "IOBluetoothHIDDriver")))) return kIOReturnBadArgument;
+            && (!IOObjectConformsTo(service, "IOBluetoothHIDDriver")))) return kIOReturnBadArgument;
     return FF_OK;
 }
 

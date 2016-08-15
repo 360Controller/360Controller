@@ -1231,7 +1231,6 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1253,7 +1252,6 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1602,6 +1600,7 @@
 				55ACBFE61D5B9E2F00E4F677 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55B636AF18C104DB00CE933D /* Build configuration list for PBXProject "360 Driver" */ = {
 			isa = XCConfigurationList;
