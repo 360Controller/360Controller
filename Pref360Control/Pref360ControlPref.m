@@ -35,6 +35,18 @@
 
 #define NO_ITEMS @"No devices found"
 
+@interface NSLayoutConstraint (Description)
+
+@end
+
+@implementation NSLayoutConstraint (Description)
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"id: %@, constant: %f", self.identifier, self.constant];
+}
+
+@end
+
 // Passes a C callback back to the Objective C class
 static void CallbackFunction(void *target,IOReturn result,void *refCon,void *sender)
 {
