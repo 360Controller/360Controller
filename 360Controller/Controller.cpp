@@ -606,7 +606,7 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             }
             else if (report->header.command==0x20)
             {
-                if (report->header.size==0x0e || report->header.size==0x1d || report->header.size==0x1a)
+                //if (report->header.size==0x0e || report->header.size==0x1d || report->header.size==0x1a)
                 {
                     convertFromXboxOne(report, report->header.size);
                     XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
