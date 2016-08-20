@@ -478,6 +478,30 @@ typedef struct {
 typedef struct {
     XBOXONE_HEADER header;
     UInt16 buttons;
+    union {
+        UInt16 steering; // leftX
+        SInt16 leftX;
+    };
+    union {
+        UInt8 accelerator;
+        UInt8 trigR;
+    };
+    UInt8 unknown1;
+    union {
+        UInt8 brake;
+        UInt8 trigL;
+    };
+    UInt8 unknown2;
+    union {
+        UInt8 clutch;
+        UInt8 rightX;
+    };
+    UInt8 unknown3[8];
+} PACKED XBOXONE_IN_WHEEL_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
+    UInt16 buttons;
     UInt16 trigL, trigR;
     XBOX360_HAT left, right;
     UInt16 true_buttons;
@@ -606,25 +630,24 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             }
             else if (report->header.command==0x20)
             {
-                // Re-order packets from steering wheels since they don't follow the proper layout (they skip triggers)
+                // Re-order packets from steering wheels since they don't follow the proper layout
                 if (report->header.size==0x11)
                 {
-                    SInt16 leftX, leftY, rightX, rightY;
+                    XBOXONE_IN_WHEEL_REPORT *wheelReport=(XBOXONE_IN_WHEEL_REPORT*)report;
+                    SInt16 leftX, rightX;
                     UInt16 trigL, trigR;
                     
-                    leftX = report->trigL;
-                    leftY = report->trigR;
-                    rightX = report->left.x;
-                    rightY = report->left.y;
-                    trigL = report->right.x;
-                    trigR = report->right.y;
+                    trigL = wheelReport->trigL;
+                    trigR = wheelReport->trigR;
+                    leftX = wheelReport->leftX;
+                    rightX = wheelReport->rightX;
                     
                     report->trigL = trigL;
                     report->trigR = trigR;
                     report->left.x = leftX;
-                    report->left.y = leftY;
-                    report->right.x = rightX;
-                    report->right.y = rightY;
+                    report->left.y = 0;
+                    report->right.x = rightX * 128; // Clutch is 0-255. Upconvert to full signed 16 range.
+                    report->right.y = 0;
                 }
                     
                 {
