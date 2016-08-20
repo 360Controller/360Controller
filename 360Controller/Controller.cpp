@@ -606,7 +606,27 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             }
             else if (report->header.command==0x20)
             {
-                //if (report->header.size==0x0e || report->header.size==0x1d || report->header.size==0x1a)
+                // Re-order packets from steering wheels since they don't follow the proper layout (they skip triggers)
+                if (report->header.size==0x11)
+                {
+                    SInt16 leftX, leftY, rightX, rightY;
+                    UInt16 trigL, trigR;
+                    
+                    leftX = report->trigL;
+                    leftY = report->trigR;
+                    rightX = report->left.x;
+                    rightY = report->left.y;
+                    trigL = report->right.x;
+                    trigR = report->right.y;
+                    
+                    report->trigL = trigL;
+                    report->trigR = trigR;
+                    report->left.x = leftX;
+                    report->left.y = leftY;
+                    report->right.x = rightX;
+                    report->right.y = rightY;
+                }
+                    
                 {
                     convertFromXboxOne(report, report->header.size);
                     XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
