@@ -494,7 +494,7 @@ typedef struct {
     UInt8 unknown2;
     union {
         UInt8 clutch;
-        UInt8 rightX;
+        UInt8 leftY;
     };
     UInt8 unknown3[8];
 } PACKED XBOXONE_IN_WHEEL_REPORT;
@@ -598,14 +598,28 @@ void XboxOneControllerClass::convertFromXboxOne(void *buffer, UInt8 packetSize)
     {
         if ((0x80 & reportXone->true_trigR) == 0x80) { trigL = 255; }
         if ((0x40 & reportXone->true_trigR) == 0x40) { trigR = 255; }
+        
+        left = reportXone->left;
+        right = reportXone->right;
     }
-    else
+    else if (packetSize == 0x11) // Racing Wheel
+    {
+        XBOXONE_IN_WHEEL_REPORT *wheelReport=(XBOXONE_IN_WHEEL_REPORT*)buffer;
+
+        trigR = wheelReport->accelerator;
+        trigL = wheelReport->brake;
+        left.x = wheelReport->steering - 32768; // UInt16 -> SInt16
+        left.y = wheelReport->clutch * 128; // Clutch is 0-255. Upconvert to half signed 16 range. (0 - 32640)
+        right = {};
+    }
+    else // Traditional Controllers
     {
         trigL = (reportXone->trigL / 1023.0) * 255;
         trigR = (reportXone->trigR / 1023.0) * 255;
+        
+        left = reportXone->left;
+        right = reportXone->right;
     }
-    left = reportXone->left;
-    right = reportXone->right;
 
     report360->buttons = convertButtonPacket(reportXone->buttons);
     report360->trigL = trigL;
@@ -630,38 +644,16 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             }
             else if (report->header.command==0x20)
             {
-                // Re-order packets from steering wheels since they don't follow the proper layout
-                if (report->header.size==0x11)
-                {
-                    XBOXONE_IN_WHEEL_REPORT *wheelReport=(XBOXONE_IN_WHEEL_REPORT*)report;
-                    SInt16 leftX, rightX;
-                    UInt16 trigL, trigR;
-                    
-                    trigL = wheelReport->trigL;
-                    trigR = wheelReport->trigR;
-                    leftX = wheelReport->leftX;
-                    rightX = wheelReport->rightX;
-                    
-                    report->trigL = trigL;
-                    report->trigR = trigR;
-                    report->left.x = leftX;
-                    report->left.y = 0;
-                    report->right.x = rightX * 128; // Clutch is 0-255. Upconvert to full signed 16 range.
-                    report->right.y = 0;
-                }
-                    
-                {
-                    convertFromXboxOne(report, report->header.size);
-                    XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
-                    if (!(GetOwner(this)->noMapping))
-                        remapButtons(report360);
-                    GetOwner(this)->fiddleReport(report360->left, report360->right);
+                convertFromXboxOne(report, report->header.size);
+                XBOX360_IN_REPORT *report360=(XBOX360_IN_REPORT*)report;
+                if (!(GetOwner(this)->noMapping))
+                    remapButtons(report360);
+                GetOwner(this)->fiddleReport(report360->left, report360->right);
 
-                    if (GetOwner(this)->swapSticks)
-                        remapAxes(report360);
+                if (GetOwner(this)->swapSticks)
+                    remapAxes(report360);
 
-                    memcpy(lastData, report360, sizeof(XBOX360_IN_REPORT));
-                }
+                memcpy(lastData, report360, sizeof(XBOX360_IN_REPORT));
             }
         }
     }
