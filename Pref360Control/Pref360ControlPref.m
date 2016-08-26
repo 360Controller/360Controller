@@ -754,10 +754,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
 
     [_mappingTable reloadData];
-
-    // Allows the kext to be disabled when you connect a controller once
-    // FIXME: Allow disabling the driver at any time.
-    [self.enableDriverCheckBox setEnabled:YES];
 }
 
 // Clear out the device lists
@@ -852,7 +848,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
     NSLog(@"Result of kextstat = %d", result);
     if (result == 0) {
-        [self.enableDriverCheckBox setEnabled:YES];
+        [self.enableDriverCheckBox setState:NSOnState];
+    } else {
+        [self.enableDriverCheckBox setState:NSOffState];
     }
 }
 
