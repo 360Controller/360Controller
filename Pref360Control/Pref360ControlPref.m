@@ -846,7 +846,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
     // TEMP: Enable the "enable driver" checkbox if the kext is loaded in the memory
     int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
-    NSLog(@"Result of kextstat = %d", result);
+//    NSLog(@"Result of kextstat = %d", result);
     if (result == 0) {
         [self.enableDriverCheckBox setState:NSOnState];
     } else {
