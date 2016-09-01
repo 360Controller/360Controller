@@ -1,4 +1,4 @@
-# Xbox Controller Driver for Mac OS X
+# Xbox Controller Driver for macOS
 
 ## Table of Contents
 1. [About](#about)
@@ -37,7 +37,7 @@ See the [releases page](https://github.com/360Controller/360Controller/releases)
 In order to uninstall the driver: navigate to the preference pane by opening your "System Preferences," navigating to the "Xbox 360 Controllers" pane, clicking on the "Advanced" tab and pressing the "Uninstall" button. This will prompt you to enter your password so that the uninstaller can remove all of the bundled software from your machine.
 
 ## Usage
-The driver exposes a standard game pad with a number of standard controls, so any game that supports gaming devices should work. In some cases, this may require an update from the developer of the game. The preference pane uses the standard Mac OS X frameworks for accessing HID devices in addition to access of Force Feedback capabilities. This means that the preference pane is a good indicator that the driver is functional for other programs.
+The driver exposes a standard game pad with a number of standard controls, so any game that supports gaming devices should work. In some cases, this may require an update from the developer of the game. The preference pane uses the standard macOS frameworks for accessing HID devices in addition to access of Force Feedback capabilities. This means that the preference pane is a good indicator that the driver is functional for other programs.
 
 It is important to note that this driver does not work, and can never work, with Apple's "Game Controller Framework." This GCController framework corresponds to physical gamepads that have been offically reviewed by Apple and accepted into the mFi program. Due to the fact that we are not Microsoft, we cannot get their gamepad certified to be a GCController. This is an unfortunate oversight on Apple's part. If you would like to discuss this, please do so at [this location.](https://github.com/360Controller/360Controller/issues/55)
 
@@ -60,14 +60,15 @@ If you have a third party controller, make an issue with the "Product ID" and "V
 ### Wireless Xbox 360 Controllers
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
-### Wired Xbox One Controllers
-If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+### Wired Xbox One 
+If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
+If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
 ### Wireless Xbox One Controllers
 Wireless Xbox One controllers are currently not supported. Please be patient as we figure out this complicated protocol.
 
 ### Wireless Xbox One Controllers (Bluetooth)
-The Xbox One controller works with OS X automatically when connected over Bluetooth. Only specific Xbox One controllers have Bluetooth capability. Due to the fact that this controller works by default, it will not be supported by this driver. However, in order to get force feedback through the controller, you will need to install this driver. It will enable force feedback to the controller. Additionally, if you choose to plug this controller in via USB, the driver will support this configuration. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
+The Xbox One controller works with macOS automatically when connected over Bluetooth. Only specific Xbox One controllers have Bluetooth capability. Due to the fact that this controller works by default, it will not be supported by this driver. However, in order to get force feedback through the controller, you will need to install this driver. It will enable force feedback to the controller. Additionally, if you choose to plug this controller in via USB, the driver will support this configuration. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
 
 ## Developer Info
 Drivers inherently modify the core operating system kernel. Using the driver as a developer can lead to dangerous kernel panics that can cause data loss or other permanent damage to your computer. Be very careful about how you use this information. We are not responsible for anything this driver does to your computer, or any loss it may incur. Normal users will never have to worry about the developer section of this README.
@@ -113,7 +114,7 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 
 ### Disabling signing requirements
 
-Since Yosemite (Mac OS X 10.10) all global kexts are required to be signed. This means if you want to build the drivers and install locally, you need a very specific signing certificate that Apple closely controls. If you want to disable the signing requirement from OS X, you will need to do several things.
+Since Yosemite (macOS 10.10) all global kexts are required to be signed. This means if you want to build the drivers and install locally, you need a very specific signing certificate that Apple closely controls. If you want to disable the signing requirement from macOS, you will need to do several things.
 
 First, execute these commands in your terminal:
 ```
@@ -133,7 +134,7 @@ From recovery mode, execute the following command:
 csrutil enable
 ```
 
-Reboot into OS X like normal. You can reset the boot arguments by executing this command:
+Reboot into macOS like normal. You can reset the boot arguments by executing this command:
 ```
 sudo nvram -d boot-args
 ```
