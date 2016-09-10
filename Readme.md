@@ -60,7 +60,7 @@ If you have a third party controller, make an issue with the "Product ID" and "V
 ### Wireless Xbox 360 Controllers
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
-### Wired Xbox One 
+### Wired Xbox One Controllers
 If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
 If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
