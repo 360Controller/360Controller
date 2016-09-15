@@ -55,12 +55,15 @@ We cannot fix game specific issues. This driver does its absolute best to put ou
 Make an issue describing your problem.
 
 ### Wired Xbox 360 Controllers
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
 ### Wireless Xbox 360 Controllers
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
 ### Wired Xbox One Controllers
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
 If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
