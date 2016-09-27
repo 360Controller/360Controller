@@ -28,6 +28,10 @@
 			<dict>
 				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
 				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+				<key>FA12FA38-6F1A-11D4-BA0C-0005028F18D5</key>
+				<string>IOHIDFamily.kext/Contents/PlugIns/IOHIDLib.plugin</string>
+				<key>7DDEECA8-A7B4-11DA-8A0E-0014519758EF</key>
+				<string>IOHIDFamily.kext/Contents/PlugIns/IOHIDLib.plugin</string>
 			</dict>
 			<key>IOClass</key>
 			<string>IOBluetoothHIDDriver</string>
