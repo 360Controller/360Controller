@@ -23,9 +23,9 @@
 #ifndef __CONTROLSTRUCT_H__
 #define __CONTROLSTRUCT_H__
 
-typedef UInt8 XBox360_Byte;
-typedef UInt16 XBox360_Short;
-typedef SInt16 XBox360_SShort;
+typedef UInt8 Xbox360_Byte;
+typedef UInt16 Xbox360_Short;
+typedef SInt16 Xbox360_SShort;
 
 #define Xbox360_Prepare(x,t)      {memset(&x,0,sizeof(x));x.header.command=t;x.header.size=sizeof(x);}
 
@@ -33,36 +33,36 @@ typedef SInt16 XBox360_SShort;
 
 // Common structure format
 typedef struct XBOX360_PACKET {
-    XBox360_Byte command;
-    XBox360_Byte size;
+    Xbox360_Byte command;
+    Xbox360_Byte size;
 } PACKED XBOX360_PACKET;
 
 // Analog stick format
 typedef struct XBOX360_HAT {
-    XBox360_SShort x,y;
+    Xbox360_SShort x,y;
 } PACKED XBOX360_HAT;
 
 // Structure describing the report had back from the controller
 typedef struct XBOX360_IN_REPORT {
     XBOX360_PACKET header;
-    XBox360_Short buttons;
-    XBox360_Byte trigL,trigR;
+    Xbox360_Short buttons;
+    Xbox360_Byte trigL,trigR;
     XBOX360_HAT left,right;
-    XBox360_Byte reserved[6];
+    Xbox360_Byte reserved[6];
 } PACKED XBOX360_IN_REPORT;
 
 // Structure describing the command to change LED status
 typedef struct XBOX360_OUT_LED {
     XBOX360_PACKET header;
-    XBox360_Byte pattern;
+    Xbox360_Byte pattern;
 } PACKED XBOX360_OUT_LED;
 
 // Structure describing the command to change rumble motor status
 typedef struct XBOX360_OUT_RUMBLE {
     XBOX360_PACKET header;
-    XBox360_Byte reserved1;
-    XBox360_Byte big,little;
-    XBox360_Byte reserved[3];
+    Xbox360_Byte reserved1;
+    Xbox360_Byte big,little;
+    Xbox360_Byte reserved[3];
 } PACKED XBOX360_OUT_RUMBLE;
 
 // Enumeration of command types

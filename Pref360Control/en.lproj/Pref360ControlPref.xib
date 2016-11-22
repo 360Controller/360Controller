@@ -932,7 +932,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                     <size key="maxSize" width="1342" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
-                                                                            <string key="content">XBox 360 Controller Driver
+                                                                            <string key="content">Xbox 360 Controller Driver
 </string>
                                                                             <attributes>
                                                                                 <font key="NSFont" size="21" name="Helvetica-Bold"/>

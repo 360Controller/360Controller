@@ -298,20 +298,20 @@ OSNumber* Xbox360Pretend360Class::newVendorIDNumber() const
 
 typedef struct {
     XBOX360_PACKET header;
-    XBox360_Byte buttons;
-    XBox360_Byte reserved1;
-    XBox360_Byte a, b, x, y, black, white;
-    XBox360_Byte trigL,trigR;
-    XBox360_Short xL,yL;
-    XBox360_Short xR,yR;
+    Xbox360_Byte buttons;
+    Xbox360_Byte reserved1;
+    Xbox360_Byte a, b, x, y, black, white;
+    Xbox360_Byte trigL,trigR;
+    Xbox360_Short xL,yL;
+    Xbox360_Short xR,yR;
 } PACKED XBOX_IN_REPORT;
 
 typedef struct {
     XBOX360_PACKET header;
-    XBox360_Byte reserved1;
-    XBox360_Byte left;
-    XBox360_Byte reserved2;
-    XBox360_Byte right;
+    Xbox360_Byte reserved1;
+    Xbox360_Byte left;
+    Xbox360_Byte reserved2;
+    Xbox360_Byte right;
 } PACKED XBOX_OUT_RUMBLE;
 
 
@@ -342,9 +342,9 @@ static void logData(UInt8 *data, int len) {
     IOLog("\n");
 }
 
-// This converts XBox original controller report into XBox360 form
+// This converts Xbox original controller report into Xbox360 form
 // See https://github.com/Grumbel/xboxdrv/blob/master/src/controller/xbox_controller.cpp
-static void convertFromXBoxOriginal(UInt8 *data) {
+static void convertFromXboxOriginal(UInt8 *data) {
     if (data[0] != 0x00 || data[1] != 0x14) {
         IOLog("Unknown report command %d, length %d\n", (int)data[0], (int)data[1]);
         return;
@@ -352,7 +352,7 @@ static void convertFromXBoxOriginal(UInt8 *data) {
     XBOX360_IN_REPORT report;
     Xbox360_Prepare (report, 0);
     XBOX_IN_REPORT *in = (XBOX_IN_REPORT*)data;
-    XBox360_Short buttons = in->buttons;
+    Xbox360_Short buttons = in->buttons;
     if (in->a) buttons |= 1 << 12; // a
     if (in->b) buttons |= 1 << 13; // b
     if (in->x) buttons |= 1 << 14; // x
@@ -376,7 +376,7 @@ IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descript
         descriptor->readBytes(0, data, sizeof(XBOX360_IN_REPORT));
         const XBOX360_IN_REPORT *report=(const XBOX360_IN_REPORT*)data;
         if ((report->header.command==inReport) && (report->header.size==sizeof(XBOX360_IN_REPORT))) {
-            convertFromXBoxOriginal(data);
+            convertFromXboxOriginal(data);
             if (memcmp(data, lastData, sizeof(XBOX360_IN_REPORT)) == 0) {
                 repeatCount ++;
                 // drop triplicate reports
@@ -709,7 +709,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor *report,IOHIDRepor
                 rumble.little = data[2];
                 rumble.big = data[3];
             }
-            
+
             GetOwner(this)->QueueWrite(&rumble,13);
             return kIOReturnSuccess;
         case 0x01: // Unsupported LED
