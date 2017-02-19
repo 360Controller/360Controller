@@ -14,14 +14,15 @@
   6. [Wired Xbox One Controllers](#wired-xbox-one-controllers)
   7. [Wireless Xbox One Controllers](#wireless-xbox-one-controllers)
   8. [Wireless Xbox One Controllers (Bluetooth)](#wireless-xbox-one-controllers-bluetooth)
-6. [Developer Info](#developer-info)
+6. [Adding Third Party Controllers](#adding-third-party-controllers)
+7. [Developer Info](#developer-info)
   1. [Building](#building)
   2. [Building the .pkg](#building-the-pkg)
   3. [Disabling signing requirements](#disabling-signing-requirements)
   4. [Re-Enabling signing requirements](#re-enabling-signing-requirements)
   5. [Debugging the driver](#debugging-the-driver)
   6. [Debugging the preference pane](#debugging-the-preference-pane)
-7. [Licence](#licence)
+8. [Licence](#licence)
 
 ## About
 This driver supports the Microsoft Xbox series of controllers including those for the original Xbox, Xbox 360, and Xbox One. Xbox 360 controllers work both wired and wirelessly, while Xbox One controllers only work wired for now. The driver provides developers with access to both force feedback and the LEDs of the controllers. Additionally, a preference pane has been provided so that users can configure their controllers and ensure that the driver has been installed properly.
@@ -73,6 +74,9 @@ Wireless Xbox One controllers are currently not supported. Please be patient as 
 
 ### Wireless Xbox One Controllers (Bluetooth)
 The Xbox One controller works with macOS automatically when connected over Bluetooth. Only specific Xbox One controllers have Bluetooth capability. Due to the fact that this controller works by default, it will not be supported by this driver. However, in order to get force feedback through the controller, you will need to install this driver. It will enable force feedback to the controller. Additionally, if you choose to plug this controller in via USB, the driver will support this configuration. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
+
+## Adding Third Party Controllers
+First, [disable signing requirements](#disabling-signing-requirements) so that you can run your custom build with your third party controller added. Then edit `360Controller/360Controller/Info.plist`. Add your controller following the pattern of pre-existing controllers by adding your vendor and product IDs to a new entry. After this, follow the information in the [building](#building) section, following the "If you don't have a signing certificate" path to build your new .kext. Then, place your shiny new `360Controller.kext` in to `/Library/Extensions` over the old one. You may need to take ownership of the driver in order for it to operate properly. You can do this with `sudo chown -R root:wheel /Library/Extensions/360Controller.kext`. Then, to make sure everything went according to plan, run `sudo kextutil /Library/Extensions/360Controller.kext`. This will load your kext into the OS and you should be able to use your controller. Once you reboot, your custom driver should be loaded automatically.
 
 ## Developer Info
 Drivers inherently modify the core operating system kernel. Using the driver as a developer can lead to dangerous kernel panics that can cause data loss or other permanent damage to your computer. Be very careful about how you use this information. We are not responsible for anything this driver does to your computer, or any loss it may incur. Normal users will never have to worry about the developer section of this README.
