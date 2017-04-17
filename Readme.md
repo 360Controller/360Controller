@@ -25,7 +25,20 @@
 8. [Licence](#licence)
 
 ## About
-This driver supports the Microsoft Xbox series of controllers including those for the original Xbox, Xbox 360, and Xbox One. Xbox 360 controllers work both wired and wirelessly, while Xbox One controllers only work wired for now. The driver provides developers with access to both force feedback and the LEDs of the controllers. Additionally, a preference pane has been provided so that users can configure their controllers and ensure that the driver has been installed properly.
+This driver supports the Microsoft Xbox series of controllers including:
+
+1. Original Xbox
+    - Original Xbox controllers are supported by using a USB adapter. 
+
+2. Xbox 360
+    - Wired Xbox 360 controllers are supported directly.
+    - Wireless Xbox 360 controllers are supported with the Xbox 360 Wireless Gaming Receiver. Using a "Play and Charge" kit is not supported. 
+
+3. Xbox One
+    - Xbox One controllers are supported when connected with a micro USB cable. Using the controller with the Wireless Adapter is not currently supported.
+    - Bluetooth capable Xbox One controllers (released after August 2016) are natively supported by macOS without the use of this driver. However, installing this driver will enable force feedback (which is not natively supported) and allow you to plug the controller in via USB.
+
+The driver provides developers with access to both force feedback and the LEDs of the controllers. Additionally, a preference pane has been provided so that users can configure their controllers and ensure that the driver has been installed properly.
 
 Controller support includes ALL devices that work with an Xbox series piece of hardware. All wheels, fight sticks, and controllers should work. This includes things like the Xbox One Elite controller. If your hardware does not work with an Xbox console we cannot support it. Sorry.
 
@@ -63,17 +76,17 @@ If you have a third party controller, make an issue with the "Product ID" and "V
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
-### Wired Xbox One Controllers
+### Xbox One Controllers connected with USB
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
 If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.
 If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
 
-### Wireless Xbox One Controllers
-Wireless Xbox One controllers are currently not supported. Please be patient as we figure out this complicated protocol.
+### Xbox One Controllers connected with Wireless Adapter
+Xbox One controllers connected with the Wireless Adapter are currently not supported. Please be patient as we figure out this complicated protocol.
 
-### Wireless Xbox One Controllers (Bluetooth)
-The Xbox One controller works with macOS automatically when connected over Bluetooth. Only specific Xbox One controllers have Bluetooth capability. Due to the fact that this controller works by default, it will not be supported by this driver. However, in order to get force feedback through the controller, you will need to install this driver. It will enable force feedback to the controller. Additionally, if you choose to plug this controller in via USB, the driver will support this configuration. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
+### Xbox One Controllers connected with Bluetooth
+The Xbox One controller works with macOS automatically when connected over Bluetooth. Only specific Xbox One controllers released after August 2016 have Bluetooth capability. See [Microsoft's support page](https://support.xbox.com/en-US/xbox-on-windows/accessories/connect-and-troubleshoot-xbox-one-bluetooth-issues-windows-10) for determining if your controller supports Bluetooth. Due to the fact that this controller works by default, it will not be supported by this driver. However, in order to get force feedback through the controller, you will need to install this driver. It will enable force feedback to the controller. Additionally, if you choose to plug this controller in via USB, the driver will support this configuration. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
 
 ## Adding Third Party Controllers
 First, [disable signing requirements](#disabling-signing-requirements) so that you can run your custom build with your third party controller added. Then edit `360Controller/360Controller/Info.plist`. Add your controller following the pattern of pre-existing controllers by adding your vendor and product IDs to a new entry. After this, follow the information in the [building](#building) section, following the "If you don't have a signing certificate" path to build your new .kext. Then, place your shiny new `360Controller.kext` in to `/Library/Extensions` over the old one. You may need to take ownership of the driver in order for it to operate properly. You can do this with `sudo chown -R root:wheel /Library/Extensions/360Controller.kext`. Then, to make sure everything went according to plan, run `sudo kextutil /Library/Extensions/360Controller.kext`. This will load your kext into the OS and you should be able to use your controller. Once you reboot, your custom driver should be loaded automatically.
