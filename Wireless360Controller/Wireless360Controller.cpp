@@ -31,9 +31,9 @@
 OSDefineMetaClassAndStructors(Wireless360Controller, WirelessHIDDevice)
 #define super WirelessHIDDevice
 
-static inline XBox360_SShort getAbsolute(XBox360_SShort value)
+static inline Xbox360_SShort getAbsolute(Xbox360_SShort value)
 {
-    XBox360_SShort reverse;
+    Xbox360_SShort reverse;
 
 #ifdef __LITTLE_ENDIAN__
     reverse=value;
@@ -132,7 +132,7 @@ void Wireless360Controller::readSettings(void)
     if (number != NULL) mapping[14] = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
     if (value != NULL) swapSticks = value->getValue();
-    
+
     noMapping = true;
     UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
     for (int i = 0; i < 15; i++)

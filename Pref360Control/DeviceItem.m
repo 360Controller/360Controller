@@ -41,13 +41,13 @@ static ControllerType GetControllerType(io_service_t device)
 {
     io_service_t parent;
     CFMutableDictionaryRef serviceProperties;
-    
+
     // Check for the DeviceData dictionary in device
     if (IORegistryEntryCreateCFProperties(device, &serviceProperties, kCFAllocatorDefault, kNilOptions) == KERN_SUCCESS)
     {
         NSDictionary *properties = CFBridgingRelease(serviceProperties);
         NSDictionary *deviceData = properties[@"DeviceData"];
-        
+
         if (deviceData != nil)
         {
             NSNumber *controllerType = deviceData[@"ControllerType"];
@@ -55,7 +55,7 @@ static ControllerType GetControllerType(io_service_t device)
                 return (ControllerType)[controllerType intValue];
         }
     }
-    
+
     // Check for the DeviceData dictionary in the device's parent
     if (IORegistryEntryGetParentEntry(device, kIOServicePlane, &parent) == KERN_SUCCESS)
     {
@@ -63,7 +63,7 @@ static ControllerType GetControllerType(io_service_t device)
         {
             NSDictionary *properties = CFBridgingRelease(serviceProperties);
             NSDictionary *deviceData = properties[@"DeviceData"];
-            
+
             if (deviceData != nil)
             {
                 NSNumber *controllerType = deviceData[@"ControllerType"];
@@ -72,7 +72,7 @@ static ControllerType GetControllerType(io_service_t device)
             }
         }
     }
-    
+
     NSLog(@"Error: couldn't find ControllerType");
     return Xbox360Controller;
 }

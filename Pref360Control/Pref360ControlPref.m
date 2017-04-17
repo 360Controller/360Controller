@@ -445,7 +445,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         ffDevice = [item ffDevice];
         registryEntry = [item rawDevice];
         controllerType = [item controllerType];
-        
+
         if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
         {
             [_rumbleOptions removeAllItems];
@@ -941,7 +941,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertX setState:[_rightStickInvertXAlt state]];
         [_rightStickInvertY setState:[_rightStickInvertYAlt state]];
     }
-    
+
     BOOL pretend360 = ([_pretend360Button state] == NSOnState);
     if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
     {

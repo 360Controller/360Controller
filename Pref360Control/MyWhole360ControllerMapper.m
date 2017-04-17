@@ -68,7 +68,7 @@ static UInt8 previousMapping[15];
 - (void)cancelMappingWithButton:(NSButton *)button andOwner:(Pref360ControlPref *)prefPref {
     pref = prefPref;
     remappingButton = button;
-    
+
     [self restorePreviousMapping];
     [self stopMapping];
 }

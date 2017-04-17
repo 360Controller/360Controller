@@ -104,7 +104,7 @@ const struct ControllerInterface {
 };
 
 // Detect if an IO service object is a Microsoft controller by running through and checking some things
-static BOOL IsXBox360Controller(io_service_t device)
+static BOOL IsXbox360Controller(io_service_t device)
 {
     IOUSBDeviceInterface **interface = GetDeviceInterface(device);
     IOUSBFindInterfaceRequest iRq;
@@ -284,7 +284,7 @@ static BOOL IsXBox360Controller(io_service_t device)
     {
         while ((object = IOIteratorNext(iterator)) != 0)
         {
-            if (IsXBox360Controller(object))
+            if (IsXbox360Controller(object))
             {
                 NSNumber *vendorValue, *productValue;
                 UInt16 vendor,product;
