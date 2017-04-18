@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15G1421" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <development version="6300" identifier="xcode"/>
@@ -88,7 +88,7 @@
                         <attributedString key="userComments">
                             <fragment content="This horizontal line is the width of a PreferencePane window.">
                                 <attributes>
-                                    <font key="NSFont" metaFont="smallSystem"/>
+                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                 </attributes>
                             </fragment>
@@ -919,7 +919,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="18" y="14" width="596" height="337"/>
-                                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
                                                             <rect key="frame" x="0.0" y="0.0" width="581" height="337"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -928,7 +928,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <animations/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="581" height="337"/>
+                                                                    <size key="minSize" width="596" height="337"/>
                                                                     <size key="maxSize" width="1342" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -978,7 +978,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 0.16.4">
+                                                                        <fragment content="Version 0.16.5">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1481,7 +1481,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                                         </fragment>
                                                                     </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="581" height="337"/>
+                                                                    <size key="minSize" width="596" height="337"/>
                                                                     <size key="maxSize" width="1342" height="10000000"/>
                                                                 </textView>
                                                             </subviews>
