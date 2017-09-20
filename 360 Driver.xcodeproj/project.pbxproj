@@ -44,6 +44,12 @@
 		55699CD61971D96E00C40A31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55699CD51971D96E00C40A31 /* Images.xcassets */; };
 		55699CD71971DA8100C40A31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55699CD51971D96E00C40A31 /* Images.xcassets */; };
 		55750C09190AFB5B0047FF41 /* DaemonLEDs.m in Sources */ = {isa = PBXBuildFile; fileRef = 55750C08190AFB5B0047FF41 /* DaemonLEDs.m */; };
+		5579514B1F7300EE001880D1 /* XBOBTFF.plugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5579513E1F73006F001880D1 /* XBOBTFF.plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5579514C1F7301F9001880D1 /* FFDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 557951451F7300C9001880D1 /* FFDriver.cpp */; };
+		5579514D1F73021A001880D1 /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6375818C109E600CE933D /* ForceFeedback.framework */; };
+		557951501F73037B001880D1 /* FeedbackXBOEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5579514E1F73037B001880D1 /* FeedbackXBOEffect.cpp */; };
+		557951511F730CA3001880D1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BDB43196DF3BA00D1F569 /* IOKit.framework */; };
+		557951521F730CAF001880D1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B6372018C108A500CE933D /* CoreFoundation.framework */; };
 		55852E1F18D6B5580009BF55 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55852E2118D6B5580009BF55 /* Localizable.strings */; };
 		55A2B8D518C116BD006829A2 /* 360Daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B637C718C10CB400CE933D /* 360Daemon.m */; };
 		55A2B8D818C116E0006829A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2B8DA18C116E0006829A2 /* Localizable.strings */; };
@@ -111,6 +117,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		557951491F7300E4001880D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5579513D1F73006F001880D1;
+			remoteInfo = XBOBTFF;
+		};
 		55ACBFE81D5BA33A00E4F677 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
@@ -177,6 +190,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		557951481F7300DC001880D1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5579514B1F7300EE001880D1 /* XBOBTFF.plugin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2B8DC18C11A21006829A2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -233,6 +256,14 @@
 		55699CD51971D96E00C40A31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55750C07190AFB5B0047FF41 /* DaemonLEDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaemonLEDs.h; sourceTree = "<group>"; usesTabs = 1; };
 		55750C08190AFB5B0047FF41 /* DaemonLEDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaemonLEDs.m; sourceTree = "<group>"; usesTabs = 1; };
+		5579513E1F73006F001880D1 /* XBOBTFF.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XBOBTFF.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		557951401F73006F001880D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		557951441F7300C9001880D1 /* FFDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFDriver.h; sourceTree = "<group>"; };
+		557951451F7300C9001880D1 /* FFDriver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FFDriver.cpp; sourceTree = "<group>"; };
+		557951461F7300CA001880D1 /* XBoxOneBTHID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBoxOneBTHID.h; sourceTree = "<group>"; };
+		557951471F7300CA001880D1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		5579514E1F73037B001880D1 /* FeedbackXBOEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FeedbackXBOEffect.cpp; sourceTree = "<group>"; };
+		5579514F1F73037B001880D1 /* FeedbackXBOEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FeedbackXBOEffect.hpp; sourceTree = "<group>"; };
 		55852E2018D6B5580009BF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55A2B8DB18C116E2006829A2 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XboxOneBluetooth.kext; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +355,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5579513B1F73006F001880D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				557951521F730CAF001880D1 /* CoreFoundation.framework in Frameworks */,
+				557951511F730CA3001880D1 /* IOKit.framework in Frameworks */,
+				5579514D1F73021A001880D1 /* ForceFeedback.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B118C104DB00CE933D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,6 +469,21 @@
 			path = Text;
 			sourceTree = "<group>";
 		};
+		5579513F1F73006F001880D1 /* XBOBTFF */ = {
+			isa = PBXGroup;
+			children = (
+				557951441F7300C9001880D1 /* FFDriver.h */,
+				557951451F7300C9001880D1 /* FFDriver.cpp */,
+				557951471F7300CA001880D1 /* main.c */,
+				557951461F7300CA001880D1 /* XBoxOneBTHID.h */,
+				5579514F1F73037B001880D1 /* FeedbackXBOEffect.hpp */,
+				5579514E1F73037B001880D1 /* FeedbackXBOEffect.cpp */,
+				557951401F73006F001880D1 /* Info.plist */,
+			);
+			path = XBOBTFF;
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
 		55A2B8E018C11C7E006829A2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +554,7 @@
 				55B6378118C10B0B00CE933D /* Pref360Control */,
 				551CDFFE196EFD0A000869B6 /* Distribution */,
 				55ACBFE11D5B9E2E00E4F677 /* XboxOneBluetooth */,
+				5579513F1F73006F001880D1 /* XBOBTFF */,
 				55B636B618C104DB00CE933D /* Frameworks */,
 				55B636B518C104DB00CE933D /* Products */,
 			);
@@ -516,6 +573,7 @@
 				55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */,
 				55FE3CA118D7B77800D69E84 /* testhaptic */,
 				55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */,
+				5579513E1F73006F001880D1 /* XBOBTFF.plugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -747,16 +805,35 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5579513D1F73006F001880D1 /* XBOBTFF */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 557951431F73006F001880D1 /* Build configuration list for PBXNativeTarget "XBOBTFF" */;
+			buildPhases = (
+				5579513A1F73006F001880D1 /* Sources */,
+				5579513B1F73006F001880D1 /* Frameworks */,
+				5579513C1F73006F001880D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XBOBTFF;
+			productName = XBOBTFF;
+			productReference = 5579513E1F73006F001880D1 /* XBOBTFF.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
 		55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55ACBFE71D5B9E2F00E4F677 /* Build configuration list for PBXNativeTarget "XboxOneBluetooth" */;
 			buildPhases = (
 				55ACBFDD1D5B9E2E00E4F677 /* Headers */,
 				55ACBFDE1D5B9E2E00E4F677 /* Resources */,
+				557951481F7300DC001880D1 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5579514A1F7300E4001880D1 /* PBXTargetDependency */,
 			);
 			name = XboxOneBluetooth;
 			productName = XboxOneBluetooth;
@@ -916,6 +993,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
+					5579513D1F73006F001880D1 = {
+						CreatedOnToolsVersion = 9.0;
+					};
 					55ACBFDF1D5B9E2E00E4F677 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -945,11 +1025,19 @@
 				55B6380D18C10E8700CE933D /* WirelessGamingReceiver */,
 				55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */,
 				55FE3CA018D7B77800D69E84 /* testhaptic */,
+				5579513D1F73006F001880D1 /* XBOBTFF */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5579513C1F73006F001880D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55ACBFDE1D5B9E2E00E4F677 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,6 +1104,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5579513A1F73006F001880D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5579514C1F7301F9001880D1 /* FFDriver.cpp in Sources */,
+				557951501F73037B001880D1 /* FeedbackXBOEffect.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55B636B018C104DB00CE933D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1103,6 +1200,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5579514A1F7300E4001880D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5579513D1F73006F001880D1 /* XBOBTFF */;
+			targetProxy = 557951491F7300E4001880D1 /* PBXContainerItemProxy */;
+		};
 		55ACBFE91D5BA33A00E4F677 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */;
@@ -1226,6 +1328,63 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		557951411F73006F001880D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = XBOBTFF/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XBOBTFF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		557951421F73006F001880D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = XBOBTFF/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XBOBTFF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
 		55ACBFE51D5B9E2F00E4F677 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1288,6 +1447,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0.0d15;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1593,6 +1753,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		557951431F73006F001880D1 /* Build configuration list for PBXNativeTarget "XBOBTFF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				557951411F73006F001880D1 /* Debug */,
+				557951421F73006F001880D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		55ACBFE71D5B9E2F00E4F677 /* Build configuration list for PBXNativeTarget "XboxOneBluetooth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
