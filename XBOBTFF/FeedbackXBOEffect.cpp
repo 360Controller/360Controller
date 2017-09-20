@@ -41,7 +41,7 @@ StartTime(src.StartTime), Index(src.Index), LastTime(src.LastTime)
 //----------------------------------------------------------------------------------------------
 // Calc
 //----------------------------------------------------------------------------------------------
-LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel)
+LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel, LONG *ltLevel, LONG *rtLevel)
 {
 	CFTimeInterval Duration = 0;
 	if(DiEffect.dwDuration != FF_INFINITE) {
@@ -63,7 +63,9 @@ LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel)
 		LONG NormalLevel;
 		LONG WorkLeftLevel;
 		LONG WorkRightLevel;
-		
+		LONG WorkLTLevel;
+		LONG WorkRTLevel;
+
 		// Used for envelope calculation
 		LONG NormalRate;
 		LONG AttackLevel;
@@ -81,10 +83,12 @@ LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel)
 				return -1;
 			}
 			else {
-				WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-				WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+				WorkLeftLevel = ((DiCustomForce.rglForceData[4*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+				WorkRightLevel = ((DiCustomForce.rglForceData[4*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+				WorkLTLevel = ((DiCustomForce.rglForceData[4*Index + 2] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+				WorkRTLevel = ((DiCustomForce.rglForceData[4*Index + 3] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
 				//fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
-				Index = (Index + 1) % (DiCustomForce.cSamples/2);
+				Index = (Index + 1) % (DiCustomForce.cSamples/4);
 				LastTime = CurrentTimeUsingMach();
 			}
 		}
@@ -102,12 +106,18 @@ LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel)
 			
 			WorkLeftLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
 			WorkRightLevel = (NormalLevel > 0) ? NormalLevel : -NormalLevel;
+			WorkLTLevel = 0;
+			WorkRTLevel = 0;
 		}
 		WorkLeftLevel = min( SCALE_MAX, WorkLeftLevel * SCALE_MAX / 10000 );
 		WorkRightLevel = min( SCALE_MAX, WorkRightLevel * SCALE_MAX / 10000 );
-		
+		WorkLTLevel = min( SCALE_MAX, WorkLTLevel * SCALE_MAX / 10000 );
+		WorkRTLevel = min( SCALE_MAX, WorkRTLevel * SCALE_MAX / 10000 );
+
 		*LeftLevel = *LeftLevel + WorkLeftLevel;
 		*RightLevel = *RightLevel + WorkRightLevel;
+		*ltLevel = *ltLevel + WorkLTLevel;
+		*rtLevel = *rtLevel + WorkRTLevel;
 	}
 	return 0;
 }

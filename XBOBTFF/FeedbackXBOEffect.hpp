@@ -18,18 +18,18 @@
 //    Effects
 //----------------------------------------------------------------------------------------------
 
-#define    CONSTANT_FORCE    0x00
-#define    RAMP_FORCE        0x01
-#define    SQUARE            0x02
-#define    SINE            0x03
-#define    TRIANGLE        0x04
-#define    SAWTOOTH_UP        0x05
-#define    SAWTOOTH_DOWN    0x06
-#define    SPRING            0x07
-#define    DAMPER            0x08
-#define    INERTIA            0x09
-#define    FRICTION        0x0A
-#define    CUSTOM_FORCE    0x0B
+#define CONSTANT_FORCE	0x00
+#define RAMP_FORCE		0x01
+#define SQUARE			0x02
+#define SINE			0x03
+#define TRIANGLE		0x04
+#define SAWTOOTH_UP		0x05
+#define SAWTOOTH_DOWN	0x06
+#define SPRING			0x07
+#define DAMPER			0x08
+#define INERTIA			0x09
+#define FRICTION		0x0A
+#define CUSTOM_FORCE	0x0B
 
 #define SCALE_MAX (LONG)101
 
@@ -41,7 +41,7 @@ public:
 	FeedbackXBOEffect(FFEffectDownloadID theHand);
 	FeedbackXBOEffect(const FeedbackXBOEffect &src);
 	
-	LONG Calc(LONG *LeftLevel, LONG *RightLevel);
+	LONG Calc(LONG *LeftLevel, LONG *RightLevel, LONG *ltLevel, LONG *rtLevel);
 	
 	CFUUIDRef			Type;
 	FFEffectDownloadID	Handle;

@@ -615,6 +615,8 @@ void FeedbackXBOBT::EffectProc( void *params )
 	
 	LONG LeftLevel = 0;
 	LONG RightLevel = 0;
+	LONG ltLevel = 0;
+	LONG rtLevel = 0;
 	LONG Gain  = cThis->Gain;
 	LONG CalcResult = 0;
 	
@@ -623,7 +625,7 @@ void FeedbackXBOBT::EffectProc( void *params )
 		for (FeedbackXBOEffectIterator effectIterator = cThis->EffectList.begin(); effectIterator != cThis->EffectList.end(); ++effectIterator)
 		{
 			if(((CurrentTimeUsingMach() - cThis->LastTime)*1000*1000) >= effectIterator->DiEffect.dwSamplePeriod) {
-				CalcResult = effectIterator->Calc(&LeftLevel, &RightLevel);
+				CalcResult = effectIterator->Calc(&LeftLevel, &RightLevel, &ltLevel, &rtLevel);
 			}
 		}
 	}
@@ -631,7 +633,7 @@ void FeedbackXBOBT::EffectProc( void *params )
 	if ((cThis->PrvLeftLevel != LeftLevel || cThis->PrvRightLevel != RightLevel) && (CalcResult != -1))
 	{
 		//fprintf(stderr, "PL: %d, PR: %d; L: %d, R: %d; \n", cThis->PrvLeftLevel, cThis->PrvRightLevel, LeftLevel, RightLevel);
-		cThis->SetForce((unsigned char)min(SCALE_MAX, LeftLevel * Gain / 10000),(unsigned char)min(SCALE_MAX, RightLevel * Gain / 10000 ), 0, 0);
+		cThis->SetForce((unsigned char)min(SCALE_MAX, LeftLevel * Gain / 10000),(unsigned char)min(SCALE_MAX, RightLevel * Gain / 10000 ), (unsigned char)min(SCALE_MAX, ltLevel * Gain / 10000), (unsigned char)min(SCALE_MAX, rtLevel * Gain / 10000));
 		
 		cThis->PrvLeftLevel = LeftLevel;
 		cThis->PrvRightLevel = RightLevel;
