@@ -17,7 +17,28 @@ using std::min;
 
 static bool goodProbe(io_service_t theService)
 {
-	return false;
+	if (!IOObjectConformsTo(theService, kIOHIDDeviceKey)) {
+		return false;
+	}
+	CFMutableDictionaryRef dict;
+	
+	IORegistryEntryCreateCFProperties(theService, &dict, kCFAllocatorDefault, 0);
+	CFTypeRef aNum = CFDictionaryGetValue(dict, CFSTR(kIOHIDProductIDKey));
+	int tmpNum;
+	::CFNumberGetValue((CFNumberRef)aNum, kCFNumberIntType, &tmpNum);
+	if (tmpNum != 765) {
+		CFRelease(dict);
+		return false;
+	}
+	aNum = CFDictionaryGetValue(dict, CFSTR(kIOHIDVendorIDKey));
+	::CFNumberGetValue((CFNumberRef)aNum, kCFNumberIntType, &tmpNum);
+	if (tmpNum != 1118) {
+		CFRelease(dict);
+		return false;
+	}
+	
+	CFRelease(dict);
+	return true;
 }
 
 #define LoopGranularity 10000 // Microseconds
