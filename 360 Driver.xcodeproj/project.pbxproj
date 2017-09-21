@@ -261,7 +261,6 @@
 		557951441F7300C9001880D1 /* FFDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFDriver.h; sourceTree = "<group>"; };
 		557951451F7300C9001880D1 /* FFDriver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FFDriver.cpp; sourceTree = "<group>"; };
 		557951461F7300CA001880D1 /* XBoxOneBTHID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBoxOneBTHID.h; sourceTree = "<group>"; };
-		557951471F7300CA001880D1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		5579514E1F73037B001880D1 /* FeedbackXBOEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FeedbackXBOEffect.cpp; sourceTree = "<group>"; };
 		5579514F1F73037B001880D1 /* FeedbackXBOEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FeedbackXBOEffect.hpp; sourceTree = "<group>"; };
 		55852E2018D6B5580009BF55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -474,7 +473,6 @@
 			children = (
 				557951441F7300C9001880D1 /* FFDriver.h */,
 				557951451F7300C9001880D1 /* FFDriver.cpp */,
-				557951471F7300CA001880D1 /* main.c */,
 				557951461F7300CA001880D1 /* XBoxOneBTHID.h */,
 				5579514F1F73037B001880D1 /* FeedbackXBOEffect.hpp */,
 				5579514E1F73037B001880D1 /* FeedbackXBOEffect.cpp */,
