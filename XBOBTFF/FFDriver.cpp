@@ -784,7 +784,7 @@ HRESULT FeedbackXBOBT::sStopEffect(void * self, UInt32 downloadID)
 }
 
 // External factory function
-void* FeedbackXBOBTFactory(CFAllocatorRef allocator, CFUUIDRef typeID)
+extern "C" void* FeedbackXBOBTFactory(CFAllocatorRef allocator, CFUUIDRef typeID)
 {
 	void* result = NULL;
 	if (CFEqual(typeID, kIOForceFeedbackLibTypeID))

@@ -12,12 +12,16 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>CFPlugInDynamicRegistration</key>
+	<false/>
 	<key>CFPlugInFactories</key>
 	<dict>
 		<key>0F793F56-8C17-4BA0-9201-D52FEC6C2702</key>
@@ -32,7 +36,5 @@
 	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 C.W. Betts. All rights reserved.</string>
-	<key>NSPrincipalClass</key>
-	<string></string>
 </dict>
 </plist>

@@ -13,11 +13,11 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>XboxOneBluetooth</key>
@@ -37,8 +37,10 @@
 			<string>IOBluetoothL2CAPChannel</string>
 			<key>PSM</key>
 			<integer>17</integer>
+			<key>IOKitDebug</key>
+			<integer>65535</integer>
 			<key>ProductID</key>
-			<integer>736</integer>
+			<integer>765</integer>
 			<key>VendorID</key>
 			<integer>1118</integer>
 		</dict>
