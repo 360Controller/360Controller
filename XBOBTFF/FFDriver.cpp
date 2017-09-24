@@ -526,6 +526,7 @@ HRESULT FeedbackXBOBT::InitializeTerminate(NumVersion APIversion, io_object_t hi
 			// fprintf(stderr,"Feedback: Failed to initialise\n");
 			return FFERR_NOINTERFACE;
 		}
+		IOHIDDeviceOpen(this->device, 0);
 		Queue = dispatch_queue_create("com.mice.driver.FeedbackXBOBT", NULL);
 		Timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, Queue);
 		dispatch_source_set_timer(Timer, dispatch_walltime(NULL, 0), LoopGranularity*1000, 10);
@@ -624,9 +625,13 @@ void FeedbackXBOBT::SetForce(LONG LeftLevel, LONG RightLevel, LONG ltLevel, LONG
 	report.leftMagnitude = (unsigned char)min(SCALE_MAX, LeftLevel * (LONG)Gain / 10000 );
 	report.rightMagnitude = (unsigned char)min(SCALE_MAX, RightLevel * (LONG)Gain / 10000 );
 	report.duration = 0x7f;
+	report.loopCount = 10;
 
 	if (!Manual) {
-		IOHIDDeviceSetReport(device, kIOHIDReportTypeOutput, report.reportID, (const uint8_t*)&report, sizeof(XboxOneBluetoothReport_t));
+		IOReturn retVal = IOHIDDeviceSetReport(device, kIOHIDReportTypeOutput, report.reportID, (const uint8_t*)&report, sizeof(XboxOneBluetoothReport_t));
+		if (retVal != 0) {
+			printf("IOHIDDeviceSetReport returned %d (system %d, subsystem %d, code %d)\n", retVal, err_get_system(retVal), err_get_sub(retVal), err_get_code(retVal));
+		}
 	}
 }
 
