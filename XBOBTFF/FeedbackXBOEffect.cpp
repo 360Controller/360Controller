@@ -83,13 +83,23 @@ LONG FeedbackXBOEffect::Calc(LONG *LeftLevel, LONG *RightLevel, LONG *ltLevel, L
 				return -1;
 			}
 			else {
-				WorkLeftLevel = ((DiCustomForce.rglForceData[4*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-				WorkRightLevel = ((DiCustomForce.rglForceData[4*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-				WorkLTLevel = ((DiCustomForce.rglForceData[4*Index + 2] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-				WorkRTLevel = ((DiCustomForce.rglForceData[4*Index + 3] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
-				//fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
-				Index = (Index + 1) % (DiCustomForce.cSamples/4);
-				LastTime = CurrentTimeUsingMach();
+				if (DiCustomForce.cChannels == 2) {
+					WorkLeftLevel = ((DiCustomForce.rglForceData[2*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					WorkRightLevel = ((DiCustomForce.rglForceData[2*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					WorkLTLevel = 0;
+					WorkRTLevel = 0;
+					//fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
+					Index = (Index + 1) % (DiCustomForce.cSamples/2);
+					LastTime = CurrentTimeUsingMach();
+				} else {
+					WorkLeftLevel = ((DiCustomForce.rglForceData[4*Index] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					WorkRightLevel = ((DiCustomForce.rglForceData[4*Index + 1] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					WorkLTLevel = ((DiCustomForce.rglForceData[4*Index + 2] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					WorkRTLevel = ((DiCustomForce.rglForceData[4*Index + 3] * NormalRate + AttackLevel + FadeLevel) / 100) * DiEffect.dwGain / 10000;
+					//fprintf(stderr, "L:%d; R:%d\n", WorkLeftLevel, WorkRightLevel);
+					Index = (Index + 1) % (DiCustomForce.cSamples/4);
+					LastTime = CurrentTimeUsingMach();
+				}
 			}
 		}
 		// Regular commands treat controller as a single output (both channels are together as one)

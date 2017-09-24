@@ -42,7 +42,7 @@ private:
     {
         IUnknownVTbl *pseudoVTable;
         FeedbackXBOBT *obj;
-    } Xbox360InterfaceMap;
+    } XboxOneBTInterfaceMap;
     
     // IOCFPlugin interfacing variables and functions
 public:
@@ -78,11 +78,11 @@ private:
     typedef std::vector<FeedbackXBOEffect> FeedbackXBOEffectVector;
     typedef FeedbackXBOEffectVector::iterator FeedbackXBOEffectIterator;
     // helper function
-    static inline FeedbackXBOBT *getThis (void *self) { return (FeedbackXBOBT *) ((Xbox360InterfaceMap *) self)->obj; }
+    static inline FeedbackXBOBT *getThis (void *self) { return (FeedbackXBOBT *) ((XboxOneBTInterfaceMap *) self)->obj; }
     
     // interfacing
-    Xbox360InterfaceMap iIOCFPlugInInterface;
-    Xbox360InterfaceMap iIOForceFeedbackDeviceInterface;
+    XboxOneBTInterfaceMap iIOCFPlugInInterface;
+    XboxOneBTInterfaceMap iIOForceFeedbackDeviceInterface;
     IOHIDDeviceRef      device;
     
     // GCD queue and timer

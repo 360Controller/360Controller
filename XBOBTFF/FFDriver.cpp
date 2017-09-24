@@ -62,7 +62,7 @@ double CurrentTimeUsingMach()
 	return (double)nanos / NSEC_PER_SEC;
 }
 
-static IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
+static IOCFPlugInInterface functionMapXBOBT_IOCFPlugInInterface = {
 	// Padding required for COM
 	NULL,
 	// IUnknown
@@ -77,7 +77,7 @@ static IOCFPlugInInterface functionMap360_IOCFPlugInInterface = {
 };
 
 
-static IOForceFeedbackDeviceInterface functionMap360_IOForceFeedbackDeviceInterface = {
+static IOForceFeedbackDeviceInterface functionMapXBOBT_IOForceFeedbackDeviceInterface = {
 	// Padding required for COM
 	NULL,
 	// IUnknown
@@ -105,10 +105,10 @@ PrvRightLevel(0), Actuator(true), Manual(false)
 {
 	EffectList = FeedbackXBOEffectVector();
 	
-	iIOCFPlugInInterface.pseudoVTable = (IUnknownVTbl *) &functionMap360_IOCFPlugInInterface;
+	iIOCFPlugInInterface.pseudoVTable = (IUnknownVTbl *) &functionMapXBOBT_IOCFPlugInInterface;
 	iIOCFPlugInInterface.obj = this;
 	
-	iIOForceFeedbackDeviceInterface.pseudoVTable = (IUnknownVTbl *) &functionMap360_IOForceFeedbackDeviceInterface;
+	iIOForceFeedbackDeviceInterface.pseudoVTable = (IUnknownVTbl *) &functionMapXBOBT_IOForceFeedbackDeviceInterface;
 	iIOForceFeedbackDeviceInterface.obj = this;
 	
 	FactoryID = BTFFPLUGINTERFACE;
@@ -697,19 +697,19 @@ HRESULT FeedbackXBOBT::GetVersion(ForceFeedbackVersion *version)
 // static c->c++ glue functions
 HRESULT FeedbackXBOBT::sQueryInterface(void *self, REFIID iid, LPVOID *ppv)
 {
-	FeedbackXBOBT *obj = ((Xbox360InterfaceMap *)self)->obj;
+	FeedbackXBOBT *obj = ((XboxOneBTInterfaceMap *)self)->obj;
 	return obj->QueryInterface(iid, ppv);
 }
 
 ULONG FeedbackXBOBT::sAddRef(void *self)
 {
-	FeedbackXBOBT *obj = ( (Xbox360InterfaceMap *) self)->obj;
+	FeedbackXBOBT *obj = ( (XboxOneBTInterfaceMap *) self)->obj;
 	return obj->AddRef();
 }
 
 ULONG FeedbackXBOBT::sRelease(void *self)
 {
-	FeedbackXBOBT *obj = ( (Xbox360InterfaceMap *) self)->obj;
+	FeedbackXBOBT *obj = ( (XboxOneBTInterfaceMap *) self)->obj;
 	return obj->Release();
 }
 
