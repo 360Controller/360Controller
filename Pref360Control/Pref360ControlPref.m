@@ -1122,6 +1122,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         rm -rf /Library/Extensions/360Controller.kext\n\
         rm -rf /Library/Extensions/Wireless360Controller.kext\n\
         rm -rf /Library/Extensions/WirelessGamingReceiver.kext\n\
+        rm -rf /Library/Extensions/XboxOneBluetooth.kext\n\
         rm -rf /Library/PreferencePanes/Pref360Control.prefPane\n\
         pkgutil --forget com.mice.pkg.Xbox360controller\
         \" with administrator privileges";
