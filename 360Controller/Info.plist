@@ -2811,7 +2811,7 @@
 			<key>idVendor</key>
 			<integer>3695</integer>
 		</dict>
-		<key>RockCandyGamepadforPS3/key>
+		<key>RockCandyGamepadforPS3</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.Xbox360Controller</string>
