@@ -14,6 +14,8 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -28,12 +30,12 @@
 			<integer>1817</integer>
 			<key>idVendor</key>
 			<integer>1118</integer>
-			<key>IOClass</key>
-			<string>WirelessGamingReceiver</string>
-			<key>IOKitDebug</key>
-			<integer>65535</integer>
-			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
+            <key>IOClass</key>
+            <string>WirelessGamingReceiver</string>
+            <key>IOKitDebug</key>
+            <integer>65535</integer>
+            <key>IOProviderClass</key>
+            <string>IOUSBDevice</string>
 		</dict>
 		<key>WirelessGamingReceiverForWindowsAlternate</key>
 		<dict>
@@ -43,12 +45,12 @@
 			<integer>657</integer>
 			<key>idVendor</key>
 			<integer>1118</integer>
-			<key>IOClass</key>
-			<string>WirelessGamingReceiver</string>
-			<key>IOKitDebug</key>
-			<integer>65535</integer>
-			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
+            <key>IOClass</key>
+            <string>WirelessGamingReceiver</string>
+            <key>IOKitDebug</key>
+            <integer>65535</integer>
+            <key>IOProviderClass</key>
+            <string>IOUSBDevice</string>
 		</dict>
 	</dict>
 	<key>OSBundleCompatibleVersion</key>

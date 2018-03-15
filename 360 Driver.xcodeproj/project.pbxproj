@@ -1393,7 +1393,6 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = XboxOneBluetooth/Info.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULE_NAME = com.mice.driver.XboxOneBluetooth;
 				MODULE_START = XboxOneBluetooth_start;
 				MODULE_STOP = XboxOneBluetooth_stop;
@@ -1414,7 +1413,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = XboxOneBluetooth/Info.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULE_NAME = com.mice.driver.XboxOneBluetooth;
 				MODULE_START = XboxOneBluetooth_start;
 				MODULE_STOP = XboxOneBluetooth_stop;
@@ -1574,6 +1572,7 @@
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
