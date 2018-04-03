@@ -11,9 +11,9 @@
   3. [Original Xbox Controllers](#original-xbox-controllers)
   4. [Wired Xbox 360 Controllers](#wired-xbox-360-controllers)
   5. [Wireless Xbox 360 Controllers](#wireless-xbox-360-controllers)
-  6. [Wired Xbox One Controllers](#wired-xbox-one-controllers)
-  7. [Wireless Xbox One Controllers](#wireless-xbox-one-controllers)
-  8. [Wireless Xbox One Controllers (Bluetooth)](#wireless-xbox-one-controllers-bluetooth)
+  6. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
+  7. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
+  8. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
 6. [Adding Third Party Controllers](#adding-third-party-controllers)
 7. [Developer Info](#developer-info)
   1. [Building](#building)
@@ -81,6 +81,7 @@ Always check your controller with the preference pane found at: `Apple Menu -> S
 If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
 If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.
 If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+**At this time, PDP and PowerA controllers are unsupported by this driver as of macOS 10.11+ thanks to a rewrite of the macOS USB kernel. We cannot resolve this issue. It is a bug in Apple's core OS code.**
 
 ### Xbox One Controllers connected with Wireless Adapter
 Xbox One controllers connected with the Wireless Adapter are currently not supported. Please be patient as we figure out this complicated protocol.
