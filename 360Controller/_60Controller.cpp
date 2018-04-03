@@ -526,8 +526,11 @@ nochat:
     if (controllerType == XboxOne || controllerType == XboxOnePretend360) {
         UInt8 xoneInit0[] = { 0x01, 0x20, 0x01, 0x09, 0x00, 0x04, 0x20, 0x3a, 0x00, 0x00, 0x00, 0x80, 0x00 };
         UInt8 xoneInit1[] = { 0x05, 0x20, 0x03, 0x01, 0x00 };
+        UInt8 xoneInit2[] = { 0x09, 0x00, 0x00, 0x09, 0x00, 0x0F, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00 };
         QueueWrite(&xoneInit0, sizeof(xoneInit0));
         QueueWrite(&xoneInit1, sizeof(xoneInit1));
+        QueueWrite(&xoneInit2, sizeof(xoneInit2));
     } else {
         // Disable LED
         Xbox360_Prepare(led,outLed);
