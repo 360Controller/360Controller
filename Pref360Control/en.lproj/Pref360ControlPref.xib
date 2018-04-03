@@ -835,7 +835,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" id="3fX-WF-3zX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="337"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="433.44999999999993"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <size key="minSize" width="596" height="337"/>
@@ -888,7 +888,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 0.16.5">
+                                                                        <fragment content="Version 0.16.6">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1398,7 +1398,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.74650077760497724" horizontal="NO" id="v6N-fu-NBq">
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="580" y="0.0" width="16" height="337"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
