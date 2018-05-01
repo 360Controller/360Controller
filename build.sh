@@ -12,7 +12,7 @@ fi
 cd Install360Controller
 packagesbuild -v Install360Controller.pkgproj
 mv build 360ControllerInstall
-hdiutil create -srcfolder 360ControllerInstall -format UDZO ../build/360ControllerInstall.dmg
+hdiutil create -srcfolder 360ControllerInstall -fs HFS+ -format UDZO ../build/360ControllerInstall.dmg
 mv 360ControllerInstall build
 cd ..
 echo "** File contents **"
