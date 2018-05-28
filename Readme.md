@@ -8,12 +8,13 @@
 5. [My controller doesn't work!](#my-controller-doesnt-work)
    1. [I'm using a driver from the Tattiebogle website](#im-using-a-driver-from-the-tattiebogle-website) 
    2. [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game)
-   3. [Original Xbox Controllers](#original-xbox-controllers)
-   4. [Wired Xbox 360 Controllers](#wired-xbox-360-controllers)
-   5. [Wireless Xbox 360 Controllers](#wireless-xbox-360-controllers)
-   6. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
-   7. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
-   8. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
+   3. [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id)
+   4. [Original Xbox Controllers](#original-xbox-controllers)
+   5. [Wired Xbox 360 Controllers](#wired-xbox-360-controllers)
+   6. [Wireless Xbox 360 Controllers](#wireless-xbox-360-controllers)
+   7. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
+   8. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
+   9. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
 6. [Adding Third Party Controllers](#adding-third-party-controllers)
 7. [Developer Info](#developer-info)
    1. [Building](#building)
@@ -69,22 +70,26 @@ The Tattiebogle driver is NOT the same driver as this Github project. We do NOT 
 ### My controller doesn't work with a game!
 We cannot fix game specific issues. This driver does its absolute best to put out a standardized format for games to use. If they don't take advantage of that, there is **ABSOLUTELY NOTHING** we can do. The best we can do for you is give you the "Pretend to be an Xbox 360 Controller" option in the "Advanced" tab. This will make any wired Xbox 360 or wired Xbox One controller appear to games as if it were an official Microsoft Xbox 360 Controller. That way if the game is only looking for Xbox 360 controllers and isn't looking for other devices like third party Xbox 360 controllers or Xbox One controllers, you should be able to trick the game. If you experience an issue with a game that this toggle does not fix, we cannot help you, sorry. That is just the nature of drivers.
 
+### How do I find my Vendor ID and Product ID?
+Navigate to the Apple menu at the top left corner of your screen. Select the `About This Mac` option. This will open a new window, where you need to select `System Report...` in the `Overview` tab. This will open another new window. On the left hand side of this window, there will be a number of options. Select `USB`. It will be somewhere near the bottom of the `Hardware` section. This will show you the USB device tree. Find and click on the entry that corresponds to your controller. This will provide you with the information needed at the bottom of the window. If you cannot find your device, make sure that all devices are properly connected to the computer. Try different cables if the controller still is not found.
+
 ### Original Xbox Controllers
 Make an issue describing your problem.
 
 ### Wired Xbox 360 Controllers
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
-If you have a third party controller, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 
 ### Wireless Xbox 360 Controllers
+**CURRENTLY UNSUPPORTED**
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
 ### Xbox One Controllers connected with USB
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
-If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. If you revert to macOS 10.10 or earlier, these controllers will work.
+If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. This is specifically found in controllers from PDP and PowerA. If you revert to macOS 10.10 or earlier, these controllers will work.
 If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.
-If you have a third party controller that isn't recognized by the preference pane, make an issue with the "Product ID" and "Vendor ID" of the controller. These can be found by accessing the Apple menu, selecting "About this Mac", and then selecting "System Report..." on the "Overview" tab. On the left hand side of the new window, select the "USB" option under "Hardware". If the controller is plugged in, there should be an entry in this window called "Controller".
+If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 **At this time, PDP and PowerA controllers are unsupported by this driver as of macOS 10.11+ thanks to a rewrite of the macOS USB kernel. We cannot resolve this issue. It is a bug in Apple's core OS code.**
 
 ### Xbox One Controllers connected with Wireless Adapter
