@@ -45,7 +45,11 @@ Controller support includes ALL devices that work with an Xbox series piece of h
 This project is a fork of the [Xbox360Controller project](http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller) originally created by Colin Munro.
 
 ## Installation
-See the [releases page](https://github.com/360Controller/360Controller/releases) for the latest compiled and signed version of the driver. Most users will want to run this installer.
+See the [releases page](https://github.com/360Controller/360Controller/releases) for the latest compiled and signed version of the driver. Most users will want to run this installer. If you are using macOS 10.13.4 or later, then you will have to allow the signing certificate of "Drew Mills" in order for the software to run. Usually, the installer will prompt you to complete this process:
+![System prompt: System Extension Blocked](https://imgur.com/zXM5JlU.png)
+You can either click "Open Security Preferences" to quickly fix this. If you didn't see this prompt, you can navigate to the same window using the Apple menu in the top left hand corner of your screen, navigating the "System Preferences" and then clicking on "Security & Privacy." This will open up the following page. All you need to do is click the "Allow" button near the bottom right.
+![Security & Privacy Preference Pane displaying prompt to user: System software from user "Drew Mills" was blocked from loading](https://imgur.com/HrL77Ii.png)
+This prompt has been known to have issues with software or hardware that interferes with mouse movement. If you are using software that impacts the movement of your mouse, or are using a special interface device, such as a Wacom tablet, please using a standard input device, such as a mouse, to click this button. This is a security feature of macOS and is out of our control.
 
 ## Uninstallation
 In order to uninstall the driver: navigate to the preference pane by opening your "System Preferences," navigating to the "Xbox 360 Controllers" pane, clicking on the "Advanced" tab and pressing the "Uninstall" button. This will prompt you to enter your password so that the uninstaller can remove all of the bundled software from your machine.
