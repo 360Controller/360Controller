@@ -518,6 +518,12 @@ typedef struct {
 
 typedef struct {
     XBOXONE_HEADER header;
+    UInt8 data[4];
+    UInt8 zero[5];
+} PACKED XBOXONE_OUT_GUIDE_REPORT;
+
+typedef struct {
+    XBOXONE_HEADER header;
     UInt8 mode; // So far always 0x00
     UInt8 rumbleMask; // So far always 0x0F
     UInt8 trigL, trigR;
@@ -637,6 +643,22 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor * descriptor, I
             if ((report->header.command==0x07) && (report->header.size==(sizeof(XBOXONE_IN_GUIDE_REPORT)-4)))
             {
                 XBOXONE_IN_GUIDE_REPORT *guideReport=(XBOXONE_IN_GUIDE_REPORT*)report;
+                
+                if (guideReport->header.reserved1 == 0x30) // 2016 Controller
+                {
+                    XBOXONE_OUT_GUIDE_REPORT outReport = {};
+                    outReport.header.command = 0x01;
+                    outReport.header.reserved1 = 0x20;
+                    outReport.header.counter = guideReport->header.counter;
+                    outReport.header.size = 0x09;
+                    outReport.data[0] = 0x00;
+                    outReport.data[1] = 0x07;
+                    outReport.data[2] = 0x20;
+                    outReport.data[3] = 0x02;
+                    
+                    GetOwner(this)->QueueWrite(&outReport, 13);
+                }
+                
                 isXboxOneGuideButtonPressed = (bool)guideReport->state;
                 XBOX360_IN_REPORT *oldReport = (XBOX360_IN_REPORT*)lastData;
                 oldReport->buttons ^= (-isXboxOneGuideButtonPressed ^ oldReport->buttons) & (1 << GetOwner(this)->mapping[10]);
