@@ -175,15 +175,21 @@ Debugging the driver depends on which part you intend to debug. For the 360Contr
 
 ### Debugging the preference pane
 
-These instructions work for Xcode 6.4, the most recent version of Xcode that can still build the driver. Most of these instructions are pulled directly from [this blog post.](http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
+Most of these instructions are pulled directly from [this blog post.](http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
 
-First, edit your build scheme for Pref360Control, and select the "Run" scheme, and make sure you are editing "Debug" (A). In the environment variables section, click on "+" to add a new environment variable (B). Name the new variable OBJC_DISABLE_GC, and set its value to YES.
+First, create a copy of `System Preferences.app` called `System Preferences (signed).app`. Then sign this new System Preferences with the command:
+
+```codesign -s "Developer ID Application: First Last (XXXXXXXXXX)" -f /Applications/System\ Preferences\ \(signed\).app/```
+
+where `Developer ID Application: First Last (XXXXXXXXXX)` is the name of your Developer ID Application signing certificate.
+
+Edit your build scheme for Pref360Control, and select the "Run" scheme, and make sure you are editing "Debug" (A). In the environment variables section, click on "+" to add a new environment variable (B). Name the new variable OBJC_DISABLE_GC, and set its value to YES.
 
 Next, click the little disclosure triangle for the run scheme to reveal its detailed settings. Then select pre-actions. Click the "+" at the bottom to add a run script action. Enter /bin/sh as the shell, make sure that your target is selected to provide build settings, and type a shell command line to install the newly compiled pref pane in your personal Library folder:
 
 ```cp -Rf ${CONFIGURATION_BUILD_DIR}/Pref360Control.prefPane ~/Library/PreferencePanes```
 
-Finally, select the run step, choose "other" from the executable drop-down menu, and select System Preferences in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
+Finally, select the run step, choose "other" from the executable drop-down menu, and select `System Preferences (signed)` in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
 
 ### A note on Unity mappings
 
