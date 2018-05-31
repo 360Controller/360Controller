@@ -105,6 +105,11 @@
 		55FE3CAD18D7B7B600D69E84 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE3CAC18D7B7B600D69E84 /* SDL2.framework */; };
 		5B943BE11A83EC6600E77A79 /* MyAnalogStick.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B943BDF1A83EC6600E77A79 /* MyAnalogStick.h */; };
 		5B943BE21A83EC6600E77A79 /* MyAnalogStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B943BE01A83EC6600E77A79 /* MyAnalogStick.m */; };
+		62035D1620C04F7D003E70C1 /* chatpadkeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 62035D1120C04F7D003E70C1 /* chatpadkeys.h */; };
+		62035D1720C04F7D003E70C1 /* chatpadkeys.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62035D1220C04F7D003E70C1 /* chatpadkeys.cpp */; };
+		62035D1820C04F7D003E70C1 /* chatpadhid.h in Headers */ = {isa = PBXBuildFile; fileRef = 62035D1320C04F7D003E70C1 /* chatpadhid.h */; };
+		62035D1920C04F7D003E70C1 /* ChatPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62035D1420C04F7D003E70C1 /* ChatPad.cpp */; };
+		62035D1A20C04F7D003E70C1 /* ChatPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 62035D1520C04F7D003E70C1 /* ChatPad.h */; };
 		622A73C21A7C339000784C02 /* MyWhole360ControllerMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */; };
 		622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */; };
 		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
@@ -337,6 +342,11 @@
 		55FE3CAC18D7B7B600D69E84 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		5B943BDF1A83EC6600E77A79 /* MyAnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnalogStick.h; sourceTree = "<group>"; };
 		5B943BE01A83EC6600E77A79 /* MyAnalogStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnalogStick.m; sourceTree = "<group>"; };
+		62035D1120C04F7D003E70C1 /* chatpadkeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadkeys.h; sourceTree = "<group>"; };
+		62035D1220C04F7D003E70C1 /* chatpadkeys.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chatpadkeys.cpp; sourceTree = "<group>"; };
+		62035D1320C04F7D003E70C1 /* chatpadhid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatpadhid.h; sourceTree = "<group>"; };
+		62035D1420C04F7D003E70C1 /* ChatPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChatPad.cpp; sourceTree = "<group>"; };
+		62035D1520C04F7D003E70C1 /* ChatPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPad.h; sourceTree = "<group>"; };
 		622A73C01A7C339000784C02 /* MyWhole360ControllerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWhole360ControllerMapper.h; sourceTree = "<group>"; };
 		622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360ControllerMapper.m; sourceTree = "<group>"; };
 		622A73CC1A7C879300784C02 /* BindingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTableView.h; sourceTree = "<group>"; };
@@ -627,6 +637,11 @@
 			children = (
 				55B636F018C1054F00CE933D /* _60Controller.h */,
 				55B636EF18C1054F00CE933D /* _60Controller.cpp */,
+				62035D1520C04F7D003E70C1 /* ChatPad.h */,
+				62035D1420C04F7D003E70C1 /* ChatPad.cpp */,
+				62035D1320C04F7D003E70C1 /* chatpadhid.h */,
+				62035D1120C04F7D003E70C1 /* chatpadkeys.h */,
+				62035D1220C04F7D003E70C1 /* chatpadkeys.cpp */,
 				55B636F718C1054F00CE933D /* Controller.h */,
 				55B636F618C1054F00CE933D /* Controller.cpp */,
 				55B636F818C1054F00CE933D /* ControlStruct.h */,
@@ -742,7 +757,10 @@
 			files = (
 				55B6375318C1098D00CE933D /* Controller.h in Headers */,
 				55B6375518C1098D00CE933D /* xbox360hid.h in Headers */,
+				62035D1620C04F7D003E70C1 /* chatpadkeys.h in Headers */,
+				62035D1A20C04F7D003E70C1 /* ChatPad.h in Headers */,
 				55B6374F18C1098D00CE933D /* _60Controller.h in Headers */,
+				62035D1820C04F7D003E70C1 /* chatpadhid.h in Headers */,
 				55B6375418C1098D00CE933D /* ControlStruct.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -977,37 +995,48 @@
 				TargetAttributes = {
 					5579513D1F73006F001880D1 = {
 						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55ACBFDF1D5B9E2E00E4F677 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B636B318C104DB00CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6370618C1057100CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6371E18C108A500CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6375F18C10A3200CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6377C18C10B0B00CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B637E718C10D5000CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6380D18C10E8700CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55B6383818C10F8E00CE933D = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 					55FE3CA018D7B77800D69E84 = {
+						DevelopmentTeam = G947KKM5RL;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -1138,6 +1167,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62035D1720C04F7D003E70C1 /* chatpadkeys.cpp in Sources */,
+				62035D1920C04F7D003E70C1 /* ChatPad.cpp in Sources */,
 				55B6371718C105B800CE933D /* _60Controller.cpp in Sources */,
 				55B6371A18C105B800CE933D /* Controller.cpp in Sources */,
 			);
