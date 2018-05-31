@@ -134,14 +134,11 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 
 #### If you have a signing certificate
 
-* Open `360 Driver.xcodeproj` using Xcode.
+* Create a file named 'DeveloperSettings.xcconfig'
 * Select the `360 Driver` project in the Navigator.
-* Select the `360Daemon` target from the top right corner.
-* Select the `Build Settings` tab from the top of the screen.
-* In the `Code Signing` section, find `Code Signing Identity` section and expand it.
-* In the `Release` section, change the selection to your `Developer ID Application` certificate.
-* Set the code signing identity for `360Daemon`, `Feedback360`, `360Controller`, `DriverTool`, `Pref360Control`, `Wireless360Controller`, `WirelessGamingReceiver` and `Whole Driver`.
-* Run `./build.sh` to build the .pkg. This .pkg can be found in the `Install360Controller` directory.
+* In this file, add the following lines:
+   * `DEVELOPMENT_TEAM = XXXXXXXXXX` where `XXXXXXXXXX` is the development team on your Developer ID Application and Installer certificates.
+   * `DEVELOPER_NAME = First Last` where `First Last` is the name on the Developer ID Installer certificate.
 
 ### Disabling signing requirements
 

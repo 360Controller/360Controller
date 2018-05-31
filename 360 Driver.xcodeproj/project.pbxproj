@@ -993,9 +993,38 @@
 				TargetAttributes = {
 					5579513D1F73006F001880D1 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Manual;
 					};
 					55ACBFDF1D5B9E2E00E4F677 = {
 						CreatedOnToolsVersion = 7.3.1;
+						ProvisioningStyle = Manual;
+					};
+					55B636B318C104DB00CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6370618C1057100CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6371E18C108A500CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6375F18C10A3200CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6377C18C10B0B00CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B637E718C10D5000CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6380D18C10E8700CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55B6383818C10F8E00CE933D = {
+						ProvisioningStyle = Manual;
+					};
+					55FE3CA018D7B77800D69E84 = {
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1341,7 +1370,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = XBOBTFF/Info.plist;
@@ -1350,6 +1382,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XBOBTFF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
 			};
@@ -1370,8 +1403,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = XBOBTFF/Info.plist;
@@ -1379,6 +1415,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XBOBTFF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = plugin;
 			};
@@ -1389,6 +1426,8 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1409,6 +1448,8 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1460,7 +1501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1502,7 +1543,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1517,6 +1558,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360Daemon/360DaemonApp-Prefix.pch";
 				INFOPLIST_FILE = "360Daemon/360DaemonApp-Info.plist";
@@ -1530,6 +1573,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360Daemon/360DaemonApp-Prefix.pch";
@@ -1544,6 +1589,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1556,6 +1603,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1569,6 +1618,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -1584,6 +1635,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
 				INFOPLIST_FILE = Feedback360/Info.plist;
@@ -1597,6 +1650,8 @@
 		55B6376818C10A3200CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DriverTool/DriverTool_Prefix.pch;
@@ -1610,6 +1665,8 @@
 		55B6376918C10A3200CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1625,6 +1682,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1644,6 +1703,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
@@ -1664,6 +1725,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1676,6 +1739,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1688,6 +1753,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1700,6 +1767,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
@@ -1711,6 +1780,8 @@
 		55B6383A18C10F8E00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_STYLE = Manual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1718,6 +1789,8 @@
 		55B6383B18C10F8E00CE933D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_STYLE = Manual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1725,6 +1798,8 @@
 		55FE3CA818D7B77800D69E84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -1738,6 +1813,8 @@
 		55FE3CA918D7B77800D69E84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",

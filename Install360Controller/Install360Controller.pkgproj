@@ -5,6 +5,10 @@
 	<key>PACKAGES</key>
 	<array>
 		<dict>
+			<key>MUST-CLOSE-APPLICATION-ITEMS</key>
+			<array/>
+			<key>MUST-CLOSE-APPLICATIONS</key>
+			<false/>
 			<key>PACKAGE_FILES</key>
 			<dict>
 				<key>DEFAULT_INSTALL_LOCATION</key>
@@ -384,7 +388,7 @@
 									<key>PATH_TYPE</key>
 									<integer>0</integer>
 									<key>PERMISSIONS</key>
-									<integer>493</integer>
+									<integer>1005</integer>
 									<key>TYPE</key>
 									<integer>1</integer>
 									<key>UID</key>
@@ -477,6 +481,22 @@
 									<integer>0</integer>
 									<key>PATH</key>
 									<string>Widgets</string>
+									<key>PATH_TYPE</key>
+									<integer>0</integer>
+									<key>PERMISSIONS</key>
+									<integer>493</integer>
+									<key>TYPE</key>
+									<integer>1</integer>
+									<key>UID</key>
+									<integer>0</integer>
+								</dict>
+								<dict>
+									<key>CHILDREN</key>
+									<array/>
+									<key>GID</key>
+									<integer>0</integer>
+									<key>PATH</key>
+									<string>Automator</string>
 									<key>PATH_TYPE</key>
 									<integer>0</integer>
 									<key>PERMISSIONS</key>
@@ -599,8 +619,14 @@
 				</dict>
 				<key>PAYLOAD_TYPE</key>
 				<integer>0</integer>
+				<key>SHOW_INVISIBLE</key>
+				<false/>
+				<key>SPLIT_FORKS</key>
+				<true/>
+				<key>TREAT_MISSING_FILES_AS_WARNING</key>
+				<false/>
 				<key>VERSION</key>
-				<integer>2</integer>
+				<integer>5</integer>
 			</dict>
 			<key>PACKAGE_SCRIPTS</key>
 			<dict>
@@ -627,15 +653,29 @@
 				<integer>1</integer>
 				<key>CONCLUSION_ACTION</key>
 				<integer>2</integer>
+				<key>FOLLOW_SYMBOLIC_LINKS</key>
+				<false/>
 				<key>IDENTIFIER</key>
 				<string>com.mice.pkg.Xbox360controller</string>
+				<key>LOCATION</key>
+				<integer>0</integer>
 				<key>NAME</key>
 				<string>Install360Controller</string>
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
+				<key>PAYLOAD_SIZE</key>
+				<integer>-1</integer>
+				<key>REFERENCE_PATH</key>
+				<string></string>
+				<key>RELOCATABLE</key>
+				<false/>
+				<key>USE_HFS+_COMPRESSION</key>
+				<false/>
 				<key>VERSION</key>
 				<string>0.15</string>
 			</dict>
+			<key>TYPE</key>
+			<integer>0</integer>
 			<key>UUID</key>
 			<string>95C3DB03-4C99-4A29-AEC7-C73B3D9F6A04</string>
 		</dict>
@@ -697,8 +737,6 @@
 						<dict/>
 					</dict>
 				</dict>
-				<key>INSTALLATION TYPE</key>
-				<integer>0</integer>
 				<key>MODE</key>
 				<integer>1</integer>
 			</dict>
@@ -780,8 +818,6 @@
 			</dict>
 			<key>LICENSE</key>
 			<dict>
-				<key>KEYWORDS</key>
-				<dict/>
 				<key>LOCALIZATIONS</key>
 				<array>
 					<dict>
@@ -862,10 +898,6 @@
 					<true/>
 				</dict>
 			</array>
-			<key>POSTINSTALL_PATH</key>
-			<dict/>
-			<key>PREINSTALL_PATH</key>
-			<dict/>
 			<key>RESOURCES</key>
 			<array/>
 			<key>ROOT_VOLUME_ONLY</key>
@@ -873,8 +905,6 @@
 		</dict>
 		<key>PROJECT_SETTINGS</key>
 		<dict>
-			<key>ADVANCED_OPTIONS</key>
-			<dict/>
 			<key>BUILD_FORMAT</key>
 			<integer>0</integer>
 			<key>BUILD_PATH</key>
@@ -883,13 +913,6 @@
 				<string>build</string>
 				<key>PATH_TYPE</key>
 				<integer>1</integer>
-			</dict>
-			<key>CERTIFICATE</key>
-			<dict>
-				<key>NAME</key>
-				<string>Developer ID Application: Rodrigo Rocha (CDMF3S9CTN)</string>
-				<key>PATH</key>
-				<string>/Users/Rodrigo/Library/Keychains/login.keychain</string>
 			</dict>
 			<key>EXCLUDED_FILES</key>
 			<array>
@@ -1061,6 +1084,10 @@
 			</array>
 			<key>NAME</key>
 			<string>Install360Controller</string>
+			<key>PAYLOAD_ONLY</key>
+			<false/>
+			<key>TREAT_MISSING_PRESENTATION_DOCUMENTS_AS_WARNING</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>TYPE</key>

@@ -1,8 +1,13 @@
 #!/bin/bash
+
+DEV_NAME=`echo | grep DEVELOPER_NAME DeveloperSettings.xcconfig`
+DEV_TEAM=`echo | grep DEVELOPMENT_TEAM DeveloperSettings.xcconfig`
+CERT_ID="${DEV_NAME//\DEVELOPER_NAME = } (${DEV_TEAM//\DEVELOPMENT_TEAM = })"
+
 mkdir -p build
 zip -r build/360ControllerSource.zip * -x "build*"
 
-xcrun xcodebuild -configuration Release -target "Whole Driver"
+xcrun xcodebuild -configuration Release -target "Whole Driver" -xcconfig "DeveloperSettings.xcconfig"
 if [ $? -ne 0 ]
   then
     echo "******** BUILD FAILED ********"
@@ -10,7 +15,7 @@ if [ $? -ne 0 ]
 fi
 
 cd Install360Controller
-packagesbuild -v Install360Controller.pkgproj
+packagesbuild -v Install360Controller.pkgproj --identity "Developer ID Installer: ""${CERT_ID}"
 mv build 360ControllerInstall
 hdiutil create -srcfolder 360ControllerInstall -fs HFS+ -format UDZO ../build/360ControllerInstall.dmg
 mv 360ControllerInstall build
