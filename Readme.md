@@ -23,6 +23,7 @@
    4. [Re-Enabling signing requirements](#re-enabling-signing-requirements)
    5. [Debugging the driver](#debugging-the-driver)
    6. [Debugging the preference pane](#debugging-the-preference-pane)
+   7. [A note on Unity mappings](#a-note-on-unity-mappings)
 8. [Licence](#licence)
 
 ## About
@@ -183,6 +184,10 @@ Next, click the little disclosure triangle for the run scheme to reveal its deta
 ```cp -Rf ${CONFIGURATION_BUILD_DIR}/Pref360Control.prefPane ~/Library/PreferencePanes```
 
 Finally, select the run step, choose "other" from the executable drop-down menu, and select System Preferences in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
+
+### A note on Unity mappings
+
+The issues with the button and axis mappings in the Unity game engine are outside of our control. Unity mangles the button and axis values provided by the controller and remaps them to different values. There is absolutely no way that we can introduce a shim to fix it. Complaints about this should be directed at Unity, not at us.
 
 ## Licence
 
