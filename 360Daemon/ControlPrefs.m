@@ -45,15 +45,15 @@ BOOL AlertDisabled(NSInteger index)
 
 void SetController(NSString *serial, NSDictionary *data)
 {
-    CFPreferencesSetValue((__bridge CFStringRef)serial, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSetValue((__bridge CFStringRef)serial, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
 NSDictionary* GetController(NSString *serial)
 {
     CFPropertyListRef value;
-    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    value = CFPreferencesCopyValue((__bridge CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    value = CFPreferencesCopyValue((__bridge CFStringRef)serial, DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     return CFBridgingRelease(value);
 }
 
@@ -75,8 +75,8 @@ void SetKnownDevices(NSDictionary *devices)
 {
     // Setting the dictionary should work?
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
-    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
 
 NSDictionary* GetKnownDevices(void)
@@ -84,8 +84,8 @@ NSDictionary* GetKnownDevices(void)
     CFPropertyListRef value;
     NSData *data;
 
-    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
-    value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesAnyUser, kCFPreferencesCurrentHost);
+    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;

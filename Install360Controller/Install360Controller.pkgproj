@@ -317,6 +317,18 @@
 									<key>CHILDREN</key>
 									<array>
 										<dict>
+											<key>BUNDLE_CAN_DOWNGRADE</key>
+											<false/>
+											<key>BUNDLE_POSTINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>BUNDLE_PREINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
 											<key>CHILDREN</key>
 											<array/>
 											<key>GID</key>
@@ -672,7 +684,7 @@
 				<key>USE_HFS+_COMPRESSION</key>
 				<false/>
 				<key>VERSION</key>
-				<string>0.15</string>
+				<string>0.16</string>
 			</dict>
 			<key>TYPE</key>
 			<integer>0</integer>
@@ -701,6 +713,8 @@
 		</dict>
 		<key>PROJECT_PRESENTATION</key>
 		<dict>
+			<key>BACKGROUND</key>
+			<dict/>
 			<key>INSTALLATION TYPE</key>
 			<dict>
 				<key>HIERARCHIES</key>
