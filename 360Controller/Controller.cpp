@@ -533,6 +533,13 @@ typedef struct {
     UInt8 extra;
 } PACKED XBOXONE_OUT_RUMBLE;
 
+typedef struct {
+    XBOXONE_HEADER header; // 0x0a 0x20 0x04 0x03
+    UInt8 zero;
+    UInt8 command;
+    UInt8 brightness; // 0x00 - 0x20
+} PACKED XBOXONE_OUT_LED;
+
 typedef enum {
     XONE_SYNC           = 0x0001, // Bit 00
     XONE_MENU           = 0x0004, // Bit 02
@@ -558,6 +565,25 @@ typedef enum {
     XONE_PADDLE_LOWER_RIGHT     = 0x0008, // Bit 03
     XONE_PADDLE_PRESET_NUM      = 0x0010, // Bit 04
 } GAMEPAD_XONE_ELITE_PADDLE;
+
+typedef enum {
+    XONE_LED_OFF_1 = 0x00;
+    XONE_LED_SOLID = 0x01;
+    XONE_LED_BLINK_FAST = 0x02;
+    XONE_LED_BLINK_SLOW = 0x03;
+    XONE_LED_BLINK_VERY_SLOW = 0x04;
+    XONE_LED_SOLD_1 = 0x05;
+    XONE_LED_SOLD_2 = 0x06;
+    XONE_LED_SOLD_3 = 0x07;
+    XONE_LED_PHASE_SLOW = 0x08;
+    XONE_LED_PHASE_FAST = 0x09;
+    XONE_LED_REBOOT_1 = 0x0a;
+    XONE_LED_OFF = 0x0b;
+    XONE_LED_FLICKER = 0x0c;
+    XONE_LED_SOLID_4 = 0x0d;
+    XONE_LED_SOLID_5 = 0x0e;
+    XONE_LED_REBOOT_2 = 0x0f;
+} LED_XONE;
 
 OSDefineMetaClassAndStructors(XboxOneControllerClass, Xbox360ControllerClass)
 
