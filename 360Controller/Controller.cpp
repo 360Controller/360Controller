@@ -567,22 +567,22 @@ typedef enum {
 } GAMEPAD_XONE_ELITE_PADDLE;
 
 typedef enum {
-    XONE_LED_OFF_1 = 0x00;
-    XONE_LED_SOLID = 0x01;
-    XONE_LED_BLINK_FAST = 0x02;
-    XONE_LED_BLINK_SLOW = 0x03;
-    XONE_LED_BLINK_VERY_SLOW = 0x04;
-    XONE_LED_SOLD_1 = 0x05;
-    XONE_LED_SOLD_2 = 0x06;
-    XONE_LED_SOLD_3 = 0x07;
-    XONE_LED_PHASE_SLOW = 0x08;
-    XONE_LED_PHASE_FAST = 0x09;
-    XONE_LED_REBOOT_1 = 0x0a;
-    XONE_LED_OFF = 0x0b;
-    XONE_LED_FLICKER = 0x0c;
-    XONE_LED_SOLID_4 = 0x0d;
-    XONE_LED_SOLID_5 = 0x0e;
-    XONE_LED_REBOOT_2 = 0x0f;
+    XONE_LED_OFF_1           = 0x00,
+    XONE_LED_SOLID           = 0x01,
+    XONE_LED_BLINK_FAST      = 0x02,
+    XONE_LED_BLINK_SLOW      = 0x03,
+    XONE_LED_BLINK_VERY_SLOW = 0x04,
+    XONE_LED_SOLD_1          = 0x05,
+    XONE_LED_SOLD_2          = 0x06,
+    XONE_LED_SOLD_3          = 0x07,
+    XONE_LED_PHASE_SLOW      = 0x08,
+    XONE_LED_PHASE_FAST      = 0x09,
+    XONE_LED_REBOOT_1        = 0x0a,
+    XONE_LED_OFF             = 0x0b,
+    XONE_LED_FLICKER         = 0x0c,
+    XONE_LED_SOLID_4         = 0x0d,
+    XONE_LED_SOLID_5         = 0x0e,
+    XONE_LED_REBOOT_2        = 0x0f,
 } LED_XONE;
 
 OSDefineMetaClassAndStructors(XboxOneControllerClass, Xbox360ControllerClass)
