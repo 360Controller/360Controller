@@ -128,6 +128,7 @@ public:
     virtual void free(void);
 
     bool start(IOService *provider);
+    bool willTerminate(IOService *provider, IOOptionBits options);
     void stop(IOService *provider);
 
     // IOKit methods. These methods are defines in <IOKit/IOService.h>

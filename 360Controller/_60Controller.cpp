@@ -615,9 +615,17 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
     }
 }
 
+bool Xbox360Peripheral::willTerminate(IOService *provider, IOOptionBits options)
+{
+    ReleaseAll();
+    
+    return super::willTerminate(provider, options);
+}
+
 void Xbox360Peripheral::stop(IOService *provider)
 {
     ReleaseAll();
+    
     super::stop(provider);
 }
 
