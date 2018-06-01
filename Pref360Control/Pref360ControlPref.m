@@ -445,17 +445,6 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         ffDevice = [item ffDevice];
         registryEntry = [item rawDevice];
         controllerType = [item controllerType];
-
-        if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
-        {
-            [_rumbleOptions removeAllItems];
-            [_rumbleOptions addItemsWithTitles:@[@"Default", @"None", @"Triggers Only", @"Both"]];
-        }
-        else
-        {
-            [_rumbleOptions removeAllItems];
-            [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
-        }
     }
 
     if((*device)->copyMatchingElements(device,NULL,&CFelements)!=kIOReturnSuccess) {
@@ -717,6 +706,19 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             } else NSLog(@"No value for Pretend360");
         } else NSLog(@"No settings found\n");
     }
+    
+    // Set force feedback options
+    if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
+    {
+        [_rumbleOptions removeAllItems];
+        [_rumbleOptions addItemsWithTitles:@[@"Default", @"None", @"Triggers Only", @"Both"]];
+    }
+    else
+    {
+        [_rumbleOptions removeAllItems];
+        [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
+    }
+    
     // Enable GUI components
     [self inputEnable:YES];
     // Set device capabilities

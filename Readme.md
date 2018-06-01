@@ -6,7 +6,7 @@
 3. [Uninstallation](#uninstallation)
 4. [Usage](#usage)
 5. [My controller doesn't work!](#my-controller-doesnt-work)
-   1. [I'm using a driver from the Tattiebogle website](#im-using-a-driver-from-the-tattiebogle-website) 
+   1. [I'm using a driver from the Tattiebogle website](#im-using-a-driver-from-the-tattiebogle-website)
    2. [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game)
    3. [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id)
    4. [Original Xbox Controllers](#original-xbox-controllers)
@@ -23,17 +23,18 @@
    4. [Re-Enabling signing requirements](#re-enabling-signing-requirements)
    5. [Debugging the driver](#debugging-the-driver)
    6. [Debugging the preference pane](#debugging-the-preference-pane)
+   7. [A note on Unity mappings](#a-note-on-unity-mappings)
 8. [Licence](#licence)
 
 ## About
 This driver supports the Microsoft Xbox series of controllers including:
 
 1. Original Xbox
-    - Original Xbox controllers are supported by using a USB adapter. 
+    - Original Xbox controllers are supported by using a USB adapter.
 
 2. Xbox 360
     - Wired Xbox 360 controllers are supported directly.
-    - **As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.15 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.** Wireless Xbox 360 controllers are supported with the Xbox 360 Wireless Gaming Receiver. Using a "Play and Charge" kit is not supported. 
+    - **As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.15 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.** Wireless Xbox 360 controllers are supported with the Xbox 360 Wireless Gaming Receiver. Using a "Play and Charge" kit is not supported.
 
 3. Xbox One
     - Xbox One controllers are supported when connected with a micro USB cable. Using the controller with the Wireless Adapter is not currently supported.
@@ -77,19 +78,19 @@ Navigate to the Apple menu at the top left corner of your screen. Select the `Ab
 Make an issue describing your problem.
 
 ### Wired Xbox 360 Controllers
-Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.  
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 
 ### Wireless Xbox 360 Controllers
 **CURRENTLY UNSUPPORTED**
-Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.  
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
 
 ### Xbox One Controllers connected with USB
-Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.  
-If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. This is specifically found in controllers from PDP and PowerA. If you revert to macOS 10.10 or earlier, these controllers will work.  
-If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.  
-If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.  
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
+If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. This is specifically found in controllers from PDP and PowerA. If you revert to macOS 10.10 or earlier, these controllers will work.
+If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.
+If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 **At this time, PDP and PowerA controllers are unsupported by this driver as of macOS 10.11+ thanks to a rewrite of the macOS USB kernel. We cannot resolve this issue. It is a bug in Apple's core OS code.**
 
 ### Xbox One Controllers connected with Wireless Adapter
@@ -134,14 +135,11 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 
 #### If you have a signing certificate
 
-* Open `360 Driver.xcodeproj` using Xcode.
+* Create a file named 'DeveloperSettings.xcconfig'
 * Select the `360 Driver` project in the Navigator.
-* Select the `360Daemon` target from the top right corner.
-* Select the `Build Settings` tab from the top of the screen.
-* In the `Code Signing` section, find `Code Signing Identity` section and expand it.
-* In the `Release` section, change the selection to your `Developer ID Application` certificate.
-* Set the code signing identity for `360Daemon`, `Feedback360`, `360Controller`, `DriverTool`, `Pref360Control`, `Wireless360Controller`, `WirelessGamingReceiver` and `Whole Driver`.
-* Run `./build.sh` to build the .pkg. This .pkg can be found in the `Install360Controller` directory.
+* In this file, add the following lines:
+   * `DEVELOPMENT_TEAM = XXXXXXXXXX` where `XXXXXXXXXX` is the development team on your Developer ID Application and Installer certificates.
+   * `DEVELOPER_NAME = First Last` where `First Last` is the name on the Developer ID Installer certificate.
 
 ### Disabling signing requirements
 
@@ -177,15 +175,25 @@ Debugging the driver depends on which part you intend to debug. For the 360Contr
 
 ### Debugging the preference pane
 
-These instructions work for Xcode 6.4, the most recent version of Xcode that can still build the driver. Most of these instructions are pulled directly from [this blog post.](http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
+Most of these instructions are pulled directly from [this blog post.](http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
 
-First, edit your build scheme for Pref360Control, and select the "Run" scheme, and make sure you are editing "Debug" (A). In the environment variables section, click on "+" to add a new environment variable (B). Name the new variable OBJC_DISABLE_GC, and set its value to YES.
+First, create a copy of `System Preferences.app` called `System Preferences (signed).app`. Then sign this new System Preferences with the command:
+
+```codesign -s "Developer ID Application: First Last (XXXXXXXXXX)" -f /Applications/System\ Preferences\ \(signed\).app/```
+
+where `Developer ID Application: First Last (XXXXXXXXXX)` is the name of your Developer ID Application signing certificate.
+
+Edit your build scheme for Pref360Control, and select the "Run" scheme, and make sure you are editing "Debug" (A). In the environment variables section, click on "+" to add a new environment variable (B). Name the new variable OBJC_DISABLE_GC, and set its value to YES.
 
 Next, click the little disclosure triangle for the run scheme to reveal its detailed settings. Then select pre-actions. Click the "+" at the bottom to add a run script action. Enter /bin/sh as the shell, make sure that your target is selected to provide build settings, and type a shell command line to install the newly compiled pref pane in your personal Library folder:
 
 ```cp -Rf ${CONFIGURATION_BUILD_DIR}/Pref360Control.prefPane ~/Library/PreferencePanes```
 
-Finally, select the run step, choose "other" from the executable drop-down menu, and select System Preferences in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
+Finally, select the run step, choose "other" from the executable drop-down menu, and select `System Preferences (signed)` in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
+
+### A note on Unity mappings
+
+The issues with the button and axis mappings in the Unity game engine are outside of our control. Unity mangles the button and axis values provided by the controller and remaps them to different values. There is absolutely no way that we can introduce a shim to fix it. Complaints about this should be directed at Unity, not at us.
 
 ## Licence
 
