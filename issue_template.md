@@ -1,6 +1,12 @@
 ### Type of Controller
 Replace this text with: Original Xbox, Xbox 360, Xbox One, All or N/A
 
+### OS Version
+Replace this text with the version of macOS that you are running
+
+### Driver Version
+Replate this text with the version or versions of the driver that you are using or have tested
+
 ### Connection Method
 Replace this text with: Wired, Wireless Adapter, Bluetooth, N/A or more specific method if applicable
 
