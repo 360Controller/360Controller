@@ -483,15 +483,13 @@ typedef struct {
         SInt16 leftX;
     };
     union {
-        UInt8 accelerator;
-        UInt8 trigR;
+        UInt16 accelerator;
+        UInt16 trigR;
     };
-    UInt8 unknown1;
     union {
-        UInt8 brake;
-        UInt8 trigL;
+        UInt16 brake;
+        UInt16 trigL;
     };
-    UInt8 unknown2;
     union {
         UInt8 clutch;
         UInt8 leftY;
@@ -638,8 +636,8 @@ void XboxOneControllerClass::convertFromXboxOne(void *buffer, UInt8 packetSize)
     {
         XBOXONE_IN_WHEEL_REPORT *wheelReport=(XBOXONE_IN_WHEEL_REPORT*)buffer;
 
-        trigR = wheelReport->accelerator;
-        trigL = wheelReport->brake;
+        trigR = (wheelReport->accelerator / 1023.0) * 255; // UInt16 -> UInt8
+        trigL = (wheelReport->brake / 1023.0) * 255; // UInt16 -> UInt8
         left.x = wheelReport->steering - 32768; // UInt16 -> SInt16
         left.y = wheelReport->clutch * 128; // Clutch is 0-255. Upconvert to half signed 16 range. (0 - 32640)
         right = {};
