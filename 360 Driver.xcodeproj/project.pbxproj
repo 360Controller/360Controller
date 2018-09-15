@@ -13,7 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				55ACBFE91D5BA33A00E4F677 /* PBXTargetDependency */,
 				55B6383D18C10FA200CE933D /* PBXTargetDependency */,
 				55B6383F18C10FA200CE933D /* PBXTargetDependency */,
 				55B6384118C10FA200CE933D /* PBXTargetDependency */,
@@ -123,13 +122,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5579513D1F73006F001880D1;
 			remoteInfo = XBOBTFF;
-		};
-		55ACBFE81D5BA33A00E4F677 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55ACBFDF1D5B9E2E00E4F677;
-			remoteInfo = XboxOneBluetooth;
 		};
 		55B6374D18C1097D00CE933D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1244,11 +1236,6 @@
 			isa = PBXTargetDependency;
 			target = 5579513D1F73006F001880D1 /* XBOBTFF */;
 			targetProxy = 557951491F7300E4001880D1 /* PBXContainerItemProxy */;
-		};
-		55ACBFE91D5BA33A00E4F677 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */;
-			targetProxy = 55ACBFE81D5BA33A00E4F677 /* PBXContainerItemProxy */;
 		};
 		55B6374E18C1097D00CE933D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
