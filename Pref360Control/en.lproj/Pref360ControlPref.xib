@@ -59,7 +59,7 @@
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="419"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="419"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +100,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-vG-8fZ">
-                                            <rect key="frame" x="18" y="355" width="623" height="26"/>
+                                            <rect key="frame" x="18" y="355" width="623" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="l7B-sk-a7S" id="XEZ-Cj-WUE">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -179,11 +179,11 @@
                                         <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="Right Stick" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
                                             <rect key="frame" x="490" y="100" width="151" height="123"/>
                                             <view key="contentView" id="uFo-qV-Y82">
-                                                <rect key="frame" x="1" y="1" width="149" height="107"/>
+                                                <rect key="frame" x="3" y="3" width="145" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
-                                                        <rect key="frame" x="16" y="81" width="69" height="18"/>
+                                                        <rect key="frame" x="16" y="79" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="acH-i4-MwR">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -193,7 +193,7 @@
                                                         </connections>
                                                     </button>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
-                                                        <rect key="frame" x="16" y="61" width="69" height="18"/>
+                                                        <rect key="frame" x="16" y="59" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Vm-ce-hhc">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -203,7 +203,7 @@
                                                         </connections>
                                                     </button>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-h4-SLy">
-                                                        <rect key="frame" x="25" y="16" width="57" height="18"/>
+                                                        <rect key="frame" x="23" y="14" width="57" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="FRy-4y-nnb">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -213,7 +213,7 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wxg-qH-eBn">
-                                                        <rect key="frame" x="16" y="37" width="117" height="19"/>
+                                                        <rect key="frame" x="14" y="35" width="117" height="19"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="H8P-Ic-jNd">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -245,7 +245,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1A-0k-b7Y">
-                                            <rect key="frame" x="491" y="47" width="150" height="26"/>
+                                            <rect key="frame" x="491" y="47" width="150" height="25"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="o1g-Uv-SAa">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -274,11 +274,11 @@
                                         <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="Left Stick" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
                                             <rect key="frame" x="490" y="227" width="151" height="123"/>
                                             <view key="contentView" id="Fay-fd-XO5">
-                                                <rect key="frame" x="1" y="1" width="149" height="107"/>
+                                                <rect key="frame" x="3" y="3" width="145" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
-                                                        <rect key="frame" x="16" y="81" width="69" height="18"/>
+                                                        <rect key="frame" x="16" y="79" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="5wf-7e-ekz">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -288,7 +288,7 @@
                                                         </connections>
                                                     </button>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
-                                                        <rect key="frame" x="16" y="61" width="69" height="18"/>
+                                                        <rect key="frame" x="16" y="59" width="69" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RFR-wA-1SW">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -298,7 +298,7 @@
                                                         </connections>
                                                     </button>
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-ha-aE9">
-                                                        <rect key="frame" x="16" y="37" width="117" height="19"/>
+                                                        <rect key="frame" x="14" y="35" width="117" height="19"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="pUW-BW-6Gu">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </sliderCell>
@@ -307,7 +307,7 @@
                                                         </connections>
                                                     </slider>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="FGM-yX-zMk">
-                                                        <rect key="frame" x="25" y="16" width="57" height="18"/>
+                                                        <rect key="frame" x="23" y="14" width="57" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Uce-Uv-Hq5">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -362,7 +362,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-qF-rWd">
-                                            <rect key="frame" x="18" y="355" width="633" height="26"/>
+                                            <rect key="frame" x="18" y="355" width="633" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Fqs-9N-l7A" id="pey-Hr-vWo">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -382,7 +382,7 @@
                                             <rect key="frame" x="20" y="20" width="465" height="330"/>
                                             <subviews>
                                                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aM0-GE-bqq">
-                                                    <rect key="frame" x="207" y="-3" width="50" height="50"/>
+                                                    <rect key="frame" x="208" y="-3" width="50" height="50"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="PowerOffTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EaU-AD-Hjh">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -406,7 +406,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="Zwr-si-a4c" id="9SZ-KC-9Y6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="153" height="247"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="153" height="245"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="1" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -446,16 +446,16 @@
                                                     </tableView>
                                                 </subviews>
                                             </clipView>
-                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="LWD-pC-O65">
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LWD-pC-O65">
                                                 <rect key="frame" x="1" y="119" width="223" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
-                                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fTK-Gc-4OH">
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="fTK-Gc-4OH">
                                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="Zwr-si-a4c">
-                                                <rect key="frame" x="0.0" y="0.0" width="153" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="153" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
@@ -506,7 +506,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v9g-pO-cIT">
-                                            <rect key="frame" x="18" y="355" width="633" height="26"/>
+                                            <rect key="frame" x="18" y="355" width="633" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="ZBC-oI-z5d" id="LNS-E3-icM">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -525,17 +525,17 @@
                                         <box autoresizesSubviews="NO" borderType="line" title="Deadzones" translatesAutoresizingMaskIntoConstraints="NO" id="k7f-mn-n3T">
                                             <rect key="frame" x="300" y="66" width="351" height="284"/>
                                             <view key="contentView" id="lUi-Wg-cgY">
-                                                <rect key="frame" x="1" y="1" width="349" height="268"/>
+                                                <rect key="frame" x="3" y="3" width="345" height="266"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <box autoresizesSubviews="NO" borderType="line" title="Right Stick" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
-                                                        <rect key="frame" x="183" y="10" width="151" height="248"/>
+                                                        <rect key="frame" x="181" y="8" width="151" height="248"/>
                                                         <view key="contentView" id="9YM-Gl-vFd">
-                                                            <rect key="frame" x="1" y="1" width="149" height="232"/>
+                                                            <rect key="frame" x="3" y="3" width="145" height="230"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
-                                                                    <rect key="frame" x="16" y="114" width="69" height="18"/>
+                                                                    <rect key="frame" x="14" y="112" width="69" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -545,7 +545,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
-                                                                    <rect key="frame" x="16" y="94" width="70" height="18"/>
+                                                                    <rect key="frame" x="14" y="92" width="70" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -555,7 +555,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
-                                                                    <rect key="frame" x="25" y="49" width="57" height="18"/>
+                                                                    <rect key="frame" x="25" y="47" width="57" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -565,7 +565,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
-                                                                    <rect key="frame" x="16" y="70" width="117" height="19"/>
+                                                                    <rect key="frame" x="16" y="68" width="117" height="19"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="1uA-oq-a0L">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -574,7 +574,7 @@
                                                                     </connections>
                                                                 </slider>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
-                                                                    <rect key="frame" x="16" y="26" width="117" height="18"/>
+                                                                    <rect key="frame" x="16" y="24" width="117" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -584,7 +584,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="vof-lR-v7y" userLabel="My Analog Stick R" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="144" width="77" height="77"/>
+                                                                    <rect key="frame" x="34" y="142" width="77" height="77"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="77" id="8if-Eb-Vw2"/>
                                                                         <constraint firstAttribute="height" constant="77" id="I7B-1Y-fXE"/>
@@ -612,13 +612,13 @@
                                                         </constraints>
                                                     </box>
                                                     <box autoresizesSubviews="NO" borderType="line" title="Left Stick" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
-                                                        <rect key="frame" x="15" y="10" width="151" height="248"/>
+                                                        <rect key="frame" x="13" y="8" width="151" height="248"/>
                                                         <view key="contentView" id="Fd4-5U-9t8">
-                                                            <rect key="frame" x="1" y="1" width="149" height="232"/>
+                                                            <rect key="frame" x="3" y="3" width="145" height="230"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
-                                                                    <rect key="frame" x="16" y="114" width="69" height="18"/>
+                                                                    <rect key="frame" x="14" y="112" width="69" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -628,7 +628,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
-                                                                    <rect key="frame" x="16" y="94" width="69" height="18"/>
+                                                                    <rect key="frame" x="14" y="92" width="69" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -638,7 +638,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
-                                                                    <rect key="frame" x="16" y="70" width="117" height="19"/>
+                                                                    <rect key="frame" x="16" y="68" width="117" height="19"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="k4Y-aS-OZs">
                                                                         <font key="font" size="12" name="Helvetica"/>
                                                                     </sliderCell>
@@ -647,7 +647,7 @@
                                                                     </connections>
                                                                 </slider>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
-                                                                    <rect key="frame" x="25" y="49" width="57" height="18"/>
+                                                                    <rect key="frame" x="25" y="47" width="57" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
@@ -657,7 +657,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
-                                                                    <rect key="frame" x="16" y="26" width="117" height="18"/>
+                                                                    <rect key="frame" x="16" y="24" width="117" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -667,7 +667,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="zxH-Fb-uux" userLabel="My Analog Stick L" customClass="MyAnalogStick">
-                                                                    <rect key="frame" x="36" y="144" width="77" height="77"/>
+                                                                    <rect key="frame" x="34" y="142" width="77" height="77"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="77" id="6aK-uV-4t7"/>
                                                                         <constraint firstAttribute="width" constant="77" id="dQw-ck-ELz"/>
@@ -708,11 +708,11 @@
                                         <box autoresizesSubviews="NO" borderType="line" title="Options" translatesAutoresizingMaskIntoConstraints="NO" id="Q4L-nM-vW8">
                                             <rect key="frame" x="17" y="16" width="281" height="334"/>
                                             <view key="contentView" id="9Me-le-Oh3">
-                                                <rect key="frame" x="1" y="1" width="279" height="318"/>
+                                                <rect key="frame" x="3" y="3" width="275" height="316"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZ6-57-3mT">
-                                                        <rect key="frame" x="12" y="7" width="104" height="32"/>
+                                                        <rect key="frame" x="10" y="5" width="104" height="32"/>
                                                         <buttonCell key="cell" type="push" title="Uninstall..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QvN-mn-giT">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -722,7 +722,7 @@
                                                         </connections>
                                                     </button>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="362-jh-07U">
-                                                        <rect key="frame" x="35" y="117" width="228" height="167"/>
+                                                        <rect key="frame" x="33" y="115" width="228" height="167"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="167" id="Nk2-fU-1WJ"/>
                                                         </constraints>
@@ -738,7 +738,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                         </textFieldCell>
                                                     </textField>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="bAx-wa-r7r">
-                                                        <rect key="frame" x="16" y="292" width="103" height="18"/>
+                                                        <rect key="frame" x="14" y="290" width="103" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Enable Driver" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FhM-1g-G1s">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -748,7 +748,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                         </connections>
                                                     </button>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-Ly-PFn">
-                                                        <rect key="frame" x="16" y="45" width="247" height="42"/>
+                                                        <rect key="frame" x="14" y="43" width="247" height="42"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Click on this button to completely remove this driver from your computer (you may need to restart):" id="ix8-GT-Crq">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -756,7 +756,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                         </textFieldCell>
                                                     </textField>
                                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="NTf-yJ-U41">
-                                                        <rect key="frame" x="14" y="96" width="247" height="5"/>
+                                                        <rect key="frame" x="12" y="94" width="247" height="5"/>
                                                     </box>
                                                 </subviews>
                                             </view>
@@ -778,11 +778,11 @@ Due to some internal limitations, you need to connect your device once to be abl
                                         <box autoresizesSubviews="NO" borderType="line" title="Spoofing Preferences" translatesAutoresizingMaskIntoConstraints="NO" id="HND-46-X0K">
                                             <rect key="frame" x="300" y="16" width="351" height="46"/>
                                             <view key="contentView" id="iBw-6b-q0S">
-                                                <rect key="frame" x="1" y="1" width="349" height="30"/>
+                                                <rect key="frame" x="3" y="3" width="345" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="egx-oO-7cv">
-                                                        <rect key="frame" x="16" y="8" width="249" height="18"/>
+                                                        <rect key="frame" x="14" y="6" width="249" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Pretend to be an Xbox 360 Controller" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Yr-CF-I6K">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -825,11 +825,11 @@ Due to some internal limitations, you need to connect your device once to be abl
                                         <box borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-tN-LmC">
                                             <rect key="frame" x="17" y="16" width="634" height="365"/>
                                             <view key="contentView" id="cED-YP-yx3">
-                                                <rect key="frame" x="1" y="1" width="632" height="363"/>
+                                                <rect key="frame" x="3" y="3" width="628" height="359"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
-                                                        <rect key="frame" x="18" y="14" width="596" height="337"/>
+                                                        <rect key="frame" x="16" y="12" width="596" height="337"/>
                                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
                                                             <rect key="frame" x="0.0" y="0.0" width="596" height="337"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -888,7 +888,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 0.16.9">
+                                                                        <fragment content="Version 0.16.10">
                                                                             <attributes>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1394,11 +1394,11 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                                 </textView>
                                                             </subviews>
                                                         </clipView>
-                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uuF-8q-9ih">
+                                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uuF-8q-9ih">
                                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
-                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
+                                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
                                                             <rect key="frame" x="580" y="0.0" width="16" height="337"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>

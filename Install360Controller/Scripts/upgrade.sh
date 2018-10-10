@@ -64,4 +64,11 @@ if [ -d /Library/Extensions/WirelessGamingReceiver.kext ]; then
    /bin/rm -r /Library/Extensions/WirelessGamingReceiver.kext
 fi
 
+# Remove bluetooth driver
+
+if [ -d /Library/Extensions/XboxOneBluetooth.kext ]; then
+   kextunload /Library/Extensions/XboxOneBluetooth.kext
+   /bin/rm -r /Library/Extensions/XboxOneBluetooth.kext
+fi
+
 exit 0

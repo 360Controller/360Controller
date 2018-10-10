@@ -138,38 +138,6 @@
 											<key>UID</key>
 											<integer>0</integer>
 										</dict>
-										<dict>
-											<key>CHILDREN</key>
-											<array/>
-											<key>GID</key>
-											<integer>0</integer>
-											<key>PATH</key>
-											<string>../build/Release/Wireless360Controller.kext</string>
-											<key>PATH_TYPE</key>
-											<integer>1</integer>
-											<key>PERMISSIONS</key>
-											<integer>493</integer>
-											<key>TYPE</key>
-											<integer>3</integer>
-											<key>UID</key>
-											<integer>0</integer>
-										</dict>
-										<dict>
-											<key>CHILDREN</key>
-											<array/>
-											<key>GID</key>
-											<integer>0</integer>
-											<key>PATH</key>
-											<string>../build/Release/WirelessGamingReceiver.kext</string>
-											<key>PATH_TYPE</key>
-											<integer>1</integer>
-											<key>PERMISSIONS</key>
-											<integer>493</integer>
-											<key>TYPE</key>
-											<integer>3</integer>
-											<key>UID</key>
-											<integer>0</integer>
-										</dict>
 									</array>
 									<key>GID</key>
 									<integer>0</integer>
@@ -668,7 +636,7 @@
 				<key>USE_HFS+_COMPRESSION</key>
 				<false/>
 				<key>VERSION</key>
-				<string>0.16</string>
+				<string>0.16.10</string>
 			</dict>
 			<key>TYPE</key>
 			<integer>0</integer>
@@ -874,7 +842,7 @@
 			<array>
 				<dict>
 					<key>BEHAVIOR</key>
-					<integer>2</integer>
+					<integer>3</integer>
 					<key>DICTIONARY</key>
 					<dict>
 						<key>IC_REQUIREMENT_OS_DISK_TYPE</key>
@@ -882,14 +850,23 @@
 						<key>IC_REQUIREMENT_OS_DISTRIBUTION_TYPE</key>
 						<integer>0</integer>
 						<key>IC_REQUIREMENT_OS_MINIMUM_VERSION</key>
-						<integer>100800</integer>
+						<integer>101100</integer>
 					</dict>
 					<key>IC_REQUIREMENT_CHECK_TYPE</key>
 					<integer>0</integer>
 					<key>IDENTIFIER</key>
 					<string>fr.whitebox.Packages.requirement.os</string>
 					<key>MESSAGE</key>
-					<array/>
+					<array>
+						<dict>
+							<key>LANGUAGE</key>
+							<string>English</string>
+							<key>SECONDARY_VALUE</key>
+							<string>This driver can only be installed on macOS 10.11 or later.</string>
+							<key>VALUE</key>
+							<string>Operating System Version Too Low</string>
+						</dict>
+					</array>
 					<key>NAME</key>
 					<string>Operating System</string>
 					<key>STATE</key>
