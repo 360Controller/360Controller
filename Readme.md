@@ -34,7 +34,7 @@ This driver supports the Microsoft Xbox series of controllers including:
 
 2. Xbox 360
     - Wired Xbox 360 controllers are supported directly.
-    - **As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.5 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.** Wireless Xbox 360 controllers are supported with the Xbox 360 Wireless Gaming Receiver. Using a "Play and Charge" kit is not supported.
+    - **As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.5 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.**
 
 3. Xbox One
     - Xbox One controllers are supported when connected with a micro USB cable. Using the controller with the Wireless Adapter is not currently supported.
@@ -82,9 +82,7 @@ Always check your controller with the preference pane found at: `Apple Menu -> S
 If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 
 ### Wireless Xbox 360 Controllers
-**CURRENTLY UNSUPPORTED**
-Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
-Remember that wireless controllers must be connected using a wireless adapter. Plugging a "Play and Charge" kit into a wireless controller does not make it a wired controller.
+**As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.5 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.**
 
 ### Xbox One Controllers connected with USB
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
