@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mice.driver.WirelessGamingReceiver</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,8 +20,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>${MIN_MACOS_VERSION}</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>WirelessGamingReceiverForWindows</key>
@@ -70,6 +68,8 @@
 			<integer>1118</integer>
 		</dict>
 	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MIN_MACOS_VERSION}</string>
 	<key>OSBundleCompatibleVersion</key>
 	<string>1.0.0d1</string>
 	<key>OSBundleLibraries</key>

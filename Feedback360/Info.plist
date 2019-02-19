@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mice.Xbox360ControllerForceFeedback</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,8 +20,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>${MIN_MACOS_VERSION}</string>
 	<key>CFPlugInDynamicRegistration</key>
 	<string>NO</string>
 	<key>CFPlugInFactories</key>
@@ -36,6 +34,8 @@
 			<string>B8ED278F-EC8A-4E8E-B4CF-13E2A9D68E83</string>
 		</array>
 	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MIN_MACOS_VERSION}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
 </dict>

@@ -68,10 +68,10 @@
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="4as-1K-roV">
                             <font key="font" metaFont="system"/>
                             <segments>
-                                <segment label="Controller Test" selected="YES"/>
-                                <segment label="Binding" tag="1"/>
-                                <segment label="Advanced"/>
-                                <segment label="About"/>
+                                <segment label="控制器测试" selected="YES"/>
+                                <segment label="绑定" tag="1"/>
+                                <segment label="高级"/>
+                                <segment label="关于"/>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -175,7 +175,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="PVh-uO-wxu" secondAttribute="bottom" constant="131" id="whF-dl-4mw"/>
                                             </constraints>
                                         </customView>
-                                        <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="Right Stick" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
+                                        <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="右摇杆" translatesAutoresizingMaskIntoConstraints="NO" id="cqy-WX-TEQ">
                                             <rect key="frame" x="490" y="100" width="151" height="123"/>
                                             <view key="contentView" id="uFo-qV-Y82">
                                                 <rect key="frame" x="3" y="3" width="145" height="105"/>
@@ -183,7 +183,7 @@
                                                 <subviews>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysF-It-Kag">
                                                         <rect key="frame" x="16" y="79" width="69" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="acH-i4-MwR">
+                                                        <buttonCell key="cell" type="check" title="反转 X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="acH-i4-MwR">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -193,7 +193,7 @@
                                                     </button>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-2i-HVe">
                                                         <rect key="frame" x="16" y="59" width="69" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Vm-ce-hhc">
+                                                        <buttonCell key="cell" type="check" title="反转 Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Vm-ce-hhc">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -202,8 +202,8 @@
                                                         </connections>
                                                     </button>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Uqs-h4-SLy">
-                                                        <rect key="frame" x="23" y="14" width="57" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="FRy-4y-nnb">
+                                                        <rect key="frame" x="23" y="14" width="45" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="绑定" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="FRy-4y-nnb">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
@@ -261,16 +261,16 @@
                                             </connections>
                                         </popUpButton>
                                         <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYW-Jo-Ujl">
-                                            <rect key="frame" x="518" y="26" width="96" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Swap Sticks" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="7VQ-hw-19d">
+                                            <rect key="frame" x="518" y="26" width="102" height="18"/>
+                                            <buttonCell key="cell" type="check" title="交换左右遥感" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="7VQ-hw-19d">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" size="13" name=".PingFangSC-Regular"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="changeSetting:" target="-2" id="U7t-zK-Tia"/>
                                             </connections>
                                         </button>
-                                        <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="Left Stick" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
+                                        <box autoresizesSubviews="NO" misplaced="YES" borderType="line" title="左摇杆" translatesAutoresizingMaskIntoConstraints="NO" id="ZlQ-UU-WB8">
                                             <rect key="frame" x="490" y="227" width="151" height="123"/>
                                             <view key="contentView" id="Fay-fd-XO5">
                                                 <rect key="frame" x="3" y="3" width="145" height="105"/>
@@ -278,7 +278,7 @@
                                                 <subviews>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-VK-hzl">
                                                         <rect key="frame" x="16" y="79" width="69" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="5wf-7e-ekz">
+                                                        <buttonCell key="cell" type="check" title="反转 X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="5wf-7e-ekz">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -288,7 +288,7 @@
                                                     </button>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-HB-a4l">
                                                         <rect key="frame" x="16" y="59" width="69" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RFR-wA-1SW">
+                                                        <buttonCell key="cell" type="check" title="反转 Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RFR-wA-1SW">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -306,8 +306,8 @@
                                                         </connections>
                                                     </slider>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="FGM-yX-zMk">
-                                                        <rect key="frame" x="23" y="14" width="57" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Uce-Uv-Hq5">
+                                                        <rect key="frame" x="23" y="14" width="45" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="绑定" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Uce-Uv-Hq5">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
@@ -402,7 +402,7 @@
                                             <rect key="frame" x="493" y="78" width="155" height="271"/>
                                             <clipView key="contentView" id="SaB-pO-6ME">
                                                 <rect key="frame" x="1" y="0.0" width="153" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="Zwr-si-a4c" id="9SZ-KC-9Y6">
                                                         <rect key="frame" x="0.0" y="0.0" width="153" height="245"/>
@@ -412,7 +412,7 @@
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="binding" width="72" minWidth="40" maxWidth="1000" id="VVi-lm-klv">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Binding">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="绑定">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -425,7 +425,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
                                                             <tableColumn identifier="input" width="79" minWidth="10" maxWidth="1000" id="CU8-av-rwl">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Input">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="输入">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -460,7 +460,7 @@
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yAI-iC-6ZJ">
                                             <rect key="frame" x="487" y="13" width="167" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Start Remapping" alternateTitle="Cancel Remapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgp-Mz-PQL">
+                                            <buttonCell key="cell" type="push" title="开始重新映射" alternateTitle="取消重新映射" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgp-Mz-PQL">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -470,7 +470,7 @@
                                         </button>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mS-Byj">
                                             <rect key="frame" x="487" y="42" width="167" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Reset Mapping" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
+                                            <buttonCell key="cell" type="push" title="重置映射" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fLu-85-Jz7">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -521,21 +521,21 @@
                                                 <action selector="selectDevice:" target="-2" id="1tN-Qv-NBp"/>
                                             </connections>
                                         </popUpButton>
-                                        <box autoresizesSubviews="NO" borderType="line" title="Deadzones" translatesAutoresizingMaskIntoConstraints="NO" id="k7f-mn-n3T">
+                                        <box autoresizesSubviews="NO" borderType="line" title="死区" translatesAutoresizingMaskIntoConstraints="NO" id="k7f-mn-n3T">
                                             <rect key="frame" x="300" y="66" width="351" height="284"/>
                                             <view key="contentView" id="lUi-Wg-cgY">
                                                 <rect key="frame" x="3" y="3" width="345" height="266"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <box autoresizesSubviews="NO" borderType="line" title="Right Stick" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
+                                                    <box autoresizesSubviews="NO" borderType="line" title="右摇杆" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-sh-mjm">
                                                         <rect key="frame" x="181" y="8" width="151" height="248"/>
                                                         <view key="contentView" id="9YM-Gl-vFd">
                                                             <rect key="frame" x="3" y="3" width="145" height="230"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-aE-ddG">
-                                                                    <rect key="frame" x="14" y="112" width="69" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
+                                                                    <rect key="frame" x="14" y="112" width="61" height="18"/>
+                                                                    <buttonCell key="cell" type="check" title="反转 X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="elG-G6-ZET">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -545,7 +545,7 @@
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ASV-58-sZ1">
                                                                     <rect key="frame" x="14" y="92" width="70" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
+                                                                    <buttonCell key="cell" type="check" title="反转 Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Kn-lQ-AaB">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -555,7 +555,7 @@
                                                                 </button>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-JO-bAn">
                                                                     <rect key="frame" x="25" y="47" width="57" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
+                                                                    <buttonCell key="cell" type="check" title="绑定" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                     </buttonCell>
@@ -574,7 +574,7 @@
                                                                 </slider>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26X-Mo-i1h">
                                                                     <rect key="frame" x="16" y="24" width="117" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
+                                                                    <buttonCell key="cell" type="check" title="标准化" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5TH-CS-wl6">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -610,15 +610,15 @@
                                                             <constraint firstAttribute="trailing" secondItem="ASV-58-sZ1" secondAttribute="trailing" constant="63" id="xd5-0R-mGl"/>
                                                         </constraints>
                                                     </box>
-                                                    <box autoresizesSubviews="NO" borderType="line" title="Left Stick" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
+                                                    <box autoresizesSubviews="NO" borderType="line" title="左摇杆" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-ba-S8X">
                                                         <rect key="frame" x="13" y="8" width="151" height="248"/>
                                                         <view key="contentView" id="Fd4-5U-9t8">
                                                             <rect key="frame" x="3" y="3" width="145" height="230"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="bu6-hT-9ND">
-                                                                    <rect key="frame" x="14" y="112" width="69" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Invert X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
+                                                                    <rect key="frame" x="14" y="112" width="61" height="18"/>
+                                                                    <buttonCell key="cell" type="check" title="反转 X" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="I8N-Ll-Q29">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -627,8 +627,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ejG-0P-eK6">
-                                                                    <rect key="frame" x="14" y="92" width="69" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Invert Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
+                                                                    <rect key="frame" x="14" y="92" width="61" height="18"/>
+                                                                    <buttonCell key="cell" type="check" title="反转 Y" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C6W-9e-zqx">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -647,7 +647,7 @@
                                                                 </slider>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Y-4P-SwU">
                                                                     <rect key="frame" x="25" y="47" width="57" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
+                                                                    <buttonCell key="cell" type="check" title="绑定" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                     </buttonCell>
@@ -657,7 +657,7 @@
                                                                 </button>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-OM-5G7">
                                                                     <rect key="frame" x="16" y="24" width="117" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Normalize" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
+                                                                    <buttonCell key="cell" type="check" title="标准化" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Nbf-a1-ZeT">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -704,15 +704,15 @@
                                                 <constraint firstAttribute="trailing" secondItem="TKg-sh-mjm" secondAttribute="trailing" constant="16" id="oNc-8Q-p0j"/>
                                             </constraints>
                                         </box>
-                                        <box autoresizesSubviews="NO" borderType="line" title="Options" translatesAutoresizingMaskIntoConstraints="NO" id="Q4L-nM-vW8">
+                                        <box autoresizesSubviews="NO" borderType="line" title="选项" translatesAutoresizingMaskIntoConstraints="NO" id="Q4L-nM-vW8">
                                             <rect key="frame" x="17" y="16" width="281" height="334"/>
                                             <view key="contentView" id="9Me-le-Oh3">
                                                 <rect key="frame" x="3" y="3" width="275" height="316"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZ6-57-3mT">
-                                                        <rect key="frame" x="10" y="5" width="104" height="32"/>
-                                                        <buttonCell key="cell" type="push" title="Uninstall..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QvN-mn-giT">
+                                                        <rect key="frame" x="10" y="5" width="78" height="32"/>
+                                                        <buttonCell key="cell" type="push" title="卸载..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QvN-mn-giT">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -727,18 +727,18 @@
                                                         </constraints>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="IRF-DH-74j">
                                                             <font key="font" metaFont="smallSystem"/>
-                                                            <string key="title">You can disable the driver temporarily so your Xbox device can be used in games that access the hardware directly.
+                                                            <string key="title">您可以暂时禁用该驱动程序，以便您的Xbox设备可以在直接访问硬件的游戏中使用。
 
-This may be useful when playing some games ported by Aspyr if it supports your device.
+当游玩由Aspyr移植的某些游戏时，如果它支持您的设备，这可能很有用。
 
-Due to some internal limitations, you need to connect your device once to be able to disable this.</string>
+由于某些内部限制，您需要连接一次设备才能禁用此功能。</string>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="bAx-wa-r7r">
-                                                        <rect key="frame" x="14" y="290" width="103" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Enable Driver" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FhM-1g-G1s">
+                                                        <rect key="frame" x="14" y="290" width="76" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="启用驱动" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FhM-1g-G1s">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -748,8 +748,10 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     </button>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-Ly-PFn">
                                                         <rect key="frame" x="14" y="43" width="247" height="42"/>
-                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Click on this button to completely remove this driver from your computer (you may need to restart):" id="ix8-GT-Crq">
+                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="ix8-GT-Crq">
                                                             <font key="font" metaFont="smallSystem"/>
+                                                            <string key="title">单击此按钮可从计算机中完全删除此驱动程序（您可能需要重新启动）：
+</string>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -774,15 +776,15 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                 <constraint firstItem="bAx-wa-r7r" firstAttribute="leading" secondItem="F4O-Ly-PFn" secondAttribute="leading" id="yin-A7-ac3"/>
                                             </constraints>
                                         </box>
-                                        <box autoresizesSubviews="NO" borderType="line" title="Spoofing Preferences" translatesAutoresizingMaskIntoConstraints="NO" id="HND-46-X0K">
+                                        <box autoresizesSubviews="NO" borderType="line" title="欺骗首选项" translatesAutoresizingMaskIntoConstraints="NO" id="HND-46-X0K">
                                             <rect key="frame" x="300" y="16" width="351" height="46"/>
                                             <view key="contentView" id="iBw-6b-q0S">
                                                 <rect key="frame" x="3" y="3" width="345" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="egx-oO-7cv">
-                                                        <rect key="frame" x="14" y="6" width="249" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Pretend to be an Xbox 360 Controller" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Yr-CF-I6K">
+                                                        <rect key="frame" x="14" y="6" width="187" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="假装是一个Xbox 360控制器" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Yr-CF-I6K">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
