@@ -1,0 +1,177 @@
+
+/* Class = "NSWindow"; title = "<< do not localize >>"; ObjectID = "3g4-A8-wfV"; */
+"3g4-A8-wfV.title" = "<< do not localize >>";
+
+/* Class = "NSSegmentedCell"; 4as-1K-roV.ibShadowedLabels[0] = "控制器测试"; ObjectID = "4as-1K-roV"; */
+"4as-1K-roV.ibShadowedLabels[0]" = "控制器测试";
+
+/* Class = "NSSegmentedCell"; 4as-1K-roV.ibShadowedLabels[1] = "绑定"; ObjectID = "4as-1K-roV"; */
+"4as-1K-roV.ibShadowedLabels[1]" = "绑定";
+
+/* Class = "NSSegmentedCell"; 4as-1K-roV.ibShadowedLabels[2] = "高级"; ObjectID = "4as-1K-roV"; */
+"4as-1K-roV.ibShadowedLabels[2]" = "高级";
+
+/* Class = "NSSegmentedCell"; 4as-1K-roV.ibShadowedLabels[3] = "关于"; ObjectID = "4as-1K-roV"; */
+"4as-1K-roV.ibShadowedLabels[3]" = "关于";
+
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "4up-mH-0Mb"; */
+"4up-mH-0Mb.title" = "Item 2";
+
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "5Iy-WS-PHG"; */
+"5Iy-WS-PHG.title" = "Item2";
+
+/* Class = "NSButtonCell"; title = "标准化"; ObjectID = "5TH-CS-wl6"; */
+"5TH-CS-wl6.title" = "标准化";
+
+/* Class = "NSButtonCell"; title = "反转 X"; ObjectID = "5wf-7e-ekz"; */
+"5wf-7e-ekz.title" = "反转 X";
+
+/* Class = "NSTabViewItem"; label = "Tweaking"; ObjectID = "6In-9m-Iqh"; */
+"6In-9m-Iqh.label" = "Tweaking";
+
+/* Class = "NSButtonCell"; title = "反转 Y"; ObjectID = "6Kn-lQ-AaB"; */
+"6Kn-lQ-AaB.title" = "反转 Y";
+
+/* Class = "NSButtonCell"; title = "交换左右遥感"; ObjectID = "7VQ-hw-19d"; */
+"7VQ-hw-19d.title" = "交换左右遥感";
+
+/* Class = "NSButtonCell"; title = "反转 Y"; ObjectID = "8Vm-ce-hhc"; */
+"8Vm-ce-hhc.title" = "反转 Y";
+
+/* Class = "NSButtonCell"; title = "假装是一个Xbox 360控制器"; ObjectID = "8Yr-CF-I6K"; */
+"8Yr-CF-I6K.title" = "假装是一个Xbox 360控制器";
+
+/* Class = "NSButtonCell"; title = "反转 Y"; ObjectID = "C6W-9e-zqx"; */
+"C6W-9e-zqx.title" = "反转 Y";
+
+/* Class = "NSTableColumn"; headerCell.title = "输入"; ObjectID = "CU8-av-rwl"; */
+"CU8-av-rwl.headerCell.title" = "输入";
+
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Dr1-vW-fhR"; */
+"Dr1-vW-fhR.title" = "Item 3";
+
+/* Class = "NSButtonCell"; title = "绑定"; ObjectID = "FRy-4y-nnb"; */
+"FRy-4y-nnb.title" = "绑定";
+
+/* Class = "NSButtonCell"; title = "启用驱动"; ObjectID = "FhM-1g-G1s"; */
+"FhM-1g-G1s.title" = "启用驱动";
+
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "Fqs-9N-l7A"; */
+"Fqs-9N-l7A.title" = "Item1";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "GKV-5p-R8F"; */
+"GKV-5p-R8F.title" = "Item3";
+
+/* Class = "NSBox"; title = "欺骗首选项"; ObjectID = "HND-46-X0K"; */
+"HND-46-X0K.title" = "欺骗首选项";
+
+/* Class = "NSButtonCell"; title = "反转 X"; ObjectID = "I8N-Ll-Q29"; */
+"I8N-Ll-Q29.title" = "反转 X";
+
+/* Class = "NSTextFieldCell"; title = "您可以暂时禁用该驱动程序，以便您的Xbox设备可以在直接访问硬件的游戏中使用。\n\n当游玩由Aspyr移植的某些游戏时，如果它支持您的设备，这可能很有用。\n\n由于某些内部限制，您需要连接一次设备才能禁用此功能。"; ObjectID = "IRF-DH-74j"; */
+"IRF-DH-74j.title" = "您可以暂时禁用该驱动程序，以便您的Xbox设备可以在直接访问硬件的游戏中使用。\n\n当游玩由Aspyr移植的某些游戏时，如果它支持您的设备，这可能很有用。\n\n由于某些内部限制，您需要连接一次设备才能禁用此功能。";
+
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "J5j-fZ-9W4"; */
+"J5j-fZ-9W4.title" = "Item2";
+
+/* Class = "NSMenuItem"; title = "Rumble"; ObjectID = "JAa-MJ-QBl"; */
+"JAa-MJ-QBl.title" = "Rumble";
+
+/* Class = "NSButtonCell"; title = "标准化"; ObjectID = "Nbf-a1-ZeT"; */
+"Nbf-a1-ZeT.title" = "标准化";
+
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "OZ9-jd-gMM"; */
+"OZ9-jd-gMM.title" = "Item2";
+
+/* Class = "NSBox"; title = "选项"; ObjectID = "Q4L-nM-vW8"; */
+"Q4L-nM-vW8.title" = "选项";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Qc5-fW-pcw"; */
+"Qc5-fW-pcw.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "卸载..."; ObjectID = "QvN-mn-giT"; */
+"QvN-mn-giT.title" = "卸载...";
+
+/* Class = "NSButtonCell"; title = "反转 Y"; ObjectID = "RFR-wA-1SW"; */
+"RFR-wA-1SW.title" = "反转 Y";
+
+/* Class = "NSTabViewItem"; label = "About"; ObjectID = "SuI-sa-Ula"; */
+"SuI-sa-Ula.label" = "About";
+
+/* Class = "NSBox"; title = "右摇杆"; ObjectID = "TKg-sh-mjm"; */
+"TKg-sh-mjm.title" = "右摇杆";
+
+/* Class = "NSButtonCell"; title = "绑定"; ObjectID = "Uce-Uv-Hq5"; */
+"Uce-Uv-Hq5.title" = "绑定";
+
+/* Class = "NSTableColumn"; headerCell.title = "绑定"; ObjectID = "VVi-lm-klv"; */
+"VVi-lm-klv.headerCell.title" = "绑定";
+
+/* Class = "NSBox"; title = "左摇杆"; ObjectID = "XdF-ba-S8X"; */
+"XdF-ba-S8X.title" = "左摇杆";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Xzo-Df-CjB"; */
+"Xzo-Df-CjB.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "ZBC-oI-z5d"; */
+"ZBC-oI-z5d.title" = "Item1";
+
+/* Class = "NSBox"; title = "左摇杆"; ObjectID = "ZlQ-UU-WB8"; */
+"ZlQ-UU-WB8.title" = "左摇杆";
+
+/* Class = "NSButtonCell"; title = "反转 X"; ObjectID = "acH-i4-MwR"; */
+"acH-i4-MwR.title" = "反转 X";
+
+/* Class = "NSBox"; title = "右摇杆"; ObjectID = "cqy-WX-TEQ"; */
+"cqy-WX-TEQ.title" = "右摇杆";
+
+/* Class = "NSButtonCell"; title = "反转 X"; ObjectID = "elG-G6-ZET"; */
+"elG-G6-ZET.title" = "反转 X";
+
+/* Class = "NSTextFieldCell"; title = "Rumble Options:"; ObjectID = "eqi-tt-Lwa"; */
+"eqi-tt-Lwa.title" = "Rumble Options:";
+
+/* Class = "NSButtonCell"; title = "重置映射"; ObjectID = "fLu-85-Jz7"; */
+"fLu-85-Jz7.title" = "重置映射";
+
+/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "fN4-Zi-Mei"; */
+"fN4-Zi-Mei.label" = "Advanced";
+
+/* Class = "NSButtonCell"; title = "绑定"; ObjectID = "hyw-2p-8xu"; */
+"hyw-2p-8xu.title" = "绑定";
+
+/* Class = "NSTextFieldCell"; title = "单击此按钮可从计算机中完全删除此驱动程序（您可能需要重新启动）：\n"; ObjectID = "ix8-GT-Crq"; */
+"ix8-GT-Crq.title" = "单击此按钮可从计算机中完全删除此驱动程序（您可能需要重新启动）：\n";
+
+/* Class = "NSBox"; title = "死区"; ObjectID = "k7f-mn-n3T"; */
+"k7f-mn-n3T.title" = "死区";
+
+/* Class = "NSButtonCell"; title = "绑定"; ObjectID = "k9z-Ya-OO3"; */
+"k9z-Ya-OO3.title" = "绑定";
+
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "l7B-sk-a7S"; */
+"l7B-sk-a7S.title" = "Item1";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "mve-gU-Nz5"; */
+"mve-gU-Nz5.title" = "Text Cell";
+
+/* Class = "NSTabViewItem"; label = "Controller test"; ObjectID = "nsf-fv-1ul"; */
+"nsf-fv-1ul.label" = "Controller test";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "qSp-FJ-2fV"; */
+"qSp-FJ-2fV.title" = "Text Cell";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "rYq-DA-bYc"; */
+"rYq-DA-bYc.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "xdj-AB-T4C"; */
+"xdj-AB-T4C.title" = "Item3";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "yZ7-Jb-sd7"; */
+"yZ7-Jb-sd7.title" = "Item3";
+
+/* Class = "NSButtonCell"; alternateTitle = "取消重新映射"; ObjectID = "zgp-Mz-PQL"; */
+"zgp-Mz-PQL.alternateTitle" = "取消重新映射";
+
+/* Class = "NSButtonCell"; title = "开始重新映射"; ObjectID = "zgp-Mz-PQL"; */
+"zgp-Mz-PQL.title" = "开始重新映射";
