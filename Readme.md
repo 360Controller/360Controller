@@ -15,6 +15,7 @@
    7. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
    8. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
    9. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
+   10. [Xbox One Adaptive Controller](#xbox-one-adaptive-controller)
 6. [Adding Third Party Controllers](#adding-third-party-controllers)
 7. [Developer Info](#developer-info)
    1. [Building](#building)
@@ -96,6 +97,9 @@ Xbox One controllers connected with the Wireless Adapter are currently not suppo
 
 ### Xbox One Controllers connected with Bluetooth
 The Xbox One controller works with macOS automatically when connected over Bluetooth via System Preferences. Only specific Xbox One controllers released after August 2016 have Bluetooth capability. See [Microsoft's support page](https://support.xbox.com/en-US/xbox-on-windows/accessories/connect-and-troubleshoot-xbox-one-bluetooth-issues-windows-10) for determining if your controller supports Bluetooth. Due to the fact that this controller works by default, it will not be supported by this driver. If you choose to plug this controller in via USB, you will need this driver. If you do not wish to connect the controller via USB, then you do not need this driver. Any problems with game compatibility in Bluetooth mode are completely out of our control and are up to you to solve in conjunction with the game developer.
+
+### Xbox One Adaptive Controller
+The Xbox One adaptive controller can connect to your macOS machine through either a Bluetooth or wired connection. In Bluetooth mode, it is not controlled by the driver in any way, and will not show up in the "Xbox 360 Controllers" preference pane. If you are having issues with a wired connection, where the preference pane is recognizing your controller, but isn't recieving inputs, please connect it to a PC or VM running Windows in order to recieve a crucial firmware update. This update may also be possible through an Xbox One console.
 
 ## Adding Third Party Controllers
 First, [disable signing requirements](#disabling-signing-requirements) so that you can run your custom build with your third party controller added. Then edit `360Controller/360Controller/Info.plist`. Add your controller following the pattern of pre-existing controllers by adding your vendor and product IDs to a new entry. After this, follow the information in the [building](#building) section, following the "If you don't have a signing certificate" path to build your new .kext. Then, place your shiny new `360Controller.kext` in to `/Library/Extensions` over the old one. You may need to take ownership of the driver in order for it to operate properly. You can do this with `sudo chown -R root:wheel /Library/Extensions/360Controller.kext`. Then, to make sure everything went according to plan, run `sudo kextutil /Library/Extensions/360Controller.kext`. This will load your kext into the OS and you should be able to use your controller. Once you reboot, your custom driver should be loaded automatically.
