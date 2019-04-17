@@ -7,7 +7,7 @@ CERT_ID="${DEV_NAME//\DEVELOPER_NAME = } (${DEV_TEAM//\DEVELOPMENT_TEAM = })"
 mkdir -p build
 zip -r build/360ControllerSource.zip * -x "build*"
 
-xcrun xcodebuild -configuration Release -target "Whole Driver" -xcconfig "DeveloperSettings.xcconfig"
+xcrun xcodebuild -configuration Release -target "Whole Driver" -xcconfig "DeveloperSettings.xcconfig" OTHER_CODE_SIGN_FLAGS="--timestamp --options=runtime"
 if [ $? -ne 0 ]
   then
     echo "******** BUILD FAILED ********"

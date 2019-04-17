@@ -1425,6 +1425,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1473,6 +1474,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1589,6 +1591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "360Daemon/360DaemonApp-Prefix.pch";
@@ -1606,6 +1609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1640,6 +1644,7 @@
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = 360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Xbox360Controller;
@@ -1676,6 +1681,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				EXPORTED_SYMBOLS_FILE = Feedback360/Feedback360.exp;
@@ -1693,6 +1699,7 @@
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1710,6 +1717,7 @@
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1752,6 +1760,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = 360Control;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_LOCATION = NO;
@@ -1792,6 +1801,7 @@
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = Wireless360Controller/Info.plist;
 				MODULE_NAME = com.mice.driver.Wireless360Controller;
@@ -1824,6 +1834,7 @@
 			buildSettings = {
 				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
@@ -1839,6 +1850,7 @@
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.10;
@@ -1850,6 +1862,7 @@
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.10;
@@ -1878,6 +1891,7 @@
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

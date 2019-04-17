@@ -137,11 +137,13 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 
 #### If you have a signing certificate
 
-* Create a file named 'DeveloperSettings.xcconfig'
+* Create a file named `DeveloperSettings.xcconfig`
 * Select the `360 Driver` project in the Navigator.
 * In this file, add the following lines:
    * `DEVELOPMENT_TEAM = XXXXXXXXXX` where `XXXXXXXXXX` is the development team on your Developer ID Application and Installer certificates.
    * `DEVELOPER_NAME = First Last` where `First Last` is the name on the Developer ID Installer certificate.
+   * `DEVELOPER_EMAIL = my.address@email.com` where `my.address@email.com` is the email address of your Apple account that has your Developer ID Application and Installer certificates.
+   * `NOTARIZATION_PASSWORD = abcd-efgh-ijkl-mnop` where `abcd-efgh-ijkl-mnop` is a temporary password that you have generated for your Apple account for the purposes of notarization.
 
 ### Disabling signing requirements
 
@@ -170,6 +172,17 @@ Reboot into macOS like normal. You can reset the boot arguments by executing thi
 sudo nvram -d boot-args
 ```
 This will remove ALL boot-args. If you have previously manipulated your boot-args, those changes will be erased as well!
+
+### Notarization of the driver
+
+This is only possible if you have a signing certificate, but it is a relatively straightforward process.
+
+* Build the driver as previously instructed and make sure to include the necessary information in your `DeveloperSettings.xcconfig` file, as they will be used during this process.
+* Make sure to `cd` into the `Install360Controller` directory and run `./makedmg.sh`
+* Run `./notarize.sh`
+* This should finish with the message: `The validate action worked!`
+
+Then you can distribute the notarized and stapled version of the driver.
 
 ### Debugging the driver
 
