@@ -31,21 +31,18 @@ private:
     bool pretend360;
 
 private:
-    OSString* getDeviceString(UInt8 index,const char *def=NULL) const;
+    OSString* getDeviceString(UInt8 index, const char* def = NULL) const;
 
 public:
-    virtual bool start(IOService *provider);
+    virtual bool start(IOService* provider);
 
-    virtual IOReturn setProperties(OSObject *properties);
+    virtual IOReturn setProperties(OSObject* properties);
 
-    virtual IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const;
+    virtual IOReturn newReportDescriptor(IOMemoryDescriptor** descriptor) const;
 
-    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
-    virtual IOReturn getReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options);
-    virtual IOReturn handleReport(
-                                  IOMemoryDescriptor * report,
-                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
-                                  IOOptionBits         options    = 0 );
+    virtual IOReturn setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options = 0);
+    virtual IOReturn getReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options);
+    virtual IOReturn handleReport(IOMemoryDescriptor* report, IOHIDReportType reportType = kIOHIDReportTypeInput, IOOptionBits options = 0 );
 
     virtual OSString* newManufacturerString() const;
     virtual OSNumber* newPrimaryUsageNumber() const;
@@ -58,8 +55,8 @@ public:
 
     virtual OSNumber* newLocationIDNumber() const;
 
-    virtual void remapButtons(void *buffer);
-    virtual void remapAxes(void *buffer);
+    virtual void remapButtons(void* buffer);
+    virtual void remapAxes(void* buffer);
 };
 
 
@@ -83,11 +80,8 @@ private:
     UInt32 repeatCount;
 
 public:
-    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
-    virtual IOReturn handleReport(
-                                  IOMemoryDescriptor * report,
-                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
-                                  IOOptionBits         options    = 0 );
+    virtual IOReturn setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options = 0);
+    virtual IOReturn handleReport(IOMemoryDescriptor* report, IOHIDReportType reportType = kIOHIDReportTypeInput, IOOptionBits options = 0 );
 
     virtual OSString* newManufacturerString() const;
     virtual OSNumber* newProductIDNumber() const;
@@ -109,13 +103,10 @@ protected:
     UInt16 convertButtonPacket(UInt16 buttons);
 
 public:
-    virtual IOReturn setReport(IOMemoryDescriptor *report,IOHIDReportType reportType,IOOptionBits options=0);
-    virtual IOReturn handleReport(
-                                  IOMemoryDescriptor * report,
-                                  IOHIDReportType      reportType = kIOHIDReportTypeInput,
-                                  IOOptionBits         options    = 0 );
+    virtual IOReturn setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options = 0);
+    virtual IOReturn handleReport(IOMemoryDescriptor* report, IOHIDReportType reportType = kIOHIDReportTypeInput, IOOptionBits options = 0);
 
-    virtual void convertFromXboxOne(void *buffer, UInt8 packetSize);
+    virtual void convertFromXboxOne(void* buffer, UInt8 packetSize);
     virtual OSString* newProductString() const;
 };
 
