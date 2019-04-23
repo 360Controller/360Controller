@@ -4440,18 +4440,18 @@
 	<string>Copyright © 2013 MICE Software. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>com.apple.driver.usb.IOUSBHostHIDDevice</key>
-		<string>1.2</string>
 		<key>com.apple.iokit.IOHIDFamily</key>
 		<string>2.0</string>
 		<key>com.apple.iokit.IOUSBHostFamily</key>
 		<string>1.2</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>18.5</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>17.5</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>17.5</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.mach</key>
-		<string>17.5</string>
+		<string>18.5</string>
 	</dict>
 </dict>
 </plist>
