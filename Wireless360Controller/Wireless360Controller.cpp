@@ -20,6 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#if 0
 #include <IOKit/IOLib.h>
 #include "Wireless360Controller.h"
 #include "../WirelessGamingReceiver/WirelessDevice.h"
@@ -427,3 +428,4 @@ OSNumber* Wireless360Controller::newVendorIDNumber() const
 {
     return OSNumber::withNumber((unsigned long long)0x45e, 16);
 }
+#endif 0

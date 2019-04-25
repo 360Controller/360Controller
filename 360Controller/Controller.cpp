@@ -214,7 +214,7 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
 static OSString* StringDescriptorToOSString(const StringDescriptor* stringDescriptor)
 {
     char stringBuffer[256] = { 0 };
-    siz_t utf8len = 0;
+    size_t utf8len = 0;
     if (stringDescriptor != nullptr && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
     {
         utf8_encodestr(reinterpret_cast<const u_int16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize, reinterpret_cast<u_int8_t*>(stringBuffer), &utf8len, sizeof(stringBuffer), '/', UTF_LITTLE_ENDIAN);

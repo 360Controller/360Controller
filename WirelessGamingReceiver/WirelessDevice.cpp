@@ -20,6 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#if 0
 #include "WirelessDevice.h"
 #include "WirelessGamingReceiver.h"
 
@@ -111,3 +112,4 @@ OSNumber* WirelessDevice::newLocationIDNumber() const
     }
     return OSNumber::withNumber(location, 32);
 }
+#endif // 0
