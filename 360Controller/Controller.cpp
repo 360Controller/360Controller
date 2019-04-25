@@ -42,7 +42,7 @@ static Xbox360Peripheral* GetOwner(IOService* us)
     {
         return NULL;
     }
-    
+
     return OSDynamicCast(Xbox360Peripheral, prov);
 }
 
@@ -50,12 +50,23 @@ static IOUSBHostDevice* GetOwnerProvider(const IOService* us)
 {
     IOService* deviceCandidate = us->getProvider();
     IOUSBHostDevice* device = nullptr;
-    
-    for (; (deviceCandidate != nullptr) && (device != nullptr); deviceCandidate = deviceCandidate->getProvider())
+
+    // for (; (deviceCandidate != nullptr) && (device != nullptr); deviceCandidate = deviceCandidate->getProvider())
+    // {
+    //     device = OSDynamicCast(IOUSBHostDevice, deviceCandidate);
+    // }
+
+    while (deviceCandidate != nullptr)
     {
         device = OSDynamicCast(IOUSBHostDevice, deviceCandidate);
+        if (device != nullptr)
+        {
+            break;
+        }
+
+        deviceCandidate = deviceCandidate->getProvider();
     }
-    
+
     return device;
 }
 
@@ -65,7 +76,7 @@ bool Xbox360ControllerClass::start(IOService* provider)
     {
         return false;
     }
-    
+
     return IOHIDDevice::start(provider);
 }
 
@@ -76,7 +87,7 @@ IOReturn Xbox360ControllerClass::setProperties(OSObject* properties)
     {
         return kIOReturnUnsupported;
     }
-    
+
     return owner->setProperties(properties);
 }
 
@@ -85,11 +96,11 @@ IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor** descri
 {
     IOBufferMemoryDescriptor* buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(HID_360::ReportDescriptor));
 
-    if (buffer == NULL)
+    if (buffer == nullptr)
     {
         return kIOReturnNoResources;
     }
-    
+
     buffer->writeBytes(0, HID_360::ReportDescriptor, sizeof(HID_360::ReportDescriptor));
     *descriptor = buffer;
 
@@ -106,8 +117,8 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
     {
         return kIOReturnSuccess;
     }
-    
-    switch(data[0])
+
+    switch (data[0])
     {
         case 0x00:  // Set force feedback
         {
@@ -124,7 +135,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
             rumble.little = data[1];
             GetOwner(this)->QueueWrite(&rumble, sizeof(rumble));
             // IOLog("Set rumble: big(%d) little(%d)\n", rumble.big, rumble.little);
-            
+
             return kIOReturnSuccess;
         } break;
 
@@ -134,7 +145,7 @@ IOReturn Xbox360ControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
             {
                 return kIOReturnUnsupported;
             }
-            
+
             XBOX360_OUT_LED led;
 
             report->readBytes(2, data, 1);
@@ -166,7 +177,7 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
     if (descriptor->getLength() >= sizeof(XBOX360_IN_REPORT))
     {
         IOBufferMemoryDescriptor* desc = OSDynamicCast(IOBufferMemoryDescriptor, descriptor);
-        
+
         if (desc != nullptr)
         {
             XBOX360_IN_REPORT* report = (XBOX360_IN_REPORT*)desc->getBytesNoCopy();
@@ -177,7 +188,7 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
                 {
                     remapButtons(report);
                 }
-                
+
                 if (GetOwner(this)->swapSticks)
                 {
                     remapAxes(report);
@@ -190,35 +201,64 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
 }
 
 
-static void StringDescriptorToCString(const StringDescriptor* stringDescriptor, char* result)
+// static void StringDescriptorToCString(const StringDescriptor* stringDescriptor, char* result)
+// {
+//     size_t utf8Len = 0;
+//     if (stringDescriptor != nullptr && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
+//     {
+//         utf8_encodestr(reinterpret_cast<const uint16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize,
+//                        reinterpret_cast<uint8_t*>(result), &utf8Len, sizeof(result), '/', UTF_LITTLE_ENDIAN);
+//     }
+// }
+
+static OSString* StringDescriptorToOSString(const StringDescriptor* stringDescriptor)
 {
-    size_t utf8Len = 0;
+    char stringBuffer[256] = { 0 };
+    siz_t utf8len = 0;
     if (stringDescriptor != nullptr && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
     {
-        utf8_encodestr(reinterpret_cast<const uint16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize,
-                       reinterpret_cast<uint8_t*>(result), &utf8Len, sizeof(result), '/', UTF_LITTLE_ENDIAN);
+        utf8_encodestr(reinterpret_cast<const u_int16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize, reinterpret_cast<u_int8_t*>(stringBuffer), &utf8len, sizeof(stringBuffer), '/', UTF_LITTLE_ENDIAN);
     }
+
+    return OSString::withCString(stringBuffer);
 }
 
 // Returns the string for the specified index from the USB device's string list, with an optional default
 OSString* Xbox360ControllerClass::getDeviceString(UInt8 index, const char* def) const
 {
-    const char* string = "Unknown";
-    char buffer[256] = {};
-    
-    if (def != nullptr)
-    {
-        string = def;
-    }
-    
+    // const char* string = "Unknown";
+    // char buffer[256] = {};
+
+    // if (def != nullptr)
+    // {
+    //     string = def;
+    // }
+
+    // const StringDescriptor* aStr = GetOwnerProvider(this)->getStringDescriptor(index);
+    // if (aStr != nullptr)
+    // {
+    //     StringDescriptorToCString(aStr, buffer);
+    //     string = buffer;
+    // }
+
+    // return OSString::withCString(string);
+    const char* string;
+
     const StringDescriptor* aStr = GetOwnerProvider(this)->getStringDescriptor(index);
-    if (aStr != nullptr)
+    if (aStr == nullptr)
     {
-        StringDescriptorToCString(aStr, buffer);
-        string = buffer;
+        if (def == nullptr)
+        {
+            string = "Unknown";
+        }
+        else
+        {
+            string = def;
+        }
+        return OSString::withCString(string);
     }
-    
-    return OSString::withCString(string);
+
+    return StringDescriptorToOSString(aStr);
 }
 
 OSString* Xbox360ControllerClass::newManufacturerString() const
@@ -691,7 +731,7 @@ void XboxOneControllerClass::convertFromXboxOne(void* buffer, UInt8 packetSize)
     {
         if ((0x80 & reportXone->true_trigR) == 0x80) { trigL = 255; }
         if ((0x40 & reportXone->true_trigR) == 0x40) { trigR = 255; }
-        
+
         left = reportXone->left;
         right = reportXone->right;
     }
@@ -709,7 +749,7 @@ void XboxOneControllerClass::convertFromXboxOne(void* buffer, UInt8 packetSize)
     {
         trigL = (reportXone->trigL / 1023.0) * 255;
         trigR = (reportXone->trigR / 1023.0) * 255;
-        
+
         left = reportXone->left;
         right = reportXone->right;
     }
@@ -732,7 +772,7 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
             if ((report->header.command == 0x07) && (report->header.size == (sizeof(XBOXONE_IN_GUIDE_REPORT) - 4)))
             {
                 XBOXONE_IN_GUIDE_REPORT* guideReport = (XBOXONE_IN_GUIDE_REPORT*)report;
-                
+
                 if (guideReport->header.reserved1 == 0x30) // 2016 Controller
                 {
                     XBOXONE_OUT_GUIDE_REPORT outReport = {};
@@ -744,10 +784,10 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
                     outReport.data[1] = 0x07;
                     outReport.data[2] = 0x20;
                     outReport.data[3] = 0x02;
-                    
+
                     GetOwner(this)->QueueWrite(&outReport, 13);
                 }
-                
+
                 isXboxOneGuideButtonPressed = (bool)guideReport->state;
                 XBOX360_IN_REPORT* oldReport = (XBOX360_IN_REPORT*)lastData;
                 oldReport->buttons ^= (-isXboxOneGuideButtonPressed ^ oldReport->buttons) & (1 << GetOwner(this)->mapping[10]);
@@ -772,7 +812,7 @@ IOReturn XboxOneControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
             }
         }
     }
-    
+
     return IOHIDDevice::handleReport(descriptor, reportType, options);
 }
 
@@ -780,7 +820,7 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
 {
     unsigned char data[4];
     report->readBytes(0, &data, 4);
-    
+
     UInt8 rumbleType = 0;
     switch(data[0])
     {
@@ -827,12 +867,12 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
             GetOwner(this)->QueueWrite(&rumble,13);
             return kIOReturnSuccess;
         } break;
-            
+
         case 0x01: // Unsupported LED
         {
             return kIOReturnSuccess;
         } break;
-            
+
         default:
         {
             IOLog("Unknown escape %d\n", data[0]);
