@@ -20,6 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#if 0
 #include <IOKit/IOLib.h>
 #include <IOKit/IOTimerEventSource.h>
 #include "WirelessHIDDevice.h"
@@ -276,3 +277,4 @@ OSString* WirelessHIDDevice::newSerialNumberString() const
 {
     return OSString::withCString(serialString);
 }
+#endif // 0
