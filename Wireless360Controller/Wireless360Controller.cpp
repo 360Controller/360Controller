@@ -20,7 +20,6 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
 #include <IOKit/IOLib.h>
 #include "Wireless360Controller.h"
 #include "../WirelessGamingReceiver/WirelessDevice.h"
@@ -46,7 +45,7 @@ static inline Xbox360_SShort getAbsolute(Xbox360_SShort value)
     return (reverse<0)?~reverse:reverse;
 }
 
-bool Wireless360Controller::init(OSDictionary *propTable)
+bool Wireless360Controller::init(OSDictionary* propTable)
 {
     bool res = super::init(propTable);
 
@@ -64,7 +63,7 @@ bool Wireless360Controller::init(OSDictionary *propTable)
     }
     for (int i = 12; i < 16; i++)
     {
-        mapping[i-1] = i;
+        mapping[i - 1] = i;
     }
 
     // Done
@@ -74,65 +73,65 @@ bool Wireless360Controller::init(OSDictionary *propTable)
 // Read the settings from the registry
 void Wireless360Controller::readSettings(void)
 {
-    OSBoolean *value;
-    OSNumber *number;
-    OSDictionary *dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
+    OSBoolean* value = nullptr;
+    OSNumber* number = nullptr;
+    OSDictionary* dataDictionary = OSDynamicCast(OSDictionary, getProperty(kDriverSettingKey));
 
-    if(dataDictionary==NULL) return;
+    if(dataDictionary == nullptr) return;
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftX"));
-    if (value != NULL) invertLeftX = value->getValue();
+    if (value != nullptr) invertLeftX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertLeftY"));
-    if (value != NULL) invertLeftY = value->getValue();
+    if (value != nullptr) invertLeftY = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightX"));
-    if (value != NULL) invertRightX = value->getValue();
+    if (value != nullptr) invertRightX = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("InvertRightY"));
-    if (value != NULL) invertRightY = value->getValue();
+    if (value != nullptr) invertRightY = value->getValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneLeft"));
-    if (number != NULL) deadzoneLeft = number->unsigned32BitValue();
+    if (number != nullptr) deadzoneLeft = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("DeadzoneRight"));
-    if (number != NULL) deadzoneRight = number->unsigned32BitValue();
+    if (number != nullptr) deadzoneRight = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeLeft"));
-    if (value != NULL) relativeLeft = value->getValue();
+    if (value != nullptr) relativeLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("RelativeRight"));
-    if (value != NULL) relativeRight=value->getValue();
+    if (value != nullptr) relativeRight=value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffLeft"));
-    if (value != NULL) deadOffLeft = value->getValue();
+    if (value != nullptr) deadOffLeft = value->getValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("DeadOffRight"));
-    if (value != NULL) deadOffRight = value->getValue();
+    if (value != nullptr) deadOffRight = value->getValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("RumbleType"));
-    if (number != NULL) rumbleType = number->unsigned8BitValue();
+    if (number != nullptr) rumbleType = number->unsigned8BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingUp"));
-    if (number != NULL) mapping[0] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[0] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingDown"));
-    if (number != NULL) mapping[1] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[1] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLeft"));
-    if (number != NULL) mapping[2] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[2] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRight"));
-    if (number != NULL) mapping[3] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[3] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingStart"));
-    if (number != NULL) mapping[4] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[4] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingBack"));
-    if (number != NULL) mapping[5] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[5] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLSC"));
-    if (number != NULL) mapping[6] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[6] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRSC"));
-    if (number != NULL) mapping[7] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[7] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingLB"));
-    if (number != NULL) mapping[8] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[8] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingRB"));
-    if (number != NULL) mapping[9] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[9] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingGuide"));
-    if (number != NULL) mapping[10] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[10] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingA"));
-    if (number != NULL) mapping[11] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[11] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingB"));
-    if (number != NULL) mapping[12] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[12] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingX"));
-    if (number != NULL) mapping[13] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[13] = number->unsigned32BitValue();
     number = OSDynamicCast(OSNumber, dataDictionary->getObject("BindingY"));
-    if (number != NULL) mapping[14] = number->unsigned32BitValue();
+    if (number != nullptr) mapping[14] = number->unsigned32BitValue();
     value = OSDynamicCast(OSBoolean, dataDictionary->getObject("SwapSticks"));
-    if (value != NULL) swapSticks = value->getValue();
+    if (value != nullptr) swapSticks = value->getValue();
 
     noMapping = true;
     UInt8 normalMapping[15] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 };
@@ -153,16 +152,35 @@ void Wireless360Controller::readSettings(void)
 }
 
 // Adjusts the report for any settings specified by the user
-void Wireless360Controller::fiddleReport(unsigned char *data, int length)
+void Wireless360Controller::fiddleReport(unsigned char* data, int length)
 {
-    XBOX360_IN_REPORT *report=(XBOX360_IN_REPORT*)data;
-    if(invertLeftX) report->left.x=~report->left.x;
-    if(!invertLeftY) report->left.y=~report->left.y;
-    if(invertRightX) report->right.x=~report->right.x;
-    if(!invertRightY) report->right.y=~report->right.y;
-    if(deadzoneLeft!=0) {
-        if(relativeLeft) {
-            if((getAbsolute(report->left.x)<deadzoneLeft)&&(getAbsolute(report->left.y)<deadzoneLeft)) {
+    XBOX360_IN_REPORT* report = (XBOX360_IN_REPORT*)data;
+    if (invertLeftX)
+    {
+        report->left.x =~ report->left.x;
+    }
+
+    if (!invertLeftY)
+    {
+        report->left.y =~ report->left.y;
+    }
+
+    if (invertRightX)
+    {
+        report->right.x =~ report->right.x;
+    }
+
+    if (!invertRightY)
+    {
+        report->right.y =~ report->right.y;
+    }
+
+    if (deadzoneLeft != 0)
+    {
+        if (relativeLeft)
+        {
+            if ((getAbsolute(report->left.x) < deadzoneLeft) && (getAbsolute(report->left.y) < deadzoneLeft))
+            {
                 report->left.x=0;
                 report->left.y=0;
             }

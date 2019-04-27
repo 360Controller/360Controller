@@ -20,7 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
+// TODO(Drew): Make sure to update the dependencies in the plist
 #ifndef __WIRELESS360CONTROLLER_H__
 #define __WIRELESS360CONTROLLER_H__
 
@@ -30,31 +30,31 @@ class Wireless360Controller : public WirelessHIDDevice
 {
     OSDeclareDefaultStructors(Wireless360Controller);
 public:
-    bool init(OSDictionary *propTable = NULL);
+    bool init(OSDictionary* propTable = nullptr) override;
 
     void SetRumbleMotors(unsigned char large, unsigned char small);
 
-    IOReturn setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options);
-    IOReturn newReportDescriptor(IOMemoryDescriptor ** descriptor ) const;
+    IOReturn setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options) override;
+    IOReturn newReportDescriptor(IOMemoryDescriptor** descriptor) const override;
 
-    IOReturn setProperties(OSObject *properties);
+    IOReturn setProperties(OSObject* properties) override;
 
-    virtual OSString* newManufacturerString() const;
-    virtual OSNumber* newPrimaryUsageNumber() const;
-    virtual OSNumber* newPrimaryUsagePageNumber() const;
-    virtual OSNumber* newProductIDNumber() const;
-    virtual OSString* newProductString() const;
-    virtual OSString* newTransportString() const;
-    virtual OSNumber* newVendorIDNumber() const;
+    virtual OSString* newManufacturerString() const override;
+    virtual OSNumber* newPrimaryUsageNumber() const override;
+    virtual OSNumber* newPrimaryUsagePageNumber() const override;
+    virtual OSNumber* newProductIDNumber() const override;
+    virtual OSString* newProductString() const override;
+    virtual OSString* newTransportString() const override;
+    virtual OSNumber* newVendorIDNumber() const override;
 protected:
     void readSettings(void);
-    void receivedHIDupdate(unsigned char *data, int length);
+    void receivedHIDupdate(unsigned char* data, int length) override;
 
     // Settings
-    bool invertLeftX,invertLeftY;
-    bool invertRightX,invertRightY;
-    short deadzoneLeft,deadzoneRight;
-    bool relativeLeft,relativeRight;
+    bool invertLeftX, invertLeftY;
+    bool invertRightX, invertRightY;
+    short deadzoneLeft, deadzoneRight;
+    bool relativeLeft, relativeRight;
     bool deadOffLeft, deadOffRight;
 
     UInt8 rumbleType;
@@ -64,10 +64,9 @@ protected:
     bool noMapping = true;
 
 private:
-    void fiddleReport(unsigned char *data, int length);
-    void remapButtons(void *buffer);
-    void remapAxes(void *buffer);
+    void fiddleReport(unsigned char* data, int length);
+    void remapButtons(void* buffer);
+    void remapAxes(void* buffer);
 };
 
 #endif // __WIRELESS360CONTROLLER_H__
-#endif // 0

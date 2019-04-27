@@ -20,7 +20,6 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
 #ifndef __WIRELESSDEVICE_H__
 #define __WIRELESSDEVICE_H__
 
@@ -28,22 +27,22 @@
 
 class WirelessDevice;
 
-typedef void (*WirelessDeviceWatcher)(void *target, WirelessDevice *sender, void *parameter);
+typedef void (*WirelessDeviceWatcher)(void* target, WirelessDevice* sender, void* parameter);
 
 class WirelessDevice : public IOService
 {
     OSDeclareDefaultStructors(WirelessDevice);
 
 public:
-    bool init(OSDictionary *dictionary = 0);
+    bool init(OSDictionary* dictionary = 0) override;
 
     // Controller interface
     bool IsDataAvailable(void);
     IOMemoryDescriptor* NextPacket(void);
 
-    void SendPacket(const void *data, size_t length);
+    void SendPacket(const void* data, size_t length);
 
-    void RegisterWatcher(void *target, WirelessDeviceWatcher function, void *parameter);
+    void RegisterWatcher(void* target, WirelessDeviceWatcher function, void* parameter);
 
     OSNumber* newLocationIDNumber() const;
 
@@ -53,9 +52,9 @@ private:
     void NewData(void);
     int index;
     // callback
-    void *target, *parameter;
+    void* target
+    void* parameter;
     WirelessDeviceWatcher function;
 };
 
 #endif // __WIRELESSDEVICE_H__
-#endif // 0
