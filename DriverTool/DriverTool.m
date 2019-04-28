@@ -53,7 +53,7 @@ static NSDictionary *ReadDriverConfig(NSString *driver)
               filename, error);
     }
     data = [NSData dataWithContentsOfFile:filename];
-    return [NSPropertyListSerialization propertyListFromData:data mutabilityOption:0 format:NULL errorDescription:NULL];
+    return [NSPropertyListSerialization propertyListWithData:data options:0 format:NULL error:&error]; // TODO(Drew): Error check this
 }
 
 static void WriteDriverConfig(NSString *driver, id config)

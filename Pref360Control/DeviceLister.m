@@ -320,11 +320,9 @@ static BOOL IsXbox360Controller(io_service_t device)
 
 - (void)showFailure:(NSString*)message
 {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
-                                     defaultButton:nil
-                                   alternateButton:nil
-                                       otherButton:nil
-                         informativeTextWithFormat:@"%@", message];
+    NSAlert* alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Error"];
+    [alert setInformativeText:message];
     [alert runModal];
 }
 
@@ -408,11 +406,12 @@ fail:
     self.owner = pane;
     if (![self loadDevices])
         return;
-    [NSApp beginSheet:sheet
-       modalForWindow:[NSApp mainWindow]
-        modalDelegate:nil
-       didEndSelector:nil
-          contextInfo:NULL];
+    [[NSApp mainWindow] beginSheet:sheet completionHandler:nil];
+//    [NSApp beginSheet:sheet
+//       modalForWindow:[NSApp mainWindow]
+//        modalDelegate:nil
+//       didEndSelector:nil
+//          contextInfo:NULL];
 }
 
 - (IBAction)done:(id)sender

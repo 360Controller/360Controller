@@ -24,7 +24,7 @@
 + (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick leftStickDeadzone: (CGFloat)leftDeadzone rightStickDeadzone: (CGFloat)rightDeadzone isLeftNormalized: (BOOL)leftNormalized isRightNormalized: (BOOL)rightNormalized
 {
     //// General Declarations
-    CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.graphicsPort;
+    CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.CGContext;
 
     //// Color Declarations
     NSColor* buttonX = [NSColor colorWithCalibratedRed: 0.124 green: 0.351 blue: 1 alpha: 1];
@@ -1117,7 +1117,7 @@
 + (void)drawTriggerMetterWithIntensity: (CGFloat)intensity triggerTitle: (NSString*)triggerTitle
 {
     //// General Declarations
-    CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.graphicsPort;
+    CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.CGContext;
 
     //// Color Declarations
     NSColor* controller = [NSColor colorWithCalibratedRed: 0.232 green: 0.232 blue: 0.232 alpha: 1];
@@ -1133,7 +1133,7 @@
     [controller setFill];
     [oval18Path fill];
     NSMutableParagraphStyle* oval18Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-    oval18Style.alignment = NSCenterTextAlignment;
+    oval18Style.alignment = NSTextAlignmentCenter;
 
     NSDictionary* oval18FontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: oval18Style};
 
@@ -1249,7 +1249,7 @@
     NSRect batteryTextBoundingRect = NSMakeRect(1, 1, 36, 19);
 
     NSMutableParagraphStyle* batteryTextStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-    batteryTextStyle.alignment = NSCenterTextAlignment;
+    batteryTextStyle.alignment = NSTextAlignmentCenter;
 
     NSDictionary* batteryTextFontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: batteryTextStyle, NSStrokeColorAttributeName: NSColor.blackColor, NSStrokeWidthAttributeName: @-6.0 };
 

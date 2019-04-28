@@ -74,7 +74,8 @@ void ConfigController(io_service_t device, NSDictionary *config)
 void SetKnownDevices(NSDictionary *devices)
 {
     // Setting the dictionary should work?
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
+    NSError* error; // TODO(Drew): Error check off of this
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:devices requiringSecureCoding:true error:&error];
     CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
@@ -83,11 +84,12 @@ NSDictionary* GetKnownDevices(void)
 {
     CFPropertyListRef value;
     NSData *data;
+    NSError* error; // TODO(Drew): Error check off of this
 
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return [NSKeyedUnarchiver unarchivedObjectOfClass:[NSDictionary class] fromData:data error:&error];
 }
