@@ -22,11 +22,9 @@
 */
 #import "MyAnalogStick.h"
 
-#define PRESSED_INSET   5
 #define AREA_INSET      4
 
 @implementation MyAnalogStick
-@synthesize pressed;
 @synthesize deadzone;
 @synthesize positionX = x;
 @synthesize positionY = y;
@@ -34,12 +32,6 @@
 @synthesize realPositionY = realY;
 @synthesize normalized = normalized;
 @synthesize linked;
-
-- (void)setPressed:(BOOL)apressed
-{
-    pressed = apressed;
-    self.needsDisplay = YES;
-}
 
 - (void)setDeadzone:(int)adeadzone
 {
@@ -109,6 +101,20 @@
 - (void)drawRect:(NSRect)rect
 {
     NSRect area = [self bounds], deadRect, posRect, realPosRect;
+    NSColor* realPositionColor = [NSColor colorWithDeviceWhite:.7 alpha:1];
+    NSColor* positionColor = [NSColor blackColor];
+    bool darkMode = false;
+
+    if (@available(macOS 10.14, *))
+    {
+        NSAppearanceName appearanceName = [self.effectiveAppearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+
+        if (appearanceName == NSAppearanceNameDarkAqua)
+        {
+            realPositionColor = [NSColor colorWithDeviceWhite:.3 alpha:1];
+            darkMode = true;
+        }
+    }
 
     // Compute positions
     // Deadzone
@@ -127,18 +133,13 @@
     realPosRect.origin.x = area.origin.x + AREA_INSET + (((realX + 32768) * (area.size.width - (AREA_INSET * 2))) / 65536) - (posRect.size.width / 2);
     realPosRect.origin.y = area.origin.y + area.size.height - AREA_INSET - (((realY + 32768) * (area.size.height - (AREA_INSET * 2))) / 65536) - (posRect.size.height / 2);
     // Draw border
-    NSDrawLightBezel(area,area);
-    // Draw pressed state
-    if(pressed) {
-        NSRect pressArea;
-
-        pressArea=area;
-        pressArea.origin.x += PRESSED_INSET;
-        pressArea.origin.y += PRESSED_INSET;
-        pressArea.size.width -= PRESSED_INSET * 2;
-        pressArea.size.height -= PRESSED_INSET * 2;
-        [[NSColor blackColor] set];
-        NSRectFill(pressArea);
+    if (darkMode)
+    {
+        NSDrawDarkBezel(area, area);
+    }
+    else
+    {
+        NSDrawLightBezel(area, area);
     }
     // Draw deadzone
     if (deadzone != 0) {
@@ -160,13 +161,11 @@
     // Draw real position
     if (realX || realY)
     {
-        if (pressed) [[NSColor colorWithDeviceWhite:.3 alpha:1] set];
-        else [[NSColor colorWithDeviceWhite:.7 alpha:1] set];
+        [realPositionColor set];
         NSRectFill(realPosRect);
     }
     // Draw position
-    if (pressed) [[NSColor whiteColor] set];
-    else [[NSColor blackColor] set];
+    [positionColor set];
     NSRectFill(posRect);
 }
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -56,10 +54,10 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="221" customClass="DeviceLister"/>
-        <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
+        <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="419"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="419"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -831,20 +829,22 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="16" y="12" width="596" height="337"/>
                                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="596" height="337"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="581" height="337"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" id="3fX-WF-3zX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="433.29999999999995"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="581" height="434"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <size key="minSize" width="596" height="337"/>
+                                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    <size key="minSize" width="581" height="337"/>
                                                                     <size key="maxSize" width="1342" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
                                                                             <string key="content">Xbox 360 Controller Driver
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="21" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -888,8 +888,9 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 0.16.11">
+                                                                        <fragment content="Version 1.0.0-alpha.2">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -939,6 +940,7 @@ Due to some internal limitations, you need to connect your device once to be abl
 Downloaded from:
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -984,6 +986,7 @@ Downloaded from:
                                                                         </fragment>
                                                                         <fragment content="https://github.com/360Controller/360Controller/releases">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/releases"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1034,6 +1037,7 @@ Downloaded from:
 Project Home:
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -1079,6 +1083,7 @@ Project Home:
                                                                         </fragment>
                                                                         <fragment content="https://github.com/360Controller/360Controller/">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -1128,6 +1133,7 @@ Project Home:
 Cg
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="13" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -1176,6 +1182,7 @@ Cg
 Cg
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="18" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -1221,6 +1228,7 @@ Cg
                                                                         </fragment>
                                                                         <fragment content="This driver supports the ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1229,6 +1237,7 @@ Cg
                                                                         </fragment>
                                                                         <fragment content="Microsoft Xbox 360 controller, Original Xbox Controller, Xbox One Controller">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1239,6 +1248,7 @@ Cg
                                                                             <mutableString key="content"> and various licensed third party controllers from brands like Hori, MadCatz, Logitech, etc. Including access to rumble motors and LEDs, on the Mac OS X platform. It includes a plugin for the Apple Force Feedback Framework so some games will be able to activate them, along with a Preference Pane with which allows you to test everything is installed correctly. Both wire controllers connected via USB, and wireless 360 controllers connected via the Wireless Gaming Receiver for Windows, are supported.
 This project is a fork of the </mutableString>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1247,7 +1257,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="Xbox360Controller project">
                                                                             <attributes>
-                                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1259,6 +1269,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" originally created by Colin Munro, and includes hard work from ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1267,6 +1278,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="d235j">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/d235j/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1276,6 +1288,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" (who forked the project and fixed Force Feedback), ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1284,6 +1297,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="C.W. Betts">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/MaddTheSane"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1293,6 +1307,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" (dozens of improvements and fixes!), ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1301,6 +1316,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="FranticRain">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/FranticRain"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1310,6 +1326,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" (Xbox One Controller support and other improvements), ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1318,6 +1335,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="kasbert">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/kasbert"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1327,6 +1345,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" (Original Xbox Controller Support), ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1335,6 +1354,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="Pyroh">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/Pyroh"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1344,6 +1364,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content=" (User Interface overhaul), ">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1352,6 +1373,7 @@ This project is a fork of the </mutableString>
                                                                         </fragment>
                                                                         <fragment content="RodrigoCard">
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <url key="NSLink" string="https://github.com/RodrigoCard"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
@@ -1363,6 +1385,7 @@ This project is a fork of the </mutableString>
                                                                             <string key="content"> (kext sign and some scripts) and others (please forgive us if we forgot to include someone).
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1373,6 +1396,7 @@ This project is a fork of the </mutableString>
                                                                             <string key="content">Licence
 </string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="18" name="Helvetica-Bold"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="6" paragraphSpacingBefore="10" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1383,6 +1407,7 @@ This project is a fork of the </mutableString>
                                                                             <string key="content">Copyright (C) 2006-2013 Colin Munro
 This driver is licensed under the GNU Public License. A copy of this license is included in the distribution file, please inspect it before using the binary or source.</string>
                                                                             <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <font key="NSFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1399,7 +1424,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
-                                                            <rect key="frame" x="580" y="0.0" width="16" height="337"/>
+                                                            <rect key="frame" x="581" y="0.0" width="15" height="337"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>

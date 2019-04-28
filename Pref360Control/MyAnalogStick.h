@@ -28,7 +28,6 @@
 @property (nonatomic) int positionY;
 @property (nonatomic) int realPositionX;
 @property (nonatomic) int realPositionY;
-@property (nonatomic) BOOL pressed;
 @property (nonatomic) BOOL linked;
 @property (nonatomic) BOOL normalized;
 

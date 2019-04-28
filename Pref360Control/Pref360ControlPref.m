@@ -97,7 +97,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 
 
 -(void)awakeFromNib {
-    [_aboutPopover setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameAqua]];
+//    [_aboutPopover setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameAqua]];
 //    [_aboutPopover setAppearance:NSPopoverAppearanceHUD];
     [_rumbleOptions removeAllItems];
     [_rumbleOptions addItemsWithTitles:@[@"Default", @"None"]];
