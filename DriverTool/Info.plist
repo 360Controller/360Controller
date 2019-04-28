@@ -4,17 +4,17 @@
 <dict>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleVersion</key>
-	<string>${CURRENT_PROJECT_VERSION}</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.mice.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleShortVersionString</key>
+	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MIN_MACOS_VERSION}</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 </dict>
 </plist>

@@ -990,7 +990,7 @@
 		55B636AC18C104DB00CE933D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
 					5579513D1F73006F001880D1 = {
@@ -1705,6 +1705,7 @@
 				GCC_PREFIX_HEADER = DriverTool/DriverTool_Prefix.pch;
 				INFOPLIST_FILE = DriverTool/Info.plist;
 				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1724,6 +1725,7 @@
 				GCC_PREFIX_HEADER = DriverTool/DriverTool_Prefix.pch;
 				INFOPLIST_FILE = DriverTool/Info.plist;
 				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
