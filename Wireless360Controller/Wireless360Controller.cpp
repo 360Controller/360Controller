@@ -151,168 +151,117 @@ void Wireless360Controller::readSettings(void)
 #endif
 }
 
+void Wireless360Controller::normalizeAxis(SInt16& axis, short deadzone)
+{
+    static const UInt16 max16 = 32767;
+    const float current = getAbsolute(axis);
+    const float maxVal = max16 - deadzone;
+    
+    if (current > deadzone)
+    {
+        if (axis < 0)
+        {
+            axis = max16 * (current - deadzone) / maxVal;
+            axis = ~axis;
+        }
+        else
+        {
+            axis = max16 * (current - deadzone) / maxVal;
+        }
+    }
+    else
+    {
+        axis =0;
+    }
+}
+
 // Adjusts the report for any settings specified by the user
 void Wireless360Controller::fiddleReport(unsigned char* data, int length)
 {
     XBOX360_IN_REPORT* report = (XBOX360_IN_REPORT*)data;
-    if (invertLeftX)
-    {
-        report->left.x =~ report->left.x;
-    }
-
-    if (!invertLeftY)
-    {
-        report->left.y =~ report->left.y;
-    }
-
-    if (invertRightX)
-    {
-        report->right.x =~ report->right.x;
-    }
-
-    if (!invertRightY)
-    {
-        report->right.y =~ report->right.y;
-    }
-
+    if (invertLeftX) report->left.x = ~(report->left.x);
+    if (!invertLeftY) report->left.y = ~(report->left.y);
+    if (invertRightX) report->right.x = ~(report->right.x);
+    if (!invertRightY) report->right.y = ~(report->right.y);
+    
     if (deadzoneLeft != 0)
     {
         if (relativeLeft)
         {
             if ((getAbsolute(report->left.x) < deadzoneLeft) && (getAbsolute(report->left.y) < deadzoneLeft))
             {
-                report->left.x=0;
-                report->left.y=0;
+                report->left.x = 0;
+                report->left.y = 0;
             }
-            else if(deadOffLeft) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                float valX=getAbsolute(report->left.x);
-                if (valX>deadzoneLeft) {
-                    if (report->left.x<0) {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                        report->left.x=~report->left.x;
-                    } else {
-                        report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.x=0;
-                }
-                float valY=getAbsolute(report->left.y);
-                if (valY>deadzoneLeft) {
-                    if (report->left.y<0) {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                        report->left.y=~report->left.y;
-                    } else {
-                        report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    }
-                } else {
-                    report->left.y=0;
-                }
-            }
-        } else {
-            if(getAbsolute(report->left.x)<deadzoneLeft)
-                report->left.x=0;
             else if (deadOffLeft)
             {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneLeft;
-                if (report->left.x<0) {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                    report->left.x=~report->left.x;
-                } else {
-                    float valX=getAbsolute(report->left.x);
-                    report->left.x=max16*(valX-deadzoneLeft)/maxVal;
-                }
+                normalizeAxis(report->left.x, deadzoneLeft);
+                normalizeAxis(report->left.y, deadzoneLeft);
             }
-            if(getAbsolute(report->left.y)<deadzoneLeft)
-                report->left.y=0;
+        }
+        else // Linked checkbox has no check
+        {
+            if (getAbsolute(report->left.x) < deadzoneLeft)
+            {
+                report->left.x = 0;
+            }
             else if (deadOffLeft)
             {
-                const UInt16 max16=32767;
-                float maxVal = max16-deadzoneLeft;
-                if (report->left.y<0) {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                    report->left.y=~report->left.y;
-                } else {
-                    float valY=getAbsolute(report->left.y);
-                    report->left.y=max16*(valY-deadzoneLeft)/maxVal;
-                }
+                normalizeAxis(report->left.x, deadzoneLeft);
+            }
+            
+            if (getAbsolute(report->left.y) < deadzoneLeft)
+            {
+                report->left.y = 0;
+            }
+            else if (deadOffLeft)
+            {
+                normalizeAxis(report->left.y, deadzoneLeft);
             }
         }
     }
-    if(deadzoneRight!=0) {
-        if(relativeRight) {
-            if((getAbsolute(report->right.x)<deadzoneRight)&&(getAbsolute(report->right.y)<deadzoneRight)) {
-                report->right.x=0;
-                report->right.y=0;
+    
+    if (deadzoneRight != 0)
+    {
+        if (relativeRight)
+        {
+            if ((getAbsolute(report->right.x) < deadzoneRight) && (getAbsolute(report->right.y) < deadzoneRight))
+            {
+                report->right.x = 0;
+                report->right.y = 0;
             }
-            else if(deadOffRight) {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                float valX=getAbsolute(report->right.x);
-                if (valX>deadzoneRight) {
-                    if (report->right.x<0) {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                        report->right.x=~report->right.x;
-                    } else {
-                        report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.x = 0;
-                }
-                float valY=getAbsolute(report->right.y);
-                if (valY>deadzoneRight) {
-                    if (report->right.y<0) {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                        report->right.y=~report->right.y;
-                    } else {
-                        report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    }
-                } else {
-                    report->right.y = 0;
-                }
-            }
-        } else {
-            if(getAbsolute(report->right.x)<deadzoneRight)
-                report->right.x=0;
             else if (deadOffRight)
             {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.x<0) {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                    report->right.x=~report->right.x;
-                } else {
-                    float valX=getAbsolute(report->right.x);
-                    report->right.x=max16*(valX-deadzoneRight)/maxVal;
-                }
+                normalizeAxis(report->left.x, deadzoneRight);
+                normalizeAxis(report->left.y, deadzoneRight);
             }
-            if(getAbsolute(report->right.y)<deadzoneRight)
-                report->right.y=0;
+        }
+        else
+        {
+            if (getAbsolute(report->right.x) < deadzoneRight)
+            {
+                report->right.x = 0;
+            }
             else if (deadOffRight)
             {
-                const UInt16 max16=32767;
-                float maxVal=max16-deadzoneRight;
-                if (report->right.y<0) {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                    report->right.y=~report->right.y;
-                } else {
-                    float valY=getAbsolute(report->right.y);
-                    report->right.y=max16*(valY-deadzoneRight)/maxVal;
-                }
+                normalizeAxis(report->right.x, deadzoneRight);
+            }
+            
+            if (getAbsolute(report->right.y) < deadzoneRight)
+            {
+                report->right.y = 0;
+            }
+            else if (deadOffRight)
+            {
+                normalizeAxis(report->right.y, deadzoneRight);
             }
         }
     }
 }
 
-void Wireless360Controller::remapButtons(void *buffer)
+void Wireless360Controller::remapButtons(void* buffer)
 {
-    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    XBOX360_IN_REPORT* report360 = (XBOX360_IN_REPORT*)buffer;
     UInt16 new_buttons = 0;
 
     new_buttons |= ((report360->buttons & 1) == 1) << mapping[0];
@@ -336,76 +285,98 @@ void Wireless360Controller::remapButtons(void *buffer)
     report360->buttons = new_buttons;
 }
 
-void Wireless360Controller::remapAxes(void *buffer)
+void Wireless360Controller::remapAxes(void* buffer)
 {
-    XBOX360_IN_REPORT *report360 = (XBOX360_IN_REPORT*)buffer;
+    XBOX360_IN_REPORT* report360 = (XBOX360_IN_REPORT*)buffer;
 
     XBOX360_HAT temp = report360->left;
     report360->left = report360->right;
     report360->right = temp;
 }
 
-void Wireless360Controller::receivedHIDupdate(unsigned char *data, int length)
+void Wireless360Controller::receivedHIDupdate(unsigned char* data, int length)
 {
     fiddleReport(data, length);
     if (!noMapping)
+    {
         remapButtons(data);
+    }
     if (swapSticks)
+    {
         remapAxes(data);
+    }
     super::receivedHIDupdate(data, length);
 }
 
 void Wireless360Controller::SetRumbleMotors(unsigned char large, unsigned char small)
 {
     unsigned char buf[] = {0x00, 0x01, 0x0f, 0xc0, 0x00, large, small, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
+    WirelessDevice* device = OSDynamicCast(WirelessDevice, getProvider());
 
-    if (device != NULL)
+    if (device != nullptr)
+    {
         device->SendPacket(buf, sizeof(buf));
+    }
 }
 
-IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
+IOReturn Wireless360Controller::setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options)
 {
-    char data[2];
+    char data[2] = {};
 
     // IOLog("setReport(%p, %d, %d)\n", report, reportType, options);
     if (report->readBytes(0, data, 2) < 2)
+    {
         return kIOReturnUnsupported;
+    }
 
     // Rumble
     if (data[0] == 0x00)
     {
         if ((data[1] != report->getLength()) || (data[1] != 0x04))
+        {
             return kIOReturnUnsupported;
+        }
+        
         report->readBytes(2, data, 2);
         SetRumbleMotors(data[0], data[1]);
+        
         return kIOReturnSuccess;
     }
 
     return super::setReport(report, reportType, options);
 }
 
-IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descriptor ) const
+IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor** descriptor) const
 {
-    IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
+    IOBufferMemoryDescriptor* buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
 
-    if (buffer == NULL)
+    if (buffer == nullptr)
+    {
         return kIOReturnNoResources;
+    }
+    
     buffer->writeBytes(0, ReportDescriptor, sizeof(ReportDescriptor));
     *descriptor = buffer;
+    
     return kIOReturnSuccess;
 }
 
 // Called by the userspace IORegistryEntrySetCFProperties function
-IOReturn Wireless360Controller::setProperties(OSObject *properties)
+IOReturn Wireless360Controller::setProperties(OSObject* properties)
 {
-    OSDictionary *dictionary = OSDynamicCast(OSDictionary,properties);
+    OSDictionary* dictionary = OSDynamicCast(OSDictionary, properties);
 
-    if(dictionary!=NULL) {
-        setProperty(kDriverSettingKey,dictionary);
+    if (dictionary != nullptr)
+    {
+        setProperty(kDriverSettingKey, dictionary);
         readSettings();
+
         return kIOReturnSuccess;
-    } else return kIOReturnBadArgument;
+    }
+    else
+    {
+        return kIOReturnBadArgument;
+    }
 }
 
 // Get info
@@ -446,4 +417,3 @@ OSNumber* Wireless360Controller::newVendorIDNumber() const
 {
     return OSNumber::withNumber((unsigned long long)0x45e, 16);
 }
-#endif 0

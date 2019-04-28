@@ -20,7 +20,6 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
 #ifndef __WIRELESSHIDDEVICE_H__
 #define __WIRELESSHIDDEVICE_H__
 
@@ -36,22 +35,22 @@ public:
     void PowerOff(void);
     unsigned char GetBatteryLevel(void);
 
-    IOReturn setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options);
+    IOReturn setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options) override;
 
-    OSNumber* newLocationIDNumber() const;
-    OSString* newSerialNumberString() const;
+    OSNumber* newLocationIDNumber() const override;
+    OSString* newSerialNumberString() const override;
 protected:
-    bool handleStart(IOService *provider);
-    void handleStop(IOService *provider);
+    bool handleStart(IOService* provider) override;
+    void handleStop(IOService* provider) override;
     virtual void receivedData(void);
-    virtual void receivedMessage(IOMemoryDescriptor *data);
-    virtual void receivedUpdate(unsigned char type, unsigned char *data);
-    virtual void receivedHIDupdate(unsigned char *data, int length);
+    virtual void receivedMessage(IOMemoryDescriptor* data);
+    virtual void receivedUpdate(unsigned char type, unsigned char* data);
+    virtual void receivedHIDupdate(unsigned char* data, int length);
 private:
-    static void _receivedData(void *target, WirelessDevice *sender, void *parameter);
-    static void ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender);
+    static void _receivedData(void* target, WirelessDevice* sender, void* parameter);
+    static void ChatPadTimerActionWrapper(OSObject* owner, IOTimerEventSource* sender);
 
-	IOTimerEventSource *serialTimer;
+	IOTimerEventSource* serialTimer;
     int serialTimerCount;
 
     unsigned char battery;
@@ -59,4 +58,3 @@ private:
 };
 
 #endif // __WIRELESSHIDDEVICE_H__
-#endif // 0

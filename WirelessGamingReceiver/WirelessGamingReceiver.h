@@ -20,12 +20,11 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
 #ifndef __WIRELESSGAMINGRECEIVER_H__
 #define __WIRELESSGAMINGRECEIVER_H__
 
-#include <IOKit/usb/IOUSBDevice.h>
-#include <IOKit/usb/IOUSBInterface.h>
+#include <IOKit/usb/IOUSBHostDevice.h>
+#include <IOKit/usb/IOUSBHostInterface.h>
 
 // This value is defined by the hardware and fixed
 #define WIRELESS_CONNECTIONS        4
@@ -35,16 +34,18 @@ class WirelessDevice;
 typedef struct WIRELESS_CONNECTION
 {
     // Controller
-    IOUSBInterface *controller;
-    IOUSBPipe *controllerIn, *controllerOut;
+    IOUSBHostInterface* controller;
+    IOUSBHostPipe* controllerIn;
+    IOUSBHostPipe* controllerOut;
 
     // Mystery
-    IOUSBInterface *other;
-    IOUSBPipe *otherIn, *otherOut;
+    IOUSBHostInterface* other;
+    IOUSBHostPipe* otherIn;
+    IOUSBHostPipe* otherOut;
 
     // Runtime data
-    OSArray *inputArray;
-    WirelessDevice *service;
+    OSArray* inputArray;
+    WirelessDevice* service;
     bool controllerStarted;
 }
 WIRELESS_CONNECTION;
@@ -53,10 +54,10 @@ class WirelessGamingReceiver : public IOService
 {
     OSDeclareDefaultStructors(WirelessGamingReceiver);
 public:
-    bool start(IOService *provider);
-    void stop(IOService *provider);
+    bool start(IOService* provider) override;
+    void stop(IOService* provider) override;
 
-    IOReturn message(UInt32 type,IOService *provider,void *argument);
+    IOReturn message(UInt32 type, IOService* provider, void* argument) override;
 
     // For WirelessDevice to use
     OSNumber* newLocationIDNumber() const;
@@ -65,29 +66,28 @@ private:
     friend class WirelessDevice;
     bool IsDataQueued(int index);
     IOMemoryDescriptor* ReadBuffer(int index);
-    bool QueueWrite(int index, const void *bytes, UInt32 length);
+    bool QueueWrite(int index, const void* bytes, UInt32 length);
 
 private:
-    IOUSBDevice *device;
+    IOUSBHostDevice* device;
     WIRELESS_CONNECTION connections[WIRELESS_CONNECTIONS];
     int connectionCount;
 
     void InstantiateService(int index);
 
-    void ProcessMessage(int index, const unsigned char *data, int length);
+    void ProcessMessage(int index, const unsigned char* data, int length);
 
     bool QueueRead(int index);
-    void ReadComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
+    void ReadComplete(void* parameter, IOReturn status, UInt32 bufferSizeRemaining);
 
-    void WriteComplete(void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
+    void WriteComplete(void* parameter, IOReturn status, UInt32 bufferSizeRemaining);
 
     void ReleaseAll(void);
 
-    bool didTerminate(IOService *provider, IOOptionBits options, bool *defer);
+    bool didTerminate(IOService* provider, IOOptionBits options, bool* defer) override;
 
-    static void _ReadComplete(void *target, void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
-    static void _WriteComplete(void *target, void *parameter, IOReturn status, UInt32 bufferSizeRemaining);
+    static void _ReadComplete(void* target, void* parameter, IOReturn status, UInt32 bufferSizeRemaining);
+    static void _WriteComplete(void* target, void* parameter, IOReturn status, UInt32 bufferSizeRemaining);
 };
 
 #endif // __WIRELESSGAMINGRECEIVER_H__
-#endif // 0

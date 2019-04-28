@@ -52,7 +52,7 @@ private:
     void NewData(void);
     int index;
     // callback
-    void* target
+    void* target;
     void* parameter;
     WirelessDeviceWatcher function;
 };

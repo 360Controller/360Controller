@@ -64,6 +64,7 @@ protected:
     bool noMapping = true;
 
 private:
+    void normalizeAxis(SInt16& axis, short deadzone);
     void fiddleReport(unsigned char* data, int length);
     void remapButtons(void* buffer);
     void remapAxes(void* buffer);

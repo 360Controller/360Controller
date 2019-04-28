@@ -20,7 +20,6 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#if 0
 #include <IOKit/IOLib.h>
 #include <IOKit/IOTimerEventSource.h>
 #include "WirelessHIDDevice.h"
@@ -33,16 +32,19 @@ OSDefineMetaClassAndAbstractStructors(WirelessHIDDevice, IOHIDDevice)
 #define super IOHIDDevice
 
 // Some sort of message to send
-const char weirdStart[] = {0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+const char weirdStart[] = { 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventSource *sender)
+void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject* owner, IOTimerEventSource* sender)
 {
-	WirelessHIDDevice *device = OSDynamicCast(WirelessHIDDevice, owner);
+    WirelessHIDDevice* device = OSDynamicCast(WirelessHIDDevice, owner);
 
     // Automatic shutoff
     device->serialTimerCount++;
     if (device->serialTimerCount > POWEROFF_TIMEOUT)
+    {
         device->PowerOff();
+    }
+    
     // Reset
     sender->setTimeoutMS(1000);
 }
@@ -50,10 +52,10 @@ void WirelessHIDDevice::ChatPadTimerActionWrapper(OSObject *owner, IOTimerEventS
 // Sets the LED with the same format as the wired controller
 void WirelessHIDDevice::SetLEDs(int mode)
 {
-    unsigned char buf[] = {0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
+    unsigned char buf[] = { 0x00, 0x00, 0x08, (unsigned char)(0x40 + (mode % 0x0e)), 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+    WirelessDevice* device = OSDynamicCast(WirelessDevice, getProvider());
 
-    if (device != NULL)
+    if (device != nullptr)
     {
         device->SendPacket(buf, sizeof(buf));
         device->SendPacket(weirdStart, sizeof(weirdStart));
@@ -68,10 +70,10 @@ unsigned char WirelessHIDDevice::GetBatteryLevel(void)
 
 void WirelessHIDDevice::PowerOff(void)
 {
-    static const unsigned char buf[] = {0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
+    static const unsigned char buf[] = { 0x00, 0x00, 0x08, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+    WirelessDevice* device = OSDynamicCast(WirelessDevice, getProvider());
 
-    if (device != NULL)
+    if (device != nullptr)
     {
         device->SendPacket(buf, sizeof(buf));
         // device->SendPacket(weirdStart, sizeof(weirdStart));
@@ -79,51 +81,72 @@ void WirelessHIDDevice::PowerOff(void)
 }
 
 // Called from userspace to do something, like set the LEDs
-IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor *report, IOHIDReportType reportType, IOOptionBits options)
+IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options)
 {
-    char data[2];
+    char data[2] = {};
 
     if (report->readBytes(0, data, 2) < 2)
+    {
         return kIOReturnUnsupported;
+    }
 
-    switch (data[0]) {
+    switch (data[0])
+    {
         case 0x01:  // LED
+        {
             if ((data[1] != report->getLength()) || (data[1] != 0x03))
+            {
                 return kIOReturnUnsupported;
+            }
+            
             report->readBytes(2, data, 1);
             SetLEDs(data[0]);
+            
             return kIOReturnSuccess;
+        } break;
+            
         case 0x02:  // Power
+        {
             PowerOff();
+            
             return kIOReturnSuccess;
+        } break;
+            
         default:
+        {
             return super::setReport(report, reportType, options);
+        } break;
     }
 }
 
 // Start up the driver
-bool WirelessHIDDevice::handleStart(IOService *provider)
+bool WirelessHIDDevice::handleStart(IOService* provider)
 {
-    WirelessDevice *device;
-    IOWorkLoop *workloop;
+    WirelessDevice* device = nullptr;
+    IOWorkLoop* workloop = nullptr;
 
     if (!super::handleStart(provider))
+    {
         goto fail;
+    }
 
     device = OSDynamicCast(WirelessDevice, provider);
-    if (device == NULL)
+    if (device == nullptr)
+    {
         goto fail;
+    }
 
     serialTimerCount = 0;
 
 	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
-	if (serialTimer == NULL)
+	if (serialTimer == nullptr)
 	{
 		IOLog("start - failed to create timer for chatpad\n");
 		goto fail;
 	}
+    
     workloop = getWorkLoop();
-	if ((workloop == NULL) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
+	if ((workloop == nullptr) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
 	{
 		IOLog("start - failed to connect timer for chatpad\n");
 		goto fail;
@@ -142,20 +165,27 @@ fail:
 }
 
 // Shut down the driver
-void WirelessHIDDevice::handleStop(IOService *provider)
+void WirelessHIDDevice::handleStop(IOService* provider)
 {
-    WirelessDevice *device = OSDynamicCast(WirelessDevice, provider);
+    WirelessDevice* device = OSDynamicCast(WirelessDevice, provider);
 
-    if (device != NULL)
-        device->RegisterWatcher(NULL, NULL, NULL);
+    if (device != nullptr)
+    {
+        device->RegisterWatcher(nullptr, nullptr, nullptr);
+    }
 
-    if (serialTimer != NULL) {
+    if (serialTimer != nullptr)
+    {
         serialTimer->cancelTimeout();
+        
         IOWorkLoop *workloop = getWorkLoop();
-        if (workloop != NULL)
+        if (workloop != nullptr)
+        {
             workloop->removeEventSource(serialTimer);
+        }
+        
         serialTimer->release();
-        serialTimer = NULL;
+        serialTimer = nullptr;
     }
 
     super::handleStop(provider);
@@ -164,35 +194,43 @@ void WirelessHIDDevice::handleStop(IOService *provider)
 // Handle new data from the device
 void WirelessHIDDevice::receivedData(void)
 {
-    IOMemoryDescriptor *data;
-    WirelessDevice *device = OSDynamicCast(WirelessDevice, getProvider());
-    if (device == NULL)
+    IOMemoryDescriptor* data = nullptr;
+    
+    WirelessDevice* device = OSDynamicCast(WirelessDevice, getProvider());
+    if (device == nullptr)
+    {
         return;
+    }
 
-    while ((data = device->NextPacket()) != NULL)
+    while ((data = device->NextPacket()) != nullptr)
     {
         receivedMessage(data);
         data->release();
     }
 }
 
-const char *HexData = "0123456789ABCDEF";
+const char* HexData = "0123456789ABCDEF";
 
 // Process new data
-void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
+void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor* data)
 {
-    unsigned char buf[29];
+    unsigned char buf[29] = {};
 
     if (data->getLength() != 29)
+    {
         return;
+    }
 
     data->readBytes(0, buf, 29);
 
     switch (buf[1])
     {
         case 0x0f:  // Initial info
+        {
             if (buf[16] == 0x13)
+            {
                 receivedUpdate(0x13, buf + 17);
+            }
             serialString[0] = HexData[(buf[0x0A] & 0xF0) >> 4];
             serialString[1] = HexData[buf[0x0A] & 0x0F];
             serialString[2] = HexData[(buf[0x0B] & 0xF0) >> 4];
@@ -203,60 +241,69 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor *data)
             serialString[7] = HexData[buf[0x0D] & 0x0F];
             serialString[8] = '\0';
             IOLog("Got serial number: %s", serialString);
-            break;
+        } break;
 
         case 0x01:  // HID info update
+        {
             if (buf[3] == 0xf0)
+            {
                 receivedHIDupdate(buf + 4, buf[5]);
-            break;
+            }
+        } break;
 
         case 0x00:  // Info update
+        {
             receivedUpdate(buf[3], buf + 4);
-            break;
+        } break;
 
         default:
-            break;
+        {
+        } break;
     }
 }
 
 // Received an update of a specific value
-void WirelessHIDDevice::receivedUpdate(unsigned char type, unsigned char *data)
+void WirelessHIDDevice::receivedUpdate(unsigned char type, unsigned char* data)
 {
     switch (type)
     {
         case 0x13:  // Battery level
+        {
             battery = data[0];
             {
-                OSObject *prop = OSNumber::withNumber(battery, 8);
-                if (prop != NULL)
+                OSObject* prop = OSNumber::withNumber(battery, 8);
+                if (prop != nullptr)
                 {
                     setProperty(kIOWirelessBatteryLevel, prop);
                     prop->release();
                 }
             }
-            break;
+        } break;
 
         default:
-            break;
+        {
+        } break;
     }
 }
 
 // Received a normal HID update from the device
-void WirelessHIDDevice::receivedHIDupdate(unsigned char *data, int length)
+void WirelessHIDDevice::receivedHIDupdate(unsigned char* data, int length)
 {
-    IOReturn err;
-    IOMemoryDescriptor *report;
+    IOReturn err = kIOReturnError;
+    IOMemoryDescriptor* report = nullptr;
 
     serialTimerCount = 0;
     report = IOMemoryDescriptor::withAddress(data, length, kIODirectionNone);
     err = handleReport(report);
     report->release();
     if (err != kIOReturnSuccess)
+    {
         IOLog("handleReport return: 0x%.8x\n", err);
+    }
 }
 
 // Wrapper for notification of receiving data
-void WirelessHIDDevice::_receivedData(void *target, WirelessDevice *sender, void *parameter)
+void WirelessHIDDevice::_receivedData(void* target, WirelessDevice* sender, void* parameter)
 {
     ((WirelessHIDDevice*)target)->receivedData();
 }
@@ -264,11 +311,14 @@ void WirelessHIDDevice::_receivedData(void *target, WirelessDevice *sender, void
 // Get a location ID for this device, as some games require it
 OSNumber* WirelessHIDDevice::newLocationIDNumber() const
 {
-    WirelessDevice *device;
+    WirelessDevice* device = nullptr;
 
     device = OSDynamicCast(WirelessDevice, getProvider());
-    if (device == NULL)
-        return NULL;
+    if (device == nullptr)
+    {
+        return nullptr;
+    }
+    
     return device->newLocationIDNumber();
 }
 
@@ -277,4 +327,3 @@ OSString* WirelessHIDDevice::newSerialNumberString() const
 {
     return OSString::withCString(serialString);
 }
-#endif // 0
