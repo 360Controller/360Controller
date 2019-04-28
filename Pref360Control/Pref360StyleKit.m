@@ -21,7 +21,7 @@
 
 #pragma mark Drawing Methods
 
-+ (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick leftStickDeadzone: (CGFloat)leftDeadzone rightStickDeadzone: (CGFloat)rightDeadzone isLeftNormalized: (BOOL)leftNormalized isRightNormalized: (BOOL)rightNormalized
++ (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick leftStickDeadzone: (CGFloat)leftDeadzone rightStickDeadzone: (CGFloat)rightDeadzone isLeftNormalized: (BOOL)leftNormalized isRightNormalized: (BOOL)rightNormalized appearance: (NSAppearance*)appearance
 {
     //// General Declarations
     CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.CGContext;
@@ -50,6 +50,24 @@
     NSColor* crossStroke = [cross shadowWithLevel: 0.5];
     NSColor* gradientColor = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.355];
     NSColor* gradientColor2 = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0];
+    
+    //// Alter colors based on macOS color mode
+    if (@available(macOS 10.14, *))
+    {
+        NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+        
+        if (appearanceName == NSAppearanceNameAqua)
+        {
+            controller = [NSColor colorWithWhite:1 alpha:1];
+            darkController = [controller shadowWithLevel: 0.25];
+            highlightController = [controller shadowWithLevel: 0.05];
+            
+        }
+        else if (appearanceName == NSAppearanceNameDarkAqua)
+        {
+            darkController = [controller shadowWithLevel: 0.7];
+        }
+    }
 
     //// Gradient Declarations
     NSGradient* gradient = [NSGradient.alloc initWithStartingColor: gradientColor endingColor: gradientColor2];
