@@ -25,6 +25,7 @@
    5. [Debugging the driver](#debugging-the-driver)
    6. [Debugging the preference pane](#debugging-the-preference-pane)
    7. [A note on Unity mappings](#a-note-on-unity-mappings)
+   8. [Release checklist](#release-checklist)
 8. [Licence](#licence)
 
 ## About
@@ -194,7 +195,9 @@ Most of these instructions are pulled directly from [this blog post.](http://www
 
 First, create a copy of `System Preferences.app` called `System Preferences (signed).app`. Then sign this new System Preferences with the command:
 
-```codesign -s "Developer ID Application: First Last (XXXXXXXXXX)" -f /Applications/System\ Preferences\ \(signed\).app/```
+```
+codesign -s "Developer ID Application: First Last (XXXXXXXXXX)" -f /Applications/System\ Preferences\ \(signed\).app/
+```
 
 where `Developer ID Application: First Last (XXXXXXXXXX)` is the name of your Developer ID Application signing certificate.
 
@@ -202,13 +205,23 @@ Edit your build scheme for Pref360Control, and select the "Run" scheme, and make
 
 Next, click the little disclosure triangle for the run scheme to reveal its detailed settings. Then select pre-actions. Click the "+" at the bottom to add a run script action. Enter /bin/sh as the shell, make sure that your target is selected to provide build settings, and type a shell command line to install the newly compiled pref pane in your personal Library folder:
 
-```cp -Rf ${CONFIGURATION_BUILD_DIR}/Pref360Control.prefPane ~/Library/PreferencePanes```
+```
+cp -Rf ${CONFIGURATION_BUILD_DIR}/Pref360Control.prefPane ~/Library/PreferencePanes
+```
 
 Finally, select the run step, choose "other" from the executable drop-down menu, and select `System Preferences (signed)` in the Applications folder. Verify that "Debug executable" and "Automatically" are both checked.
 
 ### A note on Unity mappings
 
 The issues with the button and axis mappings in the Unity game engine are outside of our control. Unity mangles the button and axis values provided by the controller and remaps them to different values. There is absolutely no way that we can introduce a shim to fix it. Complaints about this should be directed at Unity, not at us.
+
+### Release checklist
+
+This is a list of items that should be completed before releasing a new verison.
+
+- Update the `Current Project Version` in the `360 Driver` project to the new version number.
+- Update the version number in the preference pane code
+- Add the release notes to `Install360Controller/Text/Welcome.rtf`
 
 ## Licence
 
