@@ -123,12 +123,80 @@
 									<key>CHILDREN</key>
 									<array>
 										<dict>
+											<key>BUNDLE_CAN_DOWNGRADE</key>
+											<false/>
+											<key>BUNDLE_POSTINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>BUNDLE_PREINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
 											<key>CHILDREN</key>
 											<array/>
 											<key>GID</key>
 											<integer>0</integer>
 											<key>PATH</key>
 											<string>../build/Release/360Controller.kext</string>
+											<key>PATH_TYPE</key>
+											<integer>1</integer>
+											<key>PERMISSIONS</key>
+											<integer>493</integer>
+											<key>TYPE</key>
+											<integer>3</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+										<dict>
+											<key>BUNDLE_CAN_DOWNGRADE</key>
+											<false/>
+											<key>BUNDLE_POSTINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>BUNDLE_PREINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>CHILDREN</key>
+											<array/>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>PATH</key>
+											<string>../build/Release/Wireless360Controller.kext</string>
+											<key>PATH_TYPE</key>
+											<integer>1</integer>
+											<key>PERMISSIONS</key>
+											<integer>493</integer>
+											<key>TYPE</key>
+											<integer>3</integer>
+											<key>UID</key>
+											<integer>0</integer>
+										</dict>
+										<dict>
+											<key>BUNDLE_CAN_DOWNGRADE</key>
+											<false/>
+											<key>BUNDLE_POSTINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>BUNDLE_PREINSTALL_PATH</key>
+											<dict>
+												<key>PATH_TYPE</key>
+												<integer>0</integer>
+											</dict>
+											<key>CHILDREN</key>
+											<array/>
+											<key>GID</key>
+											<integer>0</integer>
+											<key>PATH</key>
+											<string>../build/Release/WirelessGamingReceiver.kext</string>
 											<key>PATH_TYPE</key>
 											<integer>1</integer>
 											<key>PERMISSIONS</key>
@@ -636,7 +704,7 @@
 				<key>USE_HFS+_COMPRESSION</key>
 				<false/>
 				<key>VERSION</key>
-				<string>0.16.11</string>
+				<string>1.0.0-alpha.2</string>
 			</dict>
 			<key>TYPE</key>
 			<integer>0</integer>
@@ -666,7 +734,17 @@
 		<key>PROJECT_PRESENTATION</key>
 		<dict>
 			<key>BACKGROUND</key>
-			<dict/>
+			<dict>
+				<key>APPAREANCES</key>
+				<dict>
+					<key>DARK_AQUA</key>
+					<dict/>
+					<key>LIGHT_AQUA</key>
+					<dict/>
+				</dict>
+				<key>SHARED_SETTINGS_FOR_ALL_APPAREANCES</key>
+				<true/>
+			</dict>
 			<key>INSTALLATION TYPE</key>
 			<dict>
 				<key>HIERARCHIES</key>

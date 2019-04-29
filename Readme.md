@@ -222,6 +222,7 @@ This is a list of items that should be completed before releasing a new verison.
 - Update the `Current Project Version` in the `360 Driver` project to the new version number.
 - Update the version number in the preference pane code
 - Add the release notes to `Install360Controller/Text/Welcome.rtf`
+- Update the version of the installer in the `Install360Controller` package
 
 ## Licence
 

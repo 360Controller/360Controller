@@ -65,7 +65,8 @@
         }
         else if (appearanceName == NSAppearanceNameDarkAqua)
         {
-            darkController = [controller shadowWithLevel: 0.7];
+            darkController = [controller shadowWithLevel: 0.5];
+            backController = [controller shadowWithLevel: 0.5];
         }
     }
 

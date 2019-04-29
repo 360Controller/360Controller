@@ -46,15 +46,15 @@
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOHIDFamily</key>
-		<string>1.2</string>
+		<string>2.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.mach</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 		<key>com.mice.driver.WirelessGamingReceiver</key>
-		<string>1.0.0d1</string>
+		<string>1.0.0</string>
 	</dict>
 </dict>
 </plist>

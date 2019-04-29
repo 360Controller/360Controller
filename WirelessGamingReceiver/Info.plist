@@ -48,7 +48,7 @@
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
+			<string>IOUSBHostDevice</string>
 			<key>idProduct</key>
 			<integer>657</integer>
 			<key>idVendor</key>
@@ -63,7 +63,7 @@
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
+			<string>IOUSBHostDevice</string>
 			<key>idProduct</key>
 			<integer>681</integer>
 			<key>idVendor</key>
@@ -71,19 +71,19 @@
 		</dict>
 	</dict>
 	<key>OSBundleCompatibleVersion</key>
-	<string>1.0.0d1</string>
+	<string>1.0.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOHIDFamily</key>
+		<string>2.0</string>
+		<key>com.apple.iokit.IOUSBHostFamily</key>
 		<string>1.2</string>
-		<key>com.apple.iokit.IOUSBFamily</key>
-		<string>1.8</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 		<key>com.apple.kpi.mach</key>
-		<string>8.0.0</string>
+		<string>18.5</string>
 	</dict>
 </dict>
 </plist>
