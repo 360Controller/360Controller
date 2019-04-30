@@ -373,8 +373,6 @@ bool Xbox360Peripheral::start(IOService* provider)
     IOWorkLoop* workloop = nullptr;
     XBOX360_OUT_LED led = {};
 
-    kprintf("Hello world.\n");
-
     if (!super::start(provider))
     {
         kprintf("start - Failed super start method.\n");
@@ -459,7 +457,7 @@ bool Xbox360Peripheral::start(IOService* provider)
             if (interfaceCandidate != nullptr)
             {
                 const StandardUSB::InterfaceDescriptor* id = interfaceCandidate->getInterfaceDescriptor();
-//                kprintf("%d, %d, %d\n", id->bInterfaceClass, id->bInterfaceSubClass, id->bInterfaceProtocol);
+//                kprintf("%d, %d, %d\n", id->bInterfaceClass, id->bInterfaceSubClass, id->bInterfaceProtocol); // TODO(Drew): Delete me
                 if (id->bInterfaceSubClass == 93)
                 {
                     if (id->bInterfaceProtocol == 1)
@@ -525,7 +523,7 @@ bool Xbox360Peripheral::start(IOService* provider)
         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType);
+        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
 
         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
         {
@@ -588,7 +586,7 @@ bool Xbox360Peripheral::start(IOService* provider)
         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-        kprintf("Chatpad pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType);
+        kprintf("Chatpad pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
 
         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
         {
@@ -683,13 +681,13 @@ nochat:
     }
 
     // Done
-    kprintf("Pass.\n");
+    kprintf("Pass.\n"); // TODO(Drew):
     PadConnect();
     registerService();
     return true;
 
 fail:
-    kprintf("Fail.\n");
+    kprintf("Fail.\n"); // TODO(Drew):
     ReleaseAll();
     return false;
 }

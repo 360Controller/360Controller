@@ -60,17 +60,18 @@ bool WirelessGamingReceiver::start(IOService* provider)
     int iConnection, iOther, i;
     OSIterator* iterator = nullptr;
     OSObject* candidate = nullptr;
+    IOReturn error = kIOReturnError;
 
     if (!IOService::start(provider))
     {
-        // IOLog("start - superclass failed\n");
+        kprintf("start - superclass failed\n");
         return false;
     }
 
     device = OSDynamicCast(IOUSBHostDevice, provider);
     if (device == nullptr)
     {
-        // IOLog("start - invalid provider\n");
+        kprintf("start - invalid provider\n");
         goto fail;
     }
 
@@ -78,7 +79,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
     if (device->getDeviceDescriptor()->bNumConfigurations < 1)
     {
         device = nullptr;
-        // IOLog("start - device has no configurations!\n");
+        kprintf("start - device has no configurations!\n");
         goto fail;
     }
 
@@ -87,19 +88,23 @@ bool WirelessGamingReceiver::start(IOService* provider)
     if (cd == nullptr)
     {
         device = nullptr;
-        // IOLog("start - couldn't get configuration descriptor\n");
+        kprintf("start - couldn't get configuration descriptor\n");
         goto fail;
     }
 
     if (!device->open(this))
     {
         device = nullptr;
-        // IOLog("start - failed to open device\n");
+        kprintf("start - failed to open device\n");
         goto fail;
     }
-    if (device->setConfiguration(cd->bConfigurationValue, true) != kIOReturnSuccess)
+
+//    if (device->setConfiguration(cd->bConfigurationValue, true) != kIOReturnSuccess)
+    error = device->setConfiguration(cd->bConfigurationValue, true);
+    if (error != kIOReturnSuccess)
     {
-        // IOLog("start - unable to set configuration\n");
+//        kprintf("start - unable to set configuration\n");
+        kprintf("start - unable to set configuration with error: %x\n", error);
         goto fail;
     }
 
@@ -124,6 +129,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
         IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
         if (interfaceCandidate != nullptr)
         {
+            // TODO(Drew): There's a bunch of duplicated code in here. Can we pull it out? What makes these two different?
             switch (interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol)
             {
                 case 129:   // Controller
@@ -132,27 +138,31 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     
                     if (!interfaceCandidate->open(this))
                     {
-                        // IOLog("start: Failed to open control interface\n");
+                        kprintf("start - failed to open control interface\n");
                         goto fail;
                     }
                     connections[iConnection].controller = interfaceCandidate;
                     
                     cd = interfaceCandidate->getConfigurationDescriptor();
                     intf = interfaceCandidate->getInterfaceDescriptor();
-                    
                     if (!cd || !intf)
                     {
+                        kprintf("start - Can't get configuration descriptor and interface descriptor.\n");
                         goto fail;
                     }
+                    
                     while ((pipe = StandardUSB::getNextEndpointDescriptor(cd, intf, pipe)))
                     {
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
+                        UInt8 pipeType = StandardUSB::getEndpointType(pipe);
+
+                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
                         
-                        if (pipeDirection == kEndpointDirectionIn)
+                        if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
                             connections[iConnection].controllerIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
-                        else if (pipeDirection == kEndpointDirectionOut)
+                        else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
                             connections[iConnection].controllerOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
@@ -160,23 +170,17 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     
                     if (connections[iConnection].controllerIn == nullptr)
                     {
-                        // IOLog("start: Failed to open control input pipe\n");
+                        kprintf("start - Failed to open control input pipe\n");
                         goto fail;
                     }
-                    else
-                    {
-                        connections[iConnection].controllerIn->retain();
-                    }
+                    connections[iConnection].controllerIn->retain();
                     
                     if (connections[iConnection].controllerOut == nullptr)
                     {
-                        // IOLog("start: Failed to open control output pipe\n");
+                        kprintf("start - Failed to open control output pipe\n");
                         goto fail;
                     }
-                    else
-                    {
-                        connections[iConnection].controllerOut->retain();
-                    }
+                    connections[iConnection].controllerOut->retain();
                     
                     iConnection++;
                 } break;
@@ -186,59 +190,56 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     pipe = nullptr;
                     if (!interfaceCandidate->open(this))
                     {
-                        // IOLog("start: Failed to open mystery interface\n");
+                        kprintf("start - Failed to open mystery interface\n");
                         goto fail;
                     }
                     connections[iOther].other = interfaceCandidate;
                     
                     cd = interfaceCandidate ->getConfigurationDescriptor();
                     intf = interfaceCandidate->getInterfaceDescriptor();
-                    
                     if (!cd || !intf)
                     {
+                        kprintf("start - Can't get configuration descriptor and interface descriptor.\n");
                         goto fail;
                     }
                     
                     while ((pipe = StandardUSB::getNextEndpointDescriptor(cd, intf, pipe)))
                     {
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
-                        
-                        if (pipeDirection == kEndpointDirectionIn)
+                        UInt8 pipeType = StandardUSB::getEndpointType(pipe);
+
+                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
+
+                        if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iConnection].otherIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].controllerIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
-                        else if (pipeDirection == kEndpointDirectionOut)
+                        else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iConnection].otherOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].controllerOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
                     }
                     
-                    if (connections[iConnection].controllerIn == nullptr)
+                    if (connections[iOther].controllerIn == nullptr)
                     {
-                        // IOLog("start: Failed to open control input pipe\n");
+                        kprintf("start: Failed to open control input pipe\n");
                         goto fail;
                     }
-                    else
-                    {
-                        connections[iConnection].controllerIn->retain();
-                    }
+                    connections[iOther].controllerIn->retain();
                     
-                    if (connections[iConnection].controllerOut == nullptr)
+                    if (connections[iOther].controllerOut == nullptr)
                     {
-                        // IOLog("start: Failed to open control output pipe\n");
+                        kprintf("start: Failed to open control output pipe\n");
                         goto fail;
                     }
-                    else
-                    {
-                        connections[iConnection].controllerOut->retain();
-                    }
+                    connections[iOther].controllerOut->retain();
                     
                     iOther++;
                 } break;
 
                 default:
                 {
-                    // IOLog("start: Ignoring interface (protocol %d)\n", interface->GetInterfaceProtocol());
+                    kprintf("start: Ignoring interface (protocol %d)\n", interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol);
                 } break;
             }
         }
@@ -247,7 +248,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
 
     if (iConnection != iOther)
     {
-        IOLog("start - interface mismatch?\n");
+        kprintf("start - interface mismatch?\n");
     }
     connectionCount = iConnection;
 
@@ -256,17 +257,17 @@ bool WirelessGamingReceiver::start(IOService* provider)
         connections[i].inputArray = OSArray::withCapacity(5);
         if (connections[i].inputArray == nullptr)
         {
-            // IOLog("start: Failed to allocate packet buffer %d\n", i);
+            kprintf("start - Failed to allocate packet buffer %d\n", i);
             goto fail;
         }
         if (!QueueRead(i))
         {
-            // IOLog("start: Failed to start read %d\n", i);
+            kprintf("start - Failed to start read %d\n", i);
             goto fail;
         }
     }
 
-    // IOLog("start: Transform and roll out (%d interfaces)\n", connectionCount);
+    kprintf("start - Transform and roll out (%d interfaces)\n", connectionCount);
     return true;
 
 fail:
@@ -631,11 +632,13 @@ void WirelessGamingReceiver::InstantiateService(int index)
             OSNumber::withNumber((unsigned long long)0, 32),
         };
         OSDictionary* dictionary = OSDictionary::withObjects(objects, keys, 1, 0);
+        kprintf("InstantiateService - attempting to init device.\n");
         if (connections[index].service->init(dictionary))
         {
             connections[index].service->attach(this);
             connections[index].service->SetIndex(index);
             // connections[index].service->registerService();
+            kprintf("InstantiateService - attahed device.\n");
             // IOLog("process: Device attached\n");
             if (IsDataQueued(index))
             {
@@ -647,6 +650,7 @@ void WirelessGamingReceiver::InstantiateService(int index)
         {
             connections[index].service->release();
             connections[index].service = nullptr;
+            kprintf("InstantiateService - device attach failure.\n");
             // IOLog("process: Device attach failure\n");
         }
     }

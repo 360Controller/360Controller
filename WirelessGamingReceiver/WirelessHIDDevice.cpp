@@ -127,12 +127,14 @@ bool WirelessHIDDevice::handleStart(IOService* provider)
 
     if (!super::handleStart(provider))
     {
+        kprintf("handleStart - super failed to handle start.\n");
         goto fail;
     }
 
     device = OSDynamicCast(WirelessDevice, provider);
     if (device == nullptr)
     {
+        kprintf("handleStart - device was null.\n");
         goto fail;
     }
 
@@ -141,14 +143,14 @@ bool WirelessHIDDevice::handleStart(IOService* provider)
 	serialTimer = IOTimerEventSource::timerEventSource(this, ChatPadTimerActionWrapper);
 	if (serialTimer == nullptr)
 	{
-		IOLog("start - failed to create timer for chatpad\n");
+		IOLog("handleStart - failed to create timer for chatpad\n");
 		goto fail;
 	}
     
     workloop = getWorkLoop();
 	if ((workloop == nullptr) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
 	{
-		IOLog("start - failed to connect timer for chatpad\n");
+		IOLog("handleStart - failed to connect timer for chatpad\n");
 		goto fail;
 	}
 
