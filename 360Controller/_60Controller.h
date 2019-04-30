@@ -37,6 +37,7 @@ class Xbox360Peripheral : public IOService
 
 private:
     void ReleaseAll(void);
+    void ReleaseChatpad(void);
     bool QueueRead(void);
     bool QueueSerialRead(void);
 

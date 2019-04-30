@@ -469,10 +469,6 @@ bool Xbox360Peripheral::start(IOService* provider)
                     }
                     else if (id->bInterfaceProtocol == 2)
                     {
-                        // TODO(Drew): This is now order dependent.
-                        // If controller found before chatpad, chatpad will not be found
-                        // Make this not order dependent
-                        // Xbox 360 chatpad interface
                         controllerType = Xbox360;
                         serialIn = interfaceCandidate;
                     }
@@ -509,7 +505,12 @@ bool Xbox360Peripheral::start(IOService* provider)
         kprintf("start - Unable to find the interface.\n");
         goto fail;
     }
-    interface->open(this);
+
+    if (!interface->open(this))
+    {
+        kprintf("start - unable to open interface.\n");
+        goto fail;
+    }
 
     cd = interface->getConfigurationDescriptor();
     intf = interface->getInterfaceDescriptor();
@@ -563,7 +564,14 @@ bool Xbox360Peripheral::start(IOService* provider)
         kprintf("start - unable to find chatpad interface.\n");
         goto nochat;
     }
-    serialIn->open(this);
+
+    // Open
+    if (!serialIn->open(this))
+    {
+        kprintf("start - unable to open chatpad interface.\n");
+        ReleaseChatpad();
+        goto nochat;
+    }
 
     // Find chatpad pipe
     cd = serialIn->getConfigurationDescriptor();
@@ -571,13 +579,16 @@ bool Xbox360Peripheral::start(IOService* provider)
     if (!cd || !intf)
     {
         kprintf("start - Can't get configuration descriptor and interface descriptor for chatpad.\n");
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
     while ((pipe = StandardUSB::getNextEndpointDescriptor(cd, intf, pipe)))
     {
         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
+
+        kprintf("Chatpad pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType);
 
         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
         {
@@ -588,7 +599,8 @@ bool Xbox360Peripheral::start(IOService* provider)
     if (serialInPipe == nullptr)
     {
         kprintf("start - Unable to find chatpad in pipe.\n");
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
     serialInPipe->retain();
 
@@ -597,7 +609,8 @@ bool Xbox360Peripheral::start(IOService* provider)
     if (serialInBuffer == nullptr)
     {
         kprintf("start - failed to allocate input buffer for chatpad.\n");
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
     // Create timer for chatpad
@@ -605,14 +618,16 @@ bool Xbox360Peripheral::start(IOService* provider)
     if (serialTimer == nullptr)
     {
         kprintf("start - Failed to create timer for chatpad.\n");
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
     workloop = getWorkLoop();
     if ((workloop == nullptr) || (workloop->addEventSource(serialTimer) != kIOReturnSuccess))
     {
         kprintf("start - Failed to connect timer for chatpad.\n");
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
     // Configure ChatPad
@@ -621,9 +636,11 @@ bool Xbox360Peripheral::start(IOService* provider)
     SendInit(0x2344, 0x7f03);
     SendInit(0x5839, 0x6832);
     // Set 'switch'
-    if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false))) {
+    if ((!SendSwitch(false)) || (!SendSwitch(true)) || (!SendSwitch(false)))
+    {
         // Commenting goto fail fixes the driver for the Hori Real Arcade Pro EX
-        //goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
     // Begin toggle
@@ -636,7 +653,8 @@ bool Xbox360Peripheral::start(IOService* provider)
     // Begin reading
     if (!QueueSerialRead())
     {
-        goto fail;
+        ReleaseChatpad();
+        goto nochat;
     }
 
 nochat:
@@ -782,6 +800,8 @@ void Xbox360Peripheral::ReleaseAll(void)
     SerialDisconnect();
     PadDisconnect();
 
+    ReleaseChatpad();
+
     if (serialTimer != nullptr)
     {
         serialTimer->cancelTimeout();
@@ -801,12 +821,6 @@ void Xbox360Peripheral::ReleaseAll(void)
     {
         serialInBuffer->release();
         serialInBuffer = nullptr;
-    }
-
-    if (serialIn != nullptr)
-    {
-        serialIn->close(this);
-        serialIn = nullptr;
     }
 
     if (outPipe != nullptr)
@@ -839,6 +853,15 @@ void Xbox360Peripheral::ReleaseAll(void)
     {
         device->close(this);
         device = nullptr;
+    }
+}
+
+void Xbox360Peripheral::ReleaseChatpad(void)
+{
+    if (serialIn != nullptr)
+    {
+        serialIn->close(this);
+        serialIn = nullptr;
     }
 }
 
