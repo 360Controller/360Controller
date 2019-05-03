@@ -48,6 +48,7 @@ static inline Xbox360_SShort getAbsolute(Xbox360_SShort value)
 bool Wireless360Controller::init(OSDictionary* propTable)
 {
     bool res = super::init(propTable);
+    kprintf("Wireless360Controller - init - %d\n", res);
 
     // Default settings
     invertLeftX = invertLeftY = false;

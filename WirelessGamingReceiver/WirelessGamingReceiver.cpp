@@ -99,12 +99,10 @@ bool WirelessGamingReceiver::start(IOService* provider)
         goto fail;
     }
 
-//    if (device->setConfiguration(cd->bConfigurationValue, true) != kIOReturnSuccess)
     error = device->setConfiguration(cd->bConfigurationValue, true);
     if (error != kIOReturnSuccess)
     {
-//        kprintf("start - unable to set configuration\n");
-        kprintf("start - unable to set configuration with error: %x\n", error);
+        kprintf("start - unable to set configuration with error: 0x%.8x\n", error);
         goto fail;
     }
 
@@ -156,7 +154,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
                         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
+                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeType, pipeDirection); // TODO(Drew): Delete me
                         
                         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
@@ -195,7 +193,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     }
                     connections[iOther].other = interfaceCandidate;
                     
-                    cd = interfaceCandidate ->getConfigurationDescriptor();
+                    cd = interfaceCandidate->getConfigurationDescriptor();
                     intf = interfaceCandidate->getInterfaceDescriptor();
                     if (!cd || !intf)
                     {
@@ -208,38 +206,38 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
                         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
+                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeType, pipeDirection); // TODO(Drew): Delete me
 
                         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iOther].controllerIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].otherIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
                         else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iOther].controllerOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].otherOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
                         }
                     }
                     
-                    if (connections[iOther].controllerIn == nullptr)
+                    if (connections[iOther].otherIn == nullptr)
                     {
-                        kprintf("start: Failed to open control input pipe\n");
+                        kprintf("start - Failed to open control input pipe\n");
                         goto fail;
                     }
-                    connections[iOther].controllerIn->retain();
+                    connections[iOther].otherIn->retain();
                     
-                    if (connections[iOther].controllerOut == nullptr)
+                    if (connections[iOther].otherOut == nullptr)
                     {
-                        kprintf("start: Failed to open control output pipe\n");
+                        kprintf("start - Failed to open control output pipe\n");
                         goto fail;
                     }
-                    connections[iOther].controllerOut->retain();
+                    connections[iOther].otherOut->retain();
                     
                     iOther++;
                 } break;
 
                 default:
                 {
-                    kprintf("start: Ignoring interface (protocol %d)\n", interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol);
+                    kprintf("start - Ignoring interface (protocol %d)\n", interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol);
                 } break;
             }
         }
@@ -315,11 +313,11 @@ IOReturn WirelessGamingReceiver::message(UInt32 type, IOService* provider, void*
             
         default:
         {
-            return IOService::message(type,provider,argument);
+            return IOService::message(type, provider, argument);
         } break;
     }
 #else
-    return IOService::message(type,provider,argument);
+    return IOService::message(type, provider, argument);
 #endif
 }
 
@@ -332,6 +330,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
 
     if (data == nullptr)
     {
+        kprintf("QueueRead - data is nullptr\n");
         return false;
     }
     
@@ -340,6 +339,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
     if (data->buffer == nullptr)
     {
         IOFree(data, sizeof(WGRREAD));
+        kprintf("QueueRead - data->buffer is nullptr\n");
         return false;
     }
 
@@ -350,13 +350,14 @@ bool WirelessGamingReceiver::QueueRead(int index)
     err = connections[index].controllerIn->io(data->buffer, (UInt32)data->buffer->getLength(), &complete);
     if (err == kIOReturnSuccess)
     {
+        kprintf("QueueRead - started\n");
         return true;
     }
 
     data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
 
-    // IOLog("read - failed to start (0x%.8x)\n", err);
+    kprintf("QueueRead - failed to start (0x%.8x)\n", err);
     return false;
 }
 
@@ -371,19 +372,23 @@ void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt
         case kIOReturnOverrun:
         {
             // IOLog("read - kIOReturnOverrun, clearing stall\n");
+            kprintf("ReadComplete - kIOReturnOverrun\n");
             connections[data->index].controllerIn->clearStall(false);
         } // fall through
         case kIOReturnSuccess:
         {
+            kprintf("ReadComplete - kIOReturnSuccess\n");
             ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), (int)data->buffer->getLength() - bufferSizeRemaining);
         } break;
 
         case kIOReturnNotResponding:
         {
             // IOLog("read - kIOReturnNotResponding\n");
+            kprintf("ReadComplete - kIOReturnNotResponding\n");
         } // fall through
         default:
         {
+            kprintf("ReadComplete - default\n");
             reread = false;
         } break;
     }
@@ -503,6 +508,7 @@ void WirelessGamingReceiver::ReleaseAll(void)
 // Static wrapper for read notifications
 void WirelessGamingReceiver::_ReadComplete(void* target, void* parameter, IOReturn status, UInt32 bufferSizeRemaining)
 {
+    kprintf("_ReadComplete\n");
     if (target != nullptr)
     {
         ((WirelessGamingReceiver*)target)->ReadComplete(parameter, status, bufferSizeRemaining);
@@ -517,7 +523,7 @@ void WirelessGamingReceiver::_WriteComplete(void* target, void* parameter, IORet
         ((WirelessGamingReceiver*)target)->WriteComplete(parameter, status, bufferSizeRemaining);
     }
 }
-
+#define PROTOCOL_DEBUG 1
 // Processes a message for a controller
 void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data, int length)
 {
@@ -540,7 +546,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
         {
             // Device disconnected
 #ifdef PROTOCOL_DEBUG
-            IOLog("process: Device detached\n");
+            kprintf("ProcessMessage - Device detached\n");
 #endif
             if (connections[index].service != nullptr)
             {
@@ -559,7 +565,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
         {
             // Device connected
 #ifdef PROTOCOL_DEBUG
-            IOLog("process: Attempting to add new device\n");
+            kprintf("ProcessMessage - Attempting to add new device\n");
 #endif
             if (connections[index].service == nullptr)
             {
@@ -580,7 +586,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
                 if (ready && connections[index].service != nullptr)
                 {
 #ifdef PROTOCOL_DEBUG
-                    IOLog("Registering wireless device");
+                    kprintf("ProcessMessage - Registering wireless device");
 #endif
                     connections[index].controllerStarted = true;
                     connections[index].service->registerService();
@@ -609,7 +615,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
             if (c == 0x0f)
             {
 #ifdef PROTOCOL_DEBUG
-                IOLog("Registering wireless device");
+                IOLog("ProcessMessage - Registering wireless device");
 #endif
                 connections[index].controllerStarted = true;
                 connections[index].service->registerService();
@@ -622,6 +628,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
 // Create a new node for the attached controller
 void WirelessGamingReceiver::InstantiateService(int index)
 {
+    kprintf("InstantiateService - !!!\n");
     connections[index].service = new WirelessDevice;
     if (connections[index].service != nullptr)
     {
