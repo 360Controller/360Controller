@@ -4441,17 +4441,17 @@
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOHIDFamily</key>
-		<string>2.0</string>
+		<string>1.0b1</string>
 		<key>com.apple.iokit.IOUSBHostFamily</key>
-		<string>1.2</string>
+		<string>1.0.1</string>
 		<key>com.apple.kpi.bsd</key>
-		<string>18.5</string>
+		<string>8.0b1</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>18.5</string>
+		<string>7.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>18.5</string>
+		<string>8.0d0</string>
 		<key>com.apple.kpi.mach</key>
-		<string>18.5</string>
+		<string>8.0d0</string>
 	</dict>
 </dict>
 </plist>

@@ -52,7 +52,7 @@
     NSColor* gradientColor2 = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0];
     
     //// Alter colors based on macOS color mode
-    if (@available(macOS 10.14, *))
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
     {
         NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
         
@@ -69,6 +69,7 @@
             backController = [controller shadowWithLevel: 0.5];
         }
     }
+#endif
 
     //// Gradient Declarations
     NSGradient* gradient = [NSGradient.alloc initWithStartingColor: gradientColor endingColor: gradientColor2];

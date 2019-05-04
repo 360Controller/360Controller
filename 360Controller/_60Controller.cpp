@@ -28,7 +28,6 @@
 #include "_60Controller.h"
 #include "ChatPad.h"
 #include "Controller.h"
-#include <os/log.h>
 
 #define kDriverSettingKey       "DeviceData"
 

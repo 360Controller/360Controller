@@ -74,8 +74,12 @@ void ConfigController(io_service_t device, NSDictionary *config)
 void SetKnownDevices(NSDictionary *devices)
 {
     // Setting the dictionary should work?
-    NSError* error; // TODO(Drew): Error check off of this
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101300
+    NSError* error;
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:devices requiringSecureCoding:true error:&error];
+#else
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
+#endif
     CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 }
@@ -84,12 +88,16 @@ NSDictionary* GetKnownDevices(void)
 {
     CFPropertyListRef value;
     NSData *data;
-    NSError* error; // TODO(Drew): Error check off of this
 
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101300
+    NSError* error;
     return [NSKeyedUnarchiver unarchivedObjectOfClass:[NSDictionary class] fromData:data error:&error];
+#else
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+#endif
 }
