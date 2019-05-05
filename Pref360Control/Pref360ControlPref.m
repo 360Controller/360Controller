@@ -382,17 +382,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Reset inputs
     [_leftStickDeadzone setIntValue:0];
     [_leftStickDeadzoneAlt setIntValue:0];
-    [_leftStickInvertX setState:NSOffState];
-    [_leftStickInvertXAlt setState:NSOffState];
-    [_leftStickInvertY setState:NSOffState];
-    [_leftStickInvertYAlt setState:NSOffState];
+    [_leftStickInvertX setState:OffState];
+    [_leftStickInvertXAlt setState:OffState];
+    [_leftStickInvertY setState:OffState];
+    [_leftStickInvertYAlt setState:OffState];
     [_rightStickDeadzone setIntValue:0];
     [_rightStickDeadzoneAlt setIntValue:0];
-    [_rightStickInvertX setState:NSOffState];
-    [_rightStickInvertXAlt setState:NSOffState];
-    [_rightStickInvertY setState:NSOffState];
-    [_rightStickInvertYAlt setState:NSOffState];
-    [_swapSticks setState:NSOffState];
+    [_rightStickInvertX setState:OffState];
+    [_rightStickInvertXAlt setState:OffState];
+    [_rightStickInvertY setState:OffState];
+    [_rightStickInvertYAlt setState:OffState];
+    [_swapSticks setState:OffState];
     // Disable inputs
     [self inputEnable:NO];
     [_powerOff setHidden:YES];
@@ -563,17 +563,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             CFNumberRef intValue;
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftX"),(void*)&boolValue)) {
-                [_leftStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
-                [_leftStickInvertXAlt setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_leftStickInvertX setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_leftStickInvertXAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for InvertLeftX\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftY"),(void*)&boolValue)) {
-                [_leftStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
-                [_leftStickInvertYAlt setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_leftStickInvertY setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_leftStickInvertYAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for InvertLeftY\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeLeft"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [_leftLinked setState:enable?NSOnState:NSOffState];
-                [_leftLinkedAlt setState:enable?NSOnState:NSOffState];
+                [_leftLinked setState:enable?OnState:OffState];
+                [_leftLinkedAlt setState:enable?OnState:OffState];
                 [_leftDeadZone setLinked:enable];
                 [_leftStickAnalog setLinked:enable];
             } else NSLog(@"No value for RelativeLeft\n");
@@ -594,17 +594,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_leftStickAnalog setDeadzone:i];
             } else NSLog(@"No value for DeadzoneLeft\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightX"),(void*)&boolValue)) {
-                [_rightStickInvertX setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
-                [_rightStickInvertXAlt setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_rightStickInvertX setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_rightStickInvertXAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for InvertRightX\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightY"),(void*)&boolValue)) {
-                [_rightStickInvertY setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
-                [_rightStickInvertYAlt setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_rightStickInvertY setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_rightStickInvertYAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for InvertRightY\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeRight"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [_rightLinked setState:enable?NSOnState:NSOffState];
-                [_rightLinkedAlt setState:enable?NSOnState:NSOffState];
+                [_rightLinked setState:enable?OnState:OffState];
+                [_rightLinkedAlt setState:enable?OnState:OffState];
                 [_rightDeadZone setLinked:enable];
                 [_wholeController setRightStickDeadzone:i];
                 [_rightStickAnalog setLinked:enable];
@@ -699,11 +699,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             } else NSLog(@"No value for BindingY\n");
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("SwapSticks"),(void*)&boolValue)) {
-                [_swapSticks setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_swapSticks setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for SwapSticks\n");
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("Pretend360"),(void*)&boolValue)) {
-                [_pretend360Button setState:CFBooleanGetValue(boolValue)?NSOnState:NSOffState];
+                [_pretend360Button setState:CFBooleanGetValue(boolValue)?OnState:OffState];
             } else NSLog(@"No value for Pretend360");
         } else NSLog(@"No settings found\n");
     }
@@ -851,9 +851,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
 //    NSLog(@"Result of kextstat = %d", result);
     if (result == 0) {
-        [self.enableDriverCheckBox setState:NSOnState];
+        [self.enableDriverCheckBox setState:OnState];
     } else {
-        [self.enableDriverCheckBox setState:NSOffState];
+        [self.enableDriverCheckBox setState:OffState];
     }
 }
 
@@ -945,7 +945,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertY setState:[_rightStickInvertYAlt state]];
     }
 
-    BOOL pretend360 = ([_pretend360Button state] == NSOnState);
+    BOOL pretend360 = ([_pretend360Button state] == OnState);
     if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
     {
         if (pretend360)
@@ -955,16 +955,16 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
 
     // Create dictionary
-    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==NSOnState)),
-                           @"InvertLeftY": @((BOOL)([_leftStickInvertY state]==NSOnState)),
-                           @"InvertRightX": @((BOOL)([_rightStickInvertX state]==NSOnState)),
-                           @"InvertRightY": @((BOOL)([_rightStickInvertY state]==NSOnState)),
+    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==OnState)),
+                           @"InvertLeftY": @((BOOL)([_leftStickInvertY state]==OnState)),
+                           @"InvertRightX": @((BOOL)([_rightStickInvertX state]==OnState)),
+                           @"InvertRightY": @((BOOL)([_rightStickInvertY state]==OnState)),
                            @"DeadzoneLeft": @((UInt16)[_leftStickDeadzone doubleValue]),
                            @"DeadzoneRight": @((UInt16)[_rightStickDeadzone doubleValue]),
-                           @"RelativeLeft": @((BOOL)([_leftLinked state]==NSOnState)),
-                           @"RelativeRight": @((BOOL)([_rightLinked state]==NSOnState)),
-                           @"DeadOffLeft": @((BOOL)([_leftStickNormalize state]==NSOnState)),
-                           @"DeadOffRight": @((BOOL)([_rightStickNormalize state]==NSOnState)),
+                           @"RelativeLeft": @((BOOL)([_leftLinked state]==OnState)),
+                           @"RelativeRight": @((BOOL)([_rightLinked state]==OnState)),
+                           @"DeadOffLeft": @((BOOL)([_leftStickNormalize state]==OnState)),
+                           @"DeadOffRight": @((BOOL)([_rightStickNormalize state]==OnState)),
                            @"ControllerType": @((UInt8)(controllerType)),
                            @"RumbleType": @((UInt8)([_rumbleOptions indexOfSelectedItem])),
                            @"BindingUp": @((UInt8)([MyWhole360ControllerMapper mapping][0])),
@@ -982,20 +982,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingB": @((UInt8)([MyWhole360ControllerMapper mapping][12])),
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
                            @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
-                           @"SwapSticks": @((BOOL)([_swapSticks state]==NSOnState)),
+                           @"SwapSticks": @((BOOL)([_swapSticks state]==OnState)),
                            @"Pretend360": @((BOOL)pretend360)};
 
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
-    [_leftDeadZone setLinked:[_leftLinked state] == NSOnState];
-    [_leftStickAnalog setLinked:[_leftLinked state] == NSOnState];
+    [_leftDeadZone setLinked:[_leftLinked state] == OnState];
+    [_leftStickAnalog setLinked:[_leftLinked state] == OnState];
     [_leftDeadZone setVal:[_leftStickDeadzone doubleValue]];
     [_wholeController setLeftStickDeadzone:[_leftStickDeadzone doubleValue]];
     [_leftStickAnalog setDeadzone:[_leftStickDeadzone doubleValue]];
-    [_rightDeadZone setLinked:[_rightLinked state] == NSOnState];
-    [_rightStickAnalog setLinked:[_rightLinked state] == NSOnState];
+    [_rightDeadZone setLinked:[_rightLinked state] == OnState];
+    [_rightStickAnalog setLinked:[_rightLinked state] == OnState];
     [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
     [_wholeController setRightStickDeadzone:[_rightStickDeadzone doubleValue]];
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
@@ -1058,7 +1058,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     NSString *script = nil;
 
     // QUESTION: should I disable the daemon too?
-    if (sender.state == NSOnState) {
+    if (sender.state == OnState) {
         // The driver should be enabled
         NSLog(@"Will Enable Driver...");
         script =
@@ -1067,7 +1067,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             kextload \\\"360Controller.kext\\\"\n\
             \" with administrator privileges\n";
 
-    } else if (sender.state == NSOffState) {
+    } else if (sender.state == OffState) {
         // The driver should be disabled
         NSLog(@"Will Disable Driver...");
         [self powerOff:nil];
@@ -1101,7 +1101,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [alert addButtonWithTitle:@"NO"];
     [alert setMessageText:@"Do you want to uninstall?"];
     [alert setInformativeText:@"This operation cannot be undone."];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200
+    [alert setAlertStyle:NSAlertStyleWarning];
+#else
     [alert setAlertStyle:NSWarningAlertStyle];
+#endif
 
     if ([alert runModal] != NSAlertFirstButtonReturn) {
         NSLog(@"Uninstallation canceled!");
@@ -1175,7 +1179,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 
 - (IBAction)resetRemappingPressed:(id)sender {
-    [_remappingButton setState:NSOffState];
+    [_remappingButton setState:OffState];
     [_wholeControllerMapper resetWithOwner:self];
 }
 

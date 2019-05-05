@@ -74,7 +74,7 @@ void ConfigController(io_service_t device, NSDictionary *config)
 void SetKnownDevices(NSDictionary *devices)
 {
     // Setting the dictionary should work?
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101300
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
     NSError* error;
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:devices requiringSecureCoding:true error:&error];
 #else
@@ -94,7 +94,7 @@ NSDictionary* GetKnownDevices(void)
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101300
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
     NSError* error;
     return [NSKeyedUnarchiver unarchivedObjectOfClass:[NSDictionary class] fromData:data error:&error];
 #else

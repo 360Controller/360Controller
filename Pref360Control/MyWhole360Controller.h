@@ -7,6 +7,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+#define OnState NSControlStateValueOn
+#define OffState NSControlStateValueOff
+#else
+#define OnState NSOnState
+#define OffState NSOffState
+#endif
+
 @interface MyWhole360Controller : NSView
 
 @property (nonatomic) BOOL aPressed;
