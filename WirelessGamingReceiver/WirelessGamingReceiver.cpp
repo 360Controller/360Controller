@@ -580,10 +580,12 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
                     data = OSDynamicCast(IOMemoryDescriptor, connections[index].inputArray->getObject(i));
                     data->readBytes(1, &c, 1);
                     if (c == 0x0f)
+                    {
                         ready = true;
+                    }
                 }
                 InstantiateService(index);
-                if (ready && connections[index].service != nullptr)
+                if (ready && (connections[index].service != nullptr))
                 {
 #ifdef PROTOCOL_DEBUG
                     kprintf("ProcessMessage - Registering wireless device");
@@ -645,7 +647,7 @@ void WirelessGamingReceiver::InstantiateService(int index)
             connections[index].service->attach(this);
             connections[index].service->SetIndex(index);
             // connections[index].service->registerService();
-            kprintf("InstantiateService - attahed device.\n");
+            kprintf("InstantiateService - attached device.\n");
             // IOLog("process: Device attached\n");
             if (IsDataQueued(index))
             {

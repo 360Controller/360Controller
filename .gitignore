@@ -165,4 +165,6 @@ xcuserdata
 #
 # ...none. Everything is now explained.
 
+# Ignore build products
+builds/
 *.dmg

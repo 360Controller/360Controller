@@ -222,28 +222,18 @@ const char* HexData = "0123456789ABCDEF";
 void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor* data)
 {
     // TODO(Drew): Keep getting data of length 3 four times in a row. Not always tied to button presses.
+    // Is either 0x000000 or 0x000100
     kprintf("Drew - receivedMessage with length: %d\n", (UInt32)data->getLength());
 
     unsigned char buf[29] = {};
-#if 0
     if (data->getLength() != 29)
     {
         return;
     }
 
     data->readBytes(0, buf, 29);
-#else
-    data->readBytes(0, buf, data->getLength());
 
-    kprintf("Drew - data: ");
-    for (int i = 0; i < data->getLength(); ++i)
-    {
-        kprintf("0x%x ", buf[i]);
-    }
-    kprintf("\n");
-#endif
-
-    kprintf("Drew - buf[1] - 0x%x\n", buf[1]);
+    kprintf("Drew - buf[0, 1, 2] - 0x%02x%02x%02x\n", buf[0], buf[1], buf[2]);
 
     switch (buf[1])
     {
