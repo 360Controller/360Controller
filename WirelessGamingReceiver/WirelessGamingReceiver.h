@@ -37,6 +37,7 @@ typedef struct WIRELESS_CONNECTION
     IOUSBHostInterface* controller;
     IOUSBHostPipe* controllerIn;
     IOUSBHostPipe* controllerOut;
+    IOBufferMemoryDescriptor* bufferIn;
 
     // Mystery
     IOUSBHostInterface* other;

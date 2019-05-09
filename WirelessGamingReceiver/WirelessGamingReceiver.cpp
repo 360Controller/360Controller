@@ -25,7 +25,7 @@
 #include "devices.h"
 #include <IOKit/usb/IOUSBHostFamily.h>
 
-//#define PROTOCOL_DEBUG
+#define PROTOCOL_DEBUG
 
 OSDefineMetaClassAndStructors(WirelessGamingReceiver, IOService)
 
@@ -111,6 +111,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
         connections[i].controller = nullptr;
         connections[i].controllerIn = nullptr;
         connections[i].controllerOut = nullptr;
+        connections[i].bufferIn = nullptr;
         connections[i].other = nullptr;
         connections[i].otherIn = nullptr;
         connections[i].otherOut = nullptr;
@@ -121,20 +122,20 @@ bool WirelessGamingReceiver::start(IOService* provider)
 
     iConnection = 0;
     iOther = 0;
-    iterator = device->getChildIterator(gIOServicePlane);
+    iterator = device->getChildIterator(gIOServicePlane); // TODO(Drew): Is this right?
     while ((iterator != nullptr) && ((candidate = iterator->getNextObject()) != nullptr))
     {
         IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
         if (interfaceCandidate != nullptr)
         {
-            // TODO(Drew): There's a bunch of duplicated code in here. Can we pull it out? What makes these two different?
+            // TODO(Drew): There's a bunch of duplicated code in here. Can we pull it out?
             switch (interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol)
             {
                 case 129:   // Controller
                 {
                     pipe = nullptr;
                     
-                    if (!interfaceCandidate->open(this))
+                    if (!interfaceCandidate->open(this)) // TODO(Drew): Does this need to be retained?
                     {
                         kprintf("start - failed to open control interface\n");
                         goto fail;
@@ -153,16 +154,15 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     {
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
                         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
-
-                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeType, pipeDirection); // TODO(Drew): Delete me
                         
                         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iConnection].controllerIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iConnection].controllerIn = interfaceCandidate->copyPipe(pipe->bEndpointAddress);
+                            kprintf("Drew - endpoint address: %d\n", connections[iConnection].controllerIn->getEndpointDescriptor()->bEndpointAddress);
                         }
                         else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iConnection].controllerOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iConnection].controllerOut = interfaceCandidate->copyPipe(pipe->bEndpointAddress);
                         }
                     }
                     
@@ -172,20 +172,28 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         goto fail;
                     }
                     connections[iConnection].controllerIn->retain();
-                    
+
                     if (connections[iConnection].controllerOut == nullptr)
                     {
                         kprintf("start - Failed to open control output pipe\n");
                         goto fail;
                     }
                     connections[iConnection].controllerOut->retain();
-                    
+
+                    connections[iConnection].bufferIn = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[iConnection].controllerIn));
+                    if (connections[iConnection].bufferIn == nullptr)
+                    {
+                        kprintf("start - Failed to allocate input buffer.\n");
+                        goto fail;
+                    }
+
                     iConnection++;
                 } break;
 
                 case 130:   // It is a mystery
                 {
                     pipe = nullptr;
+
                     if (!interfaceCandidate->open(this))
                     {
                         kprintf("start - Failed to open mystery interface\n");
@@ -206,32 +214,30 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
                         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-                        kprintf("Pipe type: %d, pipe direction: %d\n", pipeType, pipeDirection); // TODO(Drew): Delete me
-
                         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iOther].otherIn = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].otherIn = interfaceCandidate->copyPipe(pipe->bEndpointAddress);
                         }
                         else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
-                            connections[iOther].otherOut = interfaceCandidate->copyPipe(StandardUSB::getEndpointAddress(pipe));
+                            connections[iOther].otherOut = interfaceCandidate->copyPipe(pipe->bEndpointAddress);
                         }
                     }
                     
                     if (connections[iOther].otherIn == nullptr)
                     {
-                        kprintf("start - Failed to open control input pipe\n");
+                        kprintf("start - Failed to open mystery input pipe\n");
                         goto fail;
                     }
                     connections[iOther].otherIn->retain();
-                    
+
                     if (connections[iOther].otherOut == nullptr)
                     {
-                        kprintf("start - Failed to open control output pipe\n");
+                        kprintf("start - Failed to open mystery output pipe\n");
                         goto fail;
                     }
                     connections[iOther].otherOut->retain();
-                    
+
                     iOther++;
                 } break;
 
@@ -333,15 +339,21 @@ bool WirelessGamingReceiver::QueueRead(int index)
         kprintf("QueueRead - data is nullptr\n");
         return false;
     }
-    
-    data->index = index;
-    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
-    if (data->buffer == nullptr)
+
+    if (connections[index].bufferIn == nullptr)
     {
-        IOFree(data, sizeof(WGRREAD));
-        kprintf("QueueRead - data->buffer is nullptr\n");
         return false;
     }
+    
+    data->index = index;
+    data->buffer = connections[index].bufferIn;
+//    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
+//    if (data->buffer == nullptr)
+//    {
+//        IOFree(data, sizeof(WGRREAD));
+//        kprintf("QueueRead - data->buffer is nullptr\n");
+//        return false;
+//    }
 
     complete.owner = this;
     complete.action = _ReadComplete;
@@ -354,7 +366,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
         return true;
     }
 
-    data->buffer->release();
+//    data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
 
     kprintf("QueueRead - failed to start (0x%.8x)\n", err);
@@ -371,19 +383,19 @@ void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt
     {
         case kIOReturnOverrun:
         {
-            // IOLog("read - kIOReturnOverrun, clearing stall\n");
             kprintf("ReadComplete - kIOReturnOverrun\n");
             connections[data->index].controllerIn->clearStall(false);
         } // fall through
         case kIOReturnSuccess:
         {
             kprintf("ReadComplete - kIOReturnSuccess\n");
-            ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), (int)data->buffer->getLength() - bufferSizeRemaining);
+
+//            ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), (int)data->buffer->getLength() - bufferSizeRemaining);
+            ProcessMessage(data->index, (unsigned char*)connections[data->index].bufferIn->getBytesNoCopy(), (int)29);
         } break;
 
         case kIOReturnNotResponding:
         {
-            // IOLog("read - kIOReturnNotResponding\n");
             kprintf("ReadComplete - kIOReturnNotResponding\n");
         } // fall through
         default:
@@ -394,7 +406,7 @@ void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt
     }
 
     int newIndex = data->index;
-    data->buffer->release();
+//    data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
 
     if (reread)
@@ -409,6 +421,19 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void* bytes, UInt32 len
     IOBufferMemoryDescriptor* outBuffer = nullptr;
     IOUSBHostCompletion complete = {};
     IOReturn err = kIOReturnError;
+
+#ifdef PROTOCOL_DEBUG
+    char s[1024];
+    int i;
+
+    for (i = 0; i < length; i++)
+    {
+        s[(i * 2) + 0] = "0123456789ABCDEF"[(((UInt8*)bytes)[i] & 0xF0) >> 4];
+        s[(i * 2) + 1] = "0123456789ABCDEF"[((UInt8*)bytes)[i] & 0x0F];
+    }
+    s[i * 2] = '\0';
+    IOLog("Drew - Sending data (%d, %d bytes): %s\n", index, length, s);
+#endif
 
     outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
     if (outBuffer == nullptr)
@@ -523,7 +548,7 @@ void WirelessGamingReceiver::_WriteComplete(void* target, void* parameter, IORet
         ((WirelessGamingReceiver*)target)->WriteComplete(parameter, status, bufferSizeRemaining);
     }
 }
-#define PROTOCOL_DEBUG 1
+
 // Processes a message for a controller
 void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data, int length)
 {
@@ -537,10 +562,11 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
         s[(i * 2) + 1] = "0123456789ABCDEF"[data[i] & 0x0F];
     }
     s[i * 2] = '\0';
-    IOLog("Got data (%d, %d bytes): %s\n", index, length, s);
+    IOLog("Drew - Got data (%d, %d bytes): %s\n", index, length, s);
 #endif
     // Handle device connections
-    if ((length == 2) && (data[0] == 0x08))
+//    if ((length == 2) && (data[0] == 0x08))
+    if (data[0] == 0x08)
     {
         if (data[1] == 0x00)
         {

@@ -122,8 +122,6 @@ IOReturn WirelessHIDDevice::setReport(IOMemoryDescriptor* report, IOHIDReportTyp
 // Start up the driver
 bool WirelessHIDDevice::handleStart(IOService* provider)
 {
-    kprintf("Drew - handleStart\n");
-    
     WirelessDevice* device = nullptr;
     IOWorkLoop* workloop = nullptr;
 
@@ -198,14 +196,12 @@ void WirelessHIDDevice::handleStop(IOService* provider)
 // Handle new data from the device
 void WirelessHIDDevice::receivedData(void)
 {
-    kprintf("Drew - receivedData\n");
-
     IOMemoryDescriptor* data = nullptr;
     
     WirelessDevice* device = OSDynamicCast(WirelessDevice, getProvider());
     if (device == nullptr)
     {
-        kprintf("Drew - receivedData - device was null\n");
+        kprintf("receivedData - device was null\n");
         return;
     }
 
@@ -221,10 +217,9 @@ const char* HexData = "0123456789ABCDEF";
 // Process new data
 void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor* data)
 {
+    kprintf("Drew - receivedMessage\n");
     // TODO(Drew): Keep getting data of length 3 four times in a row. Not always tied to button presses.
     // Is either 0x000000 or 0x000100
-    kprintf("Drew - receivedMessage with length: %d\n", (UInt32)data->getLength());
-
     unsigned char buf[29] = {};
     if (data->getLength() != 29)
     {
@@ -232,8 +227,6 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor* data)
     }
 
     data->readBytes(0, buf, 29);
-
-    kprintf("Drew - buf[0, 1, 2] - 0x%02x%02x%02x\n", buf[0], buf[1], buf[2]);
 
     switch (buf[1])
     {
@@ -259,14 +252,12 @@ void WirelessHIDDevice::receivedMessage(IOMemoryDescriptor* data)
         {
             if (buf[3] == 0xf0)
             {
-                kprintf("Drew - about to call receivedHIDupdate\n");
                 receivedHIDupdate(buf + 4, buf[5]);
             }
         } break;
 
         case 0x00:  // Info update
         {
-            kprintf("Drew - about to call receivedHIDupdate\n");
             receivedUpdate(buf[3], buf + 4);
         } break;
 

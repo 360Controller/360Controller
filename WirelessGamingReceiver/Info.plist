@@ -33,7 +33,7 @@
 			<key>IOKitDebug</key>
 			<integer>65535</integer>
 			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
+			<string>IOUSBHostDevice</string>
 			<key>idProduct</key>
 			<integer>1817</integer>
 			<key>idVendor</key>
