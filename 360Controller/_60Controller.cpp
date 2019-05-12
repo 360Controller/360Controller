@@ -456,7 +456,7 @@ bool Xbox360Peripheral::start(IOService* provider)
             if (interfaceCandidate != nullptr)
             {
                 const StandardUSB::InterfaceDescriptor* id = interfaceCandidate->getInterfaceDescriptor();
-//                kprintf("%d, %d, %d\n", id->bInterfaceClass, id->bInterfaceSubClass, id->bInterfaceProtocol); // TODO(Drew): Delete me
+
                 if (id->bInterfaceSubClass == 93)
                 {
                     if (id->bInterfaceProtocol == 1)
@@ -522,8 +522,6 @@ bool Xbox360Peripheral::start(IOService* provider)
         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
 
-        kprintf("Pipe type: %d, pipe direction: %d\n", pipeType, pipeDirection); // TODO(Drew): Delete me
-
         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
         {
             inPipe = interface->copyPipe(StandardUSB::getEndpointAddress(pipe));
@@ -584,8 +582,6 @@ bool Xbox360Peripheral::start(IOService* provider)
     {
         UInt8 pipeDirection = StandardUSB::getEndpointDirection(pipe);
         UInt8 pipeType = StandardUSB::getEndpointType(pipe);
-
-        kprintf("Chatpad pipe type: %d, pipe direction: %d\n", pipeDirection, pipeType); // TODO(Drew): Delete me
 
         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
         {
@@ -680,13 +676,11 @@ nochat:
     }
 
     // Done
-    kprintf("Pass.\n"); // TODO(Drew):
     PadConnect();
     registerService();
     return true;
 
 fail:
-    kprintf("Fail.\n"); // TODO(Drew):
     ReleaseAll();
     return false;
 }

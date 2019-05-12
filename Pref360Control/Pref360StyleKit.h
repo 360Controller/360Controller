@@ -16,8 +16,8 @@
 
 // Drawing Methods
 + (void)drawX360ControllerWithControllerNumber: (CGFloat)controllerNumber aPressed: (BOOL)aPressed bPressed: (BOOL)bPressed xPressed: (BOOL)xPressed yPressed: (BOOL)yPressed leftPressed: (BOOL)leftPressed upPressed: (BOOL)upPressed rightPressed: (BOOL)rightPressed downPressed: (BOOL)downPressed backPressed: (BOOL)backPressed startPressed: (BOOL)startPressed lbPressed: (BOOL)lbPressed rbPressed: (BOOL)rbPressed homePressed: (BOOL)homePressed leftStickPressed: (BOOL)leftStickPressed rightStickPressed: (BOOL)rightStickPressed leftStick: (NSPoint)leftStick rightStick: (NSPoint)rightStick leftStickDeadzone: (CGFloat)leftDeadzone rightStickDeadzone: (CGFloat)rightDeadzone isLeftNormalized: (BOOL)leftNormalized isRightNormalized: (BOOL)rightNormalized appearance: (NSAppearance*) appearance;
-+ (void)drawTriggerMetterWithIntensity: (CGFloat)intensity triggerTitle: (NSString*)triggerTitle;
-+ (void)drawBatteryMonitorWithBars: (CGFloat)bars andPercentage: (int)percentage;
++ (void)drawTriggerMetterWithIntensity: (CGFloat)intensity triggerTitle: (NSString*)triggerTitle appearance: (NSAppearance*)appearance;
++ (void)drawBatteryMonitorWithBars: (CGFloat)bars andPercentage: (int)percentage appearance: (NSAppearance*)appearance;
 + (void)drawDeadZoneViewerWithValue: (CGFloat)value linked: (BOOL)linked;
 
 @end

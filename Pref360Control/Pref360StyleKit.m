@@ -58,7 +58,7 @@
         
         if (appearanceName == NSAppearanceNameAqua)
         {
-            controller = [NSColor colorWithWhite:1 alpha:1];
+            controller = [NSColor whiteColor];
             darkController = [controller shadowWithLevel: 0.25];
             highlightController = [controller shadowWithLevel: 0.05];
             
@@ -1134,7 +1134,7 @@
     }
 }
 
-+ (void)drawTriggerMetterWithIntensity: (CGFloat)intensity triggerTitle: (NSString*)triggerTitle
++ (void)drawTriggerMetterWithIntensity: (CGFloat)intensity triggerTitle: (NSString*)triggerTitle appearance: (NSAppearance*)appearance
 {
     //// General Declarations
     CGContextRef context = (CGContextRef)NSGraphicsContext.currentContext.CGContext;
@@ -1143,6 +1143,26 @@
     NSColor* controller = [NSColor colorWithCalibratedRed: 0.232 green: 0.232 blue: 0.232 alpha: 1];
     NSColor* darkController = [controller shadowWithLevel: 0.3];
     NSColor* pressed = [NSColor colorWithCalibratedRed: 1 green: 0.432 blue: 0 alpha: 1];
+    NSColor* fontColor = [NSColor whiteColor];
+
+    //// Alter colors based on macOS color mode
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    {
+        NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+
+        if (appearanceName == NSAppearanceNameAqua)
+        {
+            controller = [NSColor whiteColor];
+            darkController = [controller shadowWithLevel: 0.25];
+            fontColor = [NSColor blackColor];
+
+        }
+        else if (appearanceName == NSAppearanceNameDarkAqua)
+        {
+            darkController = [controller shadowWithLevel: 0.5];
+        }
+    }
+#endif
 
     //// Variable Declarations
     CGFloat expression = 360 - 270 * intensity - 135;
@@ -1155,7 +1175,7 @@
     NSMutableParagraphStyle* oval18Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
     oval18Style.alignment = NSTextAlignmentCenter;
 
-    NSDictionary* oval18FontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: oval18Style};
+    NSDictionary* oval18FontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: fontColor, NSParagraphStyleAttributeName: oval18Style};
 
     CGFloat oval18TextHeight = NSHeight([triggerTitle boundingRectWithSize: oval18Rect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: oval18FontAttributes]);
     NSRect oval18TextRect = NSMakeRect(NSMinX(oval18Rect), NSMinY(oval18Rect) + (NSHeight(oval18Rect) - oval18TextHeight) / 2, NSWidth(oval18Rect), oval18TextHeight);
@@ -1202,15 +1222,29 @@
     [ovalPath stroke];
 }
 
-+ (void)drawBatteryMonitorWithBars: (CGFloat)bars andPercentage: (int)percentage
++ (void)drawBatteryMonitorWithBars: (CGFloat)bars andPercentage: (int)percentage appearance: (NSAppearance*)appearance
 {
     //// Color Declarations
     NSColor* buttonB = [NSColor colorWithCalibratedRed: 1 green: 0.094 blue: 0.072 alpha: 1];
-    NSColor* controller = [NSColor colorWithCalibratedRed: 0.232 green: 0.232 blue: 0.232 alpha: 1];
-    NSColor* darkController = [controller shadowWithLevel: 0.3];
+    NSColor* controller = [NSColor whiteColor];
+    NSColor* darkController = [controller shadowWithLevel: 0.35];
+
+    //// Alter colors based on macOS color mode
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    {
+        NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+
+        if (appearanceName == NSAppearanceNameDarkAqua)
+        {
+            controller = [NSColor colorWithCalibratedRed: 0.232 green: 0.232 blue: 0.232 alpha: 1];
+            darkController = [controller highlightWithLevel: 0.5];
+        }
+    }
+#endif
 
     //// Variable Declarations
     NSColor* batteryColor = bars > 0 ? darkController : buttonB;
+    [controller shadowWithLevel: 0.25];
     BOOL bar1 = bars > 0;
     BOOL bar2 = bars > 1;
     BOOL bar3 = bars > 2;
@@ -1271,7 +1305,19 @@
     NSMutableParagraphStyle* batteryTextStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
     batteryTextStyle.alignment = NSTextAlignmentCenter;
 
-    NSDictionary* batteryTextFontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: batteryTextStyle, NSStrokeColorAttributeName: NSColor.blackColor, NSStrokeWidthAttributeName: @-6.0 };
+    NSDictionary* batteryTextFontAttributes = @{NSFontAttributeName: [NSFont systemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.blackColor, NSParagraphStyleAttributeName: batteryTextStyle};;
+
+    //// Alter battery text based on macOS color mode
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    {
+        NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+
+        if (appearanceName == NSAppearanceNameDarkAqua)
+        {
+            batteryTextFontAttributes = @{NSFontAttributeName: [NSFont systemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: batteryTextStyle};
+        }
+    }
+#endif
 
     NSString* percentageString = [NSString stringWithFormat:@"%d%%", percentage];
     CGFloat batteryTextHeight = NSHeight([percentageString boundingRectWithSize: batteryTextBoundingRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: batteryTextFontAttributes]);

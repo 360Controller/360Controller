@@ -111,7 +111,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
         connections[i].controller = nullptr;
         connections[i].controllerIn = nullptr;
         connections[i].controllerOut = nullptr;
-        connections[i].bufferIn = nullptr;
+//        connections[i].bufferIn = nullptr;
         connections[i].other = nullptr;
         connections[i].otherIn = nullptr;
         connections[i].otherOut = nullptr;
@@ -122,7 +122,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
 
     iConnection = 0;
     iOther = 0;
-    iterator = device->getChildIterator(gIOServicePlane); // TODO(Drew): Is this right?
+    iterator = device->getChildIterator(gIOServicePlane);
     while ((iterator != nullptr) && ((candidate = iterator->getNextObject()) != nullptr))
     {
         IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
@@ -135,7 +135,7 @@ bool WirelessGamingReceiver::start(IOService* provider)
                 {
                     pipe = nullptr;
                     
-                    if (!interfaceCandidate->open(this)) // TODO(Drew): Does this need to be retained?
+                    if (!interfaceCandidate->open(this))
                     {
                         kprintf("start - failed to open control interface\n");
                         goto fail;
@@ -158,7 +158,6 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         if ((pipeDirection == kEndpointDirectionIn) && (pipeType == kEndpointTypeInterrupt))
                         {
                             connections[iConnection].controllerIn = interfaceCandidate->copyPipe(pipe->bEndpointAddress);
-                            kprintf("Drew - endpoint address: %d\n", connections[iConnection].controllerIn->getEndpointDescriptor()->bEndpointAddress);
                         }
                         else if ((pipeDirection == kEndpointDirectionOut) && (pipeType == kEndpointTypeInterrupt))
                         {
@@ -180,12 +179,12 @@ bool WirelessGamingReceiver::start(IOService* provider)
                     }
                     connections[iConnection].controllerOut->retain();
 
-                    connections[iConnection].bufferIn = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[iConnection].controllerIn));
-                    if (connections[iConnection].bufferIn == nullptr)
-                    {
-                        kprintf("start - Failed to allocate input buffer.\n");
-                        goto fail;
-                    }
+//                    connections[iConnection].bufferIn = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[iConnection].controllerIn));
+//                    if (connections[iConnection].bufferIn == nullptr)
+//                    {
+//                        kprintf("start - Failed to allocate input buffer.\n");
+//                        goto fail;
+//                    }
 
                     iConnection++;
                 } break;
@@ -339,21 +338,16 @@ bool WirelessGamingReceiver::QueueRead(int index)
         kprintf("QueueRead - data is nullptr\n");
         return false;
     }
-
-    if (connections[index].bufferIn == nullptr)
-    {
-        return false;
-    }
     
     data->index = index;
-    data->buffer = connections[index].bufferIn;
-//    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
-//    if (data->buffer == nullptr)
-//    {
-//        IOFree(data, sizeof(WGRREAD));
-//        kprintf("QueueRead - data->buffer is nullptr\n");
-//        return false;
-//    }
+//    data->buffer = connections[index].bufferIn;
+    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
+    if (data->buffer == nullptr)
+    {
+        IOFree(data, sizeof(WGRREAD));
+        kprintf("QueueRead - data->buffer is nullptr\n");
+        return false;
+    }
 
     complete.owner = this;
     complete.action = _ReadComplete;
@@ -366,7 +360,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
         return true;
     }
 
-//    data->buffer->release();
+    data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
 
     kprintf("QueueRead - failed to start (0x%.8x)\n", err);
@@ -374,7 +368,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
 }
 
 // Handle a completed read on a controller
-void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt32 bufferSizeRemaining)
+void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt32 gotBytesCount)
 {
     WGRREAD* data = (WGRREAD*)parameter;
     bool reread = true;
@@ -390,8 +384,8 @@ void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt
         {
             kprintf("ReadComplete - kIOReturnSuccess\n");
 
-//            ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), (int)data->buffer->getLength() - bufferSizeRemaining);
-            ProcessMessage(data->index, (unsigned char*)connections[data->index].bufferIn->getBytesNoCopy(), (int)29);
+            ProcessMessage(data->index, (unsigned char*)data->buffer->getBytesNoCopy(), gotBytesCount);
+//            ProcessMessage(data->index, (unsigned char*)connections[data->index].bufferIn->getBytesNoCopy(), (int)29);
         } break;
 
         case kIOReturnNotResponding:
@@ -406,7 +400,7 @@ void WirelessGamingReceiver::ReadComplete(void* parameter, IOReturn status, UInt
     }
 
     int newIndex = data->index;
-//    data->buffer->release();
+    data->buffer->release();
     IOFree(data, sizeof(WGRREAD));
 
     if (reread)
@@ -432,7 +426,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void* bytes, UInt32 len
         s[(i * 2) + 1] = "0123456789ABCDEF"[((UInt8*)bytes)[i] & 0x0F];
     }
     s[i * 2] = '\0';
-    IOLog("Drew - Sending data (%d, %d bytes): %s\n", index, length, s);
+    IOLog("Sent data (%d, %d bytes): %s\n", index, length, s);
 #endif
 
     outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
@@ -562,7 +556,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
         s[(i * 2) + 1] = "0123456789ABCDEF"[data[i] & 0x0F];
     }
     s[i * 2] = '\0';
-    IOLog("Drew - Got data (%d, %d bytes): %s\n", index, length, s);
+    IOLog("Got data (%d, %d bytes): %s\n", index, length, s);
 #endif
     // Handle device connections
 //    if ((length == 2) && (data[0] == 0x08))

@@ -20,8 +20,7 @@
     along with Foobar; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-// TODO(Drew): Change devices over to IOUSBHostDevice
-// TODO(Drew): Update the bundle libraries in the plist
+
 #include "WirelessDevice.h"
 #include "WirelessGamingReceiver.h"
 

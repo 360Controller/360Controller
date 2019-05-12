@@ -23,7 +23,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
 
-    [Pref360StyleKit drawBatteryMonitorWithBars:_bars andPercentage:_percentage];
+    [Pref360StyleKit drawBatteryMonitorWithBars:_bars andPercentage:_percentage appearance:self.effectiveAppearance];
 }
 
 @end
