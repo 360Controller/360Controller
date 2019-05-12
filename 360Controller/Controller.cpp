@@ -200,17 +200,6 @@ IOReturn Xbox360ControllerClass::handleReport(IOMemoryDescriptor* descriptor, IO
     return IOHIDDevice::handleReport(descriptor, reportType, options);
 }
 
-
-// static void StringDescriptorToCString(const StringDescriptor* stringDescriptor, char* result)
-// {
-//     size_t utf8Len = 0;
-//     if (stringDescriptor != nullptr && stringDescriptor->bLength > StandardUSB::kDescriptorSize)
-//     {
-//         utf8_encodestr(reinterpret_cast<const uint16_t*>(stringDescriptor->bString), stringDescriptor->bLength - kDescriptorSize,
-//                        reinterpret_cast<uint8_t*>(result), &utf8Len, sizeof(result), '/', UTF_LITTLE_ENDIAN);
-//     }
-// }
-
 static OSString* StringDescriptorToOSString(const StringDescriptor* stringDescriptor)
 {
     char stringBuffer[256] = { 0 };
@@ -226,22 +215,6 @@ static OSString* StringDescriptorToOSString(const StringDescriptor* stringDescri
 // Returns the string for the specified index from the USB device's string list, with an optional default
 OSString* Xbox360ControllerClass::getDeviceString(UInt8 index, const char* def) const
 {
-    // const char* string = "Unknown";
-    // char buffer[256] = {};
-
-    // if (def != nullptr)
-    // {
-    //     string = def;
-    // }
-
-    // const StringDescriptor* aStr = GetOwnerProvider(this)->getStringDescriptor(index);
-    // if (aStr != nullptr)
-    // {
-    //     StringDescriptorToCString(aStr, buffer);
-    //     string = buffer;
-    // }
-
-    // return OSString::withCString(string);
     const char* string;
 
     const StringDescriptor* aStr = GetOwnerProvider(this)->getStringDescriptor(index);

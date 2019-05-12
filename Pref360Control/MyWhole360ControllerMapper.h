@@ -1,6 +1,5 @@
 //
 //  MyWhole360ControllerMapper.h
-//  360 Driver
 //
 //  Created by Drew Mills on 1/30/15.
 //

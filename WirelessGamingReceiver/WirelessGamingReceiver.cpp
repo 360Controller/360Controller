@@ -111,7 +111,6 @@ bool WirelessGamingReceiver::start(IOService* provider)
         connections[i].controller = nullptr;
         connections[i].controllerIn = nullptr;
         connections[i].controllerOut = nullptr;
-//        connections[i].bufferIn = nullptr;
         connections[i].other = nullptr;
         connections[i].otherIn = nullptr;
         connections[i].otherOut = nullptr;
@@ -128,7 +127,6 @@ bool WirelessGamingReceiver::start(IOService* provider)
         IOUSBHostInterface* interfaceCandidate = OSDynamicCast(IOUSBHostInterface, candidate);
         if (interfaceCandidate != nullptr)
         {
-            // TODO(Drew): There's a bunch of duplicated code in here. Can we pull it out?
             switch (interfaceCandidate->getInterfaceDescriptor()->bInterfaceProtocol)
             {
                 case 129:   // Controller
@@ -178,13 +176,6 @@ bool WirelessGamingReceiver::start(IOService* provider)
                         goto fail;
                     }
                     connections[iConnection].controllerOut->retain();
-
-//                    connections[iConnection].bufferIn = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[iConnection].controllerIn));
-//                    if (connections[iConnection].bufferIn == nullptr)
-//                    {
-//                        kprintf("start - Failed to allocate input buffer.\n");
-//                        goto fail;
-//                    }
 
                     iConnection++;
                 } break;
