@@ -5,7 +5,7 @@ Replace this text with: Original Xbox, Xbox 360, Xbox One, All or N/A
 Replace this text with the version of macOS that you are running
 
 ### Driver Version
-Replate this text with the version or versions of the driver that you are using or have tested
+Replace this text with the version or versions of the driver that you are using or have tested
 
 ### Connection Method
 Replace this text with: Wired, Wireless Adapter, Bluetooth, N/A or more specific method if applicable
@@ -22,5 +22,5 @@ Replace this text with information on how the physical controller reacts. Does t
 ### Response in Preference Pane
 Replace this text with information about the controller's reaction in the preference pane. Does the controller appear in the preference pane? Do all of the buttons, joysticks, and triggers act as expected?
 
-### Detailed Explaination of Issue
-Replace this text with a detailed explaination of your issue. Simply saying "it doesn't work" is a quick way to ensure that your issue is never fixed. Without detailed information on your specific issue, we cannot fix your issue. Including as much information as possible in this section increases the likelyhood of getting your issue quickly and effectively resolved.
+### Detailed Explanation of Issue
+Replace this text with a detailed explanation of your issue. Simply saying "it doesn't work" is a quick way to ensure that your issue is never fixed. Without detailed information on your specific issue, we cannot fix your issue. Including as much information as possible in this section increases the likelihood of getting your issue quickly and effectively resolved.
