@@ -2,31 +2,32 @@
 
 ## Table of Contents
 1. [About](#about)
-2. [Installation](#installation)
-3. [Uninstallation](#uninstallation)
-4. [Usage](#usage)
-5. [My controller doesn't work!](#my-controller-doesnt-work)
+1. [Installation](#installation)
+1. [Uninstallation](#uninstallation)
+1. [Usage](#usage)
+1. [My controller doesn't work!](#my-controller-doesnt-work)
    1. [I'm using a driver from the Tattiebogle website](#im-using-a-driver-from-the-tattiebogle-website)
-   2. [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game)
-   3. [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id)
-   4. [Original Xbox Controllers](#original-xbox-controllers)
-   5. [Wired Xbox 360 Controllers](#wired-xbox-360-controllers)
-   6. [Wireless Xbox 360 Controllers](#wireless-xbox-360-controllers)
-   7. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
-   8. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
-   9. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
-   10. [Xbox One Adaptive Controller](#xbox-one-adaptive-controller)
-6. [Adding Third Party Controllers](#adding-third-party-controllers)
-7. [Developer Info](#developer-info)
+   1. [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game)
+   1. [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id)
+   1. [Original Xbox Controllers](#original-xbox-controllers)
+   1. [Wired Xbox 360 Controllers](#wired-xbox-360-controllers)
+   1. [Wireless Xbox 360 Controllers](#wireless-xbox-360-controllers)
+   1. [Wireless Xbox 360 Controllers connected with USB](#wireless-xbox-360-controllers-connected-with-usb)
+   1. [Xbox One Controllers connected with USB](#xbox-one-controllers-connected-with-usb)
+   1. [Xbox One Controllers connected with Wireless Adapter](#xbox-one-controllers-connected-with-wireless-adapter)
+   1. [Xbox One Controllers connected with Bluetooth](#xbox-one-controllers-connected-with-bluetooth)
+   1. [Xbox One Adaptive Controller](#xbox-one-adaptive-controller)
+1. [Developer Info](#developer-info)
+   1. [Adding Third Party Controllers](#adding-third-party-controllers)
    1. [Building](#building)
-   2. [Building the .pkg](#building-the-pkg)
-   3. [Disabling signing requirements](#disabling-signing-requirements)
-   4. [Re-Enabling signing requirements](#re-enabling-signing-requirements)
-   5. [Debugging the driver](#debugging-the-driver)
-   6. [Debugging the preference pane](#debugging-the-preference-pane)
-   7. [A note on Unity mappings](#a-note-on-unity-mappings)
-   8. [Release checklist](#release-checklist)
-8. [Licence](#licence)
+   1. [Building the .pkg](#building-the-pkg)
+   1. [Disabling signing requirements](#disabling-signing-requirements)
+   1. [Re-Enabling signing requirements](#re-enabling-signing-requirements)
+   1. [Debugging the driver](#debugging-the-driver)
+   1. [Debugging the preference pane](#debugging-the-preference-pane)
+   1. [A note on Unity mappings](#a-note-on-unity-mappings)
+   1. [Release checklist](#release-checklist)
+1. [License](#licence)
 
 ## About
 This driver supports the Microsoft Xbox series of controllers including:
@@ -36,7 +37,8 @@ This driver supports the Microsoft Xbox series of controllers including:
 
 2. Xbox 360
     - Wired Xbox 360 controllers are supported directly.
-    - **As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.5 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.**
+    - Wireless Xbox 360 controllers are supported through a wireless receiver.
+      - Wireless Xbox 360 controllers connected via a USB adapter are not supported, as they still act like wireless controllers and require a wireless adapter to work.
 
 3. Xbox One
     - Xbox One controllers are supported when connected with a micro USB cable. Using the controller with the Wireless Adapter is not currently supported.
@@ -61,7 +63,7 @@ In order to uninstall the driver: navigate to the preference pane by opening you
 ## Usage
 The driver exposes a standard game pad with a number of standard controls, so any game that supports gaming devices should work. In some cases, this may require an update from the developer of the game. The preference pane uses the standard macOS frameworks for accessing HID devices in addition to access of Force Feedback capabilities. This means that the preference pane is a good indicator that the driver is functional for other programs.
 
-It is important to note that this driver does not work, and can never work, with Apple's "Game Controller Framework." This GCController framework corresponds to physical gamepads that have been offically reviewed by Apple and accepted into the mFi program. Due to the fact that we are not Microsoft, we cannot get their gamepad certified to be a GCController. This is an unfortunate oversight on Apple's part. If you would like to discuss this, please do so at [this location.](https://github.com/360Controller/360Controller/issues/55)
+It is important to note that this driver does not work, and can never work, with Apple's "Game Controller Framework." This GCController framework corresponds to physical gamepads that have been officially reviewed by Apple and accepted into the mFi program. Due to the fact that we are not Microsoft, we cannot get their gamepad certified to be a GCController. This is an unfortunate oversight on Apple's part. If you would like to discuss this, please do so at [this location.](https://github.com/360Controller/360Controller/issues/55)
 
 Users have been maintaining a [partial list of working and non-working games.](https://github.com/360Controller/360Controller/wiki/Games) Please contribute your findings so that you can help others debug their controller issues.
 
@@ -84,14 +86,17 @@ Always check your controller with the preference pane found at: `Apple Menu -> S
 If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
 
 ### Wireless Xbox 360 Controllers
-**As of macOS 10.11, Wireless Xbox 360 controller support causes kernel panics. This issue cannot be resolved with minor changes to the driver, and requires that the driver be re-written from scratch to resolve the issue. Due to an excess of caution, we have disabled Wireless Xbox 360 controller support as of 0.16.6. If you want to use a wireless controller, download 0.16.5 or earlier and disable the driver before the computer enters a "sleep" state in order to prevent kernel panics. Alternatively, you can revert to a macOS version before 10.11 to avoid this issue.**
+Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
+If you have issues with a wireless Xbox 360 controller, make a new issue and explain the problem you are having.
+
+### Wireless Xbox 360 Controllers connected with USB
+Wireless Xbox 360 controllers do no operate like Xbox One controllers. When using a USB adapter on a wireless Xbox 360 controller, it will not act like a wired controller. The USB adapter simply provides power to the controller. All wireless Xbox 360 controllers must be used with a wireless receiver.
 
 ### Xbox One Controllers connected with USB
 Always check your controller with the preference pane found at: `Apple Menu -> System Preferences -> Xbox 360 Controllers` before creating an issue. If the controller works in this menu, then the driver is operating as intended. If your controller works with this menu, but not with a specific game, then read the [My controller doesn't work with a game!](#my-controller-doesnt-work-with-a-game) section.
 If your controller is recognized by the preference pane, but you aren't getting any response from button presses, this is likely due to an issue with macOS 10.11 and later. Apple changed some of the underlying USB code with this release and broke compatibility with some controllers. This is specifically found in controllers from PDP and PowerA. If you revert to macOS 10.10 or earlier, these controllers will work.
 If the preference pane can't find your controller, make sure that it is listed in `Apple Menu -> About this Mac -> System Report -> Overview -> Hardware -> USB`. This menu should list a device called "Controller." If it isn't listed there, then you likely have a "charge" Micro USB cable instead of a "data" cable. If the cable isn't sending data, then you can't use the driver. Try a different cable.
 If you have a third party controller, make an issue following the template with the "Product ID" and "Vendor ID" of the controller. Follow [How do I find my Vendor ID and Product ID?](#how-do-i-find-my-vendor-id-and-product-id) for instructions on how to find this information.
-**At this time, PDP and PowerA controllers are unsupported by this driver as of macOS 10.11+ thanks to a rewrite of the macOS USB kernel. We cannot resolve this issue. It is a bug in Apple's core OS code.**
 
 ### Xbox One Controllers connected with Wireless Adapter
 Xbox One controllers connected with the Wireless Adapter are currently not supported. Please be patient as we figure out this complicated protocol.
@@ -102,16 +107,15 @@ The Xbox One controller works with macOS automatically when connected over Bluet
 ### Xbox One Adaptive Controller
 The Xbox One adaptive controller can connect to your macOS machine through either a Bluetooth or wired connection. In Bluetooth mode, it is not controlled by the driver in any way, and will not show up in the "Xbox 360 Controllers" preference pane. If you are having issues with a wired connection, where the preference pane is recognizing your controller, but isn't recieving inputs, please connect it to a PC or VM running Windows in order to recieve a crucial firmware update. This update may also be possible through an Xbox One console.
 
-## Adding Third Party Controllers
-First, [disable signing requirements](#disabling-signing-requirements) so that you can run your custom build with your third party controller added. Then edit `360Controller/360Controller/Info.plist`. Add your controller following the pattern of pre-existing controllers by adding your vendor and product IDs to a new entry. After this, follow the information in the [building](#building) section, following the "If you don't have a signing certificate" path to build your new .kext. Then, place your shiny new `360Controller.kext` in to `/Library/Extensions` over the old one. You may need to take ownership of the driver in order for it to operate properly. You can do this with `sudo chown -R root:wheel /Library/Extensions/360Controller.kext`. Then, to make sure everything went according to plan, run `sudo kextutil /Library/Extensions/360Controller.kext`. This will load your kext into the OS and you should be able to use your controller. Once you reboot, your custom driver should be loaded automatically.
-
 ## Developer Info
 Drivers inherently modify the core operating system kernel. Using the driver as a developer can lead to dangerous kernel panics that can cause data loss or other permanent damage to your computer. Be very careful about how you use this information. We are not responsible for anything this driver does to your computer, or any loss it may incur. Normal users will never have to worry about the developer section of this README.
 
-### Building
+### Supporting
 
-##### Apple has recently changed how drivers work in Xcode 7. In order to build the driver, you will need Xcode 6.4 or earlier.
-Additionally, to use the included build scripts, you will need to change your preferred Xcode installation using `xcode-select`.
+#### Adding Third Party Controllers
+First, [disable signing requirements](#disabling-signing-requirements) so that you can run your custom build with your third party controller added. Then edit `360Controller/360Controller/Info.plist`. Add your controller following the pattern of pre-existing controllers by adding your vendor and product IDs to a new entry. After this, follow the information in the [building](#building) section, following the "If you don't have a signing certificate" path to build your new .kext. Then, place your shiny new `360Controller.kext` in to `/Library/Extensions` over the old one. You may need to take ownership of the driver in order for it to operate properly. You can do this with `sudo chown -R root:wheel /Library/Extensions/360Controller.kext`. Then, to make sure everything went according to plan, run `sudo kextutil /Library/Extensions/360Controller.kext`. This will load your kext into the OS and you should be able to use your controller. Once you reboot, your custom driver should be loaded automatically.
+
+### Building
 
 ##### You must have a signing certificate to install a locally built driver. Alternatively, you can disable driver signing on your machine, however this is a major security hole and the decision should not be taken lightly.
 
@@ -148,7 +152,7 @@ In order to build the .pkg, you will need to install [Packages.app](http://s.sud
 
 ### Disabling signing requirements
 
-Since Yosemite (macOS 10.10) all global kexts are required to be signed. This means if you want to build the drivers and install locally, you need a very specific signing certificate that Apple closely controls. If you want to disable the signing requirement from macOS, you will need to do several things.
+Since Yosemite (macOS 10.10) all global kexts are required to be signed. Additionally, since later versions of Mojave (macOS 10.14.5) all global kexts are required to be notarized. This means if you want to build the drivers and install locally, you need a very specific signing certificate that Apple closely controls. If you want to disable the signing requirement from macOS, you will need to do several things.
 
 First, execute these commands in your terminal:
 ```
@@ -156,7 +160,7 @@ sudo nvram boot-args="kext-dev-mode=1"
 sudo kextcache -m /System/Library/Caches/com.apple.kext.caches/Startup/Extensions.mkext /System/Library/Extensions
 ```
 
-Next, you must disable System Integrity Protection. To do this, boot into recovery mode by holding down `CMD + R` while the computer is starting. Once recovery mode has been loaded, open the terminal from the `Utilites` menu item. Execute the following command:
+Next, you must disable System Integrity Protection. To do this, boot into recovery mode by holding down `CMD + R` while the computer is starting. Once recovery mode has been loaded, open the terminal from the `Utilities` menu item. Execute the following command:
 ```
 csrutil disable
 ```
@@ -180,14 +184,16 @@ This is only possible if you have a signing certificate, but it is a relatively 
 
 * Build the driver as previously instructed and make sure to include the necessary information in your `DeveloperSettings.xcconfig` file, as they will be used during this process.
 * Make sure to `cd` into the `Install360Controller` directory and run `./makedmg.sh`
+* Rename the DMG as needed for a release
 * Run `./notarize.sh`
-* This should finish with the message: `The validate action worked!`
+* Wait for an email from Apple that confirms that you can distribute the driver
+* Run `./staple.sh` which should finish with the message: `The validate action worked!`
 
 Then you can distribute the notarized and stapled version of the driver.
 
 ### Debugging the driver
 
-Debugging the driver depends on which part you intend to debug. For the 360Controller driver itself, it uses `IOLog` to output to the `system.log` which can be accessed using Console.app. Feedback360 uses `fprintf(stderr, ...)`, which should appear within the console of the program attempting to use force feedback.
+Debugging the driver depends on which part you intend to debug. For the 360Controller driver itself, it uses `IOLog` to output to the `system.log` which can be accessed using Console.app. Feedback360 uses `fprintf(stderr, ...)`, which should appear within the console of the program attempting to use force feedback. In order to filter for the messages from the driver, make sure to filter messages by `process:kernel`.
 
 ### Debugging the preference pane
 
@@ -217,14 +223,14 @@ The issues with the button and axis mappings in the Unity game engine are outsid
 
 ### Release checklist
 
-This is a list of items that should be completed before releasing a new verison.
+This is a list of items that should be completed before releasing a new version.
 
 - Update the `Current Project Version` in the `360 Driver` project to the new version number.
 - Update the version number in the preference pane code
 - Add the release notes to `Install360Controller/Text/Welcome.rtf`
 - Update the version of the installer in the `Install360Controller` package
 
-## Licence
+## License
 
 Copyright (C) 2006-2013 Colin Munro
 
