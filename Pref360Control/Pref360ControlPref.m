@@ -22,6 +22,7 @@
 */
 #include <mach/mach.h>
 #include <IOKit/usb/IOUSBLib.h>
+#include <libkern/OSKextLib.h>
 #import "Pref360ControlPref.h"
 #import "DeviceItem.h"
 #import "ControlPrefs.h"
@@ -382,17 +383,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     // Reset inputs
     [_leftStickDeadzone setIntValue:0];
     [_leftStickDeadzoneAlt setIntValue:0];
-    [_leftStickInvertX setState:OffState];
-    [_leftStickInvertXAlt setState:OffState];
-    [_leftStickInvertY setState:OffState];
-    [_leftStickInvertYAlt setState:OffState];
+    [_leftStickInvertX setState:NSControlStateValueOff];
+    [_leftStickInvertXAlt setState:NSControlStateValueOff];
+    [_leftStickInvertY setState:NSControlStateValueOff];
+    [_leftStickInvertYAlt setState:NSControlStateValueOff];
     [_rightStickDeadzone setIntValue:0];
     [_rightStickDeadzoneAlt setIntValue:0];
-    [_rightStickInvertX setState:OffState];
-    [_rightStickInvertXAlt setState:OffState];
-    [_rightStickInvertY setState:OffState];
-    [_rightStickInvertYAlt setState:OffState];
-    [_swapSticks setState:OffState];
+    [_rightStickInvertX setState:NSControlStateValueOff];
+    [_rightStickInvertXAlt setState:NSControlStateValueOff];
+    [_rightStickInvertY setState:NSControlStateValueOff];
+    [_rightStickInvertYAlt setState:NSControlStateValueOff];
+    [_swapSticks setState:NSControlStateValueOff];
     // Disable inputs
     [self inputEnable:NO];
     [_powerOff setHidden:YES];
@@ -563,17 +564,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             CFNumberRef intValue;
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftX"),(void*)&boolValue)) {
-                [_leftStickInvertX setState:CFBooleanGetValue(boolValue)?OnState:OffState];
-                [_leftStickInvertXAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_leftStickInvertX setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
+                [_leftStickInvertXAlt setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for InvertLeftX\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertLeftY"),(void*)&boolValue)) {
-                [_leftStickInvertY setState:CFBooleanGetValue(boolValue)?OnState:OffState];
-                [_leftStickInvertYAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_leftStickInvertY setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
+                [_leftStickInvertYAlt setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for InvertLeftY\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeLeft"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [_leftLinked setState:enable?OnState:OffState];
-                [_leftLinkedAlt setState:enable?OnState:OffState];
+                [_leftLinked setState:enable?NSControlStateValueOn:NSControlStateValueOff];
+                [_leftLinkedAlt setState:enable?NSControlStateValueOn:NSControlStateValueOff];
                 [_leftDeadZone setLinked:enable];
                 [_leftStickAnalog setLinked:enable];
             } else NSLog(@"No value for RelativeLeft\n");
@@ -594,17 +595,17 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                 [_leftStickAnalog setDeadzone:i];
             } else NSLog(@"No value for DeadzoneLeft\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightX"),(void*)&boolValue)) {
-                [_rightStickInvertX setState:CFBooleanGetValue(boolValue)?OnState:OffState];
-                [_rightStickInvertXAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_rightStickInvertX setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
+                [_rightStickInvertXAlt setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for InvertRightX\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("InvertRightY"),(void*)&boolValue)) {
-                [_rightStickInvertY setState:CFBooleanGetValue(boolValue)?OnState:OffState];
-                [_rightStickInvertYAlt setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_rightStickInvertY setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
+                [_rightStickInvertYAlt setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for InvertRightY\n");
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("RelativeRight"),(void*)&boolValue)) {
                 BOOL enable=CFBooleanGetValue(boolValue);
-                [_rightLinked setState:enable?OnState:OffState];
-                [_rightLinkedAlt setState:enable?OnState:OffState];
+                [_rightLinked setState:enable?NSControlStateValueOn:NSControlStateValueOff];
+                [_rightLinkedAlt setState:enable?NSControlStateValueOn:NSControlStateValueOff];
                 [_rightDeadZone setLinked:enable];
                 [_wholeController setRightStickDeadzone:i];
                 [_rightStickAnalog setLinked:enable];
@@ -699,11 +700,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             } else NSLog(@"No value for BindingY\n");
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("SwapSticks"),(void*)&boolValue)) {
-                [_swapSticks setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_swapSticks setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for SwapSticks\n");
 
             if(CFDictionaryGetValueIfPresent(dict,CFSTR("Pretend360"),(void*)&boolValue)) {
-                [_pretend360Button setState:CFBooleanGetValue(boolValue)?OnState:OffState];
+                [_pretend360Button setState:CFBooleanGetValue(boolValue)?NSControlStateValueOn:NSControlStateValueOff];
             } else NSLog(@"No value for Pretend360");
         } else NSLog(@"No settings found\n");
     }
@@ -851,9 +852,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
 //    NSLog(@"Result of kextstat = %d", result);
     if (result == 0) {
-        [self.enableDriverCheckBox setState:OnState];
+        [self.enableDriverCheckBox setState:NSControlStateValueOn];
     } else {
-        [self.enableDriverCheckBox setState:OffState];
+        [self.enableDriverCheckBox setState:NSControlStateValueOff];
     }
 }
 
@@ -945,7 +946,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_rightStickInvertY setState:[_rightStickInvertYAlt state]];
     }
 
-    BOOL pretend360 = ([_pretend360Button state] == OnState);
+    BOOL pretend360 = ([_pretend360Button state] == NSControlStateValueOn);
     if (controllerType == XboxOneController || controllerType == XboxOnePretend360Controller)
     {
         if (pretend360)
@@ -955,16 +956,16 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     }
 
     // Create dictionary
-    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==OnState)),
-                           @"InvertLeftY": @((BOOL)([_leftStickInvertY state]==OnState)),
-                           @"InvertRightX": @((BOOL)([_rightStickInvertX state]==OnState)),
-                           @"InvertRightY": @((BOOL)([_rightStickInvertY state]==OnState)),
+    NSDictionary *dict = @{@"InvertLeftX": @((BOOL)([_leftStickInvertX state]==NSControlStateValueOn)),
+                           @"InvertLeftY": @((BOOL)([_leftStickInvertY state]==NSControlStateValueOn)),
+                           @"InvertRightX": @((BOOL)([_rightStickInvertX state]==NSControlStateValueOn)),
+                           @"InvertRightY": @((BOOL)([_rightStickInvertY state]==NSControlStateValueOn)),
                            @"DeadzoneLeft": @((UInt16)[_leftStickDeadzone doubleValue]),
                            @"DeadzoneRight": @((UInt16)[_rightStickDeadzone doubleValue]),
-                           @"RelativeLeft": @((BOOL)([_leftLinked state]==OnState)),
-                           @"RelativeRight": @((BOOL)([_rightLinked state]==OnState)),
-                           @"DeadOffLeft": @((BOOL)([_leftStickNormalize state]==OnState)),
-                           @"DeadOffRight": @((BOOL)([_rightStickNormalize state]==OnState)),
+                           @"RelativeLeft": @((BOOL)([_leftLinked state]==NSControlStateValueOn)),
+                           @"RelativeRight": @((BOOL)([_rightLinked state]==NSControlStateValueOn)),
+                           @"DeadOffLeft": @((BOOL)([_leftStickNormalize state]==NSControlStateValueOn)),
+                           @"DeadOffRight": @((BOOL)([_rightStickNormalize state]==NSControlStateValueOn)),
                            @"ControllerType": @((UInt8)(controllerType)),
                            @"RumbleType": @((UInt8)([_rumbleOptions indexOfSelectedItem])),
                            @"BindingUp": @((UInt8)([MyWhole360ControllerMapper mapping][0])),
@@ -982,20 +983,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                            @"BindingB": @((UInt8)([MyWhole360ControllerMapper mapping][12])),
                            @"BindingX": @((UInt8)([MyWhole360ControllerMapper mapping][13])),
                            @"BindingY": @((UInt8)([MyWhole360ControllerMapper mapping][14])),
-                           @"SwapSticks": @((BOOL)([_swapSticks state]==OnState)),
+                           @"SwapSticks": @((BOOL)([_swapSticks state]==NSControlStateValueOn)),
                            @"Pretend360": @((BOOL)pretend360)};
 
     // Set property
     IORegistryEntrySetCFProperties(registryEntry, (__bridge CFTypeRef)(dict));
     SetController(GetSerialNumber(registryEntry), dict);
     // Update UI
-    [_leftDeadZone setLinked:[_leftLinked state] == OnState];
-    [_leftStickAnalog setLinked:[_leftLinked state] == OnState];
+    [_leftDeadZone setLinked:[_leftLinked state] == NSControlStateValueOn];
+    [_leftStickAnalog setLinked:[_leftLinked state] == NSControlStateValueOn];
     [_leftDeadZone setVal:[_leftStickDeadzone doubleValue]];
     [_wholeController setLeftStickDeadzone:[_leftStickDeadzone doubleValue]];
     [_leftStickAnalog setDeadzone:[_leftStickDeadzone doubleValue]];
-    [_rightDeadZone setLinked:[_rightLinked state] == OnState];
-    [_rightStickAnalog setLinked:[_rightLinked state] == OnState];
+    [_rightDeadZone setLinked:[_rightLinked state] == NSControlStateValueOn];
+    [_rightStickAnalog setLinked:[_rightLinked state] == NSControlStateValueOn];
     [_rightDeadZone setVal:[_rightStickDeadzone doubleValue]];
     [_wholeController setRightStickDeadzone:[_rightStickDeadzone doubleValue]];
     [_rightStickAnalog setDeadzone:[_rightStickDeadzone doubleValue]];
@@ -1055,38 +1056,88 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)toggleDriverEnabled:(NSButton *)sender
 {
     NSLog(@"Enable/disable driver stuff: will change state...");
-    NSString *script = nil;
+    if (sender.state == NSControlStateValueOn)
+    {
+        OSReturn error = LoadDriverWired();
 
-    // QUESTION: should I disable the daemon too?
-    if (sender.state == OnState) {
-        // The driver should be enabled
-        NSLog(@"Will Enable Driver...");
-        script =
-            @"do shell script \"\
-            cd \\\"/Library/Extensions\\\"\n\
-            kextload \\\"360Controller.kext\\\"\n\
-            \" with administrator privileges\n";
-
-    } else if (sender.state == OffState) {
-        // The driver should be disabled
-        NSLog(@"Will Disable Driver...");
+        if (error != kOSReturnSuccess)
+        {
+            [self.enableDriverCheckBox setState:NSControlStateValueOn];
+        }
+        else if (error == kOSKextReturnNotPrivileged)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Cannot Load Driver"];
+            [alert setInformativeText:@"In order to load the driver, you need administrator privileges."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
+        }
+        else if (error == kOSKextReturnSystemPolicy)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Open Security Preferences"];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Cannot Load Driver"];
+            [alert setInformativeText:@"In order to use the driver, you must allow the developer, \"Drew Mills\", in your system's security preferences."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertFirstButtonReturn) {
+                    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?General"]];
+                }
+            }];
+        }
+        else
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Cannot Load Driver"];
+            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to load due to an unknown error, code: %d. Please report this error to the driver maintainer.", error]];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
+        }
+    }
+    else if (sender.state == NSControlStateValueOff)
+    {
         [self powerOff:nil];
         [self stopDevice];
+        OSReturn error = UnloadDriverWired();
 
-        script =
-            @"do shell script \"\
-            kextstat | grep 360Controller\n\
-            if [ $? -eq 0 ]\n\
-            then\n\
-                kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
-            fi\n\
-            \" with administrator privileges\n";
-    }
-
-    if (script != nil) {
-        if ([self runInlineAppleScript:script]) {
-            NSLog(@"...done!");
-            sleep(1);
+        if (error != kOSReturnSuccess)
+        {
+            [self.enableDriverCheckBox setState:NSControlStateValueOff];
+        }
+        else if (error == kOSKextReturnNotPrivileged)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Cannot Unload Driver"];
+            [alert setInformativeText:@"In order to unload the driver, you need administrator privileges."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
+        }
+        else if (error == kOSKextReturnSystemPolicy)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert addButtonWithTitle:@"Open Security Preferences"];
+            [alert setMessageText:@"Cannot Unload Driver"];
+            [alert setInformativeText:@"In order to use the driver, you must allow the developer, \"Drew Mills\", in your system's security preferences."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertSecondButtonReturn) {
+                    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?General"]];
+                }
+            }];
+        }
+        else
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"Cancel"];
+            [alert setMessageText:@"Cannot Unload Driver"];
+            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to unload due to an unknown error, code: %d. Please report this error to the driver maintainer.", error]];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
         }
     }
 
@@ -1097,42 +1148,20 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)willPerformUninstallation:(id)sender
 {
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:@"YES"];
-    [alert addButtonWithTitle:@"NO"];
-    [alert setMessageText:@"Do you want to uninstall?"];
+    [alert addButtonWithTitle:@"Uninstall"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:@"Uninstall 360Controller?"];
     [alert setInformativeText:@"This operation cannot be undone."];
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200
     [alert setAlertStyle:NSAlertStyleWarning];
-#else
-    [alert setAlertStyle:NSWarningAlertStyle];
-#endif
 
-    if ([alert runModal] != NSAlertFirstButtonReturn) {
-        NSLog(@"Uninstallation canceled!");
+    if ([alert runModal] != NSAlertFirstButtonReturn)
+    {
         return;
     }
 
-    NSLog(@"Will uninstall the driver...");
+    NSString *uninstallFilePath = [[self bundle] pathForResource:@"upgrade" ofType:@"sh"];
 
-    // quotes must be double escaped so the script will read \" properly
-    NSString *script =
-        @"do shell script \"\
-        launchctl unload /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
-        kextunload -b \\\"com.mice.driver.Xbox360Controller\\\"\n\
-        kextunload -b \\\"com.mice.driver.Wireless360Controller\\\"\n\
-        kextunload -b \\\"com.mice.driver.WirelessGamingReceiver\\\"\n\
-        rm -f  /Library/LaunchDaemons/com.mice.360Daemon.plist\n\
-        rm -rf /Library/Application\\\\ Support/MICE/360Daemon.app\n\
-        rm -rf /System/Library/Extensions/360Controller.kext\n\
-        rm -rf /System/Library/Extensions/Wireless360Controller.kext\n\
-        rm -rf /System/Library/Extensions/WirelessGamingReceiver.kext\n\
-        rm -rf /Library/Extensions/360Controller.kext\n\
-        rm -rf /Library/Extensions/Wireless360Controller.kext\n\
-        rm -rf /Library/Extensions/WirelessGamingReceiver.kext\n\
-        rm -rf /Library/Extensions/XboxOneBluetooth.kext\n\
-        rm -rf /Library/PreferencePanes/Pref360Control.prefPane\n\
-        pkgutil --forget com.mice.pkg.Xbox360controller\
-        \" with administrator privileges";
+    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\" with administrator privileges", uninstallFilePath];
 
     if (script != nil && [self runInlineAppleScript:script]) {
         NSLog(@"...done!");
@@ -1179,7 +1208,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 }
 
 - (IBAction)resetRemappingPressed:(id)sender {
-    [_remappingButton setState:OffState];
+    [_remappingButton setState:NSControlStateValueOff];
     [_wholeControllerMapper resetWithOwner:self];
 }
 

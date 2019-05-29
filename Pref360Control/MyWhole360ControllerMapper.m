@@ -37,7 +37,7 @@ static UInt8 previousMapping[15];
     currentMappingIndex = 0;
     _isMapping = NO;
     if (remappingButton != nil)
-        [remappingButton setState:OffState];
+        [remappingButton setState:NSControlStateValueOff];
     [pref changeSetting:nil];
     [[BindingTableView tableView] reloadData];
     [pref changeSetting:nil];

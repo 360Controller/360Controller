@@ -105,7 +105,7 @@
     NSColor* positionColor = [NSColor blackColor];
     bool darkMode = false;
 
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
     {
         NSAppearanceName appearanceName = [self.effectiveAppearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
 
@@ -115,7 +115,6 @@
             darkMode = true;
         }
     }
-#endif
 
     // Compute positions
     // Deadzone

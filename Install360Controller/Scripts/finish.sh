@@ -3,6 +3,9 @@
 #This is to fix a bug in Yosemite.
 /bin/ln -s /Library/Extensions/360Controller.kext /System/Library/Extensions/
 
+# Make the uninstall script in the preference pane executable
+/bin/chmod ug+x /Library/PreferencePanes/Pref360Control.prefPane/Contents/Resources/upgrade.sh
+
 /usr/bin/touch /System/Library/Extensions
 /usr/bin/touch /Library/Extensions
 

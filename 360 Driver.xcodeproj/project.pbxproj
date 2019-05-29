@@ -113,6 +113,7 @@
 		622A73C31A7C339000784C02 /* MyWhole360ControllerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */; };
 		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
 		622A73CF1A7C879300784C02 /* BindingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73CD1A7C879300784C02 /* BindingTableView.m */; };
+		6230D74C229E1A9600C1639F /* upgrade.sh in Resources */ = {isa = PBXBuildFile; fileRef = 551CE002196EFD34000869B6 /* upgrade.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1116,6 +1117,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6230D74C229E1A9600C1639F /* upgrade.sh in Resources */,
 				55B6378618C10B0B00CE933D /* InfoPlist.strings in Resources */,
 				55699CD71971DA8100C40A31 /* Images.xcassets in Resources */,
 				3F9B7C0A1A729C1600149949 /* artworks.xcassets in Resources */,
@@ -1460,6 +1462,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XboxOneBluetooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-Wno-unknown-warning-option",
+					"-Wno-deprecated-register",
+				);
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1485,6 +1491,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.XboxOneBluetooth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"-Wno-unknown-warning-option",
+					"-Wno-deprecated-register",
+				);
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1535,7 +1545,9 @@
 				WARNING_CFLAGS = (
 					"-Wno-unknown-warning-option",
 					"-Wno-deprecated-register",
+					"-Wno-inconsistent-missing-override",
 				);
+				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -1578,7 +1590,9 @@
 				WARNING_CFLAGS = (
 					"-Wno-unknown-warning-option",
 					"-Wno-deprecated-register",
+					"-Wno-inconsistent-missing-override",
 				);
+				WARNING_LDFLAGS = "";
 			};
 			name = Release;
 		};

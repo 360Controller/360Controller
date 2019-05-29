@@ -3,7 +3,7 @@
 # Clear out daemon
 
 # Startup Items is deprecated, should this be removed?
-# the daemon is already been launched using launchctl and this folder doent appear to be created anymore.
+# the daemon is already been launched using launchctl and this folder doesn't appear to be created anymore.
 # https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/StartupItems.html
 if [ -d /Library/StartupItems/360ControlDaemon ]; then
    /bin/rm -r /Library/StartupItems/360ControlDaemon
@@ -70,5 +70,9 @@ if [ -d /Library/Extensions/XboxOneBluetooth.kext ]; then
    kextunload /Library/Extensions/XboxOneBluetooth.kext
    /bin/rm -r /Library/Extensions/XboxOneBluetooth.kext
 fi
+
+# Clean up stuff created by packages
+
+pkgutil --forget com.mice.pkg.Xbox360Controller
 
 exit 0

@@ -52,7 +52,7 @@
     NSColor* gradientColor2 = [NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0];
     
     //// Alter colors based on macOS color mode
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
     {
         NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
         
@@ -69,7 +69,6 @@
             backController = [controller shadowWithLevel: 0.5];
         }
     }
-#endif
 
     //// Gradient Declarations
     NSGradient* gradient = [NSGradient.alloc initWithStartingColor: gradientColor endingColor: gradientColor2];
@@ -1146,7 +1145,7 @@
     NSColor* fontColor = [NSColor whiteColor];
 
     //// Alter colors based on macOS color mode
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
     {
         NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
 
@@ -1162,7 +1161,6 @@
             darkController = [controller shadowWithLevel: 0.5];
         }
     }
-#endif
 
     //// Variable Declarations
     CGFloat expression = 360 - 270 * intensity - 135;
@@ -1230,7 +1228,7 @@
     NSColor* darkController = [controller shadowWithLevel: 0.35];
 
     //// Alter colors based on macOS color mode
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
     {
         NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
 
@@ -1240,7 +1238,6 @@
             darkController = [controller highlightWithLevel: 0.5];
         }
     }
-#endif
 
     //// Variable Declarations
     NSColor* batteryColor = bars > 0 ? darkController : buttonB;
@@ -1308,7 +1305,7 @@
     NSDictionary* batteryTextFontAttributes = @{NSFontAttributeName: [NSFont systemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.blackColor, NSParagraphStyleAttributeName: batteryTextStyle};;
 
     //// Alter battery text based on macOS color mode
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
+    if (@available(macOS 10.14, *))
     {
         NSAppearanceName appearanceName = [appearance bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
 
@@ -1317,7 +1314,6 @@
             batteryTextFontAttributes = @{NSFontAttributeName: [NSFont systemFontOfSize: NSFont.systemFontSize], NSForegroundColorAttributeName: NSColor.whiteColor, NSParagraphStyleAttributeName: batteryTextStyle};
         }
     }
-#endif
 
     NSString* percentageString = [NSString stringWithFormat:@"%d%%", percentage];
     CGFloat batteryTextHeight = NSHeight([percentageString boundingRectWithSize: batteryTextBoundingRect.size options: NSStringDrawingUsesLineFragmentOrigin attributes: batteryTextFontAttributes]);

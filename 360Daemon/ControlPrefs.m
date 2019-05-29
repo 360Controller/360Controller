@@ -21,6 +21,8 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #import "ControlPrefs.h"
+#import <libkern/OSKextLib.h>
+#import <IOKit/kext/KextManager.h>
 
 void SetAlertDisabled(NSInteger index)
 {
@@ -73,31 +75,92 @@ void ConfigController(io_service_t device, NSDictionary *config)
 
 void SetKnownDevices(NSDictionary *devices)
 {
+    NSError* error = nil;
+    NSData* data = nil;
     // Setting the dictionary should work?
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
-    NSError* error;
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:devices requiringSecureCoding:true error:&error];
-#else
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:devices];
-#endif
-    CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
-    CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    if (@available(macOS 10.13, *))
+    {
+        data = [NSKeyedArchiver archivedDataWithRootObject:devices requiringSecureCoding:true error:&error];
+    }
+    else
+    {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        data = [NSKeyedArchiver archivedDataWithRootObject:devices];
+#pragma GCC diagnostic pop
+    }
+
+    if (data != nil)
+    {
+        CFPreferencesSetValue((CFStringRef)D_KNOWNDEV, (__bridge CFPropertyListRef)(data), DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+        CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    }
+    else if (error != nil)
+    {
+        NSLog(@"360Controller - Failed to set known devices with error: %@\n", error);
+    }
 }
 
 NSDictionary* GetKnownDevices(void)
 {
     CFPropertyListRef value;
     NSData *data;
+    NSError* error = nil;
+    NSDictionary* result;
 
     CFPreferencesSynchronize(DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     value = CFPreferencesCopyValue((CFStringRef)D_KNOWNDEV, DOM_CONTROLLERS, kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     data = CFBridgingRelease(value);
     if (data == nil)
         return nil;
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
-    NSError* error;
-    return [NSKeyedUnarchiver unarchivedObjectOfClass:[NSDictionary class] fromData:data error:&error];
-#else
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-#endif
+
+    if (@available(macOS 10.13, *))
+    {
+        result = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSDictionary class] fromData:data error:&error];
+    }
+    else
+    {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+#pragma GCC diagnostic pop
+    }
+
+    if (result == nil)
+    {
+        NSLog(@"360Controller - Failed to get known devices with error: %@\n", error);
+    }
+
+    return result;
+}
+
+OSReturn LoadDriver(CFStringRef kextIndentifier)
+{
+    return KextManagerLoadKextWithIdentifier(kextIndentifier, NULL);
+}
+
+OSReturn LoadDriverWired(void)
+{
+    return LoadDriver(DOM_WIRED_DRIVER);
+}
+
+OSReturn LoadDriverWireless(void)
+{
+    // TODO(Drew): Test and see if this correctly loads the wireless driver or if it needs a link to the wireless controller kext
+    return LoadDriver(DOM_WIRELESS_DRIVER);
+}
+
+OSReturn UnloadDriver(CFStringRef kextIdentifer)
+{
+    return KextManagerUnloadKextWithIdentifier(kextIdentifer);
+}
+
+OSReturn UnloadDriverWired(void)
+{
+    return UnloadDriver(DOM_WIRED_DRIVER);
+}
+
+OSReturn UnloadDriverWireless(void)
+{
+    return UnloadDriver(DOM_WIRELESS_DRIVER);
 }
