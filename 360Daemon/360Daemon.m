@@ -31,6 +31,7 @@
 #include <ForceFeedback/ForceFeedback.h>
 #import "ControlPrefs.h"
 #import "DaemonLEDs.h"
+#import "SocketHandler.h"
 
 #define CHECK_SHOWAGAIN     @"Do not show this message again"
 
@@ -49,6 +50,7 @@ static io_object_t powerNotifier;
 static io_connect_t root_power_port; // a reference to the Root Power Domain IOService
 static BOOL foundWirelessReceiver;
 static DaemonLEDs *leds;
+static SocketHandler *socketHandler;
 
 static CFUserNotificationRef activeAlert = nil;
 static CFRunLoopSourceRef activeAlertSource;
@@ -326,6 +328,9 @@ int main (int argc, const char * argv[])
         CFRunLoopAddSource(CFRunLoopGetCurrent(),
                            IONotificationPortGetRunLoopSource(sleepNotifyPort), kCFRunLoopCommonModes);
     }
+    // Start the daemon server
+    socketHandler = [[SocketHandler alloc] init];
+    [socketHandler startServer];
 
     // Run loop
     CFRunLoopRun();
@@ -346,6 +351,7 @@ int main (int argc, const char * argv[])
         IOServiceClose(root_power_port);
         IONotificationPortDestroy(sleepNotifyPort);
     }
+    [socketHandler stopServer];
     // End
 }
     return 0;

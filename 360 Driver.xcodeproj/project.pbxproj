@@ -114,6 +114,7 @@
 		622A73CE1A7C879300784C02 /* BindingTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 622A73CC1A7C879300784C02 /* BindingTableView.h */; };
 		622A73CF1A7C879300784C02 /* BindingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622A73CD1A7C879300784C02 /* BindingTableView.m */; };
 		6230D74C229E1A9600C1639F /* upgrade.sh in Resources */ = {isa = PBXBuildFile; fileRef = 551CE002196EFD34000869B6 /* upgrade.sh */; };
+		62932BC022A7584A0018217E /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 62932BBF22A7584A0018217E /* SocketHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,6 +341,9 @@
 		622A73C11A7C339000784C02 /* MyWhole360ControllerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWhole360ControllerMapper.m; sourceTree = "<group>"; };
 		622A73CC1A7C879300784C02 /* BindingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingTableView.h; sourceTree = "<group>"; };
 		622A73CD1A7C879300784C02 /* BindingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingTableView.m; sourceTree = "<group>"; };
+		62932BBD22A757D20018217E /* 360DaemonSocketProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 360DaemonSocketProtocol.h; sourceTree = "<group>"; };
+		62932BBE22A7584A0018217E /* SocketHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocketHandler.h; sourceTree = "<group>"; };
+		62932BBF22A7584A0018217E /* SocketHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SocketHandler.m; sourceTree = "<group>"; };
 		62B1809B226B6FF8004DCCED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62B1809C226B6FF8004DCCED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62B1809D226B6FF8004DCCED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -614,6 +618,9 @@
 				55B637CF18C10CB400CE933D /* ControlPrefs.m */,
 				55750C07190AFB5B0047FF41 /* DaemonLEDs.h */,
 				55750C08190AFB5B0047FF41 /* DaemonLEDs.m */,
+				62932BBE22A7584A0018217E /* SocketHandler.h */,
+				62932BBF22A7584A0018217E /* SocketHandler.m */,
+				62932BBD22A757D20018217E /* 360DaemonSocketProtocol.h */,
 				55699CD51971D96E00C40A31 /* Images.xcassets */,
 				55B636BE18C104DB00CE933D /* Supporting Files */,
 			);
@@ -1160,6 +1167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55B637D518C10CB400CE933D /* ControlPrefs.m in Sources */,
+				62932BC022A7584A0018217E /* SocketHandler.m in Sources */,
 				55A2B8D518C116BD006829A2 /* 360Daemon.m in Sources */,
 				55750C09190AFB5B0047FF41 /* DaemonLEDs.m in Sources */,
 			);

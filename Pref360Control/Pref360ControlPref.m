@@ -23,6 +23,7 @@
 #include <mach/mach.h>
 #include <IOKit/usb/IOUSBLib.h>
 #include <libkern/OSKextLib.h>
+#include <IOKit/kext/KextManager.h>
 #import "Pref360ControlPref.h"
 #import "DeviceItem.h"
 #import "ControlPrefs.h"
@@ -33,6 +34,7 @@
 #import "MyDeadZoneViewer.h"
 #import "MyBatteryMonitor.h"
 #import "MyAnalogStick.h"
+#import "../360Daemon/360DaemonSocketProtocol.h"
 
 #define NO_ITEMS @"No devices found"
 
@@ -848,14 +850,11 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
 
-    // TEMP: Enable the "enable driver" checkbox if the kext is loaded in the memory
-    int result = system("kextstat | grep com.mice.driver.Xbox360Controller");
-//    NSLog(@"Result of kextstat = %d", result);
-    if (result == 0) {
-        [self.enableDriverCheckBox setState:NSControlStateValueOn];
-    } else {
-        [self.enableDriverCheckBox setState:NSControlStateValueOff];
-    }
+    // Enable the "enable driver" checkbox if the kext is loaded in the memory
+    [self updateEnableDriverCheckboxState];
+
+    // Initialize the socket to the daemon
+    [self startClient];
 }
 
 // Shut down
@@ -890,6 +889,8 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     [self deleteDeviceList];
     // Close master port
     mach_port_deallocate(mach_task_self(), _masterPort);
+    // Close down the daemon socket
+    [self stopClient];
     // Done
 }
 
@@ -1050,30 +1051,66 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     return NO;
 }
 
-// Enable/disable the driver
-// FIXME: currently only works after the controller is connected and loaded once.
-// FIXME: will not uncheck the "Enabled" box if the prefpane is started with the driver disabled
-- (IBAction)toggleDriverEnabled:(NSButton *)sender
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode
 {
-    NSLog(@"Enable/disable driver stuff: will change state...");
-    if (sender.state == NSControlStateValueOn)
+    switch(eventCode)
     {
-        OSReturn error = LoadDriverWired();
-
-        if (error != kOSReturnSuccess)
+        case NSStreamEventOpenCompleted:
         {
-            [self.enableDriverCheckBox setState:NSControlStateValueOn];
+            // Streams are open
+        } break;
+
+        case NSStreamEventHasSpaceAvailable:
+        {
+            // Queue writes here
+        } break;
+
+        case NSStreamEventHasBytesAvailable:
+        {
+            if (stream == self.readStream)
+            {
+                OSReturn kextManagerResult = kOSReturnSuccess; // Zero out the data
+                UInt length = 0;
+
+                length = (UInt)[self.readStream read:(UInt8*)&kextManagerResult maxLength:sizeof(OSReturn)];
+
+                if (length >= sizeof(OSReturn))
+                {
+                    [self handleDaemonEnableResponse:kextManagerResult];
+                }
+            }
+        } break;
+
+        case NSStreamEventErrorOccurred:
+        {
+            // Error occurred
+        } break;
+
+        default:
+        {
+            // Other cases
+        } break;
+    }
+}
+
+- (void)handleDaemonEnableResponse:(OSReturn)returnCode
+{
+    if (self.enableDriverCheckBox.state == NSControlStateValueOn)
+    {
+        if (returnCode != kOSReturnSuccess)
+        {
+            [self.enableDriverCheckBox setState:NSControlStateValueOff];
         }
-        else if (error == kOSKextReturnNotPrivileged)
+
+        if (returnCode == kOSKextReturnNotPrivileged)
         {
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Cannot Load Driver"];
             [alert setInformativeText:@"In order to load the driver, you need administrator privileges."];
             [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }
-        else if (error == kOSKextReturnSystemPolicy)
+        else if (returnCode == kOSKextReturnSystemPolicy)
         {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Open Security Preferences"];
@@ -1081,67 +1118,140 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             [alert setMessageText:@"Cannot Load Driver"];
             [alert setInformativeText:@"In order to use the driver, you must allow the developer, \"Drew Mills\", in your system's security preferences."];
             [alert setAlertStyle:NSAlertStyleWarning];
-            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse returnCode) {
-                if (returnCode == NSAlertFirstButtonReturn) {
+            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse modalResponse) {
+                if (modalResponse == NSAlertFirstButtonReturn) {
                     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?General"]];
                 }
             }];
         }
-        else
+        else if (returnCode == kOSKextReturnNotFound)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"Cannot Find Driver"];
+            [alert setInformativeText:@"Please make sure that the driver is installed."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
+        }
+        // Catch-all for all other failures.
+        else if (returnCode != kOSReturnSuccess)
         {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Cannot Load Driver"];
-            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to load due to an unknown error, code: %d. Please report this error to the driver maintainer.", error]];
+            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to load due to an unknown error, code: %d. Please report this error to the driver maintainer.", returnCode]];
             [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }
     }
-    else if (sender.state == NSControlStateValueOff)
+    else if (self.enableDriverCheckBox.state == NSControlStateValueOff)
     {
         [self powerOff:nil];
         [self stopDevice];
-        OSReturn error = UnloadDriverWired();
 
-        if (error != kOSReturnSuccess)
-        {
-            [self.enableDriverCheckBox setState:NSControlStateValueOff];
-        }
-        else if (error == kOSKextReturnNotPrivileged)
+        if (returnCode == kOSKextReturnNotPrivileged)
         {
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Cannot Unload Driver"];
             [alert setInformativeText:@"In order to unload the driver, you need administrator privileges."];
             [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }
-        else if (error == kOSKextReturnSystemPolicy)
+        else if (returnCode == kOSKextReturnSystemPolicy)
         {
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"Cancel"];
             [alert addButtonWithTitle:@"Open Security Preferences"];
+            [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Cannot Unload Driver"];
             [alert setInformativeText:@"In order to use the driver, you must allow the developer, \"Drew Mills\", in your system's security preferences."];
             [alert setAlertStyle:NSAlertStyleWarning];
-            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse returnCode) {
-                if (returnCode == NSAlertSecondButtonReturn) {
+            [alert beginSheetModalForWindow:self.mainView.window completionHandler:^(NSModalResponse modalResponse) {
+                if (modalResponse == NSAlertSecondButtonReturn) {
                     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?General"]];
                 }
             }];
         }
-        else
+        else if (returnCode == kOSKextReturnNotFound)
+        {
+            // Kext already unloaded. Just ignore that anything happened.
+        }
+        // Catch-all for all other failures.
+        else if (returnCode != kIOReturnSuccess)
         {
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"Cancel"];
             [alert setMessageText:@"Cannot Unload Driver"];
-            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to unload due to an unknown error, code: %d. Please report this error to the driver maintainer.", error]];
+            [alert setInformativeText:[NSString stringWithFormat:@"The driver has failed to unload due to an unknown error, code: %d. Please report this error to the driver maintainer.", returnCode]];
             [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }
     }
 
     [self updateDeviceList];
+}
+
+// Enable/disable the driver
+// FIXME: currently only works after the controller is connected and loaded once.
+// FIXME: will not uncheck the "Enabled" box if the prefpane is started with the driver disabled
+- (IBAction)toggleDriverEnabled:(NSButton *)sender
+{
+    // Give the client another chance to connect
+    if (self.writeStream == nil)
+    {
+        [self startClient];
+    }
+
+    if (self.writeStream != nil)
+    {
+        DaemonProtocolCommand command = UnloadWired;
+        if (sender.state == NSControlStateValueOn)
+        {
+            command = LoadWired;
+        }
+        else if (sender.state == NSControlStateValueOff)
+        {
+            command = UnloadWired;
+        }
+        [self.writeStream write:(UInt8*)&command maxLength:1];
+    }
+    else
+    {
+        if (sender.state == NSControlStateValueOn)
+        {
+            [self.enableDriverCheckBox setState:NSControlStateValueOn];
+        }
+        else if (sender.state == NSControlStateValueOff)
+        {
+            [self.enableDriverCheckBox setState:NSControlStateValueOff];
+        }
+
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Unable to Connect to Daemon"];
+        [alert setInformativeText:@"The driver currently cannot be enabled or disabled, because the preference pane can't get a connection to the daemon to perform the requested operation."];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+    }
+}
+
+- (BOOL)isDriverLoaded
+{
+    CFStringRef wiredDriverIdentifier = DOM_WIRED_DRIVER;
+    CFArrayRef miceDivers = CFArrayCreate(kCFAllocatorDefault, (void*)&wiredDriverIdentifier, 1, &kCFTypeArrayCallBacks);
+    CFDictionaryRef loadedKexts = KextManagerCopyLoadedKextInfo(miceDivers, NULL);
+    NSDictionary *dict = CFBridgingRelease(loadedKexts);
+
+    return ([dict count] > 0);
+}
+
+- (void)updateEnableDriverCheckboxState
+{
+    if ([self isDriverLoaded])
+    {
+        [self.enableDriverCheckBox setState:NSControlStateValueOn];
+    }
+    else
+    {
+        [self.enableDriverCheckBox setState:NSControlStateValueOff];
+    }
 }
 
 // Asks the user to uninstall the package, If YES, runs inline AppleScript to do that procedure.
@@ -1215,6 +1325,77 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 - (IBAction)pretend360Checked:(id)sender {
     [self changeSetting:NULL];
     [self performSelector:@selector(updateDeviceList) withObject:nil afterDelay:0.5];
+}
+
+- (void)startClient
+{
+    CFReadStreamRef readStream = nil;
+    CFWriteStreamRef writeStream = nil;
+    CFNetServiceRef netServiceRef = CFNetServiceCreate(kCFAllocatorDefault, CFSTR("local."), CFSTR("_360Daemon._tcp."), CFSTR("360Daemon"), 0);
+    if (netServiceRef != nil)
+    {
+        CFStreamCreatePairWithSocketToNetService(kCFAllocatorDefault, netServiceRef, &readStream, &writeStream);
+        CFRelease(netServiceRef);
+
+        if (readStream == nil)
+        {
+            return;
+        }
+        if (writeStream == nil)
+        {
+            return;
+        }
+
+        self.readStream = CFBridgingRelease(readStream);
+        self.writeStream = CFBridgingRelease(writeStream);
+
+        [self.readStream setDelegate:self];
+        [self.writeStream setDelegate:self];
+
+        [self.readStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.writeStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+
+        [self.readStream open];
+        [self.writeStream open];
+    }
+}
+
+- (void)stopClient
+{
+    if (self.writeStream != nil)
+    {
+        [self.writeStream setDelegate:nil];
+        [self.writeStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.writeStream close];
+    }
+
+    if (self.readStream != nil)
+    {
+        [self.readStream setDelegate:nil];
+        [self.readStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.readStream close];
+    }
+}
+
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSInteger tabIndex = [tabView indexOfTabViewItem:tabViewItem];
+    if (tabIndex == 0) // Controller Test
+    {
+
+    }
+    else if (tabIndex == 1) // Binding Tab
+    {
+
+    }
+    else if (tabIndex == 2) // Advanced Tab
+    {
+        [self updateEnableDriverCheckboxState];
+    }
+    else if (tabIndex == 3) // About Tab
+    {
+
+    }
 }
 
 @end

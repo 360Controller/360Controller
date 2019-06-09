@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
     Xbox360Pretend360Controller = 4
 } controllerType;
 
-@interface Pref360ControlPref : NSPreferencePane
+@interface Pref360ControlPref : NSPreferencePane <NSStreamDelegate, NSTabViewDelegate>
 // Window components
 @property (weak) IBOutlet NSPopUpButton *deviceList;
 @property (weak) IBOutlet NSButton *leftLinked;
@@ -95,6 +95,9 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 @property (weak) IBOutlet NSButton *rightStickInvertYAlt;
 @property (weak) IBOutlet NSButton *rightStickNormalize;
 @property (weak) IBOutlet NSButton *pretend360Button;
+// Advanced Tab - Daemon socket
+@property (nonatomic, strong, readwrite) NSInputStream *readStream;
+@property (nonatomic, strong, readwrite) NSOutputStream *writeStream;
 
 // About Tab
 /* put About Tab's @properties here */
@@ -112,5 +115,11 @@ typedef NS_ENUM(NSUInteger, ControllerType) {
 
 - (IBAction)toggleDriverEnabled:(NSButton *)sender;
 - (IBAction)willPerformUninstallation:(id)sender;
+
+// NSStreamDelegate methods
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode;
+
+// NSTabViewDelegate methods
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 @end

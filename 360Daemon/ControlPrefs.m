@@ -21,8 +21,6 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #import "ControlPrefs.h"
-#import <libkern/OSKextLib.h>
-#import <IOKit/kext/KextManager.h>
 
 void SetAlertDisabled(NSInteger index)
 {
@@ -132,35 +130,4 @@ NSDictionary* GetKnownDevices(void)
     }
 
     return result;
-}
-
-OSReturn LoadDriver(CFStringRef kextIndentifier)
-{
-    return KextManagerLoadKextWithIdentifier(kextIndentifier, NULL);
-}
-
-OSReturn LoadDriverWired(void)
-{
-    return LoadDriver(DOM_WIRED_DRIVER);
-}
-
-OSReturn LoadDriverWireless(void)
-{
-    // TODO(Drew): Test and see if this correctly loads the wireless driver or if it needs a link to the wireless controller kext
-    return LoadDriver(DOM_WIRELESS_DRIVER);
-}
-
-OSReturn UnloadDriver(CFStringRef kextIdentifer)
-{
-    return KextManagerUnloadKextWithIdentifier(kextIdentifer);
-}
-
-OSReturn UnloadDriverWired(void)
-{
-    return UnloadDriver(DOM_WIRED_DRIVER);
-}
-
-OSReturn UnloadDriverWireless(void)
-{
-    return UnloadDriver(DOM_WIRELESS_DRIVER);
 }

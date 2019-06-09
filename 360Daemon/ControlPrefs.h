@@ -21,7 +21,6 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #import <Cocoa/Cocoa.h>
-#import <libkern/OSReturn.h>
 
 #define DOM_WIRED_DRIVER    CFSTR("com.mice.driver.Xbox360Controller")
 #define DOM_WIRELESS_DRIVER CFSTR("com.mice.driver.WirelessGamingReceiver")
@@ -46,11 +45,3 @@ NSDictionary* GetKnownDevices();
 // Utility functions
 NSString* GetSerialNumber(io_service_t device);
 void ConfigController(io_service_t device, NSDictionary *config);
-
-// Loading/Unloading the driver
-OSReturn LoadDriver(CFStringRef kextIdentifier);
-OSReturn LoadDriverWired(void);
-OSReturn LoadDirverWireless(void);
-OSReturn UnloadDriver(CFStringRef kextIdentifier);
-OSReturn UnloadDriverWired(void);
-OSReturn UnloadDriverWireless(void);
