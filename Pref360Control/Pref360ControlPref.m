@@ -85,6 +85,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     IOHIDQueueInterface **hidQueue;
     FFDeviceObjectReference ffDevice;
     io_registry_entry_t registryEntry;
+    io_string_t devicePath;
 
     int largeMotor, smallMotor;
 
@@ -449,6 +450,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         ffDevice = [item ffDevice];
         registryEntry = [item rawDevice];
         controllerType = [item controllerType];
+        IORegistryEntryGetPath(registryEntry, "IOService", devicePath);
     }
 
     if((*device)->copyMatchingElements(device,NULL,&CFelements)!=kIOReturnSuccess) {
@@ -779,6 +781,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
     io_iterator_t iterator;
     io_object_t hidDevice;
     int count = 0;
+    int targetIndex = 0;
 
     // Scrub old items
     [self stopDevice];
@@ -805,6 +808,15 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         }
         DeviceItem *item = [DeviceItem allocateDeviceItemForDevice:hidDevice];
         if (item == nil) continue;
+        // Match to changed device if you can
+        io_string_t newDevicePath;
+        IORegistryEntryGetPath(hidDevice, "IOService", newDevicePath);
+        NSString *oldPath = [NSString stringWithCString:devicePath encoding:NSASCIIStringEncoding];
+        NSString *newPath = [NSString stringWithCString:newDevicePath encoding:NSASCIIStringEncoding];
+        if ([[newPath stringByDeletingLastPathComponent] isEqualToString:[oldPath stringByDeletingLastPathComponent]])
+        {
+            targetIndex = count;
+        }
         // Add to item
         NSString *name = item.displayName;
         [_deviceList addItemWithTitle:[NSString stringWithFormat:@"%i: %@ (%@)", ++count, name, deviceWireless ? @"Wireless" : @"Wired"]];
@@ -817,6 +829,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         [_deviceList addItemWithTitle:NO_ITEMS];
         [_deviceListBinding addItemWithTitle:NO_ITEMS];
         [_deviceListAdvanced addItemWithTitle:NO_ITEMS];
+    } else if (targetIndex > 0) {
+        [_deviceList selectItemAtIndex:targetIndex];
+        [_deviceListBinding selectItemAtIndex:targetIndex];
+        [_deviceListAdvanced selectItemAtIndex:targetIndex];
     }
     [self startDevice];
 }
@@ -1169,6 +1185,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
                     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?General"]];
                 }
             }];
+        }
+        else if (returnCode == kOSKextReturnInUse)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"Cannot Unload Driver"];
+            [alert setInformativeText:@"The kext cannot be unloaded because it is retained by macOS. You will need to reboot your computer before you can unload the kext."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
         }
         else if (returnCode == kOSKextReturnNotFound)
         {
