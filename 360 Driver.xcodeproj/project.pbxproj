@@ -18,6 +18,7 @@
 				55B6384118C10FA200CE933D /* PBXTargetDependency */,
 				55B6384318C10FA200CE933D /* PBXTargetDependency */,
 				55B6384518C10FA200CE933D /* PBXTargetDependency */,
+				3E23895A23413DE700FFC9A5 /* PBXTargetDependency */,
 			);
 			name = "Whole Driver";
 			productName = "Whole Driver";
@@ -25,6 +26,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3E0C3C3C231D65FA0084C30C /* WirelessOneMT76.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C3C3A231D65FA0084C30C /* WirelessOneMT76.cpp */; };
+		3E0C3C3D231D65FA0084C30C /* WirelessOneMT76.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0C3C3B231D65FA0084C30C /* WirelessOneMT76.h */; };
+		3E8073CF231BE2F1007EAB9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E8073C4231BE2F1007EAB9E /* InfoPlist.strings */; };
+		3E8073D2231BE2F1007EAB9E /* WirelessOneDongle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8073C9231BE2F1007EAB9E /* WirelessOneDongle.h */; };
+		3E8073D4231BE2F1007EAB9E /* WirelessOneController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8073CB231BE2F1007EAB9E /* WirelessOneController.cpp */; };
+		3E8073D5231BE2F1007EAB9E /* WirelessOneDongle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8073CC231BE2F1007EAB9E /* WirelessOneDongle.cpp */; };
+		3E8073D7231BE2F1007EAB9E /* WirelessOneController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8073CE231BE2F1007EAB9E /* WirelessOneController.h */; };
+		3EC3636523296DC600F82271 /* Firmware.bin in Resources */ = {isa = PBXBuildFile; fileRef = 3EC3636423296DC500F82271 /* Firmware.bin */; };
 		3F9B7C0A1A729C1600149949 /* artworks.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F9B7C091A729C1600149949 /* artworks.xcassets */; };
 		3FE789A01A701F3400FF4065 /* Pref360StyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */; };
 		3FE789A11A701F3400FF4065 /* Pref360StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */; };
@@ -174,6 +183,13 @@
 			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
 			remoteInfo = WirelessGamingReceiver;
 		};
+		3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E8073AF231BE178007EAB9E;
+			remoteInfo = WirelessOneController;
+		};
 		55DA7C6C1926BED3002F6A3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
@@ -229,6 +245,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E0C3C3A231D65FA0084C30C /* WirelessOneMT76.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessOneMT76.cpp; sourceTree = "<group>"; };
+		3E0C3C3B231D65FA0084C30C /* WirelessOneMT76.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WirelessOneMT76.h; sourceTree = "<group>"; };
+		3E8073BF231BE178007EAB9E /* WirelessOneController.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WirelessOneController.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8073C5231BE2F1007EAB9E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3E8073C8231BE2F1007EAB9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E8073C9231BE2F1007EAB9E /* WirelessOneDongle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessOneDongle.h; sourceTree = "<group>"; };
+		3E8073CB231BE2F1007EAB9E /* WirelessOneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessOneController.cpp; sourceTree = "<group>"; };
+		3E8073CC231BE2F1007EAB9E /* WirelessOneDongle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WirelessOneDongle.cpp; sourceTree = "<group>"; };
+		3E8073CD231BE2F1007EAB9E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E8073CE231BE2F1007EAB9E /* WirelessOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WirelessOneController.h; sourceTree = "<group>"; };
+		3EC3636423296DC500F82271 /* Firmware.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = Firmware.bin; sourceTree = "<group>"; };
 		3F9B7C091A729C1600149949 /* artworks.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = artworks.xcassets; path = Resources/artworks.xcassets; sourceTree = "<group>"; };
 		3FE7899E1A701F3400FF4065 /* Pref360StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pref360StyleKit.h; sourceTree = "<group>"; };
 		3FE7899F1A701F3400FF4065 /* Pref360StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pref360StyleKit.m; sourceTree = "<group>"; };
@@ -360,6 +387,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E8073B4231BE178007EAB9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5579513B1F73006F001880D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -443,6 +477,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E8073C3231BE2F1007EAB9E /* WirelessOneController */ = {
+			isa = PBXGroup;
+			children = (
+				3E0C3C3B231D65FA0084C30C /* WirelessOneMT76.h */,
+				3E0C3C3A231D65FA0084C30C /* WirelessOneMT76.cpp */,
+				3E8073C9231BE2F1007EAB9E /* WirelessOneDongle.h */,
+				3E8073CC231BE2F1007EAB9E /* WirelessOneDongle.cpp */,
+				3E8073CE231BE2F1007EAB9E /* WirelessOneController.h */,
+				3E8073CB231BE2F1007EAB9E /* WirelessOneController.cpp */,
+				3E8073D9231BE7D8007EAB9E /* Resources */,
+			);
+			path = WirelessOneController;
+			sourceTree = "<group>";
+		};
+		3E8073D9231BE7D8007EAB9E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E8073C4231BE2F1007EAB9E /* InfoPlist.strings */,
+				3E8073CD231BE2F1007EAB9E /* Info.plist */,
+				3EC3636423296DC500F82271 /* Firmware.bin */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		551CDFFE196EFD0A000869B6 /* Distribution */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +612,7 @@
 				55B636EB18C1054F00CE933D /* 360Controller */,
 				55B637F618C10DA300CE933D /* Wireless360Controller */,
 				55B6381C18C10EBE00CE933D /* WirelessGamingReceiver */,
+				3E8073C3231BE2F1007EAB9E /* WirelessOneController */,
 				55B636BD18C104DB00CE933D /* 360Daemon */,
 				55B6376A18C10A5400CE933D /* DriverTool */,
 				55B6378118C10B0B00CE933D /* Pref360Control */,
@@ -576,6 +635,7 @@
 				55B6377D18C10B0B00CE933D /* Pref360Control.prefPane */,
 				55B637E818C10D5000CE933D /* Wireless360Controller.kext */,
 				55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */,
+				3E8073BF231BE178007EAB9E /* WirelessOneController.kext */,
 				55FE3CA118D7B77800D69E84 /* testhaptic */,
 				55ACBFE01D5B9E2E00E4F677 /* XboxOneBluetooth.kext */,
 				5579513E1F73006F001880D1 /* XBOBTFF.plugin */,
@@ -752,6 +812,16 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3E8073B5231BE178007EAB9E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E0C3C3D231D65FA0084C30C /* WirelessOneMT76.h in Headers */,
+				3E8073D2231BE2F1007EAB9E /* WirelessOneDongle.h in Headers */,
+				3E8073D7231BE2F1007EAB9E /* WirelessOneController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55ACBFDD1D5B9E2E00E4F677 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -975,6 +1045,24 @@
 			productReference = 55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		3E8073AF231BE178007EAB9E /* WirelessOneController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E8073BC231BE178007EAB9E /* Build configuration list for PBXNativeTarget "WirelessOneController" */;
+			buildPhases = (
+				3E8073B0231BE178007EAB9E /* Sources */,
+				3E8073B4231BE178007EAB9E /* Frameworks */,
+				3E8073B5231BE178007EAB9E /* Headers */,
+				3E8073BA231BE178007EAB9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WirelessOneController;
+			productName = WirelessOneController;
+			productReference = 3E8073BF231BE178007EAB9E /* WirelessOneController.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		55FE3CA018D7B77800D69E84 /* testhaptic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55FE3CAA18D7B77800D69E84 /* Build configuration list for PBXNativeTarget "testhaptic" */;
@@ -1001,6 +1089,10 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
+					3E8073AF231BE178007EAB9E = {
+						DevelopmentTeam = G947KKM5RL;
+						ProvisioningStyle = Manual;
+					};
 					5579513D1F73006F001880D1 = {
 						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = G947KKM5RL;
@@ -1071,6 +1163,7 @@
 				55B6370618C1057100CE933D /* 360Controller */,
 				55B637E718C10D5000CE933D /* Wireless360Controller */,
 				55B6380D18C10E8700CE933D /* WirelessGamingReceiver */,
+				3E8073AF231BE178007EAB9E /* WirelessOneController */,
 				5579513D1F73006F001880D1 /* XBOBTFF */,
 				55ACBFDF1D5B9E2E00E4F677 /* XboxOneBluetooth */,
 				55FE3CA018D7B77800D69E84 /* testhaptic */,
@@ -1079,6 +1172,15 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E8073BA231BE178007EAB9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E8073CF231BE2F1007EAB9E /* InfoPlist.strings in Resources */,
+				3EC3636523296DC600F82271 /* Firmware.bin in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5579513C1F73006F001880D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1153,6 +1255,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E8073B0231BE178007EAB9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E0C3C3C231D65FA0084C30C /* WirelessOneMT76.cpp in Sources */,
+				3E8073D5231BE2F1007EAB9E /* WirelessOneDongle.cpp in Sources */,
+				3E8073D4231BE2F1007EAB9E /* WirelessOneController.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5579513A1F73006F001880D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1290,6 +1402,11 @@
 			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
 			targetProxy = 55B6384418C10FA200CE933D /* PBXContainerItemProxy */;
 		};
+		3E23895A23413DE700FFC9A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E8073AF231BE178007EAB9E /* WirelessOneController */;
+			targetProxy = 3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */;
+		};
 		55DA7C6D1926BED3002F6A3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55B6371E18C108A500CE933D /* Feedback360 */;
@@ -1298,6 +1415,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3E8073C4231BE2F1007EAB9E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E8073C5231BE2F1007EAB9E /* zh-Hans */,
+				3E8073C8231BE2F1007EAB9E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		551CDFFB196EEE76000869B6 /* Pref360ControlPref.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1866,6 +1992,42 @@
 			};
 			name = Release;
 		};
+		3E8073BD231BE178007EAB9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
+			buildSettings = {
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				INFOPLIST_FILE = WirelessOneController/Info.plist;
+				MODULE_NAME = com.mice.driver.WirelessOneController;
+				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		3E8073BE231BE178007EAB9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
+			buildSettings = {
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				INFOPLIST_FILE = WirelessOneController/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULE_NAME = com.mice.driver.WirelessOneController;
+				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		55B6383A18C10F8E00CE933D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
@@ -1928,6 +2090,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E8073BC231BE178007EAB9E /* Build configuration list for PBXNativeTarget "WirelessOneController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E8073BD231BE178007EAB9E /* Debug */,
+				3E8073BE231BE178007EAB9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		557951431F73006F001880D1 /* Build configuration list for PBXNativeTarget "XBOBTFF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

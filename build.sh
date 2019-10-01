@@ -30,6 +30,7 @@ xcrun lipo -info build/Release/Pref360Control.prefPane/Contents/MacOS/Pref360Con
 xcrun lipo -info build/Release/Pref360Control.prefPane/Contents/Resources/DriverTool
 xcrun lipo -info build/Release/WirelessGamingReceiver.kext/Contents/MacOS/WirelessGamingReceiver
 xcrun lipo -info build/Release/Wireless360Controller.kext/Contents/MacOS/Wireless360Controller
+xcrun lipo -info build/Release/WirelessOneController.kext/Contents/MacOS/WirelessOneController
 echo "** File signatures **"
 xcrun spctl -a -v build/Release/360Controller.kext
 xcrun spctl -a -v build/Release/360Controller.kext/Contents/PlugIns/Feedback360.plugin
@@ -38,6 +39,7 @@ xcrun spctl -a -v build/Release/Pref360Control.prefPane
 xcrun spctl -a -v build/Release/Pref360Control.prefPane/Contents/Resources/DriverTool
 xcrun spctl -a -v build/Release/WirelessGamingReceiver.kext
 xcrun spctl -a -v build/Release/Wireless360Controller.kext
+xcrun spctl -a -v build/Release/WirelessOneController.kext
 
 echo "** Installer signature **"
 xcrun spctl -a -v --type install Install360Controller/build/Install360Controller.pkg

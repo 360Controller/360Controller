@@ -47,6 +47,11 @@ if [ -d /System/Library/Extensions/WirelessGamingReceiver.kext ]; then
    /bin/rm -r /System/Library/Extensions/WirelessGamingReceiver.kext
 fi
 
+if [ -d /System/Library/Extensions/WirelessOneController.kext ]; then
+   kextunload /System/Library/Extensions/WirelessOneController.kext
+   /bin/rm -r /System/Library/Extensions/WirelessOneController.kext
+fi
+
 # Mavericks and later
 
 if [ -d /Library/Extensions/360Controller.kext ]; then
@@ -62,6 +67,11 @@ fi
 if [ -d /Library/Extensions/WirelessGamingReceiver.kext ]; then
    kextunload /Library/Extensions/WirelessGamingReceiver.kext
    /bin/rm -r /Library/Extensions/WirelessGamingReceiver.kext
+fi
+
+if [ -d /Library/Extensions/WirelessOneController.kext ]; then
+   kextunload /Library/Extensions/WirelessOneController.kext
+   /bin/rm -r /Library/Extensions/WirelessOneController.kext
 fi
 
 # Remove bluetooth driver

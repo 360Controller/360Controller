@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>WirelessDongle</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.mice.driver.WirelessOneController</string>
+			<key>IOClass</key>
+			<string>WirelessOneMT76</string>
+			<key>IOKitDebug</key>
+			<integer>65535</integer>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostDevice</string>
+			<key>idProduct</key>
+			<integer>766</integer>
+			<key>idVendor</key>
+			<integer>1118</integer>
+		</dict>
+	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MIN_MACOS_VERSION}</string>
+	<key>OSBundleCompatibleVersion</key>
+	<string>1.0.0</string>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.iokit.IOHIDFamily</key>
+		<string>2.0</string>
+		<key>com.apple.iokit.IOUSBHostFamily</key>
+		<string>1.2</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>18.5</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>18.5</string>
+		<key>com.apple.kpi.mach</key>
+		<string>18.5</string>
+	</dict>
+</dict>
+</plist>
