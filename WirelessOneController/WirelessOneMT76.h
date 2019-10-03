@@ -1152,8 +1152,7 @@ public:
     void stop(IOService *provider) override;
     bool willTerminate(IOService *provider, IOOptionBits options) override;
     
-    void sendControllerPacket(uint8_t controllerAddress[], OSData *data);
-    
+    bool sendControllerPacket(uint8_t controllerAddress[], OSData *data);
     uint32_t getLocationId();
 
 private:
@@ -1167,37 +1166,39 @@ private:
     WirelessOneDongle *dongle;
     
     /* Initialization steps */
+    bool initChip();
+    bool initDongle();
     bool requestFirmware();
-    void loadFirmware();
-    void loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t *end);
-    void initRegisters();
-    void enableBeacon();
+    bool loadFirmware();
+    bool loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t *end);
+    bool initRegisters();
+    bool enableBeacon();
     
     /* Packet handling and transmission */
     void handleWlanPacket(uint8_t data[]);
     void handleControllerPacket(uint8_t data[]);
-    void associateController(uint8_t controllerAddress[]);
-    void pairController(uint8_t controllerAddress[]);
-    void sendWlanPacket(OSData *data);
+    bool associateController(uint8_t controllerAddress[]);
+    bool pairController(uint8_t controllerAddress[]);
+    bool sendWlanPacket(OSData *data);
     
     /* MCU commands */
-    void selectFunction(McuFunction function, uint32_t value);
-    void powerMode(McuPowerMode mode);
-    void loadCr(McuCrMode mode);
-    void burstWrite(uint32_t index, uint8_t values[], uint32_t length);
-    void calibrate(McuCalibration calibration, uint32_t value);
-    void switchChannel(uint8_t channel);
-    void initGain(uint32_t index, uint8_t values[], uint32_t length);
-    void setLedMode(uint32_t index);
-    void sendCommand(McuCommand command, OSData *data);
+    bool selectFunction(McuFunction function, uint32_t value);
+    bool powerMode(McuPowerMode mode);
+    bool loadCr(McuCrMode mode);
+    bool burstWrite(uint32_t index, uint8_t values[], uint32_t length);
+    bool calibrate(McuCalibration calibration, uint32_t value);
+    bool switchChannel(uint8_t channel);
+    bool initGain(uint32_t index, uint8_t values[], uint32_t length);
+    bool setLedMode(uint32_t index);
+    bool sendCommand(McuCommand command, OSData *data);
     
     /* MCU functions */
     uint32_t efuseRead(uint8_t address, uint8_t index);
-    void writeBeacon(uint32_t offset, uint8_t type, OSData *data);
+    bool writeBeacon(uint32_t offset, uint8_t type, OSData *data);
     
     /* USB control/bulk transfer */
-    void startBulkRead(IOUSBHostPipe *pipe);
-    void bulkWrite(OSData *data);
+    bool startBulkRead(IOUSBHostPipe *pipe);
+    bool bulkWrite(OSData *data);
     uint32_t controlRead(uint16_t address, VendorRequest request = MT_VEND_MULTI_READ);
     void controlWrite(uint16_t address, uint32_t value, VendorRequest request = MT_VEND_MULTI_WRITE);
     

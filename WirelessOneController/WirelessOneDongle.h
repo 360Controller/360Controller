@@ -48,7 +48,9 @@ private:
     WirelessOneMT76 *mt;
     uint32_t locationIdCounter;
     
+    bool initController(uint8_t macAddress[]);
+    
     template<typename T>
     void iterateControllers(T each);
-    void send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[]);
+    bool send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[]);
 };

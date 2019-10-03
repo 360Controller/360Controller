@@ -164,39 +164,26 @@ bool WirelessOneMT76::start(IOService *provider)
         return false;
     }
     
-    loadFirmware();
+    if (!loadFirmware())
+    {
+        LOG("failed to load firmware");
+        
+        return false;
+    }
     
-    // Select RX ring buffer 1
-    // Turn radio on
-    // Load BBP command register
-    selectFunction(Q_SELECT, 1);
-    powerMode(RADIO_ON);
-    loadCr(MT_RF_BBP_CR);
+    if (!initChip())
+    {
+        LOG("failed to init chip");
+        
+        return false;
+    }
     
-    // Write initial register values
-    initRegisters();
-    
-    // Calibrate chip
-    controlWrite(MT_MAC_SYS_CTRL, 0);
-    calibrate(MCU_CAL_TEMP_SENSOR, 0);
-    calibrate(MCU_CAL_RXDCOC, 1);
-    calibrate(MCU_CAL_RC, 0);
-    controlWrite(MT_MAC_SYS_CTRL, MT_MAC_SYS_CTRL_ENABLE_TX | MT_MAC_SYS_CTRL_ENABLE_RX);
-    
-    // Set default channel
-    switchChannel(MT_CHANNEL);
-    
-    // Start beacon transmission
-    enableBeacon();
-    startBulkRead(readPipe);
-    startBulkRead(packetPipe);
-    
-    dongle = new WirelessOneDongle;
-    
-    dongle->init();
-    dongle->attach(this);
-    dongle->registerService();
-    dongle->start(this);
+    if (!initDongle())
+    {
+        LOG("failed to init dongle");
+        
+        return false;
+    }
     
     return true;
 }
@@ -213,6 +200,105 @@ bool WirelessOneMT76::willTerminate(IOService *provider, IOOptionBits options)
     dispose();
     
     return IOService::willTerminate(provider, options);
+}
+
+bool WirelessOneMT76::initChip()
+{
+    // Select RX ring buffer 1
+    // Turn radio on
+    // Load BBP command register
+    if (!selectFunction(Q_SELECT, 1) ||
+        !powerMode(RADIO_ON) ||
+        !loadCr(MT_RF_BBP_CR)
+    ) {
+        LOG("failed to init radio");
+        
+        return false;
+    }
+    
+    // Write initial register values
+    if (!initRegisters())
+    {
+        LOG("failed to init registers");
+        
+        return false;
+    }
+    
+    controlWrite(MT_MAC_SYS_CTRL, 0);
+    
+    // Calibrate chip
+    if (!calibrate(MCU_CAL_TEMP_SENSOR, 0) ||
+        !calibrate(MCU_CAL_RXDCOC, 1) ||
+        !calibrate(MCU_CAL_RC, 0)
+    ) {
+        LOG("failed to calibrate chip");
+        
+        return false;
+    }
+        
+    controlWrite(MT_MAC_SYS_CTRL, MT_MAC_SYS_CTRL_ENABLE_TX | MT_MAC_SYS_CTRL_ENABLE_RX);
+    
+    // Set default channel
+    if (!switchChannel(MT_CHANNEL))
+    {
+        LOG("failed to set channel");
+        
+        return false;
+    }
+    
+    // Start beacon transmission
+    if (!enableBeacon())
+    {
+        LOG("failed to enable beacon");
+        
+        return false;
+    }
+    
+    return true;
+}
+
+bool WirelessOneMT76::initDongle()
+{
+    dongle = new WirelessOneDongle;
+    
+    if (!dongle->init())
+    {
+        LOG("failed to init dongle");
+        
+        return false;
+    }
+    
+    if (!dongle->attach(this))
+    {
+        LOG("failed to attach dongle");
+        
+        return false;
+    }
+    
+    dongle->registerService();
+    
+    if (!dongle->start(this))
+    {
+        LOG("failed to start dongle");
+        
+        return false;
+    }
+    
+    if (!startBulkRead(readPipe))
+    {
+        LOG("failed to start bulk read");
+        
+        return false;
+    }
+    
+    if (!startBulkRead(packetPipe))
+    {
+        LOG("failed to start bulk packet read");
+        
+        return false;
+    }
+    
+    return true;
 }
 
 bool WirelessOneMT76::requestFirmware()
@@ -233,7 +319,7 @@ bool WirelessOneMT76::requestFirmware()
     return firmware;
 }
 
-void WirelessOneMT76::loadFirmware()
+bool WirelessOneMT76::loadFirmware()
 {
     DmaConfig config = {};
     
@@ -256,8 +342,19 @@ void WirelessOneMT76::loadFirmware()
     uint8_t *dlmEnd = dlmStart + header->dlmLength;
     
     // Upload firmware parts (ILM and DLM)
-    loadFirmwarePart(MT_MCU_ILM_OFFSET, ilmStart, dlmStart);
-    loadFirmwarePart(MT_MCU_DLM_OFFSET, dlmStart, dlmEnd);
+    if (!loadFirmwarePart(MT_MCU_ILM_OFFSET, ilmStart, dlmStart))
+    {
+        LOG("failed to write ILM");
+        
+        return false;
+    }
+    
+    if (!loadFirmwarePart(MT_MCU_DLM_OFFSET, dlmStart, dlmEnd))
+    {
+        LOG("failed to write DLM");
+        
+        return false;
+    }
     
     // Load initial vector block (IVB)
     controlWrite(MT_FCE_DMA_ADDR, 0, MT_VEND_WRITE_CFG);
@@ -267,9 +364,11 @@ void WirelessOneMT76::loadFirmware()
     while (controlRead(MT_FCE_DMA_ADDR, MT_VEND_READ_CFG) != 0x01);
     
     LOG("firmware loaded");
+    
+    return true;
 }
 
-void WirelessOneMT76::loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t *end)
+bool WirelessOneMT76::loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t *end)
 {
     // Send firmware in chunks
     for (uint8_t *chunk = start; chunk < end; chunk += MT_FW_CHUNK_SIZE)
@@ -293,7 +392,14 @@ void WirelessOneMT76::loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t 
         
         controlWrite(MT_FCE_DMA_ADDR, address, MT_VEND_WRITE_CFG);
         controlWrite(MT_FCE_DMA_LEN, length << 16, MT_VEND_WRITE_CFG);
-        bulkWrite(data);
+        
+        if (!bulkWrite(data))
+        {
+            LOG("failed to write firmware part");
+            data->release();
+            
+            return false;
+        }
         
         data->release();
         
@@ -301,9 +407,11 @@ void WirelessOneMT76::loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t 
         
         while (controlRead(MT_FCE_DMA_LEN, MT_VEND_READ_CFG) != complete);
     }
+    
+    return true;
 }
 
-void WirelessOneMT76::initRegisters()
+bool WirelessOneMT76::initRegisters()
 {
     controlWrite(MT_MAC_SYS_CTRL, MT_MAC_SYS_CTRL_RESET_CSR | MT_MAC_SYS_CTRL_RESET_BBP);
     controlWrite(MT_USB_DMA_CFG, 0);
@@ -385,13 +493,26 @@ void WirelessOneMT76::initRegisters()
     memcpy(macAddress, &macAddress1, 4);
     memcpy(macAddress + 4, &macAddress2, 2);
     
-    burstWrite(MT_MAC_ADDR_DW0, macAddress, sizeof(macAddress));
-    burstWrite(MT_MAC_BSSID_DW0, macAddress, sizeof(macAddress));
+    if (!burstWrite(MT_MAC_ADDR_DW0, macAddress, sizeof(macAddress)))
+    {
+        LOG("failed to write MAC address");
+        
+        return false;
+    }
     
-    LOG_MAC("mac address: ", macAddress);
+    if (!burstWrite(MT_MAC_BSSID_DW0, macAddress, sizeof(macAddress)))
+    {
+        LOG("failed to write BSSID");
+        
+        return false;
+    }
+    
+    LOG_MAC("MAC address: ", macAddress);
+    
+    return true;
 }
 
-void WirelessOneMT76::enableBeacon()
+bool WirelessOneMT76::enableBeacon()
 {
     // Required for controllers to connect reliably
     // Probably contains the selected channel pair
@@ -416,7 +537,13 @@ void WirelessOneMT76::enableBeacon()
     out->appendBytes(&beacon, sizeof(beacon));
     out->appendBytes(beaconData, sizeof(beaconData));
     
-    writeBeacon(MT_BCN_NORMAL_OFFSET, MT_WLAN_BEACON, out);
+    if (!writeBeacon(MT_BCN_NORMAL_OFFSET, MT_WLAN_BEACON, out))
+    {
+        LOG("failed to write beacon");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
     
@@ -433,12 +560,25 @@ void WirelessOneMT76::enableBeacon()
     };
     const uint32_t gain2[] = { 0x08 };
     
-    initGain(0, macAddress, sizeof(macAddress));
-    initGain(7, (uint8_t*)gain1, sizeof(gain1));
-    initGain(14, (uint8_t*)gain2, sizeof(gain2));
-    calibrate(MCU_CAL_RXDCOC, 0);
+    if (!initGain(0, macAddress, sizeof(macAddress)) ||
+        !initGain(7, (uint8_t*)gain1, sizeof(gain1)) ||
+        !initGain(14, (uint8_t*)gain2, sizeof(gain2))
+    ) {
+        LOG("failed to init beacon gain");
+        
+        return false;
+    }
+    
+    if (!calibrate(MCU_CAL_RXDCOC, 0))
+    {
+        LOG("failed to calibrate beacon");
+        
+        return false;
+    }
     
     LOG("beacon started");
+    
+    return true;
 }
 
 void WirelessOneMT76::handleWlanPacket(uint8_t data[])
@@ -463,7 +603,13 @@ void WirelessOneMT76::handleWlanPacket(uint8_t data[])
     {
         LOG_MAC("controller associating: ", wlanFrame->source);
         
-        associateController(wlanFrame->source);
+        if (!associateController(wlanFrame->source))
+        {
+            LOG("failed to associate controller");
+            
+            return;
+        }
+        
         dongle->handleConnect(wlanFrame->source);
     }
     
@@ -486,7 +632,10 @@ void WirelessOneMT76::handleWlanPacket(uint8_t data[])
         
         LOG_MAC("controller pairing: ", wlanFrame->source);
         
-        pairController(wlanFrame->source);
+        if (!pairController(wlanFrame->source))
+        {
+            LOG("failed to pair controller");
+        }
     }
 }
 
@@ -515,7 +664,7 @@ void WirelessOneMT76::handleControllerPacket(uint8_t data[])
     );
 }
 
-void WirelessOneMT76::associateController(uint8_t controllerAddress[])
+bool WirelessOneMT76::associateController(uint8_t controllerAddress[])
 {
     const uint32_t gain[] = { 0x0000, 0x1f40 };
     
@@ -549,14 +698,36 @@ void WirelessOneMT76::associateController(uint8_t controllerAddress[])
     out->appendBytes(&wlanFrame, sizeof(wlanFrame));
     out->appendBytes(&associationFrame, sizeof(associationFrame));
     
-    burstWrite(MT_WCID_ADDR(1), controllerAddress, sizeof(macAddress));
-    initGain(1, (uint8_t*)gain, sizeof(gain));
-    sendWlanPacket(out);
+    if (!burstWrite(MT_WCID_ADDR(1), controllerAddress, sizeof(macAddress)))
+    {
+        LOG("failed to write WCID");
+        out->release();
+        
+        return false;
+    }
+    
+    if (!initGain(1, (uint8_t*)gain, sizeof(gain)))
+    {
+        LOG("failed to init association gain");
+        out->release();
+        
+        return false;
+    }
+    
+    if (!sendWlanPacket(out))
+    {
+        LOG("failed to send association packet");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::pairController(uint8_t controllerAddress[])
+bool WirelessOneMT76::pairController(uint8_t controllerAddress[])
 {
     uint8_t data[] = { 0x70, 0x0f, 0x00, 0x45 };
     
@@ -585,13 +756,28 @@ void WirelessOneMT76::pairController(uint8_t controllerAddress[])
     out->appendBytes(&wlanFrame, sizeof(wlanFrame));
     out->appendBytes(&data, sizeof(data));
     
-    sendWlanPacket(out);
-    setLedMode(0);
+    if (!sendWlanPacket(out))
+    {
+        LOG("failed to send pairing packet");
+        out->release();
+        
+        return false;
+    }
+    
+    if (!setLedMode(0))
+    {
+        LOG("failed to set pairing LED");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::sendWlanPacket(OSData *data)
+bool WirelessOneMT76::sendWlanPacket(OSData *data)
 {
     // Values must be 32-bit aligned
     // 32 zero-bits mark the end
@@ -615,12 +801,20 @@ void WirelessOneMT76::sendWlanPacket(OSData *data)
     out->appendBytes(&footer, padding);
     out->appendBytes(&footer, sizeof(footer));
     
-    bulkWrite(out);
+    if (!bulkWrite(out))
+    {
+        LOG("failed to write WLAN packet");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::sendControllerPacket(uint8_t controllerAddress[], OSData *data)
+bool WirelessOneMT76::sendControllerPacket(uint8_t controllerAddress[], OSData *data)
 {
     TxWi txWi = {};
     
@@ -661,42 +855,74 @@ void WirelessOneMT76::sendControllerPacket(uint8_t controllerAddress[], OSData *
     out->appendBytes(data);
     out->appendBytes(&header, dataPadding);
     
-    sendCommand(CMD_PACKET_TX, out);
+    if (!sendCommand(CMD_PACKET_TX, out))
+    {
+        LOG("failed to send controller packet");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::selectFunction(McuFunction function, uint32_t value)
+bool WirelessOneMT76::selectFunction(McuFunction function, uint32_t value)
 {
     OSData *data = OSData::withCapacity(sizeof(function) + sizeof(value));
     
     data->appendBytes(&function, sizeof(function));
     data->appendBytes(&value, sizeof(value));
     
-    sendCommand(CMD_FUN_SET_OP, data);
+    if (!sendCommand(CMD_FUN_SET_OP, data))
+    {
+        LOG("failed to select function");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::powerMode(McuPowerMode mode)
+bool WirelessOneMT76::powerMode(McuPowerMode mode)
 {
     OSData *data = OSData::withBytes(&mode, sizeof(mode));
     
-    sendCommand(CMD_POWER_SAVING_OP, data);
+    if (!sendCommand(CMD_POWER_SAVING_OP, data))
+    {
+        LOG("failed to set power mode");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::loadCr(McuCrMode mode)
+bool WirelessOneMT76::loadCr(McuCrMode mode)
 {
     OSData *data = OSData::withBytes(&mode, sizeof(mode));
     
-    sendCommand(CMD_LOAD_CR, data);
+    if (!sendCommand(CMD_LOAD_CR, data))
+    {
+        LOG("failed to load CR");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::burstWrite(uint32_t index, uint8_t values[], uint32_t length)
+bool WirelessOneMT76::burstWrite(uint32_t index, uint8_t values[], uint32_t length)
 {
     index += MT_BURST_WRITE;
     
@@ -705,24 +931,40 @@ void WirelessOneMT76::burstWrite(uint32_t index, uint8_t values[], uint32_t leng
     data->appendBytes(&index, sizeof(index));
     data->appendBytes(values, length);
     
-    sendCommand(CMD_BURST_WRITE, data);
+    if (!sendCommand(CMD_BURST_WRITE, data))
+    {
+        LOG("failed to burst write register");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::calibrate(McuCalibration calibration, uint32_t value)
+bool WirelessOneMT76::calibrate(McuCalibration calibration, uint32_t value)
 {
     OSData *data = OSData::withCapacity(sizeof(calibration) + sizeof(value));
     
     data->appendBytes(&calibration, sizeof(calibration));
     data->appendBytes(&value, sizeof(value));
     
-    sendCommand(CMD_CALIBRATION_OP, data);
+    if (!sendCommand(CMD_CALIBRATION_OP, data))
+    {
+        LOG("failed to calibrate");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::switchChannel(uint8_t channel)
+bool WirelessOneMT76::switchChannel(uint8_t channel)
 {
     SwitchChannelMessage message = {};
     
@@ -733,35 +975,59 @@ void WirelessOneMT76::switchChannel(uint8_t channel)
     
     data->appendBytes(&message, sizeof(message));
     
-    sendCommand(CMD_SWITCH_CHANNEL_OP, data);
+    if (!sendCommand(CMD_SWITCH_CHANNEL_OP, data))
+    {
+        LOG("failed to switch channel");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::initGain(uint32_t index, uint8_t values[], uint32_t length)
+bool WirelessOneMT76::initGain(uint32_t index, uint8_t values[], uint32_t length)
 {
     OSData *data = OSData::withCapacity(sizeof(index) + length);
     
     data->appendBytes(&index, sizeof(index));
     data->appendBytes(values, length);
     
-    sendCommand(CMD_INIT_GAIN_OP, data);
+    if (!sendCommand(CMD_INIT_GAIN_OP, data))
+    {
+        LOG("failed to init gain");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::setLedMode(uint32_t index)
+bool WirelessOneMT76::setLedMode(uint32_t index)
 {
     OSData *data = OSData::withCapacity(sizeof(index));
     
     data->appendBytes(&index, sizeof(index));
     
-    sendCommand(CMD_LED_MODE_OP, data);
+    if (!sendCommand(CMD_LED_MODE_OP, data))
+    {
+        LOG("failed to set LED mode");
+        data->release();
+        
+        return false;
+    }
     
     data->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::sendCommand(McuCommand command, OSData *data)
+bool WirelessOneMT76::sendCommand(McuCommand command, OSData *data)
 {
     // Values must be 32-bit aligned
     // 32 zero-bits mark the end
@@ -784,9 +1050,17 @@ void WirelessOneMT76::sendCommand(McuCommand command, OSData *data)
     out->appendBytes(&footer, padding);
     out->appendBytes(&footer, sizeof(footer));
     
-    bulkWrite(out);
+    if (!bulkWrite(out))
+    {
+        LOG("failed to write command");
+        out->release();
+        
+        return false;
+    }
     
     out->release();
+    
+    return true;
 }
 
 uint32_t WirelessOneMT76::efuseRead(uint8_t address, uint8_t index)
@@ -807,7 +1081,7 @@ uint32_t WirelessOneMT76::efuseRead(uint8_t address, uint8_t index)
     return controlRead(MT_EFUSE_DATA(index));
 }
 
-void WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
+bool WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
 {
     uint8_t broadcastAddress[] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
     
@@ -848,13 +1122,22 @@ void WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
     config.tsfSyncMode = 3;
     config.transmitBeacon = 1;
     
-    burstWrite(MT_BEACON_BASE + offset, (uint8_t*)out->getBytesNoCopy(), out->getLength());
+    if (!burstWrite(MT_BEACON_BASE + offset, (uint8_t*)out->getBytesNoCopy(), out->getLength()))
+    {
+        LOG("failed to write beacon");
+        out->release();
+        
+        return false;
+    }
+    
     controlWrite(MT_BEACON_TIME_CFG, config.value);
     
     out->release();
+    
+    return true;
 }
 
-void WirelessOneMT76::startBulkRead(IOUSBHostPipe *pipe)
+bool WirelessOneMT76::startBulkRead(IOUSBHostPipe *pipe)
 {
     uint16_t length = pipe->getEndpointDescriptor()->wMaxPacketSize;
     IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::withCapacity(length, kIODirectionIn);
@@ -863,7 +1146,7 @@ void WirelessOneMT76::startBulkRead(IOUSBHostPipe *pipe)
     {
         LOG("failed to allocate buffer");
         
-        return;
+        return false;
     }
     
     BulkReadInfo *info = (BulkReadInfo*)IOMalloc(sizeof(BulkReadInfo));
@@ -873,7 +1156,7 @@ void WirelessOneMT76::startBulkRead(IOUSBHostPipe *pipe)
         LOG("failed to allocate read info");
         buffer->release();
         
-        return;
+        return false;
     }
     
     info->pipe = pipe;
@@ -890,10 +1173,15 @@ void WirelessOneMT76::startBulkRead(IOUSBHostPipe *pipe)
     if (error != kIOReturnSuccess)
     {
         LOG("input error: 0x%.8x", error);
+        buffer->release();
+        
+        return false;
     }
+    
+    return true;
 }
 
-void WirelessOneMT76::bulkWrite(OSData *data)
+bool WirelessOneMT76::bulkWrite(OSData *data)
 {
     IOMemoryDescriptor *buffer = IOMemoryDescriptor::withAddress(
         (uint8_t*)data->getBytesNoCopy(),
@@ -905,7 +1193,7 @@ void WirelessOneMT76::bulkWrite(OSData *data)
     {
         LOG("failed to allocate buffer");
         
-        return;
+        return false;
     }
     
     buffer->prepare();
@@ -916,10 +1204,14 @@ void WirelessOneMT76::bulkWrite(OSData *data)
     if (error != kIOReturnSuccess)
     {
         LOG("output error: 0x%.8x", error);
+        
+        return false;
     }
     
     buffer->complete();
     buffer->release();
+    
+    return true;
 }
 
 uint32_t WirelessOneMT76::controlRead(uint16_t address, VendorRequest request)
