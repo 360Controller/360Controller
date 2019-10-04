@@ -20,6 +20,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MIN_MACOS_VERSION}</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>WirelessDongle</key>
@@ -38,22 +40,18 @@
 			<integer>1118</integer>
 		</dict>
 	</dict>
-	<key>LSMinimumSystemVersion</key>
-	<string>${MIN_MACOS_VERSION}</string>
-	<key>OSBundleCompatibleVersion</key>
-	<string>1.0.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOHIDFamily</key>
-		<string>2.0</string>
+		<string>1.0b1</string>
 		<key>com.apple.iokit.IOUSBHostFamily</key>
-		<string>1.2</string>
+		<string>1.0.1</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>18.5</string>
+		<string>7.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>18.5</string>
+		<string>8.0d0</string>
 		<key>com.apple.kpi.mach</key>
-		<string>18.5</string>
+		<string>8.0d0</string>
 	</dict>
 </dict>
 </plist>
