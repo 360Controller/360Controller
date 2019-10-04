@@ -38,6 +38,7 @@ bool WirelessOneDongle::start(IOService *provider)
     if (!mt)
     {
         LOG("invalid provider");
+        stop(provider);
         
         return false;
     }

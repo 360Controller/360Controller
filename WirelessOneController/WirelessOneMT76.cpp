@@ -41,6 +41,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!device)
     {
         LOG("invalid provider");
+        stop(provider);
         
         return false;
     }
@@ -48,6 +49,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!device->open(this))
     {
         LOG("failed to open device");
+        stop(provider);
         
         return false;
     }
@@ -57,6 +59,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (error != kIOReturnSuccess)
     {
         LOG("error setting configuration: 0x%.8x", error);
+        stop(provider);
         
         return false;
     }
@@ -66,6 +69,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!iterator)
     {
         LOG("missing child iterator");
+        stop(provider);
         
         return false;
     }
@@ -87,6 +91,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!interface)
     {
         LOG("missing host interface");
+        stop(provider);
         
         return false;
     }
@@ -94,6 +99,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!interface->open(this))
     {
         LOG("failed to open interface");
+        stop(provider);
         
         return false;
     }
@@ -104,6 +110,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!configInfo || !interfaceInfo)
     {
         LOG("missing descriptors");
+        stop(provider);
         
         return false;
     }
@@ -144,6 +151,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!readPipe || !writePipe || !packetPipe)
     {
         LOG("missing input/output pipes");
+        stop(provider);
         
         return false;
     }
@@ -153,6 +161,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!resourceLock)
     {
         LOG("failed to acquire lock");
+        stop(provider);
         
         return false;
     }
@@ -160,6 +169,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!requestFirmware())
     {
         LOG("failed to request firmware");
+        stop(provider);
         
         return false;
     }
@@ -167,6 +177,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!loadFirmware())
     {
         LOG("failed to load firmware");
+        stop(provider);
         
         return false;
     }
@@ -174,6 +185,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!initChip())
     {
         LOG("failed to init chip");
+        stop(provider);
         
         return false;
     }
@@ -181,6 +193,7 @@ bool WirelessOneMT76::start(IOService *provider)
     if (!initDongle())
     {
         LOG("failed to init dongle");
+        stop(provider);
         
         return false;
     }
