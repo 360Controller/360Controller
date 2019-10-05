@@ -166,6 +166,39 @@ bool WirelessOneMT76::start(IOService *provider)
         return false;
     }
     
+    workLoop = getWorkLoop();
+    
+    if (!workLoop)
+    {
+        LOG("missing work loop");
+        stop(provider);
+        
+        return false;
+    }
+    
+    timer = IOTimerEventSource::timerEventSource(
+        this,
+        OSMemberFunctionCast(IOTimerEventSource::Action, this, &WirelessOneMT76::timerAction)
+    );
+    
+    if (!timer)
+    {
+        LOG("failed to create timer");
+        stop(provider);
+        
+        return false;
+    }
+    
+    error = workLoop->addEventSource(timer);
+    
+    if (error != kIOReturnSuccess)
+    {
+        LOG("error adding timer: 0x%.8x", error);
+        stop(provider);
+        
+        return false;
+    }
+    
     if (!requestFirmware())
     {
         LOG("failed to request firmware");
@@ -373,10 +406,22 @@ bool WirelessOneMT76::loadFirmware()
     controlWrite(MT_FCE_DMA_ADDR, 0, MT_VEND_WRITE_CFG);
     controlWrite(MT_FW_LOAD_IVB, 0, MT_VEND_DEV_MODE);
     
+    // Start timer
+    timeout = false;
+    timer->setTimeoutMS(MT_TIMEOUT);
+    
     // Wait for firmware to start
-    while (controlRead(MT_FCE_DMA_ADDR, MT_VEND_READ_CFG) != 0x01);
+    while (controlRead(MT_FCE_DMA_ADDR, MT_VEND_READ_CFG) != 0x01 && !timeout);
+    
+    if (timeout)
+    {
+        LOG("timeout");
+        
+        return false;
+    }
     
     LOG("firmware loaded");
+    timer->cancelTimeout();
     
     return true;
 }
@@ -418,7 +463,20 @@ bool WirelessOneMT76::loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t 
         
         uint32_t complete = (length << 16) | MT_DMA_COMPLETE;
         
-        while (controlRead(MT_FCE_DMA_LEN, MT_VEND_READ_CFG) != complete);
+        // Start timer
+        timeout = false;
+        timer->setTimeoutMS(MT_TIMEOUT);
+        
+        while (controlRead(MT_FCE_DMA_LEN, MT_VEND_READ_CFG) != complete && !timeout);
+        
+        if (timeout)
+        {
+            LOG("timeout");
+            
+            return false;
+        }
+        
+        timer->cancelTimeout();
     }
     
     return true;
@@ -1284,6 +1342,11 @@ void WirelessOneMT76::controlWrite(uint16_t address, uint32_t value, VendorReque
     }
 }
 
+void WirelessOneMT76::timerAction(OSObject *owner, IOTimerEventSource *sender)
+{
+    timeout = true;
+}
+
 void WirelessOneMT76::requestResourceCallback(
     OSKextRequestTag requestTag,
     OSReturn result,
@@ -1402,6 +1465,14 @@ void WirelessOneMT76::dispose()
     {
         IOLockFree(resourceLock);
         resourceLock = nullptr;
+    }
+    
+    if (timer)
+    {
+        timer->cancelTimeout();
+        workLoop->removeEventSource(timer);
+        timer->release();
+        timer = nullptr;
     }
     
     if (readPipe)

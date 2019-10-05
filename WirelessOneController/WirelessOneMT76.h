@@ -706,6 +706,9 @@ MT_TX_AGG_CNT_BASE1 + ((_id - 8) << 2))
 #define MT_EP_READ_PACKET 4
 #define MT_EP_WRITE 4
 
+// Read/write timeout
+#define MT_TIMEOUT 1000
+
 // Firmware defines
 // DLM offset differs from Linux source
 #define MT_FW_RESOURCE "Firmware.bin"
@@ -1159,7 +1162,11 @@ private:
     IOUSBHostDevice *device;
     IOUSBHostInterface *interface;
     IOUSBHostPipe *readPipe, *writePipe, *packetPipe;
+    
     IOLock *resourceLock;
+    IOWorkLoop *workLoop;
+    IOTimerEventSource *timer;
+    bool timeout;
     
     OSData *firmware;
     uint8_t macAddress[6];
@@ -1201,6 +1208,9 @@ private:
     bool bulkWrite(OSData *data);
     uint32_t controlRead(uint16_t address, VendorRequest request = MT_VEND_MULTI_READ);
     void controlWrite(uint16_t address, uint32_t value, VendorRequest request = MT_VEND_MULTI_WRITE);
+    
+    /* Timeout callback */
+    void timerAction(OSObject *owner, IOTimerEventSource *sender);
     
     /* Firmware and bulk read callbacks */
     static void requestResourceCallback(
