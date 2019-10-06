@@ -72,6 +72,12 @@ public:
 
 protected:
     bool handleStart(IOService *provider) override;
+    IOReturn setProperties(OSObject *properties) override;
+    IOReturn setReport(
+        IOMemoryDescriptor *report,
+        IOHIDReportType reportType,
+        IOOptionBits options = 0
+    ) override;
     
     IOReturn newReportDescriptor(IOMemoryDescriptor **descriptor) const override;
     OSString* newTransportString() const override;

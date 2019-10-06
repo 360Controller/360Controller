@@ -49,6 +49,8 @@ public:
     void handleDisconnect(uint8_t macAddress[]);
     void handleData(uint8_t macAddress[], uint8_t data[]);
     
+    bool powerOff(uint8_t macAddress[]);
+    
     uint32_t generateLocationId();
 
 private:

@@ -739,7 +739,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         int batteryPercentage = -1;
         CFTypeRef prop;
 
-        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice")) {
+        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice") ||
+            IOObjectConformsTo(registryEntry, "WirelessOneController")
+        ) {
             prop = IORegistryEntryCreateCFProperty(registryEntry, CFSTR("BatteryLevel"), NULL, 0);
             if (prop != nil) {
                 unsigned char level;

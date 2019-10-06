@@ -282,6 +282,18 @@ bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t b
     return send(macAddress, frame, (uint8_t*)&data);
 }
 
+bool WirelessOneDongle::powerOff(uint8_t macAddress[])
+{
+    ControllerFrame frame = {};
+    uint8_t data[] = { 0x04 };
+    
+    frame.command = 0x05;
+    frame.message = 0x20;
+    frame.length = sizeof(data);
+    
+    return send(macAddress, frame, (uint8_t*)&data);
+}
+
 bool WirelessOneDongle::send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[])
 {
     OSData *out = OSData::withCapacity(sizeof(frame) + frame.length);

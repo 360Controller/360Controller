@@ -20,6 +20,7 @@
 #include "WirelessOneDongle.h"
 #include "../360Controller/xbox360hid.h"
 #include "../360Controller/ControlStruct.h"
+#include "../360Controller/_60Controller.h"
 
 #define LOG(format, ...) IOLog("WirelessOne (Controller): %s - " format "\n", __func__, ##__VA_ARGS__)
 
@@ -46,13 +47,71 @@ bool WirelessOneController::handleStart(IOService *provider)
     return true;
 }
 
+IOReturn WirelessOneController::setProperties(OSObject *properties)
+{
+    OSDictionary *dictionary = OSDynamicCast(OSDictionary, properties);
+    
+    if (!dictionary)
+    {
+        return kIOReturnBadArgument;
+    }
+    
+    // Set 'Xbox One' controller type
+    if (!dictionary->setObject(
+        OSString::withCString("ControllerType"),
+        OSNumber::withNumber(2, 8)
+    )) {
+        LOG("failed to set controller type");
+        
+        return kIOReturnError;
+    }
+    
+    if (!setProperty("DeviceData", dictionary))
+    {
+        LOG("failed to set device data");
+        
+        return kIOReturnError;
+    }
+    
+    return kIOReturnSuccess;
+}
+
+IOReturn WirelessOneController::setReport(
+    IOMemoryDescriptor *report,
+    IOHIDReportType reportType,
+    IOOptionBits options
+) {
+    uint8_t data[2];
+    
+    if (report->readBytes(0, data, sizeof(data)) < sizeof(data))
+    {
+        return kIOReturnUnsupported;
+    }
+    
+    uint8_t command = data[0];
+    
+    if (command == 0x02)
+    {
+        // LEDs are only supported on 360 controllers
+        return kIOReturnUnsupported;
+    }
+    
+    if (command == 0x03)
+    {
+        // Power off the controller remotely
+        dongle->powerOff(macAddress);
+        
+        return kIOReturnSuccess;
+    }
+    
+    return IOHIDDevice::setReport(report, reportType, options);
+}
+
 void WirelessOneController::handleSerialNumber(uint8_t data[])
 {
     SerialData *serial = (SerialData*)data;
     
-    memcpy(serialNumber, serial->serialNumber, sizeof(serialNumber) - 1);
-    
-    serialNumber[sizeof(serialNumber) - 1] = '\0';
+    memcpy(serialNumber, serial->serialNumber, sizeof(serial->serialNumber));
     
     LOG("serial number: %s", serialNumber);
 }

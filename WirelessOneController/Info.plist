@@ -28,6 +28,11 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.mice.driver.WirelessOneController</string>
+			<key>IOCFPlugInTypes</key>
+			<dict>
+				<key>F4545CE5-BF5B-11D6-A4BB-0003933E3E3E</key>
+				<string>360Controller.kext/Contents/PlugIns/Feedback360.plugin</string>
+			</dict>
 			<key>IOClass</key>
 			<string>WirelessOneMT76</string>
 			<key>IOKitDebug</key>

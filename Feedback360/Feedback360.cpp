@@ -160,9 +160,17 @@ IOCFPlugInInterface** Feedback360::Alloc(void)
 
 IOReturn Feedback360::Probe(CFDictionaryRef propertyTable, io_service_t service, SInt32 *order)
 {
-    if ((service==0)
-        || ((!IOObjectConformsTo(service,"Xbox360ControllerClass"))
-            && (!IOObjectConformsTo(service,"Wireless360Controller")))) return kIOReturnBadArgument;
+    if (service == 0) {
+        return kIOReturnBadArgument;
+    }
+    
+    if (!IOObjectConformsTo(service,"Xbox360ControllerClass") ||
+        !IOObjectConformsTo(service, "Wireless360Controller") ||
+        !IOObjectConformsTo(service, "WirelessOneController")
+    ) {
+        return kIOReturnBadArgument;
+    }
+    
     return FF_OK;
 }
 
@@ -496,10 +504,13 @@ HRESULT Feedback360::InitializeTerminate(NumVersion APIversion, io_object_t hidD
             return FFERR_INVALIDPARAM;
         }
         // From probe
-        if( (hidDevice==0)
-           || ((!IOObjectConformsTo(hidDevice,"Xbox360ControllerClass"))
-               &&  (!IOObjectConformsTo(hidDevice,"Wireless360Controller"))) )
-        {
+        if (hidDevice == 0) {
+            return FFERR_INVALIDPARAM;
+        }
+        if (!IOObjectConformsTo(hidDevice, "Xbox360ControllerClass") ||
+            !IOObjectConformsTo(hidDevice, "Wireless360Controller") ||
+            !IOObjectConformsTo(hidDevice, "WirelessOneController")
+        ) {
             // fprintf(stderr,"Feedback: Invalid device\n");
             return FFERR_INVALIDPARAM;
         }
