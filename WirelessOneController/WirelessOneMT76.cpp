@@ -1037,8 +1037,10 @@ bool WirelessOneMT76::switchChannel(uint8_t channel)
 {
     SwitchChannelMessage message = {};
     
+    // Set channel to switch to
+    // Select TX and RX stream 1
     message.channel = channel;
-    message.chainmask = 0x0101;
+    message.txRxSetting = 0x0101;
     
     OSData *data = OSData::withCapacity(sizeof(message));
     

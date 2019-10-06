@@ -1077,9 +1077,10 @@ struct SwitchChannelMessage
     uint8_t scan;
     uint8_t bandwidth;
     uint8_t padding1;
-    uint16_t chainmask;
+    uint16_t txRxSetting;
     uint8_t externalChannel;
     uint8_t padding2;
+    uint64_t padding3;
 } __attribute__((packed));
 
 union EfuseControl
