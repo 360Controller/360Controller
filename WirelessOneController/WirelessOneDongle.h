@@ -28,6 +28,13 @@ struct ControllerFrame
     uint8_t length;
 } __attribute__((packed));
 
+struct LedModeData
+{
+    uint8_t unknown;
+    uint8_t mode;
+    uint8_t brightness;
+} __attribute__((packed));
+
 class WirelessOneMT76;
 
 class WirelessOneDongle : public IOService
@@ -52,5 +59,9 @@ private:
     
     template<typename T>
     void iterateControllers(T each);
+    
+    bool executeHandshake(uint8_t macAddress[]);
+    bool requestSerialNumber(uint8_t macAddress[]);
+    bool setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t brightness);
     bool send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[]);
 };
