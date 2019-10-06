@@ -623,17 +623,15 @@ bool WirelessOneMT76::enableBeacon()
     // I suspect it's a list of channel pairs the AP switches through
     // Each pair contains a TX and a RX channel
     // I wonder why some channels are listed twice though...
-    const uint32_t gain1[] = {
+    const uint32_t gain[] = {
         0x01, 0xa5, 0x0b, 0x01,
         0x06, 0x0b, 0x24, 0x28,
         0x2c, 0x30, 0x95, 0x99,
         0x9d, 0xa1
     };
-    const uint32_t gain2[] = { 0x08 };
     
     if (!initGain(0, macAddress, sizeof(macAddress)) ||
-        !initGain(7, (uint8_t*)gain1, sizeof(gain1)) ||
-        !initGain(14, (uint8_t*)gain2, sizeof(gain2))
+        !initGain(7, (uint8_t*)gain, sizeof(gain))
     ) {
         LOG("failed to init beacon gain");
         
