@@ -60,13 +60,6 @@ void WirelessOneDongle::stop(IOService *provider)
 
 void WirelessOneDongle::handleConnect(uint8_t macAddress[])
 {
-    if (!initController(macAddress))
-    {
-        LOG("failed to init controller");
-        
-        return;
-    }
-    
     if (!executeHandshake(macAddress))
     {
         LOG("failed to execute handshake");
@@ -89,7 +82,7 @@ void WirelessOneDongle::handleConnect(uint8_t macAddress[])
         return;
     }
     
-    LOG("handshake complete");
+    LOG("handshake sent");
 }
 
 void WirelessOneDongle::handleDisconnect(uint8_t macAddress[])
@@ -109,14 +102,43 @@ void WirelessOneDongle::handleDisconnect(uint8_t macAddress[])
 
 void WirelessOneDongle::handleData(uint8_t macAddress[], uint8_t data[])
 {
+    ControllerFrame *frame = (ControllerFrame*)data;
+    
+    // Serial number response, start controller
+    if (frame->command == 0x1e && frame->message == 0x30 && frame->length == 0x10)
+    {
+        uint8_t response[] = { 0x00, 0x1e, 0x20, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        
+        ControllerFrame out = {};
+        
+        out.command = 0x01;
+        out.message = 0x20;
+        out.sequence = frame->sequence;
+        out.length = 0x09;
+        
+        if (!send(macAddress, out, response))
+        {
+            LOG("failed to send serial number response");
+            
+            return;
+        }
+        
+        SerialData *serial = (SerialData*)(data + sizeof(ControllerFrame));
+        
+        if (!initController(macAddress, serial->serialNumber))
+        {
+            LOG("failed to init controller");
+        }
+        
+        return;
+    }
+    
     iterateControllers([&](WirelessOneController *controller)
     {
         if (memcmp(controller->macAddress, macAddress, sizeof(controller->macAddress)))
         {
             return;
         }
-        
-        ControllerFrame *frame = (ControllerFrame*)data;
         
         // Input data response
         if (frame->command == 0x20 && frame->message == 0 && frame->length == 0x0e)
@@ -145,28 +167,6 @@ void WirelessOneDongle::handleData(uint8_t macAddress[], uint8_t data[])
             
             controller->handleGuideButton(data + sizeof(ControllerFrame));
         }
-        
-        // Serial number response
-        else if (frame->command == 0x1e && frame->message == 0x30 && frame->length == 0x10)
-        {
-            uint8_t response[] = { 0x00, 0x1e, 0x20, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00 };
-            
-            ControllerFrame out = {};
-            
-            out.command = 0x01;
-            out.message = 0x20;
-            out.sequence = frame->sequence;
-            out.length = 0x09;
-            
-            if (!send(macAddress, out, response))
-            {
-                LOG("failed to send serial number response");
-                
-                return;
-            }
-            
-            controller->handleSerialNumber(data + sizeof(ControllerFrame));
-        }
     });
 }
 
@@ -179,9 +179,12 @@ uint32_t WirelessOneDongle::generateLocationId()
     return id;
 }
 
-bool WirelessOneDongle::initController(uint8_t macAddress[])
+bool WirelessOneDongle::initController(uint8_t macAddress[], char serialNumber[])
 {
     WirelessOneController *controller = new WirelessOneController;
+    
+    memcpy(controller->macAddress, macAddress, sizeof(controller->macAddress));
+    memcpy(controller->serialNumber, serialNumber, sizeof(controller->serialNumber) - 1);
     
     if (!controller->init())
     {
@@ -205,8 +208,6 @@ bool WirelessOneDongle::initController(uint8_t macAddress[])
         
         return false;
     }
-    
-    memcpy(controller->macAddress, macAddress, sizeof(controller->macAddress));
     
     return true;
 }

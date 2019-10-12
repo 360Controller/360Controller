@@ -65,8 +65,8 @@ class WirelessOneController : public IOHIDDevice
 
 public:
     uint8_t macAddress[6];
+    char serialNumber[15];
     
-    void handleSerialNumber(uint8_t data[]);
     void handleInput(uint8_t data[]);
     void handleGuideButton(uint8_t data[]);
 
@@ -92,7 +92,6 @@ protected:
     
 private:
     WirelessOneDongle *dongle;
-    char serialNumber[15];
     
     void sendReport(XBOX360_IN_REPORT report);
 };

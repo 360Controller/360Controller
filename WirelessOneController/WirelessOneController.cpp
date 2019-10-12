@@ -44,6 +44,8 @@ bool WirelessOneController::handleStart(IOService *provider)
         return false;
     }
     
+    LOG("serial number: %s", serialNumber);
+    
     return true;
 }
 
@@ -105,15 +107,6 @@ IOReturn WirelessOneController::setReport(
     }
     
     return IOHIDDevice::setReport(report, reportType, options);
-}
-
-void WirelessOneController::handleSerialNumber(uint8_t data[])
-{
-    SerialData *serial = (SerialData*)data;
-    
-    memcpy(serialNumber, serial->serialNumber, sizeof(serial->serialNumber));
-    
-    LOG("serial number: %s", serialNumber);
 }
 
 void WirelessOneController::handleInput(uint8_t data[])
