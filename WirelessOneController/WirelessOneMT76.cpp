@@ -292,13 +292,23 @@ bool WirelessOneMT76::initChip()
         return false;
     }
     
-    // Start beacon transmission
-    if (!enableBeacon())
+    // Write MAC address
+    if (!initGain(0, macAddress, sizeof(macAddress)))
     {
-        LOG("failed to enable beacon");
+        LOG("failed to init gain");
         
         return false;
     }
+    
+    // Start beacon transmission
+    if (!writeBeacon())
+    {
+        LOG("failed to write beacon");
+        
+        return false;
+    }
+    
+    LOG("chip initialized");
     
     return true;
 }
@@ -583,71 +593,24 @@ bool WirelessOneMT76::initRegisters()
     return true;
 }
 
-bool WirelessOneMT76::enableBeacon()
+void WirelessOneMT76::handleButtonPress()
 {
-    // Required for controllers to connect reliably
-    // Probably contains the selected channel pair
-    // 00 -> a5 and 30 -> 99
-    uint8_t beaconData[] = {
-        0xdd, 0x10, 0x00, 0x50,
-        0xf2, 0x11, 0x01, 0x10,
-        0x00, 0xa5, 0x30, 0x99,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00
-    };
-    BeaconFrame beacon = {};
-    
-    // Default beacon interval
-    // Original capability info
-    // Wildcard SSID
-    beacon.interval = MT_BCN_DEF_INTVAL;
-    beacon.capabilityInfo = 0xc631;
-    
-    OSData *out = OSData::withCapacity(sizeof(beacon) + sizeof(beaconData));
-    
-    out->appendBytes(&beacon, sizeof(beacon));
-    out->appendBytes(beaconData, sizeof(beaconData));
-    
-    if (!writeBeacon(MT_BCN_NORMAL_OFFSET, MT_WLAN_BEACON, out))
+    // Start sending the 'pairing' beacon
+    if (!writeBeacon(true))
     {
-        LOG("failed to write beacon");
-        out->release();
+        LOG("failed to write pairing beacon");
         
-        return false;
+        return;
     }
     
-    out->release();
-    
-    // This data is VERY IMPORTANT
-    // The first value always has to be 0x01
-    // I suspect it's a list of channel pairs the AP switches through
-    // Each pair contains a TX and a RX channel
-    // I wonder why some channels are listed twice though...
-    const uint32_t gain[] = {
-        0x01, 0xa5, 0x0b, 0x01,
-        0x06, 0x0b, 0x24, 0x28,
-        0x2c, 0x30, 0x95, 0x99,
-        0x9d, 0xa1
-    };
-    
-    if (!initGain(0, macAddress, sizeof(macAddress)) ||
-        !initGain(7, (uint8_t*)gain, sizeof(gain))
-    ) {
-        LOG("failed to init beacon gain");
-        
-        return false;
-    }
-    
-    if (!calibrate(MCU_CAL_RXDCOC, 0))
+    if (!setLedMode(MT_LED_BLINK))
     {
-        LOG("failed to calibrate beacon");
+        LOG("failed to set LED mode");
         
-        return false;
+        return;
     }
     
-    LOG("beacon started");
-    
-    return true;
+    LOG("pairing initiated");
 }
 
 void WirelessOneMT76::handleWlanPacket(uint8_t data[])
@@ -791,6 +754,14 @@ bool WirelessOneMT76::associateController(uint8_t controllerAddress[])
         return false;
     }
     
+    if (!setLedMode(MT_LED_ON))
+    {
+        LOG("failed to set LED mode");
+        out->release();
+        
+        return false;
+    }
+    
     out->release();
     
     return true;
@@ -798,7 +769,7 @@ bool WirelessOneMT76::associateController(uint8_t controllerAddress[])
 
 bool WirelessOneMT76::pairController(uint8_t controllerAddress[])
 {
-    uint8_t data[] = { 0x70, 0x0f, 0x00, 0x45 };
+    uint8_t data[] = { 0x70, 0x02, 0x00 };
     
     TxWi txWi = {};
     
@@ -828,14 +799,6 @@ bool WirelessOneMT76::pairController(uint8_t controllerAddress[])
     if (!sendWlanPacket(out))
     {
         LOG("failed to send pairing packet");
-        out->release();
-        
-        return false;
-    }
-    
-    if (!setLedMode(0))
-    {
-        LOG("failed to set pairing LED");
         out->release();
         
         return false;
@@ -1152,9 +1115,20 @@ uint32_t WirelessOneMT76::efuseRead(uint8_t address, uint8_t index)
     return controlRead(MT_EFUSE_DATA(index));
 }
 
-bool WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
+bool WirelessOneMT76::writeBeacon(bool pairing)
 {
     uint8_t broadcastAddress[] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+    
+    // Required for controllers to connect reliably
+    // Probably contains the selected channel pair
+    // 00 -> a5 and 30 -> 99
+    uint8_t beaconData[] = {
+        0xdd, 0x10, 0x00, 0x50,
+        0xf2, 0x11, 0x01, 0x10,
+        pairing, 0xa5, 0x30, 0x99,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00
+    };
     
     TxWi txWi = {};
     
@@ -1164,22 +1138,33 @@ bool WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
     txWi.phyMode = MT_PHY_TYPE_OFDM;
     txWi.timestamp = 1;
     txWi.nseq = 1;
-    txWi.mpduByteCount = sizeof(WlanFrame) + data->getLength();
+    txWi.mpduByteCount = sizeof(WlanFrame) + sizeof(BeaconFrame) + sizeof(beaconData);
     
     WlanFrame wlanFrame = {};
     
     wlanFrame.frameControl.type = MT_WLAN_MGMT;
-    wlanFrame.frameControl.subtype = type;
+    wlanFrame.frameControl.subtype = MT_WLAN_BEACON;
     
     memcpy(wlanFrame.destination, broadcastAddress, sizeof(macAddress));
     memcpy(wlanFrame.source, macAddress, sizeof(macAddress));
     memcpy(wlanFrame.bssId, macAddress, sizeof(macAddress));
     
-    OSData *out = OSData::withCapacity(sizeof(txWi) + sizeof(wlanFrame) + data->getLength());
+    BeaconFrame beaconFrame = {};
+    
+    // Default beacon interval
+    // Original capability info
+    // Wildcard SSID
+    beaconFrame.interval = MT_BCN_DEF_INTVAL;
+    beaconFrame.capabilityInfo = 0xc631;
+    
+    OSData *out = OSData::withCapacity(
+        sizeof(txWi) + sizeof(wlanFrame) + sizeof(beaconFrame) + sizeof(beaconData)
+    );
     
     out->appendBytes(&txWi, sizeof(txWi));
     out->appendBytes(&wlanFrame, sizeof(wlanFrame));
-    out->appendBytes(data);
+    out->appendBytes(&beaconFrame, sizeof(beaconFrame));
+    out->appendBytes(beaconData, sizeof(beaconData));
     
     BeaconTimeConfig config = {};
     
@@ -1193,7 +1178,7 @@ bool WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
     config.tsfSyncMode = 3;
     config.transmitBeacon = 1;
     
-    if (!burstWrite(MT_BEACON_BASE + offset, (uint8_t*)out->getBytesNoCopy(), out->getLength()))
+    if (!burstWrite(MT_BEACON_BASE, (uint8_t*)out->getBytesNoCopy(), out->getLength()))
     {
         LOG("failed to write beacon");
         out->release();
@@ -1201,9 +1186,35 @@ bool WirelessOneMT76::writeBeacon(uint32_t offset, uint8_t type, OSData *data)
         return false;
     }
     
+    out->release();
+    
     controlWrite(MT_BEACON_TIME_CFG, config.value);
     
-    out->release();
+    // This data is VERY IMPORTANT
+    // The first value always has to be 0x01
+    // I suspect it's a list of channel pairs the AP switches through
+    // Each pair contains a TX and a RX channel
+    // I wonder why some channels are listed twice though...
+    const uint32_t gain[] = {
+        0x01, 0xa5, 0x0b, 0x01,
+        0x06, 0x0b, 0x24, 0x28,
+        0x2c, 0x30, 0x95, 0x99,
+        0x9d, 0xa1
+    };
+    
+    if (!initGain(7, (uint8_t*)gain, sizeof(gain)))
+    {
+        LOG("failed to init beacon gain");
+        
+        return false;
+    }
+    
+    if (!calibrate(MCU_CAL_RXDCOC, 0))
+    {
+        LOG("failed to calibrate beacon");
+        
+        return false;
+    }
     
     return true;
 }
@@ -1405,10 +1416,7 @@ void WirelessOneMT76::bulkReadCompleted(
         
         else if (rxInfo->eventType == EVT_BUTTON_PRESS)
         {
-            // Start sending the 'pairing' beacon
-            self->writeBeacon(MT_BCN_PAIR_OFFSET, MT_WLAN_PAIR, nullptr);
-            
-            LOG("pairing beacon started");
+            self->handleButtonPress();
         }
     }
     

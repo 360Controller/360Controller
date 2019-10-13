@@ -719,7 +719,7 @@ MT_TX_AGG_CNT_BASE1 + ((_id - 8) << 2))
 #define MT_FW_LOAD_IVB 0x12
 
 // EFUSE offsets
-#define MT_EF_MAC_ADDR 0
+#define MT_EF_MAC_ADDR 0x00
 #define MT_EF_XTAL_CALIB 0x90
 
 // Burst write offset
@@ -730,20 +730,22 @@ MT_TX_AGG_CNT_BASE1 + ((_id - 8) << 2))
 
 // Beacon defines
 #define MT_BCN_DEF_INTVAL 100
-#define MT_BCN_NORMAL_OFFSET 0
-#define MT_BCN_PAIR_OFFSET 0x1200
 
 // WLAN frame types
-#define MT_WLAN_MGMT 0
+#define MT_WLAN_MGMT 0x00
 #define MT_WLAN_DATA 0x02
 
 // WLAN frame subtypes
-#define MT_WLAN_ASSOC_REQ 0
+#define MT_WLAN_ASSOC_REQ 0x00
 #define MT_WLAN_ASSOC_RESP 0x01
 #define MT_WLAN_DISASSOC 0x0a
 #define MT_WLAN_PAIR 0x07
 #define MT_WLAN_BEACON 0x08
 #define MT_WLAN_QOS_DATA 0x08
+
+// LED modes
+#define MT_LED_BLINK 0x00
+#define MT_LED_ON 0x01
 
 enum PhyType
 {
@@ -1180,9 +1182,9 @@ private:
     bool loadFirmware();
     bool loadFirmwarePart(uint32_t offset, uint8_t *start, uint8_t *end);
     bool initRegisters();
-    bool enableBeacon();
     
     /* Packet handling and transmission */
+    void handleButtonPress();
     void handleWlanPacket(uint8_t data[]);
     void handleControllerPacket(uint8_t data[]);
     bool associateController(uint8_t controllerAddress[]);
@@ -1202,7 +1204,7 @@ private:
     
     /* MCU functions */
     uint32_t efuseRead(uint8_t address, uint8_t index);
-    bool writeBeacon(uint32_t offset, uint8_t type, OSData *data);
+    bool writeBeacon(bool pairing = false);
     
     /* USB control/bulk transfer */
     bool startBulkRead(IOUSBHostPipe *pipe);
