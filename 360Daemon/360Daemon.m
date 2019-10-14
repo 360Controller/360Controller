@@ -148,8 +148,10 @@ static void callbackConnected(void *param,io_iterator_t iterator)
         NSLog(@"Found %p: %@", object, bob);
         CFRelease(bob);
 #endif
-        if (IOObjectConformsTo(object, "WirelessHIDDevice") || IOObjectConformsTo(object, "Xbox360ControllerClass"))
-        {
+        if (IOObjectConformsTo(object, "Xbox360ControllerClass") ||
+            IOObjectConformsTo(object, "WirelessHIDDevice") ||
+            IOObjectConformsTo(object, "WirelessOneController")
+        ) {
             FFDeviceObjectReference forceFeedback = 0;
             NSString *serialNumber = GetSerialNumber(object);
 
@@ -281,6 +283,10 @@ static void callbackPower(void *refCon, io_service_t service, natural_t messageT
             IOServiceGetMatchingServices(masterPort, IOServiceMatching("WirelessHIDDevice"), &newItr);
             callbackConnected(NULL, newItr);
             IOObjectRelease(newItr);
+            // Wireless One devices
+            IOServiceGetMatchingServices(masterPort, IOServiceMatching("WirelessOneController"), &newItr);
+            callbackConnected(NULL, newItr);
+            IOObjectRelease(newItr);
         }
             break;
 
@@ -316,6 +322,11 @@ int main (int argc, const char * argv[])
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackConnected, NULL, &onIteratorWireless);
     callbackConnected(NULL, onIteratorWireless);
     IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackDisconnected, NULL, &offIteratorWireless);
+    callbackDisconnected(NULL, offIteratorWireless);
+    // Wireless One devices
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessOneController"), callbackConnected, NULL, &onIteratorWireless);
+    callbackConnected(NULL, onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessOneController"), callbackDisconnected, NULL, &offIteratorWireless);
     callbackDisconnected(NULL, offIteratorWireless);
     // wake/sleep watching
     root_power_port = IORegisterForSystemPower(NULL, &sleepNotifyPort, callbackPower, &powerNotifier);

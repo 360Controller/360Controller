@@ -739,7 +739,9 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         int batteryPercentage = -1;
         CFTypeRef prop;
 
-        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice")) {
+        if (IOObjectConformsTo(registryEntry, "WirelessHIDDevice") ||
+            IOObjectConformsTo(registryEntry, "WirelessOneController")
+        ) {
             prop = IORegistryEntryCreateCFProperty(registryEntry, CFSTR("BatteryLevel"), NULL, 0);
             if (prop != nil) {
                 unsigned char level;
@@ -800,7 +802,7 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
 		io_object_t parent = 0;
 		IORegistryEntryGetParentEntry(hidDevice, kIOServicePlane, &parent);
         BOOL deviceWired = IOObjectConformsTo(parent, "Xbox360Peripheral") && IOObjectConformsTo(hidDevice, "Xbox360ControllerClass");
-        BOOL deviceWireless = IOObjectConformsTo(hidDevice, "WirelessHIDDevice");
+        BOOL deviceWireless = IOObjectConformsTo(hidDevice, "WirelessHIDDevice") || IOObjectConformsTo(hidDevice, "WirelessOneController");
         if ((!deviceWired) && (!deviceWireless))
         {
             IOObjectRelease(hidDevice);
@@ -861,8 +863,10 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
         IOObjectRelease(object);
         // Wireless
     IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &onIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOFirstMatchNotification, IOServiceMatching("WirelessOneController"), callbackHandleDevice, (__bridge void *)(self), &onIteratorWireless);
     callbackHandleDevice((__bridge void *)(self), onIteratorWireless);
     IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessHIDDevice"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
+    IOServiceAddMatchingNotification(notifyPort, kIOTerminatedNotification, IOServiceMatching("WirelessOneController"), callbackHandleDevice, (__bridge void *)(self), &offIteratorWireless);
     while((object = IOIteratorNext(offIteratorWireless)) != 0)
         IOObjectRelease(object);
 
