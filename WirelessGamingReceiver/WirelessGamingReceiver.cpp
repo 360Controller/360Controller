@@ -316,7 +316,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void *bytes, UInt32 len
     IOUSBCompletion complete;
     IOReturn err;
 
-    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionIn, length);
+    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionOut, length);
     if (outBuffer == NULL)
     {
         // IOLog("send - unable to allocate buffer\n");
@@ -494,7 +494,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char *data
     }
 
     // Add anything else to the queue
-    IOMemoryDescriptor *copy = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionIn, length);
+    IOMemoryDescriptor *copy = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionOut, length);
     copy->writeBytes(0, data, length);
     connections[index].inputArray->setObject(copy);
     if (connections[index].service == NULL)

@@ -598,7 +598,7 @@ bool Xbox360Peripheral::QueueWrite(const void *bytes,UInt32 length)
     IOUSBCompletion complete;
     IOReturn err;
 
-    outBuffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,kIODirectionIn,length);
+    outBuffer=IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task,kIODirectionOut,length);
     if(outBuffer==NULL) {
         IOLog("send - unable to allocate buffer\n");
         return false;
