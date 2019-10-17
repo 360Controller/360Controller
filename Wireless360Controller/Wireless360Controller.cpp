@@ -368,7 +368,7 @@ IOReturn Wireless360Controller::setReport(IOMemoryDescriptor *report, IOHIDRepor
 
 IOReturn Wireless360Controller::newReportDescriptor(IOMemoryDescriptor ** descriptor ) const
 {
-    IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(ReportDescriptor));
+    IOBufferMemoryDescriptor *buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionOut, sizeof(ReportDescriptor));
 
     if (buffer == NULL)
         return kIOReturnNoResources;

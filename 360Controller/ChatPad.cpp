@@ -35,7 +35,7 @@ IOReturn ChatPadKeyboardClass::newReportDescriptor(IOMemoryDescriptor **descript
 {
     IOBufferMemoryDescriptor *buffer;
 
-    buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(HID_ChatPad::ReportDescriptor));
+    buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionOut, sizeof(HID_ChatPad::ReportDescriptor));
     if (buffer == NULL)
 		return kIOReturnNoResources;
     buffer->writeBytes(0, HID_ChatPad::ReportDescriptor, sizeof(HID_ChatPad::ReportDescriptor));
