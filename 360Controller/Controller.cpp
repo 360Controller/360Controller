@@ -94,7 +94,7 @@ IOReturn Xbox360ControllerClass::setProperties(OSObject* properties)
 // Returns the HID descriptor for this device
 IOReturn Xbox360ControllerClass::newReportDescriptor(IOMemoryDescriptor** descriptor) const
 {
-    IOBufferMemoryDescriptor* buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, sizeof(HID_360::ReportDescriptor));
+    IOBufferMemoryDescriptor* buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, sizeof(HID_360::ReportDescriptor));
 
     if (buffer == nullptr)
     {

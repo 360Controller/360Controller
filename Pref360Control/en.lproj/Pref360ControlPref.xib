@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -57,7 +57,7 @@
         <window title="&lt;&lt; do not localize &gt;&gt;" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3g4-A8-wfV" userLabel="PrefPane">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="374" y="240" width="668" height="419"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="Z4H-05-G2i">
                 <rect key="frame" x="0.0" y="0.0" width="668" height="419"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
                         <attributedString key="userComments">
                             <fragment content="This horizontal line is the width of a PreferencePane window.">
                                 <attributes>
-                                    <font key="NSFont" metaFont="controlContent" size="11"/>
+                                    <font key="NSFont" metaFont="message" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                 </attributes>
                             </fragment>
@@ -101,7 +101,7 @@
                                             <rect key="frame" x="18" y="355" width="623" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="l7B-sk-a7S" id="XEZ-Cj-WUE">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" title="OtherViews" id="Qc5-fW-pcw">
                                                     <items>
                                                         <menuItem title="Item1" state="on" id="l7B-sk-a7S"/>
@@ -204,7 +204,7 @@
                                                         <rect key="frame" x="23" y="14" width="57" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="FRy-4y-nnb">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <font key="font" metaFont="message" size="11"/>
                                                         </buttonCell>
                                                         <connections>
                                                             <action selector="changeSetting:" target="-2" id="3ZI-Dr-rbe"/>
@@ -213,7 +213,7 @@
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wxg-qH-eBn">
                                                         <rect key="frame" x="14" y="35" width="117" height="19"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="H8P-Ic-jNd">
-                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="font" metaFont="user"/>
                                                         </sliderCell>
                                                         <connections>
                                                             <action selector="changeSetting:" target="-2" id="kZt-8K-n8W"/>
@@ -246,7 +246,7 @@
                                             <rect key="frame" x="491" y="47" width="150" height="25"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="o1g-Uv-SAa">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="AI9-wk-ula">
                                                     <items>
                                                         <menuItem title="Rumble" id="JAa-MJ-QBl"/>
@@ -298,7 +298,7 @@
                                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-ha-aE9">
                                                         <rect key="frame" x="14" y="35" width="117" height="19"/>
                                                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="pUW-BW-6Gu">
-                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="font" metaFont="user"/>
                                                         </sliderCell>
                                                         <connections>
                                                             <action selector="changeSetting:" target="-2" id="cnq-uD-6cU"/>
@@ -308,7 +308,7 @@
                                                         <rect key="frame" x="23" y="14" width="57" height="18"/>
                                                         <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Uce-Uv-Hq5">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <font key="font" metaFont="message" size="11"/>
                                                         </buttonCell>
                                                         <connections>
                                                             <action selector="changeSetting:" target="-2" id="Pjn-qx-oLt"/>
@@ -363,7 +363,7 @@
                                             <rect key="frame" x="18" y="355" width="633" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Fqs-9N-l7A" id="pey-Hr-vWo">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" title="OtherViews" id="rYq-DA-bYc">
                                                     <items>
                                                         <menuItem title="Item1" state="on" id="Fqs-9N-l7A"/>
@@ -401,18 +401,18 @@
                                             <rect key="frame" x="493" y="78" width="155" height="271"/>
                                             <clipView key="contentView" id="SaB-pO-6ME">
                                                 <rect key="frame" x="1" y="0.0" width="153" height="270"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="Zwr-si-a4c" id="9SZ-KC-9Y6">
                                                         <rect key="frame" x="0.0" y="0.0" width="153" height="245"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="1" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="binding" width="72" minWidth="40" maxWidth="1000" id="VVi-lm-klv">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Binding">
-                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <font key="font" metaFont="message" size="11"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
@@ -425,7 +425,7 @@
                                                             </tableColumn>
                                                             <tableColumn identifier="input" width="79" minWidth="10" maxWidth="1000" id="CU8-av-rwl">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Input">
-                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <font key="font" metaFont="message" size="11"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
@@ -507,7 +507,7 @@
                                             <rect key="frame" x="18" y="355" width="633" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="ZBC-oI-z5d" id="LNS-E3-icM">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" title="OtherViews" id="Xzo-Df-CjB">
                                                     <items>
                                                         <menuItem title="Item1" state="on" id="ZBC-oI-z5d"/>
@@ -556,7 +556,7 @@
                                                                     <rect key="frame" x="25" y="47" width="57" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="hyw-2p-8xu">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                        <font key="font" metaFont="message" size="11"/>
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="changeSetting:" target="-2" id="nY3-vX-XFJ"/>
@@ -565,7 +565,7 @@
                                                                 <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-Ed-Icp">
                                                                     <rect key="frame" x="16" y="68" width="117" height="19"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="1uA-oq-a0L">
-                                                                        <font key="font" size="12" name="Helvetica"/>
+                                                                        <font key="font" metaFont="user"/>
                                                                     </sliderCell>
                                                                     <connections>
                                                                         <action selector="changeSetting:" target="-2" id="abG-xT-Duq"/>
@@ -638,7 +638,7 @@
                                                                 <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w59-p2-gVR">
                                                                     <rect key="frame" x="16" y="68" width="117" height="19"/>
                                                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="32768" tickMarkPosition="above" sliderType="linear" id="k4Y-aS-OZs">
-                                                                        <font key="font" size="12" name="Helvetica"/>
+                                                                        <font key="font" metaFont="user"/>
                                                                     </sliderCell>
                                                                     <connections>
                                                                         <action selector="changeSetting:" target="-2" id="h7N-8X-dCl"/>
@@ -648,7 +648,7 @@
                                                                     <rect key="frame" x="25" y="47" width="57" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Linked" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="k9z-Ya-OO3">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                        <font key="font" metaFont="message" size="11"/>
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="changeSetting:" target="-2" id="MZZ-cQ-DfL"/>
@@ -725,7 +725,7 @@
                                                             <constraint firstAttribute="height" constant="167" id="Nk2-fU-1WJ"/>
                                                         </constraints>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" id="IRF-DH-74j">
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <font key="font" metaFont="message" size="11"/>
                                                             <string key="title">You can disable the driver temporarily so your Xbox device can be used in games that access the hardware directly.
 
 This may be useful when playing some games ported by Aspyr if it supports your device.
@@ -748,7 +748,7 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-Ly-PFn">
                                                         <rect key="frame" x="14" y="43" width="247" height="42"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Click on this button to completely remove this driver from your computer (you may need to restart):" id="ix8-GT-Crq">
-                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <font key="font" metaFont="message" size="11"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -829,15 +829,15 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-i5-hyw">
                                                         <rect key="frame" x="16" y="12" width="596" height="337"/>
                                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1IV-05-JOh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="581" height="337"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="596" height="337"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" id="3fX-WF-3zX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="581" height="434"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="434"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="581" height="337"/>
+                                                                    <size key="minSize" width="596" height="337"/>
                                                                     <size key="maxSize" width="1342" height="10000000"/>
                                                                     <attributedString key="textStorage">
                                                                         <fragment>
@@ -888,10 +888,10 @@ Due to some internal limitations, you need to connect your device once to be abl
                                                                                 </paragraphStyle>
                                                                             </attributes>
                                                                         </fragment>
-                                                                        <fragment content="Version 1.0.0-alpha.3">
+                                                                        <fragment content="Version 1.0.0-alpha.4">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547">
@@ -941,7 +941,7 @@ Downloaded from:
 </string>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user" size="13"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547">
@@ -987,7 +987,7 @@ Downloaded from:
                                                                         <fragment content="https://github.com/360Controller/360Controller/releases">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user" size="13"/>
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/releases"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -1038,7 +1038,7 @@ Project Home:
 </string>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user" size="13"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547">
@@ -1084,7 +1084,7 @@ Project Home:
                                                                         <fragment content="https://github.com/360Controller/360Controller/">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user" size="13"/>
                                                                                 <url key="NSLink" string="https://github.com/360Controller/360Controller/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
@@ -1134,7 +1134,7 @@ Cg
 </string>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="13" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user" size="13"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                                                     <tabStops>
                                                                                         <textTab alignment="left" location="28.299999237060547">
@@ -1229,7 +1229,7 @@ Cg
                                                                         <fragment content="This driver supports the ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1249,7 +1249,7 @@ Cg
 This project is a fork of the </mutableString>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1258,7 +1258,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="Xbox360Controller project">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1270,7 +1270,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" originally created by Colin Munro, and includes hard work from ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1279,7 +1279,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="d235j">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/d235j/"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1289,7 +1289,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (who forked the project and fixed Force Feedback), ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1298,7 +1298,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="C.W. Betts">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/MaddTheSane"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1308,7 +1308,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (dozens of improvements and fixes!), ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1317,7 +1317,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="FranticRain">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/FranticRain"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1327,7 +1327,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (Xbox One Controller support and other improvements), ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1336,7 +1336,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="kasbert">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/kasbert"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1346,7 +1346,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (Original Xbox Controller Support), ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1355,7 +1355,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="Pyroh">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/Pyroh"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1365,7 +1365,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content=" (User Interface overhaul), ">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1374,7 +1374,7 @@ This project is a fork of the </mutableString>
                                                                         <fragment content="RodrigoCard">
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <url key="NSLink" string="https://github.com/RodrigoCard"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
@@ -1386,7 +1386,7 @@ This project is a fork of the </mutableString>
 </string>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1408,7 +1408,7 @@ This project is a fork of the </mutableString>
 This driver is licensed under the GNU Public License. A copy of this license is included in the distribution file, please inspect it before using the binary or source.</string>
                                                                             <attributes>
                                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                <font key="NSFont" metaFont="user"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14.15" defaultTabInterval="36">
                                                                                     <tabStops/>
                                                                                 </paragraphStyle>
@@ -1424,7 +1424,7 @@ This driver is licensed under the GNU Public License. A copy of this license is 
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="v6N-fu-NBq">
-                                                            <rect key="frame" x="581" y="0.0" width="15" height="337"/>
+                                                            <rect key="frame" x="580" y="0.0" width="16" height="337"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>

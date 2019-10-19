@@ -547,7 +547,7 @@ bool Xbox360Peripheral::start(IOService* provider)
     outPipe->retain();
 
     // Get a buffer
-    inBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(inPipe));
+    inBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, GetMaxPacketSize(inPipe));
     if (inBuffer == nullptr)
     {
         kprintf("start - Failed to allocate input buffer.\n");
@@ -598,7 +598,7 @@ bool Xbox360Peripheral::start(IOService* provider)
     serialInPipe->retain();
 
     // Get a buffer for the chatpad
-    serialInBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(serialInPipe));
+    serialInBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, GetMaxPacketSize(serialInPipe));
     if (serialInBuffer == nullptr)
     {
         kprintf("start - failed to allocate input buffer for chatpad.\n");
@@ -745,7 +745,7 @@ bool Xbox360Peripheral::QueueWrite(const void* bytes, UInt32 length)
     IOUSBHostCompletion complete = {};
     IOReturn err = kIOReturnError;
 
-    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
+    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, length);
     if (outBuffer == nullptr)
     {
         IOLog("send - unable to allocate buffer\n");

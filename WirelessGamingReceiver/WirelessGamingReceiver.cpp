@@ -332,7 +332,7 @@ bool WirelessGamingReceiver::QueueRead(int index)
     
     data->index = index;
 //    data->buffer = connections[index].bufferIn;
-    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, GetMaxPacketSize(connections[index].controllerIn));
+    data->buffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, GetMaxPacketSize(connections[index].controllerIn));
     if (data->buffer == nullptr)
     {
         IOFree(data, sizeof(WGRREAD));
@@ -420,7 +420,7 @@ bool WirelessGamingReceiver::QueueWrite(int index, const void* bytes, UInt32 len
     IOLog("Sent data (%d, %d bytes): %s\n", index, length, s);
 #endif
 
-    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
+    outBuffer = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, length);
     if (outBuffer == nullptr)
     {
         // IOLog("send - unable to allocate buffer\n");
@@ -610,7 +610,7 @@ void WirelessGamingReceiver::ProcessMessage(int index, const unsigned char* data
     }
 
     // Add anything else to the queue
-    IOMemoryDescriptor* copy = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, 0, length);
+    IOMemoryDescriptor* copy = IOBufferMemoryDescriptor::inTaskWithOptions(kernel_task, kIODirectionInOut, length);
     copy->writeBytes(0, data, length);
     connections[index].inputArray->setObject(copy);
     if (connections[index].service == nullptr)

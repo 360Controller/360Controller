@@ -127,6 +127,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E8073AF231BE178007EAB9E;
+			remoteInfo = WirelessOneController;
+		};
 		557951491F7300E4001880D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
@@ -182,13 +189,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 55B6380D18C10E8700CE933D;
 			remoteInfo = WirelessGamingReceiver;
-		};
-		3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55B636AC18C104DB00CE933D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E8073AF231BE178007EAB9E;
-			remoteInfo = WirelessOneController;
 		};
 		55DA7C6C1926BED3002F6A3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -883,6 +883,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3E8073AF231BE178007EAB9E /* WirelessOneController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E8073BC231BE178007EAB9E /* Build configuration list for PBXNativeTarget "WirelessOneController" */;
+			buildPhases = (
+				3E8073B0231BE178007EAB9E /* Sources */,
+				3E8073B4231BE178007EAB9E /* Frameworks */,
+				3E8073B5231BE178007EAB9E /* Headers */,
+				3E8073BA231BE178007EAB9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WirelessOneController;
+			productName = WirelessOneController;
+			productReference = 3E8073BF231BE178007EAB9E /* WirelessOneController.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		5579513D1F73006F001880D1 /* XBOBTFF */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 557951431F73006F001880D1 /* Build configuration list for PBXNativeTarget "XBOBTFF" */;
@@ -1043,24 +1061,6 @@
 			name = WirelessGamingReceiver;
 			productName = WirelessGamingReceiver2;
 			productReference = 55B6380E18C10E8700CE933D /* WirelessGamingReceiver.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
-		3E8073AF231BE178007EAB9E /* WirelessOneController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3E8073BC231BE178007EAB9E /* Build configuration list for PBXNativeTarget "WirelessOneController" */;
-			buildPhases = (
-				3E8073B0231BE178007EAB9E /* Sources */,
-				3E8073B4231BE178007EAB9E /* Frameworks */,
-				3E8073B5231BE178007EAB9E /* Headers */,
-				3E8073BA231BE178007EAB9E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = WirelessOneController;
-			productName = WirelessOneController;
-			productReference = 3E8073BF231BE178007EAB9E /* WirelessOneController.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 		55FE3CA018D7B77800D69E84 /* testhaptic */ = {
@@ -1362,6 +1362,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3E23895A23413DE700FFC9A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E8073AF231BE178007EAB9E /* WirelessOneController */;
+			targetProxy = 3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */;
+		};
 		5579514A1F7300E4001880D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5579513D1F73006F001880D1 /* XBOBTFF */;
@@ -1401,11 +1406,6 @@
 			isa = PBXTargetDependency;
 			target = 55B6380D18C10E8700CE933D /* WirelessGamingReceiver */;
 			targetProxy = 55B6384418C10FA200CE933D /* PBXContainerItemProxy */;
-		};
-		3E23895A23413DE700FFC9A5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3E8073AF231BE178007EAB9E /* WirelessOneController */;
-			targetProxy = 3E23895923413DE700FFC9A5 /* PBXContainerItemProxy */;
 		};
 		55DA7C6D1926BED3002F6A3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1507,6 +1507,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3E8073BD231BE178007EAB9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
+			buildSettings = {
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				INFOPLIST_FILE = WirelessOneController/Info.plist;
+				MODULE_NAME = com.mice.driver.WirelessOneController;
+				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		3E8073BE231BE178007EAB9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
+			buildSettings = {
+				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				INFOPLIST_FILE = WirelessOneController/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MODULE_NAME = com.mice.driver.WirelessOneController;
+				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
 		557951411F73006F001880D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
@@ -1986,42 +2022,6 @@
 				INFOPLIST_FILE = WirelessGamingReceiver/Info.plist;
 				MODULE_NAME = com.mice.driver.WirelessGamingReceiver;
 				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
-		3E8073BD231BE178007EAB9E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
-			buildSettings = {
-				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
-				INFOPLIST_FILE = WirelessOneController/Info.plist;
-				MODULE_NAME = com.mice.driver.WirelessOneController;
-				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		3E8073BE231BE178007EAB9E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62DD3D4920C044980073EC19 /* DeveloperSettings.xcconfig */;
-			buildSettings = {
-				"CLANG_CXX_LANGUAGE_STANDARD[arch=i386]" = "compiler-default";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
-				INFOPLIST_FILE = WirelessOneController/Info.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULE_NAME = com.mice.driver.WirelessOneController;
-				MODULE_VERSION = "${CURRENT_PROJECT_VERSION}";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mice.driver.WirelessOneController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = kext;
