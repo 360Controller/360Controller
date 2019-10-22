@@ -114,9 +114,9 @@ IOReturn WirelessOneController::setReport(
         
         RumbleData rumble = {};
         
-        // Type always stays the same on Windows
-        // The first two bits control the intensity
-        rumble.type = 0x0f;
+        // Control all motors (0x0f)
+        // Each bit is a single motor
+        rumble.motors = 0x0f;
         rumble.time = 0xff;
         
         // Main motors

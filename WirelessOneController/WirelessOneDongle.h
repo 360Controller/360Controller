@@ -31,7 +31,7 @@ struct ControllerFrame
 struct RumbleData
 {
     uint8_t unknown1;
-    uint8_t type;
+    uint8_t motors;
     uint8_t triggerLeft;
     uint8_t triggerRight;
     uint8_t left;
