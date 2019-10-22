@@ -93,5 +93,7 @@ protected:
 private:
     WirelessOneDongle *dongle;
     
+    uint8_t rumbleType;
+    
     void sendReport(XBOX360_IN_REPORT report);
 };

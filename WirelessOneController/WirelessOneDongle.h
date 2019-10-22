@@ -28,6 +28,18 @@ struct ControllerFrame
     uint8_t length;
 } __attribute__((packed));
 
+struct RumbleData
+{
+    uint8_t unknown1;
+    uint8_t type;
+    uint8_t triggerLeft;
+    uint8_t triggerRight;
+    uint8_t left;
+    uint8_t right;
+    uint8_t time;
+    uint16_t unknown2;
+} __attribute__((packed));
+
 struct LedModeData
 {
     uint8_t unknown;
@@ -49,6 +61,7 @@ public:
     void handleDisconnect(uint8_t macAddress[]);
     void handleData(uint8_t macAddress[], uint8_t data[]);
     
+    bool rumble(uint8_t macAddress[], RumbleData data);
     bool powerOff(uint8_t macAddress[]);
     
     uint32_t generateLocationId();
@@ -64,6 +77,6 @@ private:
     
     bool executeHandshake(uint8_t macAddress[]);
     bool requestSerialNumber(uint8_t macAddress[]);
-    bool setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t brightness);
+    bool setLedMode(uint8_t macAddress[], LedModeData data);
     bool send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[]);
 };

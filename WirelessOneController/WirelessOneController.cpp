@@ -75,6 +75,13 @@ IOReturn WirelessOneController::setProperties(OSObject *properties)
         return kIOReturnError;
     }
     
+    OSNumber *number = OSDynamicCast(OSNumber, dictionary->getObject("RumbleType"));
+    
+    if (number)
+    {
+        rumbleType = number->unsigned8BitValue();
+    }
+    
     return kIOReturnSuccess;
 }
 
@@ -83,14 +90,65 @@ IOReturn WirelessOneController::setReport(
     IOHIDReportType reportType,
     IOOptionBits options
 ) {
-    uint8_t data[2];
+    uint8_t command = 0;
     
-    if (report->readBytes(0, data, sizeof(data)) < sizeof(data))
+    if (!report->readBytes(0, &command, 1))
     {
         return kIOReturnUnsupported;
     }
     
-    uint8_t command = data[0];
+    if (command == 0x00)
+    {
+        uint8_t data[2];
+        
+        if (report->readBytes(2, data, 2) < 2)
+        {
+            return kIOReturnUnsupported;
+        }
+        
+        // Rumble is disabled
+        if (rumbleType == 0)
+        {
+            return kIOReturnSuccess;
+        }
+        
+        RumbleData rumble = {};
+        
+        // Type always stays the same on Windows
+        // The first two bits control the intensity
+        rumble.type = 0x0f;
+        rumble.time = 0xff;
+        
+        // Main motors
+        if (rumbleType == 0)
+        {
+            rumble.left = data[0];
+            rumble.right = data[1];
+        }
+        
+        // Trigger motors
+        else if (rumbleType == 2)
+        {
+            rumble.triggerLeft = data[0] / 2;
+            rumble.triggerRight = data[1] / 2;
+        }
+        
+        // All motors
+        else if (rumbleType == 3)
+        {
+            rumble.triggerLeft = data[0] / 2;
+            rumble.triggerRight = data[1] / 2;
+            rumble.left = data[0];
+            rumble.right = data[1];
+        }
+        
+        if (!dongle->rumble(macAddress, rumble))
+        {
+            return kIOReturnError;
+        }
+        
+        return kIOReturnSuccess;
+    }
     
     if (command == 0x02)
     {
@@ -101,7 +159,10 @@ IOReturn WirelessOneController::setReport(
     if (command == 0x03)
     {
         // Power off the controller remotely
-        dongle->powerOff(macAddress);
+        if (!dongle->powerOff(macAddress))
+        {
+            return kIOReturnError;
+        }
         
         return kIOReturnSuccess;
     }

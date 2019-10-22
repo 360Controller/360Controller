@@ -74,8 +74,13 @@ void WirelessOneDongle::handleConnect(uint8_t macAddress[])
         return;
     }
     
+    LedModeData ledMode = {};
+    
     // Dim the LED a little bit, like the original driver
-    if (!setLedMode(macAddress, 0x01, 0x14))
+    ledMode.mode = 0x01;
+    ledMode.brightness = 0x14;
+    
+    if (!setLedMode(macAddress, ledMode))
     {
         LOG("failed to set LED mode");
         
@@ -267,7 +272,7 @@ bool WirelessOneDongle::requestSerialNumber(uint8_t macAddress[])
     return send(macAddress, frame, data);
 }
 
-bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t brightness)
+bool WirelessOneDongle::setLedMode(uint8_t macAddress[], LedModeData data)
 {
     ControllerFrame frame = {};
     
@@ -275,10 +280,15 @@ bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t b
     frame.message = 0x20;
     frame.length = sizeof(LedModeData);
     
-    LedModeData data = {};
+    return send(macAddress, frame, (uint8_t*)&data);
+}
+
+bool WirelessOneDongle::rumble(uint8_t macAddress[], RumbleData data)
+{
+    ControllerFrame frame = {};
     
-    data.mode = mode;
-    data.brightness = brightness;
+    frame.command = 0x09;
+    frame.length = sizeof(RumbleData);
     
     return send(macAddress, frame, (uint8_t*)&data);
 }
