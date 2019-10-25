@@ -109,6 +109,48 @@ IOReturn WirelessOneController::setReport(
     return IOHIDDevice::setReport(report, reportType, options);
 }
 
+void WirelessOneController::handleStatus(uint8_t *data)
+{
+    StatusData *status = (StatusData*)data;
+    uint8_t value = 0;
+    
+    // Map battery levels to numbers
+    if (status->batteryLevel == BATT_LEVEL_LOW)
+    {
+        value = 255 * 1 / 3;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_MED)
+    {
+        value = 255 * 2 / 3;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_HIGH)
+    {
+        value = 255 * 3 / 3;
+    }
+    
+    // Controller is charging
+    else
+    {
+        removeProperty("BatteryLevel");
+        
+        return;
+    }
+    
+    OSNumber *number = OSNumber::withNumber(value, 8);
+    
+    if (!number)
+    {
+        LOG("failed to allocate battery level");
+        
+        return;
+    }
+    
+    setProperty("BatteryLevel", number);
+    number->release();
+}
+
 void WirelessOneController::handleInput(uint8_t data[])
 {
     InputData *input = (InputData*)data;
