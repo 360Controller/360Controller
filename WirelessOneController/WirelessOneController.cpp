@@ -112,10 +112,24 @@ IOReturn WirelessOneController::setReport(
 void WirelessOneController::handleStatus(uint8_t *data)
 {
     StatusData *status = (StatusData*)data;
+    
+    // Controller is charging
+    if (!status->batteryType)
+    {
+        removeProperty("BatteryLevel");
+        
+        return;
+    }
+    
     uint8_t value = 0;
     
     // Map battery levels to numbers
-    if (status->batteryLevel == BATT_LEVEL_LOW)
+    if (status->batteryLevel == BATT_LEVEL_EMPTY)
+    {
+        value = 0;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_LOW)
     {
         value = 255 * 1 / 3;
     }
@@ -128,14 +142,6 @@ void WirelessOneController::handleStatus(uint8_t *data)
     else if (status->batteryLevel == BATT_LEVEL_HIGH)
     {
         value = 255 * 3 / 3;
-    }
-    
-    // Controller is charging
-    else
-    {
-        removeProperty("BatteryLevel");
-        
-        return;
     }
     
     OSNumber *number = OSNumber::withNumber(value, 8);
