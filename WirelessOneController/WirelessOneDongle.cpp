@@ -140,13 +140,19 @@ void WirelessOneDongle::handleData(uint8_t macAddress[], uint8_t data[])
             return;
         }
         
-        // Input data response
-        if (frame->command == 0x20 && frame->message == 0 && frame->length == 0x0e)
+        // Status packet
+        if (frame->command == 0x03 && frame->message == 0x20 && frame->length == 0x04)
+        {
+            controller->handleStatus(data + sizeof(ControllerFrame));
+        }
+        
+        // Input packet
+        if (frame->command == 0x20 && frame->message == 0x00 && frame->length == 0x0e)
         {
             controller->handleInput(data + sizeof(ControllerFrame));
         }
         
-        // Guide button response
+        // Guide button packet
         else if (frame->command == 0x07 && frame->message == 0x30 && frame->length == 0x02)
         {
             uint8_t response[] = { 0x00, 0x07, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -283,10 +289,10 @@ bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t b
     return send(macAddress, frame, (uint8_t*)&data);
 }
 
-bool WirelessOneDongle::powerOff(uint8_t macAddress[])
+bool WirelessOneDongle::powerMode(uint8_t macAddress[], uint8_t mode)
 {
     ControllerFrame frame = {};
-    uint8_t data[] = { 0x04 };
+    uint8_t data[] = { mode };
     
     frame.command = 0x05;
     frame.message = 0x20;

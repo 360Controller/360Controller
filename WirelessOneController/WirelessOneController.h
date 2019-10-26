@@ -20,10 +20,27 @@
 
 #include <IOKit/hid/IOHIDDevice.h>
 
+#define BATT_TYPE_ALKALINE 0x01
+#define BATT_TYPE_NIMH 0x02
+
+#define BATT_LEVEL_EMPTY 0x00
+#define BATT_LEVEL_LOW 0x01
+#define BATT_LEVEL_MED 0x02
+#define BATT_LEVEL_HIGH 0x03
+
 struct SerialData
 {
     uint16_t unknown;
     char serialNumber[14];
+} __attribute__((packed));
+
+struct StatusData
+{
+    uint32_t batteryLevel : 2;
+    uint32_t batteryType : 2;
+    uint32_t connectionInfo : 4;
+    uint8_t unknown1;
+    uint16_t unknown2;
 } __attribute__((packed));
 
 struct Buttons
@@ -67,6 +84,7 @@ public:
     uint8_t macAddress[6];
     char serialNumber[15];
     
+    void handleStatus(uint8_t data[]);
     void handleInput(uint8_t data[]);
     void handleGuideButton(uint8_t data[]);
 
