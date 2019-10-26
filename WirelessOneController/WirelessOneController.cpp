@@ -159,7 +159,7 @@ IOReturn WirelessOneController::setReport(
     if (command == 0x03)
     {
         // Power off the controller remotely
-        if (!dongle->powerOff(macAddress))
+        if (!dongle->powerOff(macAddress, POWER_OFF))
         {
             return kIOReturnError;
         }
@@ -168,6 +168,54 @@ IOReturn WirelessOneController::setReport(
     }
     
     return IOHIDDevice::setReport(report, reportType, options);
+}
+
+void WirelessOneController::handleStatus(uint8_t *data)
+{
+    StatusData *status = (StatusData*)data;
+    
+    // Controller is charging
+    if (!status->batteryType)
+    {
+        removeProperty("BatteryLevel");
+        
+        return;
+    }
+    
+    uint8_t value = 0;
+    
+    // Map battery levels to numbers
+    if (status->batteryLevel == BATT_LEVEL_EMPTY)
+    {
+        value = 0;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_LOW)
+    {
+        value = 255 * 1 / 3;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_MED)
+    {
+        value = 255 * 2 / 3;
+    }
+    
+    else if (status->batteryLevel == BATT_LEVEL_HIGH)
+    {
+        value = 255 * 3 / 3;
+    }
+    
+    OSNumber *number = OSNumber::withNumber(value, 8);
+    
+    if (!number)
+    {
+        LOG("failed to allocate battery level");
+        
+        return;
+    }
+    
+    setProperty("BatteryLevel", number);
+    number->release();
 }
 
 void WirelessOneController::handleInput(uint8_t data[])
