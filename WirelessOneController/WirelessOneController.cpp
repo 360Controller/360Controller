@@ -159,7 +159,7 @@ IOReturn WirelessOneController::setReport(
     if (command == 0x03)
     {
         // Power off the controller remotely
-        if (!dongle->powerOff(macAddress, POWER_OFF))
+        if (!dongle->setPowerMode(macAddress, POWER_OFF))
         {
             return kIOReturnError;
         }
@@ -170,10 +170,8 @@ IOReturn WirelessOneController::setReport(
     return IOHIDDevice::setReport(report, reportType, options);
 }
 
-void WirelessOneController::handleStatus(uint8_t *data)
+void WirelessOneController::handleStatus(StatusData *status)
 {
-    StatusData *status = (StatusData*)data;
-    
     // Controller is charging
     if (!status->batteryType)
     {
@@ -218,9 +216,8 @@ void WirelessOneController::handleStatus(uint8_t *data)
     number->release();
 }
 
-void WirelessOneController::handleInput(uint8_t data[])
+void WirelessOneController::handleInput(InputData *input)
 {
-    InputData *input = (InputData*)data;
     XBOX360_IN_REPORT report = {};
 
     report.buttons |= input->buttons.dpadUp << 0;
@@ -248,12 +245,11 @@ void WirelessOneController::handleInput(uint8_t data[])
     sendReport(report);
 }
 
-void WirelessOneController::handleGuideButton(uint8_t data[])
+void WirelessOneController::handleGuideButton(GuideButtonData *button)
 {
-    bool pressed = data[0];
     XBOX360_IN_REPORT report = {};
     
-    report.buttons = pressed << 10;
+    report.buttons = button->pressed << 10;
     
     sendReport(report);
 }

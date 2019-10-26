@@ -20,17 +20,94 @@
 
 #include <IOKit/IOService.h>
 
-// Controller can be paused/resumed or turned off
-#define POWER_RESUME 0x00
-#define POWER_PAUSE 0x01
+// Different frame types
+// Command: controller doesn't respond
+// Request: controller responds with data
+// Request (ACK): controller responds with ack + data
+#define TYPE_COMMAND 0x00
+#define TYPE_REQUEST 0x02
+#define TYPE_REQUEST_ACK 0x03
+
+#define CMD_ACKNOWLEDGE 0x01
+#define CMD_STATUS 0x03
+#define CMD_POWER_MODE 0x05
+#define CMD_GUIDE_BTN 0x07
+#define CMD_RUMBLE 0x09
+#define CMD_LED_MODE 0x0a
+#define CMD_SERIAL_NUM 0x1e
+#define CMD_INPUT 0x20
+
+// Controller input can be paused temporarily
+#define POWER_ON 0x00
+#define POWER_SLEEP 0x01
 #define POWER_OFF 0x04
 
-struct ControllerFrame
+#define LED_NORMAL 0x01
+
+#define BATT_TYPE_ALKALINE 0x01
+#define BATT_TYPE_NIMH 0x02
+
+#define BATT_LEVEL_EMPTY 0x00
+#define BATT_LEVEL_LOW 0x01
+#define BATT_LEVEL_MED 0x02
+#define BATT_LEVEL_HIGH 0x03
+
+struct SerialData
 {
-    uint8_t command;
-    uint8_t message;
-    uint8_t sequence;
-    uint8_t length;
+    uint16_t unknown;
+    char serialNumber[14];
+} __attribute__((packed));
+
+struct LedModeData
+{
+    uint8_t unknown;
+    uint8_t mode;
+    uint8_t brightness;
+} __attribute__((packed));
+
+struct StatusData
+{
+    uint32_t batteryLevel : 2;
+    uint32_t batteryType : 2;
+    uint32_t connectionInfo : 4;
+    uint8_t unknown1;
+    uint16_t unknown2;
+} __attribute__((packed));
+
+struct Buttons
+{
+    uint32_t unknown : 2;
+    uint32_t start : 1;
+    uint32_t back : 1;
+    uint32_t a : 1;
+    uint32_t b : 1;
+    uint32_t x : 1;
+    uint32_t y : 1;
+    uint32_t dpadUp : 1;
+    uint32_t dpadDown : 1;
+    uint32_t dpadLeft : 1;
+    uint32_t dpadRight : 1;
+    uint32_t bumperLeft : 1;
+    uint32_t bumperRight : 1;
+    uint32_t stickLeft : 1;
+    uint32_t stickRight : 1;
+} __attribute__((packed));
+
+struct InputData
+{
+    Buttons buttons;
+    uint16_t triggerLeft;
+    uint16_t triggerRight;
+    int16_t stickLeftX;
+    int16_t stickLeftY;
+    int16_t stickRightX;
+    int16_t stickRightY;
+} __attribute__((packed));
+
+struct GuideButtonData
+{
+    uint8_t pressed;
+    uint8_t unknown;
 } __attribute__((packed));
 
 struct RumbleData
@@ -45,11 +122,13 @@ struct RumbleData
     uint16_t unknown2;
 } __attribute__((packed));
 
-struct LedModeData
+struct ControllerFrame
 {
-    uint8_t unknown;
-    uint8_t mode;
-    uint8_t brightness;
+    uint8_t command;
+    uint32_t unknown : 4;
+    uint32_t type : 4;
+    uint8_t sequence;
+    uint8_t length;
 } __attribute__((packed));
 
 class WirelessOneMT76;
@@ -66,8 +145,8 @@ public:
     void handleDisconnect(uint8_t macAddress[]);
     void handleData(uint8_t macAddress[], uint8_t data[]);
     
+    bool setPowerMode(uint8_t macAddress[], uint8_t mode);
     bool rumble(uint8_t macAddress[], RumbleData data);
-    bool powerMode(uint8_t macAddress[], uint8_t mode);
     
     uint32_t generateLocationId();
 
@@ -80,7 +159,7 @@ private:
     template<typename T>
     void iterateControllers(T each);
     
-    bool executeHandshake(uint8_t macAddress[]);
+    bool acknowledgePacket(uint8_t macAddress[], ControllerFrame *frame);
     bool requestSerialNumber(uint8_t macAddress[]);
     bool setLedMode(uint8_t macAddress[], LedModeData data);
     bool send(uint8_t macAddress[], ControllerFrame frame, uint8_t data[]);
