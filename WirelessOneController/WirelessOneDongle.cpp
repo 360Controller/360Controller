@@ -289,10 +289,10 @@ bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t b
     return send(macAddress, frame, (uint8_t*)&data);
 }
 
-bool WirelessOneDongle::powerOff(uint8_t macAddress[])
+bool WirelessOneDongle::powerMode(uint8_t macAddress[], uint8_t mode)
 {
     ControllerFrame frame = {};
-    uint8_t data[] = { 0x04 };
+    uint8_t data[] = { mode };
     
     frame.command = 0x05;
     frame.message = 0x20;

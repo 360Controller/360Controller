@@ -101,7 +101,7 @@ IOReturn WirelessOneController::setReport(
     if (command == 0x03)
     {
         // Power off the controller remotely
-        dongle->powerOff(macAddress);
+        dongle->powerMode(macAddress, POWER_OFF);
         
         return kIOReturnSuccess;
     }

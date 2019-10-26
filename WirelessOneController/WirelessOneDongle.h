@@ -20,6 +20,11 @@
 
 #include <IOKit/IOService.h>
 
+// Controller can be paused/resumed or turned off
+#define POWER_RESUME 0x00
+#define POWER_PAUSE 0x01
+#define POWER_OFF 0x04
+
 struct ControllerFrame
 {
     uint8_t command;
@@ -49,7 +54,7 @@ public:
     void handleDisconnect(uint8_t macAddress[]);
     void handleData(uint8_t macAddress[], uint8_t data[]);
     
-    bool powerOff(uint8_t macAddress[]);
+    bool powerMode(uint8_t macAddress[], uint8_t mode);
     
     uint32_t generateLocationId();
 
