@@ -42,7 +42,13 @@
 #define POWER_SLEEP 0x01
 #define POWER_OFF 0x04
 
-#define LED_NORMAL 0x01
+#define LED_OFF 0x00
+#define LED_ON 0x01
+#define LED_BLINK_FAST 0x02
+#define LED_BLINK_MED 0x03
+#define LED_BLINK_SLOW 0x04
+#define LED_FADE_SLOW 0x08
+#define LED_FADE_FAST 0x09
 
 #define BATT_TYPE_ALKALINE 0x01
 #define BATT_TYPE_NIMH 0x02
@@ -51,6 +57,13 @@
 #define BATT_LEVEL_LOW 0x01
 #define BATT_LEVEL_MED 0x02
 #define BATT_LEVEL_HIGH 0x03
+
+// Rumble vibration motors
+#define RUMBLE_RIGHT 0x01
+#define RUMBLE_LEFT 0x02
+#define RUMBLE_LT 0x04
+#define RUMBLE_RT 0x08
+#define RUMBLE_ALL 0x0f
 
 struct SerialData
 {

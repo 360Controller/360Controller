@@ -114,9 +114,7 @@ IOReturn WirelessOneController::setReport(
         
         RumbleData rumble = {};
         
-        // Control all motors (0x0f)
-        // Each bit is a single motor
-        rumble.motors = 0x0f;
+        rumble.motors = RUMBLE_ALL;
         rumble.time = 0xff;
         
         // Main motors

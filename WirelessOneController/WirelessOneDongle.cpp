@@ -78,7 +78,8 @@ void WirelessOneDongle::handleConnect(uint8_t macAddress[])
     LedModeData ledMode = {};
     
     // Dim the LED a little bit, like the original driver
-    ledMode.mode = LED_NORMAL;
+    // Brightness ranges from 0x00 to 0x20
+    ledMode.mode = LED_ON;
     ledMode.brightness = 0x14;
     
     if (!setLedMode(macAddress, ledMode))
