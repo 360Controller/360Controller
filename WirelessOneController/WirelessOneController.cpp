@@ -94,7 +94,7 @@ IOReturn WirelessOneController::setReport(
     
     if (!report->readBytes(0, &command, 1))
     {
-        return kIOReturnUnsupported;
+        return kIOReturnInvalid;
     }
     
     if (command == 0x00)
@@ -103,11 +103,11 @@ IOReturn WirelessOneController::setReport(
         
         if (report->readBytes(2, data, 2) < 2)
         {
-            return kIOReturnUnsupported;
+            return kIOReturnInvalid;
         }
         
         // Rumble is disabled
-        if (rumbleType == 0)
+        if (rumbleType == 1)
         {
             return kIOReturnSuccess;
         }
@@ -150,13 +150,13 @@ IOReturn WirelessOneController::setReport(
         return kIOReturnSuccess;
     }
     
-    if (command == 0x02)
+    if (command == 0x01)
     {
         // LEDs are only supported on 360 controllers
         return kIOReturnUnsupported;
     }
     
-    if (command == 0x03)
+    if (command == 0x02)
     {
         // Power off the controller remotely
         if (!dongle->setPowerMode(macAddress, POWER_OFF))

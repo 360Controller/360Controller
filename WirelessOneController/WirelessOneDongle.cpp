@@ -180,7 +180,16 @@ bool WirelessOneDongle::initController(uint8_t macAddress[], char serialNumber[]
     memcpy(controller->macAddress, macAddress, sizeof(controller->macAddress));
     memcpy(controller->serialNumber, serialNumber, sizeof(controller->serialNumber) - 1);
     
-    if (!controller->init())
+    const OSString *keys[] = {
+        OSString::withCString("IOCFPlugInTypes")
+    };
+    const OSObject *objects[] = {
+        getProperty("IOCFPlugInTypes")
+    };
+    
+    OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1);
+    
+    if (!controller->init(dictionary))
     {
         LOG("failed to init controller");
         
