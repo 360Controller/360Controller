@@ -152,7 +152,7 @@ int main (int argc, const char * argv[]) {
         AddDevices(devices, argc, argv);
         WriteDriverConfig(DRIVER_NAME, saving);
 
-        system("/usr/bin/touch /System/Library/Extensions");
+        system("/usr/sbin/kextcache -i /");
     }
     else
         NSLog(@"Invalid number of parameters (%i)", argc);
