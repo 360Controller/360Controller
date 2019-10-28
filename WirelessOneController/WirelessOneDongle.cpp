@@ -60,8 +60,9 @@ void WirelessOneDongle::stop(IOService *provider)
 
 void WirelessOneDongle::handleConnect(uint8_t macAddress[])
 {
-    if (!executeHandshake(macAddress))
-    {
+    if (!acknowledgePacket(macAddress, nullptr) ||
+        !setPowerMode(macAddress, POWER_ON)
+    ) {
         LOG("failed to execute handshake");
         
         return;
@@ -74,8 +75,14 @@ void WirelessOneDongle::handleConnect(uint8_t macAddress[])
         return;
     }
     
+    LedModeData ledMode = {};
+    
     // Dim the LED a little bit, like the original driver
-    if (!setLedMode(macAddress, 0x01, 0x14))
+    // Brightness ranges from 0x00 to 0x20
+    ledMode.mode = LED_ON;
+    ledMode.brightness = 0x14;
+    
+    if (!setLedMode(macAddress, ledMode))
     {
         LOG("failed to set LED mode");
         
@@ -105,20 +112,11 @@ void WirelessOneDongle::handleData(uint8_t macAddress[], uint8_t data[])
     ControllerFrame *frame = (ControllerFrame*)data;
     
     // Serial number response, start controller
-    if (frame->command == 0x1e && frame->message == 0x30 && frame->length == 0x10)
+    if (frame->command == CMD_SERIAL_NUM && frame->length == sizeof(SerialData))
     {
-        uint8_t response[] = { 0x00, 0x1e, 0x20, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        
-        ControllerFrame out = {};
-        
-        out.command = 0x01;
-        out.message = 0x20;
-        out.sequence = frame->sequence;
-        out.length = 0x09;
-        
-        if (!send(macAddress, out, response))
+        if (!acknowledgePacket(macAddress, frame))
         {
-            LOG("failed to send serial number response");
+            LOG("failed to acknowledge serial number packet");
             
             return;
         }
@@ -139,39 +137,30 @@ void WirelessOneDongle::handleData(uint8_t macAddress[], uint8_t data[])
         {
             return;
         }
-        
+
         // Status packet
-        if (frame->command == 0x03 && frame->message == 0x20 && frame->length == 0x04)
+        if (frame->command == CMD_STATUS && frame->length == sizeof(StatusData))
         {
-            controller->handleStatus(data + sizeof(ControllerFrame));
+            controller->handleStatus((StatusData*)(data + sizeof(ControllerFrame)));
         }
-        
+
         // Input packet
-        if (frame->command == 0x20 && frame->message == 0x00 && frame->length == 0x0e)
+        if (frame->command == CMD_INPUT && frame->length == sizeof(InputData))
         {
-            controller->handleInput(data + sizeof(ControllerFrame));
+            controller->handleInput((InputData*)(data + sizeof(ControllerFrame)));
         }
-        
+
         // Guide button packet
-        else if (frame->command == 0x07 && frame->message == 0x30 && frame->length == 0x02)
+        else if (frame->command == CMD_GUIDE_BTN && frame->length == sizeof(GuideButtonData))
         {
-            uint8_t response[] = { 0x00, 0x07, 0x20, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00 };
-            
-            ControllerFrame out = {};
-            
-            out.command = 0x01;
-            out.message = 0x20;
-            out.sequence = frame->sequence;
-            out.length = 0x09;
-            
-            if (!send(macAddress, out, response))
+            if (!acknowledgePacket(macAddress, frame))
             {
-                LOG("failed to send guide button response");
-                
+                LOG("failed to acknowledge guide button packet");
+               
                 return;
             }
-            
-            controller->handleGuideButton(data + sizeof(ControllerFrame));
+           
+           controller->handleGuideButton((GuideButtonData*)(data + sizeof(ControllerFrame)));
         }
     });
 }
@@ -192,7 +181,16 @@ bool WirelessOneDongle::initController(uint8_t macAddress[], char serialNumber[]
     memcpy(controller->macAddress, macAddress, sizeof(controller->macAddress));
     memcpy(controller->serialNumber, serialNumber, sizeof(controller->serialNumber) - 1);
     
-    if (!controller->init())
+    const OSString *keys[] = {
+        OSString::withCString("IOCFPlugInTypes")
+    };
+    const OSObject *objects[] = {
+        getProperty("IOCFPlugInTypes")
+    };
+    
+    OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1);
+    
+    if (!controller->init(dictionary))
     {
         LOG("failed to init controller");
         
@@ -245,20 +243,35 @@ void WirelessOneDongle::iterateControllers(T each)
     iterator->release();
 }
 
-bool WirelessOneDongle::executeHandshake(uint8_t macAddress[])
+bool WirelessOneDongle::acknowledgePacket(uint8_t macAddress[], ControllerFrame *frame)
 {
-    ControllerFrame frame1 = {};
-    ControllerFrame frame2 = {};
-    uint8_t frame2Data[] = { 0x00 };
+    ControllerFrame out = {};
     
-    frame1.command = 0x01;
-    frame1.message = 0x20;
+    out.command = CMD_ACKNOWLEDGE;
+    out.type = TYPE_REQUEST;
     
-    frame2.command = 0x05;
-    frame2.message = 0x20;
-    frame2.length = sizeof(frame2Data);
+    // Acknowledge empty frame
+    if (!frame)
+    {
+        return send(macAddress, out, nullptr);
+    }
     
-    return send(macAddress, frame1, nullptr) && send(macAddress, frame2, frame2Data);
+    OSData *data = OSData::withCapacity(sizeof(ControllerFrame) + 6);
+    uint64_t zero = 0;
+    
+    // Acknowledgement includes the received frame
+    data->appendBytes(&zero, 1);
+    data->appendBytes(frame, sizeof(ControllerFrame));
+    data->appendBytes(&zero, 5);
+    
+    out.sequence = frame->sequence;
+    out.length = data->getLength();
+    
+    bool result = send(macAddress, out, (uint8_t*)data->getBytesNoCopy());
+    
+    data->release();
+    
+    return result;
 }
 
 bool WirelessOneDongle::requestSerialNumber(uint8_t macAddress[])
@@ -266,36 +279,42 @@ bool WirelessOneDongle::requestSerialNumber(uint8_t macAddress[])
     ControllerFrame frame = {};
     uint8_t data[] = { 0x04 };
     
-    frame.command = 0x1e;
-    frame.message = 0x30;
+    frame.command = CMD_SERIAL_NUM;
+    frame.type = TYPE_REQUEST_ACK;
     frame.length = sizeof(data);
     
     return send(macAddress, frame, data);
 }
 
-bool WirelessOneDongle::setLedMode(uint8_t macAddress[], uint8_t mode, uint8_t brightness)
-{
-    ControllerFrame frame = {};
-    
-    frame.command = 0x0a;
-    frame.message = 0x20;
-    frame.length = sizeof(LedModeData);
-    
-    LedModeData data = {};
-    
-    data.mode = mode;
-    data.brightness = brightness;
-    
-    return send(macAddress, frame, (uint8_t*)&data);
-}
-
-bool WirelessOneDongle::powerMode(uint8_t macAddress[], uint8_t mode)
+bool WirelessOneDongle::setPowerMode(uint8_t macAddress[], uint8_t mode)
 {
     ControllerFrame frame = {};
     uint8_t data[] = { mode };
     
-    frame.command = 0x05;
-    frame.message = 0x20;
+    frame.command = CMD_POWER_MODE;
+    frame.type = TYPE_REQUEST;
+    frame.length = sizeof(data);
+    
+    return send(macAddress, frame, (uint8_t*)&data);
+}
+
+bool WirelessOneDongle::setLedMode(uint8_t macAddress[], LedModeData data)
+{
+    ControllerFrame frame = {};
+    
+    frame.command = CMD_LED_MODE;
+    frame.type = TYPE_REQUEST;
+    frame.length = sizeof(data);
+    
+    return send(macAddress, frame, (uint8_t*)&data);
+}
+
+bool WirelessOneDongle::rumble(uint8_t macAddress[], RumbleData data)
+{
+    ControllerFrame frame = {};
+    
+    frame.command = CMD_RUMBLE;
+    frame.type = TYPE_COMMAND;
     frame.length = sizeof(data);
     
     return send(macAddress, frame, (uint8_t*)&data);

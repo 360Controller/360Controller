@@ -317,7 +317,16 @@ bool WirelessOneMT76::initDongle()
 {
     dongle = new WirelessOneDongle;
     
-    if (!dongle->init())
+    const OSString *keys[] = {
+        OSString::withCString("IOCFPlugInTypes")
+    };
+    const OSObject *objects[] = {
+        getProperty("IOCFPlugInTypes")
+    };
+    
+    OSDictionary *dictionary = OSDictionary::withObjects(objects, keys, 1);
+    
+    if (!dongle->init(dictionary))
     {
         LOG("failed to init dongle");
         

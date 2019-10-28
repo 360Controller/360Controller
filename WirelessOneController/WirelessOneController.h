@@ -20,61 +20,12 @@
 
 #include <IOKit/hid/IOHIDDevice.h>
 
-#define BATT_TYPE_ALKALINE 0x01
-#define BATT_TYPE_NIMH 0x02
-
-#define BATT_LEVEL_EMPTY 0x00
-#define BATT_LEVEL_LOW 0x01
-#define BATT_LEVEL_MED 0x02
-#define BATT_LEVEL_HIGH 0x03
-
-struct SerialData
-{
-    uint16_t unknown;
-    char serialNumber[14];
-} __attribute__((packed));
-
-struct StatusData
-{
-    uint32_t batteryLevel : 2;
-    uint32_t batteryType : 2;
-    uint32_t connectionInfo : 4;
-    uint8_t unknown1;
-    uint16_t unknown2;
-} __attribute__((packed));
-
-struct Buttons
-{
-    uint32_t unknown : 2;
-    uint32_t start : 1;
-    uint32_t back : 1;
-    uint32_t a : 1;
-    uint32_t b : 1;
-    uint32_t x : 1;
-    uint32_t y : 1;
-    uint32_t dpadUp : 1;
-    uint32_t dpadDown : 1;
-    uint32_t dpadLeft : 1;
-    uint32_t dpadRight : 1;
-    uint32_t bumperLeft : 1;
-    uint32_t bumperRight : 1;
-    uint32_t stickLeft : 1;
-    uint32_t stickRight : 1;
-} __attribute__((packed));
-
-struct InputData
-{
-    Buttons buttons;
-    uint16_t triggerLeft;
-    uint16_t triggerRight;
-    int16_t stickLeftX;
-    int16_t stickLeftY;
-    int16_t stickRightX;
-    int16_t stickRightY;
-} __attribute__((packed));
-
 struct XBOX360_IN_REPORT;
+
 class WirelessOneDongle;
+struct StatusData;
+struct InputData;
+struct GuideButtonData;
 
 class WirelessOneController : public IOHIDDevice
 {
@@ -84,9 +35,9 @@ public:
     uint8_t macAddress[6];
     char serialNumber[15];
     
-    void handleStatus(uint8_t data[]);
-    void handleInput(uint8_t data[]);
-    void handleGuideButton(uint8_t data[]);
+    void handleStatus(StatusData *status);
+    void handleInput(InputData *input);
+    void handleGuideButton(GuideButtonData *button);
 
 protected:
     bool handleStart(IOService *provider) override;
@@ -110,6 +61,8 @@ protected:
     
 private:
     WirelessOneDongle *dongle;
+    
+    uint8_t rumbleType;
     
     void sendReport(XBOX360_IN_REPORT report);
 };

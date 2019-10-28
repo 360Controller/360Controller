@@ -75,6 +75,13 @@ IOReturn WirelessOneController::setProperties(OSObject *properties)
         return kIOReturnError;
     }
     
+    OSNumber *number = OSDynamicCast(OSNumber, dictionary->getObject("RumbleType"));
+    
+    if (number)
+    {
+        rumbleType = number->unsigned8BitValue();
+    }
+    
     return kIOReturnSuccess;
 }
 
@@ -83,25 +90,77 @@ IOReturn WirelessOneController::setReport(
     IOHIDReportType reportType,
     IOOptionBits options
 ) {
-    uint8_t data[2];
+    uint8_t command = 0;
     
-    if (report->readBytes(0, data, sizeof(data)) < sizeof(data))
+    if (!report->readBytes(0, &command, 1))
     {
-        return kIOReturnUnsupported;
+        return kIOReturnInvalid;
     }
     
-    uint8_t command = data[0];
+    if (command == 0x00)
+    {
+        uint8_t data[2];
+        
+        if (report->readBytes(2, data, 2) < 2)
+        {
+            return kIOReturnInvalid;
+        }
+        
+        // Rumble is disabled
+        if (rumbleType == 1)
+        {
+            return kIOReturnSuccess;
+        }
+        
+        RumbleData rumble = {};
+        
+        rumble.motors = RUMBLE_ALL;
+        rumble.time = 0xff;
+        
+        // Main motors
+        if (rumbleType == 0)
+        {
+            rumble.left = data[0];
+            rumble.right = data[1];
+        }
+        
+        // Trigger motors
+        else if (rumbleType == 2)
+        {
+            rumble.triggerLeft = data[0] / 2;
+            rumble.triggerRight = data[1] / 2;
+        }
+        
+        // All motors
+        else if (rumbleType == 3)
+        {
+            rumble.triggerLeft = data[0] / 2;
+            rumble.triggerRight = data[1] / 2;
+            rumble.left = data[0];
+            rumble.right = data[1];
+        }
+        
+        if (!dongle->rumble(macAddress, rumble))
+        {
+            return kIOReturnError;
+        }
+        
+        return kIOReturnSuccess;
+    }
     
-    if (command == 0x02)
+    if (command == 0x01)
     {
         // LEDs are only supported on 360 controllers
         return kIOReturnUnsupported;
     }
     
-    if (command == 0x03)
+    if (command == 0x02)
     {
         // Power off the controller remotely
-        dongle->powerMode(macAddress, POWER_OFF);
+        if (!dongle->setPowerMode(macAddress, POWER_OFF))
+        {
+            return kIOReturnError;
+        }
         
         return kIOReturnSuccess;
     }
@@ -109,10 +168,8 @@ IOReturn WirelessOneController::setReport(
     return IOHIDDevice::setReport(report, reportType, options);
 }
 
-void WirelessOneController::handleStatus(uint8_t *data)
+void WirelessOneController::handleStatus(StatusData *status)
 {
-    StatusData *status = (StatusData*)data;
-    
     // Controller is charging
     if (!status->batteryType)
     {
@@ -157,9 +214,8 @@ void WirelessOneController::handleStatus(uint8_t *data)
     number->release();
 }
 
-void WirelessOneController::handleInput(uint8_t data[])
+void WirelessOneController::handleInput(InputData *input)
 {
-    InputData *input = (InputData*)data;
     XBOX360_IN_REPORT report = {};
 
     report.buttons |= input->buttons.dpadUp << 0;
@@ -187,12 +243,11 @@ void WirelessOneController::handleInput(uint8_t data[])
     sendReport(report);
 }
 
-void WirelessOneController::handleGuideButton(uint8_t data[])
+void WirelessOneController::handleGuideButton(GuideButtonData *button)
 {
-    bool pressed = data[0];
     XBOX360_IN_REPORT report = {};
     
-    report.buttons = pressed << 10;
+    report.buttons = button->pressed << 10;
     
     sendReport(report);
 }
