@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Get the major and minor versions of the current OS
-MAJOR_VER = $(sw_vers -productVersion | awk -F. '{ print $1; }')
-MINOR_VER = $(sw_vers -productVersion | awk -F. '{ print $2; }')
+MAJOR_VER=$(sw_vers -productVersion | awk -F. '{ print $1; }')
+MINOR_VER=$(sw_vers -productVersion | awk -F. '{ print $2; }')
 
 # Just have to make sure that macoS didn't update to 11 and really mess things up
 if [[ "${MAJOR_VER}" -ne 10 ]]; then
