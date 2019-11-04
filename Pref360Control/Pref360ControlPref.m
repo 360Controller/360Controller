@@ -1152,6 +1152,14 @@ static void callbackHandleDevice(void *param,io_iterator_t iterator)
             [alert setAlertStyle:NSAlertStyleWarning];
             [alert runModal];
         }
+        else if (returnCode == kOSKextReturnInUse)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"Cannot Load Driver"];
+            [alert setInformativeText:@"Driver was built against incorrect headers. Please report this error to the driver maintainer."];
+            [alert setAlertStyle:NSAlertStyleWarning];
+            [alert runModal];
+        }
         // Catch-all for all other failures.
         else if (returnCode != kOSReturnSuccess)
         {
