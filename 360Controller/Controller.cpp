@@ -646,9 +646,9 @@ typedef enum {
     XONE_LED_BLINK_FAST      = 0x02,
     XONE_LED_BLINK_SLOW      = 0x03,
     XONE_LED_BLINK_VERY_SLOW = 0x04,
-    XONE_LED_SOLD_1          = 0x05,
-    XONE_LED_SOLD_2          = 0x06,
-    XONE_LED_SOLD_3          = 0x07,
+    XONE_LED_SOLID_1         = 0x05,
+    XONE_LED_SOLID_2         = 0x06,
+    XONE_LED_SOLID_3         = 0x07,
     XONE_LED_PHASE_SLOW      = 0x08,
     XONE_LED_PHASE_FAST      = 0x09,
     XONE_LED_REBOOT_1        = 0x0a,
@@ -841,8 +841,21 @@ IOReturn XboxOneControllerClass::setReport(IOMemoryDescriptor* report, IOHIDRepo
             return kIOReturnSuccess;
         } break;
 
-        case 0x01: // Unsupported LED
+        case 0x01: // Set LED
         {
+            if ((data[1] != report->getLength()) || (data[1] != 0x03))
+            {
+                return kIOReturnUnsupported;
+            }
+
+            XBOXONE_OUT_LED led;
+            led.header.command = 0x0a;
+            led.header.reserved1 = 0x20;
+            led.header.counter = (GetOwner(this)->outCounter)++;
+            led.header.size = 0x03;
+            led.zero = 0x00;
+            led.command = 0x0b;
+            led.brightness = 0x00;
             return kIOReturnSuccess;
         } break;
 
