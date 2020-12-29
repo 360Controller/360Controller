@@ -28,6 +28,9 @@
 8. [Licence](#licence)
 
 ## About
+
+**As of December 28, 2020, there are not plans to add Big Sur support, including Apple Silicon support. It will most likely not work on Big Sur.**
+
 This driver supports the Microsoft Xbox series of controllers including:
 
 1. Original Xbox
