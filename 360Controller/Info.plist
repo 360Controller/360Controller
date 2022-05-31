@@ -3513,7 +3513,7 @@
 			<key>idProduct</key>
 			<integer>733</integer>
 			<key>idVendor</key>
-			<real>3695</real>
+			<integer>3695</integer>
 		</dict>
 		<key>PowerAAirflow</key>
 		<dict>
