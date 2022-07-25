@@ -193,7 +193,7 @@ Debugging the driver depends on which part you intend to debug. For the 360Contr
 
 ### Debugging the preference pane
 
-Most of these instructions are pulled directly from [this blog post.](http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
+Most of these instructions are pulled directly from [this blog post.](https://web.archive.org/web/20200617044318/http://www.condition-alpha.com/blog/?p=1314) Please visit it for futher information.
 
 First, create a copy of `System Preferences.app` called `System Preferences (signed).app`. Then sign this new System Preferences with the command:
 
